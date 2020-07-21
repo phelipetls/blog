@@ -7,8 +7,6 @@ tags: ["numpy", "monte-carlo", "matplotlib", "python", "stats"]
 
 ##### Introdução
 
-![](./knight.png)
-
 Para estrear o blog, escolhi explorar um puzzle probabilístico, que vi
 no [blog do David
 Robinson](http://varianceexplained.org/r/knight-chess/), que consiste em
@@ -287,7 +285,7 @@ knight_probs = [knight_infinite_board(100000) for _ in range(100)]
 plt.hist(knight_probs, bins = 20)
 ```
 
-![Hist](./hist.png)
+![Histograma](./histograma.png)
 
 ##### A eficiência em números
 

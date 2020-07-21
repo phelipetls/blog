@@ -180,7 +180,7 @@ assim.
 
 ##### Por Álgebra Linear
 
-<iframe width="560" height="315" src="https://youtube.com/embed/13r9QY6cmjc?t=2074" frameborder="0" allowfullscreen></iframe>
+{{< youtube 13r9QY6cmjc >}}
 
 Finalmente, matrizes. Comecemos primeiro com a equação básica, $F\_n =
 F\_{n-1} + F\_{n-2}$.

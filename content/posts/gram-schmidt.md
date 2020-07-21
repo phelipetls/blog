@@ -262,7 +262,7 @@ importantes da área. Ele, naturalmente, pode ser muito melhorado e aqui
 só quis passar a ideia básica por trás. Se quiser saber mais sobre o
 assunto, recomendo esta aula do curso clássico de Gilbert Strang:
 
-<iframe width="560" height="315" src="https://youtube.com/embed/uNsCkP9mgRk" frameborder="0" allowfullscreen></iframe>
+{{< youtube uNsCkP9mgRk >}}
 
 Como um bônus, aqui vai mais uma breve razão que faz as matrizes
 ortonormais serem tão desejáveis na computação:

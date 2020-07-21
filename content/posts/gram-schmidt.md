@@ -51,12 +51,12 @@ quadrada, então \\( Q^T \\) é então a inversa de \\( Q \\)\!\!
 
 Isso porque
 
-\\(  q^{T}\_{i}q\_j = \\begin{cases} 0, & \\text{se } i \\neq j
-\\cr 1, & \\text{se } i = j \\end{cases}  \\)
+\\(  q^{T}_{i}q_j = \begin{cases} 0, & \text{se } i \neq j
+\cr 1, & \text{se } i = j \end{cases}  \\)
 
 Para entender o que está havendo, temos que notar que \\( Q^{T}Q \\)
 simplesmente pede por todos os produtos internos dos vetores dessa
-matriz. Quando um vetor é multiplicado por um que não ele (\\(  i \\neq
+matriz. Quando um vetor é multiplicado por um que não ele (\\(  i \neq
 j \\)), então o resultado é 0. Se não, o resultado é 1 (sua norma ao
 quadrado, já que eles são vetores unitários).
 
@@ -109,18 +109,18 @@ ax.set_title(r"Projeção de \\( a_1 \\) em \\( a_2 \\)")
 ![](./images/gram-schmidt2.png)<!-- -->
 
 Essa figura serve para ilustrar o que queremos fazer: dado dois vetores,
-podemos ortogonalizar um em relação ao outro ao subtrair do vetor \\( a\_1 \\)
-o que ele tem de comum com o vetor \\( a\_2 \\), isto é, sua projeção no vetor
-\\( a\_2 \\). Essa diferença é o "erro" da projeção, o \\( e \\).
+podemos ortogonalizar um em relação ao outro ao subtrair do vetor \\( a_1 \\)
+o que ele tem de comum com o vetor \\( a_2 \\), isto é, sua projeção no vetor
+\\( a_2 \\). Essa diferença é o "erro" da projeção, o \\( e \\).
 
-A projeção de \\( a\_1 \\) em \\( a\_2 \\) é um múltiplo de \\( a\_2 \\), \\( \\hat{x}a\_2 \\).
-A diferença entre \\( a\_1 \\) e \\( \\hat{x}a\_2 \\), \\( e \\), é perpendicular a todo o
-espaço vetorial preenchido por \\( a\_2 \\). Logo, basta descobrir qual é este
-múltiplo \\( \\hat{x} \\):
+A projeção de \\( a_1 \\) em \\( a_2 \\) é um múltiplo de \\( a_2 \\), \\( \hat{x}a_2 \\).
+A diferença entre \\( a_1 \\) e \\( \hat{x}a_2 \\), \\( e \\), é perpendicular a todo o
+espaço vetorial preenchido por \\( a_2 \\). Logo, basta descobrir qual é este
+múltiplo \\( \hat{x} \\):
 
 $$
-a^{T}\_2(a\_1 - \\hat{x}a\_2) = 0 \\ a^{T}\_2a\_1 =
-\\hat{x}a^{T}\_2a\_2 \\ \\hat{x} = \\frac{a^{T}\_2a\_1}{a^{T}\_2a\_2}
+a^{T}_2(a_1 - \hat{x}a_2) = 0 \\ a^{T}_2a_1 =
+\hat{x}a^{T}_2a_2 \\ \hat{x} = \frac{a^{T}_2a_1}{a^{T}_2a_2}
 $$
 
 Se você reparar bem, essa foi exatamente a conta que eu fiz para obter a
@@ -136,15 +136,15 @@ para \\( Ax = b \\), então se pretende chegar à melhor solução possível, a
 solução que minimiza a soma do quadrado dos resíduos.
 
 $$
-\\hat{x} = (A^TA)^{-1}A^Tb
+\hat{x} = (A^TA)^{-1}A^Tb
 $$
 
-E o vetor em si, o vetor projetado em \\( A \\), é simplesmente \\( A\\hat{x} \\),
+E o vetor em si, o vetor projetado em \\( A \\), é simplesmente \\( A\hat{x} \\),
 obtido pelo produto do que agora chamaremos matriz de projeção,
 \\( A(A^TA)^{-1}A^T \\), com o vetor \\( b \\):
 
 $$
-\\hat{b} = A\\hat{x} = A(A^TA)^{-1}A^Tb 
+\hat{b} = A\hat{x} = A(A^TA)^{-1}A^Tb 
 $$
 
 Mas o nosso objetivo é, na verdade, obter o vetor ortogonal \\( e \\), o erro
@@ -152,7 +152,7 @@ da projeção, que é sempre ortogonal ao sub-espaço sobre o qual estamos
 projetando o nosso vetor:
 
 $$
-e = b - A\\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b 
+e = b - A\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b 
 $$
 
 E assim vemos que, como há a matriz de projeção de \\( b \\) sobre o

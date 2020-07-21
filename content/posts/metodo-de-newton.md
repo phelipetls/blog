@@ -12,14 +12,14 @@ math: true
 O Método de Newton é um conhecido algoritmo para chegar a soluções
 númericas de uma equação, normalmente uma para a qual a solução não é
 tão trivial. Por exemplo, imagine que queiramos encontrar encontrar a
-raiz da função quadrática \\( x = \\sqrt{5} \\Rightarrow x^2 = 5
-\\Rightarrow x^2 - 5 = 0 \\). Como poderíamos fazer isso?
+raiz da função quadrática \\( x = \sqrt{5} \Rightarrow x^2 = 5
+\Rightarrow x^2 - 5 = 0 \\). Como poderíamos fazer isso?
 
 Newton criou um método (verdadeiramente um algoritmo)
 extraordinariamente eficiente para chegar à solução, em que se faz uso
 de seus estudos em cálculo diferencial.
 
-Calcular \\( \\sqrt{5} \\), hoje em dia, é trivial, basta qualquer calculadora.
+Calcular \\( \sqrt{5} \\), hoje em dia, é trivial, basta qualquer calculadora.
 Mas, como será que a calculadora faz esse cálculo? Talvez seja esse
 o algoritmo que ela mesma usa. Vamos entender como isso funciona então.
 
@@ -42,7 +42,7 @@ plt.plot(X, f(X))
 ![png](../images/output_1_1.png)
 
 Podemos verificar que ela intercepta o eixo x quando \\( x \\) é um pouquinho
-acima de 2, quer dizer, quando \\( x = \\sqrt{5} \\approx 2.23 \\).
+acima de 2, quer dizer, quando \\( x = \sqrt{5} \approx 2.23 \\).
 
 Ok, mas como chegamos até ali com cálculo diferencial? O raciocínio é
 como segue: vamos fazer uma estimativa inicial, um valor que achamos que
@@ -68,31 +68,31 @@ estimativa *muito* próxima da solução.
 
 Esse uso da reta tangente é o que se conhece por aproximação linear. Por
 exemplo, retomando a função quadrática. A derivada dela é obtida pela
-regra da potência, \\( \\frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente é
+regra da potência, \\( \frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente é
 obtida simplesmente da equação de uma reta:
 
 $$
-\\Delta y = f'(x)\\Delta x \\ (y - y\_0) = f'(x\_0)(x - x\_0) \\ y =
-y\_0 + m(x - x\_0)
+\\Delta y = f'(x)\\Delta x \\ (y - y_0) = f'(x_0)(x - x_0) \\ y =
+y_0 + m(x - x_0)
 $$
 
-No nosso caso, queremos achar a reta tangente quando \\( x\_0 = 1 \\), sendo
-\\( f(x\_0) = x^2 - 5 = 1 - 5 = -4 \\). Logo, a reta que tangencia o ponto
+No nosso caso, queremos achar a reta tangente quando \\( x_0 = 1 \\), sendo
+\\( f(x_0) = x^2 - 5 = 1 - 5 = -4 \\). Logo, a reta que tangencia o ponto
 \\( (1, -4) \\) é:
 
 $$
-y = y\_0 + 2x(x - x\_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
+y = y_0 + 2x(x - x_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
 -2 \\ y = 2x - 6 
 $$
 
 Mas, é crucial perceber que essa é a *equação da reta tangente ao ponto
-\\( (x\_0, y\_0) \\) da função f(x)*. Então, o que realmente podemos alegar é
-que, para um dado número \\( a \\), o valor de \\( f(a) \\approx y(a) \\), quando \\( a
-\\approx x\_0 \\): a reta tangente a um dado ponto de uma função é muito
+\\( (x_0, y_0) \\) da função f(x)*. Então, o que realmente podemos alegar é
+que, para um dado número \\( a \\), o valor de \\( f(a) \approx y(a) \\), quando \\( a
+\approx x_0 \\): a reta tangente a um dado ponto de uma função é muito
 próxima da própria função para valores não muito distantes do ponto.
 
 $$
-f(a) \\approx y\_0 + m(a - x\_0)
+f(a) \\approx y_0 + m(a - x_0)
 $$
 
 No gráfico abaixo isso pode ser melhor visualizado. Perceba que para
@@ -115,7 +115,7 @@ plt.legend()
 
 Nesse zoom, também podemos ver que a reta tangente ao ponto \\( (1, -4) \\)
 cruza o eixo \\( x \\) um pouco mais adiante de \\( 2.23 \\). Mais especificamente,
-quando \\( 2x - 6 = 0 \\Rightarrow 2x = 6 \\Rightarrow x = 3 \\).
+quando \\( 2x - 6 = 0 \Rightarrow 2x = 6 \Rightarrow x = 3 \\).
 
 O que é um pouco mais próximo da raiz do que a estimativa inicial 1. E é
 exatamente nisso que consiste o Método de Newton, em se aproximar cada
@@ -123,32 +123,30 @@ vez mais da raiz de \\( f(x) \\) usando a reta que tangencia um dado ponto
 desta função.
 
 Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre
-o valor de \\( x \\) da reta tangente a um ponto \\( (x\_0, y\_0) \\) que faz com
+o valor de \\( x \\) da reta tangente a um ponto \\( (x_0, y_0) \\) que faz com
 que \\( y = 0 \\):
 
 $$
-y - y\_0 = m(x - x\_0) \\ \\text{ dividindo tudo por m e sumindo com
-o y: } \\ -\\frac{y\_0}{m} = x - x\_0 \\Rightarrow x = x\_0 -
-\\frac{y\_0}{m} \\ \\text{ o que também pode ser escrito como: } \\ x =
-x\_0 - \\frac{f(x\_0)}{f'(x\_0)} \\Rightarrow x\_{n+1} = x\_n -
-\\frac{f(x\_n)}{f'(x\_n)}
+y - y_0 = m(x - x_0) \text{ dividindo tudo por m e sumindo com o y: } \newline
+\frac{y_0}{m} = x - x_0 \Rightarrow x = x_0 - \frac{y_0}{m} \newline
+\text{ o que também pode ser escrito como: } \newline
+x = x_0 - \frac{f(x_0)}{f'(x_0)} \Rightarrow x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \newline
 $$
 
 Plugando os valores de nossa estimativa inicial, obtemos:
 
 $$
-x = 1 - \\frac{1^2 - 5}{2\\cdot1} = 1 - \\frac{-4}{2} = 1 - (-2) = 3
+x = 1 - \frac{1^2 - 5}{2\cdot1} = 1 - \frac{-4}{2} = 1 - (-2) = 3
 $$
 
-E a ideia é usarmos o 3 como um novo \\( x\_0 \\), e com ele calcularmos uma
+E a ideia é usarmos o 3 como um novo \\( x_0 \\), e com ele calcularmos uma
 nova estimativa para a raiz com a reta que tangencia \\( (3, 4) \\).
 
 $$
-x = 3 - \\frac{3^2 - 5}{2\\cdot3} = 3 - \\frac{4}{6} = 3 -
-\\frac{2}{3} \\approx 2.333
+x = 3 - \frac{3^2 - 5}{2\cdot3} = 3 - \frac{4}{6} = 3 - \frac{2}{3} \approx 2.333
 $$
 
-O que já é uma ótima aproximação de \\( \\sqrt{5} \\). Abaixo um gráfico do
+O que já é uma ótima aproximação de \\( \sqrt{5} \\). Abaixo um gráfico do
 que mais ou menos aconteceu. A função laranja é a tangente ao ponto \\( (1,
 -4) \\), e a verde ao ponto \\( (3, 4) \\). Veja como o intercepto-x da tangente
 a este último ponto é próximo da raiz da parábola.
@@ -204,8 +202,8 @@ diff(x ** 2 - 5)
 
     2*x
 
-Podemos também calcular limites, por exemplo \\( \\lim\_{x \\to \\infty}
-\\frac{1}{x} = 0 \\)
+Podemos também calcular limites, por exemplo \\( \lim_{x \to \infty}
+\frac{1}{x} = 0 \\)
 
 ``` python
 limit(1 / x, x, oo)
@@ -215,7 +213,7 @@ limit(1 / x, x, oo)
 0
 ```
 
-Ou mesmo integrais indefinidas, \\( \\int x^2 , dx = \\frac{x^3}{3} + c \\)
+Ou mesmo integrais indefinidas, \\( \int x^2 , dx = \frac{x^3}{3} + c \\)
 
 ``` python
 integrate(x ** 2)

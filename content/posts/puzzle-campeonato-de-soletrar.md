@@ -55,16 +55,16 @@ ensaio de Bernoulli que modelam muito bem as situações que descrevemos.
 ###### Distribuição geométrica: a probabilidade de N acertos até o primeiro erro
 
 O número de acertos até o primeiro erro pode ser modelado como uma
-variável aleatória discreta, com domínio \\( \[0, \\infty\] \\)
+variável aleatória discreta, com domínio \\( \[0, \infty\] \\)
 (teoricamente), que tem distribuição geométrica com parâmetro p, a
-probabilidade de sucesso, \\( X \\sim Geom(p) \\).
+probabilidade de sucesso, \\( X \sim Geom(p) \\).
 
 A função de probabilidade dessa distribuição nos dá a probabilidade de x
 *fracassos* até o primeiro sucesso. Assumindo independência, aplicamos a
 regra da multiplicação para chegar a
 
 $$
-P\_X(X = x) = (1 - p)^xp 
+P_X(X = x) = (1 - p)^xp 
 $$
 
 Mas, note que, na verdade, no *nosso* caso, estamos interessados no
@@ -73,7 +73,7 @@ demorar para você perceber que isso é arbitrário. Basta usarmos \\( 1-p \\)
 como o parâmetro, ao invés de p, para chegarmos ao que queremos:
 
 $$
-P\_X(X = x) = p^x(1-p)
+P_X(X = x) = p^x(1-p)
 $$
 
 ###### Distribuição binomial: a probabilidade de erro de seus oponentes
@@ -83,15 +83,14 @@ perguntas é simplesmente a probabilidade complementar deles terem
 acertado TODAS as N perguntas, i.e. \\( 1 - p^N \\).
 
 Eessa v.a. pode assumir qualquer valor possível de perguntas sorteadas,
-\\( Im(Y) = \[1, \\infty\] \\), e tem distribuição binomial com parâmetro \\( N \\)
+\\( Im(Y) = \[1, \infty\] \\), e tem distribuição binomial com parâmetro \\( N \\)
 e \\( p \\). Para relembrar, essa distribuição serve para modelar o número de
 sucessos em \\( N \\) ensaios de Bernoulli independentes. No nosso caso,
 queremos 1 menos a probabilidade do competidor ter acertado todas as \\( N \\)
 perguntas:
 
 $$
- P\_X(X = x) = {N\\choose N} p^{N}(1-p)^{N-N} = 1 \\cdot p^N \\cdot
-(1-p)^0 = p^N \\ P(\\text{Errou alguma}) = 1 - p^N
+P_X(X = x) = {N\choose N} p^{N}(1-p)^{N-N} = 1 \cdot p^N \cdot (1-p)^0 = p^N \\ P(\text{Errou alguma}) = 1 - p^N
 $$
 
 ###### A probabilidade de você vencer

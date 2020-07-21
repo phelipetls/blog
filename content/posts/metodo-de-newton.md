@@ -72,7 +72,7 @@ regra da potência, \\( \frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente 
 obtida simplesmente da equação de uma reta:
 
 $$
-\\Delta y = f'(x)\\Delta x \\ (y - y_0) = f'(x_0)(x - x_0) \\ y =
+\Delta y = f'(x)\Delta x \\ (y - y_0) = f'(x_0)(x - x_0) \\ y =
 y_0 + m(x - x_0)
 $$
 
@@ -81,7 +81,7 @@ No nosso caso, queremos achar a reta tangente quando \\( x_0 = 1 \\), sendo
 \\( (1, -4) \\) é:
 
 $$
-y = y_0 + 2x(x - x_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
+y = y_0 + 2x(x - x_0) \\ y = -4 + 2\cdot 1(x - 1) \\ y = -4 + 2x
 -2 \\ y = 2x - 6 
 $$
 
@@ -92,7 +92,7 @@ que, para um dado número \\( a \\), o valor de \\( f(a) \approx y(a) \\), quand
 próxima da própria função para valores não muito distantes do ponto.
 
 $$
-f(a) \\approx y_0 + m(a - x_0)
+f(a) \approx y_0 + m(a - x_0)
 $$
 
 No gráfico abaixo isso pode ser melhor visualizado. Perceba que para

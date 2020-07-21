@@ -4,6 +4,7 @@ title: "Processo de Gram-Schmidt com NumPy"
 date: 2019-08-04
 tags: ["numpy", "algoritmos", "python", "linalg"]
 comments: true
+math: true
 ---
 
 Há um famoso algoritmo em Álgebra Linear para ortogonalizar um conjunto

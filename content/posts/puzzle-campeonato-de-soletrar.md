@@ -5,6 +5,7 @@ layout: post
 published: false
 tags: ["puzzle", "probabilidade", "stats", "r"]
 comments: true
+math: true
 ---
 
 Procurando por puzzles probabilísticos na seção [The

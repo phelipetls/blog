@@ -4,6 +4,7 @@ title: "Método de Newton"
 date: 2019-03-17
 tags: ["matplotlib", "numpy", "sympy", "algoritmos", "python", "math"]
 comments: true
+math: true
 ---
 
 ###### Introdução

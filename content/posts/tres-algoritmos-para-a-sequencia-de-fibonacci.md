@@ -4,6 +4,7 @@ title: "Três algoritmos para a sequência de Fibonacci"
 date: 2019-03-03
 tags: ["numpy", "algoritmos", "python", "linalg"]
 comments: true
+math: true
 ---
 
 ![FibSeq](../images/kisspng-fibonacci-number-golden-spiral-golden-ratio-mathem-spiral-5b4a12ee4a0493.6897256215315811663032.png)

@@ -114,8 +114,8 @@ case*), em que o valor é conhecido.
 
 Neste caso, definimos que os números 0 e 1 da sequência de fibonacci
 são, respectivamente, 0 e 1. Para todos os outros, calculamos de forma
-recursiva. Por exemplo, $F\_3 = F\_2 + F\_1 = F\_1 + F\_0 + F\_1 = 1 + 0
-+ 1 = 2$
+recursiva. Por exemplo, \\( F\_3 = F\_2 + F\_1 = F\_1 + F\_0 + F\_1 = 1 + 0
++ 1 = 2 \\)
 
 E é uma boa maneira de introduzir o conceito de recursão na computação.
 Agora vejamos quão eficiente ele é.
@@ -182,28 +182,28 @@ assim.
 
 {{< youtube 13r9QY6cmjc >}}
 
-Finalmente, matrizes. Comecemos primeiro com a equação básica, $F\_n =
-F\_{n-1} + F\_{n-2}$.
+Finalmente, matrizes. Comecemos primeiro com a equação básica, \\( F\_n =
+F\_{n-1} + F\_{n-2} \\).
 
 Mas, para termos um sistema de equações lineares, precisamos de mais uma
-equação pelo menos. A escolha mais simples é: $F\_{n-1} = F\_{n-1} +
-0\\cdot F\_{n-2}$. O que, em linguagem de matrizes, pode ser escrito
+equação pelo menos. A escolha mais simples é: \\( F\_{n-1} = F\_{n-1} +
+0\\cdot F\_{n-2} \\). O que, em linguagem de matrizes, pode ser escrito
 como:
 
-$\\begin{bmatrix}F\_{n} \\\\ F\_{n-1}\\end{bmatrix} =
+\\( \\begin{bmatrix}F\_{n} \\\\ F\_{n-1}\\end{bmatrix} =
 \\begin{bmatrix}1 & 1\\\\1 & 0\\end{bmatrix} \\cdot
-\\begin{bmatrix}F\_{n-1} \\\\ F\_{n-2}\\end{bmatrix}$
+\\begin{bmatrix}F\_{n-1} \\\\ F\_{n-2}\\end{bmatrix} \\)
 
-Uma denominação mais interessante para essa relação é: $ u\_{t+1} =
-Au\_t $. O papel que desempenha a matriz A é o de transformar o vetor no
+Uma denominação mais interessante para essa relação é: \\(  u\_{t+1} =
+Au\_t  \\). O papel que desempenha a matriz A é o de transformar o vetor no
 "tempo" t para nos dar o vetor no "tempo" seguinte. Estamos lidando aqui
 com um sistema dinâmico, que evolui no tempo, e queremos saber, por
-exemplo, qual o $u\_{10000}$. Como podemos fazer isso?
+exemplo, qual o \\( u\_{10000} \\). Como podemos fazer isso?
 
-Bom, para começar, é conveniente considerarmos um vetor base $u\_0$, que
-no nosso caso pode ser perfeitamente $\\begin{bmatrix} 1 \\\\ 0
-\\end{bmatrix}$. Assim, segue diretamente que $u\_1 = Au\_0$. E, disso,
-que $u\_2 = Au\_1 = A \\cdot A \\cdot u\_0 = A^2u\_0$. Logo, a fórmula
+Bom, para começar, é conveniente considerarmos um vetor base \\( u\_0 \\), que
+no nosso caso pode ser perfeitamente \\( \\begin{bmatrix} 1 \\\\ 0
+\\end{bmatrix} \\). Assim, segue diretamente que \\( u\_1 = Au\_0 \\). E, disso,
+que \\( u\_2 = Au\_1 = A \\cdot A \\cdot u\_0 = A^2u\_0 \\). Logo, a fórmula
 geral é:
 
 $$
@@ -227,19 +227,19 @@ Ax =
 \\lambda x
 $$
 
-Em que $x$ é um autovetor da matriz $A$ e $\\lambda$ um autovalor do
-autovetor. Note que, por isso, o autovetor pode encolher (se $0 \<
-\\lambda \< 1$), ou aumentar (se $\\lambda \> 1$), ou apontar para a
-direção oposta (se $\\lambda \< 0$) quando transformado.
+Em que \\( x \\) é um autovetor da matriz \\( A \\) e \\( \\lambda \\) um autovalor do
+autovetor. Note que, por isso, o autovetor pode encolher (se \\( 0 \<
+\\lambda \< 1 \\)), ou aumentar (se \\( \\lambda \> 1 \\)), ou apontar para a
+direção oposta (se \\( \\lambda \< 0 \\)) quando transformado.
 
 Agora, o próximo passo, um grande passo, é notar que nós podemos
-decompor a matriz $A$ em seus autovetores e autovalores. Isto é possível
+decompor a matriz \\( A \\) em seus autovetores e autovalores. Isto é possível
 se os autovetores forem todos linearmente independentes, caso em que uma
 matriz cheia de autovetores tem uma inversa, e isso será crucial para
 nós.
 
-Daí que, tratando $S$ como uma matriz de autovetores nas colunas e
-$\\Lambda$ como uma matriz de autovalores na diagonal e zeros em todo o
+Daí que, tratando \\( S \\) como uma matriz de autovetores nas colunas e
+\\( \\Lambda \\) como uma matriz de autovalores na diagonal e zeros em todo o
 resto, podemos afirmar que
 
 $$
@@ -248,15 +248,15 @@ $$
 
 O que não é óbvio, mas que pode ser visto deste modo:
 
-$A \\cdot \\begin{bmatrix}x\_1 & x\_2 \\\\ x\_1 &
+\\( A \\cdot \\begin{bmatrix}x\_1 & x\_2 \\\\ x\_1 &
 x\_2\\end{bmatrix} = \\begin{bmatrix}\\lambda\_{1} x\_1 & \\lambda\_{2}
 x\_2 \\\\ \\lambda\_{1} x\_1 & \\lambda\_{2} x\_2\\end{bmatrix} =
 \\begin{bmatrix}x\_1 & x\_2 \\\\ x\_1 & x\_2\\end{bmatrix} \\cdot
-\\begin{bmatrix} \\lambda\_{1} & 0 \\\\ 0 & \\lambda\_{2}\\end{bmatrix}$
+\\begin{bmatrix} \\lambda\_{1} & 0 \\\\ 0 & \\lambda\_{2}\\end{bmatrix} \\)
 
-Caso não tenha ficado claro: cada coluna de $S$ é um autovetor. Quando
-fazemos $AS$, obtemos uma matriz cujas colunas são os autovetores vezes
-seus respectivos autovalores (consequência direta de $Ax = \\lambda x$).
+Caso não tenha ficado claro: cada coluna de \\( S \\) é um autovetor. Quando
+fazemos \\( AS \\), obtemos uma matriz cujas colunas são os autovetores vezes
+seus respectivos autovalores (consequência direta de \\( Ax = \\lambda x \\)).
 Essa matriz pode, enfim, ser "diagonalizada" separando esses seus dois
 componentes como mostrado.
 
@@ -264,22 +264,22 @@ Ok, mas por que isso é útil? Queremos investigar as potências de uma
 matriz afinal\! Essa decomposição de matriz serve justamente a esse
 propósito. Vejamos.
 
-Vamos multiplicar $AS$ pela direita por $S^{-1}$. Isso dá: $A =
-S\\Lambda S^{-1}$, já que $SS^{-1} = I$. Agora, $A^2 = S\\Lambda
-S^{-1}S\\Lambda S^{-1} = S \\Lambda^{2}S^{-1}$. E, em geral:
+Vamos multiplicar \\( AS \\) pela direita por \\( S^{-1} \\). Isso dá: \\( A =
+S\\Lambda S^{-1} \\), já que \\( SS^{-1} = I \\). Agora, \\( A^2 = S\\Lambda
+S^{-1}S\\Lambda S^{-1} = S \\Lambda^{2}S^{-1} \\). E, em geral:
 
 $$
 A^k = S \\Lambda^{k}S^{-1}
 $$
 
 E assim vemos o quanto a decomposição pode simplificar a exponenciação
-de uma matriz\! Agora, retomando lá do início, $u\_k = A^ku\_0$ pode ser
-reescrito como $u\_k = S \\Lambda^{k}S^{-1}u\_0$.
+de uma matriz\! Agora, retomando lá do início, \\( u\_k = A^ku\_0 \\) pode ser
+reescrito como \\( u\_k = S \\Lambda^{k}S^{-1}u\_0 \\).
 
-Mas perceba que seria mais interessante termos $u\_0$ em uma nova
+Mas perceba que seria mais interessante termos \\( u\_0 \\) em uma nova
 "forma", mais especificamente, como uma combinação linear dos
-autovetores, $Sc = u\_0$, onde c é o vetor de coeficientes que resolve
-esse sistema de equações, $c = S^{-1}u\_0$. E, com isso, nós temos tudo
+autovetores, \\( Sc = u\_0 \\), onde c é o vetor de coeficientes que resolve
+esse sistema de equações, \\( c = S^{-1}u\_0 \\). E, com isso, nós temos tudo
 que precisamos porque
 
 $$
@@ -287,8 +287,8 @@ $$
 $$
 
 Isso implica que, no nosso caso, para uma matrix 2x2 (só dois
-autovetores), $u\_k = c\_1\\lambda\_{1}^{k}x\_1 +
-c\_2\\lambda\_{2}^{k}x\_2$, onde os $x\_i$ são os autovetores, e o
+autovetores), \\( u\_k = c\_1\\lambda\_{1}^{k}x\_1 +
+c\_2\\lambda\_{2}^{k}x\_2 \\), onde os \\( x\_i \\) são os autovetores, e o
 restante escalares. O que indica que a evolução do nosso sistema de
 equações é totalmente ditada pelos autovalores (não importa quantas
 vezes a matriz A transforme os autovetores, a direção deles nunca muda).
@@ -314,7 +314,7 @@ print(evalues, evectors, sep="\n\n")
      [ 0.52573111  0.85065081]]
 
 Mas, lembrando que queremos os autovalores na matriz diagonal
-$\\Lambda$. Também precisamos calcular o vetor c.
+\\( \\Lambda \\). Também precisamos calcular o vetor c.
 
 ``` python
 Lambda = np.diag(evalues)
@@ -322,7 +322,7 @@ Lambda = np.diag(evalues)
 c = np.linalg.solve(evectors, np.array([1, 0])[:, np.newaxis])
 ```
 
-Antes, vamos olhar para a nossa matriz $\\Lambda$, porque ela pode
+Antes, vamos olhar para a nossa matriz \\( \\Lambda \\), porque ela pode
 revelar coisas interessantes:
 
 ``` python
@@ -334,8 +334,8 @@ Lambda
 
 O primeiro número pode parecer familiar para o leitor, afinal é um dos
 mais famosos: o número de ouro. E é precisamente ele que descreve como
-os números de Fibonacci estão crescendo\!\! Como sabemos que $u\_k =
-c\_1\\lambda\_{1}^{k}x\_1 + c\_2\\lambda\_{2}^{k}x\_2$, substituindo
+os números de Fibonacci estão crescendo\!\! Como sabemos que \\( u\_k =
+c\_1\\lambda\_{1}^{k}x\_1 + c\_2\\lambda\_{2}^{k}x\_2 \\), substituindo
 temos:
 
 $$
@@ -348,8 +348,8 @@ governa o crescimento dos números, com o outro termo tentendo a 0 com k
 aumentando arbitrariamente. Fica claro também que esses números crescem
 exponencialmente.
 
-Agora, vamos criar uma função para calcular $u\_k$. Nela usaremos a
-matriz $S$ (evectors), o vetor c e a matriz $\\Lambda$.
+Agora, vamos criar uma função para calcular \\( u\_k \\). Nela usaremos a
+matriz \\( S \\) (evectors), o vetor c e a matriz \\( \\Lambda \\).
 
 ``` python
 def FIB(k):
@@ -362,8 +362,8 @@ for i in range(1, 15):
 
     [1.]    [2.]    [3.]    [5.]    [8.]    [13.]   [21.]   [34.]   [55.]   [89.]   [144.]  [233.]  [377.]  [610.]
 
-Tudo o que fiz foi calcular $u\_k$ com a fórmula e extrair do vetor
-resultante a primeira linha ($F\_k$).
+Tudo o que fiz foi calcular \\( u\_k \\) com a fórmula e extrair do vetor
+resultante a primeira linha (\\( F\_k \\)).
 
 E quanto à sua eficiência?
 

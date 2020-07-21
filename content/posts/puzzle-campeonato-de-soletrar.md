@@ -55,9 +55,9 @@ ensaio de Bernoulli que modelam muito bem as situações que descrevemos.
 ###### Distribuição geométrica: a probabilidade de N acertos até o primeiro erro
 
 O número de acertos até o primeiro erro pode ser modelado como uma
-variável aleatória discreta, com domínio $\[0, \\infty\]$
+variável aleatória discreta, com domínio \\( \[0, \\infty\] \\)
 (teoricamente), que tem distribuição geométrica com parâmetro p, a
-probabilidade de sucesso, $X \\sim Geom(p)$.
+probabilidade de sucesso, \\( X \\sim Geom(p) \\).
 
 A função de probabilidade dessa distribuição nos dá a probabilidade de x
 *fracassos* até o primeiro sucesso. Assumindo independência, aplicamos a
@@ -69,7 +69,7 @@ $$
 
 Mas, note que, na verdade, no *nosso* caso, estamos interessados no
 número de acertos (sucessos) até o primeiro erro (fracasso). É, não vai
-demorar para você perceber que isso é arbitrário. Basta usarmos $1-p$
+demorar para você perceber que isso é arbitrário. Basta usarmos \\( 1-p \\)
 como o parâmetro, ao invés de p, para chegarmos ao que queremos:
 
 $$
@@ -80,13 +80,13 @@ $$
 
 Já a probabilidade de seus oponentes errarem ao menos uma das N
 perguntas é simplesmente a probabilidade complementar deles terem
-acertado TODAS as N perguntas, i.e. $1 - p^N$.
+acertado TODAS as N perguntas, i.e. \\( 1 - p^N \\).
 
 Eessa v.a. pode assumir qualquer valor possível de perguntas sorteadas,
-$Im(Y) = \[1, \\infty\]$, e tem distribuição binomial com parâmetro $N$
-e $p$. Para relembrar, essa distribuição serve para modelar o número de
-sucessos em $N$ ensaios de Bernoulli independentes. No nosso caso,
-queremos 1 menos a probabilidade do competidor ter acertado todas as $N$
+\\( Im(Y) = \[1, \\infty\] \\), e tem distribuição binomial com parâmetro \\( N \\)
+e \\( p \\). Para relembrar, essa distribuição serve para modelar o número de
+sucessos em \\( N \\) ensaios de Bernoulli independentes. No nosso caso,
+queremos 1 menos a probabilidade do competidor ter acertado todas as \\( N \\)
 perguntas:
 
 $$

@@ -12,15 +12,15 @@ math: true
 O Método de Newton é um conhecido algoritmo para chegar a soluções
 númericas de uma equação, normalmente uma para a qual a solução não é
 tão trivial. Por exemplo, imagine que queiramos encontrar encontrar a
-raiz da função quadrática $x = \\sqrt{5} \\Rightarrow x^2 = 5
-\\Rightarrow x^2 - 5 = 0$. Como poderíamos fazer isso?
+raiz da função quadrática \\( x = \\sqrt{5} \\Rightarrow x^2 = 5
+\\Rightarrow x^2 - 5 = 0 \\). Como poderíamos fazer isso?
 
 Newton criou um método (verdadeiramente um algoritmo)
 extraordinariamente eficiente para chegar à solução, em que se faz uso
 de seus estudos em cálculo diferencial.
 
-Calcular $\\sqrt{5}$, hoje em dia, é trivial, basta qualquer calculadora
-etc. Mas, como será que a calculadora faz esse cálculo? Talvez seja esse
+Calcular \\( \\sqrt{5} \\), hoje em dia, é trivial, basta qualquer calculadora.
+Mas, como será que a calculadora faz esse cálculo? Talvez seja esse
 o algoritmo que ela mesma usa. Vamos entender como isso funciona então.
 
 Para melhor entendimento do problema, vejamos o gráfico da função antes.
@@ -41,8 +41,8 @@ plt.plot(X, f(X))
 
 ![png](../images/output_1_1.png)
 
-Podemos verificar que ela intercepta o eixo x quando $x$ é um pouquinho
-acima de 2, quer dizer, quando $x = \\sqrt{5} \\approx 2.23$.
+Podemos verificar que ela intercepta o eixo x quando \\( x \\) é um pouquinho
+acima de 2, quer dizer, quando \\( x = \\sqrt{5} \\approx 2.23 \\).
 
 Ok, mas como chegamos até ali com cálculo diferencial? O raciocínio é
 como segue: vamos fazer uma estimativa inicial, um valor que achamos que
@@ -50,7 +50,7 @@ seja próximo da solução. Por exemplo, 1.
 
 Com esse valor, a ideia é obter a reta tangente àquele ponto, o que é
 algo muito mais fácil de lidar. E, para isso, é claro que precisamos
-calcular $f^{'}(1)$, a inclinação dessa reta naquele ponto.
+calcular \\( f^{'}(1) \\), a inclinação dessa reta naquele ponto.
 
 E, com ela em mãos, queremos achar onde *essa reta* intercepta o eixo x,
 e este deve ser um ponto mais próximo da raiz, mas não exatamente a
@@ -68,7 +68,7 @@ estimativa *muito* próxima da solução.
 
 Esse uso da reta tangente é o que se conhece por aproximação linear. Por
 exemplo, retomando a função quadrática. A derivada dela é obtida pela
-regra da potência, $\\frac{d(x^2)}{dx} = 2x$. Já a equação da tangente é
+regra da potência, \\( \\frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente é
 obtida simplesmente da equação de uma reta:
 
 $$
@@ -76,9 +76,9 @@ $$
 y\_0 + m(x - x\_0)
 $$
 
-No nosso caso, queremos achar a reta tangente quando $x\_0 = 1$, sendo
-$f(x\_0) = x^2 - 5 = 1 - 5 = -4$. Logo, a reta que tangencia o ponto
-$(1, -4)$ é:
+No nosso caso, queremos achar a reta tangente quando \\( x\_0 = 1 \\), sendo
+\\( f(x\_0) = x^2 - 5 = 1 - 5 = -4 \\). Logo, a reta que tangencia o ponto
+\\( (1, -4) \\) é:
 
 $$
 y = y\_0 + 2x(x - x\_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
@@ -86,9 +86,9 @@ y = y\_0 + 2x(x - x\_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
 $$
 
 Mas, é crucial perceber que essa é a *equação da reta tangente ao ponto
-$(x\_0, y\_0)$ da função f(x)*. Então, o que realmente podemos alegar é
-que, para um dado número $a$, o valor de $f(a) \\approx y(a)$, quando $a
-\\approx x\_0$: a reta tangente a um dado ponto de uma função é muito
+\\( (x\_0, y\_0) \\) da função f(x)*. Então, o que realmente podemos alegar é
+que, para um dado número \\( a \\), o valor de \\( f(a) \\approx y(a) \\), quando \\( a
+\\approx x\_0 \\): a reta tangente a um dado ponto de uma função é muito
 próxima da própria função para valores não muito distantes do ponto.
 
 $$
@@ -113,18 +113,18 @@ plt.legend()
 
 ![png](../images/output_3_1.png)
 
-Nesse zoom, também podemos ver que a reta tangente ao ponto $(1, -4)$
-cruza o eixo $x$ um pouco mais adiante de $2.23$. Mais especificamente,
-quando $2x - 6 = 0 \\Rightarrow 2x = 6 \\Rightarrow x = 3$.
+Nesse zoom, também podemos ver que a reta tangente ao ponto \\( (1, -4) \\)
+cruza o eixo \\( x \\) um pouco mais adiante de \\( 2.23 \\). Mais especificamente,
+quando \\( 2x - 6 = 0 \\Rightarrow 2x = 6 \\Rightarrow x = 3 \\).
 
 O que é um pouco mais próximo da raiz do que a estimativa inicial 1. E é
 exatamente nisso que consiste o Método de Newton, em se aproximar cada
-vez mais da raiz de $f(x)$ usando a reta que tangencia um dado ponto
+vez mais da raiz de \\( f(x) \\) usando a reta que tangencia um dado ponto
 desta função.
 
 Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre
-o valor de $x$ da reta tangente a um ponto $(x\_0, y\_0)$ que faz com
-que $y = 0$:
+o valor de \\( x \\) da reta tangente a um ponto \\( (x\_0, y\_0) \\) que faz com
+que \\( y = 0 \\):
 
 $$
 y - y\_0 = m(x - x\_0) \\ \\text{ dividindo tudo por m e sumindo com
@@ -140,17 +140,17 @@ $$
 x = 1 - \\frac{1^2 - 5}{2\\cdot1} = 1 - \\frac{-4}{2} = 1 - (-2) = 3
 $$
 
-E a ideia é usarmos o 3 como um novo $x\_0$, e com ele calcularmos uma
-nova estimativa para a raiz com a reta que tangencia $(3, 4)$.
+E a ideia é usarmos o 3 como um novo \\( x\_0 \\), e com ele calcularmos uma
+nova estimativa para a raiz com a reta que tangencia \\( (3, 4) \\).
 
 $$
 x = 3 - \\frac{3^2 - 5}{2\\cdot3} = 3 - \\frac{4}{6} = 3 -
 \\frac{2}{3} \\approx 2.333
 $$
 
-O que já é uma ótima aproximação de $\\sqrt{5}$. Abaixo um gráfico do
-que mais ou menos aconteceu. A função laranja é a tangente ao ponto $(1,
--4)$, e a verde ao ponto $(3, 4)$. Veja como o intercepto-x da tangente
+O que já é uma ótima aproximação de \\( \\sqrt{5} \\). Abaixo um gráfico do
+que mais ou menos aconteceu. A função laranja é a tangente ao ponto \\( (1,
+-4) \\), e a verde ao ponto \\( (3, 4) \\). Veja como o intercepto-x da tangente
 a este último ponto é próximo da raiz da parábola.
 
 ``` python
@@ -192,7 +192,7 @@ Essa biblioteca fornece suporte para trabalhar com álgebra simbólica.
 Nela contamos com funções para calcular limites, derivadas, integrais,
 expandir polinômicos, simplificar expressões etc.
 
-Por exemplo, se quisermos calcular a derivada da função $x^2 - 5$.
+Por exemplo, se quisermos calcular a derivada da função \\( x^2 - 5 \\).
 
 ``` python
 from sympy import symbols, diff, limit, integrate, oo
@@ -204,8 +204,8 @@ diff(x ** 2 - 5)
 
     2*x
 
-Podemos também calcular limites, por exemplo $\\lim\_{x \\to \\infty}
-\\frac{1}{x} = 0$
+Podemos também calcular limites, por exemplo \\( \\lim\_{x \\to \\infty}
+\\frac{1}{x} = 0 \\)
 
 ``` python
 limit(1 / x, x, oo)
@@ -215,7 +215,7 @@ limit(1 / x, x, oo)
 0
 ```
 
-Ou mesmo integrais indefinidas, $\\int x^2 , dx = \\frac{x^3}{3} + c$
+Ou mesmo integrais indefinidas, \\( \\int x^2 , dx = \\frac{x^3}{3} + c \\)
 
 ``` python
 integrate(x ** 2)
@@ -234,10 +234,10 @@ Antes de apresentar a função em si, melhor explicar como eu a pensei.
 
 Primeiramente, ela tomará três argumentos: a função, o valor para o qual
 queremos uma solução, e a estimativa inicial. Por exemplo, no nosso
-caso, ela tomaria os argumentos $x^2$, $5$ e $1$.
+caso, ela tomaria os argumentos \\( x^2 \\), \\( 5 \\) e \\( 1 \\).
 
 Em seguida, construirei simbolicamente, com estes argumentos, nossa
-$f(x)$ e sua derivada, $f'(x)$. E com isso temos tudo que precisamos
+\\( f(x) \\) e sua derivada, \\( f'(x) \\). E com isso temos tudo que precisamos
 para executarmos o método.
 
 No algoritmo, decidi por 5 iterações, printando três colunas com os
@@ -296,7 +296,7 @@ print(f"\nO quanto erramos: {abs(5**(1/3) - newton(x**3, 5, 2))}")
     
     O quanto erramos: 2.220446049250313e-16
 
-Uma das raízes para função $ x^4 + x^3 - x^2 - 5$ deve ser:
+Uma das raízes para função \\(  x^4 + x^3 - x^2 - 5 \\) deve ser:
 
 ``` python
 newton(x ** 4 + x ** 3 - x ** 2, 5, 1)
@@ -381,7 +381,7 @@ divisão por zero.
 
 E se ela for muito pequena, a reta tangente será muito pouco inclinada e
 jogará a estimativa para muito longe da raiz. E foi isso o que aconteceu
-ali em cima. Por exemplo, consideremos a função $x^3 - x$.
+ali em cima. Por exemplo, consideremos a função \\( x^3 - x \\).
 
 ``` python
 X = np.linspace(-2, 2, 1000)

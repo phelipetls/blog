@@ -3,7 +3,6 @@ layout: post
 title: "Web Scraping de páginas dinâmicas com Python"
 date: 2019-08-18
 tags: ["python", "web-scraping", "pandas", "tidytext", "regex", "dataviz"]
-comments: true
 ---
 
 Automatizar a extração de informações de sites é provavelmente algo que
@@ -268,7 +267,7 @@ plt.suptitle("20 palavras mais frequentes por status da reclamação")
 plt.show()
 ```
 
-![](./images/palavras_frequentes-1.png)
+![](./palavras_frequentes-1.png)
 
 Vamos procurar visualizar também a correlação entre as palavras.
 
@@ -340,7 +339,7 @@ nx.draw_kamada_kawai(
 plt.show()
 ```
 
-![](./images/correlacao-1.png)
+![](./correlacao-1.png)
 
 O que primeiro salta à vista é que quase todas as palavras estão
 conectadas entre si. Não há "núcleos" que as separam nitidamente como
@@ -473,7 +472,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](./images/sentimentos-1.png)
+![](./sentimentos-1.png)
 
 Naturalmente, reclamações em geral são negativas, mas interessante que
 as reclamações resolvidas em geral tem mais palavras positivas que as
@@ -508,7 +507,7 @@ fct.map(plt.barh, "palavras", "total_count")
 plt.show()
 ```
 
-![](./images/palavras_frequentes_2-1.png)
+![](./palavras_frequentes_2-1.png)
 
 Aqui podemos conferir com mais detalhes a estrutura do léxico. As
 palavras negativas estão coerentes com o que alguém que está reclamando

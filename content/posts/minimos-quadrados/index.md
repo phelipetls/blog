@@ -1,7 +1,7 @@
 ---
-title: "Mínimios Quadrados"
+title: "Mínimos Quadrados"
 date: 2019-03-25
-published: false
+draft: true
 ---
 
 ##### Introdução

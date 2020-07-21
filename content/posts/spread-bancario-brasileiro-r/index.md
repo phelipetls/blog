@@ -3,7 +3,6 @@ layout: post
 title: "Spread bancário brasileiro: limpeza e visualização de dados"
 date: 2019-03-31
 tags: ["tidyverse", "dataviz", "ggplot2", "r"]
-comments: true
 ---
 
 O altíssimo spread bancário \[^1\] brasileiro é um motivo de preocupação
@@ -143,7 +142,7 @@ dados %>%
   )
 ```
 
-![img3](../images/unnamed-chunk-7-1.png)
+![img3](./unnamed-chunk-7-1.png)
 
 Veja como o spread vinha caindo sistematicamente, embora ainda fosse
 muito alto pros padrões internacionais. Com a crise, ele voltou a
@@ -230,7 +229,7 @@ dados %>%
   coord_flip()
 ```
 
-![img1](../images/output_9_0.png)
+![img1](./output_9_0.png)
 
 E que tal contrastar os 15 maiores spreads de países em desenvolvimento
 versus desenvolvidos, pro ano de 2017? Na outra tabela tem uma coluna
@@ -261,7 +260,7 @@ library(gridExtra)
 grid.arrange(plot1, plot2, nrow = 2)
 ```
 
-![img2](../images/output_11_0.png)
+![img2](./output_11_0.png)
 
 Vemos, assim, que a situação do Brasil é meio crítica quando se olha
 para o mercado de crédito. Está no meio de países muito pequenos ou

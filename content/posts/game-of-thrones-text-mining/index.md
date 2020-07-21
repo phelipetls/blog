@@ -3,7 +3,6 @@ layout: post
 title: "Mineração de Texto com as legendas de Game of Thrones"
 date: 2019-04-20
 tags: ["tidyverse", "dataviz", "ggplot2", "tidytext", "r"]
-comments: true
 ---
 
 Nesse post vou combinar duas das minhas coisas favoritas: R e Game of
@@ -317,7 +316,7 @@ word_pairs %>%
   theme_void()
 ```
 
-![](./images/unnamed-chunk-8-1.png)<!-- -->
+![](./unnamed-chunk-8-1.png)<!-- -->
 
 Esse é uma das visualizações mais legais\! Algumas correlações esperadas
 saltam aos olhos: o núcleo da família Stark, dos Lannister, dos Baratheon
@@ -353,7 +352,7 @@ got_words %>%
   ))
 ```
 
-![](./images/unnamed-chunk-9-1.png)<!-- -->
+![](./unnamed-chunk-9-1.png)<!-- -->
 
 Agora, vamos ver como isso varia para cada temporada. Desta vez, será
 melhor usarmos um pacote mais integrado ao ggplot2, o `ggwordcloud`.
@@ -381,7 +380,7 @@ got_words %>%
   facet_wrap(. ~ season, nrow = 3, ncol = 3)
 ```
 
-![](./images/plot_zoom_png.png)<!-- -->
+![](./plot_zoom_png.png)<!-- -->
 
 Neste gráfico podemos conferir diversos momentos marcantes de cada temporada em palavras.
 Por exemplo, 'hand' na temporada 1, 'stannis' na 2, 'wedding' e 'north' na 3, 'joffrey' na 4, 'shame' na 5, 'hodor' na 6 e, finalmente, 'dead' e 'north' na 7.
@@ -498,7 +497,7 @@ got_bing %>%
   )
 ```
 
-![](./images/unnamed-chunk-13-1.png)<!-- -->
+![](./unnamed-chunk-13-1.png)<!-- -->
 
 Em análise de texto, é interessante buscar visualizar quais partes dele
 são mais negativas ou positivas. O que me interessa aqui é ver isso por temporada.
@@ -543,7 +542,7 @@ got_afinn %>%
   facet_wrap(season ~ ., scale = "free_x")
 ```
 
-![](./images/unnamed-chunk-15-1.png)<!-- -->
+![](./unnamed-chunk-15-1.png)<!-- -->
 
 Em geral, podemos ver que as temporadas foram ficando mais pesadas. Os
 picos azuis claros foram ficando cada vez mais raros e os vales
@@ -582,7 +581,7 @@ got_bing %>%
   )
 ```
 
-![](./images/unnamed-chunk-17-1.png)<!-- -->
+![](./unnamed-chunk-17-1.png)<!-- -->
 
 Ok, isso em geral vai de encontro com o que já havíamos visto.
 
@@ -623,7 +622,7 @@ got_nrc %>%
   )
 ```
 
-![](./images/unnamed-chunk-18-1.png)<!-- -->
+![](./unnamed-chunk-18-1.png)<!-- -->
 
 Pera! Já esse nos dá quase que o resultado oposto! De fato, por esse método
 a série não parece ser tão negativa quanto os outros haviam sugerido. Isso porque

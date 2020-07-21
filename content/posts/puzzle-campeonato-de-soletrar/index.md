@@ -2,10 +2,9 @@
 title: "Puzzle do Campeonato de Soletrar"
 date: 2019-04-15
 layout: post
-published: false
 tags: ["puzzle", "probabilidade", "stats", "r"]
-comments: true
 math: true
+draft: true
 ---
 
 Procurando por puzzles probabilísticos na seção [The

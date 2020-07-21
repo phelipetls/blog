@@ -3,12 +3,11 @@ layout: post
 title: "Puzzle do cavalo no tabuleiro infinito com NumPy"
 date: 2019-02-18
 tags: ["numpy", "monte-carlo", "matplotlib", "python", "stats"]
-comments: true
 ---
 
 ##### Introdução
 
-![Img](../images/knight.png)
+![](./knight.png)
 
 Para estrear o blog, escolhi explorar um puzzle probabilístico, que vi
 no [blog do David
@@ -126,7 +125,7 @@ plano cartesiano, em que o cavalo está no ponto de origem, (0, 0),
 podendo saltar dali para oito casas possíveis, com igual probabilidade,
 respeitando sempre as regras do xadrez, como na imagem:
 
-![Knight](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/images/knight_moves.png)
+![Knight](./knight_moves.png)
 
 Daí podemos notar que, se o cavalo pular para uma casa de coordenada x,
 a coordenada y terá que ser igual a 3 - abs(x). Mas devemos tomar o
@@ -288,7 +287,7 @@ knight_probs = [knight_infinite_board(100000) for _ in range(100)]
 plt.hist(knight_probs, bins = 20)
 ```
 
-![Hist](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/images/hist.png)
+![Hist](./hist.png)
 
 ##### A eficiência em números
 

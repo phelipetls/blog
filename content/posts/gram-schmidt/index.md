@@ -3,7 +3,6 @@ layout: post
 title: "Processo de Gram-Schmidt com NumPy"
 date: 2019-08-04
 tags: ["numpy", "algoritmos", "python", "linalg"]
-comments: true
 math: true
 ---
 
@@ -38,7 +37,7 @@ ax.set_ylim(-1, 1, 1)
 ax.set_zlim(-1, 1, 1)
 ```
 
-![](./images/gram-schmidt1.png)
+![](./gram-schmidt1.png)
 
 Para ver como um conjunto ortogonal de vetores é mais conveniente que um
 outro conjunto qualquer, vamos supor uma matriz \\( Q \\) cujas colunas são
@@ -106,7 +105,7 @@ ax.annotate("$e = a_1 - \hat{x}a_2$", e + projection + [1, -2], fontsize=15)
 ax.set_title(r"Projeção de \\( a_1 \\) em \\( a_2 \\)")
 ```
 
-![](./images/gram-schmidt2.png)<!-- -->
+![](./gram-schmidt2.png)<!-- -->
 
 Essa figura serve para ilustrar o que queremos fazer: dado dois vetores,
 podemos ortogonalizar um em relação ao outro ao subtrair do vetor \\( a_1 \\)

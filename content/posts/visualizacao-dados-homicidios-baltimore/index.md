@@ -2,7 +2,6 @@
 title: "Homicídios em Baltimore: visualizações com ggplot2 e gganimate"
 date: 2019-04-07
 tags: ["dataviz", "tidyverse", "gganimate", "ggplot2", "r"]
-comments: true
 ---
 
 Neste post pretendo continuar o que foi iniciado no último, onde
@@ -78,7 +77,7 @@ df %>%
   )
 ```
 
-![plot1](../images/unnamed-chunk-2-1.png)
+![plot1](./unnamed-chunk-2-1.png)
 
 Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com
 os anos…
@@ -109,7 +108,7 @@ df %>%
   scale_x_continuous(breaks = 2007:2012)
 ```
 
-![plot2](../images/unnamed-chunk-3-1.png)<!-- -->
+![plot2](./unnamed-chunk-3-1.png)<!-- -->
 
 Essa é a primeira visualização do que já era esperado: na cidade de
 Baltimore, a violência afeta muito mais os negros do que a qualquer
@@ -150,7 +149,7 @@ acumulado <- df %>%
 acumulado
 ```
 
-![plot3](../images/unnamed-chunk-4-1.png)<!-- -->
+![plot3](./unnamed-chunk-4-1.png)<!-- -->
 
 E aqui fica claro o porquê da queda em 2012: não temos os dados de todos
 os meses. Também salta aos olhos que a violência diminuiu em relação a
@@ -178,7 +177,7 @@ df %>%
   scale_x_continuous(breaks = seq(0, 100, 10))
 ```
 
-![plot3](../images/unnamed-chunk-5-1.png)<!-- -->
+![plot3](./unnamed-chunk-5-1.png)<!-- -->
 
 E assim podemos ver que o mais afetado pela violência é o homem negro da
 faixa dos 20-30 anos. Se olharmos bem, pode-se também observar que a
@@ -208,7 +207,7 @@ df %>%
   scale_fill_brewer(palette = "Set1")
 ```
 
-![plot5](../images/unnamed-chunk-6-1.png)<!-- -->
+![plot5](./unnamed-chunk-6-1.png)<!-- -->
 
 Os homicídios por armas de fogo são de longe os mais comuns, seguido por
 esfaqueamento e contusão.
@@ -271,7 +270,7 @@ anim <- baltimore_map +
 animate(anim, fps = 5)
 ```
 
-![gif1](../images/unnamed-chunk-7-1.gif)<!-- -->
+![gif1](./unnamed-chunk-7-1.gif)<!-- -->
 
 Fica evidente daí como a violência é concentrada em certos bairros.
 
@@ -301,7 +300,7 @@ df %>%
   transition_states(ano)
 ```
 
-![gif2](../images/unnamed-chunk-8-1.gif)<!-- -->
+![gif2](./unnamed-chunk-8-1.gif)<!-- -->
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
 `gganimate::transition_reveal()` para revelar ao longo do eixo do tempo
@@ -319,7 +318,7 @@ acumulado +
   transition_reveal(mes)
 ```
 
-![gif3](../images/unnamed-chunk-9-1.gif)<!-- -->
+![gif3](./unnamed-chunk-9-1.gif)<!-- -->
 
 ###### Conclusões
 

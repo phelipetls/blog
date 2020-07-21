@@ -3,11 +3,10 @@ layout: post
 title: "Três algoritmos para a sequência de Fibonacci"
 date: 2019-03-03
 tags: ["numpy", "algoritmos", "python", "linalg"]
-comments: true
 math: true
 ---
 
-![FibSeq](../images/kisspng-fibonacci-number-golden-spiral-golden-ratio-mathem-spiral-5b4a12ee4a0493.6897256215315811663032.png)
+![FibSeq](./kisspng-fibonacci-number-golden-spiral-golden-ratio-mathem-spiral-5b4a12ee4a0493.6897256215315811663032.png)
 
 A sequência de fibonacci é uma velha conhecida dos que estudam
 programação. Por isso, esse post não deve soar tão estimulante para
@@ -129,7 +128,7 @@ Para calcular o vigésimo número ele demorou muito mais do que o
 algoritmo anterior, que calculou um número muito maior\!\! Por que será
 que isso aconteceu? Uma imagem pode ajudar a ilustrar o porquê disso.
 
-![Fib](../images/fibo.png)
+![Fib](./fibo.png)
 
 O que acontece é que a função recursiva acaba requisitando os mesmos
 números de fibonacci múltiplas vezes e, para números muito grandes,
@@ -217,7 +216,7 @@ maneira muito conveniente para resolver esses casos, e envolve os
 autovalores/autovetores (*eigenvalues/eigenvectors*) de uma matriz. Mas,
 afinal, o que são eles?
 
-![Eigenvectors](../images/evectors.gif)
+![Eigenvectors](./evectors.gif)
 
 Simply put, os autovetores são vetores característicos de uma matriz
 que, após transformados por ela, não mudam de direção, mas é possível

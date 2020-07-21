@@ -39,9 +39,13 @@ Apenas para recordar o que é a sequência de fibonacci: dados os dois
 primeiros números da sequência (comumente 0 e 1), o próximo número é a
 soma dos dois que o precedem.
 
-$$F\_0 = 0, F\_1 = 1$$
+$$
+F\_0 = 0, F\_1 = 1
+$$
 
-$$F\_n = F\_{n-1} + F\_{n-2}$$
+$$
+F\_n = F\_{n-1} + F\_{n-2}
+$$
 
 Com isso em mente, podemos escrever o algoritmo que muitos já devem
 conhecer.
@@ -200,7 +204,11 @@ Bom, para começar, é conveniente considerarmos um vetor base $u\_0$, que
 no nosso caso pode ser perfeitamente $\\begin{bmatrix} 1 \\\\ 0
 \\end{bmatrix}$. Assim, segue diretamente que $u\_1 = Au\_0$. E, disso,
 que $u\_2 = Au\_1 = A \\cdot A \\cdot u\_0 = A^2u\_0$. Logo, a fórmula
-geral é: $$u^k = A^ku\_0$$.
+geral é:
+
+$$
+u^k = A^ku\_0
+$$.
 
 O que sugere de imediato que a resposta reside nas potências da matriz.
 Mas isso pode ser bem pesado matematicamente. Felizmente, existe uma
@@ -212,8 +220,12 @@ afinal, o que são eles?
 
 Simply put, os autovetores são vetores característicos de uma matriz
 que, após transformados por ela, não mudam de direção, mas é possível
-que mudem em magnitude dependendo do autovalor. Matematicamente, $$Ax =
-\\lambda x$$
+que mudem em magnitude dependendo do autovalor. Matematicamente,
+
+$$
+Ax =
+\\lambda x
+$$
 
 Em que $x$ é um autovetor da matriz $A$ e $\\lambda$ um autovalor do
 autovetor. Note que, por isso, o autovetor pode encolher (se $0 \<
@@ -228,7 +240,11 @@ nós.
 
 Daí que, tratando $S$ como uma matriz de autovetores nas colunas e
 $\\Lambda$ como uma matriz de autovalores na diagonal e zeros em todo o
-resto, podemos afirmar que $$AS = S\\Lambda$$
+resto, podemos afirmar que
+
+$$
+AS = S\\Lambda
+$$
 
 O que não é óbvio, mas que pode ser visto deste modo:
 
@@ -252,7 +268,9 @@ Vamos multiplicar $AS$ pela direita por $S^{-1}$. Isso dá: $A =
 S\\Lambda S^{-1}$, já que $SS^{-1} = I$. Agora, $A^2 = S\\Lambda
 S^{-1}S\\Lambda S^{-1} = S \\Lambda^{2}S^{-1}$. E, em geral:
 
-$$A^k = S \\Lambda^{k}S^{-1}$$
+$$
+A^k = S \\Lambda^{k}S^{-1}
+$$
 
 E assim vemos o quanto a decomposição pode simplificar a exponenciação
 de uma matriz\! Agora, retomando lá do início, $u\_k = A^ku\_0$ pode ser
@@ -264,7 +282,9 @@ autovetores, $Sc = u\_0$, onde c é o vetor de coeficientes que resolve
 esse sistema de equações, $c = S^{-1}u\_0$. E, com isso, nós temos tudo
 que precisamos porque
 
-$$ u\_k = A^ku\_0 = S \\Lambda^{k}S^{-1} Sc = S \\Lambda^{k}c$$
+$$
+ u\_k = A^ku\_0 = S \\Lambda^{k}S^{-1} Sc = S \\Lambda^{k}c
+$$
 
 Isso implica que, no nosso caso, para uma matrix 2x2 (só dois
 autovetores), $u\_k = c\_1\\lambda\_{1}^{k}x\_1 +
@@ -318,8 +338,10 @@ os números de Fibonacci estão crescendo\!\! Como sabemos que $u\_k =
 c\_1\\lambda\_{1}^{k}x\_1 + c\_2\\lambda\_{2}^{k}x\_2$, substituindo
 temos:
 
-$$u\_k = c\_1\\cdot(1.618)^{k}\\cdot x\_1 + c\_2\\cdot(-0.618)^{k}\\cdot
-x\_2$$
+$$
+u\_k = c\_1\\cdot(1.618)^{k}\\cdot x\_1 + c\_2\\cdot(-0.618)^{k}\\cdot
+x\_2
+$$
 
 E fica evidente que, para um k muito grande, o número de ouro é o que
 governa o crescimento dos números, com o outro termo tentendo a 0 com k

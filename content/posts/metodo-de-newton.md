@@ -71,15 +71,19 @@ exemplo, retomando a função quadrática. A derivada dela é obtida pela
 regra da potência, $\\frac{d(x^2)}{dx} = 2x$. Já a equação da tangente é
 obtida simplesmente da equação de uma reta:
 
-$$ \\Delta y = f'(x)\\Delta x \\ (y - y\_0) = f'(x\_0)(x - x\_0) \\ y =
-y\_0 + m(x - x\_0)$$
+$$
+\\Delta y = f'(x)\\Delta x \\ (y - y\_0) = f'(x\_0)(x - x\_0) \\ y =
+y\_0 + m(x - x\_0)
+$$
 
 No nosso caso, queremos achar a reta tangente quando $x\_0 = 1$, sendo
 $f(x\_0) = x^2 - 5 = 1 - 5 = -4$. Logo, a reta que tangencia o ponto
 $(1, -4)$ é:
 
-$$ y = y\_0 + 2x(x - x\_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
--2 \\ y = 2x - 6 $$
+$$
+y = y\_0 + 2x(x - x\_0) \\ y = -4 + 2\\cdot 1(x - 1) \\ y = -4 + 2x
+-2 \\ y = 2x - 6 
+$$
 
 Mas, é crucial perceber que essa é a *equação da reta tangente ao ponto
 $(x\_0, y\_0)$ da função f(x)*. Então, o que realmente podemos alegar é
@@ -87,7 +91,9 @@ que, para um dado número $a$, o valor de $f(a) \\approx y(a)$, quando $a
 \\approx x\_0$: a reta tangente a um dado ponto de uma função é muito
 próxima da própria função para valores não muito distantes do ponto.
 
-$$f(a) \\approx y\_0 + m(a - x\_0)$$
+$$
+f(a) \\approx y\_0 + m(a - x\_0)
+$$
 
 No gráfico abaixo isso pode ser melhor visualizado. Perceba que para
 valores próximos de 1, a reta tangente está bem próxima da parábola, mas
@@ -120,22 +126,27 @@ Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre
 o valor de $x$ da reta tangente a um ponto $(x\_0, y\_0)$ que faz com
 que $y = 0$:
 
-$$ y - y\_0 = m(x - x\_0) \\ \\text{ dividindo tudo por m e sumindo com
+$$
+y - y\_0 = m(x - x\_0) \\ \\text{ dividindo tudo por m e sumindo com
 o y: } \\ -\\frac{y\_0}{m} = x - x\_0 \\Rightarrow x = x\_0 -
 \\frac{y\_0}{m} \\ \\text{ o que também pode ser escrito como: } \\ x =
 x\_0 - \\frac{f(x\_0)}{f'(x\_0)} \\Rightarrow x\_{n+1} = x\_n -
-\\frac{f(x\_n)}{f'(x\_n)}$$
+\\frac{f(x\_n)}{f'(x\_n)}
+$$
 
 Plugando os valores de nossa estimativa inicial, obtemos:
 
-$$ x = 1 - \\frac{1^2 - 5}{2\\cdot1} = 1 - \\frac{-4}{2} = 1 - (-2) =
-3$$
+$$
+x = 1 - \\frac{1^2 - 5}{2\\cdot1} = 1 - \\frac{-4}{2} = 1 - (-2) = 3
+$$
 
 E a ideia é usarmos o 3 como um novo $x\_0$, e com ele calcularmos uma
 nova estimativa para a raiz com a reta que tangencia $(3, 4)$.
 
-$$ x = 3 - \\frac{3^2 - 5}{2\\cdot3} = 3 - \\frac{4}{6} = 3 -
-\\frac{2}{3} \\approx 2.333$$
+$$
+x = 3 - \\frac{3^2 - 5}{2\\cdot3} = 3 - \\frac{4}{6} = 3 -
+\\frac{2}{3} \\approx 2.333
+$$
 
 O que já é uma ótima aproximação de $\\sqrt{5}$. Abaixo um gráfico do
 que mais ou menos aconteceu. A função laranja é a tangente ao ponto $(1,

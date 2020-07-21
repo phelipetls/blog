@@ -68,7 +68,9 @@ Por isso é útil usar a ideia de Gram-Schmidt, que procura decompor uma
 matriz $A$ qualquer em uma matriz com vetores ortonormais $Q$ e uma
 matriz $R$ que conecta as duas:
 
-$$A = QR$$
+$$
+A = QR
+$$
 
 Como eles fazem isso? A ideia básica é a seguinte e está intimamente
 ligada ao conceito de projeção. Por isso, vamos entender o que é isso
@@ -116,8 +118,10 @@ A diferença entre $a\_1$ e $\\hat{x}a\_2$, $e$, é perpendicular a todo o
 espaço vetorial preenchido por $a\_2$. Logo, basta descobrir qual é este
 múltiplo $\\hat{x}$:
 
-$$a^{T}\_2(a\_1 - \\hat{x}a\_2) = 0 \\ a^{T}\_2a\_1 =
-\\hat{x}a^{T}\_2a\_2 \\ \\hat{x} = \\frac{a^{T}\_2a\_1}{a^{T}\_2a\_2}$$
+$$
+a^{T}\_2(a\_1 - \\hat{x}a\_2) = 0 \\ a^{T}\_2a\_1 =
+\\hat{x}a^{T}\_2a\_2 \\ \\hat{x} = \\frac{a^{T}\_2a\_1}{a^{T}\_2a\_2}
+$$
 
 Se você reparar bem, essa foi exatamente a conta que eu fiz para obter a
 variável de nome `projection` no código acima.
@@ -131,19 +135,25 @@ expandido pelas colunas de $A$. Isso se faz porque não há uma solução
 para $Ax = b$, então se pretende chegar à melhor solução possível, a
 solução que minimiza a soma do quadrado dos resíduos.
 
-$$\\hat{x} = (A^TA)^{-1}A^Tb$$
+$$
+\\hat{x} = (A^TA)^{-1}A^Tb
+$$
 
 E o vetor em si, o vetor projetado em $A$, é simplesmente $A\\hat{x}$,
 obtido pelo produto do que agora chamaremos matriz de projeção,
 $A(A^TA)^{-1}A^T$, com o vetor $b$:
 
-$$\\hat{b} = A\\hat{x} = A(A^TA)^{-1}A^Tb $$
+$$
+\\hat{b} = A\\hat{x} = A(A^TA)^{-1}A^Tb 
+$$
 
 Mas o nosso objetivo é, na verdade, obter o vetor ortogonal $e$, o erro
 da projeção, que é sempre ortogonal ao sub-espaço sobre o qual estamos
 projetando o nosso vetor:
 
-$$e = b - A\\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b $$
+$$
+e = b - A\\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b 
+$$
 
 E assim vemos que, como há a matriz de projeção de $b$ sobre o
 sub-espaço expandido pelas colunas de $A$, há também a projeção de $b$
@@ -257,7 +267,9 @@ assunto, recomendo esta aula do curso clássico de Gilbert Strang:
 Como um bônus, aqui vai mais uma breve razão que faz as matrizes
 ortonormais serem tão desejáveis na computação:
 
-$$| Qv |^{2} = (Qv)^{T}(Qv) = v^TQ^TQv = v^Tv = | v |^{2}$$
+$$
+| Qv |^{2} = (Qv)^{T}(Qv) = v^TQ^TQv = v^Tv = | v |^{2}
+$$
 
 Isto quer dizer que a norma de um vetor $v$, quando multiplicado por uma
 matriz com vetores ortonormais $Q$, não muda. Logo, a multiplicação é

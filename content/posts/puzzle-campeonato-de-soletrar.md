@@ -63,14 +63,18 @@ A função de probabilidade dessa distribuição nos dá a probabilidade de x
 *fracassos* até o primeiro sucesso. Assumindo independência, aplicamos a
 regra da multiplicação para chegar a
 
-$$P\_X(X = x) = (1 - p)^xp $$
+$$
+P\_X(X = x) = (1 - p)^xp 
+$$
 
 Mas, note que, na verdade, no *nosso* caso, estamos interessados no
 número de acertos (sucessos) até o primeiro erro (fracasso). É, não vai
 demorar para você perceber que isso é arbitrário. Basta usarmos $1-p$
 como o parâmetro, ao invés de p, para chegarmos ao que queremos:
 
-$$P\_X(X = x) = p^x(1-p)$$
+$$
+P\_X(X = x) = p^x(1-p)
+$$
 
 ###### Distribuição binomial: a probabilidade de erro de seus oponentes
 
@@ -85,8 +89,10 @@ sucessos em $N$ ensaios de Bernoulli independentes. No nosso caso,
 queremos 1 menos a probabilidade do competidor ter acertado todas as $N$
 perguntas:
 
-$$ P\_X(X = x) = {N\\choose N} p^{N}(1-p)^{N-N} = 1 \\cdot p^N \\cdot
-(1-p)^0 = p^N \\ P(\\text{Errou alguma}) = 1 - p^N$$
+$$
+ P\_X(X = x) = {N\\choose N} p^{N}(1-p)^{N-N} = 1 \\cdot p^N \\cdot
+(1-p)^0 = p^N \\ P(\\text{Errou alguma}) = 1 - p^N
+$$
 
 ###### A probabilidade de você vencer
 

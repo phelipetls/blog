@@ -8,7 +8,7 @@ comments: true
 
 ##### Introdução
 
-{: .center} ![Img](../images/knight.png)
+![Img](../images/knight.png)
 
 Para estrear o blog, escolhi explorar um puzzle probabilístico, que vi
 no [blog do David
@@ -45,7 +45,7 @@ deve fazer. Porque, por exemplo, somar dois integers é diferente de
 somar dois strings:
 
 ``` python
-1+2
+1 + 2
 ```
 
 ``` 
@@ -53,7 +53,7 @@ somar dois strings:
 ```
 
 ``` python
-'1'+'2'
+"1" + "2"
 ```
 
     '12'
@@ -88,7 +88,7 @@ Se tentarmos incluir um string nesse ndarray, ele será convertido para
 um integer:
 
 ``` python
-a[0] = '12'
+a[0] = "12"
 a
 ```
 
@@ -97,7 +97,7 @@ a
 Mas se tentarmos incluir um número complexo, obtemos um erro:
 
 ``` python
-a[0] = 2+1j
+a[0] = 2 + 1j
 ```
 
     ---------------------------------------------------------------------------
@@ -115,10 +115,11 @@ Esse comportamento é muito similar ao vetor do R.
 ###### Simulando os movimentos do cavalo
 
 Dito isto, vejamos o que o Numpy pode fazer. Mas antes um esclarecimento
-- devo todo o thought process no que diz respeito à modelagem ao
-Robinson, e encorajo a todos lendo que confiram o post dele, se não
-antes, depois de ler aqui. O único trabalho que tive foi o de escrever o
-código em Python.
+
+  - devo todo o thought process no que diz respeito à modelagem ao
+    Robinson, e encorajo a todos lendo que confiram o post dele, se não
+    antes, depois de ler aqui. O único trabalho que tive foi o de
+    escrever o código em Python.
 
 A ideia de Robinson para a simulação foi imaginar o tabuleiro como um
 plano cartesiano, em que o cavalo está no ponto de origem, (0, 0),
@@ -149,10 +150,10 @@ Mas, é claro, não é interessante simular somente um salto. Queremos, na
 verdade, 20 deles, precisamos de um vetor.
 
 ``` python
-move_x = np.random.choice((1, 2, -1, -2), size = 20)
-move_y = (3 - abs(move_x)) * np.random.choice((1, -1), size = 20)
+move_x = np.random.choice((1, 2, -1, -2), size=20)
+move_y = (3 - abs(move_x)) * np.random.choice((1, -1), size=20)
 
-print(move_x, move_y, sep = '\n')
+print(move_x, move_y, sep="\n")
 ```
 
     [-2  1 -1  2  1  1  2  2 -1 -2 -2  2 -1  2 -2  2 -1  1  2  1]
@@ -171,9 +172,11 @@ Com o Numpy, isso é bem fácil de ser feito.
 
 ``` python
 move_x = np.random.choice((1, 2, -1, -2), size=20 * 100000).reshape((20, 100000))
-move_y = (3 - abs(move_x)) * np.random.choice((1, -1), size=20 * 100000).reshape((20, 100000))
+move_y = (3 - abs(move_x)) * np.random.choice((1, -1), size=20 * 100000).reshape(
+    (20, 100000)
+)
 
-print(move_x, move_y, sep = '\n\n') # sep = '\n\n' serve para espaçar o output do print
+print(move_x, move_y, sep="\n\n")  # sep = '\n\n' serve para espaçar o output do print
 ```
 
     [[ 1 -2  1 ... -1  2  2]
@@ -210,10 +213,10 @@ soma cumulativa "down the rows", linhas abaixo (o 0 é porque a linha é o
 linha como um salto:
 
 ``` python
-position_x = move_x.cumsum(axis = 0)
-position_y = move_y.cumsum(axis = 0)
+position_x = move_x.cumsum(axis=0)
+position_y = move_y.cumsum(axis=0)
 
-print(position_x, position_y, sep = '\n\n')
+print(position_x, position_y, sep="\n\n")
 ```
 
     [[ 1 -2  1 ... -1  2  2]
@@ -238,7 +241,7 @@ podemos extrair somente ela pedindo a linha de indíce -1 de nossa matriz
 (no Python, -1 equivale ao último elemento, -2 ao penúltimo etc.).
 
 ``` python
-print(position_x[-1], position_y[-1], sep = '\n\n')
+print(position_x[-1], position_y[-1], sep="\n\n")
 ```
 
     [ 2 -6 -5 ...  7 14  7]
@@ -285,7 +288,6 @@ knight_probs = [knight_infinite_board(100000) for _ in range(100)]
 plt.hist(knight_probs, bins = 20)
 ```
 
-{: .center}
 ![Hist](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/images/hist.png)
 
 ##### A eficiência em números

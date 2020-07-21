@@ -49,28 +49,27 @@ probabilidade. É fácil perceber que soletrar certo ou errado a palavra é
 uma variável aleatória de Bernoulli, com parâmetro p, a probabilidade de
 sucesso, sendo a probabilidade de soletrar corretamente. Sabendo disso,
 há muitas distribuições que pressupõem repetições independentes de um
-ensaio de Bernoulli que modelam muito bem as situações que
-descrevemos.
+ensaio de Bernoulli que modelam muito bem as situações que descrevemos.
 
 ###### Distribuição geométrica: a probabilidade de N acertos até o primeiro erro
 
 O número de acertos até o primeiro erro pode ser modelado como uma
-variável aleatória discreta, com domínio $[0, \infty]$
+variável aleatória discreta, com domínio $\[0, \\infty\]$
 (teoricamente), que tem distribuição geométrica com parâmetro p, a
-probabilidade de sucesso, $X \sim Geom(p)$.
+probabilidade de sucesso, $X \\sim Geom(p)$.
 
 A função de probabilidade dessa distribuição nos dá a probabilidade de x
 *fracassos* até o primeiro sucesso. Assumindo independência, aplicamos a
 regra da multiplicação para chegar a
 
-$$P_X(X = x) = (1 - p)^xp $$
+$$P\_X(X = x) = (1 - p)^xp $$
 
 Mas, note que, na verdade, no *nosso* caso, estamos interessados no
 número de acertos (sucessos) até o primeiro erro (fracasso). É, não vai
 demorar para você perceber que isso é arbitrário. Basta usarmos $1-p$
 como o parâmetro, ao invés de p, para chegarmos ao que queremos:
 
-$$P_X(X = x) = p^x(1-p)$$
+$$P\_X(X = x) = p^x(1-p)$$
 
 ###### Distribuição binomial: a probabilidade de erro de seus oponentes
 
@@ -79,15 +78,14 @@ perguntas é simplesmente a probabilidade complementar deles terem
 acertado TODAS as N perguntas, i.e. $1 - p^N$.
 
 Eessa v.a. pode assumir qualquer valor possível de perguntas sorteadas,
-$Im(Y) = [1, \infty]$, e tem distribuição binomial com parâmetro $N$
-e $p$. Para relembrar, essa distribuição serve para modelar o número
-de sucessos em $N$ ensaios de Bernoulli independentes. No nosso caso,
-queremos 1 menos a probabilidade do competidor ter acertado todas as
-$N$
+$Im(Y) = \[1, \\infty\]$, e tem distribuição binomial com parâmetro $N$
+e $p$. Para relembrar, essa distribuição serve para modelar o número de
+sucessos em $N$ ensaios de Bernoulli independentes. No nosso caso,
+queremos 1 menos a probabilidade do competidor ter acertado todas as $N$
 perguntas:
 
-$$ P_X(X = x) = {N\choose N} p^{N}(1-p)^{N-N} = 1 \cdot p^N \cdot (1-p)^0 = p^N \\
-P(\text{Errou alguma}) = 1 - p^N$$
+$$ P\_X(X = x) = {N\\choose N} p^{N}(1-p)^{N-N} = 1 \\cdot p^N \\cdot
+(1-p)^0 = p^N \\ P(\\text{Errou alguma}) = 1 - p^N$$
 
 ###### A probabilidade de você vencer
 
@@ -116,8 +114,10 @@ até errar.
 library(magrittr)
 
 # comecemos com o primeiro caso
-geom <- dgeom(x = N-1,
-              prob = 1-.99)
+geom <- dgeom(
+  x = N - 1,
+  prob = 1 - .99
+)
 ```
 
 Agora, precisamos das probabilidade dos outros falharem. Para isso, vou
@@ -135,10 +135,11 @@ for (i in 1:dim(A)[1]) {
     # ter acertado todas as j perguntas
     # com probabilidade de acerto probs[i]
 
-    A[i, j] <- 1 - dbinom(x = j,
-                          size = j,
-                          prob = probs[i])
-
+    A[i, j] <- 1 - dbinom(
+      x = j,
+      size = j,
+      prob = probs[i]
+    )
   }
 }
 
@@ -161,15 +162,16 @@ uma dimensão de uma array.
 
 ``` r
 produtos <- apply(A,
-                  MARGIN = 2,
-                  FUN = prod)
+  MARGIN = 2,
+  FUN = prod
+)
 ```
 
 Agora resta multiplicar esse vetor com o previamente calculado para
 chegar a resposta final:
 
 ``` r
-(produtos * geom) %>% sum
+(produtos * geom) %>% sum()
 ```
 
     ## [1] 0.5259606
@@ -177,10 +179,12 @@ chegar a resposta final:
 Já no caso em que você soletra primeiro:
 
 ``` r
-geom <- dgeom(x = N,
-              prob = 1-.99)
+geom <- dgeom(
+  x = N,
+  prob = 1 - .99
+)
 
-(produtos * geom) %>% sum
+(produtos * geom) %>% sum()
 ```
 
     ## [1] 0.5207009

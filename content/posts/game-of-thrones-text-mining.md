@@ -35,18 +35,15 @@ transformei em um data.frame com `tibble::enframe()`.
 library(jsonlite)
 library(tidyverse)
 
-setwd('~/got_subtitles/')
+setwd("~/got_subtitles/")
 
 # vetor com o endereço dos arquivos
-arquivos <- dir(path = getwd(),
-                pattern = 'json$',
-                full.names = T)
+arquivos <- dir(path = getwd(), pattern = "json$", full.names = T)
 
 # lendo os arquivos
-got_subs_raw <-
-  map(arquivos, ~fromJSON(.x)) %>%
-  unlist %>%
-  enframe
+got_subs_raw <- map(arquivos, ~ fromJSON(.x)) %>%
+  unlist() %>%
+  enframe()
 
 got_subs_raw
 ```
@@ -81,22 +78,21 @@ etc.). Usarei algumas regex para extrair o que quero.
 ``` r
 got_subs <- got_subs_raw %>%
   mutate(
-    name = str_remove(name, 'Game Of Thrones S'),
+    name = str_remove(name, "Game Of Thrones S"),
     # extraindo a parte com o nº da temporada e do episodio
-    season_episode = str_extract(name, '\\d+E\\d+'),
+    season_episode = str_extract(name, "\\d+E\\d+"),
     # extraindo a parte com o nome do episódio
-    name = str_match(name, '([A-z,\' ]+)\\.srt')[, 2] %>% trimws
-    ) %>%
+    name = str_match(name, "([A-z,' ]+)\\.srt")[, 2] %>% trimws()
+  ) %>%
 
   # separando a temporada do episódio
-  separate(season_episode, c('season', 'episode'), sep = 'E') %>%
+  separate(season_episode, c("season", "episode"), sep = "E") %>%
 
   # transformando o que é número para numeric
   mutate(
     season = as.numeric(season),
     episode = as.numeric(episode)
-    ) %>%
-
+  ) %>%
   select(season, episode, name, value)
 
 got_subs
@@ -213,9 +209,11 @@ por serem pronomes de tratamento de GOT, são as stop
 words desse universo. Por isso, achei prudente retirá-las.
 
 ``` r
-got_stop_words <- c('father', 'mother', 'queen', 'king',
-                    'boy', 'girl', 'lord', 'lady', 'son', 'sister',
-                    'grace', 'ser', 'brother', 'sister', 'king\'s')
+got_stop_words <- c(
+  "father", "mother", "queen", "king",
+  "boy", "girl", "lord", "lady", "son", "sister",
+  "grace", "ser", "brother", "sister", "king's"
+)
 
 got_words <- got_words %>%
   filter(!(word %in% got_stop_words)) %>%
@@ -265,8 +263,9 @@ word_pairs <- got_words %>%
   add_count(word) %>%
   filter(n >= 50) %>%
   pairwise_cor(word,
-               rowname,
-               sort = T)
+    rowname,
+    sort = T
+  )
 
 word_pairs
 ```
@@ -301,16 +300,20 @@ library(igraph)
 set.seed(0)
 
 word_pairs %>%
-  filter(!(item1 %in% c('font', 'color', 'game'))) %>%
+  filter(!(item1 %in% c("font", "color", "game"))) %>%
   top_n(100) %>%
   graph_from_data_frame() %>%
-  ggraph(layout = 'fr') +
+  ggraph(layout = "fr") +
   geom_edge_link(aes(edge_alpha = correlation),
-                 show.legend = F) +
-  geom_node_point(color = 'skyblue',
-                  size = 3) +
+    show.legend = F
+  ) +
+  geom_node_point(
+    color = "skyblue",
+    size = 3
+  ) +
   geom_node_text(aes(label = name),
-                 repel = T) +
+    repel = T
+  ) +
   theme_void()
 ```
 
@@ -337,16 +340,17 @@ principais um vetor de palavras e um de frequências.
 library(wordcloud)
 library(RColorBrewer)
 
-paleta <- brewer.pal(6, 'Dark2')
+paleta <- brewer.pal(6, "Dark2")
 
 set.seed(99)
 
 got_words %>%
   count(word) %>%
   with(wordcloud(word,
-                 n,
-                 max.words = 50,
-                 colors = paleta))
+    n,
+    max.words = 50,
+    colors = paleta
+  ))
 ```
 
 ![](./images/unnamed-chunk-9-1.png)<!-- -->
@@ -360,19 +364,21 @@ library(ggwordcloud)
 theme_set(theme_minimal())
 
 got_words <- got_words %>%
-  filter(!str_detect(word, 'font|color'))
+  filter(!str_detect(word, "font|color"))
 
 got_words %>%
-  count(season, word, name = 'count') %>%
+  count(season, word, name = "count") %>%
   group_by(season) %>%
   top_n(20, count) %>%
-  ggplot(aes(label = word,
-             size = count,
-             color = count %>% as.numeric)) +
+  ggplot(aes(
+    label = word,
+    size = count,
+    color = count %>% as.numeric()
+  )) +
   geom_text_wordcloud(rm_outside = T) +
   scale_size_area(max_size = 10) +
   scale_color_viridis_c() +
-  facet_wrap(.~season, nrow = 3, ncol = 3)
+  facet_wrap(. ~ season, nrow = 3, ncol = 3)
 ```
 
 ![](./images/plot_zoom_png.png)<!-- -->
@@ -398,7 +404,7 @@ nos ajudam a fazer isso. Por exemplo, este dataset classifica algumas mil palavr
 negativo) até 5 (muito positivo).
 
 ``` r
-get_sentiments('afinn')
+get_sentiments("afinn")
 ```
 
     ## # A tibble: 2,476 x 2
@@ -420,7 +426,7 @@ Já esse classifica cada palavra binariamente, em ‘negativa’ ou ‘positiva�
 cobrindo uma porção maior de palavras.
 
 ``` r
-get_sentiments('bing')
+get_sentiments("bing")
 ```
 
     ## # A tibble: 6,788 x 2
@@ -442,7 +448,7 @@ get_sentiments('bing')
 Outra base possível de ser usada é essa, que cobre muito mais palavras e categorias, além de ter mais palavras positivas (em relação às negativas) que a base 'bing'.
 
 ``` r
-get_sentiments('nrc')
+get_sentiments("nrc")
 ```
 
     ## # A tibble: 13,901 x 2
@@ -467,9 +473,9 @@ comuns.
 
 ``` r
 got_bing <- got_words %>%
-  filter(word != 'stark') %>%
+  filter(word != "stark") %>%
   select(-rowname) %>%
-  inner_join(get_sentiments('bing'))
+  inner_join(get_sentiments("bing"))
 ```
 
     ## Joining, by = "word"
@@ -480,13 +486,16 @@ got_bing %>%
   group_by(sentiment) %>%
   top_n(10, n) %>%
   ggplot(aes(fct_reorder(word, n),
-             n,
-             fill = sentiment)) +
+    n,
+    fill = sentiment
+  )) +
   geom_col(show.legend = F) +
   coord_flip() +
-  facet_wrap(.~sentiment, scale = 'free_y') +
-  labs(x = NULL, y = NULL,
-       title = 'Palavras Negativas e Positivas Mais Comuns')
+  facet_wrap(. ~ sentiment, scale = "free_y") +
+  labs(
+    x = NULL, y = NULL,
+    title = "Palavras Negativas e Positivas Mais Comuns"
+  )
 ```
 
 ![](./images/unnamed-chunk-13-1.png)<!-- -->
@@ -503,10 +512,12 @@ cada pedaço do texto em cada seção, para cada temporada.
 
 ``` r
 got_afinn <- got_words %>%
-  inner_join(get_sentiments('afinn')) %>%
+  inner_join(get_sentiments("afinn")) %>%
   select(-rowname, -n) %>%
-  mutate(row = row_number(),
-         section = row %/% 25) %>%
+  mutate(
+    row = row_number(),
+    section = row %/% 25
+  ) %>%
   ungroup()
 ```
 
@@ -517,14 +528,19 @@ got_afinn %>%
   group_by(season, section) %>%
   summarise(avg_sentiment = mean(score)) %>%
   ggplot(aes(section,
-             avg_sentiment,
-             fill = avg_sentiment)) +
+    avg_sentiment,
+    fill = avg_sentiment
+  )) +
   geom_col(show.legend = F) +
-  labs(x = "Seções", y = "Sentimento médio\n",
-       title = "Sentimento médio a cada 25 palavras por temporada") +
-  scale_fill_gradient2(low = 'firebrick3',
-                       high = 'dodgerblue3') +
-  facet_wrap(season~., scale = 'free_x')
+  labs(
+    x = "Seções", y = "Sentimento médio\n",
+    title = "Sentimento médio a cada 25 palavras por temporada"
+  ) +
+  scale_fill_gradient2(
+    low = "firebrick3",
+    high = "dodgerblue3"
+  ) +
+  facet_wrap(season ~ ., scale = "free_x")
 ```
 
 ![](./images/unnamed-chunk-15-1.png)<!-- -->
@@ -542,21 +558,28 @@ seção.
 ``` r
 got_bing %>%
   select(-n) %>%
-  mutate(row = row_number(),
-         section = row %/% 25) %>%
+  mutate(
+    row = row_number(),
+    section = row %/% 25
+  ) %>%
   count(season, episode, section, sentiment) %>%
   spread(sentiment, n, fill = 0) %>%
   mutate(net_sentiment = positive - negative) %>%
   ggplot(aes(section,
-             net_sentiment,
-             fill = net_sentiment)) +
+    net_sentiment,
+    fill = net_sentiment
+  )) +
   geom_col(show.legend = F) +
-  scale_fill_gradient2(low = 'firebrick3',
-                       high = 'navyblue') +
-  facet_wrap(.~season, scale = 'free_x') +
-  labs(x = "Seções", y = "Sentimento médio\n",
-       title = "Sentimento médio a cada 25 palavras por temporada",
-       subtitle = 'Método Bing')
+  scale_fill_gradient2(
+    low = "firebrick3",
+    high = "navyblue"
+  ) +
+  facet_wrap(. ~ season, scale = "free_x") +
+  labs(
+    x = "Seções", y = "Sentimento médio\n",
+    title = "Sentimento médio a cada 25 palavras por temporada",
+    subtitle = "Método Bing"
+  )
 ```
 
 ![](./images/unnamed-chunk-17-1.png)<!-- -->
@@ -565,10 +588,10 @@ Ok, isso em geral vai de encontro com o que já havíamos visto.
 
 ``` r
 got_nrc <- got_words %>%
-  filter(word != 'stark') %>%
+  filter(word != "stark") %>%
   select(-rowname) %>%
-  inner_join(get_sentiments('nrc') %>%
-             filter(sentiment %in% c('negative', 'positive')))
+  inner_join(get_sentiments("nrc") %>%
+    filter(sentiment %in% c("negative", "positive")))
 ```
 
     ## Joining, by = "word"
@@ -576,21 +599,28 @@ got_nrc <- got_words %>%
 ``` r
 got_nrc %>%
   select(-n) %>%
-  mutate(row = row_number(),
-         section = row %/% 25) %>%
+  mutate(
+    row = row_number(),
+    section = row %/% 25
+  ) %>%
   count(season, episode, section, sentiment) %>%
   spread(sentiment, n, fill = 0) %>%
   mutate(net_sentiment = positive - negative) %>%
   ggplot(aes(section,
-             net_sentiment,
-             fill = net_sentiment)) +
+    net_sentiment,
+    fill = net_sentiment
+  )) +
   geom_col(show.legend = F) +
-  scale_fill_gradient2(low = 'firebrick3',
-                       high = 'navyblue') +
-  facet_wrap(.~season, scale = 'free_x') +
-  labs(x = "Seções", y = "Sentimento médio\n",
-       title = "Sentimento médio a cada 25 palavras por temporada",
-       subtitle = 'Método NRC')
+  scale_fill_gradient2(
+    low = "firebrick3",
+    high = "navyblue"
+  ) +
+  facet_wrap(. ~ season, scale = "free_x") +
+  labs(
+    x = "Seções", y = "Sentimento médio\n",
+    title = "Sentimento médio a cada 25 palavras por temporada",
+    subtitle = "Método NRC"
+  )
 ```
 
 ![](./images/unnamed-chunk-18-1.png)<!-- -->

@@ -9,22 +9,21 @@ Neste post pretendo continuar o que foi iniciado no último, onde
 transformamos dados contidos em texto em um data.frame, um formato muito
 mais amigável para a exploração e visualização de dados no R.
 
-O procedimento geral agora, com os dados já limpos, é transformá-los
-e fazer a visualização que queremos. Daí o uso extensivo do
-tidyverse antes de chamar o ggplot2.
+O procedimento geral agora, com os dados já limpos, é transformá-los e
+fazer a visualização que queremos. Daí o uso extensivo do tidyverse
+antes de chamar o ggplot2.
 
 Ok, vamos primeiro olhar para a nossa [base de
 dados](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/homicides_df.csv "Link do arquivo raw")
-e ver que perguntas gostaríamos de
-    responder:
+e ver que perguntas gostaríamos de responder:
 
 ``` r
 library(tidyverse)
 
 df <- read_csv("https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/homicides_df.csv") %>%
-      na.omit()
+  na.omit()
 
-df %>% head
+df %>% head()
 ```
 
     ## # A tibble: 6 x 8
@@ -68,11 +67,15 @@ df <- df %>%
 
 df %>%
   count(ano) %>%
-  ggplot(aes(x = ano,
-             y = n)) +
+  ggplot(aes(
+    x = ano,
+    y = n
+  )) +
   geom_line() +
-  labs(x = "\nAno", y = NULL,
-       title = "Número de homicídios na cidade de Baltimore por ano")
+  labs(
+    x = "\nAno", y = NULL,
+    title = "Número de homicídios na cidade de Baltimore por ano"
+  )
 ```
 
 ![plot1](../images/unnamed-chunk-2-1.png)
@@ -80,9 +83,9 @@ df %>%
 Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com
 os anos…
 
-Exceto por essa queda brusca em 2012, que deveria gerar suspeitas. De fato,
-essa queda será esclarecida por outra visualização mais adiante. Se
-desconsiderarmos 2012, o quadro da violência não parece apresentar
+Exceto por essa queda brusca em 2012, que deveria gerar suspeitas. De
+fato, essa queda será esclarecida por outra visualização mais adiante.
+Se desconsiderarmos 2012, o quadro da violência não parece apresentar
 melhoras tão significativas.
 
 É interessante visualizar também como isso se deu para as diferentes
@@ -92,12 +95,16 @@ raças:
 df %>%
   # contagem dos casos por raça e ano
   count(raca, ano) %>%
-  ggplot(aes(x = ano,
-             y = n,
-             fill = raca)) +
+  ggplot(aes(
+    x = ano,
+    y = n,
+    fill = raca
+  )) +
   geom_col() +
-  labs(x = NULL, y = NULL,
-       title = "Raça das vítimas de homicídios em Baltimore") +
+  labs(
+    x = NULL, y = NULL,
+    title = "Raça das vítimas de homicídios em Baltimore"
+  ) +
   scale_fill_brewer(palette = "Set1", name = "Raça") +
   scale_x_continuous(breaks = 2007:2012)
 ```
@@ -120,18 +127,24 @@ acumulado <- df %>%
   group_by(ano) %>%
   mutate(soma_cumulativa = cumsum(n)) %>%
   na.omit() %>%
-  ggplot(aes(x = mes,
-             y = soma_cumulativa,
-             color = factor(ano),
-             group = ano)) +
+  ggplot(aes(
+    x = mes,
+    y = soma_cumulativa,
+    color = factor(ano),
+    group = ano
+  )) +
   scale_color_brewer(palette = "Dark2") +
-  labs(x = NULL,
-       y = "# acumulado de homicídios\n",
-       title = "Evolução temporal dos homicídios em Baltimore",
-       color = "Ano") +
+  labs(
+    x = NULL,
+    y = "# acumulado de homicídios\n",
+    title = "Evolução temporal dos homicídios em Baltimore",
+    color = "Ano"
+  ) +
   geom_line(size = 1.2) +
-  scale_x_continuous(breaks = 1:12,
-                     labels = month(df$data, label = T) %>% levels())
+  scale_x_continuous(
+    breaks = 1:12,
+    labels = month(df$data, label = T) %>% levels()
+  )
 
 
 acumulado
@@ -140,8 +153,8 @@ acumulado
 ![plot3](../images/unnamed-chunk-4-1.png)<!-- -->
 
 E aqui fica claro o porquê da queda em 2012: não temos os dados de todos
-os meses. Também salta aos olhos que a violência diminuiu em relação a 2007,
-mas se manteve mais ou menos estável no resto do período.
+os meses. Também salta aos olhos que a violência diminuiu em relação a
+2007, mas se manteve mais ou menos estável no resto do período.
 
 ###### Aspectos sociais das vítimas
 
@@ -152,13 +165,16 @@ diferentes grupos:
 df %>%
   ggplot(aes(idade)) +
   geom_histogram(aes(fill = raca),
-                 binwidth = 5) +
-  facet_grid(.~genero) +
+    binwidth = 5
+  ) +
+  facet_grid(. ~ genero) +
   scale_fill_brewer(palette = "Set1") +
-  labs(x = "Idade", y = NULL,
-       fill = "Raça",
-       title = "Número de homicídios na cidade de Baltimore",
-       subtitle = "Por gênero, raça e idade (de 2007 até maio de 2012)") +
+  labs(
+    x = "Idade", y = NULL,
+    fill = "Raça",
+    title = "Número de homicídios na cidade de Baltimore",
+    subtitle = "Por gênero, raça e idade (de 2007 até maio de 2012)"
+  ) +
   scale_x_continuous(breaks = seq(0, 100, 10))
 ```
 
@@ -179,12 +195,16 @@ de barras:
 
 ``` r
 df %>%
-  ggplot(aes(x = causas,
-             fill = causas)) +
+  ggplot(aes(
+    x = causas,
+    fill = causas
+  )) +
   geom_bar() +
-  labs(x = NULL, y = NULL,
-       fill = "Causas",
-       title = "Causas de morte mais comuns") +
+  labs(
+    x = NULL, y = NULL,
+    fill = "Causas",
+    title = "Causas de morte mais comuns"
+  ) +
   scale_fill_brewer(palette = "Set1")
 ```
 
@@ -198,7 +218,8 @@ esfaqueamento e contusão.
 Para visualizar a distribuição geográfica da ocorrência de homicídios,
 temos que primeiro plotar o mapa da cidade. O código abaixo mostra como
 fazer isso, com a ajuda do dataset `county` do pacote `maps`, de onde
-extraímos as coordenadas geográficas, para depois plotar com `geom_polyon()`.
+extraímos as coordenadas geográficas, para depois plotar com
+`geom_polyon()`.
 
 Uma vez com o mapa, minha ideia foi criar uma animação para visualizar o
 aspecto temporal, espacial e qualitativo (nesse caso, pela raça das
@@ -225,19 +246,26 @@ df <- df %>%
 
 # criando a animação
 anim <- baltimore_map +
-  geom_point(data = df,
-             aes(lon,
-                 lat,
-                 group = ano_mes,
-                 color = raca),
-             size = 3.5, alpha = .7) +
-  labs(title = "Que raças e regiões são mais vulneráveis ao homicídio?",
-       subtitle = "{ current_frame }",
-       color = "Raça") +
+  geom_point(
+    data = df,
+    aes(lon,
+      lat,
+      group = ano_mes,
+      color = raca
+    ),
+    size = 3.5, alpha = .7
+  ) +
+  labs(
+    title = "Que raças e regiões são mais vulneráveis ao homicídio?",
+    subtitle = "{ current_frame }",
+    color = "Raça"
+  ) +
   scale_color_brewer(palette = "Set1") +
   transition_manual(factor(ano_mes, # ordernando os meses
-                           levels = unique(ano_mes)),
-                    cumulative = T)
+    levels = unique(ano_mes)
+  ),
+  cumulative = T
+  )
 
 # desacelerando a animação (padrão é 10fps)
 animate(anim, fps = 5)
@@ -254,30 +282,39 @@ visualizarmos as mudanças ocorridas no decorrer dos anos.
 ``` r
 df %>%
   count(ano, causas) %>%
-  ggplot(aes(x = causas,
-             y = n,
-             fill = causas)) +
+  ggplot(aes(
+    x = causas,
+    y = n,
+    fill = causas
+  )) +
   geom_col(show.legend = F) +
-  geom_text(aes(label = paste0("", round(n)),
-                hjust = -0.2)) +
+  geom_text(aes(
+    label = paste0("", round(n)),
+    hjust = -0.2
+  )) +
   coord_flip() +
-  labs(x = NULL, y = NULL, fill = NULL,
-       title = "Causas de morte mais comuns",
-       subtitle = "Ano: { closest_state }") +
+  labs(
+    x = NULL, y = NULL, fill = NULL,
+    title = "Causas de morte mais comuns",
+    subtitle = "Ano: { closest_state }"
+  ) +
   transition_states(ano)
 ```
 
 ![gif2](../images/unnamed-chunk-8-1.gif)<!-- -->
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
-`gganimate::transition_reveal()` para revelar ao longo do eixo do tempo como os
-números crescem.
+`gganimate::transition_reveal()` para revelar ao longo do eixo do tempo
+como os números crescem.
 
 ``` r
 acumulado +
-  geom_segment(aes(xend = 12.5,
-                   yend = soma_cumulativa),
-               linetype = 2, color = "grey") +
+  geom_segment(aes(
+    xend = 12.5,
+    yend = soma_cumulativa
+  ),
+  linetype = 2, color = "grey"
+  ) +
   geom_text(aes(x = 13, label = paste0("", soma_cumulativa))) +
   transition_reveal(mes)
 ```
@@ -286,12 +323,18 @@ acumulado +
 
 ###### Conclusões
 
-Este post é certamente só uma amostra do pontecial do combo ggplot2 + gganimate, talvez
-uma das maiores vantagens de se usar o R, e espero que
-te ajude a criar as suas próprias visualizações, apesar de não ter sido exatamente
-o intuito ser didático.
+Este post é certamente só uma amostra do pontecial do combo ggplot2 +
+gganimate, talvez uma das maiores vantagens de se usar o R, e espero que
+te ajude a criar as suas próprias visualizações, apesar de não ter sido
+exatamente o intuito ser didático.
 
-O gganimate é bem novo ainda e tem relativamente pouca informação sobre na internet. Eu demorei
-bastante para fazer alguns desses gráficos, mas acho que o resultado valeu a pena.
+O gganimate é bem novo ainda e tem relativamente pouca informação sobre
+na internet. Eu demorei bastante para fazer alguns desses gráficos, mas
+acho que o resultado valeu a pena.
 
-Para aprender mais sobre ggplot2, tente este [cookbook](http://www.cookbook-r.com/Graphs/) é ótimo. Para maiores referências sobre animações, tente o respositório [learngganimate](https://github.com/ropenscilabs/learngganimate), esse [vignette](https://cran.r-project.org/web/packages/gganimate/vignettes/gganimate.html) ou o próprio [site do pacote](https://gganimate.com/).
+Para aprender mais sobre ggplot2, tente este
+[cookbook](http://www.cookbook-r.com/Graphs/) é ótimo. Para maiores
+referências sobre animações, tente o respositório
+[learngganimate](https://github.com/ropenscilabs/learngganimate), esse
+[vignette](https://cran.r-project.org/web/packages/gganimate/vignettes/gganimate.html)
+ou o próprio [site do pacote](https://gganimate.com/).

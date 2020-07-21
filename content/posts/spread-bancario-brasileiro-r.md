@@ -6,7 +6,7 @@ tags: ["tidyverse", "dataviz", "ggplot2", "r"]
 comments: true
 ---
 
-O altíssimo spread bancário [^1] brasileiro é um motivo de preocupação
+O altíssimo spread bancário \[^1\] brasileiro é um motivo de preocupação
 das autoridades, já que dificulta uma economia mais guiada pelo crédito,
 dificultando o crescimento etc. Como estou estudando isso para
 monografia, pensei em visualizar exatamente quão alto ele é. Imaginei
@@ -41,7 +41,8 @@ teremos que limpá-los.
 library(tidyverse)
 
 (dados <- read_csv("~/Blog/phelipetls.github.io/assets/spreads.csv",
-                   skip = 4))
+  skip = 4
+))
 ```
 
     ## # A tibble: 264 x 64
@@ -94,11 +95,13 @@ etc. nos nomes das colunas, então teremos que cuidar disso também. Isso
 library(janitor)
 
 (dados <- dados %>%
-  clean_names %>%
+  clean_names() %>%
   select(-x64) %>%
   gather("ano", "spread", x1960:x2018) %>%
-  mutate(ano = str_remove(ano, "x"),
-         ano = as.numeric(ano)) %>%
+  mutate(
+    ano = str_remove(ano, "x"),
+    ano = as.numeric(ano)
+  ) %>%
   select(-starts_with("indicator")) %>%
   na.omit())
 ```
@@ -121,9 +124,9 @@ library(janitor)
 Aconteceram algumas coisas aqui: primeiro, o `readr::read_csv` criou uma
 nova coluna “x64”, que não me interessa então a tirei (a função dá um
 warning, mas eu o omiti aqui). Daí que o clean\_names prefixou um “x” às
-colunas com números, que também removi com `stringr::str_remove()`. Eu também não
-vou precisar das colunas com informações sobre o indicador. E, pronto,
-está limpo.
+colunas com números, que também removi com `stringr::str_remove()`. Eu
+também não vou precisar das colunas com informações sobre o indicador.
+E, pronto, está limpo.
 
 ##### Visualização
 
@@ -134,8 +137,10 @@ dados %>%
   filter(country_name == "Brazil") %>%
   ggplot(aes(ano, spread)) +
   geom_line() +
-  labs(x = "\nAno", y = "Spread\n",
-       title = "Spread no Brasil ao ano\n")
+  labs(
+    x = "\nAno", y = "Spread\n",
+    title = "Spread no Brasil ao ano\n"
+  )
 ```
 
 ![img3](../images/unnamed-chunk-7-1.png)
@@ -152,14 +157,16 @@ base de dados, porque nela encontro o código de cada país, o nome de sua
 “região” e se ele é desenvolvido ou não.
 
 ``` r
-url    <- "https://pkgstore.datahub.io/core/country-codes/country-codes_csv/data/3b9fd39bdadd7edd7f7dcee708f47e1b/country-codes_csv.csv"
+url <- "https://pkgstore.datahub.io/core/country-codes/country-codes_csv/data/3b9fd39bdadd7edd7f7dcee708f47e1b/country-codes_csv.csv"
 
 paises <- read_csv(url) %>%
-          clean_names %>%
-          select(iso3166_1_alpha_3,
-                 intermediate_region_name,
-                 developed_developing_countries) %>%
-          setNames(c("codigo", "regiao", "status_desenvolvimento"))
+  clean_names() %>%
+  select(
+    iso3166_1_alpha_3,
+    intermediate_region_name,
+    developed_developing_countries
+  ) %>%
+  setNames(c("codigo", "regiao", "status_desenvolvimento"))
 ```
 
     ## Parsed with column specification:
@@ -174,11 +181,11 @@ paises <- read_csv(url) %>%
     ##   `Region Code` = col_double(),
     ##   `Sub-region Code` = col_double()
     ## )
-
+    
     ## See spec(...) for full column specifications.
 
 ``` r
-paises %>% glimpse
+paises %>% glimpse()
 ```
 
     ## Observations: 250
@@ -208,16 +215,18 @@ Brasil domina em termos de spread, para nossa infelicidade:
 ``` r
 theme_set(theme_minimal())
 
-anos = 2015:2017
+anos <- 2015:2017
 
 dados %>%
-  filter(country_code %in% america_sul,
-         ano %in% anos) %>%
+  filter(
+    country_code %in% america_sul,
+    ano %in% anos
+  ) %>%
   mutate(country_name = fct_reorder(country_name, spread)) %>%
   ggplot(aes(x = country_name, y = spread)) +
   geom_col() +
   labs(y = "Spread", x = NULL) +
-  facet_wrap(.~ano) +
+  facet_wrap(. ~ ano) +
   coord_flip()
 ```
 
@@ -229,24 +238,24 @@ que pode nos ajudar com isso. Para isso, fiz um join para depois filtrar
 e criar os gráficos que eu queria.
 
 ``` r
-df    <- left_join(dados, paises, by = c(country_code = "codigo"))
+df <- left_join(dados, paises, by = c(country_code = "codigo"))
 
 plot1 <- df %>%
-         filter(ano == 2017, status_desenvolvimento == "Developing") %>%
-         top_n(10, spread) %>%
-         ggplot(aes(reorder(country_name, spread), spread)) +
-         geom_col() +
-         labs(x = "Em desenvolvimento", y = NULL) +
-         coord_flip()
+  filter(ano == 2017, status_desenvolvimento == "Developing") %>%
+  top_n(10, spread) %>%
+  ggplot(aes(reorder(country_name, spread), spread)) +
+  geom_col() +
+  labs(x = "Em desenvolvimento", y = NULL) +
+  coord_flip()
 
 plot2 <- df %>%
-         filter(ano == 2017, status_desenvolvimento == "Developed") %>%
-         top_n(10, spread) %>%
-         ggplot(aes(reorder(country_name, spread), spread)) +
-         geom_col() +
-         labs(x = "Desenvolvidos", y = NULL) +
-         expand_limits(y = 45) +
-         coord_flip()
+  filter(ano == 2017, status_desenvolvimento == "Developed") %>%
+  top_n(10, spread) %>%
+  ggplot(aes(reorder(country_name, spread), spread)) +
+  geom_col() +
+  labs(x = "Desenvolvidos", y = NULL) +
+  expand_limits(y = 45) +
+  coord_flip()
 
 library(gridExtra)
 grid.arrange(plot1, plot2, nrow = 2)
@@ -280,5 +289,5 @@ quanto nebuloso. O plano é analisar os seus determinantes
 quantitativamente, a partir da estimação de um modelo, provavelmente um
 de vetores autorregressivos.
 
-[^1]: É a diferença entre o que banco cobra ao emprestar e o que ele paga
-aos depositantes.
+\[^1\]: É a diferença entre o que banco cobra ao emprestar e o que ele
+paga aos depositantes.

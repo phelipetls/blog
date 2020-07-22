@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
-    {{ if or .Params.math .Site.Params.math }}
-      {{ partial "math.html" . }}
-    {{ end }}
-  </head>
-  <body>
-    {{ .Content }}
-  </body>
-</html>
+{{ define "main" }}
+  {{ .Content }}
+{{ end }}

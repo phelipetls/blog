@@ -8,7 +8,7 @@
   <body>
     <ul>
     {{ range .Pages }}
-      {{ .Date }}<li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
     {{ end }}
     </ul>
   </body>

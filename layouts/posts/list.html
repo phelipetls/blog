@@ -1,8 +1,11 @@
 {{ define "main" }}
-  <ul>
+  <h3>Posts</h3>
+
+  <ul class="page-list posts-list">
     {{ range .Pages }}
       <li>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <div class="date">{{ .Date.Format "01 Jan" }}</div>
       </li>
     {{ end }}
   </ul>

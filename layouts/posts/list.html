@@ -4,7 +4,7 @@
   <ul class="page-list posts-list">
     {{ range .Pages }}
       <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         <time datetime="{{ .Date.Format "2006-01-02" }}">
           {{ .Date.Format "02 Jan" }}
         </time>

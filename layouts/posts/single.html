@@ -1,14 +1,23 @@
 {{ define "main" }}
   <h2>{{ .Title }}</h2>
-  <ul class="tags-list">
-    {{ range (.GetTerms "tags") }}
-      <li>
-        <a class="tag plain-link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      </li>
-    {{ end }}
-  </ul>
+  <div class="post-info">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "01 Jan, 2006" }}
+    </time>
+    <ul class="tags-list">
+      {{ range (.GetTerms "tags") }}
+        <li>
+          <a class="tag plain-link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <hr>
 
   {{ .Content }}
+
+  <hr>
 
   <div class="post-navigation">
     {{ with .Prev }}

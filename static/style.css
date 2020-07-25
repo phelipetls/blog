@@ -111,13 +111,20 @@ pre {
   border-bottom: 1px dotted black;
 }
 
+.post-info {
+  display: flex;
+  justify-content: space-between;
+}
+
 .tags-list {
+  margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
 }
 
 .tag {
+  font-size: 0.8em;
   margin: 0 0.2em;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;

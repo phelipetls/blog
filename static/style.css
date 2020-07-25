@@ -58,6 +58,11 @@ main {
   flex: 1;
 }
 
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--dark);
 }
@@ -98,6 +103,20 @@ pre {
 
 .posts-list li a:hover {
   border-bottom: 1px dotted black;
+}
+
+.tags-list {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.tag {
+  margin: 0 0.2em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid var(--dark);
+  background-color: var(--white);
 }
 
 footer {

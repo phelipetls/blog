@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <h2>{{ .Title }}</h2>
+  <ul class="tags-list">
+    {{ range (.GetTerms "tags") }}
+      <li>
+        <a class="tag plain-link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </li>
+    {{ end }}
+  </ul>
+
+  {{ .Content }}
+
+  <div class="post-navigation">
+    {{ with .Prev }}
+      <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+        Previous
+      </a>
+    {{ end }}
+
+    {{ with .Next }}
+      <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+        Next
+      </a>
+    {{ end }}
+  </div>
+{{ end }}

@@ -5,7 +5,7 @@ date: 2019-02-18
 tags: ["numpy", "monte-carlo", "matplotlib", "python", "stats"]
 ---
 
-##### Introdução
+# Introdução
 
 Para estrear o blog, escolhi explorar um puzzle probabilístico, que vi
 no [blog do David
@@ -24,7 +24,7 @@ achei que seria interessante tentar fazer a mesma simulação com uma de
 suas bibliotecas mais famosas, o Numpy, para praticar e ver se ele
 cumpre o que promete: operações vetorizadas e eficientes.
 
-###### O que está por trás da eficiência do Numpy
+# O que está por trás da eficiência do Numpy
 
 O Numpy chega para suprir uma desvantagem que o Python tem por ser uma
 linguagem de tipagem dinâmica e de script (não-compilada): ele não é tão
@@ -109,7 +109,7 @@ a[0] = 2 + 1j
 
 Esse comportamento é muito similar ao vetor do R.
 
-###### Simulando os movimentos do cavalo
+# Simulando os movimentos do cavalo
 
 Dito isto, vejamos o que o Numpy pode fazer. Mas antes um esclarecimento
 
@@ -287,7 +287,7 @@ plt.hist(knight_probs, bins = 20)
 
 ![Histograma](./histograma.png)
 
-##### A eficiência em números
+# A eficiência em números
 
 E, só para coisa não ficar vaga, quão eficiente é o Numpy afinal?
 Podemos verificar isso facilmente com o magic command do IPython, o
@@ -323,7 +323,7 @@ knight_infinite_board(1000000) # 1 milhão!
 matriz de 20 x 1 milhão\! E meu computador certamente não ajuda. O mesmo
 feito no base Python seria absurdamente mais lento.
 
-###### Conclusões
+# Conclusões
 
 Acho que com esse simples exercício, pudemos mesmo atestar que o Numpy é
 uma ferramenta muito útil, garantindo eficiência com uma sintaxe simples

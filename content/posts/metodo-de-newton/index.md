@@ -6,7 +6,7 @@ tags: ["matplotlib", "numpy", "sympy", "algoritmos", "python", "math"]
 math: true
 ---
 
-###### Introdução
+# Introdução
 
 O Método de Newton é um conhecido algoritmo para chegar a soluções
 númericas de uma equação, normalmente uma para a qual a solução não é
@@ -63,7 +63,7 @@ isso de novo, usando como estimativa a raiz dessa reta? Acontece que se
 repetirmos esse processo algumas vezes mais podemos chegar numa
 estimativa *muito* próxima da solução.
 
-##### Aproximação Linear
+# Aproximação Linear
 
 Esse uso da reta tangente é o que se conhece por aproximação linear. Por
 exemplo, retomando a função quadrática. A derivada dela é obtida pela
@@ -183,7 +183,7 @@ Seria interessante escrevermos uma função para fazer esses cálculos, e
 ela inevitavelmente teria lidar com cálculo diferencial. Para isso,
 existe uma biblioteca que pode nos ajudar.
 
-##### Introduzindo SymPy
+# Introduzindo SymPy
 
 Essa biblioteca fornece suporte para trabalhar com álgebra simbólica.
 Nela contamos com funções para calcular limites, derivadas, integrais,
@@ -225,7 +225,7 @@ praticamente só aceita funções do próprio SymPy. Para a utilizarmos como
 uma função qualquer, devemos usar `  lambdify() `. Para nossos
 objetivos, essa última e a função diff serão suficientes.
 
-##### Um código para o algoritmo
+# Um código para o algoritmo
 
 Antes de apresentar a função em si, melhor explicar como eu a pensei.
 
@@ -345,7 +345,7 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, -1.5)
     
     -2.0588469658492823
 
-###### Limitações do método
+# Limitações do método
 
 Essa é uma função complicadinha e expõe algumas limitações do método que
 Newton criou. Por exemplo, imagine que usemos como estimativa um valor
@@ -444,7 +444,7 @@ plt.legend()
 
 ![png](./output_26_1.png)
 
-##### Conclusões
+# Conclusões
 
 O interessante desse algoritmo é ser uma aplicação de cálculo
 diferencial. É bastante simples sem sacrificar o lado da eficiência, mas

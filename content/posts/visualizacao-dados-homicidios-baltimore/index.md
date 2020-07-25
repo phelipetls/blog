@@ -48,7 +48,7 @@ Os dados nos possibilitam também enxergar a distribuição geográfica, que
 E, por fim, é interessante visualizar como o número de vítimas evolui no
 tempo. Será que vem declinando com o passar dos anos?
 
-###### Evolução do número de vítimas no tempo
+# Evolução do número de vítimas no tempo
 
 Esse é um bom ponto para se começar a entender os dados. Vamos fazer
 essa visualização com um gráfico de linhas:
@@ -155,7 +155,7 @@ E aqui fica claro o porquê da queda em 2012: não temos os dados de todos
 os meses. Também salta aos olhos que a violência diminuiu em relação a
 2007, mas se manteve mais ou menos estável no resto do período.
 
-###### Aspectos sociais das vítimas
+# Aspectos sociais das vítimas
 
 Vamos tentar visualizar agora como a violência afeta as pessoas de
 diferentes grupos:
@@ -187,7 +187,7 @@ provavelmente porque vive nas regiões onde a violência é maior.
 Também impressiona o contraste entre os números para cada gênero. Os
 homens são muito mais propensos a serem mortos violentamente.
 
-###### Que causa de morte é a mais comum?
+# Que causa de morte é a mais comum?
 
 Para ver quais são as causas mais comuns, vamos fazer um simples gráfico
 de barras:
@@ -212,7 +212,7 @@ df %>%
 Os homicídios por armas de fogo são de longe os mais comuns, seguido por
 esfaqueamento e contusão.
 
-###### Mapas e animações
+# Mapas e animações
 
 Para visualizar a distribuição geográfica da ocorrência de homicídios,
 temos que primeiro plotar o mapa da cidade. O código abaixo mostra como
@@ -320,7 +320,7 @@ acumulado +
 
 ![gif3](./unnamed-chunk-9-1.gif)<!-- -->
 
-###### Conclusões
+# Conclusões
 
 Este post é certamente só uma amostra do pontecial do combo ggplot2 +
 gganimate, talvez uma das maiores vantagens de se usar o R, e espero que

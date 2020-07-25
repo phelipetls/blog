@@ -32,7 +32,7 @@ isso, além do `selenium`, iremos usar o `BeautifulSoup`. Um serve mais
 ao propósito de carregar o site e o outro mais ao de escavar o html.
 Você pode instalá-los com `pip install selenium bs4`.
 
-#### Script para a raspagem do site
+# Script para a raspagem do site
 
 Para crawlear as url's interessantes, criei uma classe que requer um
 `webdriver` e uma string que identifica a empresa de interesse para
@@ -148,7 +148,7 @@ globo_df.loc[:, colunas_com_espaco] = df.loc[:, colunas_com_espaco].apply(
 Uma vez que consegui a base que queria, de 100 reclamações, a salvei em
 um csv, e é isto que irei explorar a partir daqui.
 
-#### Análise exploratória de dados
+# Análise exploratória de dados
 
 ``` python
 import pandas as pd

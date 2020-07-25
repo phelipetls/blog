@@ -51,7 +51,7 @@ sucesso, sendo a probabilidade de soletrar corretamente. Sabendo disso,
 há muitas distribuições que pressupõem repetições independentes de um
 ensaio de Bernoulli que modelam muito bem as situações que descrevemos.
 
-###### Distribuição geométrica: a probabilidade de N acertos até o primeiro erro
+# Distribuição geométrica: a probabilidade de N acertos até o primeiro erro
 
 O número de acertos até o primeiro erro pode ser modelado como uma
 variável aleatória discreta, com domínio \\( \[0, \infty\] \\)
@@ -75,7 +75,7 @@ $$
 P_X(X = x) = p^x(1-p)
 $$
 
-###### Distribuição binomial: a probabilidade de erro de seus oponentes
+# Distribuição binomial: a probabilidade de erro de seus oponentes
 
 Já a probabilidade de seus oponentes errarem ao menos uma das N
 perguntas é simplesmente a probabilidade complementar deles terem
@@ -92,7 +92,7 @@ $$
 P_X(X = x) = {N\choose N} p^{N}(1-p)^{N-N} = 1 \cdot p^N \cdot (1-p)^0 = p^N \\ P(\text{Errou alguma}) = 1 - p^N
 $$
 
-###### A probabilidade de você vencer
+# A probabilidade de você vencer
 
 Para chegar à resposta no
 
@@ -194,4 +194,4 @@ geom <- dgeom(
 
     ## [1] 0.5207009
 
-###### Conclusões
+# Conclusões

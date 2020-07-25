@@ -39,7 +39,7 @@ primeiro; a causa da morte vem depois de “Cause: ”; a raça, o sexo e a
 idade vêm todas numa tacada só, “black male, 17 years old”. Logo, como
 poderíamos tirar vantagem disso?
 
-##### Expressões regulares (RegEx)
+# Expressões regulares (RegEx)
 
 O melhor modo de proceder é com Expressões Regulares, ou RegEx, que é,
 digamos, uma “linguagem” para encontrar padrões em strings, para daí
@@ -82,13 +82,13 @@ combina com "casa", e `\w` equivale a `[A-z0-9_]`.
 
 <div class="divider"></div>
 
-#### Extraindo as variáveis com stringr
+# Extraindo as variáveis com stringr
 
 Para extrairmos os dados do texto, vamos usar o pacote stringr do
 tidyverse, mais especificamente a função `stringr::str_match`, que
 extrai de uma string o padrão e seus grupos.
 
-###### Causa da morte
+# Causa da morte
 
 Ok, agora mão na massa, vamos começar pela causa da morte. As primeiras
 linhas indicam que ela é registrada deste modo: “Cause: *descrição*”,
@@ -123,7 +123,7 @@ Veja que ele fez o esperado. A regex combinou com a parte da linha que
 imaginávamos e na segunda coluna temos extraída a informação que nos
 interessa. É esse o procedimento geral que vamos adotar aqui.
 
-###### Latitude e Longitude
+# Latitude e Longitude
 
 Outra informação importante é a coordenada geográfica. As strings que as
 representam são formadas por números `\d`, sinais de menos, `-` e pontos
@@ -148,7 +148,7 @@ lat_long %>% head()
     ## [5,] "39.238928, -76.602718" "39.238928" "-76.602718"
     ## [6,] "39.352676, -76.607979" "39.352676" "-76.607979"
 
-###### Raça
+# Raça
 
 Outra coisa em que estamos interessados é na raça da pessoa. Mas devo
 adiantar que essa não vai ser tão fácil. Isso porque o modo de registrar
@@ -192,7 +192,7 @@ Veja que, inseri um grupo a mais para indicar que é opcional todo o
 grupo “fe” em sexo, ele pode ou não ocorrer. Daí que o uso de grupos
 pode não ser somente para extrair.
 
-###### Gênero
+# Gênero
 
 Esse caso é muito similar ao anterior, mudando de maneira idêntica no
 registro. Então vamos logo tratá-lo.
@@ -226,7 +226,7 @@ genero %>% tail()
     ## [1249,] "Gender: male"   NA   "male"
     ## [1250,] "Gender: male"   NA   "male"
 
-###### Idade
+# Idade
 
 E aqui a mesma coisa ocorre, vamos usar duas regex para dar conta disso:
 
@@ -259,7 +259,7 @@ idade %>% tail()
     ## [1249,] "Age: 62" NA   "62"
     ## [1250,] "Age: 65" NA   "65"
 
-###### Data
+# Data
 
 Outra informação bastante valiosa é a data do crime. Pelas primeiras
 linhas, vemos que ela normalmente vem depois de “Found on”, então
@@ -292,7 +292,7 @@ data %>% head()
     ## [5,] "Found on January 5, 2007" "January 5, 2007"
     ## [6,] "Found on January 5, 2007" "January 5, 2007"
 
-###### Endereço
+# Endereço
 
 Também pode ser interessante termos disponível o endereço de cada morte:
 
@@ -320,7 +320,7 @@ melhorar a regex etc. Importante considerar também que é muito mais
 fácil escrever regex do que as ler. Então tente você mesmo esse
 exercício.
 
-###### Agregando tudo em um data.frame
+# Agregando tudo em um data.frame
 
 Agora precisamos juntar tudo num data.frame. Vamos pegar só as colunas
 dos grupos que nos interessam.

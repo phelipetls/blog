@@ -32,7 +32,7 @@ sistema de equações lineares dinâmico, que evolui no tempo. E para
 entender melhor como isso funciona, precisamos introduzir o conceito de
 autovalores/autovetores. Mas antes vejamos os algoritmos mais simples.
 
-##### A maneira comum
+# A maneira comum
 
 Apenas para recordar o que é a sequência de fibonacci: dados os dois
 primeiros números da sequência (comumente 0 e 1), o próximo número é a
@@ -89,7 +89,7 @@ Para comparação, vamos testar sua performance em termos de eficiência.
 
     2.46 ms ± 96.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 
-##### Por recursão
+# Por recursão
 
 Como não sou estudante de ciência da computação, esse eu conheci
 recentemente até e achei maravilhoso. Ele tem a vantagem de ser bem
@@ -176,7 +176,7 @@ chamar a função com 10000, pelo menos com esse código, dá "stack
 overflow"... o que eu não esperava e honestamente nem sei por que é
 assim.
 
-##### Por Álgebra Linear
+# Por Álgebra Linear
 
 {{< youtube 13r9QY6cmjc >}}
 

@@ -29,7 +29,7 @@ facilitar as coisas quando usamos R.
 Se você não sabe, um *tidy dataset* é aquele em que cada coluna
 corresponde a uma variável e cada linha a uma observação.
 
-##### Limpando os dados
+# Limpando os dados
 
 Os dados eu baixei
 [daqui](https://data.worldbank.org/indicator/fr.inr.lndp) e o arquivo eu
@@ -127,7 +127,7 @@ colunas com números, que também removi com `stringr::str_remove()`. Eu
 também não vou precisar das colunas com informações sobre o indicador.
 E, pronto, está limpo.
 
-##### Visualização
+# Visualização
 
 Vamos primeiro ver como evoluiu o spread no Brasil no decorrer do tempo.
 

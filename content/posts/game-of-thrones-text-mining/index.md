@@ -17,7 +17,7 @@ como um livro ou legendas.
 Como veremos, isso facilitará muito a análise e criação de
 visualizações.
 
-##### Obtendo os dados
+# Obtendo os dados
 
 Os dados brutos foram coletados
 [aqui](https://www.kaggle.com/gunnvant/game-of-thrones-srt), onde os encontrei
@@ -243,7 +243,7 @@ time, o que é recorrente em muitos textos, seguida de north, um dos lugares cen
 A base limpa que usaremos no decorrer do post você pode baixar
 [aqui](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/got_words.csv) para fazer a análise que quiser.
 
-###### Correlação entre as palavras
+# Correlação entre as palavras
 
 Uma das coisas interessantes que podemos fazer com um tidy text em mãos
 é ver quais são as palavras que aparecem juntas com mais frequência.
@@ -326,7 +326,7 @@ Também podemos ver ali o “winter is coming”, o motto dos Stark, o “hold
 the door” e “close the bloody gate” do mesmo episódio icônico, 'The Door'. E várias
 outras.
 
-###### Palavras mais frequentes
+# Palavras mais frequentes
 
 O plano agora é visualizar quais as palavras mais frequentes em geral e
 por temporada. Para isso vamos utilizar nuvem de palavras.
@@ -385,7 +385,7 @@ got_words %>%
 Neste gráfico podemos conferir diversos momentos marcantes de cada temporada em palavras.
 Por exemplo, 'hand' na temporada 1, 'stannis' na 2, 'wedding' e 'north' na 3, 'joffrey' na 4, 'shame' na 5, 'hodor' na 6 e, finalmente, 'dead' e 'north' na 7.
 
-###### Análise de sentimentos
+# Análise de sentimentos
 
 Outra coisa que é interessante de ser feita é analisar o sentimento
 médio expresso pelo texto. Por exemplo, se nele há mais palavras

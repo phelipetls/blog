@@ -78,7 +78,7 @@ pre {
   justify-content: space-between;
 }
 
-.posts-list .date {
+.posts-list time {
   color: var(--grey);
 }
 

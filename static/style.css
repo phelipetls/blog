@@ -1,8 +1,14 @@
 :root {
   --default-padding: 0.5 1em;
   --dark: #151718;
-  --white: #777;
-  --grey: #666;
+  --red: #cd3f45;
+  --green: #9fca56;
+  --yellow: #e6cd69;
+  --blue: #55b5db;
+  --purple: #a074c4;
+  --bright-blue: #55dbbe;
+  --grey: #d6d6d6;
+  --dark-blue: #41535b;
 }
 
 html {

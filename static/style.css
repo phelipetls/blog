@@ -52,6 +52,11 @@ main {
   flex: 1;
 }
 
+.heading {
+  text-decoration: none;
+  color: inherit;
+}
+
 pre {
   font-family: monospace;
   font-size: 0.7rem;

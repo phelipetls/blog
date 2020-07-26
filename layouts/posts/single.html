@@ -1,9 +1,11 @@
 {{ define "main" }}
   <h2>{{ .Title }}</h2>
+
   <div class="post-info">
     <time datetime="{{ .Date.Format "2006-01-02" }}">
       {{ .Date.Format "01 Jan, 2006" }}
     </time>
+
     <ul class="tags-list">
       {{ range (.GetTerms "tags") }}
         <li>

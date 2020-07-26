@@ -2,7 +2,7 @@
 title: "Home"
 ---
 
-### About
+# About
 
 I have a background in Economics (mostly Econometrics), which got me interested
 in programming so much to the point that I wish I could break into the industry

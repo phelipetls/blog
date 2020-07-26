@@ -1,23 +1,22 @@
-.posts-list li {
-  display: flex;
-  justify-content: space-between;
-}
+.posts-list {
+  margin: auto 0;
 
-.posts-list time {
-  color: grey;
-}
+  li {
+    display: flex;
+    justify-content: space-between;
+    a {
+      border-bottom: 1px dotted transparent;
+      &:hover {
+        border-bottom: 1px dotted black;
+      }
+    }
+  }
 
-.posts-list li a {
-  border-bottom: 1px dotted transparent;
-}
-
-.posts-list li a:hover {
-  border-bottom: 1px dotted black;
-}
-
-.post-navigation {
-  display: flex;
-  justify-content: space-between;
+  time {
+    font-family: monospace;
+    font-size: 1.1em;
+    line-height: 1.3em;
+  }
 }
 
 .post-info {
@@ -45,3 +44,7 @@
   margin-right: 0;
 }
 
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+}

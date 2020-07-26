@@ -1,0 +1,66 @@
+@import 'header';
+@import 'post';
+
+html {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.1rem;
+}
+
+html, body {
+  height: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+body > * {
+  padding: 0.5em 1em;
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: black;
+}
+
+.page-list {
+  padding: 0;
+  list-style: none;
+}
+
+.page-list li {
+  margin-top: 0.7em;
+}
+
+.plain-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+p > code {
+  font-size: 0.8rem;
+  padding: 0 0.3em;
+  border-radius: 0.3em;
+}
+
+pre {
+  font-family: monospace;
+  font-size: 0.7rem;
+  padding: 0.5em;
+  overflow-x: auto;
+}
+
+footer {
+  margin: 0 auto;
+}

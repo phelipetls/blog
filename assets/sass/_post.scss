@@ -1,0 +1,47 @@
+.posts-list li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.posts-list time {
+  color: grey;
+}
+
+.posts-list li a {
+  border-bottom: 1px dotted transparent;
+}
+
+.posts-list li a:hover {
+  border-bottom: 1px dotted black;
+}
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tags-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.tag {
+  font-size: 0.8em;
+  margin: 0 0.2em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.tags-list li:last-child .tag {
+  margin-right: 0;
+}
+

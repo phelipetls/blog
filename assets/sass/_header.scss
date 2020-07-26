@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  ul {
+  margin: 0;
+  list-style: none;
+    li {
+      display: inline;
+      a:hover {
+        border-bottom: 1px dotted black;
+      }
+    }
+  }
+}

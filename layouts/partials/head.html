@@ -2,7 +2,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
-  <link href="/style.css" rel="stylesheet" />
+  {{ $options := (dict "targetPath" "style.css" "outputStyle" "compressed") }}
+  {{ $style := resources.Get "sass/main.scss" | toCSS $options }}
+  <link href="{{ $style.Permalink }}" rel="stylesheet" />
   <title>
     {{ site.Title }} {{ if not .IsHome }} - {{ .Title }} {{ end }}
   </title>

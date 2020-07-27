@@ -1,3 +1,4 @@
+.posts-list,
 header,
 footer,
 h1,
@@ -12,11 +13,11 @@ h6 {
   }
 }
 
+.posts-list,
 .navbar-links {
   a {
     &:hover {
       text-decoration: dotted;
-      border-bottom: 1px dotted grey;
     }
   }
 }

@@ -1,0 +1,25 @@
+ul.posts-list {
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0.8em 0;
+    display: flex;
+
+    time {
+      margin-right: 1em;
+    }
+
+    a {
+      flex: 1;
+    }
+
+    .post-title {
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        border-bottom: 1px dotted grey;
+      }
+    }
+  }
+}

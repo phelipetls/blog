@@ -1,15 +1,2 @@
 {{ define "main" }}
-  <ul class="page-list posts-list">
-    {{ range .Pages.GroupByDate "2006" }}
-      <h3>{{ .Key }}</h3>
-      {{ range .Pages }}
-        <li>
-          <a class="plain-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <time datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "02 Jan" }}
-          </time>
-        </li>
-      {{ end }}
-    {{ end }}
-  </ul>
 {{ end }}

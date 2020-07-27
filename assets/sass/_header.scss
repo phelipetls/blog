@@ -1,16 +1,43 @@
 header {
+  height: 15%;
   display: flex;
-  justify-content: space-between;
-}
 
-nav {
-  ul {
-  margin: 0;
-  list-style: none;
-    li {
-      display: inline;
-      a:hover {
-        border-bottom: 1px dotted black;
+  img {
+    max-height: 100%;
+    border-radius: 50%;
+  }
+
+  .site-info {
+    padding-left: 15px;
+
+    flex: 1;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    gap: 5px;
+
+    .site-title {
+      font-size: 1.2em;
+    }
+
+    .site-description {
+      padding-top: 0.5em;
+      font-size: 0.8em;
+    }
+  }
+
+  nav {
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline;
+
+        &:not(:first-child) {
+          margin-left: 1em;
+        }
       }
     }
   }

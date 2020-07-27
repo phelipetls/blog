@@ -1,16 +1,26 @@
 <header>
-  <div class="home">
-    <a href="/" title="Home">{{ .Site.Title }}</a>
+  <img
+    class="avatar-img"
+    src="https://avatars.githubusercontent.com/phelipetls"
+    alt="Github avatar"
+    title="Homepage"
+  />
+
+  <div class="site-info">
+    <div class="site-metadata">
+      <a class="site-title" href="/" title="Home">{{ .Site.Title }}</a>
+
+      <div class="site-description">
+        A place to share my interests
+      </div>
+    </div>
+
+    <nav>
+      <ul class="navbar-links">
+        <li><a href="/posts/">Posts</a></li>
+        <li><a href="/projects/">Projects</a></li>
+      </ul>
+    </nav>
   </div>
 
-  <nav>
-    <ul>
-      <li>
-        <a href="/posts/" title="Posts">Posts</a>
-      </li>
-      <li>
-        <a href="/projects/" title="Projects">Projects</a>
-      </li>
-    </ul>
-  </nav>
 </header>

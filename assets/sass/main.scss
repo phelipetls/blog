@@ -1,4 +1,5 @@
 @import 'header';
+@import 'footer';
 
 html {
   font-family: sans-serif;
@@ -23,8 +24,4 @@ body > * {
 main {
   flex: 1;
   text-align: justify;
-}
-
-footer {
-  margin: 0 auto;
 }

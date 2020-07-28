@@ -1,3 +1,4 @@
+@import 'variables';
 @import 'header';
 @import 'footer';
 @import 'links';
@@ -5,7 +6,7 @@
 @import 'misc';
 
 html {
-  font-family: sans-serif;
+  font-family: $serif;
   box-sizing: border-box;
 }
 
@@ -22,7 +23,7 @@ body {
   display: flex;
   flex-flow: column;
 
-  max-width: 40em;
+  max-width: $content-width;
   margin: 0 auto;
 }
 

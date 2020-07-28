@@ -27,13 +27,19 @@ ul.posts-list {
   * {
     font-size: 0.8rem;
   }
+
+  time {
+    &:after {
+      content: "-";
+      margin-right: 0.5em;
+    }
+  }
 }
 
 .category-list {
   flex: 1;
 
   margin: 0;
-  margin-left: 1em;
 
   padding: 0;
 
@@ -41,11 +47,6 @@ ul.posts-list {
 
   li {
     display: inline;
-
-    a {
-      color: $black;
-      text-decoration: none;
-    }
 
     &:not(:last-child):after {
       content: "·";

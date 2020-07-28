@@ -1,6 +1,11 @@
 time {
   font-family: $monospace;
 }
+
+img {
+  max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -9,4 +14,3 @@ h5,
 h6 {
   color: $black;
 }
-

@@ -6,7 +6,6 @@
 @import 'misc';
 
 html {
-  font-family: $serif;
   box-sizing: border-box;
 }
 
@@ -19,6 +18,7 @@ html, body {
 }
 
 body {
+  font-family: $serif;
   display: flex;
   flex-flow: column;
 

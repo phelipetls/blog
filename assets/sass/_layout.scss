@@ -5,6 +5,12 @@ html, body {
 body {
   display: flex;
   flex-flow: column;
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+body > * {
+  margin: 0.5em 1em;
 }
 
 header {

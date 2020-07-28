@@ -4,13 +4,15 @@
   <div class="post-info">
     <time
       datetime="{{ .Date.Format "2006-01-02" }}">
-      <small>{{ .Date.Format "01 Jan, 2006" }}</small>
+      {{ .Date.Format "01 Jan, 2006" }}
     </time>
 
-    <ul class="tags-list">
-      {{ range (.GetTerms "tags") }}
+    <ul class="category-list">
+      {{ range (.GetTerms "categories") }}
         <li>
-          <a class="tag plain-link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          <a href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
         </li>
       {{ end }}
     </ul>

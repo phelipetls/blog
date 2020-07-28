@@ -16,11 +16,46 @@ ul.posts-list {
         text-decoration: underline;
       }
     }
+  }
+}
 
+.post-year, .post-date {
+  font-size: 1.3em;
+}
+
+.post-info {
+  display: flex;
+  flex-flow: row;
+
+  * {
+    font-size: 0.8rem;
+  }
+}
+
+.category-list {
+  flex: 1;
+
+  margin: 0;
+  margin-left: 1em;
+
+  padding: 0;
+
+  list-style: none;
+
+  li {
+    display: inline;
+
+    a {
+      color: $black;
+      text-decoration: none;
 
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    &:not(:last-child):after {
+      content: "·";
     }
   }
 }

@@ -1,16 +1,24 @@
 {{ define "main" }}
   {{ range .Pages.GroupByDate "2006" }}
     <h3>
-      <time datetime="{{ .Key }}-01-01"> {{ .Key }} </time>
+      <time
+        class="post-year"
+        datetime="{{ .Key }}-01-01">
+        {{ .Key }} 
+      </time>
     </h3>
     <ul class="posts-list">
     {{ range .Pages }}
       <li>
-        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+        <time
+          class="post-date"
+          datetime="{{ .Date.Format "2006-01-02" }}">
           {{ .Date.Format "Jan 02" }}
         </time>
         <a href="{{ .Permalink }}">
-          <span class="post-title">{{ .Title }}</span>
+          <span class="post-title">
+            {{ .Title }}
+          </span>
         </a>
       </li>
     {{ end }}

@@ -2,8 +2,9 @@
   <h2>{{ .Title }}</h2>
 
   <div class="post-info">
-    <time datetime="{{ .Date.Format "2006-01-02" }}">
-      {{ .Date.Format "01 Jan, 2006" }}
+    <time
+      datetime="{{ .Date.Format "2006-01-02" }}">
+      <small>{{ .Date.Format "01 Jan, 2006" }}</small>
     </time>
 
     <ul class="tags-list">
@@ -17,19 +18,25 @@
 
   <hr>
 
-  {{ .Content }}
+  <article class="post-content">
+    {{ .Content }}
+  </article>
 
   <hr>
 
   <div class="post-navigation">
     {{ with .Prev }}
-      <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+      <a
+        href="{{ .RelPermalink }}"
+        title="{{ .Title }}">
         Previous
       </a>
     {{ end }}
 
     {{ with .Next }}
-      <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+      <a
+        href="{{ .RelPermalink }}"
+        title="{{ .Title }}">
         Next
       </a>
     {{ end }}

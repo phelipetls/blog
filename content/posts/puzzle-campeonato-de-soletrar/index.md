@@ -2,7 +2,7 @@
 title: "Puzzle do Campeonato de Soletrar"
 date: 2019-04-15
 layout: post
-tags: ["puzzle", "probabilidade", "stats", "r"]
+tags: ["puzzle", "probability", "stats", "r"]
 math: true
 draft: true
 ---

@@ -14,10 +14,10 @@ h6 {
   }
 }
 
-nav,
+header,
 .post-info,
 .posts-list {
   a:hover {
-    text-decoration: underline;
+    color: $grey;
   }
 }

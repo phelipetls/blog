@@ -1,43 +1,69 @@
 header {
   display: flex;
+  flex-flow: row;
+  gap: 1em;
 
-  img {
-    max-height: 100%;
-    border-radius: 50%;
+  @media only screen and (max-width: 500px) {
+    & {
+      flex-flow: column;
+    }
   }
 
-  .site-info {
-    padding-left: 15px;
+  margin-bottom: 2em;
 
+  a.avatar-container {
+    flex: 0 0 6.5em;
+
+    display: grid;
+    place-self: center;
+
+    img.site-avatar {
+      margin: 0 auto;
+      border-radius: 50%;
+      object-fit: cover;
+      max-height: 6.5em;
+    }
+  }
+
+  .site-header {
     flex: 1;
 
+    display: grid;
+    grid-template-rows: 25% 25% 50%;
+  }
+
+  .site-heading {
     display: flex;
-    flex-flow: column;
     justify-content: space-between;
-    gap: 5px;
-
-    .site-title {
-      font-size: 1.2em;
+    > * {
+      color: $grey;
+      font-weight: 600;
+      font-size: 1.5em;
     }
+  }
 
-    .site-description {
-      padding-top: 0.5em;
-      font-size: 0.8em;
-    }
+  .site-description {
+    padding-top: 0.7em;
+    font-size: 0.8em;
   }
 
   nav {
-    ul {
-      margin: 0;
-      padding: 0;
+    align-self: end;
+    margin-top: 1.5em;
+  }
+}
 
-      li {
-        display: inline;
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
-        &:not(:first-child) {
-          margin-left: 1em;
-        }
-      }
+  li {
+    display: inline;
+
+    &:not(:first-child) {
+      margin-left: 1em;
     }
   }
 }

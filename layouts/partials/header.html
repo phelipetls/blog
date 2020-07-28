@@ -1,24 +1,38 @@
 <header>
-  <img
-    class="avatar-img"
-    src="https://avatars.githubusercontent.com/phelipetls"
-    alt="Github avatar"
-  />
+  <a class="avatar-container" href="/">
+    <img
+      class="site-avatar"
+      src="https://avatars.githubusercontent.com/phelipetls"
+      title="About"
+      alt="Github avatar"
+      />
+  </a>
 
-  <div class="site-info">
-    <div class="site-metadata">
-      <a class="site-title" href="/" title="Home">{{ .Site.Title }}</a>
+  <div class="site-header">
+    <div class="site-heading">
+      <a class="site-title" href="/">
+        {{ .Site.Title }}
+      </a>
 
-      <div class="site-description">
-        A place to share my interests
-      </div>
+      <span class="site-social">
+        <a href="https://github.com/phelipetls" title="Github">
+          <i class='bx bxl-github'></i>
+        </a>
+        <a href="www.linkedin.com/in/phelipeteles/" title="Linkedin">
+          <i class='bx bxl-linkedin'></i>
+        </a>
+      </span>
+    </div>
+
+    <div class="site-description">
+      A place to share my interests
     </div>
 
     <nav>
       <ul class="navbar-links">
-        <li><a href="/">About</a></li>
         <li><a href="/posts/">Posts</a></li>
         <li><a href="/projects/">Projects</a></li>
+        <li><a href="/categories/">Categories</a></li>
       </ul>
     </nav>
   </div>

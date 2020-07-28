@@ -1,12 +1,9 @@
 html, body {
-  height: 100%;
 }
 
 body {
-  display: flex;
-  flex-flow: column;
-  max-width: $content-width;
   margin: 0 auto;
+  max-width: $content-width;
 }
 
 body > * {
@@ -14,10 +11,7 @@ body > * {
 }
 
 header {
-  flex-shrink: 0;
-  height: 7em;
 }
 
 main {
-  flex: 1;
 }

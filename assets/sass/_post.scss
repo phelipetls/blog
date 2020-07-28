@@ -12,13 +12,14 @@ ul.posts-list {
 
     a {
       flex: 1;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
-    .post-title {
-      border-bottom: 1px solid transparent;
 
       &:hover {
-        border-bottom: 1px dotted grey;
+        text-decoration: underline;
       }
     }
   }

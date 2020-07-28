@@ -2,7 +2,8 @@
 layout: post
 title: "Web Scraping de páginas dinâmicas com Python"
 date: 2019-08-18
-tags: ["python", "web-scraping", "pandas", "tidytext", "regex", "dataviz"]
+categories: ["Programming", "Python"]
+tags: ["web-scraping", "pandas", "regex", "dataviz"]
 ---
 
 Automatizar a extração de informações de sites é provavelmente algo que

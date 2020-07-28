@@ -2,7 +2,8 @@
 layout: post
 title: "Spread bancário brasileiro: limpeza e visualização de dados"
 date: 2019-03-31
-tags: ["tidyverse", "dataviz", "ggplot2", "r"]
+categories: ["Programming", "R", "Economics"]
+tags: ["tidyverse", "dataviz", "ggplot2"]
 ---
 
 O altíssimo spread bancário \[^1\] brasileiro é um motivo de preocupação

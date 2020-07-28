@@ -2,7 +2,8 @@
 layout: post
 title: "Puzzle do cavalo no tabuleiro infinito com NumPy"
 date: 2019-02-18
-tags: ["numpy", "monte-carlo", "matplotlib", "python", "stats"]
+categories: ["Programming", "Python", "Statistics"]
+tags: ["numpy", "matplotlib"]
 ---
 
 # Introdução

@@ -1,7 +1,8 @@
 ---
 title: "Homicídios em Baltimore: visualizações com ggplot2 e gganimate"
 date: 2019-04-07
-tags: ["dataviz", "tidyverse", "gganimate", "ggplot2", "r"]
+categories: ["Programming", "R"]
+tags: ["dataviz", "tidyverse", "gganimate", "ggplot2"]
 ---
 
 Neste post pretendo continuar o que foi iniciado no último, onde

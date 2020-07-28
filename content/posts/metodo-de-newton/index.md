@@ -2,7 +2,8 @@
 layout: post
 title: "Método de Newton"
 date: 2019-03-17
-tags: ["matplotlib", "numpy", "sympy", "python", "math"]
+categories: ["Programming", "Python", "Math"]
+tags: ["matplotlib", "numpy", "sympy"]
 math: true
 ---
 

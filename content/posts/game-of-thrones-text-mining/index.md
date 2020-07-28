@@ -2,7 +2,8 @@
 layout: post
 title: "Mineração de Texto com as legendas de Game of Thrones"
 date: 2019-04-20
-tags: ["tidyverse", "dataviz", "ggplot2", "tidytext", "R"]
+categories: ["Programming", "R"]
+tags: ["tidyverse", "dataviz", "ggplot2", "tidytext"]
 ---
 
 Nesse post vou combinar duas das minhas coisas favoritas: R e Game of

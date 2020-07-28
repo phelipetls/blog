@@ -2,7 +2,8 @@
 layout: post
 title: "Processo de Gram-Schmidt com NumPy"
 date: 2019-08-04
-tags: ["numpy", "algoritmos", "python", "linalg"]
+categories: ["Programming", "Python", "Math"]
+tags: ["numpy", "python", "linear-algebra"]
 math: true
 ---
 

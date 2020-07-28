@@ -2,7 +2,8 @@
 layout: post
 title: "Extraindo dados de texto com RegEx no R"
 date: 2019-04-01
-tags: ["tidyverse", "regex", "r"]
+categories: ["Programming", "R"]
+tags: ["tidyverse", "regex"]
 ---
 
 Quando comecei a estudar R, via muito os vídeos do Roger Peng, que tem

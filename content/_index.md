@@ -2,11 +2,11 @@
 title: "Home"
 ---
 
-I have a background in Economics (mostly Econometrics), which got me interested
-in R and showed me how programming in general can be fun. I have studied it
-since then on my free time.
+I have a background in Economics (mostly Econometrics), which led me to
+learn R.
 
-Most of my experience has been with Python, R and VBA for data analytics and
-academic stuff, but I've been developing an interest in web development lately.
+From then on, I've developed a great interesting in programming
+in general, not just for statistics.
 
-Also, this site is built with a framework for static site generator called Hugo.
+Most of my experience has been with Python, R and VBA for data analytics
+and academic, but I've been learning about web development lately too.

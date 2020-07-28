@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+}
+
+header {
+  flex-shrink: 0;
+  height: 7em;
+}
+
+main {
+  flex: 1;
+}

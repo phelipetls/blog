@@ -12,9 +12,6 @@ ul.posts-list {
 
     a {
       flex: 1;
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 }
@@ -48,10 +45,6 @@ ul.posts-list {
     a {
       color: $black;
       text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
 
     &:not(:last-child):after {

@@ -12,3 +12,10 @@ h6 {
     text-decoration: none;
   }
 }
+
+.post-info,
+.posts-list {
+  a:hover {
+    text-decoration: underline;
+  }
+}

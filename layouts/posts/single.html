@@ -29,17 +29,19 @@
   <div class="post-navigation">
     {{ with .Prev }}
       <a
+        class="previous"
         href="{{ .RelPermalink }}"
-        title="{{ .Title }}">
-        Previous
+        title="Previous post">
+        {{ .Title }}
       </a>
     {{ end }}
 
     {{ with .Next }}
       <a
+        class="next"
         href="{{ .RelPermalink }}"
-        title="{{ .Title }}">
-        Next
+        title="Next post">
+        {{ .Title }}
       </a>
     {{ end }}
   </div>

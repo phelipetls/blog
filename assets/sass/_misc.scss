@@ -14,6 +14,7 @@ img {
   max-width: 100%;
 }
 
+.post-navigation,
 header,
 footer,
 h1,
@@ -25,6 +26,7 @@ h6 {
   color: $black;
 }
 
+.post-navigation,
 .posts-list,
 .category-list,
 header,
@@ -42,6 +44,7 @@ h6 {
 }
 
 header,
+.post-navigation,
 .post-info,
 .posts-list {
   a:hover {

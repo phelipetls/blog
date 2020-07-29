@@ -2,3 +2,7 @@ baseURL = "https://phelipetls.github.io"
 languageCode = "en-us"
 title = "Phelipe Teles"
 assetsDir = "assets"
+
+[markup]
+  [markup.highlight]
+    style = "lovelace"

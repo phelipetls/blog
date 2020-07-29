@@ -1,7 +1,11 @@
 html, body {
+  height: 100%;
 }
 
 body {
+  display: flex;
+  flex-flow: column;
+
   margin: 0 auto;
   max-width: $content-width;
 }
@@ -10,8 +14,6 @@ body > * {
   margin: 0.5em 1em;
 }
 
-header {
-}
-
 main {
+  flex: 1;
 }

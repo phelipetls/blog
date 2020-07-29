@@ -60,13 +60,14 @@ hr {
 }
 
 p > code {
-  color: black;
-  background-color: $grey;
-  padding: 0.1em 0.5em;
+  background-color: $light-grey;
+  border: 1px solid $dark-grey;
+  border-radius: 5px;
+  padding: 0.1em 0.3em;
 }
 
 pre {
   overflow-x: auto;
   padding: 1em;
-  background-color: $very-light-grey !important;
+  background-color: $light-grey !important;
 }

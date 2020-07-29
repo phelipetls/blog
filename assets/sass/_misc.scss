@@ -18,15 +18,8 @@ img {
   max-width: 100%;
 }
 
-.post-navigation,
-header,
-footer,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.site-heading,
+h1, h2, h3, h4, h5, h6 {
   color: $black;
 }
 
@@ -35,24 +28,10 @@ h6 {
 .category-list,
 header,
 footer,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   a {
     color: inherit;
     text-decoration: none;
-  }
-}
-
-header,
-.post-navigation,
-.post-info,
-.posts-list {
-  a:hover {
-    color: $light-black;
   }
 }
 

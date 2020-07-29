@@ -29,7 +29,7 @@
   <div class="post-navigation">
     {{ with .Prev }}
       <a
-        class="previous"
+        class="previous plain-link"
         href="{{ .RelPermalink }}"
         title="Previous post">
         {{ .Title }}
@@ -38,7 +38,7 @@
 
     {{ with .Next }}
       <a
-        class="next"
+        class="next plain-link"
         href="{{ .RelPermalink }}"
         title="Next post">
         {{ .Title }}

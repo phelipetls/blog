@@ -1,5 +1,5 @@
 {{ $level := add .Level 2 }}
 
 <h{{ $level }} id="{{ .Anchor | safeURL }}">
-  <a class="heading" href="#{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</a>
+  <a class="heading plain-link" href="#{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</a>
 </h{{ $level }}>

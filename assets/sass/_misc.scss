@@ -23,16 +23,9 @@ h1, h2, h3, h4, h5, h6 {
   color: $black;
 }
 
-.post-navigation,
-.posts-list,
-.category-list,
-header,
-footer,
-h1, h2, h3, h4, h5, h6 {
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+.plain-link {
+  color: inherit;
+  text-decoration: none;
 }
 
 hr {

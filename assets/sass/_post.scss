@@ -25,12 +25,12 @@ ul.posts-list {
   flex-flow: row;
 
   * {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   time {
     &:after {
-      content: "-";
+      content: "/";
       margin-right: 0.5em;
     }
   }
@@ -38,18 +38,15 @@ ul.posts-list {
 
 .category-list {
   flex: 1;
-
   margin: 0;
-
   padding: 0;
-
   list-style: none;
 
   li {
     display: inline;
 
     &:not(:last-child):after {
-      content: "·";
+      content: ",";
     }
   }
 }

@@ -10,13 +10,12 @@
     </time>
 
     <ul class="category-list">
-      {{ range (.GetTerms "categories") }}
+      {{- range (.GetTerms "categories") -}}
         <li>
           <a class="plain-link highlight-on-hover" href="{{ .RelPermalink }}">
-            {{ .Title }}
-          </a>
-        </li>
-      {{ end }}
+            {{- .Title -}}
+          </a></li>
+      {{- end -}}
     </ul>
   </div>
 

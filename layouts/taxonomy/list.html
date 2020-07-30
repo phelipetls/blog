@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <ul class="taxonomy-container prettier-list">
+    <h3>
+      {{ .Section | title }}
+    </h3>
+
+    {{ range .Data.Terms.ByCount }}
+      <li class="taxonomy-term">
+        <a class="plain-link" href="{{ .Page.Permalink }}">
+          <span class="taxonomy-name">
+            {{- .Page.Title -}}
+          </span>
+        </a>
+        <div class="taxonomy-count">
+          ({{- .Count -}})
+        </div>
+      </li>
+    {{ end }}
+  </ul>
+
+{{ end }}

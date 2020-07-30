@@ -1,0 +1,32 @@
+{{ define "main" }}
+  <div class="posts-container">
+    {{ range .Pages }}
+      <div class="post">
+
+        <h5 class="post-title">
+          <a class="plain-link" href="{{ .Permalink }}">{{ .Title }}</a>
+        </h5>
+
+        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "Jan 02" }}
+        </time>
+
+        <div class="post-summary">
+          {{ .Summary }}
+        </div>
+
+        {{ $taxonomy := cond (eq $.Section "categories") "tags" "categories" }}
+
+        <div class="post-tags">
+          {{ $terms := (.GetTerms $taxonomy) }}
+          {{ $taxonomy | title }}:
+          {{ range $index, $term := $terms }}
+            <a href="{{ $term.Permalink }}">{{ $term.Title }}</a>
+             {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}
+          {{ end }}
+        </div>
+
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

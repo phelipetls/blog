@@ -6,7 +6,7 @@
 
     {{ range .Data.Terms.ByCount }}
       <li class="taxonomy-term">
-        <a class="plain-link" href="{{ .Page.Permalink }}">
+        <a class="plain-link highlight-on-hover" href="{{ .Page.Permalink }}">
           <span class="taxonomy-name">
             {{- .Page.Title -}}
           </span>

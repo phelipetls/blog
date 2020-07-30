@@ -3,9 +3,9 @@
     {{ range .Pages }}
       <div class="post">
 
-        <h5 class="post-title">
-          <a class="plain-link" href="{{ .Permalink }}">{{ .Title }}</a>
-        </h5>
+        <h4 class="post-title">
+          <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">{{ .Title }}</a>
+        </h4>
 
         <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
           {{ .Date.Format "Jan 02" }}
@@ -21,7 +21,7 @@
           {{ $terms := (.GetTerms $taxonomy) }}
           {{ $taxonomy | title }}:
           {{ range $index, $term := $terms }}
-            <a href="{{ $term.Permalink }}">{{ $term.Title }}</a>
+            <a class="plain-link highlight-on-hover" href="{{ $term.Permalink }}">{{ $term.Title }}</a>
              {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}
           {{ end }}
         </div>

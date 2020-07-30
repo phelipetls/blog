@@ -56,13 +56,8 @@ nav {
   ul {
     margin: 0;
     padding: 0;
-  }
-
-  li {
-    display: inline;
-
-    &:not(:first-child) {
-      margin-left: 1em;
-    }
+    list-style: none;
+    display: flex;
+    gap: 1em;
   }
 }

@@ -40,12 +40,14 @@ hr {
 }
 
 p > code {
+  border: 1px solid $dark-grey;
   background-color: $light-grey;
   border-radius: 5px;
-  padding: 0.1em 0.3em;
+  padding: 0.1em 0.5em;
 }
 
 pre {
+  border: 1px solid $dark-grey;
   overflow-x: auto;
   padding: 1em;
   background-color: $light-grey !important;

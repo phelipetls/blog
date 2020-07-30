@@ -1,53 +1,25 @@
 header {
-  display: flex;
-  flex-flow: row;
-  gap: 1em;
-
-  @media only screen and (max-width: 500px) {
-    & {
-      flex-flow: column;
-    }
-  }
-
-  margin-bottom: 2em;
-
-  a.avatar-container {
-    flex: 0 0 6.5em;
-
-    display: grid;
-    place-self: center;
-
-    img.site-avatar {
-      margin: 0 auto;
-      border-radius: 50%;
-      object-fit: cover;
-      max-height: 6.5em;
-    }
-  }
-
-  .site-header {
-    flex: 1;
-
-    display: grid;
-    grid-template-rows: 25% 25% 50%;
-  }
+  margin-bottom: 1em;
 
   .site-heading {
+    font-weight: 600;
+    font-size: 1.5em;
+
     display: flex;
     justify-content: space-between;
-    > * {
-      font-weight: 600;
-      font-size: 1.5em;
-    }
   }
 
-  .site-description {
-    padding-top: 0.7em;
-    font-size: 0.8em;
+  .site-social {
+    display: inline-flex;
+    > * {
+      display: flex;
+      align-self: center;
+      margin-right: 2px;
+      font-size: 1.2em;
+    }
   }
 
   nav {
-    align-self: end;
     margin-top: 1.5em;
   }
 }

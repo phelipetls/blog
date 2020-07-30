@@ -1,42 +1,24 @@
 <header>
-  {{ if .IsHome }}
-    <a class="avatar-container" href="/">
-      <img
-        class="site-avatar"
-        src="https://avatars.githubusercontent.com/phelipetls"
-        title="About"
-        alt="Github avatar"
-        />
+  <div class="site-heading">
+    <a class="site-title plain-link highlight-on-hover" href="/">
+      {{ .Site.Title }}
     </a>
-  {{ end }}
 
-  <div class="site-header">
-    <div class="site-heading">
-      <a class="site-title plain-link" href="/">
-        {{ .Site.Title }}
+    <div class="site-social">
+      <a class="plain-link highlight-on-hover" href="https://github.com/phelipetls" title="Github">
+        <i class='bx bxl-github'></i>
       </a>
-
-      <span class="site-social">
-        <a class="plain-link" href="https://github.com/phelipetls" title="Github">
-          <i class='bx bxl-github'></i>
-        </a>
-        <a class="plain-link" href="https://linkedin.com/in/phelipeteles/" title="Linkedin">
-          <i class='bx bxl-linkedin'></i>
-        </a>
-      </span>
+      <a class="plain-link highlight-on-hover" href="https://linkedin.com/in/phelipeteles/" title="Linkedin">
+        <i class='bx bxl-linkedin'></i>
+      </a>
     </div>
-
-    <div class="site-description">
-      A place to share my interests.
-    </div>
-
-    <nav>
-      <ul class="navbar-links">
-        <li><a class="plain-link" href="/posts/">Posts</a></li>
-        <li><a class="plain-link" href="/categories/">Categories</a></li>
-        <li><a class="plain-link" href="/projects/">Projects</a></li>
-      </ul>
-    </nav>
   </div>
 
+  <nav>
+    <ul class="navbar-links">
+      <li><a class="plain-link highlight-on-hover" href="/posts/">Posts</a></li>
+      <li><a class="plain-link highlight-on-hover" href="/categories/">Categories</a></li>
+      <li><a class="plain-link highlight-on-hover" href="/projects/">Projects</a></li>
+    </ul>
+  </nav>
 </header>

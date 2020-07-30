@@ -1,5 +1,6 @@
 {{ define "main" }}
-  {{ range .Pages.GroupByDate "2006" }}
+  {{ $blogPosts := (.Site.GetPage "/posts").Pages }}
+  {{ range $blogPosts.GroupByDate "2006" }}
     <h3>
       <time
         class="post-year"

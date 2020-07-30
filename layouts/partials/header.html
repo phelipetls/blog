@@ -1,12 +1,14 @@
 <header>
-  <a class="avatar-container" href="/">
-    <img
-      class="site-avatar"
-      src="https://avatars.githubusercontent.com/phelipetls"
-      title="About"
-      alt="Github avatar"
-      />
-  </a>
+  {{ if .IsHome }}
+    <a class="avatar-container" href="/">
+      <img
+        class="site-avatar"
+        src="https://avatars.githubusercontent.com/phelipetls"
+        title="About"
+        alt="Github avatar"
+        />
+    </a>
+  {{ end }}
 
   <div class="site-header">
     <div class="site-heading">

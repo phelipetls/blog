@@ -47,3 +47,8 @@ pre {
   padding: 1em;
   background-color: $light-grey !important;
 }
+
+.prettier-list {
+  padding:  0;
+  list-style: inside circle;
+}

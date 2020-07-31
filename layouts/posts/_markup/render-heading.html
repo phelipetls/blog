@@ -1,0 +1,6 @@
+{{ $level := add .Level 2 }}
+
+<h{{ $level }} class="post-heading" id="{{ .Anchor | safeURL }}">
+  {{ .Text | safeHTML }}
+  <a class="post-heading-anchor plain-link" href="#{{ .Anchor | safeURL }}">#</a>
+</h{{ $level }}>

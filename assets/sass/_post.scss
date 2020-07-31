@@ -24,6 +24,17 @@ ul.posts-list {
 
 /* SINGLE POST */
 
+.post-heading {
+  .post-heading-anchor {
+    display: none;
+    text-decoration: underline;
+  }
+
+  &:hover .post-heading-anchor {
+    display: inline;
+  }
+}
+
 .post-info {
   display: flex;
   flex-flow: row;

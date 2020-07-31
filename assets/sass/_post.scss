@@ -49,19 +49,19 @@ ul.posts-list {
       margin-right: 0.5em;
     }
   }
-}
 
-.category-list {
-  flex: 1;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  .category-list {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 
-  li {
-    display: inline;
+    li {
+      display: inline;
 
-    &:not(:last-child):after {
-      content: ",";
+      &:not(:last-child):after {
+        content: ",";
+      }
     }
   }
 }

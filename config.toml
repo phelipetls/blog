@@ -5,6 +5,11 @@ assetsDir = "assets"
 summaryLength = 20
 Paginate = 5
 
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  tech = "techs"
+
 [markup]
   [markup.highlight]
     style = "lovelace"

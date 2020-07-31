@@ -4,6 +4,7 @@ title: "Extraindo dados de texto com RegEx no R"
 date: 2019-04-01
 categories: ["Programming", "R"]
 tags: ["tidyverse", "regex"]
+aliases: ["/homicidios-em-baltimore-minerando-dados-r"]
 ---
 
 Quando comecei a estudar R, via muito os vídeos do Roger Peng, que tem

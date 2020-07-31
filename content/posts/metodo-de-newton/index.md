@@ -4,6 +4,7 @@ title: "Método de Newton"
 date: 2019-03-17
 categories: ["Programming", "Python", "Math"]
 tags: ["matplotlib", "numpy", "sympy"]
+aliases: ["/metodo-de-newton"]
 math: true
 ---
 

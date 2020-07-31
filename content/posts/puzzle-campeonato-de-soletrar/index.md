@@ -4,6 +4,7 @@ date: 2019-04-15
 layout: post
 categories: ["Programming", "R", "Statistics"]
 tags: ["puzzle"]
+aliases: ["/puzzle-campeonato-de-soletrar"]
 math: true
 draft: true
 ---

@@ -4,6 +4,7 @@ title: "Processo de Gram-Schmidt com NumPy"
 date: 2019-08-04
 categories: ["Programming", "Python", "Math"]
 tags: ["numpy", "python", "linear-algebra"]
+aliases: ["/gram-schmidt"]
 math: true
 ---
 

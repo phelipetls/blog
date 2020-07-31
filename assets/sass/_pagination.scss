@@ -1,0 +1,36 @@
+.pagination-container {
+  margin: 0 auto;
+  display: grid;
+  place-self: center;
+}
+
+ul.pagination {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+  list-style: none;
+
+  li {
+    cursor: pointer;
+    margin: 0 0.3em;
+    padding: 0.3em 0.5em;
+    color: $black;
+    background-color: $grey;
+    display: inline;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &:not(.disabled):hover {
+      background-color:  $blue;
+      color: white;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      color: $dark-grey;
+    }
+  }
+}

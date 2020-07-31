@@ -2,7 +2,8 @@ baseURL = "https://phelipetls.github.io"
 languageCode = "en-us"
 title = "Phelipe Teles"
 assetsDir = "assets"
-summaryLength = 25
+summaryLength = 20
+Paginate = 5
 
 [markup]
   [markup.highlight]

@@ -1,0 +1,22 @@
+ul.posts-list {
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0.8em 0;
+    display: flex;
+
+    time {
+      margin-right: 1em;
+    }
+  }
+}
+
+.post-date {
+  font-size: 1.3em;
+  text-align: right;
+}
+
+.post-year {
+  font-size: 1.3em;
+}

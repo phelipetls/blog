@@ -1,0 +1,56 @@
+.posts-container {
+  display: flex;
+  flex-flow: column;
+
+  .post {
+    display: grid;
+    grid-template-columns: 90% 10%;
+
+    padding: 1em 0;
+    border-bottom: 1px solid $grey;
+  }
+
+  .post-title {
+    margin: 0;
+  }
+
+  .post-date {
+    font-size: 1.1em;
+    justify-self: end;
+    grid-column: 2 / 3;
+  }
+
+  .post-summary {
+    margin-top: 1em;
+    grid-column: 1 / 3;
+    font-size: 0.9em;
+  }
+
+  .post-tags {
+    align-self: end;
+    margin-top: 1em;
+    font-size: 0.7em;
+    grid-column: 1 / 3;
+  }
+}
+
+.post-navigation {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1em;
+
+  .previous {
+    text-align: left;
+    &:before {
+      content: "«"
+    }
+  }
+
+  .next {
+    text-align: right;
+    &:after {
+      content: "»"
+    }
+  }
+}
+

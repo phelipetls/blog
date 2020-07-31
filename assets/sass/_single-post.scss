@@ -1,0 +1,43 @@
+.post-heading {
+  .post-heading-anchor {
+    display: none;
+    text-decoration: underline;
+  }
+
+  &:hover .post-heading-anchor {
+    display: inline;
+  }
+}
+
+.post-info {
+  display: flex;
+  flex-flow: row;
+
+  * {
+    font-size: 0.7rem;
+  }
+
+  time {
+    &:after {
+      content: "/";
+      margin-right: 0.5em;
+    }
+  }
+
+  .category-list {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline;
+
+      &:not(:last-child):after {
+        content: ",";
+      }
+    }
+  }
+}
+
+

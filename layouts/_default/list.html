@@ -19,7 +19,7 @@
 
         <div class="post-tags">
           {{ $terms := (.GetTerms $taxonomy) }}
-          {{ $taxonomy | title }}:
+          <strong>{{ $taxonomy | title }}:</strong>
           {{ range $index, $term := $terms }}
             <a class="plain-link highlight-on-hover" href="{{ $term.Permalink }}">{{ $term.Title }}</a>
              {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}

@@ -18,3 +18,10 @@ a.link {
     place-self: end;
   }
 }
+
+details[open] {
+  summary {
+    margin-bottom: 1em;
+  }
+  margin-bottom: 1em;
+}

@@ -2,11 +2,14 @@
 title: "Home"
 ---
 
-I have a background in Economics (mostly Econometrics), which led me to
-learn R.
+Hi, my name is Phelipe Teles, I have a background in Economics but am currently
+most interested in software development.
 
-From then on, I've developed a great interesting in programming
-in general, not just for statistics.
+I really got into programming because of Econometrics, which led me to learn R
+and Python, but since then this has expanded beyond the statistical domain.
 
-Most of my experience has been with Python, R and VBA for data analytics
-and academic, but I've been learning about web development lately too.
+Most of my experience has been with Python, R, VBA and Power BI for academic
+and data analysis taks, but I've been learning about web development lately
+too.
+
+Check out my [projects](/projects) and [blog](/posts) to know more about me.

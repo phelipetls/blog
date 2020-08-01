@@ -16,7 +16,7 @@
         {{ .Summary }}
       </div>
 
-      {{ $taxonomy := cond (eq $.Section "categories") "tags" "categories" }}
+      {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
       {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
 
       <div class="page-categories">

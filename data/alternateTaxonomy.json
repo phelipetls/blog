@@ -1,0 +1,6 @@
+{
+    "categories": "tags",
+    "tags": "categories",
+    "techs": "techs",
+    "posts": "categories"
+}

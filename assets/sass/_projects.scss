@@ -8,6 +8,10 @@ a.link {
 .project {
   &:hover {
     cursor: pointer;
+
+    .bxs-chevron-down {
+      color: $blue;
+    }
   }
 
   .bxs-chevron-down {

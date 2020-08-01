@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{ range .Pages }}
-    <div class="pages-container">
+    <div class="pages-list projects-list">
       <details>
         <summary class="page project" onMouseDown="return false;">
           <h4 class="page-title">
@@ -37,7 +37,7 @@
           <i class='bx bxs-chevron-down'></i>
         </summary>
 
-        <div class="page-text">
+        <div class="page-text project-summary">
           {{ .Summary }}
         </div>
       </details>

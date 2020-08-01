@@ -4,7 +4,8 @@ ul.posts-list {
 
   li {
     margin: 0.8em 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
 
     time {
       margin-right: 1em;

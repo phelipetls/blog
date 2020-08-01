@@ -1,27 +1,26 @@
 {{ range .Paginator.Pages }}
-  <div class="posts-container">
-    <div class="post">
+  <div class="pages-container">
+    <div class="page">
 
-      <h4 class="post-title">
+      <h4 class="page-title">
         <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">{{ .Title }}</a>
       </h4>
 
-      <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+      <time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
         <strong>
           {{ .Date.Format "Jan 02" }}
         </strong>
       </time>
 
-      <div class="post-summary">
+      <div class="page-text">
         {{ .Summary }}
       </div>
 
       {{ $taxonomy := cond (eq $.Section "categories") "tags" "categories" }}
       {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
 
-      <div class="post-tags">
+      <div class="page-categories">
         {{ $terms := (.GetTerms $taxonomy) }}
-
         <strong>
           <a
             class="plain-link highlight-on-hover"
@@ -29,7 +28,6 @@
             {{ $taxonomy | title }}:
           </a>
         </strong>
-
         {{ range $index, $term := $terms }}
           <a class="plain-link highlight-on-hover" href="{{ $term.Permalink }}">
             {{- $term.Title -}}
@@ -37,6 +35,7 @@
           {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}
         {{ end }}
       </div>
+
     </div>
   </div>
 {{ end }}

@@ -7,7 +7,7 @@
   {{ $style := resources.Get "sass/main.scss" | toCSS $options }}
   <link href="{{ $style.Permalink }}" rel="stylesheet" />
   <title>
-    {{ site.Title }} {{ if not .IsHome }} - {{ .Title }} {{ end }}
+    {{ .Title }} {{ if .IsHome }} - {{ .Site.Title }} {{ end }}
   </title>
   {{ if or .Params.math .Site.Params.math }}
     {{ partial "math.html" . }}

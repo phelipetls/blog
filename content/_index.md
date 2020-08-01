@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "About"
 ---
 
 Hi, my name is Phelipe Teles, I have a background in Economics but am currently

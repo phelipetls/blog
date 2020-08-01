@@ -1,0 +1,21 @@
+name: Deploy website to Github Pages on push
+
+on:
+  push:
+    branches:
+      master
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+      - name: Deploy the site
+        uses: benmatselby/hugo-deploy-gh-pages@master
+        env:
+          HUGO_VERSION: 0.74.3
+          HUGO_EXTENDED: true
+          TARGET_REPO: phelipetls/phelipetls.github.io
+          TOKEN: ${{ secrets.TOKEN }}

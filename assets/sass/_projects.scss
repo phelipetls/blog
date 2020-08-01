@@ -1,0 +1,16 @@
+a.link {
+  i {
+    font-size: 1.1em;
+    vertical-align: middle;
+  }
+}
+
+.project {
+  &:hover {
+    cursor: pointer;
+  }
+
+  .bxs-chevron-down {
+    place-self: end;
+  }
+}

@@ -1,0 +1,46 @@
+{{ define "main" }}
+  {{ range .Pages }}
+    <div class="pages-container">
+      <details>
+        <summary class="page project" onMouseDown="return false;">
+          <h4 class="page-title">
+            <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">
+              {{ .Title | title }}
+            </a>
+
+            <a class="plain-link link highlight-on-hover" href="{{ .Params.github }}">
+              <i class='bx bxl-github'></i>
+            </a>
+
+            <a class="plain-link link highlight-on-hover" href="{{ .Params.website }}">
+              <i class='bx bx-link'></i>
+            </a>
+          </h4>
+
+          <time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
+            <strong>
+              {{ .Date.Format "Jan 02, 2006" }}
+            </strong>
+          </time>
+
+          <div class="page-categories">
+            <strong>Techs:</strong>
+            {{ $techs := .GetTerms "techs" }}
+            {{ range $index, $tech := $techs }}
+              <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">
+                {{- $tech.Title -}}
+              </a>
+              {{- if (lt (add $index 1) (len $techs)) }},{{ end -}}
+            {{ end }}
+          </div>
+
+          <i class='bx bxs-chevron-down'></i>
+        </summary>
+
+        <div class="page-text">
+          {{ .Summary }}
+        </div>
+      </details>
+    </div>
+  {{ end }}
+{{ end }}

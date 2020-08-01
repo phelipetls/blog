@@ -4,8 +4,7 @@
 
   .page {
     display: grid;
-    grid-template-columns: 90% 10%;
-
+    grid-template-columns: 80% auto;
     padding: 1em 0;
     border-bottom: 1px solid $grey;
   }
@@ -16,6 +15,7 @@
 
   .page-date {
     font-size: 1.1em;
+    text-align: right;
     justify-self: end;
     grid-column: 2 / 3;
   }
@@ -30,7 +30,6 @@
     align-self: end;
     margin-top: 1em;
     font-size: 0.7em;
-    grid-column: 1 / 3;
   }
 }
 

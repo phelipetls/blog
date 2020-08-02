@@ -40,8 +40,10 @@
 
         <div class="page-text project-summary">
           {{ .Summary }}
+        </div>
+        <div class="read-more">
           {{ if .Truncated }}
-            <a href="{{ .Permalink }}">More »</a>
+            <a href="{{ .Permalink }}">Read more »</a>
           {{ end }}
         </div>
       </details>

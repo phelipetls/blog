@@ -30,6 +30,7 @@
   <div class="related-posts">
     {{ with .PrevInSection }}
       <a
+        class="previous"
         href="{{ .RelPermalink }}"
         title="Previous post">
         {{ .Title }}
@@ -38,6 +39,7 @@
 
     {{ with .NextInSection }}
       <a
+        class="next"
         href="{{ .RelPermalink }}"
         title="Next post">
         {{ .Title }}

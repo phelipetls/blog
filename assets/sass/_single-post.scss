@@ -40,4 +40,22 @@
   }
 }
 
+.related-posts {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1em;
 
+  .previous {
+    text-align: left;
+    &:before {
+      content: "«"
+    }
+  }
+
+  .next {
+    text-align: right;
+    &:after {
+      content: "»"
+    }
+  }
+}

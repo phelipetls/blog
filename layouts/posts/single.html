@@ -27,8 +27,8 @@
 
   <hr>
 
-  <div class="post-navigation">
-    {{ with .Prev }}
+  <div class="related-posts">
+    {{ with .PrevInSection }}
       <a
         class="previous plain-link highlight-on-hover"
         href="{{ .RelPermalink }}"
@@ -37,7 +37,7 @@
       </a>
     {{ end }}
 
-    {{ with .Next }}
+    {{ with .NextInSection }}
       <a
         class="next plain-link highlight-on-hover"
         href="{{ .RelPermalink }}"

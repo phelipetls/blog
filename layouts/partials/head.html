@@ -8,7 +8,12 @@
   {{ $style := resources.Get "sass/main.scss" | toCSS $options }}
   <link href="{{ $style.Permalink }}" rel="stylesheet" />
   <title>
-    {{ .Title }} | {{ .Site.Title }}
+    {{ .Title }}
+    {{ with .Paginator }}
+      {{ if ge .PageNumber 1 }}
+        - Page {{ .PageNumber }}
+      {{ end }}
+    {{ end }}| {{ .Site.Title }}
   </title>
   {{ if or .Params.math .Site.Params.math }}
     {{ partial "math.html" . }}

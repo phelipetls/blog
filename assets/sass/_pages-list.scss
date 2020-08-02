@@ -24,13 +24,12 @@
   .page-summary {
     margin-top: 1em;
     grid-column: 1 / 3;
-    font-size: 0.9em;
   }
 
   .page-categories {
     align-self: end;
     margin-top: 1em;
-    font-size: 0.7em;
+    font-size: 0.8em;
     @include style-links;
   }
 }

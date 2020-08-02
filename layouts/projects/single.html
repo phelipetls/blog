@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <article>
+    <div class="project-heading">
+      <h1>{{ .Title }}</h1> 
+
+      <a href="{{ .Params.github }}">
+        <i class='bx bxl-github'></i>
+      </a>
+
+      <a href="{{ .Params.website }}">
+        <i class='bx bx-link'></i>
+      </a>
+    </div>
+
+    {{ .Content }}
+
+  </article>
+{{ end }}

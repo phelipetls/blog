@@ -12,7 +12,7 @@ focused on downloading reports.
 
 It mostly involved dealing with HTTP stuff to authenticate via [SOAP
 API](https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/authenticate-soap-api.htm),
-download the JSON and transform it into a pandas DataFrame (by far the most difficult part).
+download the JSON and transform it into a pandas DataFrame.
 
 I begun this project becasue I needed to daily retrieve a Salesforce report,
 and it was very time consuming to do it manually in the browser.

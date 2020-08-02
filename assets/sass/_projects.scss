@@ -1,7 +1,14 @@
-a.link {
-  i {
-    font-size: 1.1em;
-    vertical-align: top;
+.project-heading {
+  @include style-links;
+
+  h1 {
+    display: inline;
+    margin: 0;
+  }
+
+  a {
+    font-size: 1.2em;
+    display: inline;
   }
 }
 
@@ -10,20 +17,35 @@ a.link {
     cursor: pointer;
   }
 
-  .bxs-chevron-down {
+  .bx {
     place-self: end;
   }
 }
 
 .projects-list details {
-  summary::-webkit-details-marker {
+  summary {
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  .bxs-chevron-left {
     display: none;
   }
 
   &[open] {
+    margin-bottom: 1em;
+
     summary {
       margin-bottom: 1em;
     }
-    margin-bottom: 1em;
+
+    .bxs-chevron-down {
+      display: none;
+    }
+
+    .bxs-chevron-left {
+      display: inline-block;
+    }
   }
 }

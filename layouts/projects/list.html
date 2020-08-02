@@ -35,10 +35,14 @@
           </div>
 
           <i class='bx bxs-chevron-down'></i>
+          <i class='bx bxs-chevron-left'></i>
         </summary>
 
         <div class="page-text project-summary">
-          {{ .Content }}
+          {{ .Summary }}
+          {{ if .Truncated }}
+            <a href="{{ .Permalink }}">More »</a>
+          {{ end }}
         </div>
       </details>
     </div>

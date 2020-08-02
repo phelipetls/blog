@@ -20,7 +20,7 @@ through their databases and to get the data itself.
 
 Most of them are public REST APIs, so I only needed to create functions to
 receive the users parameters, build the specific URL and clean up the JSON
-through `pandas`.
+through pandas.
 
 It was also my first contact with Test-Driven development. I used the standard
-`unittest` Python library and currently it has 99% test coverage.
+unittest Python library and currently it has 99% test coverage.

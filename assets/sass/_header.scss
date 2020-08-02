@@ -10,11 +10,7 @@ header {
   }
 
   .site-social {
-    display: inline-flex;
-    > * {
-      display: flex;
-      align-self: center;
-      margin-right: 2px;
+    a {
       font-size: 1.2em;
     }
   }

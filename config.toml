@@ -5,6 +5,9 @@ assetsDir = "assets"
 summaryLength = 20
 Paginate = 5
 
+[params]
+  description = "A blog to share my interests on programming, statistics and more"
+
 [taxonomies]
   category = "categories"
   tag = "tags"

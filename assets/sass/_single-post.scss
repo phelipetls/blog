@@ -43,7 +43,6 @@
 .related-posts {
   display: grid;
   grid-auto-flow: column;
-  gap: 1em;
 
   .previous {
     text-align: left;
@@ -53,6 +52,7 @@
   }
 
   .next {
+    margin-right: 1em;
     text-align: right;
     &:after {
       content: "»"

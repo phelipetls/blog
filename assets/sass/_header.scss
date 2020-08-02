@@ -30,6 +30,9 @@ nav {
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 1em;
+
+    li:not(:first-child) {
+      margin-left: 1em;
+    }
   }
 }

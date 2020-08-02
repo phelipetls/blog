@@ -4,15 +4,15 @@
       <details>
         <summary class="page project" onMouseDown="return false;">
           <h4 class="page-title">
-            <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">
+            <a href="{{ .Permalink }}">
               {{ .Title | title }}
             </a>
 
-            <a class="plain-link link highlight-on-hover" href="{{ .Params.github }}">
+            <a href="{{ .Params.github }}">
               <i class='bx bxl-github'></i>
             </a>
 
-            <a class="plain-link link highlight-on-hover" href="{{ .Params.website }}">
+            <a href="{{ .Params.website }}">
               <i class='bx bx-link'></i>
             </a>
           </h4>
@@ -27,7 +27,7 @@
             <strong>Techs:</strong>
             {{ $techs := .GetTerms "techs" }}
             {{ range $index, $tech := $techs }}
-              <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">
+              <a href="{{ .Permalink }}">
                 {{- $tech.Title -}}
               </a>
               {{- if (lt (add $index 1) (len $techs)) }},{{ end -}}

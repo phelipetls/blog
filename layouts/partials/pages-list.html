@@ -3,7 +3,7 @@
     <div class="page">
 
       <h4 class="page-title">
-        <a class="plain-link highlight-on-hover" href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h4>
 
       <time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
@@ -23,13 +23,12 @@
         {{ $terms := (.GetTerms $taxonomy) }}
         <strong>
           <a
-            class="plain-link highlight-on-hover"
             href="{{ $taxonomyPage.Permalink }}">
             {{ $taxonomy | title }}:
           </a>
         </strong>
         {{ range $index, $term := $terms }}
-          <a class="plain-link highlight-on-hover" href="{{ $term.Permalink }}">
+          <a href="{{ $term.Permalink }}">
             {{- $term.Title -}}
           </a>
           {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}

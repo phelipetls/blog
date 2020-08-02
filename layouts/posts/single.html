@@ -12,7 +12,7 @@
     <ul class="category-list">
       {{- range (.GetTerms "categories") -}}
         <li>
-          <a class="plain-link highlight-on-hover" href="{{ .RelPermalink }}">
+          <a href="{{ .RelPermalink }}">
             {{- .Title -}}
           </a></li>
       {{- end -}}
@@ -30,7 +30,6 @@
   <div class="related-posts">
     {{ with .PrevInSection }}
       <a
-        class="previous plain-link highlight-on-hover"
         href="{{ .RelPermalink }}"
         title="Previous post">
         {{ .Title }}
@@ -39,7 +38,6 @@
 
     {{ with .NextInSection }}
       <a
-        class="next plain-link highlight-on-hover"
         href="{{ .RelPermalink }}"
         title="Next post">
         {{ .Title }}

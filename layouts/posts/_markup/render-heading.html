@@ -2,5 +2,5 @@
 
 <h{{ $level }} class="post-heading" id="{{ .Anchor | safeURL }}">
   {{ .Text | safeHTML }}
-  <a class="post-heading-anchor plain-link" href="#{{ .Anchor | safeURL }}">#</a>
+  <a href="#{{ .Anchor | safeURL }}">#</a>
 </h{{ $level }}>

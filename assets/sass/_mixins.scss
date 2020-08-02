@@ -1,0 +1,23 @@
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin plain-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+@mixin highlight-on-hover {
+  &:hover {
+    color: $blue;
+  }
+}
+
+@mixin style-links {
+  a {
+    @include plain-link;
+    @include highlight-on-hover;
+  }
+}

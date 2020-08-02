@@ -10,7 +10,14 @@ header {
     justify-content: space-between;
   }
 
+  .site-title {
+    @include plain-link;
+    @include highlight-on-hover;
+  }
+
   .site-social {
+    @include style-links;
+
     a {
       font-size: 1.2em;
     }
@@ -22,10 +29,10 @@ header {
 }
 
 nav {
+  @include style-links;
+
   ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    @include reset-list
     display: flex;
 
     li:not(:first-child) {

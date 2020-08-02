@@ -1,6 +1,7 @@
 .taxonomy-container {
   .taxonomy-term {
     line-height: 1.5em;
+    @include style-links;
   }
 
   .taxonomy-count {

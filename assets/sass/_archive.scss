@@ -1,6 +1,7 @@
 ul.posts-list {
   padding: 0;
   list-style: none;
+  @include style-links;
 
   li {
     margin: 0.8em 0;

@@ -3,4 +3,5 @@ footer {
   text-align: center;
   margin: 0 auto;
   padding: 2em 1em;
+  @include style-links;
 }

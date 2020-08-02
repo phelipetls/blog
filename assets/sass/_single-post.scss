@@ -1,4 +1,6 @@
 .post-heading {
+  @include style-links;
+
   .post-heading-anchor {
     display: none;
     text-decoration: underline;
@@ -29,6 +31,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    @include style-links;
 
     li {
       display: inline;
@@ -43,6 +46,7 @@
 .related-posts {
   display: grid;
   grid-auto-flow: column;
+  @include style-links;
 
   .previous {
     text-align: left;

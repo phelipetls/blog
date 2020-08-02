@@ -11,6 +11,7 @@
 
   .page-title {
     margin: 0;
+    @include style-links;
   }
 
   .page-date {
@@ -30,5 +31,6 @@
     align-self: end;
     margin-top: 1em;
     font-size: 0.7em;
+    @include style-links;
   }
 }

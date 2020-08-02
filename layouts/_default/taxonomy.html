@@ -6,7 +6,7 @@
   <ul class="taxonomy-container prettier-list">
     {{ range .Data.Terms.ByCount }}
       <li class="taxonomy-term">
-        <a class="plain-link highlight-on-hover" href="{{ .Page.Permalink }}">
+        <a href="{{ .Page.Permalink }}">
           <span class="taxonomy-name">
             {{- .Page.Title -}}
           </span>

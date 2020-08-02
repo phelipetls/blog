@@ -7,8 +7,6 @@ tags: ["numpy", "matplotlib"]
 aliases: ["/puzzle-do-cavalo-no-tabuleiro-infinito-com-numpy"]
 ---
 
-# Introdução
-
 Para estrear o blog, escolhi explorar um puzzle probabilístico, que vi
 no [blog do David
 Robinson](http://varianceexplained.org/r/knight-chess/), que consiste em

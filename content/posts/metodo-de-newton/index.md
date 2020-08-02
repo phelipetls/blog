@@ -8,8 +8,6 @@ aliases: ["/metodo-de-newton"]
 math: true
 ---
 
-# Introdução
-
 O Método de Newton é um conhecido algoritmo para chegar a soluções
 númericas de uma equação, normalmente uma para a qual a solução não é
 tão trivial. Por exemplo, imagine que queiramos encontrar encontrar a

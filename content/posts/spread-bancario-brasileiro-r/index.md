@@ -182,7 +182,7 @@ paises <- read_csv(url) %>%
     ##   `Region Code` = col_double(),
     ##   `Sub-region Code` = col_double()
     ## )
-    
+
     ## See spec(...) for full column specifications.
 
 ``` r

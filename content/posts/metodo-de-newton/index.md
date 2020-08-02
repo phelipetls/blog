@@ -83,7 +83,7 @@ No nosso caso, queremos achar a reta tangente quando \\( x_0 = 1 \\), sendo
 
 $$
 y = y_0 + 2x(x - x_0) \\ y = -4 + 2\cdot 1(x - 1) \\ y = -4 + 2x
--2 \\ y = 2x - 6 
+-2 \\ y = 2x - 6
 $$
 
 Mas, é crucial perceber que essa é a *equação da reta tangente ao ponto
@@ -210,7 +210,7 @@ Podemos também calcular limites, por exemplo \\( \lim_{x \to \infty}
 limit(1 / x, x, oo)
 ```
 
-``` 
+```
 0
 ```
 
@@ -273,7 +273,7 @@ print(f"\nO quanto erramos: {abs(np.sqrt(5) - newton(x**2, 5, 1))}")
     2.33333 |  2.23810  | 0.09523809523809534383
     2.23810 |  2.23607  | 0.00202634245187471862
     2.23607 |  2.23607  | 0.00000091814338532004
-    
+
     O quanto erramos: 1.8829382497642655e-13
 
 E assim vemos que o erro foi desprezível.
@@ -292,7 +292,7 @@ print(f"\nO quanto erramos: {abs(5**(1/3) - newton(x**3, 5, 2))}")
     1.71088 |  1.70998  | 0.00090792482452184409
     1.70998 |  1.70998  | 0.00000048224014181919
     1.70998 |  1.70998  | 0.00000000000013589130
-    
+
     O quanto erramos: 2.220446049250313e-16
 
 Uma das raízes para função \\(  x^4 + x^3 - x^2 - 5 \\) deve ser:
@@ -307,7 +307,7 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, 1)
     1.52529 |  1.43509  | 0.09020236587892971336
     1.43509 |  1.42600  | 0.00908943849525978287
     1.42600 |  1.42591  | 0.00008681126625442737
-    
+
     1.4259134245660217
 
 Se plotarmos seu gráfico, veremos que esse é um valor razoável. Uma raiz
@@ -344,7 +344,7 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, -1.5)
     -2.45626 | -2.16542  | 0.29084549734551234934
     -2.16542 | -2.06890  | 0.09651451804451394167
     -2.06890 | -2.05885  | 0.01005450745933744727
-    
+
     -2.0588469658492823
 
 # Limitações do método
@@ -363,8 +363,8 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, 0.5)
     15.50807 |  11.57934 | 3.92872823960125217013
     11.57934 |  8.63653  | 2.94280653615018472635
     8.63653 |  6.43473  | 2.20180035062548107305
-    
-    
+
+
     6.434733086164693
 
 O resultado foi bem catastrófico. É claro, não poderíamos esperar que
@@ -409,7 +409,7 @@ newton(x ** 3 - x, 1, 0.5)
     -3.36486 | -2.28096  | 1.08390981119991192116
     -2.28096 | -1.55628  | 0.72467848569769000022
     -1.55628 | -1.04351  | 0.51277134078822550478
-    
+
     -1.0435052271790375
 
 E se escolhêssemos algo muito perto do mínimo, aquele mesmo fiasco
@@ -425,7 +425,7 @@ newton(x ** 3 - x, 1, 0.6)
     11.94680 |  7.98552  | 3.96128197667255399494
     7.98552 |  5.35691  | 2.62861103714074939575
     5.35691 |  3.62500  | 1.73191328184936210732
-    
+
     3.624996032946096
 
 Como esperado, a tangente ali é pouquíssimo inclinada, e jogou a

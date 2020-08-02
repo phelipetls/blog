@@ -145,7 +145,7 @@ obtido pelo produto do que agora chamaremos matriz de projeção,
 \\( A(A^TA)^{-1}A^T \\), com o vetor \\( b \\):
 
 $$
-\hat{b} = A\hat{x} = A(A^TA)^{-1}A^Tb 
+\hat{b} = A\hat{x} = A(A^TA)^{-1}A^Tb
 $$
 
 Mas o nosso objetivo é, na verdade, obter o vetor ortogonal \\( e \\), o erro
@@ -153,7 +153,7 @@ da projeção, que é sempre ortogonal ao sub-espaço sobre o qual estamos
 projetando o nosso vetor:
 
 $$
-e = b - A\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b 
+e = b - A\hat{x} = b - A(A^TA)^{-1}A^Tb = (I - A(A^TA)^{-1}A^T)b
 $$
 
 E assim vemos que, como há a matriz de projeção de \\( b \\) sobre o

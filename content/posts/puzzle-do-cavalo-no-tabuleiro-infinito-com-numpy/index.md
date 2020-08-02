@@ -47,7 +47,7 @@ somar dois strings:
 1 + 2
 ```
 
-``` 
+```
 3
 ```
 
@@ -100,13 +100,13 @@ a[0] = 2 + 1j
 ```
 
     ---------------------------------------------------------------------------
-    
+
     TypeError                                 Traceback (most recent call last)
-    
+
     <ipython-input-6-65561a8fbe75> in <module>
     ----> 1 a[0] = 2+1j
-    
-    
+
+
     TypeError: can't convert complex to int
 
 Esse comportamento é muito similar ao vetor do R.
@@ -185,7 +185,7 @@ print(move_x, move_y, sep="\n\n")  # sep = '\n\n' serve para espaçar o output d
      [-1  1  1 ...  2  2 -2]
      [-1  1  2 ...  1 -1  2]
      [-1 -2  1 ...  2 -2  2]]
-    
+
     [[-2  1 -2 ...  2  1  1]
      [ 2 -2 -1 ...  1 -1 -1]
      [ 2 -1 -2 ...  2  2  2]
@@ -225,7 +225,7 @@ print(position_x, position_y, sep="\n\n")
      [ 4 -5 -8 ...  4 17  3]
      [ 3 -4 -6 ...  5 16  5]
      [ 2 -6 -5 ...  7 14  7]]
-    
+
     [[ -2   1  -2 ...   2   1   1]
      [  0  -1  -3 ...   3   0   0]
      [  2  -2  -5 ...   5   2   2]
@@ -244,7 +244,7 @@ print(position_x[-1], position_y[-1], sep="\n\n")
 ```
 
     [ 2 -6 -5 ...  7 14  7]
-    
+
     [  8  -6 -15 ...   3   6  -1]
 
 Agora, para de fato termos uma estimativa da probabilidade do cavalo

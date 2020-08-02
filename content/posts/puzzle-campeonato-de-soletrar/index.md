@@ -65,7 +65,7 @@ A função de probabilidade dessa distribuição nos dá a probabilidade de x
 regra da multiplicação para chegar a
 
 $$
-P_X(X = x) = (1 - p)^xp 
+P_X(X = x) = (1 - p)^xp
 $$
 
 Mas, note que, na verdade, no *nosso* caso, estamos interessados no

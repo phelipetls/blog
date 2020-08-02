@@ -163,24 +163,24 @@ globo_df.head()
 ```
 
     ##            status    periodo                cidade  \
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 1       Resolvido  Há 4 dias               Niterói   
-    ## 2       Resolvido  Há 5 dias        Rio de Janeiro   
-    ## 3      Respondida  Há 5 dias           São Gonçalo   
-    ## 4       Resolvido  Há 5 dias        Rio de Janeiro   
-    ## 
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ## 1       Resolvido  Há 4 dias               Niterói
+    ## 2       Resolvido  Há 5 dias        Rio de Janeiro
+    ## 3      Respondida  Há 5 dias           São Gonçalo
+    ## 4       Resolvido  Há 5 dias        Rio de Janeiro
+    ##
     ##                                            descricao  \
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 1  Fiz uma assinatura do O Globo em uma promoção ...   
-    ## 2  Venho registrar a minha indignação com o sorte...   
-    ## 3  A mais de 04 meses esta sendo lançado no meu c...   
-    ## 4  Verifiquei na data de hoje, dia 13/08/2019, qu...   
-    ## 
-    ##                                               titulo  
-    ## 0                        CANCELAR ASSINATURA DIGITAL  
-    ## 1                 Pontos do Tudo Azul não creditados  
-    ## 2  Descumprimento do regulamento da promoção Rock...  
-    ## 3     COMPRA LANÇADA NO CARTÃO QUE NÃO SOU ASSINANTE  
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ## 1  Fiz uma assinatura do O Globo em uma promoção ...
+    ## 2  Venho registrar a minha indignação com o sorte...
+    ## 3  A mais de 04 meses esta sendo lançado no meu c...
+    ## 4  Verifiquei na data de hoje, dia 13/08/2019, qu...
+    ##
+    ##                                               titulo
+    ## 0                        CANCELAR ASSINATURA DIGITAL
+    ## 1                 Pontos do Tudo Azul não creditados
+    ## 2  Descumprimento do regulamento da promoção Rock...
+    ## 3     COMPRA LANÇADA NO CARTÃO QUE NÃO SOU ASSINANTE
     ## 4  Aumentaram para R$ 129,90 minha assinatura  e ...
 
 Agora, vamos tentar fazer a mineração de texto no campo `descricao`, ao
@@ -199,7 +199,7 @@ palavras
     ## 2     [venho, registrar, a, minha, indignação, com, ...
     ## 3     [a, mais, de, 04, meses, esta, sendo, lançado,...
     ## 4     [verifiquei, na, data, de, hoje, dia, 13/08/20...
-    ##                             ...                        
+    ##                             ...
     ## 95    [tinha, uma, assinatura, que, cancelei, e, o, ...
     ## 96    [entro, no, meu, perfil, usando, o, facebook, ...
     ## 97    [manifestei, à, representante, do, jornal, o, ...
@@ -217,24 +217,24 @@ globo_df.head()
 ```
 
     ##            status    periodo                cidade  \
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia   
-    ## 
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ## 0  Não respondida  Há 2 dias  Aparecida de Goiânia
+    ##
     ##                                            descricao  \
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 0  Boa tarde, tem alguns meses que fiz uma assina...   
-    ## 
-    ##                         titulo palavras  
-    ## 0  CANCELAR ASSINATURA DIGITAL      boa  
-    ## 0  CANCELAR ASSINATURA DIGITAL    tarde  
-    ## 0  CANCELAR ASSINATURA DIGITAL      tem  
-    ## 0  CANCELAR ASSINATURA DIGITAL   alguns  
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ## 0  Boa tarde, tem alguns meses que fiz uma assina...
+    ##
+    ##                         titulo palavras
+    ## 0  CANCELAR ASSINATURA DIGITAL      boa
+    ## 0  CANCELAR ASSINATURA DIGITAL    tarde
+    ## 0  CANCELAR ASSINATURA DIGITAL      tem
+    ## 0  CANCELAR ASSINATURA DIGITAL   alguns
     ## 0  CANCELAR ASSINATURA DIGITAL    meses
 
 Agora, podemos começar a fazer algumas visualizações. Para começar, pode
@@ -391,7 +391,7 @@ lexicon
     ## 82344  zumbidora,zumbidor.PoS=Adj;FLEX=fs;TG=HUM:N0;P...
     ## 82345  zumbidoras,zumbidor.PoS=Adj;FLEX=fp;TG=HUM:N0;...
     ## 82346  zumbidores,zumbidor.PoS=Adj;FLEX=mp;TG=HUM:N0;...
-    ## 
+    ##
     ## [82347 rows x 1 columns]
 
 ``` python
@@ -417,7 +417,7 @@ lexicon = lexicon.palavras.str.extract(
     ## 82344   zumbidora,zumbidor         -1
     ## 82345  zumbidoras,zumbidor         -1
     ## 82346  zumbidores,zumbidor         -1
-    ## 
+    ##
     ## [82347 rows x 2 columns]
 
 ``` python
@@ -439,7 +439,7 @@ lexicon.to_csv("Sentilex-PT-FLEX.csv")
     ## 82345    zumbidor         -1
     ## 82346  zumbidores         -1
     ## 82346    zumbidor         -1
-    ## 
+    ##
     ## [161019 rows x 2 columns]
 
 Agora, vamos fazer um left join com o data frame original e ver quantos

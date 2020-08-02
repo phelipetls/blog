@@ -19,9 +19,15 @@ a.link {
   }
 }
 
-details[open] {
-  summary {
+.projects-list details {
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  &[open] {
+    summary {
+      margin-bottom: 1em;
+    }
     margin-bottom: 1em;
   }
-  margin-bottom: 1em;
 }

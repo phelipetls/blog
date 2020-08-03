@@ -20,3 +20,9 @@
     @include highlight-on-hover;
   }
 }
+
+@mixin spaced($space: 1em) {
+  padding-bottom: $space;
+  margin-bottom: $space * 2;
+}
+

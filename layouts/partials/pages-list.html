@@ -1,44 +1,28 @@
-{{ range .Paginator.Pages }}
+{{ range .Pages }}
   <div class="pages-list">
     <div class="page">
 
-      <h4 class="page-title">
+      <h3 class="title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
-      </h4>
+      </h3>
 
-      <time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
-        <strong>
-          {{ .Date.Format "Jan 02, 2006" }}
-        </strong>
+      <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "January 02, 2006" }}
       </time>
 
-      <div class="page-summary">
-        {{ .Summary }}
-      </div>
-
-      {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
-      {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
-
-      <div class="page-categories">
-        {{ $terms := (.GetTerms $taxonomy) }}
-        <strong>
-          <a
-            href="{{ $taxonomyPage.Permalink }}">
-            {{ $taxonomy | title }}:
+      <span class="taxonomies">
+        {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
+        {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
+        <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}">
+          {{- $taxonomy | title -}}
+        </a>:
+        {{ range (.GetTerms $taxonomy) }}
+          <a class="taxonomy" href="{{ .Permalink }}">
+            {{- .Title -}}
           </a>
-        </strong>
-        {{ range $index, $term := $terms }}
-          <a href="{{ $term.Permalink }}">
-            {{- $term.Title -}}
-          </a>
-          {{- if (lt (add $index 1) (len $terms)) }},{{ end -}}
         {{ end }}
-      </div>
+      </span>
 
     </div>
   </div>
 {{ end }}
-
-<div class="pagination-container">
-  {{ partial "pagination.html" . }}
-</div>

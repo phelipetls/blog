@@ -1,35 +1,30 @@
-.pages-list {
-  display: flex;
-  flex-flow: column;
-
-  .page {
-    display: grid;
-    grid-template-columns: 80% auto;
-    padding: 1em 0;
-    border-bottom: 1px solid $grey;
+.page {
+  a {
+    @include inherit-color;
+    @include highlight-on-hover;
   }
 
-  .page-title {
-    margin: 0;
-    @include style-links;
-  }
+  @include spaced;
+  @include reset-headings;
 
-  .page-date {
-    font-size: 1.1em;
-    text-align: right;
-    justify-self: end;
-    grid-column: 2 / 3;
-  }
-
-  .page-summary {
+  .title {
     margin-top: 1em;
-    grid-column: 1 / 3;
   }
 
-  .page-categories {
-    align-self: end;
-    margin-top: 1em;
-    font-size: 0.8em;
-    @include style-links;
+  .date {
+    &:after {
+      content: "·";
+    }
+  }
+
+  .date, .taxonomies {
+    font-size: 0.7em;
+  }
+
+  .title {
+  }
+
+  .taxonomy {
+    @include separate(",");
   }
 }

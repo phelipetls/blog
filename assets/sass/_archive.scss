@@ -1,24 +1,22 @@
-ul.posts-list {
-  padding: 0;
-  list-style: none;
-  @include style-links;
+.archive {
+  ul {
+    @include reset-list;
 
-  li {
-    margin: 0.8em 0;
-    display: grid;
-    grid-template-columns: auto 1fr;
+    li {
+      display: grid;
+      grid-template-columns: 6ch auto;
 
-    time {
-      margin-right: 1em;
+      padding-bottom: 1em;
+
+      time {
+        font-family: monospace;
+        font-size: 1.2em;
+      }
+
+      a {
+        @include inherit-color;
+        @include highlight-on-hover;
+      }
     }
   }
-}
-
-.post-date {
-  font-size: 1.3em;
-  text-align: right;
-}
-
-.post-year {
-  font-size: 1.3em;
 }

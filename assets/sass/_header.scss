@@ -1,46 +1,14 @@
 header {
-  margin-bottom: 1em;
-
-  .site-heading {
-    color: $black;
-    font-weight: 600;
-    font-size: 1.5em;
-
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .site-title {
-    @include plain-link;
+  a {
+    @include inherit-color;
     @include highlight-on-hover;
   }
 
-  .site-social {
-    @include style-links;
+  nav ul {
+    @include horizontal-list;
 
-    a {
-      font-size: 1.2em;
-
-      &:not(:last-child) {
-        margin-right: 5px;
-      }
-    }
-  }
-
-  nav {
-    margin-top: 1.5em;
-  }
-}
-
-nav {
-  @include style-links;
-
-  ul {
-    @include reset-list
-    display: flex;
-
-    li:not(:first-child) {
-      margin-left: 1em;
+    li {
+      margin-right: 1em;
     }
   }
 }

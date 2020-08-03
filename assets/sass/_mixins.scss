@@ -4,20 +4,45 @@
   list-style: none;
 }
 
-@mixin plain-link {
-  color: inherit;
-}
+@mixin horizontal-list {
+  @include reset-list;
 
-@mixin highlight-on-hover {
-  &:hover {
-    color: $blue;
+  li {
+    display: inline-block;
   }
 }
 
-@mixin style-links {
-  a {
-    @include plain-link;
-    @include highlight-on-hover;
+@mixin reset-headings {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+}
+
+@mixin inherit-color {
+  color: inherit;
+}
+
+@mixin highlight-on-hover($color: $highlight-color) {
+  &:hover {
+    color: $color;
+  }
+}
+
+@mixin separate($sep) {
+  &:not(:last-child):after {
+    content: $sep;
+  }
+}
+
+@mixin ends_with($sep) {
+  &:last-child:after {
+    content: $sep;
+  }
+}
+
+@mixin prefix($char) {
+  &:before {
+    content: $char;
   }
 }
 
@@ -26,3 +51,10 @@
   margin-bottom: $space * 2;
 }
 
+@mixin generate-grid-areas($elements...) {
+  @each $element in $elements {
+    .#{$element} {
+      grid-area: $element;
+    }
+  }
+}

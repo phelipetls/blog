@@ -1,52 +1,42 @@
 {{ define "main" }}
-  {{ range .Pages }}
-    <div class="pages-list projects-list">
-      <details>
-        <summary class="page project" onMouseDown="return false;">
-          <h4 class="page-title">
-            <a href="{{ .Permalink }}">
+  <section>
+    {{ range .Pages }}
+      <div class="project-item">
+
+        <details>
+          <summary class="title" onMouseDown="return false;">
+            <a href="{{ .Permalink }}" title="'{{ .Title }}' project details">
               {{ .Title | title }}
             </a>
+          </summary>
 
-            <a href="{{ .Params.github }}">
-              <i class='bx bxl-github'></i>
-            </a>
-
-            <a href="{{ .Params.website }}">
-              <i class='bx bx-link'></i>
-            </a>
-          </h4>
-
-          <time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
-            <strong>
-              {{ .Date.Format "Jan 02, 2006" }}
-            </strong>
-          </time>
-
-          <div class="page-categories">
-            <strong>Techs:</strong>
-            {{ $techs := .GetTerms "techs" }}
-            {{ range $index, $tech := $techs }}
-              <a href="{{ .Permalink }}">
-                {{- $tech.Title -}}
-              </a>
-              {{- if (lt (add $index 1) (len $techs)) }},{{ end -}}
-            {{ end }}
+          <div class="content">
+            {{ .Content }}
           </div>
 
-          <i class='bx bxs-chevron-down'></i>
-          <i class='bx bxs-chevron-left'></i>
-        </summary>
+          <div class="links">
+            <a href="{{ .Params.github }}">repository</a
+            ><a href="{{ .Params.website }}">
+              {{- cond (in .Params.website "readthedocs") "docs" "website" }}
+            </a
+            ></div>
+        </details>
 
-        <div class="page-text project-summary">
-          {{ .Summary }}
+        <div class="metadata">
+          <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "January 02, 2006" }}
+          </time>
+
+          <span class="technologies">
+            {{ range (.GetTerms "techs") }}
+              <a class="technology" href="{{ .Permalink }}">
+                {{- .Title -}}
+              </a>
+            {{ end }}
+          </span>
         </div>
-        <div class="read-more">
-          {{ if .Truncated }}
-            <a href="{{ .Permalink }}">Read more »</a>
-          {{ end }}
-        </div>
-      </details>
-    </div>
-  {{ end }}
+
+      </div>
+    {{ end }}
+  </section>
 {{ end }}

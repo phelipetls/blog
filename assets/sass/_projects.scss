@@ -1,55 +1,40 @@
-.project-heading {
-  @include style-links;
+.project-item {
+  @include reset-headings;
+  @include spaced;
 
-  h1 {
-    display: inline;
-    margin: 0;
-    margin-right: 0.3em;
+  .metadata {
+    font-size: 0.8em;
+  }
+
+  .content {
+    margin: 2em 0;
+  }
+
+  .links {
+    padding-bottom: 1em;
+    text-align: right;
+
+    a {
+      margin-left: 0.5em;
+    }
+  }
+
+  .title {
+    margin: 1em 0;
+  }
+
+  .date {
+    &:after {
+      content: "-";
+    }
+  }
+
+  .technology {
+    @include separate(",");
   }
 
   a {
-    font-size: 1.2em;
+    @include inherit-color;
+    @include highlight-on-hover;
   }
-}
-
-.project {
-  &:hover {
-    cursor: pointer;
-  }
-
-  .bx {
-    place-self: end;
-  }
-}
-
-.projects-list details {
-  summary {
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  .bxs-chevron-left {
-    display: none;
-  }
-
-  &[open] {
-    margin-bottom: 1em;
-
-    summary {
-      margin-bottom: 1em;
-    }
-
-    .bxs-chevron-down {
-      display: none;
-    }
-
-    .bxs-chevron-left {
-      display: inline-block;
-    }
-  }
-}
-
-.read-more {
-  margin-top: 0.5em;
 }

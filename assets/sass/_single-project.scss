@@ -1,0 +1,12 @@
+.single-project {
+  .metadata {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 80% auto;
+
+    .links {
+      align-self: center;
+      justify-self: end;
+    }
+  }
+}

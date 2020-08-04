@@ -1,15 +1,17 @@
 {{ define "main" }}
-  <article>
-    <div class="project-heading">
-      <h1>{{ .Title }}</h1> 
+  <article class="single-project">
+    <div class="metadata">
+      <h1 class="title">{{ .Title }}</h1>
 
-      <a href="{{ .Params.github }}">
-        <i class='bx bxl-github'></i>
-      </a>
+      <div class="links">
+        <a href="{{ .Params.github }}">
+          {{ readFile "/static/svg/github.svg" | safeHTML }}
+        </a>
 
-      <a href="{{ .Params.website }}">
-        <i class='bx bx-link'></i>
-      </a>
+        <a href="{{ .Params.website }}">
+          {{ readFile "/static/svg/linkedin.svg" | safeHTML }}
+        </a>
+      </div>
     </div>
 
     {{ .Content }}

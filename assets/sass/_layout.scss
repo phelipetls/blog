@@ -1,5 +1,9 @@
-html, body {
+html {
   height: 100%;
+}
+
+body {
+  min-height: 100%;
 }
 
 body {
@@ -10,10 +14,10 @@ body {
   max-width: $content-width;
 }
 
-body > * {
-  margin: 0.5em 1em;
-}
-
 main {
   flex: 1;
+}
+
+header, main, footer {
+  padding: 0.5em 1em;
 }

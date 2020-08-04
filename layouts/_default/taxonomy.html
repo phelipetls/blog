@@ -1,9 +1,5 @@
 {{ define "main" }}
   <section class="taxonomies">
-    <h3>
-      {{ .Data.Plural | title }}
-    </h3>
-
     <ul>
       {{ $total := len .Data.Terms }}
       {{ range .Data.Terms }}

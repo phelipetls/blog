@@ -1,10 +1,14 @@
-.taxonomy-container {
-  .taxonomy-term {
-    line-height: 1.5em;
-    @include style-links;
+.taxonomies {
+
+  ul {
+    @include reset-list;
+    @include horizontal-list;
+    text-align: center;
+    margin: 8em 0;
   }
 
-  .taxonomy-count {
-    display: inline-block;
+  a {
+    @include inherit-color;
+    @include highlight-on-hover;
   }
 }

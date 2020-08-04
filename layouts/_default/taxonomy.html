@@ -1,21 +1,21 @@
 {{ define "main" }}
-  <h3>
-    {{ .Section | title }}
-  </h3>
+  <section class="taxonomies">
+    <h3>
+      {{ .Data.Plural | title }}
+    </h3>
 
-  <ul class="taxonomy-container prettier-list">
-    {{ range .Data.Terms.ByCount }}
-      <li class="taxonomy-term">
-        <a href="{{ .Page.Permalink }}">
-          <span class="taxonomy-name">
-            {{- .Page.Title -}}
-          </span>
-          <div class="taxonomy-count">
-            ({{- .Count -}})
-          </div>
-        </a>
-      </li>
-    {{ end }}
-  </ul>
+    <ul>
+      {{ $total := len .Data.Terms }}
+      {{ range .Data.Terms }}
+        <li>
+          <a href="{{ .Page.Permalink }}">
+            <span style="font-size: {{  math.Sqrt .Count }}rem;" class="name">
+              {{- .Page.Title -}}
+            </span>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </section>
 
 {{ end }}

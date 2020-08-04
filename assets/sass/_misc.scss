@@ -6,53 +6,55 @@ html {
   box-sizing: inherit;
 }
 
-time {
-  font-family: $monospace;
-}
-
 a {
   text-decoration: none;
-}
 
-small {
-  font-size: 0.5rem;
+  p & {
+    color: $link-color;
+
+    &:visited {
+      color: $visited-link-color;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 img {
+  display: block;
+  margin: 0 auto;
   max-width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $black;
+body {
+  color: $font-color;
+  font-family: $main-font;
 }
 
-hr {
-  border: 0;
-  height: 0;
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid $black;
+h1, h2, h3, h4, h5, h6 {
+  color: $heading-color;
+  font-family: $heading-font;
 }
 
 p > code {
-  border: 1px solid $dark-grey;
-  background-color: $light-grey;
-  border-radius: 5px;
   padding: 0.1em 0.5em;
+  font-family: $code-font;
+  background-color: $code-bg;
 }
 
 pre {
-  border: 1px solid $dark-grey;
-  overflow-x: auto;
   padding: 1em;
-  background-color: $light-grey !important;
+  background-color: $code-bg !important;
+
+  overflow-x: auto;
+  &:hover {
+    overflow-x: visible;
+  }
 }
 
-.prettier-list {
-  padding:  0;
-  list-style: inside;
-}
-
-strong {
-  color: $black;
-  font-weight: bold;
+hr {
+  margin: 2em 0;
+  border: 0.1em solid $dim-color;
 }

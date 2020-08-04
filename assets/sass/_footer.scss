@@ -1,7 +1,23 @@
 footer {
-  font-size: 0.7em;
+  padding: 0.5em 0 2em 0;
+
+  font-size: 0.8em;
   text-align: center;
-  margin: 0 auto;
-  padding: 2em 1em;
-  @include style-links;
+
+  .links {
+    margin-bottom: 1em;
+  }
+
+  a {
+    @include inherit-color;
+    @include highlight-on-hover;
+  }
+
+  svg {
+    fill: $heading-color;
+
+    &:hover {
+      fill: $highlight-color;
+    }
+  }
 }

@@ -7,12 +7,7 @@
   {{ $style := resources.Get "sass/main.scss" | toCSS $options }}
   <link href="{{ $style.Permalink }}" rel="stylesheet" />
   <title>
-    {{ .Title }}
-    {{ with .Paginator }}
-      {{ if ge .PageNumber 1 }}
-        - Page {{ .PageNumber }}
-      {{ end }}
-    {{ end }}| {{ .Site.Title }}
+    {{ .Title }} | {{ .Site.Title }}
   </title>
   {{ if or .Params.math .Site.Params.math }}
     {{ partial "math.html" . }}

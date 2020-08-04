@@ -1,49 +1,51 @@
 {{ define "main" }}
-  <div class="post-title">
-    <h2>{{ .Title }}</h2>
-  </div>
+  <section class="single-post">
+    <div class="title">
+      <h2>{{ .Title }}</h2>
+    </div>
 
-  <div class="post-info">
-    <time
-      datetime="{{ .Date.Format "2006-01-02" }}">
-      {{ .Date.Format "01 Jan, 2006" }}
-    </time>
+    <div class="metadata">
+      <time
+        datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "01 Jan, 2006" }}
+      </time>
 
-    <ul class="category-list">
-      {{- range (.GetTerms "categories") -}}
-        <li>
-          <a href="{{ .RelPermalink }}">
-            {{- .Title -}}
-          </a></li>
-      {{- end -}}
-    </ul>
-  </div>
+      <ul class="category-list">
+        {{- range (.GetTerms "categories") -}}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              {{- .Title -}}
+            </a></li>
+          {{- end -}}
+      </ul>
+    </div>
 
-  <hr>
+    <hr>
 
-  <article class="post-content">
-    {{ .Content }}
-  </article>
+    <article class="content">
+      {{ .Content }}
+    </article>
 
-  <hr>
+    <hr>
 
-  <div class="related-posts">
-    {{ with .PrevInSection }}
-      <a
-        class="previous"
-        href="{{ .RelPermalink }}"
-        title="Previous post">
-        {{ .Title }}
-      </a>
-    {{ end }}
+    <div class="adjacent-posts">
+      {{ with .PrevInSection }}
+        <a
+          class="previous"
+          href="{{ .RelPermalink }}"
+          title="Previous post">
+          {{ .Title }}
+        </a>
+      {{ end }}
 
-    {{ with .NextInSection }}
-      <a
-        class="next"
-        href="{{ .RelPermalink }}"
-        title="Next post">
-        {{ .Title }}
-      </a>
-    {{ end }}
-  </div>
+      {{ with .NextInSection }}
+        <a
+          class="next"
+          href="{{ .RelPermalink }}"
+          title="Next post">
+          {{ .Title }}
+        </a>
+      {{ end }}
+    </div>
+  </section>
 {{ end }}

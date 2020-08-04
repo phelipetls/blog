@@ -1,6 +1,6 @@
 {{ $level := add .Level 2 }}
 
-<h{{ $level }} class="post-heading" id="{{ .Anchor | safeURL }}">
+<h{{ $level }} class="heading" id="{{ .Anchor | safeURL }}">
   {{ .Text | safeHTML }}
-  <a href="#{{ .Anchor | safeURL }}">#</a>
+  <a class="anchor" href="#{{ .Anchor | safeURL }}">#</a>
 </h{{ $level }}>

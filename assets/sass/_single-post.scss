@@ -1,65 +1,73 @@
-.post-heading {
-  @include style-links;
+.single-post {
+  .metadata {
+    ul {
+      display: inline;
+      @include horizontal-list;
 
-  .post-heading-anchor {
-    display: none;
-    text-decoration: underline;
-  }
+      &:before {
+        content: "·";
+        margin-right: 0.3em;
+      }
 
-  &:hover .post-heading-anchor {
-    display: inline;
-  }
-}
+      li {
+        @include separate(",");
+        margin-right: 0.5em;
 
-.post-info {
-  display: flex;
-  flex-flow: row;
-
-  * {
-    font-size: 0.7rem;
-  }
-
-  time {
-    &:after {
-      content: "/";
-      margin-right: 0.5em;
+        a {
+          @include inherit-color;
+          @include highlight-on-hover;
+        }
+      }
     }
   }
 
-  .category-list {
-    flex: 1;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    @include style-links;
+  .heading {
+    /* Take more 'virtual' space at top */
+    margin-top: -3em;
+    padding-top: 3em;
 
-    li {
-      display: inline;
+    a {
+      display: none;
+      @include inherit-color;
+      color: $highlight-color;
+    }
 
-      &:not(:last-child):after {
-        content: ",";
+    &:hover {
+      /* Hide anchor element by default */
+      /* Show it on hover */
+      a {
+        display: inline;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
 }
 
-.related-posts {
+.adjacent-posts {
   display: grid;
   grid-auto-flow: column;
-  @include style-links;
+  grid-template: "previous next" / 50% 50%;
+
+  @include generate-grid-areas(previous, next);
+
+  a {
+    @include inherit-color;
+    @include highlight-on-hover;
+  }
 
   .previous {
-    text-align: left;
     &:before {
-      content: "«"
+      content: "«";
     }
   }
 
   .next {
-    margin-right: 1em;
     text-align: right;
     &:after {
-      content: "»"
+      content: "»";
     }
   }
 }

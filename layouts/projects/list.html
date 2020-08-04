@@ -27,9 +27,9 @@
             {{ .Date.Format "January 02, 2006" }}
           </time>
 
-          <span class="technologies">
-            {{ range (.GetTerms "techs") }}
-              <a class="technology" href="{{ .Permalink }}">
+          <span class="softwares">
+            {{ range (.GetTerms "softwares") }}
+              <a class="software" href="{{ .Permalink }}">
                 {{- .Title -}}
               </a>
             {{ end }}

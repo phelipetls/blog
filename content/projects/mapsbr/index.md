@@ -1,7 +1,7 @@
 ---
 title: "mapsbr"
 date: 2019-12-29
-techs: ["python", "pandas", "requests", "unittest"]
+softwares: ["python", "pandas", "requests", "unittest"]
 website: "https://mapsbr.readthedocs.io"
 github: "https://github.com/phelipetls/mapsbr"
 ---

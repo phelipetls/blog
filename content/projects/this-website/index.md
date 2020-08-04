@@ -1,7 +1,7 @@
 ---
 title: "Personal website"
 date: 2020-07-20
-techs: ["hugo", "sass"]
+softwares: ["hugo", "sass"]
 website: "https://phelipetls.github.io"
 github: "https://github.com/phelipetls/blog"
 ---

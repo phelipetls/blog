@@ -1,6 +1,6 @@
 {
     "categories": "tags",
     "tags": "categories",
-    "techs": "techs",
+    "softwares": "softwares",
     "posts": "categories"
 }

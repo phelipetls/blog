@@ -11,7 +11,7 @@ Paginate = 5
 [taxonomies]
   category = "categories"
   tag = "tags"
-  tech = "techs"
+  software = "softwares"
 
 [markup]
   [markup.highlight]

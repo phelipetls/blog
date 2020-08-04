@@ -1,7 +1,7 @@
 ---
 title: "minesweeper.js"
 date: 2020-06-16
-techs: ["javascript", "css", "node", "express", "postgresql"]
+softwares: ["javascript", "css", "node", "express", "postgresql"]
 website: "https://some-minesweeper.herokuapp.com"
 github: "https://github.com/phelipetls/minesweeper.js"
 ---

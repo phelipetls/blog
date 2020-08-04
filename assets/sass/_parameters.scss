@@ -4,7 +4,23 @@ $main-font: serif;
 $heading-font: serif;
 $code-font: monospace;
 
-$font-color: black;
-$heading-color: #30323D;
+$black: #1a1a1a;
+$light-grey: #cccccc;
+$very-light-grey: #f5f5f5;
+$grey: #666666;
+$white: #ffffff;
 
-$code-bg: #f5f5f5;
+$font-color: $black;
+
+$heading-color: #41413e;
+
+$dim-color: #cfcdc2;
+$dim-color-darker: #aca895;
+
+$highlight-color: #e25822;
+$highlight-color-darker: #1da7dd;
+
+$code-bg: $very-light-grey;
+
+$link-color: #31639c;
+$visited-link-color: #684d77;

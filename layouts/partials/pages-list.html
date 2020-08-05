@@ -3,7 +3,7 @@
     <div class="page">
 
       <h3 class="title">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
       </h3>
 
       <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
@@ -13,7 +13,7 @@
       <span class="taxonomies">
         {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
         {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
-        <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}">
+        <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}" title="Check all {{ $taxonomy }}">
           {{- $taxonomy | title -}}
         </a>:
         {{ range (.GetTerms $taxonomy) }}

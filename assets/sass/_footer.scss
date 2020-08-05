@@ -1,12 +1,11 @@
 footer {
   padding: 0.5em 0 2em 0;
 
+  width: 80%;
+  margin: 0 auto;
+
   font-size: 0.8em;
   text-align: center;
-
-  .links {
-    margin-bottom: 1em;
-  }
 
   a {
     @include inherit-color;
@@ -14,6 +13,11 @@ footer {
   }
 
   svg {
+    width: 2.5em;
+    height: 2.5em;
+
+    margin-left: 1em;
+
     fill: $heading-color;
 
     &:hover {

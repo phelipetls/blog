@@ -1,7 +1,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="{{ $description := cond .IsHome .Site.Params.Description (.Description | default .Summary) }}" />
+  {{ $description := cond .IsHome .Site.Params.Description (.Description | default .Summary) }}
+  <meta name="description" content="{{ $description }}" />
   <link type="normalize.css" rel="stylesheet" />
   {{ $options := (dict "targetPath" "style.css" "outputStyle" "compressed") }}
   {{ $style := resources.Get "sass/main.scss" | toCSS $options }}

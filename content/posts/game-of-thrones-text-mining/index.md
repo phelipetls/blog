@@ -7,25 +7,19 @@ tags: ["tidyverse", "dataviz", "ggplot2", "tidytext"]
 aliases: ["/game-of-thrones-text-mining"]
 ---
 
-Nesse post vou combinar duas das minhas coisas favoritas: R e Game of
-Thrones. Difícil ficar melhor que isso. Juntando a euforia causada pela
-volta da série com o meu interesse em análise de dados com o tidyverse,
-tive a ideia de fazer mineração de texto com base nas legendas de GOT.
+Neste post procuro visualizar dados textuais das legendads de Game of Thrones
+com o R, utilizando o pacote [`tidytext`](https://www.tidytextmining.com), que
+torna trivial esse tipo de tarefa.
 
-Essa tarefa é muito facilitada pelo pacote [`tidytext`](https://www.tidytextmining.com),
-que generaliza a ideia de um tidy dataset para dados compostos de puro texto,
-como um livro ou legendas.
-
-Como veremos, isso facilitará muito a análise e criação de
-visualizações.
+A ideia é transformar um bloco de texto, como um livro, em um tidy DataFrame.
+No nosso, caso faremos com as legendas de GOT.
 
 # Obtendo os dados
 
 Os dados brutos foram coletados
-[aqui](https://www.kaggle.com/gunnvant/game-of-thrones-srt), onde os encontrei
-em formato JSON. São 7 arquivos, que contêm todas as legendas para as
-sete temporadas de GOT. Felizmente, há uma biblioteca para ler arquivos
-JSON no R, o `jsonlite`.
+[aqui](https://www.kaggle.com/gunnvant/game-of-thrones-srt), formato JSON. São
+7 arquivos, que contêm todas as legendas para as sete temporadas de GOT.
+Felizmente, há uma biblioteca para ler arquivos JSON no R, o `jsonlite`.
 
 No código abaixo, o que fiz foi ler cada arquivo, aplicando a função
 `jsonlite::fromJSON()` a cada um deles com `purrr::map()`, o que me dá uma
@@ -64,25 +58,18 @@ got_subs_raw
     ## 10 Game Of Thrones S01E01 Winter I~ The direwolf is the sigil of your hous~
     ## # ... with 44,880 more rows
 
-E assim temos os nossos dados brutos, mas há muito o que fazer ainda
-para transformá-lo no que consideramos um *tidy dataset*. Vamos por
-partes.
+Agora vamos limpar esse DataFrame, procurando extrair variáveis interessantes
+como temporada, número e nome do episódio etc.
 
-Primeiro, podemos concordar que será bom ter como variável a temporada,
-o número e nome do episódio.
-
-A minha ideia foi, primeiro, retirar a parte ‘Game of Thrones S’, já que
-isso não me serve e também porque será conveniente para separar a
-temporada do episódio, já que somente um ‘E’ os está separando (‘01E01’
-etc.). Usarei algumas regex para extrair o que quero.
+Primeiro vamos retirar o prefixo 'Game of Throns S', o que nos deixa com '01E01
+Winter Is Coming', '{Temporada}E{Episódio} {Nome do episódio}'. Vamos usar
+regexes para extrair cada parte individualmente.
 
 ``` r
 got_subs <- got_subs_raw %>%
   mutate(
     name = str_remove(name, "Game Of Thrones S"),
-    # extraindo a parte com o nº da temporada e do episodio
     season_episode = str_extract(name, "\\d+E\\d+"),
-    # extraindo a parte com o nome do episódio
     name = str_match(name, "([A-z,' ]+)\\.srt")[, 2] %>% trimws()
   ) %>%
 
@@ -114,16 +101,13 @@ got_subs
     ## 10      1       1 Winter Is Co~ The direwolf is the sigil of your house.
     ## # ... with 44,880 more rows
 
-Essa já é uma base muito melhor, mas *ainda* não é o melhor para se
-analisar dados de texto. Aqui entra o conceito do pacote `tidytext`.
-Como em um tidy dataset temos uma unidade de observações por linha,
-gostaríamos de ter isso para o texto também. Nesse caso, isso significa
-uma palavra para cada linha\! Então, o segredo é que gostaríamos de
-separar as legendas em palavras por linha\!
+Podemos tornar isso se quebrarmos a coluna `value` em unidades menores, como
+palavras. O pacote `tidytext` tem uma função para isso, chamada
+`unnest_tokens`. É mais geral e pode servir para separar um texto em
+caracteres, frases, parágrafos etc.
 
-Separar cada linha em palavras é muito fácil de ser feito com este
-pacote, basta usar a função `unnest_tokens()`. Queremos também rastrear a que linha cada
-palavra pertence, o que pode ser feito com o `dplyr::rownames_to_column()`
+Será útil também a função `rownames_to_column`, para podermos saber quais
+palavras pertencem à mesma frase após a separação etc.
 
 ``` r
 library(tidytext)
@@ -172,9 +156,9 @@ got_words %>%
     ## 10 it     2962
     ## # ... with 9,685 more rows
 
-Esse é o esperado, a maioria são preposições, pronomes etc., o que não é
+A maioria são preposições, pronomes etc., o que não é
 muito interessante. Felizmente, isso é muito facilmente resolvido por
-esse pacote. Para as eliminarmos, basta fazer um `dplyr::anti_join()`
+esse pacote. Basta rodar um `dplyr::anti_join`
 com um dataset que contém essas palavras, conhecidas como ‘stop
 words’.
 
@@ -239,23 +223,18 @@ got_words %>%
     ## 10 life     278
     ## # ... with 9,055 more rows
 
-E aqui as coisas começam a ficar interessantes\! A palavra mais frequente no geral é
-time, o que é recorrente em muitos textos, seguida de north, um dos lugares centrais na série.
+E aqui as coisas começam a ficar interessantes\!
 
-A base limpa que usaremos no decorrer do post você pode baixar
-[aqui](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/got_words.csv) para fazer a análise que quiser.
+A [base limpa com essas palavras pode ser baixada aqui](./got_words.csv).
 
 # Correlação entre as palavras
 
-Uma das coisas interessantes que podemos fazer com um tidy text em mãos
-é ver quais são as palavras que aparecem juntas com mais frequência.
-Essa tarefa é bem resolvida pela função `pairwise_cor()` do pacote
-`widyr`.
+Agora, vamos visualizar quais as palavras que aparecem juntas com mais
+frequência, com a função `pairwise_cor` do pacote `widyr`.
 
-Só precisamos filtrar nossa base antes, porque não queremos que o R faça
-compare cada par de 81579 palavras. Vamos adicionar um contador de
-palavras à nossa base e filtrar para as palavras que aparecem 50 vezes
-ou mais.
+Só precisamos filtrar nossa base antes, porque não queremos que o R
+compare cada par de 81579 palavras: escolheremos as palavras que apareçam 50
+vezes ou mais.
 
 ``` r
 library(widyr)
@@ -287,8 +266,8 @@ word_pairs
     ## # ... with 109,882 more rows
 
 Dentre alguns resultado interessantes, nos deparamos com um bastante
-anormal. color font? font color? Isso são linhas de HTML, que não me
-interessam. Mas, fora isso, já conseguimos algo proveitoso.
+anormal. color font? font color? Isso é código HTML usado para formatação que
+acabou entrando no documento, que eventualmente serão ignoradas.
 
 Para visualizar essas relações, vamos usar grafos. Nele as palavras são nós
 e os vértices as corrrelações (um vértice mais escuro indica uma correlação mais alta),
@@ -318,23 +297,15 @@ word_pairs %>%
   theme_void()
 ```
 
-![Grafo de palavras](./grafo-de-palavras.png)<!-- -->
-
-Esse é uma das visualizações mais legais\! Algumas correlações esperadas
-saltam aos olhos: o núcleo da família Stark, dos Lannister, dos Baratheon
-e dos Tyrell.
-
-Também podemos ver ali o “winter is coming”, o motto dos Stark, o “hold
-the door” e “close the bloody gate” do mesmo episódio icônico, 'The Door'. E várias
-outras.
+![Grafo das palavras mais comuns em Game of Thrones](./grafo-de-palavras.png)<!-- -->
 
 # Palavras mais frequentes
 
-O plano agora é visualizar quais as palavras mais frequentes em geral e
+Agora, vamos visualizar quais as palavras mais frequentes em geral e
 por temporada. Para isso vamos utilizar nuvem de palavras.
 
 O em geral primeiro. Vamos ver quais são as top 50 palavras em uma
-nuvem, com a função `wordcloud::wordcloud()`, que toma como argumentos
+nuvem, com a função `wordcloud::wordcloud`, que toma como argumentos
 principais um vetor de palavras e um de frequências.
 
 ``` r
@@ -354,10 +325,9 @@ got_words %>%
   ))
 ```
 
-![Nuvem de palavras](./nuvem-de-palavras.png)<!-- -->
+![Nuvem de palavras das palavras mais comuns em Game of Thrones](./nuvem-de-palavras.png)<!-- -->
 
-Agora, vamos ver como isso varia para cada temporada. Desta vez, será
-melhor usarmos um pacote mais integrado ao ggplot2, o `ggwordcloud`.
+Agora, vamos ver como isso varia para cada temporada, com o pacote `ggwordcloud`.
 
 ``` r
 library(ggwordcloud)
@@ -384,25 +354,19 @@ got_words %>%
 
 ![Nuvem de palavras por temporada](./nuvem_de_palavras_por_temporada.png)<!-- -->
 
-Neste gráfico podemos conferir diversos momentos marcantes de cada temporada em palavras.
-Por exemplo, 'hand' na temporada 1, 'stannis' na 2, 'wedding' e 'north' na 3, 'joffrey' na 4, 'shame' na 5, 'hodor' na 6 e, finalmente, 'dead' e 'north' na 7.
-
 # Análise de sentimentos
 
 Outra coisa que é interessante de ser feita é analisar o sentimento
-médio expresso pelo texto. Por exemplo, se nele há mais palavras
-consideradas negativas ou positivas etc.
+médio do texto, se nele há mais palavras consideradas negativas ou positivas
+etc.
 
 Esse é um tópico delicado teoricamente, já que não é algo tão trivial
-para um computador deduzir se uma frase expressa um sentimento bom ou ruim.
+para um computador deduzir se uma frase expressa um sentimento bom ou ruim. Não
+vamos deixar o computador fazer isso, mas usar um léxico que mapeia palavras a
+sentimentos, feito por humanos.
 
-A abordagem que vamos adotar é a mais simples, ela considera o
-sentimento total de um texto como a soma do sentimento evocado por cada
-palavra ou por cada pedaço do texto.
-
-Mas como medir o sentimento expresso por uma palavra? Alguns datasets
-nos ajudam a fazer isso. Por exemplo, este dataset classifica algumas mil palavras em uma escala que varia de -5 (muito
-negativo) até 5 (muito positivo).
+Por exemplo, o léxico `afinn` classifica algumas mil palavras em uma escala que
+varia de -5 (muito negativo) até 5 (muito positivo).
 
 ``` r
 get_sentiments("afinn")
@@ -467,7 +431,8 @@ get_sentiments("nrc")
     ## 10 abandonment fear
     ## # ... with 13,891 more rows
 
-Vamos aplicar a análise de sentimento com base nas três e ver o que elas nos mostram.
+Vamos aplicar a análise de sentimento com as três e ver como elas se
+diferenciam.
 
 Vejamos primeiro quais são as palavras negativas e positivas mais
 comuns.
@@ -501,15 +466,10 @@ got_bing %>%
 
 ![Palavras negativas e positivas](./palavras-negativas-e-positivas.png)<!-- -->
 
-Em análise de texto, é interessante buscar visualizar quais partes dele
-são mais negativas ou positivas. O que me interessa aqui é ver isso por temporada.
+Agora, vamos fazer isso em por temporada e medir o sentimento médio a cada
+seção de n palavras.
 
-Farei isso dividindo o texto em seções. Para isso, vamos indexar cada linha
-com o número da linha e depois aplicar a divisão inteira para separar o texto em pedaços
-formados por n palavras.
-
-Vamos usar o dataset `afinn` agora, e calcular o sentimento médio de
-cada pedaço do texto em cada seção, para cada temporada.
+Vamos usar o dataset `afinn` e uma seção formada por 25 palavras.
 
 ``` r
 got_afinn <- got_words %>%
@@ -632,11 +592,5 @@ essa base tem muito mais palavras positivas em relação a negativas. Palavras c
 'prince' etc. são nela 'positivas', enquanto que nas outras, não. Por ter mais palavras,
 aumentam também o número de seções.
 
-Enfim, esse é um ponto delicado. Não sei que método é o mais aplicado a GOT, mas é
-válida a menção pelo conhecimento. Diria porém que a última é um retrato mais fidedigno,
-porque a série não é feita somente de momentos negativos como poderíamos ter concluído com
-as outras. E ao menos numa coisa todas elas concordam: o Walk of Shame foi bem punk.
-
-Uma limitação dessa análise é que a série não se vale somente de palavras para
-transmitir o que tá acontecendo, então o resultado só poderia ser parcial.
-Algo mais efetivo seria aplicar o mesmo aos livros.
+Enfim, esse é um ponto delicado, incluído aqui somente por ser interessante em
+si mesmo.

@@ -38,17 +38,17 @@ os links e títulos das reclamações das primeiras `n_paginas`.
 Outro método, o `ReclameAqui.extrair_descricoes()`, abre cada uma dessas URLs e
 extrai as descrições das informações.
 
-Aqui entra o BeautifulSoup. Por exemplo, para extrair a informação do
-título, precisamos inspecionar o HTML da página. Basta que você clique
-no elemento de interesse com o botão direito do mouse e te aparecerá
-essa opção. Uma tela vai surgir para que você identifique as tags do
-elemento de HTML. Por exemplo, ele pode ser um "p" ou uma "div", e ter
-uma "classe" ou um "id" etc.
+Para extrair a informação desejada, nós fazemos o `BeautifulSoup` "entender" o
+código-fonte primeiro para depois usarmos os métodos para extração de algum
+element do HTML.
 
-Daí que, uma vez que você tenha transformado o código fonte em um objeto
-do BeautifulSoup, ele vai conseguir facilmente extrair os elementos que
-têm as características que você especificou com os métodos `find` ou
-`find_all`.
+Por exemplo, para extrair o título e os links das reclamações em cada página,
+procuramos por parágrafos que contenham a classe `text-detail`: (`<p
+class='text-detail'></p>`), e depois procuramos elementos `a`, que contém o
+título dentro dele e o link dentro do atributo `href`.
+
+Já para a descrição, procuramos por um elemento `div` com a classe
+`complain-body`, e extraímos o texto dentro dele.
 
 ``` python
 from time import sleep
@@ -95,3 +95,7 @@ class ReclameAqui:
             descricao = html.find("div", {"class": "complain-body"}).text.strip()
             self.descricoes.append(descricao)
 ```
+
+Esse código deve funcionar para qualquer empresa contanto que a estrutura do
+HTML do ReclameAqui não mude (isto é, o nome das classes e o tipo dos elementos
+onde as informações se encontram).

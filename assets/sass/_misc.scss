@@ -29,6 +29,7 @@ img {
 }
 
 body {
+  font-size: 1.1em;
   color: $font-color;
   font-family: $main-font;
 }
@@ -39,9 +40,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p > code {
-  padding: 0.1em 0.5em;
+  padding: 0 0.3em;
   font-family: $code-font;
   background-color: $code-bg;
+}
+
+p > code {
+  font-size: 0.9em;
 }
 
 pre {

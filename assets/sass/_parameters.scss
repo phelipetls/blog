@@ -1,8 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+
 $content-width: 40em;
 
-$main-font: serif;
-$heading-font: serif;
-$code-font: monospace;
+$main-font: 'Droid Serif', serif;
+$heading-font: $main-font;
+$code-font: 'Consolas', 'Courier New', monospace;
 
 $black: #1a1a1a;
 $light-grey: #cccccc;

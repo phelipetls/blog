@@ -8,25 +8,24 @@ aliases: ["/web-scraping-de-paginas-dinamicas"]
 ---
 
 Web scraping pode ficar bem complicado quando a página é dinâmica, você não
-mais precisa somente carregar o código-fonte da página mas também precisar o
-JavaScript da página construir a página em si, que é o caso do site do Reclame Aqui.
+mais precisa somente carregar o código-fonte da página mas também precisa esperar o
+JavaScript da página construir a página, que é o caso do site do Reclame Aqui.
 
-Nesses casos, precisamos permitir que um navegador seja controlado remotamente
-com um *web driver*, por exemplo, `geckodriver` para o Firefox ou
+Nesses casos, precisamos controlar um navegador remotamente
+por meio de um *web driver*, por exemplo, o `geckodriver` para o Firefox ou
 `chromedriver` para o Chrome.
 
-Também precisamos usar uma biblioteca a partir da qual podemos instruir o
-navegador a fazer o que queremos. A mais famosa é o `Selenium`.
+Para isso, usamos uma biblioteca a partir da qual podemos instruir este
+navegador a fazer o que queremos, por exemplo o `Selenium`.
 
-Devemos instruir o Selenium em que site ir e o que ele deve fazer. No post que
-segue, iremos usá-lo simplesmente para extrair informações da página, o que
-pode ser feito com o próprio `Selenium` ou uma biblioteca que entenda estrutura
-HTML e facilite isso pra gente, como a `BeautifulSoup`.
+Pros meus propósitos, usarei o `Selenium` para abrir uma URL e extrair alguma
+informação na página, tarefa para alguma biblioteca que entenda
+estrutura HTML e facilite a extração dos elementos, como a `BeautifulSoup`.
 
-Para instalá-los:
+Utilizo essas duas bibliotecas no script abaixo. E podemos instalá-las com:
 
 ```sh
-pip instal selenium bs4
+pip3 instal selenium bs4
 ```
 
 Para fazer o crawleamento, criei uma classe que aceita o nome de uma

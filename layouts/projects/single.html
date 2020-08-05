@@ -4,12 +4,12 @@
       <h1 class="title">{{ .Title }}</h1>
 
       <div class="links">
-        <a href="{{ .Params.github }}">
+        <a href="{{ .Params.github }}" title="Go to project Github's repository">
           {{ readFile "/static/svg/github.svg" | safeHTML }}
         </a>
 
-        <a href="{{ .Params.website }}">
-          {{ readFile "/static/svg/linkedin.svg" | safeHTML }}
+        <a href="{{ .Params.website }}" title="Go to project website">
+          {{ readFile "/static/svg/link.svg" | safeHTML }}
         </a>
       </div>
     </div>

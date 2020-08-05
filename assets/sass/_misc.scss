@@ -58,3 +58,11 @@ hr {
   margin: 1em 0;
   border: 0.1em solid $dim-color;
 }
+
+svg {
+  fill: $heading-color;
+
+  &:hover {
+    fill: $highlight-color;
+  }
+}

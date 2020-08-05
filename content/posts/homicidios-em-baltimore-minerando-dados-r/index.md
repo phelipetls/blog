@@ -396,4 +396,4 @@ E assim conseguimos uma base que pode render visualizações promissoras.
 Podemos olhar como a violência afeta pessoas de diferentes raças, idades
 e gêneros, ou até mesmo investigar a distribuição geográfica dos
 crimes\!\! E é exatamente isso o que eu pretendo fazer num post em
-breve. :smiley:
+breve.

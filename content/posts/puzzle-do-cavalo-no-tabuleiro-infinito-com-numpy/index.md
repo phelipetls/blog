@@ -337,4 +337,4 @@ crescer na área de data science.
 
 Pretendo trazer outros posts em que o usarei, mas por ora ficarei por
 aqui. Espero que tenha sido proveitoso. Toda crítica/sugestão será muito
-bem-vinda. Até :smile:.
+bem-vinda.

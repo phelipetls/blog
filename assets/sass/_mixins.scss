@@ -58,3 +58,38 @@
     }
   }
 }
+
+@mixin formatted-horizontal-list {
+  @include horizontal-list;
+  display: inline;
+
+  li {
+    @include separate(",");
+    margin-right: 0.5em;
+
+    a {
+      @include inherit-color;
+      @include highlight-on-hover;
+    }
+  }
+}
+
+@mixin make-heading-occupy-more-space-at-top {
+  margin-top: -3em;
+  padding-top: 3em;
+}
+
+@mixin hide-anchor-but-show-on-hover {
+  a {
+    display: none;
+    @include inherit-color;
+    color: $highlight-color;
+  }
+
+  &:hover {
+    a {
+      display: inline;
+      &:hover { text-decoration: underline; }
+    }
+  }
+}

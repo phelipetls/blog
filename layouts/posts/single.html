@@ -10,9 +10,9 @@
         {{ .Date.Format "01 Jan, 2006" }}
       </time>
 
-      <ul class="category-list">
+      <ul class="categories">
         {{- range (.GetTerms "categories") -}}
-          <li>
+          <li class="category">
             <a href="{{ .RelPermalink }}">
               {{- .Title -}}
             </a></li>

@@ -1,48 +1,16 @@
 .single-post {
-  .metadata {
-    ul {
-      display: inline;
-      @include horizontal-list;
+  ul.categories {
+    @include formatted-horizontal-list;
 
-      &:before {
-        content: "·";
-        margin-right: 0.3em;
-      }
-
-      li {
-        @include separate(",");
-        margin-right: 0.5em;
-
-        a {
-          @include inherit-color;
-          @include highlight-on-hover;
-        }
-      }
+    &:before {
+      content: "·";
+      margin-right: 0.3em;
     }
   }
 
   .heading {
-    /* Take more 'virtual' space at top */
-    margin-top: -3em;
-    padding-top: 3em;
-
-    a {
-      display: none;
-      @include inherit-color;
-      color: $highlight-color;
-    }
-
-    &:hover {
-      /* Hide anchor element by default */
-      /* Show it on hover */
-      a {
-        display: inline;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+    @include make-heading-occupy-more-space-at-top;
+    @include hide-anchor-but-show-on-hover;
   }
 }
 

@@ -26,7 +26,7 @@ web service is via SOAP API](https://developer.salesforce.com/docs/atlas.en-us.a
 It returns a bunch of XML in the response, but we will only need the session id
 (a JWT) inside of it. This is what the function below does.
 
-From here onwards, we will need to authenticate every request by passing the header `Authorizaion: Bearer $sessionId`.
+From here onwards, we will need to authenticate every request by passing the header `Authorization: Bearer $sessionId`.
 
 ```vb
 Function SalesforceLogin(Username As String, _
@@ -276,9 +276,10 @@ changing the value at `.reportMetadata.reportBooleanFilter`, so you only need to
 
 The function looks way more involved because we have to get the report headers
 (the `label` property of each object inside
-`.reportExtendedMetadata.detailColumnInfo`, the ones you see in the browser),
-which is the "API name" of the identifier column (an internal value), which we
-will need to filter its values.
+`.reportExtendedMetadata.detailColumnInfo`, the ones you see in the browser).
+
+We also need the identifier column API name (an internal value), which we will
+need to filter it.
 
 ```vb
 Sub DownloadEntireReport(ReportId As String, _
@@ -387,10 +388,10 @@ Sub DownloadEntireReport(ReportId As String, _
 End Sub
 ```
 
-We create a dictionary named `Filters` to store all key-value pairs we need,
-add it to the `reportFilters` object at first, and change its value in later
-iterations. Then we convert the metadata from a `Dictionary` to `String`, get
-the report again and repeat the loop.
+To do the filter, we create a `Filters` dictionary to store all key-value pairs we need,
+then add it to the `reportFilters` object, and change its value in later
+iterations. Then we convert the metadata into a JSON string, get
+a new filtered report and repeat the loop until we get all data.
 
 Also notice that I use a custom function to get all values at a given column,
 `GetValuesAtColumn`.
@@ -432,10 +433,10 @@ End Sub
 
 # Final words
 
-You probably have a better way to do it, I wouldn't recommend this approach to
-anyone with options. But it is in fact super convenient to have it inside
-Excel. You can put it anywhere you want with zero overhead -- no need for a
-library to understand the complexity of an Excel archive.
+You probably have a better way to do it, I would only recommend this approach
+to someone in an environment very dependent on Excel, simply because it is
+super convenient. You can put the report anywhere you want with zero overhead -- no
+need for a library to understand the complexity of an Excel archive.
 
 And I gotta say, VBA is kind of a hard, its ecosystem is not great, obviously.
 But I was very impressed by what it can do, despite of its shortcomings. It's

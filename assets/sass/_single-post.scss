@@ -9,7 +9,6 @@
   }
 
   .heading {
-    @include make-heading-occupy-more-space-at-top;
     @include hide-anchor-but-show-on-hover;
   }
 }

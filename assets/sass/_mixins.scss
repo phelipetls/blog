@@ -74,11 +74,6 @@
   }
 }
 
-@mixin make-heading-occupy-more-space-at-top {
-  margin-top: -3em;
-  padding-top: 3em;
-}
-
 @mixin hide-anchor-but-show-on-hover {
   a {
     display: none;

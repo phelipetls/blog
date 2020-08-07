@@ -1,34 +1,30 @@
----
-title: "Getting Salesforce reports with VBA"
-date: 2020-08-05
-categories: ["Programming", "VBA"]
-tags: ["salesforce"]
----
+Sub DownloadReports
 
-For those who find themselves in an environment which heavily relies on Excel
-and Salesforce, you may be interested in a way to automate the process of
-downloading reports from inside Excel with VBA only, maybe because it's more convenient
-to so inside Excel or because you're restrained by the environment in some way.
+  Dim Username As String, Password As String, SecurityToken As String
 
-In my case, I'm kind of restrained. Of course there probably are better tools
-for the jobs, like Apex, SOQL query or a better programming language. I
-[created a Python package for this purpose](https://github.com/reportforce) but
-I didn't use it so much because it's hard to integrate with Excel.
+  Username = "username"
+  Password = "password"
+  SecurityToken = "secret"
 
-Instead, I looked into a way to do something similar inside VBA and I managed
-to do it. In this post I'll share this with you.
+  Dim SessionId As String
+  SessionId = SalesforceLogin(Username, Password, SecurityToken)
 
-# Authentication
+  If IsEmpty(SessionId) Then
+      MsgBox "Authentication Error"
+      Exit Sub
+  End If
 
-The more painless way I know of to [authenticate your requests for a Salesforce
-web service is via SOAP API](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/asynch_api_quickstart_login.htm), with username, password and a security token.
+  Dim ReportId As String: ReportId = "REPORT_ID"
+  Dim WorksheetName As String: WorksheetName = "MY_REPORT"
 
-It returns a bunch of XML in the response, but we will only need the session id
-(a JWT) inside of it. This is what the function below does.
+  Call DownloadEntireReport(ReportId, WorksheetName, SessionId, _
+                            IdentifierColumn:="Número do caso", _
+                            BooleanFilter:="1 AND 2 AND (3 OR 4)", _
+                            startDate:="01/07/2020", _
+                            endDate:="31/07/2020")
 
-From here onwards, we will need to authenticate every request by passing the header `Authorizaion: Bearer $sessionId`.
+End Sub
 
-```vb
 Function SalesforceLogin(Username As String, _
                          Password As String, _
                          SecurityToken As String) As String
@@ -79,40 +75,7 @@ Function SalesforceLogin(Username As String, _
     Set Request = Nothing
 
 End Function
-```
 
-# Parsing JSON inside VBA?
-
-Now, to get an actual report inside Excel we will need to use the Analytics
-API. So far, we didn't had to rely on any external tools, there is an XML
-parser inside VBA, but not a JSON parser at least that I know of. So we're in
-trouble here because that's what Analytics speaks.
-
-Fortunately, there is a [JSON parser implementation for
-VBA](https://github.com/VBA-tools/VBA-JSON) which works flawlessly. You just
-need to download [this
-file](https://raw.githubusercontent.com/VBA-tools/VBA-JSON/master/JsonConverter.bas)
-and import it as a module.
-
-# Unfortunate API limitations
-
-This API unfortunately have a [critical
-limitation](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_limits_limitations.htm),
-which is to return only a maximum of 2000 rows per report. Also, there is no
-way to filter by row limits.
-
-This almost turns it useless. The only way I know of is to use a column
-which has only unique values and exclude already seen values with a filter,
-which is what we'll gonna do.
-
-# Getting report metadata
-
-To be able to filter a report, we will need to fetch its metadata, which is a
-huge JSON with key-value pairs describing the report.
-
-We can get it with a `GET` request to `https://$YOUR_INSTANCE_URL/services/data/v47.0/analytics/reports/$REPORT_ID/describe`.
-
-```vb
 Function GetMetadata(ReportId As String, SessionId As String) As String
     Dim Request As Object
     Set Request = CreateObject("MSXML2.XMLHTTP.6.0")
@@ -128,18 +91,7 @@ Function GetMetadata(ReportId As String, SessionId As String) As String
 
     GetMetadata = Request.responseText
 End Function
-```
 
-# Getting an individual report
-
-With the function below, you will be able to get the report in JSON format.
-
-This is achieved with a `POST` request to
-`https://$YOUR_INSTANCE_URL/services/data/v47.0/analytics/reports/$REPORT_ID`,
-optional metadata goes into the request body, this is what we use to filter the
-report.
-
-```vb
 Function GetReport(ReportId As String, _
                    SessionId As String, _
                    Optional Metadata As String = "") As String
@@ -167,30 +119,7 @@ Function GetReport(ReportId As String, _
 
     GetReport = Response
 End Function
-```
 
-# Writing the data into a worksheet
-
-Now we need to extract the data and write it into a worksheet.
-
-[Every thing we need is inside the `factMap`
-key](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_factmap_example.htm "Salesforce documentation on how to decode the factMap").
-This can get complex if we intend to cover matrix and summary reports, which
-has groupings etc., but tabular reports are much simpler.
-
-What we need to do is to iterate through the values at `factMap.T!T.rows` and,
-for each row, get every value inside `.dataCells` array.
-
-This approach will only cover tabular reports, you can take a look at the
-[reportforce source
-code](https://github.com/phelipetls/reportforce/tree/master/reportforce/helpers "Source code for reportforce package on a Github repository")
-if you need to cover these. By the way, there is an option to export to an Excel (but not to write to a worksheet, obviously).
-
-The below function takes care of this, its job is to go through every cell and
-store it in an array, and then append that array to a worksheet range starting
-from column A.
-
-```vb
 Function WriteIntoWorksheet(Report As Dictionary, _
                             WorksheetName As String, _
                             ColumnLabels As Variant) As Variant
@@ -251,36 +180,7 @@ Function WriteIntoWorksheet(Report As Dictionary, _
     WriteIntoWorksheet = Table
 
 End Function
-```
 
-We also need to get the values at `.reportMetadata.detailColumns` and
-`reportExtendedMetadata.detailColumnInfo` to check how many columns
-the report have and to extract the value at `.value` if it is a date.
-
-# Getting the entire report
-
-To get the entire report, the key thing to overcome the API limitations is a
-key called `.allData`, which will be `true` only if we got all the data from
-the API.
-
-So we get the first 2000 rows and, if `.allData` is `false`, we get the values
-of an identifier column, filter them out and request a new report, until we get all data.
-
-We will modify the keys
-`.reportMetadata.standardDateFilter` and `.reportMetadata.reportFilters`,
-to filter dates and other filters respectively.
-
-If your report has a boolean filter, it's likely that you'll need to change it
-because we will insert new filters. This is already done in the code by
-changing the value at `.reportMetadata.reportBooleanFilter`, so you only need to pass it as a parameter.
-
-The function looks way more involved because we have to get the report headers
-(the `label` property of each object inside
-`.reportExtendedMetadata.detailColumnInfo`, the ones you see in the browser),
-which is the "API name" of the identifier column (an internal value), which we
-will need to filter its values.
-
-```vb
 Sub DownloadEntireReport(ReportId As String, _
                          WorksheetName As String, _
                          SessionId As String, _
@@ -385,60 +285,3 @@ Sub DownloadEntireReport(ReportId As String, _
     Loop
 
 End Sub
-```
-
-We create a dictionary named `Filters` to store all key-value pairs we need,
-add it to the `reportFilters` object at first, and change its value in later
-iterations. Then we convert the metadata from a `Dictionary` to `String`, get
-the report again and repeat the loop.
-
-Also notice that I use a custom function to get all values at a given column,
-`GetValuesAtColumn`.
-
-[Download the source code here](./Salesforce.bas).
-
-# How to use it
-
-It's up to you how you're gonna use this code. Here's an example.
-
-```vb
-Sub DownloadReports
-
-  Dim Username As String, Password As String, SecurityToken As String
-
-  Username = "username"
-  Password = "password"
-  SecurityToken = "secret"
-
-  Dim SessionId As String
-  SessionId = SalesforceLogin(Username, Password, SecurityToken)
-
-  If IsEmpty(SessionId) Then
-      MsgBox "Authentication Error"
-      Exit Sub
-  End If
-
-  Dim ReportId As String: ReportId = "REPORT_ID"
-  Dim WorksheetName As String: WorksheetName = "MY_REPORT"
-
-  Call DownloadEntireReport(ReportId, WorksheetName, SessionId, _
-                            IdentifierColumn:="Número do caso", _
-                            BooleanFilter:="1 AND 2 AND (3 OR 4)", _
-                            startDate:="01/07/2020", _
-                            endDate:="31/07/2020")
-
-End Sub
-```
-
-# Final words
-
-You probably have a better way to do it, I wouldn't recommend this approach to
-anyone with options. But it is in fact super convenient to have it inside
-Excel. You can put it anywhere you want with zero overhead -- no need for a
-library to understand the complexity of an Excel archive.
-
-And I gotta say, VBA is kind of a hard, its ecosystem is not great, obviously.
-But I was very impressed by what it can do, despite of its shortcomings. It's
-still a programming language after all.
-
-Nonetheless, it was still fun to write this.

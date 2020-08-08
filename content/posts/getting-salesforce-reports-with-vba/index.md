@@ -7,21 +7,24 @@ tags: ["salesforce"]
 
 For those who find themselves in an environment which heavily relies on Excel
 and Salesforce, you may be interested in a way to automate the process of
-downloading reports from inside Excel with VBA only, maybe because it's more convenient
-to so inside Excel or because you're restrained by the environment in some way.
+downloading reports from inside Excel with VBA only, maybe because it's more
+convenient to so inside Excel or because you're restrained by the environment in
+some way.
 
 In my case, I'm kind of restrained. Of course there probably are better tools
-for the jobs, like Apex, SOQL query or a better programming language. I
-[created a Python package for this purpose](https://github.com/reportforce) but
-I didn't use it so much because it's hard to integrate with Excel.
+for the jobs, like Apex, SOQL query or a better programming language. I [created
+a Python package for this purpose](https://github.com/reportforce) but I didn't
+use it so much because it's hard to integrate with Excel.
 
-Instead, I looked into a way to do something similar inside VBA and I managed
-to do it. In this post I'll share this with you.
+Instead, I looked into a way to do something similar inside VBA and I managed to
+do it. In this post I'll share this with you.
 
 # Authentication
 
 The more painless way I know of to [authenticate your requests for a Salesforce
-web service is via SOAP API](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/asynch_api_quickstart_login.htm), with username, password and a security token.
+web service is via SOAP
+API](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/asynch_api_quickstart_login.htm),
+with username, password and a security token.
 
 It returns a bunch of XML in the response, but we will only need the session id
 (a JWT) inside of it. This is what the function below does.
@@ -83,10 +86,10 @@ End Function
 
 # Parsing JSON inside VBA?
 
-Now, to get an actual report inside Excel we will need to use the Analytics
-API. So far, we didn't had to rely on any external tools, there is an XML
-parser inside VBA, but not a JSON parser at least that I know of. So we're in
-trouble here because that's what Analytics speaks.
+Now, to get an actual report inside Excel we will need to use the Analytics API.
+So far, we didn't had to rely on any external tools, there is an XML parser
+inside VBA, but not a JSON parser at least that I know of. So we're in trouble
+here because that's what Analytics speaks.
 
 Fortunately, there is a [JSON parser implementation for
 VBA](https://github.com/VBA-tools/VBA-JSON) which works flawlessly. You just
@@ -98,19 +101,20 @@ and import it as a module.
 
 This API unfortunately have a [critical
 limitation](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_limits_limitations.htm),
-which is to return only a maximum of 2000 rows per report. Also, there is no
-way to filter by row limits.
+which is to return only a maximum of 2000 rows per report. Also, there is no way
+to filter by row limits.
 
-This almost turns it useless. The only way I know of is to use a column
-which has only unique values and exclude already seen values with a filter,
-which is what we'll gonna do.
+This almost turns it useless. The only way I know of is to use a column which
+has only unique values and exclude already seen values with a filter, which is
+what we'll gonna do.
 
 # Getting report metadata
 
 To be able to filter a report, we will need to fetch its metadata, which is a
 huge JSON with key-value pairs describing the report.
 
-We can get it with a `GET` request to `https://$YOUR_INSTANCE_URL/services/data/v47.0/analytics/reports/$REPORT_ID/describe`.
+We can get it with a `GET` request to
+`https://$YOUR_INSTANCE_URL/services/data/v47.0/analytics/reports/$REPORT_ID/describe`.
 
 ```vb
 Function GetMetadata(ReportId As String, SessionId As String) As String

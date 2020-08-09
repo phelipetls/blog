@@ -7,7 +7,7 @@ tags: ["tidyverse", "dataviz", "ggplot2"]
 aliases: ["/spread-bancario-brasileiro-r"]
 ---
 
-O altíssimo spread bancário \[^1\] brasileiro é um motivo de preocupação
+O altíssimo spread bancário [^1] brasileiro é um motivo de preocupação
 das autoridades, já que dificulta uma economia mais guiada pelo crédito,
 dificultando o crescimento etc. Como estou estudando isso para
 monografia, pensei em visualizar exatamente quão alto ele é. Imaginei
@@ -290,5 +290,5 @@ quanto nebuloso. O plano é analisar os seus determinantes
 quantitativamente, a partir da estimação de um modelo, provavelmente um
 de vetores autorregressivos.
 
-\[^1\]: É a diferença entre o que banco cobra ao emprestar e o que ele
+[^1]: A diferença entre o que banco cobra ao emprestar e o que ele
 paga aos depositantes.

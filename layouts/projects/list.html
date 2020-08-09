@@ -15,8 +15,8 @@
           </div>
 
           <div class="links">
-            <a href="{{ .Params.github }}" title="Project's repository">repository</a
-            ><a href="{{ .Params.website }}" title="Project's website">
+            <a href="{{ .Params.github }}">repository</a
+            ><a href="{{ .Params.website }}">
               {{- cond (in .Params.website "readthedocs") "docs" "website" }}
             </a
             ></div>
@@ -29,7 +29,7 @@
 
           <span class="softwares">
             {{ range (.GetTerms "softwares") }}
-              <a class="software" href="{{ .Permalink }}" title="Check every project that uses {{ .Title }}">
+              <a class="software" href="{{ .Permalink }}">
                 {{- .Title -}}
               </a>
             {{ end }}

@@ -14,7 +14,7 @@
         {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
         {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
         <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}">
-          {{- $taxonomy | title -}}
+          {{- i18n $taxonomy | default $taxonomy | title -}}
         </a>:
         {{ range (.GetTerms $taxonomy) }}
           <a class="taxonomy" href="{{ .Permalink }}">

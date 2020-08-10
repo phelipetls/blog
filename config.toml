@@ -5,8 +5,20 @@ assetsDir = "assets"
 summaryLength = 20
 Paginate = 5
 
+DefaultContentLanguage = "en"
+
 [params]
   description = "A blog to share my interests on programming, statistics and more"
+
+[languages]
+  [languages.en]
+    LanguageName = "English"
+    weight = 1
+  [languages.pt]
+    LanguageName = "Português"
+    weight = 2
+    [languages.pt.params]
+      description = "Um blog para compartilhar meus interesses em programação, estatística e mais"
 
 [taxonomies]
   category = "categories"

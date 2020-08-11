@@ -28,6 +28,7 @@
           </time>
 
           <span class="softwares">
+            <span><a href="{{ "/softwares" | absLangURL }}">Softwares</a></span>:
             {{ range (.GetTerms "softwares") }}
               <a class="software" href="{{ .Permalink }}">
                 {{- .Title -}}

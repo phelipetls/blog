@@ -15,3 +15,7 @@ Créditos a <a href="https://gohugo.io/">Hugo</a>,
 
 [categories]
 other = 'Categorias'
+
+[repository]
+other = 'repositório'
+

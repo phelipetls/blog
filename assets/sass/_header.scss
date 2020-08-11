@@ -1,14 +1,29 @@
 header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+
   a {
     @include inherit-color;
     @include highlight-on-hover;
   }
 
-  nav ul {
-    @include horizontal-list;
+  nav {
+    display: flex;
+    justify-content: space-between;
 
-    li {
-      margin-right: 1em;
+    ul {
+      @include horizontal-list;
+    }
+
+    li.section:not(:last-child) {
+      margin-right: 1ch;
+    }
+
+    li.translation:before {
+      margin-right: 0.5ch;
+      content: "·";
     }
   }
 }

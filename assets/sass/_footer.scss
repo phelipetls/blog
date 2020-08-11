@@ -1,11 +1,11 @@
 footer {
+  font-size: 0.75em;
+  text-align: center;
+
   padding: 2em 0;
 
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-
-  font-size: 0.8em;
-  text-align: center;
 
   a {
     @include inherit-color;

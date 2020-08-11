@@ -19,3 +19,11 @@ other = 'Categorias'
 [repository]
 other = 'repositório'
 
+[Archive]
+other = 'Arquivo'
+
+[Projects]
+other = 'Projetos'
+
+[Translation]
+other = 'Read this page in {{ .Language.LanguageName }}'

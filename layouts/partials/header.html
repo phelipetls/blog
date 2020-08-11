@@ -1,15 +1,24 @@
 <header>
-  <h1>
+  <h2>
     <a class="site-title" href="{{ .Site.Home.Permalink }}">
       {{ .Site.Title }}
     </a>
-  </h1>
+  </h2>
 
   <nav>
     <ul class="navbar-links">
-      <li><a href="/posts/">Posts</a></li>
-      <li><a href="/projects/">Projects</a></li>
-      <li><a href="/archive/">Archive</a></li>
+      {{- range .Site.Menus.main -}}
+        <li class="section"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></li>
+      {{- end -}}
+      {{- if .IsTranslated -}}
+        <li class="translation">
+          {{- range .Translations -}}
+            <a href="{{ .Permalink | absLangURL }}" title="{{ i18n "Translation" . }}">
+              {{ .Lang | upper }}
+            </a>
+          {{- end -}}
+        </li>
+      {{- end -}}
     </ul>
   </nav>
 </header>

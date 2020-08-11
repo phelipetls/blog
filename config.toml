@@ -28,3 +28,22 @@ DefaultContentLanguage = "en"
 [markup]
   [markup.highlight]
     style = "lovelace"
+
+[menu]
+  [[menu.main]]
+  identifier = "Posts"
+  name = "Posts"
+  url = "/posts"
+  weight = -3
+
+  [[menu.main]]
+  identifier = "Projects"
+  name = "Projects"
+  url = "/projects"
+  weight = -2
+
+  [[menu.main]]
+  identifier = "Archive"
+  name = "Archive"
+  url = "/archive"
+  weight = -1

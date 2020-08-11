@@ -15,3 +15,6 @@ other = '''Powered by <a href="https://gohugo.io/">Hugo</a>,
 
 [repository]
 other = 'repository'
+
+[Translation]
+other = 'Leia esta página em {{ .Language.LanguageName }}'

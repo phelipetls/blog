@@ -2,15 +2,15 @@
 title: "Sobre"
 ---
 
-Oi, meu nome é Phelipe Teles. Eu venho de um curso de Economia mas acabei me
-interessando mais por desenvolvimento de software.
+Oi, meu nome é Phelipe. Este é um lugar para compartilhar meus interesses e
+coisas que eu faço.
 
-Eu comecei a gostar de programação por causa de Econometrica, que me levou a
-aprender R e Python. Mas desde então isso se expandiu para além do domínio
-estatístico.
+Eu cursei Economia mas acabei me interessando mais por desenvolvimento de
+software e almejo trabalhar profissionalmente com isso um dia.
 
-Minha experiência até agora se resume a mexer com Python, R e VBA para coisas
-acadêmicas e relacionadas a análise de dados, mas ultimamente tenho me
-interessado por desenvolvimento web também.
+Comecei a gostar de programação por causa de Econometria, que me levou a
+aprender R e Python. Mas desde então isso se expandiu além da Estatística.
 
-Para saber mais sobre mim, leia sobre [meus projetos](/projects) e [blog posts](/posts).
+Minha experiência até agora tem sido com Python, R e VBA para coisas acadêmicas
+e relacionadas a análise de dados, mas ultimamente tenho me interessado por
+desenvolvimento web.

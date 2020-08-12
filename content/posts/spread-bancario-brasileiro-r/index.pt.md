@@ -22,7 +22,7 @@ procurando.
 
 Acabei descobrindo que o World Bank registra a série *Interest rate
 spread (lending rate minus deposit rate, %)* anualmente para cada país.
-Além disso, foi tudo disponilizado para download em um .csv.
+Além disso, foi tudo disponibilizado para download em um .csv.
 
 E, como normalmente acontece com dados “selvagens”, ele não estava num
 formato *tidy*, limpo, que é como gostaríamos que estivesse para

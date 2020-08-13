@@ -9,6 +9,7 @@
   }
 
   .heading {
+    padding-top: 0.5em;
     @include hide-anchor-but-show-on-hover;
   }
 }

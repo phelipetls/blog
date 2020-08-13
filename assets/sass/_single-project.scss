@@ -7,6 +7,11 @@
     .links {
       align-self: center;
       justify-self: end;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 }

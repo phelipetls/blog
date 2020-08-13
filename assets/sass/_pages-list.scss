@@ -4,7 +4,8 @@
     @include highlight-on-hover;
   }
 
-  @include spaced;
+  margin-bottom: 2em;
+
   @include reset-headings;
 
   .title {
@@ -19,9 +20,6 @@
 
   .date, .taxonomies {
     font-size: 0.8em;
-  }
-
-  .title {
   }
 
   .taxonomy {

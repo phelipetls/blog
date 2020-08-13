@@ -1,6 +1,7 @@
 .project-item {
+  margin-bottom: 2em;
+
   @include reset-headings;
-  @include spaced;
 
   .metadata {
     font-size: 0.8em;

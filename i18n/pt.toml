@@ -12,8 +12,8 @@ other = 'Feito com <a href="https://gohugo.io/">Hugo</a>'
 [categories]
 other = 'Categorias'
 
-[repository]
-other = 'repositório'
+[Repository]
+other = 'Repositório'
 
 [Archive]
 other = 'Arquivo'

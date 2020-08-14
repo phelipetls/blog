@@ -10,8 +10,8 @@ license
 [links]
 other = 'Built with <a href="https://gohugo.io/">Hugo</a>'
 
-[repository]
-other = 'repository'
+[Repository]
+other = 'Repository'
 
 [Translation]
 other = 'Leia esta página em {{ .Language.LanguageName }}'

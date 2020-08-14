@@ -400,7 +400,8 @@ a new filtered report and repeat the loop until we get all data.
 Also notice that I use a custom function to get all values at a given column,
 `GetValuesAtColumn`.
 
-[Download the source code here](./Salesforce.bas).
+[Get the full source code in this GitHub
+gist](https://gist.github.com/phelipetls/57a27f529561eefe73633093c737b7e0).
 
 # How to use it
 
@@ -443,7 +444,5 @@ super convenient. You can put the report anywhere you want with zero overhead --
 need for a library to understand the complexity of an Excel archive.
 
 And I gotta say, VBA is kind of a hard, its ecosystem is not great, obviously.
-But I was very impressed by what it can do, despite of its shortcomings. It's
-still a programming language after all.
-
+But I was very impressed by what it can do, despite of its shortcomings.
 Nonetheless, it was still fun to write this.

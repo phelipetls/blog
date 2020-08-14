@@ -63,14 +63,6 @@ hr {
   border: 0.1em solid $dim-color;
 }
 
-svg {
-  fill: $heading-color;
-
-  &:hover {
-    fill: $highlight-color;
-  }
-}
-
 span.newline {
   margin: 0.5em;
 }

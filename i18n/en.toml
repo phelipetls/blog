@@ -1,6 +1,6 @@
 [license]
 other = '''
-This content is licensed a under
+This content is a under a
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
   Creative Commons Attribution 4.0
 </a>
@@ -8,10 +8,7 @@ license
 '''
 
 [links]
-other = '''Powered by <a href="https://gohugo.io/">Hugo</a>,
-<a href="https://boxicons.com/">Boxicons</a> and
-<a href="https://pages.github.com/">Github Pages</a>
-'''
+other = 'Built with <a href="https://gohugo.io/">Hugo</a>'
 
 [repository]
 other = 'repository'

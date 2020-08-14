@@ -1,18 +1,18 @@
 <footer>
-  <div class="links">
+  <span class="links">
     <a href="mailto:phelipe_teles@hotmail.com">
-      {{ readFile "/static/svg/mail.svg" | safeHTML }}
+      Mail
     </a>
     <a href="https://github.com/phelipetls">
-      {{ readFile "/static/svg/github.svg" | safeHTML }}
+      GitHub
     </a>
     <a href="https://linkedin.com/in/phelipeteles">
-      {{ readFile "/static/svg/linkedin.svg" | safeHTML }}
+      Linkedin
     </a>
-  </div>
-  <div class="credits">
+  </span>
+  <span class="credits">
     {{ i18n "links" | safeHTML }}
-  </div>
+  </span>
   <div class="license">
     {{ i18n "license" | safeHTML }}
   </div>

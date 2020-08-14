@@ -1,20 +1,18 @@
 footer {
-  font-size: 0.75em;
+  font-size: 0.9em;
   text-align: center;
-
-  padding: 2em 0;
-
-  width: 90%;
-  margin: 0 auto;
+  padding: 2em 1em;
 
   a {
     @include inherit-color;
     @include highlight-on-hover;
   }
 
-  svg {
-    width: 2.5em;
-    height: 2.5em;
-    margin-left: 1em;
+  .credits:before {
+    content: "·";
+  }
+
+  .links a {
+    @include separate("|");
   }
 }

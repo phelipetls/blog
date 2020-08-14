@@ -5,11 +5,11 @@
 
       <div class="links">
         <a href="{{ .Params.github }}">
-          {{ readFile "/static/svg/github.svg" | safeHTML }}
+          GitHub
         </a>
 
         <a href="{{ .Params.website }}">
-          {{ readFile "/static/svg/link.svg" | safeHTML }}
+          {{- cond (in .Params.website "readthedocs") "Docs" "Website" }}
         </a>
       </div>
     </div>

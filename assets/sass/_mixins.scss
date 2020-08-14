@@ -34,31 +34,6 @@
   }
 }
 
-@mixin ends_with($sep) {
-  &:last-child:after {
-    content: $sep;
-  }
-}
-
-@mixin prefix($char) {
-  &:before {
-    content: $char;
-  }
-}
-
-@mixin spaced($space: 1em) {
-  padding-bottom: $space;
-  margin-bottom: $space * 2;
-}
-
-@mixin generate-grid-areas($elements...) {
-  @each $element in $elements {
-    .#{$element} {
-      grid-area: $element;
-    }
-  }
-}
-
 @mixin formatted-horizontal-list {
   @include horizontal-list;
   display: inline;

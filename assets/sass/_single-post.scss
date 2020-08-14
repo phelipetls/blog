@@ -19,23 +19,33 @@
   grid-auto-flow: column;
   grid-template: "previous next" / 50% 50%;
 
-  @include generate-grid-areas(previous, next);
-
   a {
+    display: flex;
     @include inherit-color;
     @include highlight-on-hover;
-  }
 
-  .previous {
-    &:before {
-      content: "«";
+    &:after, &:before {
+      display: flex;
+      align-items: center;
     }
-  }
 
-  .next {
-    text-align: right;
-    &:after {
-      content: "»";
+    &.previous {
+      grid-area: previous;
+      padding-right: 1em;
+      &:before {
+        content: "«";
+        padding-right: 1em;
+      }
+    }
+
+    &.next {
+      grid-area: next;
+      text-align: right;
+      padding-left: 1em;
+      &:after {
+        padding-left: 1em;
+        content: "»";
+      }
     }
   }
 }

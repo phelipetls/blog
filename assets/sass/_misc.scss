@@ -58,6 +58,14 @@ pre {
   }
 }
 
+article {
+  ul, ol {
+    li {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
 hr {
   margin: 1em 0;
   border: 0.1em solid $dim-color;

@@ -42,14 +42,12 @@ p > code {
   padding: 0 0.3em;
   font-family: $code-font;
   background-color: $code-bg;
-}
-
-p > code {
   font-size: 0.9em;
 }
 
 pre {
   padding: 1em;
+  font-family: $code-font;
   background-color: $code-bg !important;
 
   overflow-x: auto;

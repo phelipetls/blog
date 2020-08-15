@@ -5,7 +5,7 @@ categories: ["Programming", "Lua", "Neovim", "Tools"]
 tags: ["lua", "nvim"]
 ---
 
-The `make` command in Vim is quite useful, it runs whatever program is under
+The `:make` command in Vim is quite useful, it runs whatever program is under
 the `makeprg` option and returns its output in the quickfix list, where you'll
 be able to hop through the errors if they were parsed correctly by the
 `errorformat` option.
@@ -19,7 +19,7 @@ setlocal errorformat=%f:%l:%c:\ %t%n\ %m
 ```
 
 Or, you could create a `:h compiler` plugin named `flake8`, that set these
-options when you run `compiler flake8`, [as I have in my
+options when you run `:compiler flake8`, [as I have in my
 config](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/flake8.vim).
 
 There are a bunch of compiler plugins that come with Vim by default that you
@@ -89,7 +89,11 @@ function M.make()
   end
   )
 
-  vim.fn.setqflist({}, "r") -- (6)
+  if vim.fn.getqflist({title = ''}).title == makeprg then -- (6)
+    vim.fn.setqflist({}, "r")
+  else
+    vim.fn.setqflist({}, " ")
+  end
 
   stderr:read_start(vim.schedule_wrap(onread)) -- (7)
   stdout:read_start(vim.schedule_wrap(onread))
@@ -108,8 +112,9 @@ return M
    but rather a table, so we split it. Also we pass the file descriptors that
    we want available to the process, from which we will read.
 5. Pass the function to execute on exit, to close everything we opened.
-6. Clear the current quickfix list. It's also possible to create a new one with
-   `vim.fn.setqflist({}, " ")`. Read `:h setqflist()` for details.
+6. Check the title of the current quickfix list. If it's unrelated to the
+   current `makeprg`, we create a new one. Otherwise we just clear the current
+   one[^1]. Read `:h setqflist()` for details.
 7. Pass the function to read from the file `stdout` and `stderr`. Notice we
    must need to wrap it with `:h vim.schedule_wrap`.
 
@@ -167,3 +172,7 @@ Please comment if you find a bug or some improvement and I'll update here.
 
 I took inspiration [from this post](https://teukka.tech/vimloop.html), which
 might be a great further read if you want to go deep into this matter.
+
+[^1]: This may be unnecessarily complex. Initially I just cleared the current
+  one but it messes up with the functionality of `:colder` and `:cnewer`
+  commands, to navigate through old quickfix lists.

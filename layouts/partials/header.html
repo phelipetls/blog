@@ -1,12 +1,12 @@
 <header>
   <h2>
-    <a class="site-title" href="{{ .Site.Home.Permalink }}">
+    <a href="{{ .Site.Home.Permalink }}">
       {{ .Site.Title }}
     </a>
   </h2>
 
   <nav>
-    <ul class="navbar-links">
+    <ul>
       {{- range .Site.Menus.main -}}
         <li class="section"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></li>
       {{- end -}}

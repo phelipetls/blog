@@ -4,6 +4,10 @@ header {
   align-items: center;
   justify-content: space-between;
 
+  h2 {
+    padding-right: 1em;
+  }
+
   a {
     @include inherit-color;
     @include highlight-on-hover;

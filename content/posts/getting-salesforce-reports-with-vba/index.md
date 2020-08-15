@@ -7,16 +7,14 @@ tags: ["salesforce"]
 
 For those who find themselves in an environment which heavily relies on Excel
 and Salesforce, you may be interested in a way to automate the process of
-downloading reports from inside Excel with VBA only, maybe because it's more
-convenient to so inside Excel or because you're restrained by the environment in
-some way.
+downloading reports from inside Excel with VBA only.
 
-In my case, I'm kind of restrained. Of course there probably are better tools
-for the jobs, like Apex, SOQL query or a better programming language. I [created
-a Python package for this purpose](https://github.com/reportforce) but I didn't
-use it so much because it's hard to integrate with Excel.
+I think there are probably are better tools for the jobs, like Apex, SOQL query
+or a better programming language. I [created a Python package for this
+purpose](https://github.com/reportforce) but I didn't use it so much because
+it's hard to integrate with Excel.
 
-Instead, I looked into a way to do something similar inside VBA and I managed to
+Instead, I looked into a way to do something similar with VBA and I managed to
 do it. In this post I'll share this with you.
 
 # Authentication

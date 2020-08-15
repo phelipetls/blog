@@ -1,28 +1,34 @@
 <section class="pages-list">
-  {{ range .Pages }}
-    <div class="page">
+  <section class="pages">
+    {{ range (.Paginator 6).Pages }}
+      <div class="page">
 
-      <h3 class="title">
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-      </h3>
+        <h3 class="title">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h3>
 
-      <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "January 02, 2006" }}
-      </time>
+        <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date.Format "January 02, 2006" }}
+        </time>
 
-      <span class="taxonomies">
-        {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
-        {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
-        <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}">
-          {{- i18n $taxonomy | default $taxonomy | title -}}
-        </a>:
-        {{ range (.GetTerms $taxonomy) }}
-          <a class="taxonomy" href="{{ .Permalink }}">
-            {{- .Title -}}
-          </a>
-        {{ end }}
-      </span>
+        <span class="taxonomies">
+          {{ $taxonomy := index $.Site.Data.alternateTaxonomy $.Section }}
+          {{ $taxonomyPage := .Site.GetPage (printf "/%s" $taxonomy) }}
+          <a class="taxonomy-page" href="{{ $taxonomyPage.Permalink }}">
+            {{- i18n $taxonomy | default $taxonomy | title -}}
+          </a>:
+          {{ range (.GetTerms $taxonomy) }}
+            <a class="taxonomy" href="{{ .Permalink }}">
+              {{- .Title -}}
+            </a>
+          {{ end }}
+        </span>
 
-    </div>
+      </div>
+    {{ end }}
+  </section>
+
+  {{ if gt .Paginator.TotalPages 1 }}
+    {{ partial "pagination.html" . }}
   {{ end }}
 </section>

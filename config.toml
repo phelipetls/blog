@@ -3,7 +3,6 @@ languageCode = "en-us"
 title = "Phelipe Teles"
 assetsDir = "assets"
 summaryLength = 20
-Paginate = 5
 
 DefaultContentLanguage = "en"
 

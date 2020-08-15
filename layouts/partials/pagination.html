@@ -1,0 +1,17 @@
+{{ with .Paginator }}
+  <ul class="pagination">
+    <li class="previous">
+      {{ with .Prev }}
+        <a href="{{ .URL }}">←</a>
+      {{ end }}
+    </li>
+
+    <li class="current">{{ .PageNumber }}</li>
+
+    <li class="next">
+      {{ with .Next }}
+        <a href="{{ .URL }}">→</a>
+      {{ end }}
+    </li>
+  </ul>
+{{ end }}

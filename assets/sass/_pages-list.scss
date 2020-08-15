@@ -1,28 +1,55 @@
-.page {
-  a {
-    @include inherit-color;
-    @include highlight-on-hover;
-  }
+.pages-list {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 
-  margin-bottom: 2em;
+  .pages {
+    flex: 1;
 
-  @include reset-headings;
+    .page {
+      margin-bottom: 2em;
+      @include reset-headings;
 
-  .title {
-    margin-top: 1em;
-  }
+      a {
+        @include inherit-color;
+        @include highlight-on-hover;
+      }
 
-  .date {
-    &:after {
-      content: "·";
+      .title {
+        margin-top: 1em;
+      }
+
+      .date {
+        &:after {
+          content: "·";
+        }
+      }
+
+      .date, .taxonomies {
+        font-size: 0.8em;
+      }
+
+      .taxonomy {
+        @include separate(",");
+      }
     }
   }
 
-  .date, .taxonomies {
-    font-size: 0.8em;
-  }
+  ul.pagination {
+    @include horizontal-list;
+    text-align: center;
 
-  .taxonomy {
-    @include separate(",");
+    a {
+      @include inherit-color;
+      @include highlight-on-hover;
+    }
+
+    .current {
+      padding: 0 0.5em;
+    }
+
+    .previous, .next {
+      width: 2ch;
+    }
   }
 }

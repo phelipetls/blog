@@ -1,8 +1,8 @@
 ---
 title: "Asynchronous :make in Neovim with Lua"
 date: 2020-08-12
-categories: ["Programming", "Lua", "Neovim"]
-tags: []
+categories: ["Programming", "Lua", "Neovim", "Tools"]
+tags: ["lua", "nvim"]
 ---
 
 The `make` command in Vim is quite useful, it runs whatever program is under

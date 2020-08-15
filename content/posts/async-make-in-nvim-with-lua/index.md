@@ -30,8 +30,8 @@ It works great once you have these options set correctly (although for some, it
 can be tricky to get the `errorformat` right).
 
 The only problem is that it is synchronous. Which means that for some expensive
-programs, you will not be able to edit until if finishes. In this post we will
-solve this using in Neovim using Lua.
+programs, you will not be able to edit until it finishes. In this post we will
+solve this in Neovim with Lua.
 
 # Using Libuv through Lua
 
@@ -62,21 +62,8 @@ nnoremap <silent> <space>m :Make<CR>
 
 # Running the program
 
-Let's walk through the main function step by step.
-
-1. Get the value under the `makeprg` option, e.g. `flake8 %`.
-2. Expand special keywords like `%` in a string, e.g. `flake8 ~/script.py`.
-3. Get the program (the first sequence of non-whitespace characters, `[^%s]+`)
-   and its arguments (what follows after a sequence of spaces) in two separate
-   strings. This uses [Lua's pattern
-   matching](http://lua-users.org/wiki/PatternsTutorial).
-4. Call the function. Notice that `args` in `options` should not be a string,
-   but rather a table. Also we pass the file descriptors that we want available
-   to the process, from which we will read.
-5. Pass the function to execute on exit, to just close everything we opened.
-6. Clear the current quickfix list.
-7. Pass the function to read from the file `stdout` and `stderr`. Notice we
-   must need to wrap it with `:h vim.schedule_wrap`.
+Here's the function that does the main job. Below, we will go through it
+step-by-step.
 
 ```lua
 local M = {}
@@ -110,6 +97,22 @@ end
 
 return M
 ```
+
+1. Get the value under the `makeprg` option, e.g. `flake8 %`.
+2. Expand special keywords like `%` in a string, e.g. `flake8 ~/script.py`.
+3. Get the program (the first sequence of non-whitespace characters, `[^%s]+`)
+   and its arguments (what follows after a sequence of spaces) in two separate
+   strings. This uses [Lua's pattern
+   matching](http://lua-users.org/wiki/PatternsTutorial).
+4. Call the function. Notice that `args` in `options` should not be a string,
+   but rather a table, so we split it. Also we pass the file descriptors that
+   we want available to the process, from which we will read.
+5. Pass the function to execute on exit, to close everything we opened.
+6. Clear the current quickfix list. It's also possible to create a new one with
+   `vim.fn.setqflist({}, " ")`. Read `:h setqflist()` for details.
+7. Pass the function to read from the file `stdout` and `stderr`. Notice we
+   must need to wrap it with `:h vim.schedule_wrap`.
+
 
 # Reading the output
 
@@ -145,8 +148,6 @@ local function fill_qflist(lines)
 end
 ```
 
-Read `:h setqflist()` for more details on how to use this function.
-
 The only thing worth notice here is that we first need to split the data into
 lines and filter out those with only whitespace in them using the function
 below.
@@ -162,5 +163,4 @@ that's all.
 
 [Get the full code in this
 gist](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566).
-Please comment if you find a bug or any room for improvement and I'll update
-here accordingly.
+Please comment if you find a bug or some improvement and I'll update here.

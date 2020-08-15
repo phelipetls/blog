@@ -164,3 +164,6 @@ that's all.
 [Get the full code in this
 gist](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566).
 Please comment if you find a bug or some improvement and I'll update here.
+
+I took inspiration [from this post](https://teukka.tech/vimloop.html), which
+might be a great further read if you want to go deep into this matter.

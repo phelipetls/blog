@@ -20,13 +20,16 @@
     }
   }
 
-  .title {
+  summary.title {
     margin: 1em 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: $heading-color;
   }
 
   .date {
     &:after {
-      content: "-";
+      content: "·";
     }
   }
 

@@ -3,12 +3,9 @@ html {
 }
 
 body {
-  height: 100%;
-}
-
-body {
   display: flex;
   flex-flow: column;
+  min-height: 100%;
 
   margin: 0 auto;
   max-width: $content-width;

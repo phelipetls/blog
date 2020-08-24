@@ -70,7 +70,7 @@ local M = {}
 
 function M.make()
   makeprg = vim.bo.makeprg -- (1)
-  efm = vim.api.nvim_buf_get_option(0, "errorformat")
+  efm = vim.bo.errorformat
 
   local cmd = vim.fn.expandcmd(makeprg) -- (2)
   local program, args = string.match(cmd, "([^%s]+)%s+(.+)") -- (3)
@@ -104,7 +104,8 @@ end
 return M
 ```
 
-1. Get the value under the `makeprg` option, e.g. `flake8 %`.
+1. Get the value under the `makeprg` and `errorformat` option and store them in
+   global variables.
 2. Expand special keywords like `%` in a string, e.g. `flake8 ~/script.py`.
 3. Get the program (the first sequence of non-whitespace characters, `[^%s]+`)
    and its arguments (what follows after a sequence of spaces) in two separate
@@ -175,10 +176,8 @@ Please comment if you find a bug or some improvement and I'll update here.
 I took inspiration [from this post](https://teukka.tech/vimloop.html), which
 might be a great further read if you want to go deep into this matter.
 
-*Update 2020-08-23*: Fixed bug that happened when switching buffers. Because I
-called `vim.bo.makeprg` and `vim.bo.errorformat` in `vim.fn.setqflist()`, these
-variables would get mixed up when I switched buffers and the quickfix list
-wouldn't be appropriately created. [So, to fix them, I used global
+**Update 2020-08-23**: Fixed bug of buffer options values changing when
+switching buffers.  [The fix is to get them once and store them in global
 variables](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566/revisions#diff-239751dbaf9aa06f928287497aba2cc0)
 
 [^1]: This may be unnecessarily complex. Initially I just cleared the current

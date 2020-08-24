@@ -69,7 +69,9 @@ step-by-step.
 local M = {}
 
 function M.make()
-  local makeprg = vim.bo.makeprg -- (1)
+  makeprg = vim.bo.makeprg -- (1)
+  efm = vim.api.nvim_buf_get_option(0, "errorformat")
+
   local cmd = vim.fn.expandcmd(makeprg) -- (2)
   local program, args = string.match(cmd, "([^%s]+)%s+(.+)") -- (3)
 
@@ -144,9 +146,9 @@ add the output to the current quickfix list.
 ```lua
 local function fill_qflist(lines)
   vim.fn.setqflist({}, "a", {
-    title = vim.bo.makeprg,
+    title = makeprg,
     lines = vim.tbl_filter(has_non_whitespace, lines),
-    efm = vim.bo.errorformat
+    efm = efm
   })
 
   vim.api.nvim_command("doautocmd QuickFixCmdPost")
@@ -172,6 +174,12 @@ Please comment if you find a bug or some improvement and I'll update here.
 
 I took inspiration [from this post](https://teukka.tech/vimloop.html), which
 might be a great further read if you want to go deep into this matter.
+
+*Update 2020-08-23*: Fixed bug that happened when switching buffers. Because I
+called `vim.bo.makeprg` and `vim.bo.errorformat` in `vim.fn.setqflist()`, these
+variables would get mixed up when I switched buffers and the quickfix list
+wouldn't be appropriately created. [So, to fix them, I used global
+variables](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566/revisions#diff-239751dbaf9aa06f928287497aba2cc0)
 
 [^1]: This may be unnecessarily complex. Initially I just cleared the current
   one but it messes up with the functionality of `:colder` and `:cnewer`

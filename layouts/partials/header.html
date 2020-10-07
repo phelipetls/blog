@@ -14,7 +14,7 @@
         <li class="translation">
           {{- range .Translations -}}
             <a href="{{ .Permalink | absLangURL }}" title="{{ i18n "Translation" . }}">
-              {{ .Lang | upper }}
+              {{ .Lang | title }}
             </a>
           {{- end -}}
         </li>

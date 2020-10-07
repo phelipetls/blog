@@ -15,12 +15,12 @@
 }
 
 .adjacent-posts {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template: "previous next" / 50% 50%;
+  display: flex;
+  gap: 2em;
 
   a {
     display: flex;
+    flex-basis: 50%;
     @include inherit-color;
     @include highlight-on-hover;
 
@@ -30,8 +30,6 @@
     }
 
     &.previous {
-      grid-area: previous;
-      padding-right: 1em;
       &:before {
         content: "«";
         padding-right: 1em;
@@ -39,9 +37,8 @@
     }
 
     &.next {
-      grid-area: next;
-      text-align: right;
-      padding-left: 1em;
+      flex: 1;
+      justify-content: flex-end;
       &:after {
         padding-left: 1em;
         content: "»";

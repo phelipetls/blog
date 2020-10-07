@@ -2,13 +2,13 @@
 title: "About"
 ---
 
-Hi, my name is Phelipe, this is a place to share my interests and stuff I do.
+Hi, my name is Phelipe, I'm 24 years old, living in Rio.
 
-I studied Economics but ended more interested in software development and I aim
-to work with it professionally someday.
+I studied Economics but ended more interested in software development. I got
+into programming due to Econometrics, which led me to learn R and Python.
 
-I got into programming due to Econometrics, which first led me to learn R and
-Python.
+Although I still like statistics very much, I've found myself more interested
+in computer science side of things. Now I wanna break into the industry someday.
 
-Most of my experience has been with Python, R and VBA for academic and data
-analysis tasks, but lately I've been learning about web development too.
+I'm interested in web development and data science and I mostly using Python
+and JavaScript.

@@ -2,15 +2,15 @@
 title: "Sobre"
 ---
 
-Oi, meu nome é Phelipe. Este é um lugar para compartilhar meus interesses e
-coisas que eu faço.
+Oi, meu nome é Phelipe, tenho 24 anos e vivo no Rio.
 
-Eu cursei Economia mas acabei me interessando mais por desenvolvimento de
-software e almejo trabalhar profissionalmente com isso um dia.
+Eu estudei Economia mas acabei me interessando mais por desenvolvimento de
+software. Comecei a gostar de programação por causa de Econometria, que me
+levou a aprender R e Python.
 
-Comecei a gostar de programação por causa de Econometria, que me levou a
-aprender R e Python.
+Apesar de ainda gostar bastante de estatística, o lado da ciência da computação
+acabou me encantando mais. Eu espero um dia poder trabalhar com isso
+profissionalmente.
 
-Minha experiência até agora tem sido com Python, R e VBA para coisas acadêmicas
-e relacionadas a análise de dados, mas ultimamente tenho me interessado por
-desenvolvimento web.
+Eu tenho interesse em desenvolvimento web e data science e, na maioria das
+vezes, estou usando Python e JavaScript.

@@ -1,5 +1,5 @@
 ---
-title: "url-shortener"
+title: "URL shortener"
 date: 2020-08-26
 softwares: ["python", "flask", "sqlalchemy", "pytest", "vue"]
 website: "https://xsurl.herokuapp.com/"

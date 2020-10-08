@@ -107,21 +107,20 @@ The error then continues with
 So we add the pattern `%C%f:%l:\ in\ %o`. Where `%f` is filename, `%l` is line
 number and `%C` says that this a continuation line.
 
-I'm not really interested in capturing AND parse anything else. So I just say
-how it continues: `%C\ %.%#`, where `%.%#` is the same as regular expression
-`.*`, so a line starting with a space.
+I'm not really interested in capturing anything else. So I just say how it
+continues: `%C\ %.%#`, where `%.%#` is the same as regular expression `.*`.
 
-Now, I need to tell how the errors ends so we can get the main message.
+Now, I need to captura how a test failure ends:
 
     E   assert 3 == 1
 
-Notice how 3 spaces follow the E, so the pattern may be `\%ZE\ %\\{3}%m`. Where
-`%Z` means it ends there.
+Notice the 3 spaces after the E, a pattern for that could be `%ZE\ %\\{3}%m`.
+Where `%Z` is the token for end of multi-line error.
 
-I also want to filter out all the lines that doesn't match those, except a few
-ones: the ones starting with `[E!>]`, so I include `\%-G%[%^E]%.%#`, which will
-exclude every line that does not start with an E. And to also exclude empty
-lines: `\%-G`. `%G` has the purpose to capture or ignore "general" messages.
+I also want to filter out all the other lines that don't any of this, except
+the ones starting with E, so I include `%-G%[%^E]%.%#`. To also exclude empty
+lines: `%-G`. `%G` has the purpose to capture (when prefixed with `+`) or
+ignore (when prefixed with `-`) "general" messages.
 
 The quickfix list will then look like:
 
@@ -138,8 +137,8 @@ The quickfix list will then look like:
     || E     + {'0', '3', '8', '5'}
     || E     ?               +++++
 
-So far, it will understand tests failures but not syntax errors neither import
-errors, which would fail silently and this is no good.
+So far, it will understand tests failures but not syntax errors, import errors
+and fixture errors, which would fail silently. This is no good.
 
 # Getting syntax errors
 
@@ -177,23 +176,22 @@ Let's start with syntax errors. We need to parse something like this:
     !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
     =============================== 1 error in 0.09s ===============================
 
-We can see that what really matters starts with an E. A proper `errorformat`
-would be:
+We can see that what really matters starts with an E. This `errorformat` does
+the job:
 
-    \%EE\ \ \ \ \ File\ \"%f\"\\,\ line\ %l,
-    \%CE\ \ \ %p^,
-    \%ZE\ \ \ %[%^\ ]%\\@=%m,
-    \%CE\ %.%#,
+    %EE\ \ \ \ \ File\ \"%f\"\\,\ line\ %l,
+    %CE\ \ \ %p^,
+    %ZE\ \ \ %[%^\ ]%\\@=%m,
+    %CE\ %.%#,
 
 The second line has the pattern `%p`, which matches a sequence of `[ -.]` to
 get its length to later use as column number.
 
-The end pattern `\%ZE   %[%^ ]%\@=%m` matches a line starting with E, three
-spaces, and not followed by another space (this is needed to distinguish it
-from the others).
+The end pattern `%ZE   %[%^ ]%\@=%m` matches a line starting with E, three
+spaces exactly, which is needed to distinguish it from the others, see `:h \@=`.
 
-Notice how we put a generic continuation pattern at the end (any line starting
-with E and space), because otherwise it matches the other patterns as well.
+We also need to include a continuation format (any line starting with E and
+space that didn't match the earlier ones).
 
 # Getting import errors
 
@@ -223,10 +221,10 @@ Import errors are also slightly different:
     !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
     =============================== 1 error in 0.09s ===============================
 
-It starts with `ImportError while...` so I just included
-`\%EImportError%.%#\'%f\'\.` to capture the filename. It ends with an `E   %m`
+It starts with `ImportError while...` so I included
+`%EImportError%.%#\'%f\'\.` to capture the filename. It ends with an `E   %m`
 and we already a pattern to capture this. But we do need to tell how it
-continues, and it's fine to just something that would match anything like
+continues, and it's fine to just put something that would match anything like
 `%C%.%#`.
 
 # Getting fixture errors
@@ -256,10 +254,10 @@ Notice how syntax, import and fixture errors are preceded with something like
     ______________________________ ERROR.* ______________________________
 
 Which will match our pattern to catch the start of a test failure. There's an
-easy fix for this, just put `\%-G_%\\+\ ERROR%.%#\ _%\\+` before that pattern,
+easy fix for this, just put `%-G_%\\+\ ERROR%.%#\ _%\\+` before that pattern,
 so it will ignore it first.
 
-Also, if all tests passed, don't ignore the line indicating it with:
+Also, if all tests passed, capture it too:
 
       \%+G%[=]%\\+\ %*\\d\ passed%.%#,
 

@@ -64,7 +64,7 @@ function M.make()
     end
 
     if event == "exit" then
-      vim.fn.setloclist(winnr, {}, "r", {
+      vim.fn.setqflist({}, " ", {
         title = cmd,
         lines = lines,
         efm = vim.api.nvim_buf_get_option(bufnr, "errorformat")
@@ -105,8 +105,8 @@ When we receive data from `stdout` and `stderr`, we extend the `lines` variable
 with it. Because of `stdout_buffered` and `stderr_buffered`, the callback will
 only be called when all of the output was gathered (see `:h channel-buffered`).
 
-When the program exits, we populate the location list. This is done with `:h
-setloclist()`. We give it a title (the expanded `makeprg`), the
+When the program exits, we populate the quickfix list. This is done with `:h
+setqflist()`. We give it a title (the expanded `makeprg`), the
 lines to be parsed and the `errorformat` to parse the lines with.
 
 Finally we trigger whatever `autocmd` is under the `QuickFixCmdPost` event.
@@ -118,6 +118,19 @@ command! Make silent lua require'async_make'.make()
 nnoremap <silent> <space>m :Make<CR>
 ```
 
-<!-- TODO: update gist !-->
+Then, if you may wish to run it on save, use this:
+
+```vim
+augroup LintOnSave
+  autocmd! BufWritePost <buffer> Make
+augroup END
+```
+
+A command to disable it is convenient (you can re-enable it with `:e<CR>`):
+
+```vim
+command! DisableLintOnSave autocmd! LintOnSave BufWritePost <buffer>
+```
+
 [Get the full code in this
 gist](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566).

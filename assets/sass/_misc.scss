@@ -38,10 +38,15 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $heading-font;
 }
 
-p > code {
+code {
+  font-size: 0.9em;
   padding: 0 0.3em;
   font-family: $code-font;
   background-color: $code-bg;
+  p > & {
+    padding: 0 4px;
+    border-radius: 5px;
+  }
 }
 
 pre {

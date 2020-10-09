@@ -6,23 +6,28 @@ date: 2020-10-07 15:14:17
 >  Ah, errorformat, the feature everybody loves to hate. :)
 >  -- lcd047, on [Stack Overflow](https://stackoverflow.com/a/29102995)
 
+
 I really like Vim's `:h errorformat` feature, but only when I manage to get it
 right. Until then, I'm sure it will frustrate me more than once. It's very
 awkward to write one if the program's output you're trying to capture is not
 trivial (e.g., `LaTeX`).
 
-Recently, I committed to get right for `pytest`. The cli allows customizing how
-tracebacks are shown with the `--tb` option, e.g., `pytest --tb=short`, and to
-control verbosity level with `-v`, `-vv` and `-q`.
+Recently, I committed to get it right for `pytest`. The cli allows customizing
+how tracebacks are shown with the `--tb` option, e.g., `pytest --tb=short`, and
+to control verbosity level with `-v`, `-vv` and `-q`. I went with `pytest
+--tb=short -vv`.
 
-I went with `pytest --tb=short -vv` as my `:h makeprg`. So I put this line in
-`:h compiler` plugin (see `:h write-compiler-plugin`):
+To run pytest in Vim I then put this line in a `:h compiler` plugin (see `:h
+write-compiler-plugin`):
 
 ```vim
-    CompilerSet makeprg=pytest\ --tb=short\ -vv\ %
+    CompilerSet makeprg=pytest\ --tb=short\ -vv\ $*\ %
 ```
 
-It gives something like this as output:
+So that I can run `pytest` with `:make` or even with more arguments with `:make
+-k mytest`, which will replace the token `$*`.
+
+It outputs something like this:
 
     ============================= test session starts ==============================
     platform linux -- Python 3.7.5, pytest-5.3.4, py-1.8.1, pluggy-0.13.1 -- /usr/bin/python3
@@ -66,25 +71,26 @@ It gives something like this as output:
 
 Now, for the difficult part.
 
-# Writing errorformat
+# Writing an errorformat
 
-To make Vim understand these lines, we must give patterns so that it can go
-through every line testing against them. From `:h errorformat`:
+To make Vim understand these lines so that we can jump to each error, we must
+give patterns. It will then go through every line testing against those
+patterns. From `:h errorformat`:
 
 >  Error format strings are always parsed pattern by pattern until the first
 >  match occurs.
 
-So, the order is important here.
+The order is, thus, important here.
 
 Also, the pattern has to match the entire line. That is to say the pattern is always
 implicitly surrounded by a `^` and `$`.
 
 We will need to use `:h errorformat-multi-line` because a single error spans
-multiple lines. And we must explicitly tell how it starts, continues and ends.
+multiple lines.
 
 I found out that `pytest` gives inconsistent patterns depending on the error
 (test failure, missing fixture and syntax error), so I had to handle them
-separately and it was a mess.
+separately.
 
 # Handling test failures
 
@@ -94,7 +100,8 @@ A test failure starts like this:
 
 The pattern for this is `%E_%\\+\ %o\ _%\\+`. Notice the overwhelming number of
 escape characters needed because I'm passing the pattern as an option value,
-like in `:set errorformat=%E_%\\+\ %o\ _%\\+` (see `:h option-backslash`).
+like in `:set errorformat=%E_%\\+\ %o\ _%\\+` (see `:h option-backslash` to
+understand).
 
 `%E` tells Vim how an error starts. `%o` matches a string and means `module` for
 Vim (it's just useful to give more context, the test name will be shown in the
@@ -107,20 +114,23 @@ The error then continues with
 So we add the pattern `%C%f:%l:\ in\ %o`. Where `%f` is filename, `%l` is line
 number and `%C` says that this a continuation line.
 
-I'm not really interested in capturing anything else. So I just say how it
-continues: `%C\ %.%#`, where `%.%#` is the same as regular expression `.*`.
+I'm not really interested in capturing anything else. So I just give a pattern
+that will match anything until the end pattern: `%C\ %.%#` (where `%.%#` is the
+same as regular expression `.*`).
 
 Now, I need to captura how a test failure ends:
 
     E   assert 3 == 1
 
-Notice the 3 spaces after the E, a pattern for that could be `%ZE\ %\\{3}%m`.
-Where `%Z` is the token for end of multi-line error.
+A pattern for that may be `%ZE\ %\\{3}%m`. Where `%Z` is the token for end of
+multi-line error.
 
-I also want to filter out all the other lines that don't any of this, except
-the ones starting with E, so I include `%-G%[%^E]%.%#`. To also exclude empty
-lines: `%-G`. `%G` has the purpose to capture (when prefixed with `+`) or
-ignore (when prefixed with `-`) "general" messages.
+I also want to filter out all the other lines that didn't match, except the
+ones starting with E, so I include `%-G%[%^E]%.%#`. To also exclude empty
+lines also: `%-G`.
+
+`%G` has the purpose to capture (when prefixed with `+`) or ignore (when
+prefixed with `-`) "general" messages.
 
 The quickfix list will then look like:
 
@@ -140,9 +150,9 @@ The quickfix list will then look like:
 So far, it will understand tests failures but not syntax errors, import errors
 and fixture errors, which would fail silently. This is no good.
 
-# Getting syntax errors
+# Syntax errors
 
-Let's start with syntax errors. We need to parse something like this:
+For syntax errors, we need to parse something like this:
 
     ============================= test session starts ==============================
     platform linux -- Python 3.7.5, pytest-5.3.4, py-1.8.1, pluggy-0.13.1 -- /usr/bin/python3
@@ -176,8 +186,7 @@ Let's start with syntax errors. We need to parse something like this:
     !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
     =============================== 1 error in 0.09s ===============================
 
-We can see that what really matters starts with an E. This `errorformat` does
-the job:
+What matters starts with an E. So this `errorformat` does the job:
 
     %EE\ \ \ \ \ File\ \"%f\"\\,\ line\ %l,
     %CE\ \ \ %p^,
@@ -193,7 +202,7 @@ spaces exactly, which is needed to distinguish it from the others, see `:h \@=`.
 We also need to include a continuation format (any line starting with E and
 space that didn't match the earlier ones).
 
-# Getting import errors
+# Import errors
 
 Import errors are also slightly different:
 
@@ -227,7 +236,7 @@ and we already a pattern to capture this. But we do need to tell how it
 continues, and it's fine to just put something that would match anything like
 `%C%.%#`.
 
-# Getting fixture errors
+# Fixture errors
 
 Fixture errors are also in a different format:
 
@@ -263,19 +272,20 @@ Also, if all tests passed, capture it too:
 
 # Conclusion
 
-Check out the whole [compiler
-plugin](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim)
-in my dotfiles repo.
+Check out the whole [compiler plugin](gist) in my dotfiles repo.
 
 It's tricky to figure out how to order the patterns, which I didn't risk to
-explain here since I wouldn't say I fully understand how it works. It's hard to
-debug and it was mostly by trial and error. But taking the risk of being
-inaccurate, I'd say to just pay attention to put the more generic patterns at
-the end and the more specific ones first, that way you don't risk a more
-specific pattern never being considered because the more generic one takes
-precedence.
+explain here since I wouldn't say I fully understand how it works. It was
+mostly by trial and error.
 
-If you're interested, I also recommend reading the [Stack Overflow
-question](https://stackoverflow.com/a/29102995), from which the first quote
-came from, and `:h errorformat`. It's useful to know about this in order to
+But be careful to not put more generic patterns first, because then they will
+take precedence and the more specific ones will be ignored. At least, I did
+this a lot.
+
+If you're interested, I recommend reading the [Stack Overflow
+answer](https://stackoverflow.com/a/29102995) and, of course, `:h errorformat`.
+
+If you're commited to learn Vim, It's worth it to know about this in order to
 integrate a command line program into Vim.
+
+[gist]: https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim

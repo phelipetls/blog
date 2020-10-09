@@ -1,8 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
 $content-width: 65ch;
 
-$main-font: serif;
-$heading-font: sans-serif;
-$code-font: 'Consolas', 'Ubuntu Mono', monospace;
+$main-font: "Merriweather", serif;
+$heading-font: $main-font;
+$code-font: "Consolas", "Fira Mono", monospace;
 
 $light-beige: #cfcdc2;
 $dark-beige: #aca895;

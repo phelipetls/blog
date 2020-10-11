@@ -55,9 +55,6 @@ pre {
   background-color: $code-bg !important;
 
   overflow-x: auto;
-  &:hover {
-    overflow-x: visible;
-  }
 }
 
 article {

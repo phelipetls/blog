@@ -6,8 +6,8 @@ website: "http://ipeadata-explorer.surge.sh"
 github: "https://github.com/phelipetls/ipeadata-explorer"
 ---
 
-Este é um frontend escrito em [React](react) para a base de dados
-[Ipeadata](ipeadata) do IPEA, que contém várias séries temporais de temas
+Este é um frontend escrito em [React](https://reactjs.org/docs/getting-started.html) para a base de dados
+[Ipeadata](http://ipeadata.gov.br/api/) do IPEA, que contém várias séries temporais de temas
 diversos.
 
 Com ele você consegue pesquisar a base de dados com base em vários filtros e
@@ -25,12 +25,7 @@ O mapa pode ser filtrado também, por exemplo, se o usuário quiser visualizar o
 valores por município para o estado do Rio de Janeiro.
 
 Essas visualizações foram feitas possíveis graças aos projetos
-[Chart.js](chartjs) e um [plugin para maps](chartjs-chart-geo) e à [API do
-IBGE](ibge) que provê TopoJSON para as regiões geográficas do Brasil.
-
-
-[ipeadata]: http://ipeadata.gov.br/api/
-[react]: https://reactjs.org/docs/getting-started.html
-[chartjs]: https://www.chartjs.org/docs/latest/
-[chartjs-chart-geo]: https://github.com/sgratzl/chartjs-chart-geo
-[ibge]: https://servicodados.ibge.gov.br/api/docs/malhas?versao=2
+[Chart.js](https://www.chartjs.org/docs/latest/) e um [plugin para
+maps](https://github.com/sgratzl/chartjs-chart-geo-chart-geo) e à [API do
+IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) que provê
+TopoJSON para as regiões geográficas do Brasil.

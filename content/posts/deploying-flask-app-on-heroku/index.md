@@ -5,7 +5,9 @@ categories: ["Programming", "Python", "Web development"]
 tags: ["python", "flask", "heroku"]
 ---
 
-tl;dr: Use [waitress](waitress) instead of [gunicorn](gunicorn)
+tl;dr: Use
+[waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/) instead
+of [gunicorn](https://gunicorn.org/)
 
 ```diff
 diff --git a/Procfile b/Procfile
@@ -85,6 +87,3 @@ Now the application restarts when unidling:
     2020-10-09T13:22:44.966887+00:00 heroku[web.1]: Unidling
     2020-10-09T13:22:44.969344+00:00 heroku[web.1]: State changed from down to starting
     2020-10-09T13:22:49.127433+00:00 heroku[web.1]: Starting process with command `waitress-serve --port=55574 --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'`
-
-[waitress]: https://docs.pylonsproject.org/projects/waitress/en/latest/
-[gunicorn]: https://gunicorn.org/

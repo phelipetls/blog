@@ -1,0 +1,90 @@
+---
+title: "Deploying a Flask app on a Heroku free dyno"
+date: "2020-10-11"
+categories: ["Programming", "Python", "Web development"]
+tags: ["python", "flask", "heroku"]
+---
+
+tl;dr: Use [waitress](waitress) instead of [gunicorn](gunicorn)
+
+```diff
+diff --git a/Procfile b/Procfile
+index d49e1a0..0cd38da 100644
+--- a/Procfile
++++ b/Procfile
+@@ -1 +1 @@
+-web: gunicorn "app:create_app()"
++web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
+```
+
+Recently, I had trouble deploying a Flask application using Heroku on a free
+dyno tier and gunicorn as the WSGI server.
+
+The problem boils down to the application **not restarting** when the **dyno is
+unidling**, so once it sleeps it never wake up again, unless you force it to do
+so with `heroku restart`.
+
+Here's the log:
+
+    2020-08-27T19:21:21.060020+00:00 heroku[web.1]: State changed from down to starting
+    2020-08-27T19:21:26.527757+00:00 heroku[web.1]: Starting process with command `gunicorn "app:create_app()"`
+    2020-08-27T19:21:34.069516+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Starting gunicorn 20.0.4
+    2020-08-27T19:21:34.087317+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Listening at: http://0.0.0.0:3906 (4)
+    2020-08-27T19:21:34.092921+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Using worker: sync
+    2020-08-27T19:21:34.131957+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [10] [INFO] Booting worker with pid: 10
+    2020-08-27T19:21:34.201582+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [11] [INFO] Booting worker with pid: 11
+    2020-08-27T19:21:34.560508+00:00 heroku[web.1]: State changed from starting to up
+    2020-08-27T19:54:54.137845+00:00 heroku[web.1]: Idling
+    2020-08-27T19:54:54.139855+00:00 heroku[web.1]: State changed from up to down
+    2020-08-27T19:54:59.841651+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+    2020-08-27T19:54:59.908237+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [11] [INFO] Worker exiting (pid: 11)
+    2020-08-27T19:54:59.910662+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [4] [INFO] Handling signal: term
+    2020-08-27T19:54:59.919059+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [10] [INFO] Worker exiting (pid: 10)
+    2020-08-27T19:55:00.122579+00:00 app[web.1]: [2020-08-27 19:55:00 +0000] [4] [INFO] Shutting down: Master
+    2020-08-27T19:55:00.223868+00:00 heroku[web.1]: Process exited with status 0
+
+Every request would then be met with a Heroku's `H10` error and 503 HTTP error.
+
+As I was using Flask's application factory pattern, I simply had this in my
+`Procfile`:
+
+    web: gunicorn "app:create_app()"
+
+I don't know if there's anything wrong with it or if I could have done
+something to make it restart when unidling.
+
+I compared with the logs from another application using `node`, and the
+difference lies on how the processes handle the `SIGTERM` signal. `node` exits
+with code 143 and restarts just fine afterwards, but `gunicorn` exits with code
+0 and doesn't restart again.
+
+I searched for a way to configure how gunicorn handles SIGTERM with no luck,
+but that would be too awkward anyway. Then I stumbled upon [a post discouraging
+the use of gunicorn on
+Heroku](https://blog.etianen.com/blog/2014/01/19/gunicorn-heroku-django/) and
+recommending
+[Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/)
+instead.
+
+The mentioned blog post author's reasons are much more technical than mine, I
+just wanted the application to not crash. So I changed the Procfile to:
+
+    web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
+
+As was suggested by the
+[Flask](https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server)
+and [Waitress
+documentation](https://docs.pylonsproject.org/projects/waitress/en/latest/usage.html#heroku)
+
+Now the application restarts when unidling:
+
+    2020-10-09T02:02:24.121855+00:00 heroku[web.1]: Idling
+    2020-10-09T02:02:24.123702+00:00 heroku[web.1]: State changed from up to down
+    2020-10-09T02:02:25.226026+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+    2020-10-09T02:02:25.317332+00:00 heroku[web.1]: Process exited with status 143
+    2020-10-09T13:22:44.966887+00:00 heroku[web.1]: Unidling
+    2020-10-09T13:22:44.969344+00:00 heroku[web.1]: State changed from down to starting
+    2020-10-09T13:22:49.127433+00:00 heroku[web.1]: Starting process with command `waitress-serve --port=55574 --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'`
+
+[waitress]: https://docs.pylonsproject.org/projects/waitress/en/latest/
+[gunicorn]: https://gunicorn.org/

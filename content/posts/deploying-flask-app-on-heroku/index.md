@@ -19,14 +19,14 @@ index d49e1a0..0cd38da 100644
 +web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
 ```
 
-Recently, I had trouble deploying a Flask application using Heroku on a free
-dyno tier and gunicorn as the WSGI server.
+Recently, I had trouble deploying a Flask application using gunicorn as
+the WSGI server on a Heroku's free dyno tier.
 
-The problem boils down to the application **not restarting** when the **dyno is
-unidling**, so once it sleeps it never wake up again, unless you force it to do
+The problem boils down to the application not restarting when the dyno is
+unidling, so once it sleeps it never wakes up again, unless you force it to do
 so with `heroku restart`.
 
-Here's the log:
+From the `heroku logs`:
 
     2020-08-27T19:21:21.060020+00:00 heroku[web.1]: State changed from down to starting
     2020-08-27T19:21:26.527757+00:00 heroku[web.1]: Starting process with command `gunicorn "app:create_app()"`
@@ -45,24 +45,25 @@ Here's the log:
     2020-08-27T19:55:00.122579+00:00 app[web.1]: [2020-08-27 19:55:00 +0000] [4] [INFO] Shutting down: Master
     2020-08-27T19:55:00.223868+00:00 heroku[web.1]: Process exited with status 0
 
-Every request would then be met with a Heroku's `H10` error and 503 HTTP error.
+Every request would then be met with a Heroku `H10` error and 503 HTTP error.
 
-As I was using Flask's application factory pattern, I simply had this in my
-`Procfile`:
+I simply had this in my `Procfile`:
 
     web: gunicorn "app:create_app()"
 
 I don't know if there's anything wrong with it or if I could have done
-something to make it restart when unidling.
+something to make it restart when unidling. Please let me know if that's the
+case.
 
-I compared with the logs from another application using `node`, and the
-difference lies on how the processes handle the `SIGTERM` signal. `node` exits
-with code 143 and restarts just fine afterwards, but `gunicorn` exits with code
-0 and doesn't restart again.
+By comparing with a node application log, the difference seems to be on how the
+processes handle a `SIGTERM` signal. `node` exits with code 143 and restarts
+just fine afterwards, but `gunicorn` exits with code 0 and doesn't restart
+again.
 
 I searched for a way to configure how gunicorn handles SIGTERM with no luck,
-but that would be too awkward anyway. Then I stumbled upon [a post discouraging
-the use of gunicorn on
+but that would be too awkward anyway.
+
+Then I stumbled upon [a post discouraging the use of gunicorn on
 Heroku](https://blog.etianen.com/blog/2014/01/19/gunicorn-heroku-django/) and
 recommending
 [Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/)

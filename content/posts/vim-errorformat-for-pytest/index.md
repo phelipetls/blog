@@ -1,6 +1,8 @@
 ---
 title: "A Vim errorformat for pytest"
-date: 2020-10-07 15:14:17
+date: 2020-10-07
+categories: ["Programming", "Vim", "Tools", "Python"]
+tags: ["python", "vim"]
 ---
 
 >  Ah, errorformat, the feature everybody loves to hate. :)

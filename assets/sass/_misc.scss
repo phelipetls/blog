@@ -43,7 +43,7 @@ code {
   font-family: $code-font;
   background-color: $code-bg;
   p > & {
-    padding: 0 1ch;
+    padding: 0 0.8ch;
     border-radius: 5px;
   }
 }

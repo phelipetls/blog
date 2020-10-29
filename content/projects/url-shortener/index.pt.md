@@ -8,6 +8,8 @@ github: "https://github.com/phelipetls/url-shortener"
 
 Este é um simples encurtado de URLs feito para aprender o básico de Flask e Vue.
 
+<!--more-->
+
 É hospedado no Heroku com um nome qualquer, usando `PostgreSQL` como banco de
 dados e `SQLAlchemy` como o ORM (com a extensão `Flask-SQLAlchemy`). Claro, tem
 um modelo de banco de dados muito simples: uma tabela com uma chave primária,

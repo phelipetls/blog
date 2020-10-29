@@ -6,9 +6,8 @@ website: "https://phelipetls.github.io"
 github: "https://github.com/phelipetls/blog"
 ---
 
-Este site foi construído com o gerador de site estático [Hugo], estilizado com
-[Sass], com muito pouco de JavaScript (exceto [KaTeX]).
+Este site foi construído com o gerador de site estático
+(Hugo)[https://gohugo.io/], estilizado com (Sass)[https://sass-lang.com/], com
+muito pouco de JavaScript (exceto (KaTeX)[https://katex.org/]).
 
-[Hugo]: https://gohugo.io/
-[Sass]: https://sass-lang.com/
-[KaTeX]: https://katex.org/
+<!--more-->

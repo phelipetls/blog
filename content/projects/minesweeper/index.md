@@ -9,6 +9,8 @@ github: "https://github.com/phelipetls/minesweeper.js"
 This is a minesweeper implementation in pure JavaScript, to help me learn a
 basic web development stack with vanilla JS, CSS, Node and PostgreSQL.
 
+<!--more-->
+
 I mostly used the DOM API and custom events to handle the game logic and state.
 
 Basic authentication was implemented with

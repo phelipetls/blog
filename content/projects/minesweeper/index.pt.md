@@ -9,6 +9,8 @@ github: "https://github.com/phelipetls/minesweeper.js"
 Esta é uma implementação de campo minado escrito com JavaScript, CSS, Node.js e
 PostgreSQL, para me ajudar a aprender uma stack básica de desenvolvimento web.
 
+<!--more-->
+
 Eu usei principalmente a API do DOM e eventos para lidar com o estado e lógica
 do jogo.
 

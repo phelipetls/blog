@@ -10,3 +10,5 @@ Esta é uma biblioteca em Python que serve como interface para obter dados
 geoespaciais de fontes como
 [IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) ou um
 servidor ArcGIS em um DataFrame incrementado pela biblioteca `geopandas`.
+
+<!--more-->

@@ -9,6 +9,8 @@ github: "https://github.com/phelipetls/url-shortener"
 This is a simple URL shortener made for learning the basics of Flask and
 Vue.
 
+<!--more-->
+
 [It is hosted on Heroku with a silly name](https://xsurl.herokuapp.com/), using
 PostgreSQL as the database and `SQLAlchemy` as ORM (with `Flask-SQLAlchemy`
 extension). Of course, it has a very simple database model: a single table with

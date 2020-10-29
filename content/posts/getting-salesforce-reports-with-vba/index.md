@@ -9,8 +9,8 @@ For those who find themselves in an environment which heavily relies on Excel
 and Salesforce, you may be interested in a way to automate the process of
 downloading reports from inside Excel with VBA only.
 
-I think there are probably are better tools for the jobs, like Apex, SOQL query
-or a better programming language. I [created a Python package for this
+I think there are probably better tools for the job, like Apex, SOQL query or a
+better programming language. I [created a Python package for this
 purpose](https://github.com/reportforce) but I didn't use it so much because
 it's hard to integrate with Excel.
 

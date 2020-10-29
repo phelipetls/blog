@@ -9,7 +9,7 @@ Getting Python syntax highlighting to work in Vim requires very little code, to
 my surprise.
 
 It's really useful to know how to extend or modify the syntax highlighting in
-case the default ones does not match your preference or you a file type is not
+case the default ones does not match your preference or if a file type is not
 at all supported.
 
 Here is everything that you need and an explanation below.
@@ -36,13 +36,13 @@ The first two lines define a new syntax region (see `:h syn-region`) called
 `pythonfString`.
 
 We then declare how it starts by using the regex `[fF]\@1<=\z(['"]\)`, which is
-equivalent to `(?:<=[fF])(")` in Perl regular expressions (see `:h \@<=`). The
+equivalent to `(?:<=[fF])(['"])` in Perl regular expressions (see `:h \@<=`). The
 second line just handles the case of a docstring.
 
 Then we declare how it ends: it ends when we see the opening quotes again.
-Because we captured the quotes inside a group, we just use that with `\z1`,
-which means group 1 (we need to prefix with `z` because it will be used in an
-external pattern, see `:h \z(`).
+Because we captured the quotes inside a group, we just reference it with `\z1`,
+which means group 1 (we need to prefix with `z` because it is an external
+pattern, see `:h \z(`).
 
 The `matchgroup` parameter tells Vim which highlight group it should use to
 highlight the start/end pattern. The group `pythonQuotes` come from the default
@@ -56,3 +56,7 @@ syntax to do that).
 
 Finally, we link these syntax regions with an appropriate highlight group (see
 `:h hi-link`): which is the `String` (see `:h group-name`).
+
+I didn't had much trouble with this setup, but you never know. Take a look at
+`:e $VIMRUNTIME/syntax/python.vim` for reference in case you need to tweak
+something more (or contact me).

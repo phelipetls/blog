@@ -14,7 +14,12 @@
         {{ range .Pages }}
           <li>
             <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
-              {{ .Date.Format "02 Jan" }}
+              {{ if eq .Lang "en" }}
+                {{ .Date.Format "02 Jan" }}
+              {{ else }}
+                {{ .Date.Day }}
+                {{ index $.Site.Data.portugueseMonthsAbbr (printf "%d" .Date.Month) }}
+              {{ end }}
             </time>
             <a href="{{ .Permalink }}">
               {{ .Title }}

@@ -1,7 +1,7 @@
 {{ define "main" }}
   <article class="single-project">
     <div class="metadata">
-      <h1 class="title">{{ .Title }}</h1>
+      <h1 class="title">{{ .Title | title }}</h1>
 
       <div class="links">
         <a href="{{ .Params.github }}">

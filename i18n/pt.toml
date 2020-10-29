@@ -12,9 +12,6 @@ other = 'Feito com <a href="https://gohugo.io/">Hugo</a>'
 [categories]
 other = 'Categorias'
 
-[Repository]
-other = 'Repositório'
-
 [Archive]
 other = 'Arquivo'
 
@@ -23,3 +20,6 @@ other = 'Projetos'
 
 [Translation]
 other = 'Read this page in {{ .Language.LanguageName }}'
+
+[More]
+other = "Leia mais"

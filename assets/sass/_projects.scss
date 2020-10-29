@@ -3,34 +3,42 @@
 
   @include reset-headings;
 
-  .content {
-    margin: 2em 0;
-  }
+  .header, .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 
-  .links {
-    padding-bottom: 1em;
-    text-align: right;
-
-    a {
-      margin-left: 0.5em;
+    @media screen and (max-width: 540px) {
+      flex-flow: column;
+      & > .date {
+        margin-top: 0.3em;
+      }
     }
   }
 
-  summary.title {
-    margin: 1em 0;
-    font-size: 1.3em;
-    font-weight: bold;
-    color: $heading-color;
+  .content {
+    margin: 2em 0;
+
+    .more {
+      color: dimgrey;
+      @include highlight-on-hover;
+    }
   }
 
-  .date {
-    &:after {
-      content: "·";
+  .links {
+    padding-top: 0.5em;
+
+    a:not(:first-child) {
+      margin-left: 0.5em;
     }
   }
 
   .software {
     @include separate(",");
+  }
+
+  hr {
+    margin: 2em 0;
   }
 
   a {

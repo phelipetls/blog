@@ -1,41 +1,52 @@
 {{ define "main" }}
   <section>
+    {{ $lastProject := index (last 1 .Pages) 0 }}
+
     {{ range .Pages }}
       <div class="project-item">
 
-        <details>
-          <summary class="title" onMouseDown="return false;">
-            <a href="{{ .Permalink }}">
+        <div class="header">
+          <a href="{{ .Params.website }}">
+            <h1 class="title">
               {{ .Title | title }}
-            </a>
-          </summary>
+            </h1>
+          </a>
 
-          <div class="content">
-            {{ .Content }}
-          </div>
-
-          <div class="links">
-            <a href="{{ .Params.github }}">{{ i18n "Repository" }}</a
-            ><a href="{{ .Params.website }}">
-              {{- cond (in .Params.website "readthedocs") "Docs" "Website" }}
-            </a
-            ></div>
-        </details>
-
-        <div class="metadata">
           <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "January 02, 2006" }}
           </time>
+        </div>
 
+        <div class="content">
+          {{ .Summary }}
+          {{ if .Truncated }}
+            <a class="more" href="{{ .Permalink }}">{{ i18n "More" }} &#xbb;</a>
+          {{ end }}
+        </div>
+
+        <div class="links">
+        </div>
+
+        <div class="metadata">
           <span class="softwares">
             <span><a href="{{ "/softwares" | absLangURL }}">Softwares</a></span>:
+
             {{ range (.GetTerms "softwares") }}
               <a class="software" href="{{ .Permalink }}">
                 {{- .Title -}}
               </a>
             {{ end }}
           </span>
+
+          <div class="links">
+            <a href="{{ .Params.github }}">GitHub</a>
+            <a href="{{ .Params.website }}">Website</a>
+          </div>
         </div>
+
+        {{ if ne . $lastProject }}
+          <hr>
+        {{ end }}
 
       </div>
     {{ end }}

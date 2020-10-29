@@ -8,8 +8,4 @@ github: "https://github.com/phelipetls/mapsbr"
 
 This library provides an interface to get geospatial data from an [IBGE
 API](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) or an ArcGIS
-server in the [`geopandas`](https://geopandas.org/) format.
-
-This was my second Python project and it was inspired by the
-[geobr](https://github.com/ipeaGIT/geobr) package for R. At the time, they
-hadn't ported it to Python, so that was my motivation.
+server in an augmented [`geopandas`](https://geopandas.org/) DataFrame.

@@ -7,8 +7,7 @@ github: "https://github.com/phelipetls/blog"
 ---
 
 Este site foi construído com o gerador de site estático [Hugo], estilizado com
-[Sass], com muito pouco de JavaScript (exceto [KaTeX]). Não foi necessário
-qualquer conhecimento de Go.
+[Sass], com muito pouco de JavaScript (exceto [KaTeX]).
 
 [Hugo]: https://gohugo.io/
 [Sass]: https://sass-lang.com/

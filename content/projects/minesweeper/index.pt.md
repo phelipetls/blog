@@ -1,5 +1,5 @@
 ---
-title: "minesweeper.js"
+title: "Minesweeper.js"
 date: 2020-06-16
 softwares: ["javascript", "css", "node", "express", "postgresql"]
 website: "https://some-minesweeper.herokuapp.com"
@@ -15,5 +15,4 @@ do jogo.
 Um mecanismo simples de autenticação foi implementado com PostgreSQL,
 [node-postgres](https://node-postgres.com/) e
 [passport-local](http://www.passportjs.org/packages/passport-local/), porque eu
-queria armazenar o histórico do jogador, o que seria então visível no
-*Leaderboard* ou em sua página de perfil.
+queria armazenar o histórico das jogadas.

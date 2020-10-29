@@ -9,8 +9,4 @@ github: "https://github.com/phelipetls/mapsbr"
 Esta é uma biblioteca em Python que serve como interface para obter dados
 geoespaciais de fontes como
 [IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) ou um
-servidor ArcGIS em formato `geopandas`.
-
-Foi o meu segundo projeto Python, inspirado pelo pacote em R
-[geobr](https://github.com/ipeaGIT/geobr). Na época, ele ainda não tinha sido
-portado para o Python, então essa foi minha inspiração.
+servidor ArcGIS em um DataFrame incrementado pela biblioteca `geopandas`.

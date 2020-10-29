@@ -3,7 +3,6 @@ title: "Python f-strings syntax highlighting in Vim"
 date: 2020-10-28
 categories: ["Programming", "Tools", "Vim", "Python"]
 tags: ["vim", "python"]
-draft: true
 ---
 
 Getting Python syntax highlighting to work in Vim requires very little code, to
@@ -42,12 +41,12 @@ second line just handles the case of a docstring.
 
 Then we declare how it ends: it ends when we see the opening quotes again.
 Because we captured the quotes inside a group, we just use that with `\z1`,
-which means group 1 (we need to prefix with `z` it will be used in an external
-pattern, see `:h \z(`).
+which means group 1 (we need to prefix with `z` because it will be used in an
+external pattern, see `:h \z(`).
 
-The `matchgroup` parameter tells Vim which highlight group to use to highlight
-the start and end pattern, in this case we use `pythonQuotes`, which come from
-the default syntax file.
+The `matchgroup` parameter tells Vim which highlight group it should use to
+highlight the start/end pattern. The group `pythonQuotes` come from the default
+syntax file.
 
 We also need to declare what this region contains. For this we declare another
 region called `pythonInterpolation` whose start and end patterns are much
@@ -55,8 +54,5 @@ simpler: an opening and closing braces respectively. This region, in turn, may
 contain anything but stuff like a function, a decorator etc (notice the special
 syntax to do that).
 
-Finally, we tell with which highlight group the region must be highlighted (see
-`:h hi-link`). Of course, we use the `String` group (see `:h group-name`).
-
-I didn't experience much issues with this in my daily use, but you can always
-fix it yourself.
+Finally, we link these syntax regions with an appropriate highlight group (see
+`:h hi-link`): which is the `String` (see `:h group-name`).

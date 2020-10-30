@@ -3,7 +3,11 @@
   <head>
     {{ partial "head.html" . }}
 
-    {{ block "css" . }}{{ end }}
+    {{ block "css" . }}
+      {{ range (.Resources.Match "*.css") }}
+        <link href="{{ .RelPermalink }}" rel="stylesheet" />
+      {{ end }}
+    {{ end }}
   </head>
   <body>
     {{ partial "header.html" . }}
@@ -16,6 +20,10 @@
 
     {{ partial "footer.html" . }}
 
-    {{ block "scripts" . }}{{ end }}
+    {{ block "scripts" . }}
+      {{ range (.Resources.Match "*.js") }}
+        <script src="{{ .RelPermalink }}"></script>
+      {{ end }}
+    {{ end }}
   </body>
 </html>

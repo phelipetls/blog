@@ -49,15 +49,3 @@
     </div>
   </section>
 {{ end }}
-
-{{ define "css" }}
-  {{ range .Params.css }}
-    <link href="{{ . }}" rel="stylesheet" />
-  {{ end }}
-{{ end }}
-
-{{ define "scripts" }}
-  {{ range .Params.js }}
-    <script src="{{ . }}"></script>
-  {{ end }}
-{{ end }}

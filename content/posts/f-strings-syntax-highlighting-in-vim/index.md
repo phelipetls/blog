@@ -9,7 +9,7 @@ css: ["cocoen.min.css"]
 
 **UPDATE 2020-10-30**: First iteration of this post was very naive, supporting
 only the very basic. See the
-[diff](https://gist.github.com/phelipetls/80cea3b7862fd493efa6c25ee9d5a510/revisions)
+[diff](https://gist.github.com/phelipetls/8726d6cd68e66ad6b83586ae53f3b3d8/revisions#diff-8108a43d0db89a371349e6de001c6932fba065485f6790dddd5b011e7ae7f527)
 that adds support for string modifiers and escape sequences.
 
 Getting Python syntax highlighting to work in Vim requires very little code, to
@@ -22,8 +22,8 @@ Here is everything that you need and an explanation below.
 
 ```vim
 " in ~/.config/nvim/after/syntax or ~/.vim/after/syntax
-syn match pythonEscape +{{+ contained containedin=pythonfString,pythonDocstring
-syn match pythonEscape +}}+ contained containedin=pythonfString,pythonDocstring
+syn match pythonEscape +{{+ contained containedin=pythonfString,pythonfDocstring
+syn match pythonEscape +}}+ contained containedin=pythonfString,pythonfDocstring
 
 syn region pythonfString matchgroup=pythonQuotes
       \ start=+[fF]\@1<=\z(['"]\)+ end="\z1"

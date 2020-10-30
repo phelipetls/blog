@@ -5,17 +5,24 @@ categories: ["Programming", "Tools", "Vim", "Python"]
 tags: ["vim", "python"]
 ---
 
+**UPDATE 2020-10-30**: First iteration of this post was very naive, supporting
+only the very basic. See the
+[diff](https://gist.github.com/phelipetls/80cea3b7862fd493efa6c25ee9d5a510/revisions)
+that adds support for string modifiers and escape sequences.
+
 Getting Python syntax highlighting to work in Vim requires very little code, to
 my surprise.
 
-It's really useful to know how to extend or modify the syntax highlighting in
-case the default ones does not match your preference or if a file type is not
-at all supported.
+![Before](./before.png)
+![After](./after.png)
 
 Here is everything that you need and an explanation below.
 
 ```vim
 " in ~/.config/nvim/after/syntax or ~/.vim/after/syntax
+syn match pythonEscape +{{+ contained containedin=pythonfString,pythonDocstring
+syn match pythonEscape +}}+ contained containedin=pythonfString,pythonDocstring
+
 syn region pythonfString matchgroup=pythonQuotes
       \ start=+[fF]\@1<=\z(['"]\)+ end="\z1"
       \ contains=@Spell,pythonEscape,pythonInterpolation
@@ -25,38 +32,74 @@ syn region pythonfDocstring matchgroup=pythonQuotes
 
 syn region pythonInterpolation contained
       \ matchgroup=SpecialChar
-      \ start=/{/ end=/}/
+      \ start=+{{\@!+ end=+}}\@!+ skip=+{{+ keepend
       \ contains=ALLBUT,pythonDecoratorName,pythonDecorator,pythonFunction,pythonDoctestValue,pythonDoctest
+
+syn match pythonStringModifier /:\(.[<^=>]\)\?[-+ ]\?#\?0\?[0-9]*[_,]\?\(\.[0-9]*\)\?[bcdeEfFgGnosxX%]\?/ contained containedin=pythonInterpolation
+syn match pythonStringModifier /![sra]/ contained containedin=pythonInterpolation
 
 hi link pythonfString String
 hi link pythonfDocstring String
+hi link pythonStringModifier PreProc
 ```
+
+# Declaring a syntax region for f-strings
 
 The first two lines define a new syntax region (see `:h syn-region`) called
 `pythonfString`.
 
-We then declare how it starts by using the regex `[fF]\@1<=\z(['"]\)`, which is
-equivalent to `(?:<=[fF])(['"])` in Perl regular expressions (see `:h \@<=`). The
-second line just handles the case of a docstring.
+We then declare how it starts with the regex `[fF]\@1<=\z(['"]\)`, which is
+equivalent to `(?:<=[fF])(['"])` in Perl regular expressions (see `:h \@<=`).
+The second line just handles the case of a docstring.
 
-Then we declare how it ends: it ends when we see the opening quotes again.
-Because we captured the quotes inside a group, we just reference it with `\z1`,
-which means group 1 (we need to prefix with `z` because it is an external
-pattern, see `:h \z(`).
+The string will end how it starts, so we can just reference the captured group
+using `\z1` (we need to prefix it with `z` because it is an external pattern,
+see `:h \z(`).
 
-The `matchgroup` parameter tells Vim which highlight group it should use to
+The `matchgroup` argument tells Vim which highlight group it should use to
 highlight the start/end pattern. The group `pythonQuotes` come from the default
 syntax file.
 
-We also need to declare what this region contains. For this we declare another
-region called `pythonInterpolation` whose start and end patterns are much
-simpler: an opening and closing braces respectively. This region, in turn, may
-contain anything but stuff like a function, a decorator etc (notice the special
-syntax to do that).
+# Handling expressions inside f-strings
 
-Finally, we link these syntax regions with an appropriate highlight group (see
-`:h hi-link`): which is the `String` (see `:h group-name`).
+We also need to declare what this region contains.
 
-I didn't had much trouble with this setup, but you never know. Take a look at
-`:e $VIMRUNTIME/syntax/python.vim` for reference in case you need to tweak
-something more (or contact me).
+For this we declare another region called `pythonInterpolation`, which starts
+with "{" (but not with "{{", which will actually produce a literal "{") and
+closes with "}". With that in mind, we use the regex `{{\@!` because we don't
+want a match if the preceding token is present (see `:h \@!`).
+
+This region may contain only expressions, so stuff like a function declaration
+does not make sense (notice there is a syntax for that, `:helpgrep ALLBUT`)
+
+# Handling string modifiers
+
+f-strings supports [`str.format`
+syntax](https://docs.python.org/3/library/string.html#format-examples) for
+formatting, for example:
+
+```python
+import math
+print(f"The value of pi is approximately {math.pi:.3f}.")
+```
+
+So I read the [Python
+docs](https://docs.python.org/3/library/string.html#format-specification-mini-language)
+and wrote a regex based on it, but regexes are always easier to write than to
+read so I wouldn't recommend you trying.
+
+It's also possible to convert a value as if wrapping them in functions
+`ascii()`, `repr()`, `str()` with `!a`, `!r`, `!s`, so we need to handle this
+also.
+
+For this, I declared a syntax group with `:h syn-match` and pass the regexes
+that should be used.
+
+It should only be highlighted inside a `pythonInterpolation` so we take
+advantage of the `containedin` argument (see `:h syn-containedin`).
+
+# Highlighting declared groups
+
+Finally, we link these new highlight groups with an appropriate/whichever you
+like highlight group (see `:h hi-link` and `:h group-name`). I chose `String`
+for s-strings and `PreProc` for modifiers. And it should work as expected.

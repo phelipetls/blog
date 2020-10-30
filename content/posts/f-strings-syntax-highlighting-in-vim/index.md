@@ -3,6 +3,8 @@ title: "Python f-strings syntax highlighting in Vim"
 date: 2020-10-28
 categories: ["Programming", "Tools", "Vim", "Python"]
 tags: ["vim", "python"]
+js: ["cocoen.min.js", "script.js"]
+css: ["cocoen.min.css"]
 ---
 
 **UPDATE 2020-10-30**: First iteration of this post was very naive, supporting

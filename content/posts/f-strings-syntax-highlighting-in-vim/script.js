@@ -1,10 +1,10 @@
 const before = document.querySelector("[alt='Before']");
 const after = document.querySelector("[alt='After']");
 
-const cocoen = document.createElement("div");
-cocoen.className = "cocoen";
+const container = document.createElement("div");
+container.className = "cocoen";
 
-after.after(cocoen)
-cocoen.append(after, before)
+after.after(container);
+container.append(after, before);
 
-new Cocoen(cocoen);
+new Cocoen(container);

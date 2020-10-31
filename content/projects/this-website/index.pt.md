@@ -7,7 +7,7 @@ github: "https://github.com/phelipetls/blog"
 ---
 
 Este site foi construído com o gerador de site estático
-(Hugo)[https://gohugo.io/], estilizado com (Sass)[https://sass-lang.com/], com
-muito pouco de JavaScript (exceto (KaTeX)[https://katex.org/]).
+[Hugo](https://gohugo.io/), estilizado com [Sass](https://sass-lang.com/), com
+muito pouco de JavaScript (exceto [KaTeX](https://katex.org/)).
 
 <!--more-->

@@ -18,6 +18,7 @@ DefaultContentLanguage = "en"
     weight = 2
     [languages.pt.params]
       description = "Um blog para compartilhar meus interesses em programação, estatística e mais"
+      htmlLang = "pt-BR"
 
 [taxonomies]
   category = "categories"

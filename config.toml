@@ -27,6 +27,9 @@ DefaultContentLanguage = "en"
 [markup]
   [markup.highlight]
     style = "lovelace"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [menu]
   [[menu.main]]

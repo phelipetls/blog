@@ -88,9 +88,9 @@ docs](https://docs.python.org/3/library/string.html#format-specification-mini-la
 and wrote a regex based on it, but regexes are always easier to write than to
 read so I wouldn't recommend you trying.
 
-It's also possible to convert a value as if wrapping them in functions
-`ascii()`, `repr()`, `str()` with `!a`, `!r`, `!s`, so we need to handle this
-also.
+It's also possible to convert a value as if wrapping them in functions such as
+`ascii()`, `repr()`, `str()` with `!a`, `!r`, `!s` respectively, so we need to
+handle this also.
 
 For this, I declared a syntax group with `:h syn-match` and pass the regexes
 that should be used.
@@ -102,4 +102,4 @@ advantage of the `containedin` argument (see `:h syn-containedin`).
 
 Finally, we link these new highlight groups with an appropriate/whichever you
 like highlight group (see `:h hi-link` and `:h group-name`). I chose `String`
-for s-strings and `PreProc` for modifiers. And it should work as expected.
+for f-strings and `PreProc` for modifiers. And it should work as expected.

@@ -41,9 +41,6 @@ Here's how I configured `efm-langserver` to work with `eslint_d`:
 
 ```yaml
 version: 2
-root-markers:
-  - .git/
-  - package.json
 
 tools:
   eslint_d: &eslint_d
@@ -73,9 +70,6 @@ languages:
 I think it's pretty much self-explanatory but I will point out the issues I had
 until I got it right.
 
-- If you're working in a monorepo, add `package.json` in the `root-markers`
-  sequence (the example configuration in the project GitHub page includes only
-  `.git`).
 - Don't forget to configure `lint-formats`, it didn't recognize the column
   numbers without it.
 - You need to configure it to work with all those "languages", which ideally
@@ -89,13 +83,7 @@ capabilities:
 version: 2
 log-file: /home/phelipe/efmlangserver.log
 log-level: 1
-root-markers:
-  - .git/
 ```
-
-**NOTE**: If you do not want to use `eslint_d` you could use the same config
-apart from the `format-command` because the flag `--fix-to-stdout` is
-`eslint_d` feature only.
 
 # Configuring efm-langserver in Neovim
 
@@ -110,7 +98,10 @@ nvim_lsp.efm.setup {
       "efm-langserver",
       "-c",
       [["$HOME/.config/efm-langserver/config.yaml"]]
-    }
+    },
+    root_dir = function()
+      return vim.fn.getcwd()
+    end,
   },
   filetypes = {
     "javascript",
@@ -127,6 +118,17 @@ Notice that I had to override the `default_config` `cmd` value because by
 default it's just `efm-langserver`, which is not ideal but I don't know of a
 better way (you can also configure it in Lua, but I didn't feel like figuring
 it out).
+
+Notice also how I configured the `root_dir` parameter. This is what decides if
+a buffer gets attached to a server or not, but it is optional for
+`efm-langserver` because it takes into account the value of `root-markers` in
+its configuration.
+
+I find that it worked best for me to just set `root_dir` to the directory in
+which I opened `nvim`, so it won't search for any other roots. Otherwise, files
+inside `node_modules` would also be attached to `efm-langserver`. This is not
+what I want, particularly because `eslint_d` has caching features that takes
+too much RAM.
 
 # Bonus: LSP configuration
 

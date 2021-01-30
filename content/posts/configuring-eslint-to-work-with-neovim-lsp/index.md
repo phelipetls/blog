@@ -7,101 +7,67 @@ tags: ["lua", "nvim"]
 
 The way we'll get this to work is by using a generic Language Server called
 [`efm-langserver`](https://github.com/mattn/efm-langserver), which is written
-in Go. There is also
-[`diagnostic-languageserver`](https://github.com/iamcco/diagnostic-languageserver),
-which is written in TypeScript, but I didn't try it.
+in Go.
 
 These Language Servers are generic in that they were made to be powered by
-command-line tools and for any language.
+command-line tools and for any programming language.
 
 # Making eslint faster with eslint_d
 
-To reduce latency when invoking `eslint`, I'd recommend using
-[`eslint_d`](https://github.com/mantoni/eslint_d.js/), which runs `eslint` as a
+To reduce latency when invoking `eslint`, I'm gonna use
+`eslint_d`](https://github.com/mantoni/eslint_d.js/), which runs `eslint` as a
 daemon process.
-
-This is what I began to use by configuring my `makeprg` in the following way:
-
-```vim
-setl makeprg=eslint_d\ --format=unix
-setl errorformat=%f:%l:%c:\ %m,%-G%.%#
-```
-
-The problem with this workflow is to remember to run `:make` to regularly check
-your code. I used to solve this by running an async version of make whenever I
-saved and open the quick fix list in a non-invasive way, but I ended up finding
-this to be disruptive.
-
-Once I got used to getting this feedback through the `:h signcolumn`, I wanted
-to integrate my linters with LSP as well.
 
 # Configuring eslint_d in efm-langserver
 
-Here's how I configured `efm-langserver` to work with `eslint_d`:
+It's possible to configure it with a YAML file, by following their README. I
+did this initially I found that it's more powerful to configure it with Lua.
 
-```yaml
-version: 2
-
-tools:
-  eslint_d: &eslint_d
-    lint-command: 'eslint_d -f unix --stdin --stdin-filename ${INPUT}'
-    lint-stdin: true
-    lint-formats:
-      - "%f:%l:%c: %m"
-    lint-ignore-exit-code: true
-    format-command: 'eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}'
-    format-stdin: true
-
-languages:
-  javascript:
-    - <<: *eslint_d
-  javascriptreact:
-    - <<: *eslint_d
-  javascript.jsx:
-    - <<: *eslint_d
-  typescript:
-    - <<: *eslint_d
-  typescript.tsx:
-    - <<: *eslint_d
-  typescriptreact:
-    - <<: *eslint_d
-```
-
-I think it's pretty much self-explanatory but I will point out the issues I had
-until I got it right.
-
-- Don't forget to configure `lint-formats`, it didn't recognize the column
-  numbers without it.
-- You need to configure it to work with all those "languages", which ideally
-  would be just 2: javascript and typescript, but filetype names in Vim is a
-  shitshow so that's that.
-
-If you still have a problem, take advantage of the program's logging
-capabilities:
-
-```yml
-version: 2
-log-file: /home/phelipe/efmlangserver.log
-log-level: 1
-```
-
-# Configuring efm-langserver in Neovim
-
-This is the configuration that worked for me:
+Here's the configuration, which more explanation below.
 
 ```lua
-local nvim_lsp = require "nvim_lsp"
+local lspconfig = require"lspconfig"
 
-nvim_lsp.efm.setup {
-  default_config = {
-    cmd = {
-      "efm-langserver",
-      "-c",
-      [["$HOME/.config/efm-langserver/config.yaml"]]
-    },
-    root_dir = function()
-      return vim.fn.getcwd()
-    end,
+local eslint = {
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = {"%f:%l:%c: %m"},
+  lintIgnoreExitCode = true,
+  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true
+}
+
+lspconfig.tsserver.setup {
+  on_attach = function(client)
+    if client.config.flags then
+      client.config.flags.allow_incremental_sync = true
+    end
+    client.resolved_capabilities.document_formatting = false
+    set_lsp_config(client)
+  end
+}
+
+lspconfig.efm.setup {
+  on_attach = function(client)
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.goto_definition = false
+    set_lsp_config(client)
+  end,
+  root_dir = function()
+    if not eslint_config_exists() then
+      return nil
+    end
+    return vim.fn.getcwd()
+  end,
+  settings = {
+    languages = {
+      javascript = {eslint},
+      javascriptreact = {eslint},
+      ["javascript.jsx"] = {eslint},
+      typescript = {eslint},
+      ["typescript.tsx"] = {eslint},
+      typescriptreact = {eslint}
+    }
   },
   filetypes = {
     "javascript",
@@ -110,43 +76,47 @@ nvim_lsp.efm.setup {
     "typescript",
     "typescript.tsx",
     "typescriptreact"
-  }
+  },
 }
 ```
 
-Notice that I had to override the `default_config` `cmd` value because by
-default it's just `efm-langserver`, which is not ideal but I don't know of a
-better way (you can also configure it in Lua, but I didn't feel like figuring
-it out).
+I defined a table to configure `efm-langserver` with `eslint_d` by giving the
+necessary commands for linting and formatting.
 
-Notice also how I configured the `root_dir` parameter. This is what decides if
-a buffer gets attached to a server or not, but it is optional for
-`efm-langserver` because it takes into account the value of `root-markers` in
-its configuration.
+I customize the `on_attach` function of both `efm` and `tsserver` so that only
+one has `documentFormatting` capability, otherwise they would conflict with
+each other.
 
-I find that it worked best for me to just set `root_dir` to the directory in
-which I opened `nvim`, so it won't search for any other roots. Otherwise, files
-inside `node_modules` would also be attached to `efm-langserver`. This is not
-what I want, particularly because `eslint_d` has caching features that takes
-too much RAM.
+The `root_dir` function was also customized so that `eslint_d` is spawned just
+for the current working directory and not for every directory it encounters a
+`.eslintrc` (or similar).
 
-# Bonus: LSP configuration
+But I also want this to happen only if the directory has some sort of `eslint`
+configuration. So I created a function to do this:
 
-If you're new to this, you may want to look at [my LSP
-configuration](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/lsp.lua).
-You'll see that I pass a callback (which just sets some keybindings) to be
-called when a buffer gets attached to a LSP server (via the `on_attach` field
-in the setup table). [I then source this file in my
-`init.vim`](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/init.vim#L533)
+```lua
+local function eslint_config_exists()
+  local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
 
-# Furthermore
+  if not vim.tbl_isempty(eslintrc) then
+    return true
+  end
 
-I just configured this so I'll see how it goes but it's definitely better than
-letting `eslint` warnings pass unnoticed.
+  if vim.fn.filereadable("package.json") then
+    if vim.fn.json_decode(vim.fn.readfile("package.json"))["eslintConfig"] then
+      return true
+    end
+  end
 
-I also really wanted a way to use `eslint --fix` (preferably on save), but I
-didn't manage to do that. Using `vim.lsp.buf.formatting_sync()` has a
-noticeable latency (which is understandable), so running it on save is not an
-option. For now, I will just run it from time to time manually. (I do use
-`formatprg`, but for prettier, and at work they don't use prettier so I'm still
-figuring it out how to make this more convenient).
+  return false
+end
+```
+
+# Conclusion
+
+This is kind like a poor replacement for the VS Code eslint extension,
+which does a similar thing as `eslint_d`. And it works ok, it's pretty fast,
+much faster than `typescript-language-server`, so it's definitely an improvement.
+
+It would be nice if there was a way to shut down the server if `eslint` is
+broken for example, but I didn't manage to do it just yet.

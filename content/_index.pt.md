@@ -2,14 +2,13 @@
 title: "Sobre"
 ---
 
-Meu nome é Phelipe Teles, tenho 24 anos e vivo no Rio.
+Oi, meu nome é Phelipe, sou um desenvolvedor de software que vive no Rio.
 
-Eu estudei Economia mas acabei me interessando mais por desenvolvimento de
-software. Comecei a gostar de programação por causa de Econometria, que me
-levou a aprender R e Python.
+Eu venho de um background em Economia e atualmente trabalho como desenvolvedor
+web front-end.
 
-Apesar de ainda gostar bastante de estatística, eu descobri gostar de construir
-software em geral e espero um dia poder trabalhar com isso profissionalmente.
+Ultimamente ando mais interessado em melhorar na criação de interfaces de
+usuário com React, JavaScript e TypeScript. Mas também me interesso por web
+APIs e arquitetura de software.
 
-Eu tenho interesse em desenvolvimento web e data science e, na maioria das
-vezes, estou usando Python e JavaScript.
+Às vezes também escrevo um pouco de Python e Lua.

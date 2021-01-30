@@ -2,13 +2,13 @@
 title: "About"
 ---
 
-My name is Phelipe Teles, I'm 24 years old and I live in Rio.
+Hi, my name is Phelipe, I'm a software developer from Brazil, Rio.
 
-I studied Economics but ended more interested in software development. I got
-into programming due to Econometrics, which led me to learn R and Python.
+I came from an Economics background, but am currently working as a front-end
+web developer.
 
-Although I still like statistics very much, I've found myself enjoying building
-software in general and I expect someday to work professionally with it.
+Lately, I'm mostly concerned in getting better at building user interfaces with
+React, JavaScript and TypeScript. But I also like to learn about web APIs and
+software infrastructure.
 
-I'm interested in web development and data science and I mostly using Python
-and JavaScript.
+Sometimes I also write some Python and Lua code.

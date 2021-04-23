@@ -1,0 +1,7 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{{ $description := cond .IsHome .Site.Params.Description (.Description | default .Summary) }}
+<meta name="description" content="{{ $description }}" />
+<meta name="deploy-date" content="{{ now.Format "2006-01-02" }}">
+<meta name="publish-date" content="{{ .Date.Format "2006-01-02" }}">
+<meta name="last-modified-date" content="{{ .Lastmod.Format "2006-01-02" }}">
+<meta name="author" content="{{ site.Author.name }}">

@@ -1,7 +1,7 @@
 ---
 title: "Configuring eslint to work with Neovim LSP"
 date: 2020-12-28
-tags: ["lua", "nvim"]
+tags: ["lua", "nvim", "lsp", "eslint"]
 ---
 
 The way we'll get this to work is by using a generic Language Server called

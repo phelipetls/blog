@@ -1,7 +1,7 @@
 ---
 title: "Getting Salesforce reports with VBA"
 date: 2020-08-05
-tags: ["salesforce"]
+tags: ["salesforce", "vba", "excel"]
 ---
 
 For those who find themselves in an environment which heavily relies on Excel

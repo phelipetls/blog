@@ -1,4 +1,4 @@
-[license]
+[License]
 other = '''
 Este conteúdo está sob uma licença
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
@@ -6,7 +6,7 @@ Este conteúdo está sob uma licença
 </a>
 '''
 
-[links]
+[Links]
 other = 'Feito com <a href="https://gohugo.io/">Hugo</a>'
 
 [Archive]

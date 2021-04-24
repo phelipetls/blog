@@ -2,7 +2,6 @@
 layout: post
 title: "Web Scraping de páginas dinâmicas com Python"
 date: 2019-08-18
-categories: ["Programming", "Python"]
 tags: ["web-scraping", "pandas", "regex", "dataviz"]
 aliases: ["/web-scraping-de-paginas-dinamicas"]
 ---

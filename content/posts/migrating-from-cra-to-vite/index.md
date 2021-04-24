@@ -1,7 +1,6 @@
 ---
 title: "Migrating from create-react-app to Vite"
 date: 2021-04-23
-categories: ["Programming", "JavaScript", "TypeScript", "Tools"]
 tags: ["javascript", "typescript"]
 ---
 

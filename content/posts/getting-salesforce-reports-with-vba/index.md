@@ -1,7 +1,6 @@
 ---
 title: "Getting Salesforce reports with VBA"
 date: 2020-08-05
-categories: ["Programming", "VBA"]
 tags: ["salesforce"]
 ---
 
@@ -10,24 +9,24 @@ and Salesforce, you may be interested in a way to automate the process of
 downloading reports from inside Excel with VBA only.
 
 I think there are probably better tools for the job, like Apex, SOQL query or a
-better programming language. I [created a Python package for this
-purpose](https://github.com/reportforce) but I didn't use it so much because
-it's hard to integrate with Excel.
+better programming language. I
+[created a Python package for this purpose](https://github.com/reportforce) but
+I didn't use it so much because it's hard to integrate with Excel.
 
 Instead, I looked into a way to do something similar with VBA and I managed to
 do it. In this post I'll share this with you.
 
 # Authentication
 
-The more painless way I know of to [authenticate your requests for a Salesforce
-web service is via SOAP
-API](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/asynch_api_quickstart_login.htm),
+The more painless way I know of to
+[authenticate your requests for a Salesforce web service is via SOAP API](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/asynch_api_quickstart_login.htm),
 with username, password and a security token.
 
 It returns a bunch of XML in the response, but we will only need the session id
 (a JWT) inside of it. This is what the function below does.
 
-From here onwards, we will need to authenticate every request by passing the header `Authorization: Bearer $sessionId`.
+From here onwards, we will need to authenticate every request by passing the
+header `Authorization: Bearer $sessionId`.
 
 ```vb
 Function SalesforceLogin(Username As String, _
@@ -89,16 +88,16 @@ So far, we didn't had to rely on any external tools, there is an XML parser
 inside VBA, but not a JSON parser at least that I know of. So we're in trouble
 here because that's what Analytics speaks.
 
-Fortunately, there is a [JSON parser implementation for
-VBA](https://github.com/VBA-tools/VBA-JSON) which works flawlessly. You just
-need to download [this
-file](https://raw.githubusercontent.com/VBA-tools/VBA-JSON/master/JsonConverter.bas)
+Fortunately, there is a
+[JSON parser implementation for VBA](https://github.com/VBA-tools/VBA-JSON)
+which works flawlessly. You just need to download
+[this file](https://raw.githubusercontent.com/VBA-tools/VBA-JSON/master/JsonConverter.bas)
 and import it as a module.
 
 # Unfortunate API limitations
 
-This API unfortunately have a [critical
-limitation](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_limits_limitations.htm),
+This API unfortunately have a
+[critical limitation](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_limits_limitations.htm),
 which is to return only a maximum of 2000 rows per report. Also, there is no way
 to filter by row limits.
 
@@ -175,18 +174,17 @@ End Function
 
 Now we need to extract the data and write it into a worksheet.
 
-[Every thing we need is inside the `factMap`
-key](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_factmap_example.htm "Salesforce documentation on how to decode the factMap").
-This can get complex if we intend to cover matrix and summary reports, which
-has groupings etc., but tabular reports are much simpler.
+[Every thing we need is inside the `factMap` key](https://developer.salesforce.com/docs/atlas.en-us.api_analytics.meta/api_analytics/sforce_analytics_rest_api_factmap_example.htm "Salesforce documentation on how to decode the factMap").
+This can get complex if we intend to cover matrix and summary reports, which has
+groupings etc., but tabular reports are much simpler.
 
 What we need to do is to iterate through the values at `factMap.T!T.rows` and,
 for each row, get every value inside `.dataCells` array.
 
 This approach will only cover tabular reports, you can take a look at the
-[reportforce source
-code](https://github.com/phelipetls/reportforce/tree/master/reportforce/helpers "Source code for reportforce package on a Github repository")
-if you need to cover these. By the way, there is an option to export to an Excel (but not to write to a worksheet, obviously).
+[reportforce source code](https://github.com/phelipetls/reportforce/tree/master/reportforce/helpers "Source code for reportforce package on a Github repository")
+if you need to cover these. By the way, there is an option to export to an Excel
+(but not to write to a worksheet, obviously).
 
 The below function takes care of this, its job is to go through every cell and
 store it in an array, and then append that array to a worksheet range starting
@@ -256,25 +254,26 @@ End Function
 ```
 
 We also need to get the values at `.reportMetadata.detailColumns` and
-`reportExtendedMetadata.detailColumnInfo` to check how many columns
-the report have and to extract the value at `.value` if it is a date.
+`reportExtendedMetadata.detailColumnInfo` to check how many columns the report
+have and to extract the value at `.value` if it is a date.
 
 # Getting the entire report
 
-To get the entire report, the key thing to overcome the API limitations is a
-key called `.allData`, which will be `true` only if we got all the data from
-the API.
+To get the entire report, the key thing to overcome the API limitations is a key
+called `.allData`, which will be `true` only if we got all the data from the
+API.
 
 So we get the first 2000 rows and, if `.allData` is `false`, we get the values
-of an identifier column, filter them out and request a new report, until we get all data.
+of an identifier column, filter them out and request a new report, until we get
+all data.
 
-We will modify the keys
-`.reportMetadata.standardDateFilter` and `.reportMetadata.reportFilters`,
-to filter dates and other filters respectively.
+We will modify the keys `.reportMetadata.standardDateFilter` and
+`.reportMetadata.reportFilters`, to filter dates and other filters respectively.
 
 If your report has a boolean filter, it's likely that you'll need to change it
-because we will insert new filters. This is already done in the code by
-changing the value at `.reportMetadata.reportBooleanFilter`, so you only need to pass it as a parameter.
+because we will insert new filters. This is already done in the code by changing
+the value at `.reportMetadata.reportBooleanFilter`, so you only need to pass it
+as a parameter.
 
 The function looks way more involved because we have to get the report headers
 (the `label` property of each object inside
@@ -390,16 +389,15 @@ Sub DownloadEntireReport(ReportId As String, _
 End Sub
 ```
 
-To do the filter, we create a `Filters` dictionary to store all key-value pairs we need,
-then add it to the `reportFilters` object, and change its value in later
-iterations. Then we convert the metadata into a JSON string, get
-a new filtered report and repeat the loop until we get all data.
+To do the filter, we create a `Filters` dictionary to store all key-value pairs
+we need, then add it to the `reportFilters` object, and change its value in
+later iterations. Then we convert the metadata into a JSON string, get a new
+filtered report and repeat the loop until we get all data.
 
 Also notice that I use a custom function to get all values at a given column,
 `GetValuesAtColumn`.
 
-[Get the full source code in this GitHub
-gist](https://gist.github.com/phelipetls/57a27f529561eefe73633093c737b7e0).
+[Get the full source code in this GitHub gist](https://gist.github.com/phelipetls/57a27f529561eefe73633093c737b7e0).
 
 # How to use it
 
@@ -436,9 +434,9 @@ End Sub
 
 # Final words
 
-You probably have a better way to do it, I would only recommend this approach
-to someone in an environment very dependent on Excel, simply because it is
-super convenient. You can put the report anywhere you want with zero overhead -- no
+You probably have a better way to do it, I would only recommend this approach to
+someone in an environment very dependent on Excel, simply because it is super
+convenient. You can put the report anywhere you want with zero overhead -- no
 need for a library to understand the complexity of an Excel archive.
 
 And I gotta say, VBA is kind of a hard, its ecosystem is not great, obviously.

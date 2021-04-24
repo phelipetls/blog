@@ -1,13 +1,12 @@
 ---
 title: "Configuring eslint to work with Neovim LSP"
 date: 2020-12-28
-categories: ["Programming", "Lua", "Neovim", "Tools"]
 tags: ["lua", "nvim"]
 ---
 
 The way we'll get this to work is by using a generic Language Server called
-[`efm-langserver`](https://github.com/mattn/efm-langserver), which is written
-in Go.
+[`efm-langserver`](https://github.com/mattn/efm-langserver), which is written in
+Go.
 
 These Language Servers are generic in that they were made to be powered by
 command-line tools and for any programming language.
@@ -20,8 +19,8 @@ daemon process.
 
 # Configuring eslint_d in efm-langserver
 
-It's possible to configure it with a YAML file, by following their README. I
-did this initially I found that it's more powerful to configure it with Lua.
+It's possible to configure it with a YAML file, by following their README. I did
+this initially I found that it's more powerful to configure it with Lua.
 
 Here's the configuration, which more explanation below.
 
@@ -84,8 +83,8 @@ I defined a table to configure `efm-langserver` with `eslint_d` by giving the
 necessary commands for linting and formatting.
 
 I customize the `on_attach` function of both `efm` and `tsserver` so that only
-one has `documentFormatting` capability, otherwise they would conflict with
-each other.
+one has `documentFormatting` capability, otherwise they would conflict with each
+other.
 
 The `root_dir` function was also customized so that `eslint_d` is spawned just
 for the current working directory and not for every directory it encounters a
@@ -114,9 +113,9 @@ end
 
 # Conclusion
 
-This is kind like a poor replacement for the VS Code eslint extension,
-which does a similar thing as `eslint_d`. And it works ok, it's pretty fast,
-much faster than `typescript-language-server`, so it's definitely an improvement.
+This is kind like a poor replacement for the VS Code eslint extension, which
+does a similar thing as `eslint_d`. And it works ok, it's pretty fast, much
+faster than `typescript-language-server`, so it's definitely an improvement.
 
 It would be nice if there was a way to shut down the server if `eslint` is
 broken for example, but I didn't manage to do it just yet.

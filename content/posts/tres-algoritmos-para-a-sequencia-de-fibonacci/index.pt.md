@@ -2,7 +2,6 @@
 layout: post
 title: "Três algoritmos para a sequência de Fibonacci"
 date: 2019-03-03
-categories: ["Programming", "Python", "Math"]
 tags: ["numpy", "linear-algebra"]
 aliases: ["/tres-algoritmos-para-a-sequencia-de-fibonacci"]
 math: true

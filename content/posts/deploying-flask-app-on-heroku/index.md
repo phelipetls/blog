@@ -1,7 +1,6 @@
 ---
 title: "Deploying a Flask app on a Heroku free dyno"
 date: "2020-10-11"
-categories: ["Programming", "Python", "Web development"]
 tags: ["python", "flask", "heroku"]
 ---
 
@@ -19,8 +18,8 @@ index d49e1a0..0cd38da 100644
 +web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
 ```
 
-Recently, I had trouble deploying a Flask application using gunicorn as
-the WSGI server on a Heroku's free dyno tier.
+Recently, I had trouble deploying a Flask application using gunicorn as the WSGI
+server on a Heroku's free dyno tier.
 
 The problem boils down to the application not restarting when the dyno is
 unidling, so once it sleeps it never wakes up again, unless you force it to do
@@ -51,23 +50,21 @@ I simply had this in my `Procfile`:
 
     web: gunicorn "app:create_app()"
 
-I don't know if there's anything wrong with it or if I could have done
-something to make it restart when unidling. Please let me know if that's the
-case.
+I don't know if there's anything wrong with it or if I could have done something
+to make it restart when unidling. Please let me know if that's the case.
 
 By comparing with a node application log, the difference seems to be on how the
 processes handle a `SIGTERM` signal. `node` exits with code 143 and restarts
 just fine afterwards, but `gunicorn` exits with code 0 and doesn't restart
 again.
 
-I searched for a way to configure how gunicorn handles SIGTERM with no luck,
-but that would be too awkward anyway.
+I searched for a way to configure how gunicorn handles SIGTERM with no luck, but
+that would be too awkward anyway.
 
-Then I stumbled upon [a post discouraging the use of gunicorn on
-Heroku](https://blog.etianen.com/blog/2014/01/19/gunicorn-heroku-django/) and
-recommending
-[Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/)
-instead.
+Then I stumbled upon
+[a post discouraging the use of gunicorn on Heroku](https://blog.etianen.com/blog/2014/01/19/gunicorn-heroku-django/)
+and recommending
+[Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/) instead.
 
 The mentioned blog post author's reasons are much more technical than mine, I
 just wanted the application to not crash. So I changed the Procfile to:
@@ -76,8 +73,8 @@ just wanted the application to not crash. So I changed the Procfile to:
 
 As was suggested by the
 [Flask](https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server)
-and [Waitress
-documentation](https://docs.pylonsproject.org/projects/waitress/en/latest/usage.html#heroku)
+and
+[Waitress documentation](https://docs.pylonsproject.org/projects/waitress/en/latest/usage.html#heroku)
 
 Now the application restarts when unidling:
 

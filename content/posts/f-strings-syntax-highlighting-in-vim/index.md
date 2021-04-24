@@ -1,7 +1,6 @@
 ---
 title: "Python f-strings syntax highlighting in Vim"
 date: 2020-10-28
-categories: ["Programming", "Tools", "Vim", "Python"]
 tags: ["vim", "python"]
 ---
 
@@ -13,8 +12,7 @@ that adds support for string modifiers and escape sequences.
 Getting Python syntax highlighting to work in Vim requires very little code, to
 my surprise.
 
-![Before](./before.png)
-![After](./after.png)
+![Before](./before.png) ![After](./after.png)
 
 Here is everything that you need and an explanation below.
 
@@ -74,17 +72,17 @@ does not make sense (notice there is a syntax for that, `:helpgrep ALLBUT`)
 
 # Handling string modifiers
 
-f-strings supports [`str.format`
-syntax](https://docs.python.org/3/library/string.html#format-examples) for
-formatting, for example:
+f-strings supports
+[`str.format` syntax](https://docs.python.org/3/library/string.html#format-examples)
+for formatting, for example:
 
 ```python
 import math
 print(f"The value of pi is approximately {math.pi:.3f}.")
 ```
 
-So I read the [Python
-docs](https://docs.python.org/3/library/string.html#format-specification-mini-language)
+So I read the
+[Python docs](https://docs.python.org/3/library/string.html#format-specification-mini-language)
 and wrote a regex based on it, but regexes are always easier to write than to
 read so I wouldn't recommend you trying.
 

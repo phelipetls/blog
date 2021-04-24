@@ -1,7 +1,6 @@
 ---
 title: "Asynchronous :make in Neovim with Lua"
 date: 2020-08-12
-categories: ["Programming", "Lua", "Neovim", "Tools"]
 tags: ["lua", "nvim"]
 ---
 

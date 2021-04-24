@@ -2,7 +2,6 @@
 layout: post
 title: "Mineração de Texto com as legendas de Game of Thrones"
 date: 2019-04-20
-categories: ["Programming", "R"]
 tags: ["tidyverse", "dataviz", "ggplot2", "tidytext"]
 aliases: ["/game-of-thrones-text-mining"]
 ---
@@ -11,14 +10,14 @@ Neste post procuro visualizar dados textuais das legendads de Game of Thrones
 com o R, utilizando o pacote [`tidytext`](https://www.tidytextmining.com), que
 torna trivial esse tipo de tarefa.
 
-A ideia é transformar um bloco de texto, como um livro, em um tidy DataFrame.
-No nosso, caso faremos com as legendas de GOT.
+A ideia é transformar um bloco de texto, como um livro, em um tidy DataFrame. No
+nosso, caso faremos com as legendas de GOT.
 
 # Obtendo os dados
 
 Os dados brutos foram coletados
-[aqui](https://www.kaggle.com/gunnvant/game-of-thrones-srt), formato JSON. São
-7 arquivos, que contêm todas as legendas para as sete temporadas de GOT.
+[aqui](https://www.kaggle.com/gunnvant/game-of-thrones-srt), formato JSON. São 7
+arquivos, que contêm todas as legendas para as sete temporadas de GOT.
 Felizmente, há uma biblioteca para ler arquivos JSON no R, o `jsonlite`.
 
 No código abaixo, o que fiz foi ler cada arquivo, aplicando a função
@@ -26,7 +25,7 @@ No código abaixo, o que fiz foi ler cada arquivo, aplicando a função
 lista. Depois, transformei essa lista em um vetor com `unlist()`, que por fim
 transformei em um data.frame com `tibble::enframe()`.
 
-``` r
+```r
 library(jsonlite)
 library(tidyverse)
 
@@ -65,7 +64,7 @@ Primeiro vamos retirar o prefixo 'Game of Throns S', o que nos deixa com '01E01
 Winter Is Coming', '{Temporada}E{Episódio} {Nome do episódio}'. Vamos usar
 regexes para extrair cada parte individualmente.
 
-``` r
+```r
 got_subs <- got_subs_raw %>%
   mutate(
     name = str_remove(name, "Game Of Thrones S"),
@@ -102,14 +101,14 @@ got_subs
     ## # ... with 44,880 more rows
 
 Podemos tornar isso se quebrarmos a coluna `value` em unidades menores, como
-palavras. O pacote `tidytext` tem uma função para isso, chamada
-`unnest_tokens`. É mais geral e pode servir para separar um texto em
-caracteres, frases, parágrafos etc.
+palavras. O pacote `tidytext` tem uma função para isso, chamada `unnest_tokens`.
+É mais geral e pode servir para separar um texto em caracteres, frases,
+parágrafos etc.
 
 Será útil também a função `rownames_to_column`, para podermos saber quais
 palavras pertencem à mesma frase após a separação etc.
 
-``` r
+```r
 library(tidytext)
 
 got_words <- got_subs %>%
@@ -136,7 +135,7 @@ got_words
 
 Vamos contar quais são as palavras mais comuns:
 
-``` r
+```r
 got_words %>%
   count(word, sort = T)
 ```
@@ -156,20 +155,19 @@ got_words %>%
     ## 10 it     2962
     ## # ... with 9,685 more rows
 
-A maioria são preposições, pronomes etc., o que não é
-muito interessante. Felizmente, isso é muito facilmente resolvido por
-esse pacote. Basta rodar um `dplyr::anti_join`
-com um dataset que contém essas palavras, conhecidas como ‘stop
-words’.
+A maioria são preposições, pronomes etc., o que não é muito interessante.
+Felizmente, isso é muito facilmente resolvido por esse pacote. Basta rodar um
+`dplyr::anti_join` com um dataset que contém essas palavras, conhecidas como
+‘stop words’.
 
-``` r
+```r
 got_words <- got_words %>%
   anti_join(stop_words)
 ```
 
     ## Joining, by = "word"
 
-``` r
+```r
 got_words %>%
   count(word, sort = T)
 ```
@@ -189,11 +187,11 @@ got_words %>%
     ## 10 brother   393
     ## # ... with 9,069 more rows
 
-E aqui vemos algo mais específico de GOT, mas essas palavras são assim tão frequentes
-por serem pronomes de tratamento de GOT, são as stop
-words desse universo. Por isso, achei prudente retirá-las.
+E aqui vemos algo mais específico de GOT, mas essas palavras são assim tão
+frequentes por serem pronomes de tratamento de GOT, são as stop words desse
+universo. Por isso, achei prudente retirá-las.
 
-``` r
+```r
 got_stop_words <- c(
   "father", "mother", "queen", "king",
   "boy", "girl", "lord", "lady", "son", "sister",
@@ -232,11 +230,10 @@ A [base limpa com essas palavras pode ser baixada aqui](./got_words.csv).
 Agora, vamos visualizar quais as palavras que aparecem juntas com mais
 frequência, com a função `pairwise_cor` do pacote `widyr`.
 
-Só precisamos filtrar nossa base antes, porque não queremos que o R
-compare cada par de 81579 palavras: escolheremos as palavras que apareçam 50
-vezes ou mais.
+Só precisamos filtrar nossa base antes, porque não queremos que o R compare cada
+par de 81579 palavras: escolheremos as palavras que apareçam 50 vezes ou mais.
 
-``` r
+```r
 library(widyr)
 
 word_pairs <- got_words %>%
@@ -265,15 +262,16 @@ word_pairs
     ## 10 snow     jon            0.540
     ## # ... with 109,882 more rows
 
-Dentre alguns resultado interessantes, nos deparamos com um bastante
-anormal. color font? font color? Isso é código HTML usado para formatação que
-acabou entrando no documento, que eventualmente serão ignoradas.
+Dentre alguns resultado interessantes, nos deparamos com um bastante anormal.
+color font? font color? Isso é código HTML usado para formatação que acabou
+entrando no documento, que eventualmente serão ignoradas.
 
-Para visualizar essas relações, vamos usar grafos. Nele as palavras são nós
-e os vértices as corrrelações (um vértice mais escuro indica uma correlação mais alta),
-teremos assim uma network dos top 100 par de palavras mais correlacionados entre si.
+Para visualizar essas relações, vamos usar grafos. Nele as palavras são nós e os
+vértices as corrrelações (um vértice mais escuro indica uma correlação mais
+alta), teremos assim uma network dos top 100 par de palavras mais
+correlacionados entre si.
 
-``` r
+```r
 library(ggraph)
 library(igraph)
 
@@ -301,14 +299,14 @@ word_pairs %>%
 
 # Palavras mais frequentes
 
-Agora, vamos visualizar quais as palavras mais frequentes em geral e
-por temporada. Para isso vamos utilizar nuvem de palavras.
+Agora, vamos visualizar quais as palavras mais frequentes em geral e por
+temporada. Para isso vamos utilizar nuvem de palavras.
 
-O em geral primeiro. Vamos ver quais são as top 50 palavras em uma
-nuvem, com a função `wordcloud::wordcloud`, que toma como argumentos
-principais um vetor de palavras e um de frequências.
+O em geral primeiro. Vamos ver quais são as top 50 palavras em uma nuvem, com a
+função `wordcloud::wordcloud`, que toma como argumentos principais um vetor de
+palavras e um de frequências.
 
-``` r
+```r
 library(wordcloud)
 library(RColorBrewer)
 
@@ -327,9 +325,10 @@ got_words %>%
 
 ![Nuvem de palavras das palavras mais comuns em Game of Thrones](./nuvem-de-palavras.png)<!-- -->
 
-Agora, vamos ver como isso varia para cada temporada, com o pacote `ggwordcloud`.
+Agora, vamos ver como isso varia para cada temporada, com o pacote
+`ggwordcloud`.
 
-``` r
+```r
 library(ggwordcloud)
 
 theme_set(theme_minimal())
@@ -356,19 +355,18 @@ got_words %>%
 
 # Análise de sentimentos
 
-Outra coisa que é interessante de ser feita é analisar o sentimento
-médio do texto, se nele há mais palavras consideradas negativas ou positivas
-etc.
+Outra coisa que é interessante de ser feita é analisar o sentimento médio do
+texto, se nele há mais palavras consideradas negativas ou positivas etc.
 
-Esse é um tópico delicado teoricamente, já que não é algo tão trivial
-para um computador deduzir se uma frase expressa um sentimento bom ou ruim. Não
-vamos deixar o computador fazer isso, mas usar um léxico que mapeia palavras a
+Esse é um tópico delicado teoricamente, já que não é algo tão trivial para um
+computador deduzir se uma frase expressa um sentimento bom ou ruim. Não vamos
+deixar o computador fazer isso, mas usar um léxico que mapeia palavras a
 sentimentos, feito por humanos.
 
 Por exemplo, o léxico `afinn` classifica algumas mil palavras em uma escala que
 varia de -5 (muito negativo) até 5 (muito positivo).
 
-``` r
+```r
 get_sentiments("afinn")
 ```
 
@@ -390,7 +388,7 @@ get_sentiments("afinn")
 Já esse classifica cada palavra binariamente, em ‘negativa’ ou ‘positiva’,
 cobrindo uma porção maior de palavras.
 
-``` r
+```r
 get_sentiments("bing")
 ```
 
@@ -409,10 +407,11 @@ get_sentiments("bing")
     ## 10 abort       negative
     ## # ... with 6,778 more rows
 
+Outra base possível de ser usada é essa, que cobre muito mais palavras e
+categorias, além de ter mais palavras positivas (em relação às negativas) que a
+base 'bing'.
 
-Outra base possível de ser usada é essa, que cobre muito mais palavras e categorias, além de ter mais palavras positivas (em relação às negativas) que a base 'bing'.
-
-``` r
+```r
 get_sentiments("nrc")
 ```
 
@@ -434,10 +433,9 @@ get_sentiments("nrc")
 Vamos aplicar a análise de sentimento com as três e ver como elas se
 diferenciam.
 
-Vejamos primeiro quais são as palavras negativas e positivas mais
-comuns.
+Vejamos primeiro quais são as palavras negativas e positivas mais comuns.
 
-``` r
+```r
 got_bing <- got_words %>%
   filter(word != "stark") %>%
   select(-rowname) %>%
@@ -446,7 +444,7 @@ got_bing <- got_words %>%
 
     ## Joining, by = "word"
 
-``` r
+```r
 got_bing %>%
   distinct(word, .keep_all = T) %>%
   group_by(sentiment) %>%
@@ -466,12 +464,12 @@ got_bing %>%
 
 ![Palavras negativas e positivas](./palavras-negativas-e-positivas.png)<!-- -->
 
-Agora, vamos fazer isso em por temporada e medir o sentimento médio a cada
-seção de n palavras.
+Agora, vamos fazer isso em por temporada e medir o sentimento médio a cada seção
+de n palavras.
 
 Vamos usar o dataset `afinn` e uma seção formada por 25 palavras.
 
-``` r
+```r
 got_afinn <- got_words %>%
   inner_join(get_sentiments("afinn")) %>%
   select(-rowname, -n) %>%
@@ -484,7 +482,7 @@ got_afinn <- got_words %>%
 
     ## Joining, by = "word"
 
-``` r
+```r
 got_afinn %>%
   group_by(season, section) %>%
   summarise(avg_sentiment = mean(score)) %>%
@@ -506,17 +504,15 @@ got_afinn %>%
 
 ![Sentimento médio, método afinn](./sentimento-medio-afinn.png)<!-- -->
 
-Em geral, podemos ver que as temporadas foram ficando mais pesadas. Os
-picos azuis claros foram ficando cada vez mais raros e os vales
-vermelhos mais agudos, chegando a seu clímax na temporada 5, o Walk of
-Shame.
+Em geral, podemos ver que as temporadas foram ficando mais pesadas. Os picos
+azuis claros foram ficando cada vez mais raros e os vales vermelhos mais agudos,
+chegando a seu clímax na temporada 5, o Walk of Shame.
 
-Vamos tentar o mesmo com as outras duas bases. Como elas classificam as
-palavras binariamente, a ideia é calcular o 'sentimento líquido', o que se
-entende pela diferença no número de palavras positivas e negativas, para cada
-seção.
+Vamos tentar o mesmo com as outras duas bases. Como elas classificam as palavras
+binariamente, a ideia é calcular o 'sentimento líquido', o que se entende pela
+diferença no número de palavras positivas e negativas, para cada seção.
 
-``` r
+```r
 got_bing %>%
   select(-n) %>%
   mutate(
@@ -547,7 +543,7 @@ got_bing %>%
 
 Ok, isso em geral vai de encontro com o que já havíamos visto.
 
-``` r
+```r
 got_nrc <- got_words %>%
   filter(word != "stark") %>%
   select(-rowname) %>%
@@ -557,7 +553,7 @@ got_nrc <- got_words %>%
 
     ## Joining, by = "word"
 
-``` r
+```r
 got_nrc %>%
   select(-n) %>%
   mutate(
@@ -586,11 +582,11 @@ got_nrc %>%
 
 ![Sentimento médio, método NRC](./sentimento-medio-nrc.png)<!-- -->
 
-Pera! Já esse nos dá quase que o resultado oposto! De fato, por esse método
-a série não parece ser tão negativa quanto os outros haviam sugerido. Isso porque
-essa base tem muito mais palavras positivas em relação a negativas. Palavras como 'land',
-'prince' etc. são nela 'positivas', enquanto que nas outras, não. Por ter mais palavras,
-aumentam também o número de seções.
+Pera! Já esse nos dá quase que o resultado oposto! De fato, por esse método a
+série não parece ser tão negativa quanto os outros haviam sugerido. Isso porque
+essa base tem muito mais palavras positivas em relação a negativas. Palavras
+como 'land', 'prince' etc. são nela 'positivas', enquanto que nas outras, não.
+Por ter mais palavras, aumentam também o número de seções.
 
 Enfim, esse é um ponto delicado, incluído aqui somente por ser interessante em
 si mesmo.

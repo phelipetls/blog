@@ -2,7 +2,6 @@
 layout: post
 title: "Processo de Gram-Schmidt com NumPy"
 date: 2019-08-04
-categories: ["Programming", "Python", "Math"]
 tags: ["numpy", "python", "linear-algebra"]
 aliases: ["/gram-schmidt"]
 math: true
@@ -16,14 +15,14 @@ Esse processo de ortogonalização é útil porque torna fácil numericamente
 operações custosas como a inversão de uma matriz. Isso vem simplesmente do fato
 do produto interno de dois vetores perpendiculares entre si ser 0.
 
-Intuitivamente, se interpretarmos o produto interno como uma
-"projeção" de um vetor sobre o outro, isso quer dizer que os dois
-vetores não tem uma "correlação" em termos de direção. Geometricamente,
-também quer dizer que eles estão separados por um ângulo de 90º.
+Intuitivamente, se interpretarmos o produto interno como uma "projeção" de um
+vetor sobre o outro, isso quer dizer que os dois vetores não tem uma
+"correlação" em termos de direção. Geometricamente, também quer dizer que eles
+estão separados por um ângulo de 90º.
 
 Por exemplo, os três vetores abaixo são vetores ortogonais:
 
-``` python
+```python
 %matplotlib inline
 import matplotlib.pyplot as plt
 
@@ -43,35 +42,34 @@ ax.set_zlim(-1, 1, 1)
 
 Para ver isso com matrizes, vamos supor uma matriz \\( Q \\) cujas colunas são
 vetores ortogonais com o comprimento
-([norma](https://en.wikipedia.org/wiki/Norm_(mathematics))) igual a 1, o que
-quer dizer que eles são *ortonormais*.
+([norma](<https://en.wikipedia.org/wiki/Norm_(mathematics)>)) igual a 1, o que
+quer dizer que eles são _ortonormais_.
 
-Se isso é verdade, então podemos dizer que \\( Q^{T}Q = I \\). E, se \\( Q \\) for
-quadrada, então \\( Q^T \\) é a inversa de \\( Q \\)\!\!
+Se isso é verdade, então podemos dizer que \\( Q^{T}Q = I \\). E, se \\( Q \\)
+for quadrada, então \\( Q^T \\) é a inversa de \\( Q \\)\!\!
 
 Isso porque
 
-\\(  q^{T}_{i}q_j = \begin{cases} 0, & \text{se } i \neq j
-\cr 1, & \text{se } i = j \end{cases}  \\)
+\\( q^{T}\_{i}q_j = \begin{cases} 0, & \text{se } i \neq j \cr 1, & \text{se } i
+= j \end{cases} \\)
 
-É dessa forma que uma operação complexa como inverter uma matriz
-torna-se trivial no caso de uma matriz ortogonal.
+É dessa forma que uma operação complexa como inverter uma matriz torna-se
+trivial no caso de uma matriz ortogonal.
 
-Então entra a ideia de Gram-Schmidt, que procura transformar uma
-matriz \\( A \\) qualquer em uma matriz com vetores ortonormais \\( Q \\) e uma
-matriz \\( R \\) que conecta as duas:
+Então entra a ideia de Gram-Schmidt, que procura transformar uma matriz \\( A
+\\) qualquer em uma matriz com vetores ortonormais \\( Q \\) e uma matriz \\( R
+\\) que conecta as duas:
 
 $$
 A = QR
 $$
 
-Como eles fazem isso? A ideia básica é a seguinte e está intimamente
-ligada ao conceito de projeção. Por isso, vamos entender o que é isso
-antes.
+Como eles fazem isso? A ideia básica é a seguinte e está intimamente ligada ao
+conceito de projeção. Por isso, vamos entender o que é isso antes.
 
 Abaixo, uma imagem da projeção de um vetor \\( a_1 \\) sobre \\( a_2 \\).
 
-``` python
+```python
 import numpy as np
 
 np.random.seed(1)
@@ -121,8 +119,8 @@ $$
 Se você reparar bem, essa foi exatamente a conta que eu fiz para obter a
 variável de nome `projection` no código acima.
 
-Isso pode ser generaliza para um sistema de equações e é conhecido como
-equações normais e é o que fundamenta o modelo clássico de regressão linear.
+Isso pode ser generaliza para um sistema de equações e é conhecido como equações
+normais e é o que fundamenta o modelo clássico de regressão linear.
 
 A fórmula é bem parecida com a de cima e a interpretação também: ela projeta o
 vetor \\( b \\) no espaço vetorial expandido pelos vetores de \\( A \\).
@@ -131,9 +129,9 @@ $$
 \hat{x} = (A^TA)^{-1}A^Tb
 $$
 
-O vetor projetado em \\( A \\) é então simplesmente \\( A\hat{x} \\),
-o produto do que agora chamaremos matriz de projeção,
-\\( A(A^TA)^{-1}A^T \\), com o vetor \\( b \\):
+O vetor projetado em \\( A \\) é então simplesmente \\( A\hat{x} \\), o produto
+do que agora chamaremos matriz de projeção, \\( A(A^TA)^{-1}A^T \\), com o vetor
+\\( b \\):
 
 $$
 \hat{b} = A\hat{x} = A(A^TA)^{-1}A^Tb
@@ -148,14 +146,14 @@ $$
 E assim vemos que assim como há a matriz de projeção de \\( b \\) sobre o
 sub-espaço expandido pelos vetores de \\( A \\), há também a projeção de \\( b
 \\) sobre o sub-espaço ortogonal, que é obtido ao multiplicar \\( b \\) com a
-matriz denominada como *annihilator matrix*, \\( (I - A(A^TA)^{-1}A^T) \\).
-Essa matriz é a *residual maker* na regressão linear. E é justamente o que
-iremos precisar.
+matriz denominada como _annihilator matrix_, \\( (I - A(A^TA)^{-1}A^T) \\). Essa
+matriz é a _residual maker_ na regressão linear. E é justamente o que iremos
+precisar.
 
 Agora, para o algoritmo propriamente dito. Vamos usar uma matriz 3x3 qualquer e
 tentar torná-lo ortogonal.
 
-``` python
+```python
 np.random.seed(1)
 A = np.random.randint(0, 10, 9).reshape((3, 3))
 
@@ -170,14 +168,14 @@ O primeiro vetor não precisa ser ortogonalizado, vamos dividindo-o por seu
 próprio comprimento para torná-lo normal (com norma 1).
 
 Já o segundo, queremos ortogonalizar em relação ao primeiro. E para isso vamos
-usar a *annhilator matrix*.
+usar a _annhilator matrix_.
 
 No caso do terceito, faremos o mesmo mas sobre o espaço expandido pelos dois
 primeiros vetores.
 
 Vamos ver se isso funciona. O código abaixo replica esse processo.
 
-``` python
+```python
 def orthogonalize(A, n):
     # vetor a ser ortogonalizado
     b = A[:, n][:, np.newaxis]
@@ -211,10 +209,9 @@ Q
            [ 0.70014004, -0.55198092, -0.45290285],
            [ 0.14002801,  0.72814504, -0.67096718]])
 
-Se tudo está correto, a multiplicação \\( Q^{T}Q \\) deve retornar a
-identidade:
+Se tudo está correto, a multiplicação \\( Q^{T}Q \\) deve retornar a identidade:
 
-``` python
+```python
 Q.T.dot(Q)
 ```
 
@@ -222,15 +219,14 @@ Q.T.dot(Q)
            [-1.38777878e-17,  1.00000000e+00,  6.66133815e-16],
            [-8.04911693e-16,  6.66133815e-16,  1.00000000e+00]])
 
-
 O que felizmente é o nosso caso.
 
-Isso também é conhecido como mudar a base de
-uma matriz, para uma muito mais fácil de se lidar numericamente.
+Isso também é conhecido como mudar a base de uma matriz, para uma muito mais
+fácil de se lidar numericamente.
 
-Para obter a mesma matriz Q de forma mais confiável, você pode usar a
-função `np.linalg.qr()`, que vai te retornar a matriz \\( Q \\) que obtemos e
-a matriz \\( R \\) que conecta \\( Q \\) a \\( A \\).
+Para obter a mesma matriz Q de forma mais confiável, você pode usar a função
+`np.linalg.qr()`, que vai te retornar a matriz \\( Q \\) que obtemos e a matriz
+\\( R \\) que conecta \\( Q \\) a \\( A \\).
 
 Aqui está a aula em que Gilbert Strang explica esse conceito:
 

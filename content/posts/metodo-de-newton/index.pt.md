@@ -2,29 +2,28 @@
 layout: post
 title: "Método de Newton"
 date: 2019-03-17
-categories: ["Programming", "Python", "Math"]
 tags: ["matplotlib", "numpy", "sympy"]
 aliases: ["/metodo-de-newton"]
 math: true
 ---
 
-O Método de Newton é um conhecido algoritmo para chegar a soluções
-númericas de uma equação, normalmente uma para a qual a solução não é
-tão trivial. Por exemplo, imagine que queiramos encontrar encontrar a
-raiz da função quadrática \\( x = \sqrt{5} \Rightarrow x^2 = 5
-\Rightarrow x^2 - 5 = 0 \\). Como poderíamos fazer isso?
+O Método de Newton é um conhecido algoritmo para chegar a soluções númericas de
+uma equação, normalmente uma para a qual a solução não é tão trivial. Por
+exemplo, imagine que queiramos encontrar encontrar a raiz da função quadrática
+\\( x = \sqrt{5} \Rightarrow x^2 = 5 \Rightarrow x^2 - 5 = 0 \\). Como
+poderíamos fazer isso?
 
-Newton criou um método (verdadeiramente um algoritmo)
-extraordinariamente eficiente para chegar à solução, em que se faz uso
-de seus estudos em cálculo diferencial.
+Newton criou um método (verdadeiramente um algoritmo) extraordinariamente
+eficiente para chegar à solução, em que se faz uso de seus estudos em cálculo
+diferencial.
 
 Calcular \\( \sqrt{5} \\), hoje em dia, é trivial, basta qualquer calculadora.
-Mas, como será que a calculadora faz esse cálculo? Talvez seja esse
-o algoritmo que ela mesma usa. Vamos entender como isso funciona então.
+Mas, como será que a calculadora faz esse cálculo? Talvez seja esse o algoritmo
+que ela mesma usa. Vamos entender como isso funciona então.
 
 Para melhor entendimento do problema, vejamos o gráfico da função antes.
 
-``` python
+```python
 %matplotlib inline
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -43,63 +42,63 @@ plt.plot(X, f(X))
 Podemos verificar que ela intercepta o eixo x quando \\( x \\) é um pouquinho
 acima de 2, quer dizer, quando \\( x = \sqrt{5} \approx 2.23 \\).
 
-Ok, mas como chegamos até ali com cálculo diferencial? O raciocínio é
-como segue: vamos fazer uma estimativa inicial, um valor que achamos que
-seja próximo da solução. Por exemplo, 1.
+Ok, mas como chegamos até ali com cálculo diferencial? O raciocínio é como
+segue: vamos fazer uma estimativa inicial, um valor que achamos que seja próximo
+da solução. Por exemplo, 1.
 
-Com esse valor, a ideia é obter a reta tangente àquele ponto, o que é
-algo muito mais fácil de lidar. E, para isso, é claro que precisamos
-calcular \\( f^{'}(1) \\), a inclinação dessa reta naquele ponto.
+Com esse valor, a ideia é obter a reta tangente àquele ponto, o que é algo muito
+mais fácil de lidar. E, para isso, é claro que precisamos calcular \\( f^{'}(1)
+\\), a inclinação dessa reta naquele ponto.
 
-E, com ela em mãos, queremos achar onde *essa reta* intercepta o eixo x,
-e este deve ser um ponto mais próximo da raiz, mas não exatamente a
-raiz. Isto porque estamos calculando a raiz de uma reta pra nos
-aproximarmos da raiz de uma parábola, que não é linear, é claro.
+E, com ela em mãos, queremos achar onde _essa reta_ intercepta o eixo x, e este
+deve ser um ponto mais próximo da raiz, mas não exatamente a raiz. Isto porque
+estamos calculando a raiz de uma reta pra nos aproximarmos da raiz de uma
+parábola, que não é linear, é claro.
 
 ![Img](./newtonraphson1.png)
 
-Até então, o método não parece tão impressionante. Mas e se fizermos
-isso de novo, usando como estimativa a raiz dessa reta? Acontece que se
-repetirmos esse processo algumas vezes mais podemos chegar numa
-estimativa *muito* próxima da solução.
+Até então, o método não parece tão impressionante. Mas e se fizermos isso de
+novo, usando como estimativa a raiz dessa reta? Acontece que se repetirmos esse
+processo algumas vezes mais podemos chegar numa estimativa _muito_ próxima da
+solução.
 
 # Aproximação Linear
 
 Esse uso da reta tangente é o que se conhece por aproximação linear. Por
-exemplo, retomando a função quadrática. A derivada dela é obtida pela
-regra da potência, \\( \frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente é
-obtida simplesmente da equação de uma reta:
+exemplo, retomando a função quadrática. A derivada dela é obtida pela regra da
+potência, \\( \frac{d(x^2)}{dx} = 2x \\). Já a equação da tangente é obtida
+simplesmente da equação de uma reta:
 
 $$
 \Delta y = f'(x)\Delta x \\ (y - y_0) = f'(x_0)(x - x_0) \\ y =
 y_0 + m(x - x_0)
 $$
 
-No nosso caso, queremos achar a reta tangente quando \\( x_0 = 1 \\), sendo
-\\( f(x_0) = x^2 - 5 = 1 - 5 = -4 \\). Logo, a reta que tangencia o ponto
-\\( (1, -4) \\) é:
+No nosso caso, queremos achar a reta tangente quando \\( x_0 = 1 \\), sendo \\(
+f(x_0) = x^2 - 5 = 1 - 5 = -4 \\). Logo, a reta que tangencia o ponto \\( (1,
+-4) \\) é:
 
 $$
 y = y_0 + 2x(x - x_0) \\ y = -4 + 2\cdot 1(x - 1) \\ y = -4 + 2x
 -2 \\ y = 2x - 6
 $$
 
-Mas, é crucial perceber que essa é a *equação da reta tangente ao ponto
-\\( (x_0, y_0) \\) da função f(x)*. Então, o que realmente podemos alegar é
-que, para um dado número \\( a \\), o valor de \\( f(a) \approx y(a) \\), quando \\( a
-\approx x_0 \\): a reta tangente a um dado ponto de uma função é muito
-próxima da própria função para valores não muito distantes do ponto.
+Mas, é crucial perceber que essa é a _equação da reta tangente ao ponto \\(
+(x_0, y_0) \\) da função f(x)_. Então, o que realmente podemos alegar é que,
+para um dado número \\( a \\), o valor de \\( f(a) \approx y(a) \\), quando \\(
+a \approx x_0 \\): a reta tangente a um dado ponto de uma função é muito próxima
+da própria função para valores não muito distantes do ponto.
 
 $$
 f(a) \approx y_0 + m(a - x_0)
 $$
 
-No gráfico abaixo isso pode ser melhor visualizado. Perceba que para
-valores próximos de 1, a reta tangente está bem próxima da parábola, mas
-vai ficando cada vez mais distante quando x se afasta de 1. E é esse o
-sentido de uma aproximação linear.
+No gráfico abaixo isso pode ser melhor visualizado. Perceba que para valores
+próximos de 1, a reta tangente está bem próxima da parábola, mas vai ficando
+cada vez mais distante quando x se afasta de 1. E é esse o sentido de uma
+aproximação linear.
 
-``` python
+```python
 def tang(x):
     return 2 * x - 6
 
@@ -113,17 +112,16 @@ plt.legend()
 ![png](./output_3_1.png)
 
 Nesse zoom, também podemos ver que a reta tangente ao ponto \\( (1, -4) \\)
-cruza o eixo \\( x \\) um pouco mais adiante de \\( 2.23 \\). Mais especificamente,
-quando \\( 2x - 6 = 0 \Rightarrow 2x = 6 \Rightarrow x = 3 \\).
+cruza o eixo \\( x \\) um pouco mais adiante de \\( 2.23 \\). Mais
+especificamente, quando \\( 2x - 6 = 0 \Rightarrow 2x = 6 \Rightarrow x = 3 \\).
 
 O que é um pouco mais próximo da raiz do que a estimativa inicial 1. E é
-exatamente nisso que consiste o Método de Newton, em se aproximar cada
-vez mais da raiz de \\( f(x) \\) usando a reta que tangencia um dado ponto
-desta função.
+exatamente nisso que consiste o Método de Newton, em se aproximar cada vez mais
+da raiz de \\( f(x) \\) usando a reta que tangencia um dado ponto desta função.
 
-Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre
-o valor de \\( x \\) da reta tangente a um ponto \\( (x_0, y_0) \\) que faz com
-que \\( y = 0 \\):
+Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre o valor
+de \\( x \\) da reta tangente a um ponto \\( (x_0, y_0) \\) que faz com que \\(
+y = 0 \\):
 
 $$
 y - y_0 = m(x - x_0) \text{ dividindo tudo por m e sumindo com o y: } \newline
@@ -138,19 +136,19 @@ $$
 x = 1 - \frac{1^2 - 5}{2\cdot1} = 1 - \frac{-4}{2} = 1 - (-2) = 3
 $$
 
-E a ideia é usarmos o 3 como um novo \\( x_0 \\), e com ele calcularmos uma
-nova estimativa para a raiz com a reta que tangencia \\( (3, 4) \\).
+E a ideia é usarmos o 3 como um novo \\( x_0 \\), e com ele calcularmos uma nova
+estimativa para a raiz com a reta que tangencia \\( (3, 4) \\).
 
 $$
 x = 3 - \frac{3^2 - 5}{2\cdot3} = 3 - \frac{4}{6} = 3 - \frac{2}{3} \approx 2.333
 $$
 
-O que já é uma ótima aproximação de \\( \sqrt{5} \\). Abaixo um gráfico do
-que mais ou menos aconteceu. A função laranja é a tangente ao ponto \\( (1,
--4) \\), e a verde ao ponto \\( (3, 4) \\). Veja como o intercepto-x da tangente
-a este último ponto é próximo da raiz da parábola.
+O que já é uma ótima aproximação de \\( \sqrt{5} \\). Abaixo um gráfico do que
+mais ou menos aconteceu. A função laranja é a tangente ao ponto \\( (1, -4) \\),
+e a verde ao ponto \\( (3, 4) \\). Veja como o intercepto-x da tangente a este
+último ponto é próximo da raiz da parábola.
 
-``` python
+```python
 def f(x):
     return x ** 2 - 5
 
@@ -179,19 +177,19 @@ plt.legend()
 
 ![Image](./newton_visualization.png)
 
-Seria interessante escrevermos uma função para fazer esses cálculos, e
-ela inevitavelmente teria lidar com cálculo diferencial. Para isso,
-existe uma biblioteca que pode nos ajudar.
+Seria interessante escrevermos uma função para fazer esses cálculos, e ela
+inevitavelmente teria lidar com cálculo diferencial. Para isso, existe uma
+biblioteca que pode nos ajudar.
 
 # Introduzindo SymPy
 
-Essa biblioteca fornece suporte para trabalhar com álgebra simbólica.
-Nela contamos com funções para calcular limites, derivadas, integrais,
-expandir polinômicos, simplificar expressões etc.
+Essa biblioteca fornece suporte para trabalhar com álgebra simbólica. Nela
+contamos com funções para calcular limites, derivadas, integrais, expandir
+polinômicos, simplificar expressões etc.
 
 Por exemplo, se quisermos calcular a derivada da função \\( x^2 - 5 \\).
 
-``` python
+```python
 from sympy import symbols, diff, limit, integrate, oo
 
 x = symbols("x")
@@ -201,10 +199,10 @@ diff(x ** 2 - 5)
 
     2*x
 
-Podemos também calcular limites, por exemplo \\( \lim_{x \to \infty}
+Podemos também calcular limites, por exemplo \\( \lim\_{x \to \infty}
 \frac{1}{x} = 0 \\)
 
-``` python
+```python
 limit(1 / x, x, oo)
 ```
 
@@ -214,35 +212,35 @@ limit(1 / x, x, oo)
 
 Ou mesmo integrais indefinidas, \\( \int x^2 , dx = \frac{x^3}{3} + c \\)
 
-``` python
+```python
 integrate(x ** 2)
 ```
 
     x**3/3
 
 A função assim como está não serve para retornar qualquer valor, ela
-praticamente só aceita funções do próprio SymPy. Para a utilizarmos como
-uma função qualquer, devemos usar `  lambdify() `. Para nossos
-objetivos, essa última e a função diff serão suficientes.
+praticamente só aceita funções do próprio SymPy. Para a utilizarmos como uma
+função qualquer, devemos usar `lambdify()`. Para nossos objetivos, essa última e
+a função diff serão suficientes.
 
 # Um código para o algoritmo
 
 Antes de apresentar a função em si, melhor explicar como eu a pensei.
 
 Primeiramente, ela tomará três argumentos: a função, o valor para o qual
-queremos uma solução, e a estimativa inicial. Por exemplo, no nosso
-caso, ela tomaria os argumentos \\( x^2 \\), \\( 5 \\) e \\( 1 \\).
+queremos uma solução, e a estimativa inicial. Por exemplo, no nosso caso, ela
+tomaria os argumentos \\( x^2 \\), \\( 5 \\) e \\( 1 \\).
 
-Em seguida, construirei simbolicamente, com estes argumentos, nossa
-\\( f(x) \\) e sua derivada, \\( f'(x) \\). E com isso temos tudo que precisamos
-para executarmos o método.
+Em seguida, construirei simbolicamente, com estes argumentos, nossa \\( f(x) \\)
+e sua derivada, \\( f'(x) \\). E com isso temos tudo que precisamos para
+executarmos o método.
 
-No algoritmo, decidi por 5 iterações, printando três colunas com os
-resultados a cada iteração: a estimativa inicial, a nova estimativa e,
-por fim, a diferença entre as duas, a fim de verificar como a cada
-iteração o valor de x se aproxima mais do da raiz.
+No algoritmo, decidi por 5 iterações, printando três colunas com os resultados a
+cada iteração: a estimativa inicial, a nova estimativa e, por fim, a diferença
+entre as duas, a fim de verificar como a cada iteração o valor de x se aproxima
+mais do da raiz.
 
-``` python
+```python
 from sympy.utilities.lambdify import lambdify
 
 
@@ -276,11 +274,10 @@ print(f"\nO quanto erramos: {abs(np.sqrt(5) - newton(x**2, 5, 1))}")
 
 E assim vemos que o erro foi desprezível.
 
-A vantagem de usar o SymPy é que agora podemos estimar a raiz de
-qualquer tipo de função. Por exemplo, a raiz cúbica de 5, ou algo mais
-complicado:
+A vantagem de usar o SymPy é que agora podemos estimar a raiz de qualquer tipo
+de função. Por exemplo, a raiz cúbica de 5, ou algo mais complicado:
 
-``` python
+```python
 print(f"\nO quanto erramos: {abs(5**(1/3) - newton(x**3, 5, 2))}")
 ```
 
@@ -293,9 +290,9 @@ print(f"\nO quanto erramos: {abs(5**(1/3) - newton(x**3, 5, 2))}")
 
     O quanto erramos: 2.220446049250313e-16
 
-Uma das raízes para função \\(  x^4 + x^3 - x^2 - 5 \\) deve ser:
+Uma das raízes para função \\( x^4 + x^3 - x^2 - 5 \\) deve ser:
 
-``` python
+```python
 newton(x ** 4 + x ** 3 - x ** 2, 5, 1)
 ```
 
@@ -308,11 +305,10 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, 1)
 
     1.4259134245660217
 
-Se plotarmos seu gráfico, veremos que esse é um valor razoável. Uma raiz
-parece estar entre 1 e 2, e foi a que achamos. E uma outra está muito
-próxima de -2.
+Se plotarmos seu gráfico, veremos que esse é um valor razoável. Uma raiz parece
+estar entre 1 e 2, e foi a que achamos. E uma outra está muito próxima de -2.
 
-``` python
+```python
 X = np.linspace(-5, 5, 1000)
 
 
@@ -328,11 +324,10 @@ plt.ylim(-7.5, 5)
 
 ![png](./output_17_1.png)
 
-Vamos tentar achar essa outra raiz com nossa função. Para isso, basta
-mudarmos nossa estimativa inicial de forma a nos aproximarmos daquela
-outra raiz.
+Vamos tentar achar essa outra raiz com nossa função. Para isso, basta mudarmos
+nossa estimativa inicial de forma a nos aproximarmos daquela outra raiz.
 
-``` python
+```python
 newton(x ** 4 + x ** 3 - x ** 2, 5, -1.5)
 ```
 
@@ -347,11 +342,11 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, -1.5)
 
 # Limitações do método
 
-Essa é uma função complicadinha e expõe algumas limitações do método que
-Newton criou. Por exemplo, imagine que usemos como estimativa um valor
-próximo de um mínimo, digamos que 0.5.
+Essa é uma função complicadinha e expõe algumas limitações do método que Newton
+criou. Por exemplo, imagine que usemos como estimativa um valor próximo de um
+mínimo, digamos que 0.5.
 
-``` python
+```python
 newton(x ** 4 + x ** 3 - x ** 2, 5, 0.5)
 ```
 
@@ -365,22 +360,21 @@ newton(x ** 4 + x ** 3 - x ** 2, 5, 0.5)
 
     6.434733086164693
 
-O resultado foi bem catastrófico. É claro, não poderíamos esperar que
-ele fosse infalível. Vejamos as razões pelas quais ele pode falhar.
+O resultado foi bem catastrófico. É claro, não poderíamos esperar que ele fosse
+infalível. Vejamos as razões pelas quais ele pode falhar.
 
-Primeiro, é muito claro que o resultado final a que chegaremos depende
-da estimativa inicial. Logo, se fizermos uma estimativa desarrazoada, é
-muito provável que não cheguemos a uma solução pertinente.
+Primeiro, é muito claro que o resultado final a que chegaremos depende da
+estimativa inicial. Logo, se fizermos uma estimativa desarrazoada, é muito
+provável que não cheguemos a uma solução pertinente.
 
-Além disso, a derivada da função naquele ponto não deve ser muito
-pequena. No limite, se ela for zero, teremos uma indefinição, uma
-divisão por zero.
+Além disso, a derivada da função naquele ponto não deve ser muito pequena. No
+limite, se ela for zero, teremos uma indefinição, uma divisão por zero.
 
-E se ela for muito pequena, a reta tangente será muito pouco inclinada e
-jogará a estimativa para muito longe da raiz. E foi isso o que aconteceu
-ali em cima. Por exemplo, consideremos a função \\( x^3 - x \\).
+E se ela for muito pequena, a reta tangente será muito pouco inclinada e jogará
+a estimativa para muito longe da raiz. E foi isso o que aconteceu ali em cima.
+Por exemplo, consideremos a função \\( x^3 - x \\).
 
-``` python
+```python
 X = np.linspace(-2, 2, 1000)
 
 plt.plot(X, X ** 3 - X)
@@ -391,13 +385,13 @@ plt.ylim(-0.5, 0.5)
 
 ![png](./output_20_1.png)
 
-Pelo gráfico, salta à vista que as três raízes são 0, 1 e -1. Ok, mas
-imagine que queiramos estimar a raiz não-nula positiva com este método.
+Pelo gráfico, salta à vista que as três raízes são 0, 1 e -1. Ok, mas imagine
+que queiramos estimar a raiz não-nula positiva com este método.
 
-Não poderíamos escolher 0.5 como estimativa, porque isso nos jogaria
-para o outro lado e acabaríamos achando algo próximo da raiz negativa:
+Não poderíamos escolher 0.5 como estimativa, porque isso nos jogaria para o
+outro lado e acabaríamos achando algo próximo da raiz negativa:
 
-``` python
+```python
 newton(x ** 3 - x, 1, 0.5)
 ```
 
@@ -410,10 +404,9 @@ newton(x ** 3 - x, 1, 0.5)
 
     -1.0435052271790375
 
-E se escolhêssemos algo muito perto do mínimo, aquele mesmo fiasco
-aconteceria.
+E se escolhêssemos algo muito perto do mínimo, aquele mesmo fiasco aconteceria.
 
-``` python
+```python
 newton(x ** 3 - x, 1, 0.6)
 ```
 
@@ -426,11 +419,11 @@ newton(x ** 3 - x, 1, 0.6)
 
     3.624996032946096
 
-Como esperado, a tangente ali é pouquíssimo inclinada, e jogou a
-estimativa para muito longe, tanto que em 5 tentativas não conseguimos
-uma estimativa muito boa. Veja o gráfico.
+Como esperado, a tangente ali é pouquíssimo inclinada, e jogou a estimativa para
+muito longe, tanto que em 5 tentativas não conseguimos uma estimativa muito boa.
+Veja o gráfico.
 
-``` python
+```python
 X = np.linspace(-2, 2, 1000)
 
 plt.plot(X, X ** 3 - X, label=r"$x^3 - x$")
@@ -446,9 +439,8 @@ plt.legend()
 
 # Conclusões
 
-O interessante desse algoritmo é ser uma aplicação de cálculo
-diferencial. É bastante simples sem sacrificar o lado da eficiência, mas
-também vimos que há certas limitações. É claro, ele não poderia fazer
-milagres. Mas, hoje em dia, basta plotar o gráfico em questão para ter
-uma ideia de onde estão as raízes, como acabamos de fazer aqui com a
-ajuda do matplotlib.
+O interessante desse algoritmo é ser uma aplicação de cálculo diferencial. É
+bastante simples sem sacrificar o lado da eficiência, mas também vimos que há
+certas limitações. É claro, ele não poderia fazer milagres. Mas, hoje em dia,
+basta plotar o gráfico em questão para ter uma ideia de onde estão as raízes,
+como acabamos de fazer aqui com a ajuda do matplotlib.

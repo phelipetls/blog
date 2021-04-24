@@ -2,24 +2,23 @@
 layout: post
 title: "Extraindo dados de texto com regex no R"
 date: 2019-04-01
-categories: ["Programming", "R"]
 tags: ["tidyverse", "regex"]
 aliases: ["/homicidios-em-baltimore-minerando-dados-r"]
 ---
 
-Quando comecei a estudar R, via muito os vídeos do [Roger Peng]. [Este vídeo
-foi um que particularmente me impressionou](https://youtu.be/q8SzNKib5-4), em
-que ele faz uso de regular expressions para manipular e extrair informações de
-texto.
+Quando comecei a estudar R, via muito os vídeos do [Roger Peng].
+[Este vídeo foi um que particularmente me impressionou](https://youtu.be/q8SzNKib5-4),
+em que ele faz uso de regular expressions para manipular e extrair informações
+de texto.
 
-Neste post, pretendo explorar essa base mais a fundo, para depois, em um
-outro post, visualizar com o ggplot2 as informações coletadas.
+Neste post, pretendo explorar essa base mais a fundo, para depois, em um outro
+post, visualizar com o ggplot2 as informações coletadas.
 
-A base de dados é um pouco soturna: trata-se de registros de homicídios
-na cidade de Baltimore, em Maryland, com detalhes incluindo a raça da
-vítima, seu sexo, o local em que morreu, a causa da morte etc.
+A base de dados é um pouco soturna: trata-se de registros de homicídios na
+cidade de Baltimore, em Maryland, com detalhes incluindo a raça da vítima, seu
+sexo, o local em que morreu, a causa da morte etc.
 
-``` r
+```r
 library(tidyverse)
 
 homicides <- read_lines("https://raw.githubusercontent.com/hadv/PAR/master/homicides.txt")
@@ -31,9 +30,9 @@ homicides %>% head(3)
     ## [2] "39.312641, -76.698948, iconHomicideShooting, 'p3', '<dl><dt>Eddie Golf</dt><dd class=\"address\">4900 Challedon Road<br />Baltimore, MD 21207</dd><dd>black male, 26 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: shooting</dd></dl>'"
     ## [3] "39.309781, -76.649882, iconHomicideBluntForce, 'p4', '<dl><dt>Nelsene Burnette</dt><dd class=\"address\">2000 West North Ave<br />Baltimore, MD 21217</dd><dd>black female, 44 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: blunt force</dd></dl>'"
 
-Como podemos ver, a base está de fato bastante suja. Quer dizer, é
-somente texto, nada está estruturado. O objetivo aqui é extrair o máximo
-de informações que pudermos.
+Como podemos ver, a base está de fato bastante suja. Quer dizer, é somente
+texto, nada está estruturado. O objetivo aqui é extrair o máximo de informações
+que pudermos.
 
 Há algum padrão na forma do registro, mas nem sempre é respeitado. Por exemplo,
 a coordenada geográfica sempre vêm primeiro; a causa da morte depois de “Cause:
@@ -41,9 +40,9 @@ a coordenada geográfica sempre vêm primeiro; a causa da morte depois de “Cau
 
 # Expressões regulares (regex)
 
-O melhor modo de proceder é com Expressões Regulares, ou regex, que é,
-digamos, uma “linguagem” para encontrar padrões em strings, para daí
-extrair, substituir, remover etc.
+O melhor modo de proceder é com Expressões Regulares, ou regex, que é, digamos,
+uma “linguagem” para encontrar padrões em strings, para daí extrair, substituir,
+remover etc.
 
 Nela há uma série de caracteres (metacharacters) com significados especiais,
 podendo expressar uma classe de caracteres, ou uma quantidade deles, ou uma
@@ -69,21 +68,21 @@ Abaixo, uma lista sumária dos mais básicos.
 
 # Extraindo as variáveis com stringr
 
-Para extrairmos os dados do texto, vamos usar o pacote stringr do
-tidyverse, mais especificamente a função `stringr::str_match`, que
-extrai de uma string o padrão e seus grupos.
+Para extrairmos os dados do texto, vamos usar o pacote stringr do tidyverse,
+mais especificamente a função `stringr::str_match`, que extrai de uma string o
+padrão e seus grupos.
 
 # Causa da morte
 
 Ok, vamos começar extraindo a causa da morte. As primeiras linhas indicam que
-ela é registrada deste modo: “Cause: *descrição*”, sendo a descrição uma string
+ela é registrada deste modo: “Cause: _descrição_”, sendo a descrição uma string
 de letras (`\w`) e espaços (`\s`), logo, `Cause: [\\w\\s]+`.
 
-E queremos, na verdade, somente essa combinação, esse prefixo não nos
-interessa. Por isso, colocamos eles entre parênteses, formando um grupo,
-que vamos extrair da linha com a função `stringr::str_match`.
+E queremos, na verdade, somente essa combinação, esse prefixo não nos interessa.
+Por isso, colocamos eles entre parênteses, formando um grupo, que vamos extrair
+da linha com a função `stringr::str_match`.
 
-``` r
+```r
 # note que, no r, precisamos infelizmente
 # adicionar uma \ a mais na regex,
 # porque \ é especial dentro de uma string no R
@@ -110,7 +109,7 @@ números `\d`, sinais de menos, `-` e pontos `.`. Para indicar que queremos um
 match no começo da linha, usaremos o metacharacter `^`. Observe que, dentro dos
 colchetes, o `.` não é um metacharacter, mas um ponto comum mesmo.
 
-``` r
+```r
 lat_long <- str_match(
   homicides,
   "^([\\d.-]+), ([\\d.-]+)"
@@ -132,12 +131,12 @@ lat_long %>% head()
 Outra coisa em que estamos interessados é na raça da pessoa. Esse caso, no
 entanto, é mais irregular.
 
-No início o registro é do tipo “black male” etc., enquanto que, mais
-para o final, se registra assim, “Race: black”. Temos que lidar com
-isso. Podemos indicar que desejamos um match numa regex OU em outra com
-o metacharacter `|`. Daí que:
+No início o registro é do tipo “black male” etc., enquanto que, mais para o
+final, se registra assim, “Race: black”. Temos que lidar com isso. Podemos
+indicar que desejamos um match numa regex OU em outra com o metacharacter `|`.
+Daí que:
 
-``` r
+```r
 raca <- str_match(
   homicides,
   "<dd>(\\w+) (fe)?male|[Rr]ace: (\\w+)"
@@ -154,7 +153,7 @@ raca %>% head()
     ## [5,] "<dd>white male"   "white" NA   NA
     ## [6,] "<dd>black male"   "black" NA   NA
 
-``` r
+```r
 raca %>% tail()
 ```
 
@@ -166,15 +165,15 @@ raca %>% tail()
     ## [1249,] "Race: Black" NA   NA   "Black"
     ## [1250,] "Race: Black" NA   NA   "Black"
 
-Veja que, inseri um grupo a mais para indicar que é opcional todo o
-grupo “fe” em sexo, ele pode ou não ocorrer. Daí que o uso de grupos
-pode não ser somente para extrair.
+Veja que, inseri um grupo a mais para indicar que é opcional todo o grupo “fe”
+em sexo, ele pode ou não ocorrer. Daí que o uso de grupos pode não ser somente
+para extrair.
 
 # Gênero
 
 Esse caso é muito similar ao anterior:
 
-``` r
+```r
 genero <- str_match(
   homicides,
   "<dd>\\w* (\\w+),?|[Gg]ender: (\\w+)"
@@ -191,7 +190,7 @@ genero %>% head()
     ## [5,] "<dd>white male,"   "male"   NA
     ## [6,] "<dd>black male,"   "male"   NA
 
-``` r
+```r
 genero %>% tail()
 ```
 
@@ -205,7 +204,7 @@ genero %>% tail()
 
 # Idade
 
-``` r
+```r
 idade <- str_match(
   homicides,
   "(\\d+) years? old|[Aa]ge: (\\d+)"
@@ -222,7 +221,7 @@ idade %>% head()
     ## [5,] "61 years old" "61" NA
     ## [6,] "46 years old" "46" NA
 
-``` r
+```r
 idade %>% tail()
 ```
 
@@ -240,14 +239,15 @@ Pelas primeiras linhas, vemos que a data normalmente vem depois de “Found on�
 
 Precisamos também uma regex para capturar a data. Ela deve conter:
 
-  - o mês por extenso, `\w+`
-  - seguido pelo dia, `\d{1,2}`
-  - seguido por uma vírgula, `,`.
-  - e o ano, um número de 4 dígitos, `\d{4}`.
+- o mês por extenso, `\w+`
+- seguido pelo dia, `\d{1,2}`
+- seguido por uma vírgula, `,`.
+- e o ano, um número de 4 dígitos, `\d{4}`.
 
-Às vezes acontece de ter um espaço a mais depois do mês, por isso o espaço opcional a mais ` ?`.
+Às vezes acontece de ter um espaço a mais depois do mês, por isso o espaço
+opcional a mais `?`.
 
-``` r
+```r
 data <- str_match(
   homicides,
   "[Ff]ound on (\\w+  ?\\d{1,2}, \\d{4})"
@@ -268,7 +268,7 @@ data %>% head()
 
 Também pode ser interessante termos disponível o endereço de cada morte:
 
-``` r
+```r
 endereco <- str_match(
   homicides,
   ">([A-z0-9 .]+)<br ?/>"
@@ -285,17 +285,16 @@ endereco %>% head()
     ## [5,] ">500 Maude Ave.<br />"       "500 Maude Ave."
     ## [6,] ">5200 Ready Ave.<br />"      "5200 Ready Ave."
 
-
 # Agregando tudo em um data.frame
 
-Agora precisamos juntar tudo num data.frame. Vamos pegar só as colunas
-dos grupos que nos interessam.
+Agora precisamos juntar tudo num data.frame. Vamos pegar só as colunas dos
+grupos que nos interessam.
 
-Há casos em que há duas colunas para duas regex alternativas, e
-precisamos mesclá-las (substituir os `NA` de uma com os valores da
-outra). Vou usar a função `ifelse` para isso.
+Há casos em que há duas colunas para duas regex alternativas, e precisamos
+mesclá-las (substituir os `NA` de uma com os valores da outra). Vou usar a
+função `ifelse` para isso.
 
-``` r
+```r
 causas <- causes[, 2]
 lat <- long_lat[, 2]
 lon <- long_lat[, 3]
@@ -326,12 +325,12 @@ homicides_df %>% head()
     ## 5 blunt for~ -76.602~ 39.2389~ white male   61    January 5~ 500 Maude Ave.
     ## 6 shooting   -76.607~ 39.3526~ black male   46    January 5~ 5200 Ready Av~
 
-E terminamos nossa limpeza dos dados. Na verdade, seria bom fazer
-algumas coisinhas antes, do tipo, uniformizar os valores das variáveis
-(alguns estão escritos em minúsculo enquanto outros não etc.), mudar o
-tipo das variáveis (a data precisa estar no formato Date) etc:
+E terminamos nossa limpeza dos dados. Na verdade, seria bom fazer algumas
+coisinhas antes, do tipo, uniformizar os valores das variáveis (alguns estão
+escritos em minúsculo enquanto outros não etc.), mudar o tipo das variáveis (a
+data precisa estar no formato Date) etc:
 
-``` r
+```r
 homicides_df <- homicides_df %>%
   mutate_at(
     vars(causas, raca, genero),

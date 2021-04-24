@@ -2,7 +2,6 @@
 layout: post
 title: "Spread bancário brasileiro: limpeza e visualização de dados"
 date: 2019-03-31
-categories: ["Programming", "R", "Economics"]
 tags: ["tidyverse", "dataviz", "ggplot2"]
 aliases: ["/spread-bancario-brasileiro-r"]
 ---

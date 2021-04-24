@@ -1,59 +1,31 @@
 {{ define "main" }}
-  <section>
-    {{ $lastProject := index (last 1 .Pages) 0 }}
-
+  <section class="pages projects">
     {{ range .Pages }}
-      <div class="project-item">
-
+      <div class="pages project">
         <div class="header">
-          <a href="{{ .Params.website }}">
-            <h1 class="title">
-              {{ .Title | title }}
-            </h1>
+          <a href="{{ or (.Params.website) (.Params.github) }}">
+            <h1 class="title">{{ .Title | title }}</h1>
           </a>
-
-          <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ if eq .Lang "en" }}
-              {{ .Date.Format "January 02, 2006" }}
-            {{ else }}
-              {{ .Date.Day }} de
-              {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }},
-              {{ .Date.Year }}
-            {{ end }}
-          </time>
         </div>
 
         <div class="content">
-          {{ .Summary }}
-          {{ if .Truncated }}
-            <a class="more" href="{{ .Permalink }}">{{ i18n "More" }} &#xbb;</a>
-          {{ end }}
+          {{ .Content }}
+        </div>
+
+        <div class="tags">
+          {{- range (.GetTerms "softwares") -}}
+            <a class="tag" href="{{ .Permalink }}">
+              {{- .Title -}}
+            </a>
+          {{- end -}}
         </div>
 
         <div class="links">
+          {{ if isset .Params "github" }}<a href="{{ .Params.github }}">GitHub</a>{{ end }}
+          {{ if isset .Params "website" }}· <a href="{{ .Params.website }}">Website</a>{{ end }}
         </div>
 
-        <div class="metadata">
-          <span class="softwares">
-            <span><a href="{{ "/softwares" | absLangURL }}">Softwares</a></span>:
-
-            {{ range (.GetTerms "softwares") }}
-              <a class="software" href="{{ .Permalink }}">
-                {{- .Title -}}
-              </a>
-            {{ end }}
-          </span>
-
-          <div class="links">
-            <a href="{{ .Params.github }}">GitHub</a>
-            <a href="{{ .Params.website }}">Website</a>
-          </div>
-        </div>
-
-        {{ if ne . $lastProject }}
-          <hr>
-        {{ end }}
-
+        <hr>
       </div>
     {{ end }}
   </section>

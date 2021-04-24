@@ -12,6 +12,3 @@ other = 'Built with <a href="https://gohugo.io/">Hugo</a>'
 
 [Translation]
 other = 'Leia esta página em {{ .Language.LanguageName }}'
-
-[More]
-other = "Read more"

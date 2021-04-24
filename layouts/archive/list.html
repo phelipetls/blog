@@ -10,10 +10,10 @@
         </time>
       </h3>
 
-      <ul>
+      <div class="posts">
         {{ range .Pages }}
-          <li>
-            <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">
+          <div class="post">
+            <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">
               {{ if eq .Lang "en" }}
                 {{ .Date.Format "02 Jan" }}
               {{ else }}
@@ -24,9 +24,9 @@
             <a href="{{ .Permalink }}">
               {{ .Title }}
             </a>
-          </li>
+          </div>
         {{ end }}
-      </ul>
+      </div>
     {{ end }}
   </section>
 {{ end }}

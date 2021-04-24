@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="single-post">
+  <section class="post">
     <div class="title">
       <h2>{{ .Title }}</h2>
     </div>
@@ -10,15 +10,12 @@
         {{ .Date.Format "02 Jan, 2006" }}
       </time>
 
-      {{ with (.GetTerms "categories") }}
-        <ul class="categories">
+      {{ with (first 5 (.GetTerms "tags")) }}
+        <div class="tags">
           {{- range . -}}
-            <li class="category">
-              <a href="{{ .RelPermalink }}">
-                {{- .Title -}}
-              </a></li>
-            {{- end -}}
-        </ul>
+            <span class="tag"><a href="{{ .RelPermalink }}">{{- .Title -}}</a></span>
+          {{- end -}}
+        </div>
       {{ end }}
     </div>
 
@@ -32,18 +29,16 @@
 
     <div class="adjacent-posts">
       {{ with .PrevInSection }}
-        <a
-          class="previous"
-          href="{{ .RelPermalink }}">
-          {{ .Title }}
+        <a class="adjacent-post previous" href="{{ .RelPermalink }}">
+          <div class="arrow">«</div>
+          <span>{{ .Title }}</span>
         </a>
       {{ end }}
 
       {{ with .NextInSection }}
-        <a
-          class="next"
-          href="{{ .RelPermalink }}">
-          {{ .Title }}
+        <a class="adjacent-post next" href="{{ .RelPermalink }}">
+          <span>{{ .Title }}</span>
+          <div class="arrow">»</div>
         </a>
       {{ end }}
     </div>

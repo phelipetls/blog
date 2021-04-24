@@ -1,0 +1,222 @@
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
+:root {
+  --body-max-width: 65ch;
+  --monospace-font: "Consolas", "Fira Mono", monospace;
+  --black: #1a1a1a;
+  --light-beige: #cfcdc2;
+  --dark-beige: #aca895;
+  --light-grey: #f5f5f5;
+  --dark-grey: #41413e;
+  --orange: #e25822;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:after, *:before {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  font-family: "Georgia", "Merriweather", serif;
+  max-width: var(--body-max-width);
+  display: flex;
+  flex-flow: column;
+  margin: 0 auto;
+  padding: 0.5em 1em;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+}
+
+header, main, footer {
+  padding: 0.5em 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-grey);
+  font-family: $heading-font;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--orange);
+}
+
+article p {
+  line-height: 1.5em;
+}
+
+article :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 2em;
+}
+
+article :is(h1, h2, h3, h4, h5, h6) .anchor {
+  display: none;
+}
+
+article :is(h1, h2, h3, h4, h5, h6):hover .anchor {
+  display: inline;
+}
+
+article p a {
+  all: revert;
+}
+
+article p a:hover {
+  all: revert;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+code {
+  font-family: var(--monospace-font);
+}
+
+p > code {
+  padding: 0 0.8ch;
+  border-radius: 8px;
+  background-color: var(--light-grey);
+}
+
+pre {
+  padding: 1em;
+  background-color: var(--light-grey) !important;
+  overflow-x: auto;
+}
+
+hr {
+  margin: 1em 0;
+  border: 1.5px solid var(--light-beige);
+  background-color: var(--light-beige);
+}
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+}
+
+header nav ul li:not(:last-child) {
+  margin-right: 0.5em;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 0.750em;
+}
+
+.pages {
+  flex: 1;
+}
+
+.pages .page {
+  margin-bottom: 1.5em;
+}
+
+.pages .page > hr {
+  margin-top: 1.5em;
+}
+
+.pages .page:last-child > hr {
+  display: none;
+}
+
+.pages .page .title {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.pagination {
+  margin-top: 0.750em;
+  text-align: center;
+}
+
+.pagination * {
+  padding: 0 0.250em;
+}
+
+.archive .posts {
+  display: flex;
+  flex-flow: column;
+}
+
+.archive .posts .post {
+  display: grid;
+  grid-template-columns: 7ch auto;
+  margin-bottom: 1em;
+}
+
+.projects .project .links {
+  font-size: small;
+  text-align: end;
+  margin-top: 0.5em;
+}
+
+.metadata {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.tags .tag {
+  padding: 0.125em 0.5em;
+  border: 1px solid var(--light-beige);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.tags .tag:not(:first-child) {
+  margin-left: 0.5em;
+}
+
+.adjacent-posts {
+  display: flex;
+  flex-flow: row;
+}
+
+@media screen and (max-width: 420px) {
+  .adjacent-posts {
+    flex-flow: column;
+  }
+}
+
+.adjacent-post {
+  display: flex;
+  align-items: center;
+}
+
+.adjacent-posts .arrow {
+  padding: 0.750em;
+}
+
+.adjacent-posts .next {
+  text-align: right;
+}

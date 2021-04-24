@@ -9,9 +9,6 @@ Este conteúdo está sob uma licença
 [links]
 other = 'Feito com <a href="https://gohugo.io/">Hugo</a>'
 
-[categories]
-other = 'Categorias'
-
 [Archive]
 other = 'Arquivo'
 
@@ -20,6 +17,3 @@ other = 'Projetos'
 
 [Translation]
 other = 'Read this page in {{ .Language.LanguageName }}'
-
-[More]
-other = "Leia mais"

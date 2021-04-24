@@ -1,0 +1,33 @@
+<section class="pages">
+  {{ range (.Paginator 10).Pages }}
+    <div class="page">
+      <h3 class="title">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </h3>
+
+      <div class="metadata">
+        <div class="tags">
+          {{- range (or (.GetTerms "tags") (.GetTerms "softwares")) -}}
+            <a class="tag" href="{{ .Permalink }}">{{ .Title }}</a>
+          {{- end -}}
+        </div>
+
+        <time datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ if eq .Lang "en" }}
+            {{ .Date.Format "January 02, 2006" }}
+          {{ else }}
+            {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+            {{ .Date.Day }},
+            {{ .Date.Year }}
+          {{ end }}
+        </time>
+      </div>
+
+      <hr>
+    </div>
+  {{ end }}
+</section>
+
+{{ if gt .Paginator.TotalPages 1 }}
+  {{ partial "pagination.html" . }}
+{{ end }}

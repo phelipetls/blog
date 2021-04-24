@@ -10,14 +10,12 @@ really does its job well. I never had to worry too much about tooling but... it
 is slow to start up.
 
 This never bothered me too much but it's noticeable and everyone would agree it
-could be better. Lately, we're witnessing projects developed to improve on
-this, more noticeably [esbuild](https://github.com/evanw/esbuild) and
+could be better. Lately, we're witnessing projects developed to improve on this,
+more noticeably [esbuild](https://github.com/evanw/esbuild) and
 [Vite](https://vitejs.dev/).
 
-I wanted to try this out and though about migrating a small app of mine, mostly
-written in Typescript, to Vite.
-
-I was surprised about how easy it was.
+I wanted to try this out and thought about migrating a small app of mine, mostly
+written in Typescript, to Vite. And it was more easy than I expected.
 
 # Initial setup
 
@@ -45,11 +43,11 @@ index f3307f5..32724e4 100644
      "test": "react-scripts test",
 ```
 
-Next, I needed to modify my index.html file. [The following steps are explained
-in more detail here](https://vitejs.dev/guide/#index-html-and-project-root).
+Next, I needed to modify my `index.html` file.
+[The reasons for the following steps are explained in more detail here](https://vitejs.dev/guide/#index-html-and-project-root).
 
-Moved my `index.html` from the `./public` folder to my root folder and added
-a `script` tag with my JS entry point as its `src` attribute.
+Moved my `index.html` from the `./public` folder to my project's root folder and
+added a `script` tag with my JS entry point as its `src` attribute.
 
 ```diff
 diff --git a/public/index.html b/index.html
@@ -74,13 +72,13 @@ replace it with `/`, as explained in the linked article.
 # TypeScript setup
 
 At this point, I couldn't get my app to run because my project used
-`tsconfig.json` `include` properties to make absolute imports, which Vite
-didn't understand.
+`tsconfig.json` `include` properties to make absolute imports, which Vite didn't
+understand.
 
 The solution was simple: install a Vite plugin called
-[`vite-tsconfig-paths`](https://github.com/aleclarson/vite-tsconfig-paths)
-which supports, apart from [path
-mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping),
+[`vite-tsconfig-paths`](https://github.com/aleclarson/vite-tsconfig-paths) which
+supports, apart from
+[path mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping),
 `include` and `exclude` properties as well:
 
 ```sh
@@ -108,8 +106,8 @@ After that, I was able to start a server and see my app running.
 
 # Jest setup
 
-Because I intended to remove `react-scripts` from my project, I needed to
-figure out how to run my Jest tests without `react-scripts test`.
+Because I intended to remove `react-scripts` from my project, I needed to figure
+out how to run my Jest tests without `react-scripts test`.
 
 I needed a way to get Jest to understand/transpile TypeScript and JSX.
 

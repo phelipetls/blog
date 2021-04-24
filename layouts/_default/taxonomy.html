@@ -1,14 +1,11 @@
 {{ define "main" }}
   <section class="taxonomies">
+    {{ $total := len .Data.Terms }}
     <ul>
-      {{ $total := len .Data.Terms }}
-      {{ range .Data.Terms }}
+      {{ range sort .Data.Terms "Count" "desc" }}
         <li>
-          <a href="{{ .Page.Permalink }}">
-            <span style="font-size: {{ add 1 (math.Log .Count) }}rem;" class="name">
-              {{- .Page.Title -}}
-            </span>
-          </a>
+          <a href="{{ .Page.Permalink }}">{{- .Page.Title | title -}}</a>
+          <span>({{ .Count }})</span>
         </li>
       {{ end }}
     </ul>

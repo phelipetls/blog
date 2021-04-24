@@ -1,5 +1,5 @@
 ---
-title: "Migrating from CRA to Vite"
+title: "Migrating from create-react-app to Vite"
 date: 2021-04-23
 categories: ["Programming", "JavaScript", "TypeScript", "Tools"]
 tags: ["javascript", "typescript"]
@@ -9,14 +9,15 @@ I started to learn React with `create-react-app` like everyone else, and it
 really does its job well. I never had to worry too much about tooling but... it
 is slow to start up.
 
-This never bothered me too much but it's noticeable and noticeable and everyone
-would agree it could be better. Lately, we're finally witnessing projects meant
-to solve this very problem, more noticeably
-[esbuild](https://github.com/evanw/esbuild) and [Vite](https://vitejs.dev/),
-and I was surprised at how well Vite worked.
+This never bothered me too much but it's noticeable and everyone would agree it
+could be better. Lately, we're witnessing projects developed to improve on
+this, more noticeably [esbuild](https://github.com/evanw/esbuild) and
+[Vite](https://vitejs.dev/).
 
-I just migrated a small app of mine, mostly written in Typescript, to Vite and
-it took me a few hours messing with configuration files.
+I wanted to try this out and though about migrating a small app of mine, mostly
+written in Typescript, to Vite.
+
+I was surprised about how easy it was.
 
 # Initial setup
 
@@ -72,7 +73,7 @@ replace it with `/`, as explained in the linked article.
 
 # TypeScript setup
 
-At this point, I couldn't get my app to run because I took advantage of
+At this point, I couldn't get my app to run because my project used
 `tsconfig.json` `include` properties to make absolute imports, which Vite
 didn't understand.
 
@@ -94,9 +95,9 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   build: {
-    outDir: "build",
+    outDir: "build"
   },
-  plugins: [tsconfigPaths()],
+  plugins: [tsconfigPaths()]
 });
 ```
 
@@ -107,14 +108,14 @@ After that, I was able to start a server and see my app running.
 
 # Jest setup
 
-Because I intend to remove `react-scripts` from my project, I need to figure
-out how to run my Jest tests without `react-scripts test`.
+Because I intended to remove `react-scripts` from my project, I needed to
+figure out how to run my Jest tests without `react-scripts test`.
 
 I needed a way to get Jest to understand/transpile TypeScript and JSX.
 
-Fortunately, there is project just for that purpose already
-[`ts-jest`](https://kulshekhar.github.io/ts-jest/), so all we need to do is to
-add it as a jest preset in `jest.config.js`:
+Fortunately, there is project to help with that called
+[`ts-jest`](https://kulshekhar.github.io/ts-jest/). All we need to do is add it
+as a jest preset in `jest.config.js`:
 
 ```js
 module.exports = {
@@ -127,7 +128,7 @@ module.exports = {
 
 For my specific setup, I also needed to:
 
-- Ignore `*.spec.js` files inside `./cypress` folder
+- Ignore `*.spec.js` files inside `./cypress/integration` folder
 - Rename `./src/setupTests.js` to `./src/setupTests.ts`. Otherwise, types from
   the `@testing-library/jest-dom/extend-expect` wouldn't be imported.
 - Add `"src"` to `moduleDirectories`, because it would not understand absolute
@@ -135,14 +136,15 @@ For my specific setup, I also needed to:
 
 # Conclusion
 
-I just finished setting this up, but it seems to be working fine so far.
+This seems to be working fine so far, development environment is much faster
+to boot, though I haven't checked how great hot reloading is.
 
-I'm excited about the things going on in the JavaScript tooling ecosystem, I
-think we can expect great things to come.
+But I'm amazed by that first experience and how straightforward it was, and
+happy about where JavaScript tooling is heading towards, a fast and no
+configuration setup.
 
-That said, `create-react-app` is a wonderful tool that I'll probably continue
-to use. And, as the project states:
+Finally, I uninstalled my CRA-related dev dependencies:
 
-> Create React App is a comfortable environment for learning React
-
-It's undeniable that it has been doing its jobs very well.
+```sh
+npm uninstall react-scripts customize-cra react-app-rewired babel-plugin-import
+```

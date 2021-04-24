@@ -136,12 +136,10 @@ For my specific setup, I also needed to:
 
 # Conclusion
 
-This seems to be working fine so far, development environment is much faster
-to boot, though I haven't checked how great hot reloading is.
+This seems to be working fine so far, development environment is much faster to
+boot, though I haven't checked how great hot reloading is.
 
-But I'm amazed by that first experience and how straightforward it was, and
-happy about where JavaScript tooling is heading towards, a fast and no
-configuration setup.
+But I'm amazed by that first experience and how straightforward it was.
 
 Finally, I uninstalled my CRA-related dev dependencies:
 

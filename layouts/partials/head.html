@@ -1,8 +1,14 @@
 {{ partial "meta.html" . }}
 <link type="normalize.css" rel="stylesheet" />
 
-{{ $style := resources.Get "css/main.css" }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}"/>
+{{ $css := resources.Get "css/main.css" }}
+
+{{ if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
+{{ else }}
+  {{ $minifiedCss := ($css | minify | fingerprint) }}
+  <link rel="stylesheet" href="{{ $minifiedCss.RelPermalink }}" integrity="{{ $minifiedCss.Data.Integrity }}" />
+{{end}}
 
 <title>
   {{ .Title }} | {{ .Site.Title }}

@@ -1,7 +1,7 @@
 {{ define "main" }}
   <section class="pages projects">
     {{ range .Pages }}
-      <div class="pages project">
+      <div class="page project">
         <div class="header">
           <a href="{{ or (.Params.website) (.Params.github) }}">
             <h1 class="title">{{ .Title | title }}</h1>

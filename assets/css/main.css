@@ -95,7 +95,7 @@ code {
   font-family: "Consolas", "Fira Mono", monospace;
 }
 
-p > code {
+p code {
   padding: 0 0.8ch;
   border-radius: 8px;
   background-color: var(--light-grey);

@@ -4,9 +4,8 @@ date: 2020-10-07
 tags: ["python", "vim"]
 ---
 
->  Ah, errorformat, the feature everybody loves to hate. :)
->  -- lcd047, on [Stack Overflow](https://stackoverflow.com/a/29102995)
-
+> Ah, errorformat, the feature everybody loves to hate. :) -- lcd047, on
+> [Stack Overflow](https://stackoverflow.com/a/29102995)
 
 I really like Vim's `:h errorformat` feature, but only when I manage to get it
 right. Until then, I'm sure it will frustrate me more than once. It's very
@@ -15,18 +14,18 @@ trivial (e.g., `LaTeX`).
 
 Recently, I committed to get it right for `pytest`. The cli allows customizing
 how tracebacks are shown with the `--tb` option, e.g., `pytest --tb=short`, and
-to control verbosity level with `-v`, `-vv` and `-q`. I went with `pytest
---tb=short -vv`.
+to control verbosity level with `-v`, `-vv` and `-q`. I went with
+`pytest --tb=short -vv`.
 
-To run pytest in Vim I then put this line in a `:h compiler` plugin (see `:h
-write-compiler-plugin`):
+To run pytest in Vim I then put this line in a `:h compiler` plugin (see
+`:h write-compiler-plugin`):
 
 ```vim
     CompilerSet makeprg=pytest\ --tb=short\ -vv\ $*\ %
 ```
 
-So that I can run `pytest` with `:make` or even with more arguments with `:make
--k mytest`, which will replace the token `$*`.
+So that I can run `pytest` with `:make` or even with more arguments with
+`:make -k mytest`, which will replace the token `$*`.
 
 It outputs something like this:
 
@@ -78,13 +77,13 @@ To make Vim understand these lines so that we can jump to each error, we must
 give patterns. It will then go through every line testing against those
 patterns. From `:h errorformat`:
 
->  Error format strings are always parsed pattern by pattern until the first
->  match occurs.
+> Error format strings are always parsed pattern by pattern until the first
+> match occurs.
 
 The order is, thus, important here.
 
-Also, the pattern has to match the entire line. That is to say the pattern is always
-implicitly surrounded by a `^` and `$`.
+Also, the pattern has to match the entire line. That is to say the pattern is
+always implicitly surrounded by a `^` and `$`.
 
 We will need to use `:h errorformat-multi-line` because a single error spans
 multiple lines.
@@ -126,9 +125,9 @@ Now, I need to captura how a test failure ends:
 A pattern for that may be `%ZE\ %\\{3}%m`. Where `%Z` is the token for end of
 multi-line error.
 
-I also want to filter out all the other lines that didn't match, except the
-ones starting with E, so I include `%-G%[%^E]%.%#`. To also exclude empty
-lines also: `%-G`.
+I also want to filter out all the other lines that didn't match, except the ones
+starting with E, so I include `%-G%[%^E]%.%#`. To also exclude empty lines also:
+`%-G`.
 
 `%G` has the purpose to capture (when prefixed with `+`) or ignore (when
 prefixed with `-`) "general" messages.
@@ -194,11 +193,11 @@ What matters starts with an E. So this `errorformat` does the job:
     %ZE\ \ \ %[%^\ ]%\\@=%m,
     %CE\ %.%#,
 
-The second line has the pattern `%p`, which matches a sequence of `[ -.]` to
-get its length to later use as column number.
+The second line has the pattern `%p`, which matches a sequence of `[ -.]` to get
+its length to later use as column number.
 
-The end pattern `%ZE   %[%^ ]%\@=%m` matches a line starting with E, three
-spaces exactly, which is needed to distinguish it from the others, see `:h \@=`.
+The end pattern `%ZE %[%^ ]%\@=%m` matches a line starting with E, three spaces
+exactly, which is needed to distinguish it from the others, see `:h \@=`.
 
 We also need to include a continuation format (any line starting with E and
 space that didn't match the earlier ones).
@@ -231,11 +230,10 @@ Import errors are also slightly different:
     !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
     =============================== 1 error in 0.09s ===============================
 
-It starts with `ImportError while...` so I included
-`%EImportError%.%#\'%f\'\.` to capture the filename. It ends with an `E   %m`
-and we already a pattern to capture this. But we do need to tell how it
-continues, and it's fine to just put something that would match anything like
-`%C%.%#`.
+It starts with `ImportError while...` so I included `%EImportError%.%#\'%f\'\.`
+to capture the filename. It ends with an `E %m` and we already a pattern to
+capture this. But we do need to tell how it continues, and it's fine to just put
+something that would match anything like `%C%.%#`.
 
 # Fixture errors
 
@@ -264,8 +262,8 @@ Notice how syntax, import and fixture errors are preceded with something like
     ______________________________ ERROR.* ______________________________
 
 Which will match our pattern to catch the start of a test failure. There's an
-easy fix for this, just put `%-G_%\\+\ ERROR%.%#\ _%\\+` before that pattern,
-so it will ignore it first.
+easy fix for this, just put `%-G_%\\+\ ERROR%.%#\ _%\\+` before that pattern, so
+it will ignore it first.
 
 Also, if all tests passed, capture it too:
 
@@ -276,17 +274,19 @@ Also, if all tests passed, capture it too:
 Check out the whole [compiler plugin](gist) in my dotfiles repo.
 
 It's tricky to figure out how to order the patterns, which I didn't risk to
-explain here since I wouldn't say I fully understand how it works. It was
-mostly by trial and error.
+explain here since I wouldn't say I fully understand how it works. It was mostly
+by trial and error.
 
 But be careful to not put more generic patterns first, because then they will
-take precedence and the more specific ones will be ignored. At least, I did
-this a lot.
+take precedence and the more specific ones will be ignored. At least, I did this
+a lot.
 
-If you're interested, I recommend reading the [Stack Overflow
-answer](https://stackoverflow.com/a/29102995) and, of course, `:h errorformat`.
+If you're interested, I recommend reading the
+[Stack Overflow answer](https://stackoverflow.com/a/29102995) and, of course,
+`:h errorformat`.
 
 If you're commited to learn Vim, It's worth it to know about this in order to
 integrate a command line program into Vim.
 
-[gist]: https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim
+[gist]:
+  https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim

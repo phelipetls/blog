@@ -18,8 +18,8 @@ setlocal errorformat=%f:%l:%c:\ %t%n\ %m
 ```
 
 Or, you could create a `:h compiler` plugin named `flake8`, that set these
-options when you run `:compiler flake8`, [as I have in my
-config](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/flake8.vim).
+options when you run `:compiler flake8`,
+[as I have in my config](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/flake8.vim).
 
 There are a bunch of compiler plugins built into Vim that you might be
 interested, for example, `:compiler pyunit` for test suites written with the
@@ -28,14 +28,15 @@ interested, for example, `:compiler pyunit` for test suites written with the
 It works great once you have these options set correctly (although the
 `errorformat` can be tricky).
 
-The only "problem" is that it is synchronous. Which means that for some expensive
-programs, you will not be able to edit until it finishes. In this post we will
-solve this in Neovim with Lua.
+The only "problem" is that it is synchronous. Which means that for some
+expensive programs, you will not be able to edit until it finishes. In this post
+we will solve this in Neovim with Lua.
 
-In a previous revision of this post, I used [libuv bindings for
-Lua](https://github.com/luvit/luv/blob/master/docs.md), accessible under
-`vim.loop`, but this is kind of a low level approach. An alternative is to use
-the `jobstart()` function, which offers several conveniences.
+In a previous revision of this post, I used
+[libuv bindings for Lua](https://github.com/luvit/luv/blob/master/docs.md),
+accessible under `vim.loop`, but this is kind of a low level approach. An
+alternative is to use the `jobstart()` function, which offers several
+conveniences.
 
 I put the following Lua script under `~/.config/nvim/lua/` (if you use Neovim
 you can get yours with `:echo stdpath("config")`) for it to be available at
@@ -104,9 +105,9 @@ When we receive data from `stdout` and `stderr`, we extend the `lines` variable
 with it. Because of `stdout_buffered` and `stderr_buffered`, the callback will
 only be called when all of the output was gathered (see `:h channel-buffered`).
 
-When the program exits, we populate the quickfix list. This is done with `:h
-setqflist()`. We give it a title (the expanded `makeprg`), the
-lines to be parsed and the `errorformat` to parse the lines with.
+When the program exits, we populate the quickfix list. This is done with
+`:h setqflist()`. We give it a title (the expanded `makeprg`), the lines to be
+parsed and the `errorformat` to parse the lines with.
 
 Finally we trigger whatever `autocmd` is under the `QuickFixCmdPost` event.
 
@@ -131,5 +132,4 @@ A command to disable it is convenient (you can re-enable it with `:e<CR>`):
 command! DisableLintOnSave autocmd! LintOnSave BufWritePost <buffer>
 ```
 
-[Get the full code in this
-gist](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566).
+[Get the full code in this gist](https://gist.github.com/phelipetls/639a1b5f021d17c4124cccc83e518566).

@@ -6,38 +6,35 @@ tags: ["tidyverse", "dataviz", "ggplot2"]
 aliases: ["/spread-bancario-brasileiro-r"]
 ---
 
-O altíssimo spread bancário [^1] brasileiro é um motivo de preocupação
-das autoridades, já que dificulta uma economia mais guiada pelo crédito,
-dificultando o crescimento etc. Como estou estudando isso para
-monografia, pensei em visualizar exatamente quão alto ele é. Imaginei
-que não seria tão difícil com a ajuda do R, e não foi mesmo. Nesse post
-vou falar sobre a coleta de dados, o tratamento com o tidyverse e a
-visualização com o ggplot2.
+O altíssimo spread bancário [^1] brasileiro é um motivo de preocupação das
+autoridades, já que dificulta uma economia mais guiada pelo crédito,
+dificultando o crescimento etc. Como estou estudando isso para monografia,
+pensei em visualizar exatamente quão alto ele é. Imaginei que não seria tão
+difícil com a ajuda do R, e não foi mesmo. Nesse post vou falar sobre a coleta
+de dados, o tratamento com o tidyverse e a visualização com o ggplot2.
 
 Normalmente, pego séries econômicas sem sair do R e num formato já muito
-conveniente, com a ajuda de bibliotecas como rbcb, ipeadatar, sidrar
-etc. Mas, para esse caso em específico, eu tive que de fato sair
-procurando.
+conveniente, com a ajuda de bibliotecas como rbcb, ipeadatar, sidrar etc. Mas,
+para esse caso em específico, eu tive que de fato sair procurando.
 
-Acabei descobrindo que o World Bank registra a série *Interest rate
-spread (lending rate minus deposit rate, %)* anualmente para cada país.
-Além disso, foi tudo disponibilizado para download em um .csv.
+Acabei descobrindo que o World Bank registra a série _Interest rate spread
+(lending rate minus deposit rate, %)_ anualmente para cada país. Além disso, foi
+tudo disponibilizado para download em um .csv.
 
-E, como normalmente acontece com dados “selvagens”, ele não estava num
-formato *tidy*, limpo, que é como gostaríamos que estivesse para
-facilitar as coisas quando usamos R.
+E, como normalmente acontece com dados “selvagens”, ele não estava num formato
+_tidy_, limpo, que é como gostaríamos que estivesse para facilitar as coisas
+quando usamos R.
 
-Se você não sabe, um *tidy dataset* é aquele em que cada coluna
-corresponde a uma variável e cada linha a uma observação.
+Se você não sabe, um _tidy dataset_ é aquele em que cada coluna corresponde a
+uma variável e cada linha a uma observação.
 
 # Limpando os dados
 
-Os dados eu baixei
-[daqui](https://data.worldbank.org/indicator/fr.inr.lndp) e o arquivo eu
-nomeei “spreads.csv”. Vamos olhar como eles estão organizados e por que
-teremos que limpá-los.
+Os dados eu baixei [daqui](https://data.worldbank.org/indicator/fr.inr.lndp) e o
+arquivo eu nomeei “spreads.csv”. Vamos olhar como eles estão organizados e por
+que teremos que limpá-los.
 
-``` r
+```r
 library(tidyverse)
 
 (dados <- read_csv("~/Blog/phelipetls.github.io/assets/spreads.csv",
@@ -72,26 +69,24 @@ library(tidyverse)
     ## #   `2012` <dbl>, `2013` <dbl>, `2014` <dbl>, `2015` <dbl>, `2016` <dbl>,
     ## #   `2017` <dbl>, `2018` <lgl>, X64 <lgl>
 
-Além de um bando de NA, veja como a informação para cada ano está
-organizada. A cada coluna temos um ano, e abaixo o spread para cada país
-naquele ano. Pode até ser mais fácil visualizar os dados assim, mas não
-trabalhar com eles no R. O que devemos observar é que todas essas
-colunas são na verdade instâncias de uma única variável, o ano, e os
-valores também, o spread. Queremos, então, condensar toda essa massa de
-dados em duas colunas, transformar desse formato largo (*wide*) para um
-formato comprido (*long*).
+Além de um bando de NA, veja como a informação para cada ano está organizada. A
+cada coluna temos um ano, e abaixo o spread para cada país naquele ano. Pode até
+ser mais fácil visualizar os dados assim, mas não trabalhar com eles no R. O que
+devemos observar é que todas essas colunas são na verdade instâncias de uma
+única variável, o ano, e os valores também, o spread. Queremos, então, condensar
+toda essa massa de dados em duas colunas, transformar desse formato largo
+(_wide_) para um formato comprido (_long_).
 
-Isso é uma tarefa muito fácil para função `tidyr::gather`. O que ela faz
-é reunir um monte de colunas em uma coluna só. O primeiro argumento da
-função pede o nome da variável das colunas, o segundo, o nome da
-variável dos valores, e o terceiro, quais são as colunas que você quer
-reunir.
+Isso é uma tarefa muito fácil para função `tidyr::gather`. O que ela faz é
+reunir um monte de colunas em uma coluna só. O primeiro argumento da função pede
+o nome da variável das colunas, o segundo, o nome da variável dos valores, e o
+terceiro, quais são as colunas que você quer reunir.
 
-Mas, perceba também como os nomes estão sujos. O R não gosta de espaços
-etc. nos nomes das colunas, então teremos que cuidar disso também. Isso
-é muito fácil de fazer com a função `janitor::clean_names()`.
+Mas, perceba também como os nomes estão sujos. O R não gosta de espaços etc. nos
+nomes das colunas, então teremos que cuidar disso também. Isso é muito fácil de
+fazer com a função `janitor::clean_names()`.
 
-``` r
+```r
 library(janitor)
 
 (dados <- dados %>%
@@ -121,18 +116,17 @@ library(janitor)
     ## 10 United Kingdom GBR           1967  1.29
     ## # ... with 5,215 more rows
 
-Aconteceram algumas coisas aqui: primeiro, o `readr::read_csv` criou uma
-nova coluna “x64”, que não me interessa então a tirei (a função dá um
-warning, mas eu o omiti aqui). Daí que o clean\_names prefixou um “x” às
-colunas com números, que também removi com `stringr::str_remove()`. Eu
-também não vou precisar das colunas com informações sobre o indicador.
-E, pronto, está limpo.
+Aconteceram algumas coisas aqui: primeiro, o `readr::read_csv` criou uma nova
+coluna “x64”, que não me interessa então a tirei (a função dá um warning, mas eu
+o omiti aqui). Daí que o clean_names prefixou um “x” às colunas com números, que
+também removi com `stringr::str_remove()`. Eu também não vou precisar das
+colunas com informações sobre o indicador. E, pronto, está limpo.
 
 # Visualização
 
 Vamos primeiro ver como evoluiu o spread no Brasil no decorrer do tempo.
 
-``` r
+```r
 dados %>%
   filter(country_name == "Brazil") %>%
   ggplot(aes(ano, spread)) +
@@ -145,18 +139,18 @@ dados %>%
 
 ![img3](./unnamed-chunk-7-1.png)
 
-Veja como o spread vinha caindo sistematicamente, embora ainda fosse
-muito alto pros padrões internacionais. Com a crise, ele voltou a
-aumentar, voltando aos níveis do início do século.
+Veja como o spread vinha caindo sistematicamente, embora ainda fosse muito alto
+pros padrões internacionais. Com a crise, ele voltou a aumentar, voltando aos
+níveis do início do século.
 
-Para visualizações entre países, seria interessante filtrar a base
-antes, por exemplo, como se compara o spread do Brasil com o de outros
-países da América do Sul? Para isso, vou usar
+Para visualizações entre países, seria interessante filtrar a base antes, por
+exemplo, como se compara o spread do Brasil com o de outros países da América do
+Sul? Para isso, vou usar
 [essa](https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv)
 base de dados, porque nela encontro o código de cada país, o nome de sua
 “região” e se ele é desenvolvido ou não.
 
-``` r
+```r
 url <- "https://pkgstore.datahub.io/core/country-codes/country-codes_csv/data/3b9fd39bdadd7edd7f7dcee708f47e1b/country-codes_csv.csv"
 
 paises <- read_csv(url) %>%
@@ -184,7 +178,7 @@ paises <- read_csv(url) %>%
 
     ## See spec(...) for full column specifications.
 
-``` r
+```r
 paises %>% glimpse()
 ```
 
@@ -194,10 +188,10 @@ paises %>% glimpse()
     ## $ regiao                 <chr> NA, NA, NA, NA, NA, NA, "Middle Africa"...
     ## $ status_desenvolvimento <chr> NA, "Developing", "Developed", "Develop...
 
-Vamos obter um vetor com o código dos países da América do Sul, para
-assim podermos filtrar a base do spread.
+Vamos obter um vetor com o código dos países da América do Sul, para assim
+podermos filtrar a base do spread.
 
-``` r
+```r
 america_sul <- paises %>%
   filter(regiao == "South America") %>%
   pull(codigo)
@@ -208,11 +202,11 @@ america_sul
     ##  [1] "ARG" "BOL" "BVT" "BRA" "CHL" "COL" "ECU" "FLK" "GUF" "GUY" "PRY"
     ## [12] "PER" "SGS" "SUR" "URY" "VEN"
 
-E com isso podemos fazer uma visualização dos spreads na América do Sul,
-para os anos de 2015 a 2017, por exemplo. No que podemos ver que o
-Brasil domina em termos de spread, para nossa infelicidade:
+E com isso podemos fazer uma visualização dos spreads na América do Sul, para os
+anos de 2015 a 2017, por exemplo. No que podemos ver que o Brasil domina em
+termos de spread, para nossa infelicidade:
 
-``` r
+```r
 theme_set(theme_minimal())
 
 anos <- 2015:2017
@@ -232,12 +226,12 @@ dados %>%
 
 ![img1](./output_9_0.png)
 
-E que tal contrastar os 15 maiores spreads de países em desenvolvimento
-versus desenvolvidos, pro ano de 2017? Na outra tabela tem uma coluna
-que pode nos ajudar com isso. Para isso, fiz um join para depois filtrar
-e criar os gráficos que eu queria.
+E que tal contrastar os 15 maiores spreads de países em desenvolvimento versus
+desenvolvidos, pro ano de 2017? Na outra tabela tem uma coluna que pode nos
+ajudar com isso. Para isso, fiz um join para depois filtrar e criar os gráficos
+que eu queria.
 
-``` r
+```r
 df <- left_join(dados, paises, by = c(country_code = "codigo"))
 
 plot1 <- df %>%
@@ -263,31 +257,29 @@ grid.arrange(plot1, plot2, nrow = 2)
 
 ![img2](./output_11_0.png)
 
-Vemos, assim, que a situação do Brasil é meio crítica quando se olha
-para o mercado de crédito. Está no meio de países muito pequenos ou
-pobres (não que o Brasil também não seja) no lado subdesenvolvido.
-Enquanto que no lado dos desenvolvidos, está em peso o Leste Europeu
-etc., antigos países soviéticos.
+Vemos, assim, que a situação do Brasil é meio crítica quando se olha para o
+mercado de crédito. Está no meio de países muito pequenos ou pobres (não que o
+Brasil também não seja) no lado subdesenvolvido. Enquanto que no lado dos
+desenvolvidos, está em peso o Leste Europeu etc., antigos países soviéticos.
 
-Não é tão claro, ao menos para mim, o porquê disso, é justamente o meu
-intuito entender. Se, por um lado, alguns culpam a concentração
-bancária, que no Brasil não é desprezível mesmo, por outro ela não
-nessariamente significa que o mercado não é competitivo, sendo também um
-fator a considerar os ganhos de eficiência que isso pode significar, com
-o advento das economias de escala. Normalmente se fala com razão do alto
-nível da Selic (ou de sua volatilidade), que implica um custo de
-oportunidade para investimentos (e um risco para os bancos, que
-eventualmente têm de recorrer ao mercado interbancário quando há
-descompassos entre demandas por empréstimos e ofertas de depósitos),
-hoje já se questiona isto, visto que a Selic está estável há meses e em
-níveis historicamente baixos. Outra razão pode ser a inadimplência, que
-realmente é considerável e da qual os bancos se protegem via spread. Ou
-mesmo o cumpulsório, as instituições, os impostos etc.
+Não é tão claro, ao menos para mim, o porquê disso, é justamente o meu intuito
+entender. Se, por um lado, alguns culpam a concentração bancária, que no Brasil
+não é desprezível mesmo, por outro ela não nessariamente significa que o mercado
+não é competitivo, sendo também um fator a considerar os ganhos de eficiência
+que isso pode significar, com o advento das economias de escala. Normalmente se
+fala com razão do alto nível da Selic (ou de sua volatilidade), que implica um
+custo de oportunidade para investimentos (e um risco para os bancos, que
+eventualmente têm de recorrer ao mercado interbancário quando há descompassos
+entre demandas por empréstimos e ofertas de depósitos), hoje já se questiona
+isto, visto que a Selic está estável há meses e em níveis historicamente baixos.
+Outra razão pode ser a inadimplência, que realmente é considerável e da qual os
+bancos se protegem via spread. Ou mesmo o cumpulsório, as instituições, os
+impostos etc.
 
-Enfim, é um assunto bastante extenso, que para mim ainda é um tanto
-quanto nebuloso. O plano é analisar os seus determinantes
-quantitativamente, a partir da estimação de um modelo, provavelmente um
-de vetores autorregressivos.
+Enfim, é um assunto bastante extenso, que para mim ainda é um tanto quanto
+nebuloso. O plano é analisar os seus determinantes quantitativamente, a partir
+da estimação de um modelo, provavelmente um de vetores autorregressivos.
 
 [^1]: A diferença entre o que banco cobra ao emprestar e o que ele
+
 paga aos depositantes.

@@ -6,20 +6,20 @@ tags: ["web-scraping", "pandas", "regex", "dataviz"]
 aliases: ["/web-scraping-de-paginas-dinamicas"]
 ---
 
-Web scraping pode ficar bem complicado quando a página é dinâmica, você não
-mais precisa somente carregar o código-fonte da página mas também precisa esperar o
+Web scraping pode ficar bem complicado quando a página é dinâmica, você não mais
+precisa somente carregar o código-fonte da página mas também precisa esperar o
 JavaScript da página construir a página, que é o caso do site do Reclame Aqui.
 
-Nesses casos, precisamos controlar um navegador remotamente
-por meio de um *web driver*, por exemplo, o `geckodriver` para o Firefox ou
-`chromedriver` para o Chrome.
+Nesses casos, precisamos controlar um navegador remotamente por meio de um _web
+driver_, por exemplo, o `geckodriver` para o Firefox ou `chromedriver` para o
+Chrome.
 
 Para isso, usamos uma biblioteca a partir da qual podemos instruir este
 navegador a fazer o que queremos, por exemplo o `Selenium`.
 
 Pros meus propósitos, usarei o `Selenium` para abrir uma URL e extrair alguma
-informação na página, tarefa para alguma biblioteca que entenda
-estrutura HTML e facilite a extração dos elementos, como a `BeautifulSoup`.
+informação na página, tarefa para alguma biblioteca que entenda estrutura HTML e
+facilite a extração dos elementos, como a `BeautifulSoup`.
 
 Utilizo essas duas bibliotecas no script abaixo. E podemos instalá-las com:
 
@@ -27,11 +27,11 @@ Utilizo essas duas bibliotecas no script abaixo. E podemos instalá-las com:
 pip3 instal selenium bs4
 ```
 
-Para fazer o crawleamento, criei uma classe que aceita o nome de uma
-empresa e o web driver a ser utilizado.
+Para fazer o crawleamento, criei uma classe que aceita o nome de uma empresa e o
+web driver a ser utilizado.
 
-Ela tem o método `ReclameAqui.extrair_informacoes(n_paginas)` que vai extrair
-os links e títulos das reclamações das primeiras `n_paginas`.
+Ela tem o método `ReclameAqui.extrair_informacoes(n_paginas)` que vai extrair os
+links e títulos das reclamações das primeiras `n_paginas`.
 
 Outro método, o `ReclameAqui.extrair_descricoes()`, abre cada uma dessas URLs e
 extrai as descrições das informações.
@@ -41,14 +41,14 @@ código-fonte primeiro para depois usarmos os métodos para extração de algum
 element do HTML.
 
 Por exemplo, para extrair o título e os links das reclamações em cada página,
-procuramos por parágrafos que contenham a classe `text-detail`: (`<p
-class='text-detail'></p>`), e depois procuramos elementos `a`, que contém o
+procuramos por parágrafos que contenham a classe `text-detail`:
+(`<p class='text-detail'></p>`), e depois procuramos elementos `a`, que contém o
 título dentro dele e o link dentro do atributo `href`.
 
 Já para a descrição, procuramos por um elemento `div` com a classe
 `complain-body`, e extraímos o texto dentro dele.
 
-``` python
+```python
 from time import sleep
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs

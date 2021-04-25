@@ -5,19 +5,19 @@ tags: ["dataviz", "tidyverse", "gganimate", "ggplot2"]
 aliases: ["/visualizacao-dados-homicidios-baltimore"]
 ---
 
-Neste post pretendo continuar o que foi iniciado no último, onde
-transformamos dados contidos em texto em um data.frame, um formato muito
-mais amigável para a exploração e visualização de dados no R.
+Neste post pretendo continuar o que foi iniciado no último, onde transformamos
+dados contidos em texto em um data.frame, um formato muito mais amigável para a
+exploração e visualização de dados no R.
 
-O procedimento geral agora, com os dados já limpos, é transformá-los e
-fazer a visualização que queremos. Daí o uso extensivo do tidyverse
-antes de chamar o ggplot2.
+O procedimento geral agora, com os dados já limpos, é transformá-los e fazer a
+visualização que queremos. Daí o uso extensivo do tidyverse antes de chamar o
+ggplot2.
 
-Ok, vamos primeiro olhar para a nossa [base de
-dados](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/homicides_df.csv "Link do arquivo raw")
+Ok, vamos primeiro olhar para a nossa
+[base de dados](https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/homicides_df.csv "Link do arquivo raw")
 e ver que perguntas gostaríamos de responder:
 
-``` r
+```r
 library(tidyverse)
 
 df <- read_csv("https://raw.githubusercontent.com/phelipetls/phelipetls.github.io/master/assets/homicides_df.csv") %>%
@@ -36,25 +36,25 @@ df %>% head()
     ## 5 Blunt Force  -76.6  39.2 White Male      61 2007-01-05 500 Maude Ave.
     ## 6 Shooting     -76.6  39.4 Black Male      46 2007-01-05 5200 Ready Ave.
 
-Há diversas questões a serem exploradas aqui, a primeira e mais sensível
-que vem a mente é a racial: quais raças costumam ser vítimas de
-homicídio? Vamos, naturalmente, estar interessados também na mesma
-pergunta para diferentes características das pessoas, como gênero, idade
-etc. e como elas se relacionam umas com as outras. Por exemplo, será que
-mulheres negras acabam vítimas de homicídios muito mais que as brancas?
+Há diversas questões a serem exploradas aqui, a primeira e mais sensível que vem
+a mente é a racial: quais raças costumam ser vítimas de homicídio? Vamos,
+naturalmente, estar interessados também na mesma pergunta para diferentes
+características das pessoas, como gênero, idade etc. e como elas se relacionam
+umas com as outras. Por exemplo, será que mulheres negras acabam vítimas de
+homicídios muito mais que as brancas?
 
-Os dados nos possibilitam também enxergar a distribuição geográfica, que
-áreas da cidade são as mais violentas etc.
+Os dados nos possibilitam também enxergar a distribuição geográfica, que áreas
+da cidade são as mais violentas etc.
 
-E, por fim, é interessante visualizar como o número de vítimas evolui no
-tempo. Será que vem declinando com o passar dos anos?
+E, por fim, é interessante visualizar como o número de vítimas evolui no tempo.
+Será que vem declinando com o passar dos anos?
 
 # Evolução do número de vítimas no tempo
 
-Esse é um bom ponto para se começar a entender os dados. Vamos fazer
-essa visualização com um gráfico de linhas:
+Esse é um bom ponto para se começar a entender os dados. Vamos fazer essa
+visualização com um gráfico de linhas:
 
-``` r
+```r
 library(lubridate)
 
 # configurando o tema
@@ -80,18 +80,16 @@ df %>%
 
 ![plot1](./unnamed-chunk-2-1.png)
 
-Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com
-os anos…
+Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com os
+anos…
 
-Exceto por essa queda brusca em 2012, que deveria gerar suspeitas. De
-fato, essa queda será esclarecida por outra visualização mais adiante.
-Se desconsiderarmos 2012, o quadro da violência não parece apresentar
-melhoras tão significativas.
+Exceto por essa queda brusca em 2012, que deveria gerar suspeitas. De fato, essa
+queda será esclarecida por outra visualização mais adiante. Se desconsiderarmos
+2012, o quadro da violência não parece apresentar melhoras tão significativas.
 
-É interessante visualizar também como isso se deu para as diferentes
-raças:
+É interessante visualizar também como isso se deu para as diferentes raças:
 
-``` r
+```r
 df %>%
   # contagem dos casos por raça e ano
   count(raca, ano) %>%
@@ -111,16 +109,15 @@ df %>%
 
 ![plot2](./unnamed-chunk-3-1.png)<!-- -->
 
-Essa é a primeira visualização do que já era esperado: na cidade de
-Baltimore, a violência afeta muito mais os negros do que a qualquer
-outra raça. Impressiona a magnitude da desigualdade.
+Essa é a primeira visualização do que já era esperado: na cidade de Baltimore, a
+violência afeta muito mais os negros do que a qualquer outra raça. Impressiona a
+magnitude da desigualdade.
 
-Um gráfico interessante que vi
-[aqui](https://homicides.news.baltimoresun.com/), foi o do crescimento
-acumulado do número de vítimas por mês para cada ano, que tentei
-replicar abaixo:
+Um gráfico interessante que vi [aqui](https://homicides.news.baltimoresun.com/),
+foi o do crescimento acumulado do número de vítimas por mês para cada ano, que
+tentei replicar abaixo:
 
-``` r
+```r
 acumulado <- df %>%
   mutate(mes = month(data)) %>%
   count(ano, mes) %>%
@@ -152,16 +149,16 @@ acumulado
 
 ![plot3](./unnamed-chunk-4-1.png)<!-- -->
 
-E aqui fica claro o porquê da queda em 2012: não temos os dados de todos
-os meses. Também salta aos olhos que a violência diminuiu em relação a
-2007, mas se manteve mais ou menos estável no resto do período.
+E aqui fica claro o porquê da queda em 2012: não temos os dados de todos os
+meses. Também salta aos olhos que a violência diminuiu em relação a 2007, mas se
+manteve mais ou menos estável no resto do período.
 
 # Aspectos sociais das vítimas
 
-Vamos tentar visualizar agora como a violência afeta as pessoas de
-diferentes grupos:
+Vamos tentar visualizar agora como a violência afeta as pessoas de diferentes
+grupos:
 
-``` r
+```r
 df %>%
   ggplot(aes(idade)) +
   geom_histogram(aes(fill = raca),
@@ -180,20 +177,20 @@ df %>%
 
 ![plot3](./unnamed-chunk-5-1.png)<!-- -->
 
-E assim podemos ver que o mais afetado pela violência é o homem negro da
-faixa dos 20-30 anos. Se olharmos bem, pode-se também observar que a
-mulher negra está em posição mais vulnerável à violência que a branca,
-provavelmente porque vive nas regiões onde a violência é maior.
+E assim podemos ver que o mais afetado pela violência é o homem negro da faixa
+dos 20-30 anos. Se olharmos bem, pode-se também observar que a mulher negra está
+em posição mais vulnerável à violência que a branca, provavelmente porque vive
+nas regiões onde a violência é maior.
 
-Também impressiona o contraste entre os números para cada gênero. Os
-homens são muito mais propensos a serem mortos violentamente.
+Também impressiona o contraste entre os números para cada gênero. Os homens são
+muito mais propensos a serem mortos violentamente.
 
 # Que causa de morte é a mais comum?
 
-Para ver quais são as causas mais comuns, vamos fazer um simples gráfico
-de barras:
+Para ver quais são as causas mais comuns, vamos fazer um simples gráfico de
+barras:
 
-``` r
+```r
 df %>%
   ggplot(aes(
     x = causas,
@@ -215,19 +212,17 @@ esfaqueamento e contusão.
 
 # Mapas e animações
 
-Para visualizar a distribuição geográfica da ocorrência de homicídios,
-temos que primeiro plotar o mapa da cidade. O código abaixo mostra como
-fazer isso, com a ajuda do dataset `county` do pacote `maps`, de onde
-extraímos as coordenadas geográficas, para depois plotar com
-`geom_polyon()`.
+Para visualizar a distribuição geográfica da ocorrência de homicídios, temos que
+primeiro plotar o mapa da cidade. O código abaixo mostra como fazer isso, com a
+ajuda do dataset `county` do pacote `maps`, de onde extraímos as coordenadas
+geográficas, para depois plotar com `geom_polyon()`.
 
-Uma vez com o mapa, minha ideia foi criar uma animação para visualizar o
-aspecto temporal, espacial e qualitativo (nesse caso, pela raça das
-vítimas) com um único gráfico. Para isso, vamos usar a função
-`gganimate::transition_manual`, de forma a mostrar por mês o crescimento
-no número de vítimas:
+Uma vez com o mapa, minha ideia foi criar uma animação para visualizar o aspecto
+temporal, espacial e qualitativo (nesse caso, pela raça das vítimas) com um
+único gráfico. Para isso, vamos usar a função `gganimate::transition_manual`, de
+forma a mostrar por mês o crescimento no número de vítimas:
 
-``` r
+```r
 library(gganimate)
 
 # mapa de baltimore city
@@ -275,11 +270,11 @@ animate(anim, fps = 5)
 
 Fica evidente daí como a violência é concentrada em certos bairros.
 
-Outra ideia é visualizar a evolução dos homicídios no tempo, por causa
-de morte. Para isso, vamos usar ot `gganimate::transition_states`, para
-visualizarmos as mudanças ocorridas no decorrer dos anos.
+Outra ideia é visualizar a evolução dos homicídios no tempo, por causa de morte.
+Para isso, vamos usar ot `gganimate::transition_states`, para visualizarmos as
+mudanças ocorridas no decorrer dos anos.
 
-``` r
+```r
 df %>%
   count(ano, causas) %>%
   ggplot(aes(
@@ -304,10 +299,10 @@ df %>%
 ![gif2](./unnamed-chunk-8-1.gif)<!-- -->
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
-`gganimate::transition_reveal()` para revelar ao longo do eixo do tempo
-como os números crescem.
+`gganimate::transition_reveal()` para revelar ao longo do eixo do tempo como os
+números crescem.
 
-``` r
+```r
 acumulado +
   geom_segment(aes(
     xend = 12.5,
@@ -323,18 +318,18 @@ acumulado +
 
 # Conclusões
 
-Este post é certamente só uma amostra do pontecial do combo ggplot2 +
-gganimate, talvez uma das maiores vantagens de se usar o R, e espero que
-te ajude a criar as suas próprias visualizações, apesar de não ter sido
-exatamente o intuito ser didático.
+Este post é certamente só uma amostra do pontecial do combo ggplot2 + gganimate,
+talvez uma das maiores vantagens de se usar o R, e espero que te ajude a criar
+as suas próprias visualizações, apesar de não ter sido exatamente o intuito ser
+didático.
 
-O gganimate é bem novo ainda e tem relativamente pouca informação sobre
-na internet. Eu demorei bastante para fazer alguns desses gráficos, mas
-acho que o resultado valeu a pena.
+O gganimate é bem novo ainda e tem relativamente pouca informação sobre na
+internet. Eu demorei bastante para fazer alguns desses gráficos, mas acho que o
+resultado valeu a pena.
 
 Para aprender mais sobre ggplot2, tente este
-[cookbook](http://www.cookbook-r.com/Graphs/) é ótimo. Para maiores
-referências sobre animações, tente o respositório
+[cookbook](http://www.cookbook-r.com/Graphs/) é ótimo. Para maiores referências
+sobre animações, tente o respositório
 [learngganimate](https://github.com/ropenscilabs/learngganimate), esse
 [vignette](https://cran.r-project.org/web/packages/gganimate/vignettes/gganimate.html)
 ou o próprio [site do pacote](https://gganimate.com/).

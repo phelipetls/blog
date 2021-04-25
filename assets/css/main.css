@@ -106,25 +106,27 @@ hr {
   background-color: var(--light-beige);
 }
 
-header {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-
 header nav {
   display: flex;
   justify-content: space-between;
 }
 
-header nav ul {
+header nav .items {
+  width: 100%;
   display: flex;
-  list-style: none;
+  align-items: center;
 }
 
-header nav ul li:not(:last-child) {
+header nav .items .item:not(:last-child) {
   margin-right: 0.5em;
+}
+
+header nav .items .translation {
+  margin-left: auto;
+  padding: 0.250em 0.5em;
+  border: 1px solid var(--light-beige);
+  border-radius: 8px;
+  font-family: sans-serif;
 }
 
 footer {

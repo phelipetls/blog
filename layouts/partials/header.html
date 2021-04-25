@@ -6,19 +6,20 @@
   </h2>
 
   <nav>
-    <ul>
+    <div class="items">
       {{- range .Site.Menus.main -}}
-        <li class="section"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></li>
+        <div class="item section"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></div>
       {{- end -}}
+
       {{- if .IsTranslated -}}
-        <li class="translation">
+        <div class="item translation">
           {{- range .Translations -}}
             <a href="{{ .Permalink | absLangURL }}" title="{{ i18n "Translation" . }}">
-              {{ .Lang | title }}
+              {{ .Lang | upper }}
             </a>
           {{- end -}}
-        </li>
+        </div>
       {{- end -}}
-    </ul>
+    </div>
   </nav>
 </header>

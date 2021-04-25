@@ -9,6 +9,14 @@
   --light-grey: #f5f5f5;
   --dark-grey: #41413e;
   --orange: #e25822;
+  --spacing-1: 0.25em;
+  --spacing-2: 0.50em;
+  --spacing-3: 0.75em;
+  --spacing-4: 1.00em;
+  --spacing-5: 1.25em;
+  --spacing-6: 1.50em;
+  --spacing-7: 1.75em;
+  --spacing-8: 2.00em;
 }
 
 html {
@@ -27,7 +35,7 @@ body {
   display: flex;
   flex-flow: column;
   margin: 0 auto;
-  padding: 0.5em 1em;
+  padding: var(--spacing-2) var(--spacing-4);
 }
 
 main {
@@ -37,7 +45,7 @@ main {
 }
 
 header, main, footer {
-  padding: 0.5em 1em;
+  padding: var(--spacing-2) var(--spacing-4);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,11 +63,11 @@ a:hover {
 }
 
 article p {
-  line-height: 1.5em;
+  line-height: var(--spacing-6);
 }
 
 article :is(h1, h2, h3, h4, h5, h6):not(:first-child) {
-  margin-top: 2em;
+  margin-top: var(--spacing-8);
 }
 
 article :is(h1, h2, h3, h4, h5, h6) .anchor {
@@ -95,13 +103,13 @@ p > code {
 }
 
 pre {
-  padding: 1em;
+  padding: var(--spacing-4);
   background-color: var(--light-grey) !important;
   overflow-x: auto;
 }
 
 hr {
-  margin: 1em 0;
+  margin: var(--spacing-4) 0;
   color: var(--light-beige);
   opacity: 0.5;
 }
@@ -116,13 +124,13 @@ header nav .items {
 }
 
 header nav .items .item {
-  margin-right: 0.5em;
+  margin-right: var(--spacing-2);
 }
 
 footer {
   text-align: center;
-  margin-top: 2em;
-  margin-bottom: 0.750em;
+  margin-top: var(--spacing-8);
+  margin-bottom: var(--spacing-3);
 }
 
 .pages {
@@ -130,11 +138,11 @@ footer {
 }
 
 .pages .page {
-  margin-bottom: 1.5em;
+  margin-bottom: var(--spacing-6);
 }
 
 .pages .page > hr {
-  margin-top: 1.5em;
+  margin-top: var(--spacing-6);
 }
 
 .pages .page:last-child > hr {
@@ -142,17 +150,17 @@ footer {
 }
 
 .pages .page .title {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
 }
 
 .pagination {
-  margin-top: 0.750em;
+  margin-top: var(--spacing-3);
   text-align: center;
 }
 
 .pagination * {
-  padding: 0 0.250em;
+  padding: 0 var(--spacing-1);
 }
 
 .archive .posts {
@@ -163,13 +171,13 @@ footer {
 .archive .posts .post {
   display: grid;
   grid-template-columns: 7ch auto;
-  margin-bottom: 1em;
+  margin-bottom: var(--spacing-4);
 }
 
 .projects .project .links {
   font-size: small;
   text-align: end;
-  margin-top: 1em;
+  margin-top: var(--spacing-4);
 }
 
 .metadata {
@@ -182,12 +190,12 @@ footer {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin: -0.250em;
+  margin: calc(-1 * var(--spacing-1));
 }
 
 .tags .tag {
-  margin: 0.250em;
-  padding: 0.125em 0.5em;
+  margin: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
   border: 1px solid var(--light-beige);
   border-radius: 8px;
   text-align: center;
@@ -210,7 +218,7 @@ footer {
 }
 
 .adjacent-posts .arrow {
-  padding: 0.750em;
+  padding: var(--spacing-3);
 }
 
 .adjacent-posts .next {

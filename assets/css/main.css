@@ -179,7 +179,6 @@ footer {
 }
 
 .projects .project .links {
-  font-size: small;
   text-align: end;
   margin-top: var(--spacing-4);
 }

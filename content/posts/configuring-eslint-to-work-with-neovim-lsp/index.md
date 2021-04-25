@@ -14,7 +14,7 @@ command-line tools and for any programming language.
 # Making eslint faster with eslint_d
 
 To reduce latency when invoking `eslint`, I'm gonna use
-`eslint_d`](https://github.com/mantoni/eslint_d.js/), which runs `eslint` as a
+[`eslint_d`](https://github.com/mantoni/eslint_d.js/), which runs `eslint` as a
 daemon process.
 
 # Configuring eslint_d in efm-langserver

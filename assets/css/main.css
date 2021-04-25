@@ -157,6 +157,20 @@ footer {
   margin-bottom: var(--spacing-4);
 }
 
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(-1 * var(--spacing-1));
+}
+
+.tags .tag {
+  margin: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  border: 1px solid var(--light-beige);
+  border-radius: 8px;
+  text-align: center;
+}
+
 .pagination {
   margin-top: var(--spacing-3);
   text-align: center;
@@ -191,20 +205,6 @@ footer {
 
 .metadata * {
   margin: var(--spacing-1);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  margin: calc(-1 * var(--spacing-1));
-}
-
-.tags .tag {
-  margin: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-2);
-  border: 1px solid var(--light-beige);
-  border-radius: 8px;
-  text-align: center;
 }
 
 .adjacent-posts {

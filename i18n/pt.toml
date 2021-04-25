@@ -1,13 +1,5 @@
-[License]
-other = '''
-Este conteúdo está sob uma licença
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-  Creative Commons Attribution 4.0
-</a>
-'''
-
-[Links]
-other = 'Feito com <a href="https://gohugo.io/">Hugo</a>'
+[Licensed]
+other = '''Conteúdo sob a licença'''
 
 [Archive]
 other = 'Arquivo'

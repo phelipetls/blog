@@ -62,7 +62,7 @@ a:hover {
   color: var(--orange);
 }
 
-article p {
+p {
   line-height: var(--spacing-6);
 }
 

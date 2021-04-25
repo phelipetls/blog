@@ -1,9 +1,9 @@
 <section class="pages">
   {{ range (.Paginator 10).Pages }}
     <div class="page">
-      <h3 class="title">
+      <h2 class="title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
-      </h3>
+      </h2>
 
       <time datetime="{{ .Date.Format "2006-01-02" }}">
         {{ if eq .Lang "en" }}

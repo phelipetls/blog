@@ -231,3 +231,8 @@ footer {
 .adjacent-posts .next {
   text-align: right;
 }
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}

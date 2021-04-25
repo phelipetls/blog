@@ -179,24 +179,28 @@ footer {
 .projects .project .links {
   font-size: small;
   text-align: end;
-  margin-top: 0.5em;
+  margin-top: 1em;
 }
 
 .metadata {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  gap: 0.5em;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.250em;
 }
 
 .tags .tag {
+  margin: 0.250em;
   padding: 0.125em 0.5em;
   border: 1px solid var(--light-beige);
   border-radius: 8px;
   text-align: center;
-}
-
-.tags .tag:not(:first-child) {
-  margin-left: 0.5em;
 }
 
 .adjacent-posts {

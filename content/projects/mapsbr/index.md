@@ -1,5 +1,5 @@
 ---
-title: "mapsbr"
+title: "MapsBR"
 date: 2019-12-29
 softwares: ["python", "pandas", "requests", "unittest"]
 website: "https://mapsbr.readthedocs.io"

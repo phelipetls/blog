@@ -5,22 +5,20 @@
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h3>
 
-      <div class="metadata">
-        <div class="tags">
-          {{- range (or (.GetTerms "tags") (.GetTerms "softwares")) -}}
-            <a class="tag" href="{{ .Permalink }}">{{ .Title }}</a>
-          {{- end -}}
-        </div>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ if eq .Lang "en" }}
+          {{ .Date.Format "January 02, 2006" }}
+        {{ else }}
+          {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+          {{ .Date.Day }},
+          {{ .Date.Year }}
+        {{ end }}
+      </time>
 
-        <time datetime="{{ .Date.Format "2006-01-02" }}">
-          {{ if eq .Lang "en" }}
-            {{ .Date.Format "January 02, 2006" }}
-          {{ else }}
-            {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-            {{ .Date.Day }},
-            {{ .Date.Year }}
-          {{ end }}
-        </time>
+      <div class="tags">
+        {{- range (or (.GetTerms "tags") (.GetTerms "softwares")) -}}
+          <a class="tag" href="{{ .Permalink }}">{{ .Title }}</a>
+        {{- end -}}
       </div>
 
       <hr>

@@ -150,6 +150,10 @@ footer {
 
 .pages .page .title {
   margin-top: var(--spacing-4);
+}
+
+.pages .page time {
+  display: block;
   margin-bottom: var(--spacing-4);
 }
 

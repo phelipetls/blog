@@ -2,7 +2,6 @@
 
 :root {
   --body-max-width: 65ch;
-  --monospace-font: "Consolas", "Fira Mono", monospace;
   --black: #1a1a1a;
   --light-beige: #cfcdc2;
   --dark-beige: #aca895;
@@ -97,7 +96,7 @@ img {
 }
 
 code {
-  font-family: var(--monospace-font);
+  font-family: "Consolas", "Fira Mono", monospace;
 }
 
 p > code {
@@ -219,7 +218,7 @@ footer {
   }
 }
 
-.adjacent-post {
+.adjacent-posts .adjacent-post {
   display: flex;
   align-items: center;
 }

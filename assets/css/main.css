@@ -97,7 +97,7 @@ code {
 }
 
 p code {
-  padding: 0 0.8ch;
+  padding: 0 var(--spacing-2);
   border-radius: var(--border-radius);
   background-color: var(--light-grey);
 }

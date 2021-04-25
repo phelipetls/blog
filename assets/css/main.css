@@ -62,6 +62,10 @@ a:hover {
   color: var(--orange);
 }
 
+article h1 {
+  font-size: var(--spacing-6);
+}
+
 article p {
   line-height: var(--spacing-6);
 }

@@ -16,6 +16,7 @@
   --spacing-6: 1.50em;
   --spacing-7: 1.75em;
   --spacing-8: 2.00em;
+  --border-radius: 8px;
 }
 
 html {
@@ -97,7 +98,7 @@ code {
 
 p code {
   padding: 0 0.8ch;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   background-color: var(--light-grey);
 }
 
@@ -167,7 +168,7 @@ footer {
   margin: var(--spacing-1);
   padding: var(--spacing-1) var(--spacing-2);
   border: 1px solid var(--light-beige);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   text-align: center;
 }
 

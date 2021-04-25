@@ -184,7 +184,11 @@ footer {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  gap: 0.5em;
+  margin: calc(-1 * var(--spacing-1));
+}
+
+.metadata * {
+  margin: var(--spacing-1);
 }
 
 .tags {

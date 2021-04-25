@@ -112,21 +112,11 @@ header nav {
 }
 
 header nav .items {
-  width: 100%;
   display: flex;
-  align-items: center;
 }
 
-header nav .items .item:not(:last-child) {
+header nav .items .item {
   margin-right: 0.5em;
-}
-
-header nav .items .translation {
-  margin-left: auto;
-  padding: 0.250em 0.5em;
-  border: 1px solid var(--light-beige);
-  border-radius: 8px;
-  font-family: sans-serif;
 }
 
 footer {

@@ -8,14 +8,16 @@
   <nav>
     <div class="items">
       {{- range .Site.Menus.main -}}
-        <div class="item section"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></div>
+        <div class="item"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></div>
       {{- end -}}
 
       {{- if .IsTranslated -}}
-        <div class="item translation">
+        <div class="item">·</div>
+
+        <div class="translation">
           {{- range .Translations -}}
             <a href="{{ .Permalink | absLangURL }}" title="{{ i18n "Translation" . }}">
-              {{ .Lang | upper }}
+              {{ .Lang }}
             </a>
           {{- end -}}
         </div>

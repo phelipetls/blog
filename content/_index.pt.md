@@ -2,13 +2,15 @@
 title: "Sobre"
 ---
 
-Oi, meu nome é Phelipe, sou um desenvolvedor de software que vive no Rio.
+# Sobre mim
+
+Sou um desenvolvedor de software do Rio.
 
 Eu venho de um background em Economia e atualmente trabalho como desenvolvedor
 web front-end.
 
-Ultimamente ando mais interessado em melhorar na criação de interfaces de
-usuário com React, JavaScript e TypeScript. Mas também me interesso por web
-APIs e arquitetura de software.
+Ultimamente ando mais interessado em criar interfaces de usuário com React,
+JavaScript e TypeScript. Também tenho interesse em web APIs e
+arquitetura/infraestrutura de software.
 
-Às vezes também escrevo um pouco de Python e Lua.
+No meu tempo livre, gosto de codar em Python e Lua.

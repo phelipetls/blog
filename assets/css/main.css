@@ -58,7 +58,7 @@ article p {
   line-height: 1.5em;
 }
 
-article :is(h1, h2, h3, h4, h5, h6) {
+article :is(h1, h2, h3, h4, h5, h6):not(:first-child) {
   margin-top: 2em;
 }
 

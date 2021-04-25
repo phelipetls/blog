@@ -199,6 +199,7 @@ footer {
 .post .metadata {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
   justify-content: space-between;
   margin: calc(-1 * var(--spacing-1));
 }

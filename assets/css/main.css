@@ -196,14 +196,14 @@ footer {
   margin-top: var(--spacing-4);
 }
 
-.metadata {
+.post .metadata {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   margin: calc(-1 * var(--spacing-1));
 }
 
-.metadata * {
+.post .metadata * {
   margin: var(--spacing-1);
 }
 

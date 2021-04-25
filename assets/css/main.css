@@ -110,7 +110,7 @@ pre {
 
 hr {
   margin: var(--spacing-4) 0;
-  color: var(--light-beige);
+  border: 1px solid var(--light-beige);
   opacity: 0.5;
 }
 

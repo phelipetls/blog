@@ -102,8 +102,8 @@ pre {
 
 hr {
   margin: 1em 0;
-  border: 1.5px solid var(--light-beige);
-  background-color: var(--light-beige);
+  color: var(--light-beige);
+  opacity: 0.5;
 }
 
 header nav {

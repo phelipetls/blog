@@ -9,7 +9,8 @@
       {{ end }}
     {{ end }}
   </head>
-  <body>
+
+  <body data-theme="light">
     {{ partial "header.html" . }}
 
     <main>
@@ -24,6 +25,13 @@
       {{ range (.Resources.Match "*.js") }}
         <script src="{{ .RelPermalink }}"></script>
       {{ end }}
+    {{ end }}
+
+    {{ $themeScript := resources.Get "js/theme.js" }}
+    {{ if .Site.IsServer }}
+      <script src="{{ $themeScript.RelPermalink }}"></script>
+    {{ else }}
+      <script src="{{ ($themeScript | minify).RelPermalink }}"></script>
     {{ end }}
   </body>
 </html>

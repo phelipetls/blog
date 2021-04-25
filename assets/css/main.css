@@ -149,6 +149,31 @@ hr {
   opacity: 0.5;
 }
 
+button {
+  outline: none;
+  appearance: none;
+  font-family: sans-serif;
+  padding: var(--spacing-2) var(--spacing-4);
+  border: unset;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+body[data-theme='light'] button.theme {
+  color: var(--white);
+  background-color: var(--light-black);
+}
+
+body[data-theme='dark'] button.theme {
+  background-color: var(--dark-beige);
+}
+
+header .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 header nav {
   display: flex;
   justify-content: space-between;

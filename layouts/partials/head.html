@@ -1,11 +1,15 @@
 {{ partial "meta.html" . }}
 
+{{ $cssReset := resources.Get "css/normalize.css"  }}
 {{ $css := resources.Get "css/main.css" }}
 
 {{ if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}"/>
   <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
 {{ else }}
+  {{ $minifiedCssReset := $cssReset | minify | fingerprint }}
   {{ $minifiedCss := ($css | minify | fingerprint) }}
+  <link rel="stylesheet" href="{{ $minifiedCssReset.RelPermalink }}" integrity="{{ $minifiedCssReset.Data.Integrity }}" />
   <link rel="stylesheet" href="{{ $minifiedCss.RelPermalink }}" integrity="{{ $minifiedCss.Data.Integrity }}" />
 {{end}}
 

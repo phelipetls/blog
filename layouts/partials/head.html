@@ -17,8 +17,8 @@
   {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" integrity="{{ $cssReset.Data.Integrity }}" />
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
-  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" integrity="{{ $syntaxHighlight.Data.Integrity }}" media="prefers-color-scheme: light" />
-  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" integrity="{{ $darkSyntaxHighlight.Data.Integrity }}" media="prefers-color-scheme: dark" />
+  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" integrity="{{ $syntaxHighlight.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" integrity="{{ $darkSyntaxHighlight.Data.Integrity }}" />
 {{end}}
 
 <title>

@@ -1,0 +1,25 @@
+<script>
+  window.__setTheme = function(newTheme) {
+    document.body.setAttribute("data-theme", newTheme);
+    localStorage.setItem("__theme", newTheme);
+    const oldTheme = newTheme === "dark" ? "light" : "dark";
+    document
+      .querySelector("link[href*='" + oldTheme + "']")
+      .setAttribute("disabled", "");
+    document
+      .querySelector("link[href*='" + newTheme + "']")
+      .removeAttribute("disabled");
+    const themeChangeEvent = new CustomEvent("themeChange", {
+      detail: { theme: newTheme }
+    });
+    document.body.dispatchEvent(themeChangeEvent);
+  };
+
+  const storedTheme = localStorage.getItem("__theme");
+
+  if (storedTheme) {
+    window.__setTheme(storedTheme);
+  } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    window.__setTheme("dark");
+  }
+</script>

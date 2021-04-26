@@ -11,29 +11,7 @@
   </head>
 
   <body data-theme="light">
-    <script>
-      window.__setTheme = function(newTheme) {
-        document.body.setAttribute("data-theme", newTheme);
-        localStorage.setItem("__theme", newTheme);
-        const oldTheme = newTheme === "dark" ? "light" : "dark"
-        document
-          .querySelector("link[href*='" + oldTheme + "']")
-          .setAttribute("disabled", "");
-        document
-          .querySelector("link[href*='" + newTheme + "']")
-          .removeAttribute("disabled");
-        const themeChangeEvent = new CustomEvent("themeChange", { detail: { theme: newTheme }})
-        document.body.dispatchEvent(themeChangeEvent)
-      }
-
-      const storedTheme = localStorage.getItem("__theme");
-
-      if (storedTheme) {
-        window.__setTheme(storedTheme);
-      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        window.__setTheme("dark");
-      }
-    </script>
+    {{ partial "theme.html" }}
 
     {{ partial "header.html" . }}
 
@@ -51,11 +29,7 @@
       {{ end }}
     {{ end }}
 
-    {{ $themeScript := resources.Get "js/theme.js" }}
-    {{ if .Site.IsServer }}
-      <script src="{{ $themeScript.RelPermalink }}"></script>
-    {{ else }}
-      <script src="{{ ($themeScript | minify).RelPermalink }}"></script>
-    {{ end }}
+    {{ $themeButtonScript := resources.Get "js/theme-button.js" }}
+    <script src="{{ $themeButtonScript.RelPermalink }}"></script>
   </body>
 </html>

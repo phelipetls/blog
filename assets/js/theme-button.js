@@ -1,5 +1,10 @@
 const button = document.querySelector("button.theme");
 
+const theme = localStorage.getItem("__theme");
+if (theme) {
+  button.textContent = theme === "dark" ? "Light" : "Dark";
+}
+
 button.addEventListener("click", function() {
   if (document.body.dataset.theme === "dark") {
     window.__setTheme("light");

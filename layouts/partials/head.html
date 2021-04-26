@@ -11,14 +11,14 @@
   <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 {{ else }}
-  {{ $cssReset := $cssReset | minify | fingerprint }}
-  {{ $css := $css | minify | fingerprint }}
-  {{ $syntaxHighlight := $syntaxHighlight | minify | fingerprint }}
-  {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" integrity="{{ $cssReset.Data.Integrity }}" />
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
-  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" integrity="{{ $syntaxHighlight.Data.Integrity }}" />
-  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" integrity="{{ $darkSyntaxHighlight.Data.Integrity }}" />
+  {{ $cssReset := $cssReset | minify }}
+  {{ $css := $css | minify }}
+  {{ $syntaxHighlight := $syntaxHighlight | minify }}
+  {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
+  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 {{end}}
 
 <title>

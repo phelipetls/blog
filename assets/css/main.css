@@ -93,7 +93,7 @@ a:hover {
   color: var(--hover-fg-color);
 }
 
-p {
+p, article li {
   line-height: var(--spacing-6);
 }
 

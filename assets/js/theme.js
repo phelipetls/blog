@@ -1,9 +1,24 @@
 const button = document.querySelector("button.theme");
 
-function setTheme(theme) {
-  document.body.setAttribute("data-theme", theme);
-  localStorage.setItem("__theme", theme);
-  button.textContent = theme === "dark" ? "Light" : "Dark";
+function toTitleCase(str) {
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+function setTheme(newTheme) {
+  document.body.setAttribute("data-theme", newTheme);
+  localStorage.setItem("__theme", newTheme);
+
+  const oldTheme = newTheme === "dark" ? "light" : "dark";
+
+  document
+    .querySelector("link[href*='" + oldTheme + "']")
+    .setAttribute("disabled", "");
+
+  document
+    .querySelector("link[href*='" + newTheme + "']")
+    .removeAttribute("disabled");
+
+  button.textContent = toTitleCase(newTheme);
 }
 
 const storedTheme = localStorage.getItem("__theme");

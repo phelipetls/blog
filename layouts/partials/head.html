@@ -4,10 +4,22 @@
 {{ $css := resources.Get "css/main.css" }}
 {{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
-<link rel="stylesheet" href="{{ $cssReset.RelPermalink }}"/>
-<link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
-<link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
-<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
+
+{{ if .Site.IsServer }}
+  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}"/>
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
+  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
+{{ else }}
+  {{ $cssReset := $cssReset | minify | fingerprint }}
+  {{ $css := $css | minify | fingerprint }}
+  {{ $syntaxHighlight := $syntaxHighlight | minify | fingerprint }}
+  {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" integrity="{{ $cssReset.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" integrity="{{ $syntaxHighlight.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" integrity="{{ $darkSyntaxHighlight.Data.Integrity }}" />
+{{end}}
 
 <title>
   {{ .Title }} | {{ .Site.Title }}

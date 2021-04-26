@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}"/>
   <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
 {{ else }}
-  {{ $minifiedCssReset := $cssReset | minify | fingerprint }}
-  {{ $minifiedCss := ($css | minify | fingerprint) }}
-  <link rel="stylesheet" href="{{ $minifiedCssReset.RelPermalink }}" integrity="{{ $minifiedCssReset.Data.Integrity }}" />
-  <link rel="stylesheet" href="{{ $minifiedCss.RelPermalink }}" integrity="{{ $minifiedCss.Data.Integrity }}" />
+  {{ $cssReset := $cssReset | minify | fingerprint }}
+  {{ $css := $css | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" integrity="{{ $cssReset.Data.Integrity }}" />
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
 {{end}}
 
 <title>

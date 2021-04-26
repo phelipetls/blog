@@ -13,6 +13,6 @@ button.addEventListener("click", function() {
   window.__setTheme("dark");
 });
 
-button.addEventListener("themeChange", function(e) {
-  e.target.textContent = toTitleCase(e.detail.theme);
+document.body.addEventListener("themeChange", function(e) {
+  button.textContent = e.detail.theme === "dark" ? "Light" : "Dark";
 });

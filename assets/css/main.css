@@ -137,7 +137,6 @@ code {
 
 pre {
   padding: var(--spacing-4);
-  background-color: var(--bg-color) !important;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   overflow-x: auto;

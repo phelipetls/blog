@@ -22,4 +22,9 @@
   } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
     window.__setTheme("dark");
   }
+
+  /* Enable animations */
+  window.addEventListener("load", function() {
+    document.body.classList.remove("preload")
+  })
 </script>

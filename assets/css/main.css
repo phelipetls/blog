@@ -67,6 +67,14 @@ body {
   flex-flow: column;
   margin: 0 auto;
   padding: var(--spacing-2) var(--spacing-4);
+  transition: color 0.25s ease-out, background 0.25s ease-out;
+}
+
+.preload {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
 }
 
 main {

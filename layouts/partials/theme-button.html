@@ -1,0 +1,36 @@
+<button class="icon theme-toggler">
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+      {{ partial "svg" "bx-moon" }}
+      {{ partial "svg" "bxs-sun" }}
+    </defs>
+
+    <use href="#sun" />
+  </svg>
+</button>
+
+<script>
+  const toggler = document.querySelector("button.theme-toggler");
+  const togglerSvgIcon = document.querySelector("use")
+
+  const getThemeSvgIcon = function(theme) {
+    return theme === "dark" ? "#sun" : "#moon"
+  }
+
+  const theme = localStorage.getItem("__theme");
+  if (theme) {
+    togglerSvgIcon.setAttribute("href", getThemeSvgIcon(theme));
+  }
+
+  toggler.addEventListener("click", function() {
+    if (document.body.dataset.theme === "dark") {
+      window.__setTheme("light");
+      return;
+    }
+    window.__setTheme("dark");
+  });
+
+  document.body.addEventListener("themeChange", function(e) {
+    togglerSvgIcon.setAttribute("href", getThemeSvgIcon(e.detail.theme))
+  });
+</script>

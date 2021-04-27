@@ -151,26 +151,34 @@ hr {
 button {
   outline: none;
   appearance: none;
-  font-family: sans-serif;
-  padding: var(--spacing-2) var(--spacing-4);
   border: unset;
-  border-radius: var(--border-radius);
   cursor: pointer;
+  font-family: sans-serif;
 }
 
-body[data-theme='light'] button.theme {
-  color: var(--white);
-  background-color: var(--light-black);
+button.primary {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--border-radius);
 }
 
-body[data-theme='dark'] button.theme {
-  background-color: var(--dark-beige);
-}
-
-header .title {
+button.icon {
+  font-size: larger;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+button.theme-toggler {
+  position: fixed;
+  bottom: var(--spacing-6);
+  right: var(--spacing-6);
+
+  fill: var(--bg-color);
+  /* TODO: improve variable name */
+  background-color: var(--heading-fg-color);
 }
 
 header nav {

@@ -12,10 +12,10 @@
 
   <body data-theme="light">
     {{ partial "theme.html" }}
-
     {{ partial "header.html" . }}
 
     <main>
+
       {{ block "main" . }}
         {{ .Content }}
       {{ end }}
@@ -29,7 +29,6 @@
       {{ end }}
     {{ end }}
 
-    {{ $themeButtonScript := resources.Get "js/theme-button.js" }}
-    <script src="{{ $themeButtonScript.RelPermalink }}"></script>
+    {{ partial "theme-button.html" }}
   </body>
 </html>

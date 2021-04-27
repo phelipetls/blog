@@ -36,7 +36,7 @@ html {
 body[data-theme='light'] {
   --bg-color: var(--white);
   --fg-color: var(--black);
-  --heading-fg-color: var(--dark-grey);
+  --primary-color: var(--dark-grey);
   --code-bg-color: var(--light-white);
   --code-fg-color: var(--fg-color);
   --hover-fg-color: var(--orange);
@@ -48,7 +48,7 @@ body[data-theme='light'] {
 body[data-theme='dark'] {
   --bg-color: var(--black);
   --fg-color: var(--grey);
-  --heading-fg-color: var(--dark-beige);
+  --primary-color: var(--dark-beige);
   --code-bg-color: var(--light-black);
   --code-fg-color: var(--grey);
   --hover-fg-color: var(--orange);
@@ -80,7 +80,7 @@ header, main, footer {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--heading-fg-color);
+  color: var(--primary-color);
   font-family: $heading-font;
 }
 
@@ -175,10 +175,8 @@ button.theme-toggler {
   position: fixed;
   bottom: var(--spacing-6);
   right: var(--spacing-6);
-
   fill: var(--bg-color);
-  /* TODO: improve variable name */
-  background-color: var(--heading-fg-color);
+  background-color: var(--primary-color);
 }
 
 header nav {

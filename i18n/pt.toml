@@ -12,8 +12,8 @@ other = 'Arquivo'
 [Projects]
 other = 'Projetos'
 
-[Translation]
-other = 'Read this page in {{ .Language.LanguageName }}'
-
 [ThemeButton]
 other = 'Mudar tema'
+
+[en]
+other = "In English"

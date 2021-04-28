@@ -4,13 +4,12 @@ title: "Sobre"
 
 # Sobre mim
 
-Sou um desenvolvedor de software do Rio.
+Oi, sou desenvolvedor de software do Rio de Janeiro.
 
-Eu venho de um background em Economia e atualmente trabalho como desenvolvedor
-web front-end.
+Atualmente trabalho como desenvolvedor front-end, construindo interfaces de
+usuário para mobile e web com React, JavaScript e TypeScript.
 
-Ultimamente ando mais interessado em criar interfaces de usuário com React,
-JavaScript e TypeScript. Também tenho interesse em web APIs e
-arquitetura/infraestrutura de software.
+Também tenho interesse em aprender como as coisas funcionam no back-end, com que
+não tenho muita experiência.
 
-No meu tempo livre, gosto de codar em Python e Lua.
+Fora isso, gosto de Python, Lua e Linux.

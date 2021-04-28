@@ -4,13 +4,12 @@ title: "About"
 
 # About
 
-I'm a software developer from Brazil, Rio.
+Hi, I'm a software developer based in Brazil, Rio.
 
-I came from an Economics background, but am currently working as a front-end web
-developer.
+I am currently working as a front-end developer building mobile and web user
+interfaces with React, JavaScript and TypeScript.
 
-Lately, I'm mostly busy building user interfaces with React, JavaScript and
-TypeScript. I'm also interested in learning about web APIs, software
-architecture and infrastructure.
+I'm also interested in learning how things work on the back-end, but my
+experience with it is limited.
 
-In my free time, I like to write Python and Lua code.
+Other than that, I like Python, Lua and Linux.

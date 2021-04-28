@@ -12,10 +12,10 @@ DefaultContentLanguage = "en"
 
 [languages]
   [languages.en]
-    LanguageName = "English"
+    languageName = "English"
     weight = 1
   [languages.pt]
-    LanguageName = "Português"
+    languageName = "Português"
     weight = 2
     [languages.pt.params]
       description = "Um blog para compartilhar meus interesses em programação, estatística e mais"

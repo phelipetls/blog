@@ -100,12 +100,12 @@ a:hover {
   color: var(--hover-fg-color);
 }
 
-p a {
+article a {
   all: revert;
   color: var(--link-fg-color);
 }
 
-p a:visited {
+article a:visited {
   color: var(--visited-link-fg-color);
 }
 

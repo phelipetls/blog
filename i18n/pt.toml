@@ -9,3 +9,6 @@ other = 'Mudar tema'
 
 [en]
 other = "In English"
+
+[Icons]
+other = 'Ícones de <a href="https://boxicons.com/">Boxicons</a>'

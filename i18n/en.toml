@@ -3,3 +3,6 @@ other = 'Change theme'
 
 [pt]
 other = "Em Português"
+
+[Icons]
+other = 'Icons by <a href="https://boxicons.com/">Boxicons</a>'

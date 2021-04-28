@@ -161,11 +161,14 @@ button {
   border: unset;
   cursor: pointer;
   font-family: sans-serif;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-1) var(--spacing-2);
 }
 
-button.primary {
-  padding: var(--spacing-2) var(--spacing-4);
-  border-radius: var(--border-radius);
+button.secondary {
+  color: var(--fg-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
 }
 
 button.icon {
@@ -238,10 +241,6 @@ footer {
 
 .tags .tag {
   margin: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-2);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  text-align: center;
 }
 
 .pagination {

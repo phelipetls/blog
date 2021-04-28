@@ -17,7 +17,9 @@
 
       <div class="tags">
         {{- range (or (.GetTerms "tags") (.GetTerms "softwares")) -}}
-          <a class="tag" href="{{ .Permalink }}">{{ .Title }}</a>
+          <button class="secondary tag">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </button>
         {{- end -}}
       </div>
 

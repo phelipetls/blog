@@ -13,7 +13,7 @@
       {{ with (first 5 (.GetTerms "tags")) }}
         <div class="tags">
           {{- range . -}}
-            <span class="tag"><a href="{{ .RelPermalink }}">{{- .Title -}}</a></span>
+            <button class="secondary tag"><a href="{{ .RelPermalink }}">{{- .Title -}}</a></button>
           {{- end -}}
         </div>
       {{ end }}

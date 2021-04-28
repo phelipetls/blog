@@ -87,6 +87,10 @@ header, main, footer {
   padding: var(--spacing-2) var(--spacing-4);
 }
 
+h1 {
+  font-size: var(--spacing-8);
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-color);
 }
@@ -223,7 +227,7 @@ footer {
   display: none;
 }
 
-.pages .page .title {
+.pages .page h1 {
   margin-top: var(--spacing-4);
 }
 

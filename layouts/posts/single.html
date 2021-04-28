@@ -1,8 +1,6 @@
 {{ define "main" }}
-  <section class="post">
-    <div class="title">
-      <h2>{{ .Title }}</h2>
-    </div>
+  <article class="post">
+    <h1>{{ .Title }}</h1>
 
     <div class="metadata">
       <time
@@ -21,9 +19,7 @@
 
     <hr>
 
-    <article class="content">
-      {{ .Content }}
-    </article>
+    {{ .Content }}
 
     <hr>
 
@@ -42,5 +38,5 @@
         </a>
       {{ end }}
     </div>
-  </section>
+  </article>
 {{ end }}

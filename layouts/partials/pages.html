@@ -1,6 +1,6 @@
 <section class="pages">
   {{ range (.Paginator 10).Pages }}
-    <div class="page">
+    <article class="page">
       <h2 class="title">
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h2>
@@ -24,7 +24,7 @@
       </div>
 
       <hr>
-    </div>
+    </article>
   {{ end }}
 </section>
 

@@ -1,18 +1,16 @@
 {{ define "main" }}
   <section class="pages projects">
     {{ range .Pages }}
-      <div class="page project">
+      <article class="page project">
         <div class="header">
-          <h2 class="title">
+          <h2>
             <a href="{{ or (.Params.website) (.Params.github) }}">
               {{ .Title | title }}
             </a>
           </h2>
         </div>
 
-        <article class="content">
-          {{ .Content }}
-        </article>
+        {{ .Content }}
 
         <div class="tags">
           {{- range (.GetTerms "softwares") -}}
@@ -28,7 +26,7 @@
         </div>
 
         <hr>
-      </div>
+      </article>
     {{ end }}
   </section>
 {{ end }}

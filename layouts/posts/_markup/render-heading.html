@@ -1,4 +1,4 @@
-<h{{ .Level }} class="heading" id="{{ .Anchor | safeURL }}">
+<h{{ add .Level 1 }} class="heading" id="{{ .Anchor | safeURL }}">
   {{ .Text | safeHTML }}
   <a class="anchor" href="#{{ .Anchor | safeURL }}">#</a>
-</h{{ .Level }}>
+</h{{ add .Level 1 }}>

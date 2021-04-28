@@ -92,21 +92,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--hover-fg-color);
-}
-
-article a {
-  all: revert;
   color: var(--link-fg-color);
 }
 
-article a:visited {
+a:visited {
   color: var(--visited-link-fg-color);
+}
+
+:is(h1, h2, h3, h4, h5, h6, button, nav) :is(a, a:visited) {
+  color: inherit;
+  text-decoration: none;
 }
 
 p, article li {

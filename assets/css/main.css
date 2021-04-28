@@ -180,6 +180,12 @@ button.theme-toggler {
   bottom: var(--spacing-6);
   right: var(--spacing-6);
   fill: currentColor;
+  opacity: 75%;
+  transition: opacity .25s ease-in-out;
+}
+
+button.theme-toggler:hover {
+  opacity: 100%;
 }
 
 header nav {

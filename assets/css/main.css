@@ -165,6 +165,11 @@ button {
   padding: var(--spacing-1) var(--spacing-2);
 }
 
+button.primary {
+  color: var(--bg-color);
+  background-color: var(--primary-color);
+}
+
 button.secondary {
   color: var(--fg-color);
   background-color: var(--bg-color);
@@ -185,8 +190,7 @@ button.theme-toggler {
   position: fixed;
   bottom: var(--spacing-6);
   right: var(--spacing-6);
-  fill: var(--bg-color);
-  background-color: var(--primary-color);
+  fill: currentColor;
 }
 
 header nav {

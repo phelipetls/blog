@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My experience testing React applications"
-date: 2021-04-29
+date: 2021-04-28
 tags: ["react", "javascript"]
 ---
 

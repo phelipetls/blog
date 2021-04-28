@@ -9,3 +9,6 @@ license
 
 [Translation]
 other = 'Leia esta página em {{ .Language.LanguageName }}'
+
+[ThemeButton]
+other = 'Change theme'

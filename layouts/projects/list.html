@@ -2,13 +2,11 @@
   <section class="pages projects">
     {{ range .Pages }}
       <article class="page project">
-        <div class="header">
-          <h2>
-            <a href="{{ or (.Params.website) (.Params.github) }}">
-              {{ .Title | title }}
-            </a>
-          </h2>
-        </div>
+        <h2>
+          <a href="{{ or (.Params.website) (.Params.github) }}">
+            {{ .Title | title }}
+          </a>
+        </h2>
 
         {{ .Content }}
 

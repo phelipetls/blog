@@ -11,8 +11,6 @@
   --grey: #e6e1dc;
   --dark-grey: #41413e;
   --orange: #e25822;
-  --blue: #4d8fac;
-  --purple: #a688c0;
   --spacing-1: 0.25em;
   --spacing-2: 0.50em;
   --spacing-3: 0.75em;
@@ -40,8 +38,6 @@ body[data-theme='light'] {
   --code-bg-color: var(--light-white);
   --code-fg-color: var(--fg-color);
   --hover-fg-color: var(--orange);
-  --link-fg-color: var(--blue);
-  --visited-link-fg-color: var(--purple);
   --border-color: var(--beige);
 }
 
@@ -52,8 +48,6 @@ body[data-theme='dark'] {
   --code-bg-color: var(--light-black);
   --code-fg-color: var(--grey);
   --hover-fg-color: var(--orange);
-  --link-fg-color: var(--blue);
-  --visited-link-fg-color: var(--purple);
   --border-color: var(--light-black);
 }
 
@@ -96,11 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--link-fg-color);
-}
-
-a:visited {
-  color: var(--visited-link-fg-color);
+  color: var(--primary-color);
 }
 
 :is(h1, h2, h3, h4, h5, h6, button, nav) :is(a, a:visited) {

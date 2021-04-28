@@ -26,15 +26,13 @@
     <div class="adjacent-posts">
       {{ with .PrevInSection }}
         <a class="adjacent-post previous" href="{{ .RelPermalink }}">
-          <div class="arrow">«</div>
-          <span>{{ .Title }}</span>
+          « {{ .Title }}
         </a>
       {{ end }}
 
       {{ with .NextInSection }}
         <a class="adjacent-post next" href="{{ .RelPermalink }}">
-          <span>{{ .Title }}</span>
-          <div class="arrow">»</div>
+          {{ .Title }} »
         </a>
       {{ end }}
     </div>

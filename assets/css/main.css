@@ -274,23 +274,15 @@ footer {
 }
 
 .adjacent-posts {
-  display: flex;
-  flex-flow: row;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: var(--spacing-4);
 }
 
 @media screen and (max-width: 420px) {
   .adjacent-posts {
-    flex-flow: column;
+    grid-template-columns: 1fr;
   }
-}
-
-.adjacent-posts .adjacent-post {
-  display: flex;
-  align-items: center;
-}
-
-.adjacent-posts .arrow {
-  padding: var(--spacing-3);
 }
 
 .adjacent-posts .next {

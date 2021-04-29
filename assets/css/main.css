@@ -77,10 +77,6 @@ main {
   flex-flow: column;
 }
 
-header, main, footer {
-  padding: var(--spacing-2) var(--spacing-4);
-}
-
 h1 {
   font-size: var(--spacing-8);
 }

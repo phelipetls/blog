@@ -10,12 +10,12 @@
 </button>
 
 <script>
-  const toggler = document.querySelector("button.theme-toggler");
-  const togglerSvgIcon = document.querySelector("use")
+  const btn = document.querySelector("button.theme-toggler");
+  const btnSvgIcon = document.querySelector("use")
 
   const changeTogglerSvgIcon = function(theme) {
     const icon = theme === "dark" ? "#sun" : "#moon"
-    togglerSvgIcon.setAttribute("href", icon)
+    btnSvgIcon.setAttribute("href", icon)
   }
 
   const theme = localStorage.getItem("__theme");
@@ -23,7 +23,7 @@
     changeTogglerSvgIcon(theme)
   }
 
-  toggler.addEventListener("click", function() {
+  btn.addEventListener("click", function() {
     if (document.body.dataset.theme === "dark") {
       window.__setTheme("light");
       changeTogglerSvgIcon("light")

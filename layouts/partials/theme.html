@@ -9,10 +9,6 @@
     document
       .querySelector("link[href*='" + newTheme + "']")
       .removeAttribute("disabled");
-    const themeChangeEvent = new CustomEvent("themeChange", {
-      detail: { theme: newTheme }
-    });
-    document.body.dispatchEvent(themeChangeEvent);
   };
 
   const storedTheme = localStorage.getItem("__theme");

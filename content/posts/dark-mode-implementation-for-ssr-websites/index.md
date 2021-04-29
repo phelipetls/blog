@@ -1,16 +1,16 @@
 ---
 layout: "post"
 title: "Implementing dark mode for SSR websites"
-date: 2021-04-28
+date: 2021-04-29
 tags: ["hugo", "html", "css", "javascript"]
-draft: true
 ---
 
-I know there are a lot of resources about this already but I'll make one anyway
-because I was impressed at how much harder it is than I initially thought.
+Implementing dark mode in a server side rendered website is not as simple as you
+may initially think. There are some hacky things we should do to avoid flash of
+incorrect theme on reload, animation etc.
 
-There a lot of hacky things you need to do to make things work properly, so
-let's get started.
+In this blog post I'll dive into the implementation details in a general way and
+then focus on Hugo-powered websites.
 
 # CSS
 
@@ -50,9 +50,9 @@ button.addEventListener("click", function() {
 });
 ```
 
-# Theme persistence across reloads
+# Theme persistence
 
-To make theme persist, we'll use
+To make the theme persist, we'll use
 [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
 
 Every time the theme changes, we save it to `localStorage`. When the page
@@ -78,9 +78,9 @@ it work!... except the page will flash on reload.
 This is because, at the time the script runs, the page has already been drawn in
 light mode, and just then we change it to dark mode.
 
-The fix is to recover the theme from `localStorage` as early as possible. But
+The fix is to recover the theme from `localStorage` _as early as possible_. But
 this also means that we won't be able to add an event listener to the button
-because it doesn't exist yet:
+because it has yet to be created:
 
 ```html
 <body data-theme="light">
@@ -90,16 +90,19 @@ because it doesn't exist yet:
 
   ...
 
+  <button>Change theme</button>
+
   <script>
     <!-- add button logic -->
   </script>
 </body>
 ```
 
-But that way we won't be able to share logic between scripts so (here comes the
-hack) we will use a global variable to do it.
+But that way we won't be able to share logic between scripts unless (here comes
+the hack) we use a global variable.
 
-First, we set the theme inside `localStorage` (if any).
+In the first script, right after the body tag, we set the theme from
+`localStorage`.
 
 ```js
 window.__setTheme = function(newTheme) {
@@ -115,7 +118,7 @@ if (storedTheme) {
 }
 ```
 
-Then we make the button toggle theme:
+Then we make the button change the theme:
 
 ```js
 const button = document.querySelector("button.theme-toggler");
@@ -132,9 +135,9 @@ button.addEventListener("click", function() {
 **NOTE:** The script tag _has_ to be inline, otherwise the flash will still
 happen.
 
-# Add transition between themes
+# Transition between themes
 
-This works but we want to animate it:
+This works, but we want some animations:
 
 ```css
 body {
@@ -142,7 +145,8 @@ body {
 }
 ```
 
-Now things are broken again, because the transition will happen on reload.
+Now you reload the page and things are broken again, because the transition will
+happen on reload.
 [To prevent this, I used this tip from this CSS-Tricks article.](https://css-tricks.com/transitions-only-after-page-load/)
 
 ```html
@@ -180,7 +184,7 @@ if (storedTheme) {
 }
 ```
 
-If there's nothing in `localStorage`, we respect system settings.
+So that, if there's nothing in `localStorage`, we respect system settings.
 
 # Hugo implementation details
 
@@ -244,4 +248,4 @@ window.__setTheme = function(newTheme) {
 };
 ```
 
-And that's it.
+And that's it, hopefully we can enjoy dark mode now.

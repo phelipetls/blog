@@ -186,15 +186,8 @@ button.theme-toggler:hover {
 
 header nav {
   display: flex;
-  justify-content: space-between;
-}
-
-header nav .items {
-  display: flex;
-}
-
-header nav .items .item {
-  margin-right: var(--spacing-2);
+  flex-flow: wrap;
+  gap: var(--spacing-2)
 }
 
 footer {

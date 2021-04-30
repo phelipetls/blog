@@ -6,22 +6,17 @@
   </h1>
 
   <nav>
-    <div class="items">
-      {{- range .Site.Menus.main -}}
-        <div class="item"><a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a></div>
-      {{- end -}}
+    {{- range .Site.Menus.main -}}
+      <a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a>
+    {{- end -}}
 
-      {{- if .IsTranslated -}}
-        <div class="item">·</div>
-
-        <div class="translation">
-          {{- range .Translations -}}
-            <a href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
-              {{ i18n .Lang }}
-            </a>
-          {{- end -}}
-        </div>
+    {{- if .IsTranslated -}}
+      ·
+      {{- range .Translations -}}
+        <a class="translation" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
+          {{ i18n .Lang }}
+        </a>
       {{- end -}}
-    </div>
+    {{- end -}}
   </nav>
 </header>

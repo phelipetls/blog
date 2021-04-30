@@ -201,12 +201,9 @@ footer {
   flex: 1;
 }
 
-.pages .page {
-  margin-bottom: var(--spacing-6);
-}
-
-.pages .page > hr {
+.pages .page hr {
   margin-top: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
 }
 
 .pages .page:last-child > hr {

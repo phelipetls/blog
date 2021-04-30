@@ -213,10 +213,6 @@ footer {
   display: none;
 }
 
-.pages .page h1 {
-  margin-top: var(--spacing-4);
-}
-
 .pages .page time {
   display: block;
   margin-bottom: var(--spacing-4);

@@ -237,7 +237,7 @@ footer {
 
 .archive .posts .post {
   display: grid;
-  grid-template-columns: 7ch auto;
+  grid-template-columns: 7ch 1fr;
   margin-bottom: var(--spacing-4);
 }
 

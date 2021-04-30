@@ -9,8 +9,8 @@ Implementing dark mode in a server side rendered website is not as simple as you
 may initially think. There are some hacky things we should do to avoid flash of
 incorrect theme on reload, animation etc.
 
-In this blog post I'll dive into the implementation details in a general way and
-then focus on Hugo-powered websites.
+In this blog post I'll dive into the implementation details on how to make it
+work in general and then on how to implement it in Hugo-powered websites.
 
 # CSS
 
@@ -78,9 +78,9 @@ it work!... except the page will flash on reload.
 This is because, at the time the script runs, the page has already been drawn in
 light mode, and just then we change it to dark mode.
 
-The fix is to recover the theme from `localStorage` _as early as possible_. But
-this also means that we won't be able to add an event listener to the button
-because it has yet to be created:
+The fix is to set the theme from `localStorage` _as early as possible_. But this
+also means that we won't be able to add an event listener to the button because
+it has yet to be created:
 
 ```html
 <body data-theme="light">
@@ -147,7 +147,7 @@ body {
 
 Now you reload the page and things are broken again, because the transition will
 happen on reload.
-[To prevent this, I used this tip from this CSS-Tricks article.](https://css-tricks.com/transitions-only-after-page-load/)
+[To prevent this, I used this trick from CSS-Tricks:](https://css-tricks.com/transitions-only-after-page-load/)
 
 ```html
 <body class="preload"></body>
@@ -188,7 +188,7 @@ So that, if there's nothing in `localStorage`, we respect system settings.
 
 # Hugo implementation details
 
-In my `layouts/_default/baseof.html` template
+In `layouts/_default/baseof.html` template, we need something like this:
 
 <!-- prettier-ignore -->
 ```html
@@ -214,8 +214,8 @@ button.
 Also, to change syntax highlighting colorscheme, we need to add
 `pygmentsUseClasses = true` to our configuration file.
 
-Then, we need to generate stylesheets for each different colorscheme and add it
-our assets folder.
+Then, we need to generate stylesheets for each different colorscheme and move
+them to our assets folder.
 
 ```sh
 hugo gen chromastyles --style=monokai > dark-syntax-highlight.css
@@ -233,7 +233,7 @@ Add them to our html (with the dark stylesheet disabled).
 <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 ```
 
-Handle enabling/disabling stylesheet when theme changes:
+And handle enabling/disabling stylesheet when theme changes with JavaScript:
 
 ```js
 window.__setTheme = function(newTheme) {

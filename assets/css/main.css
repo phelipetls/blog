@@ -218,11 +218,7 @@ footer {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin: calc(-1 * var(--spacing-1));
-}
-
-.tags .tag {
-  margin: var(--spacing-1);
+  gap: var(--spacing-2);
 }
 
 .pagination {

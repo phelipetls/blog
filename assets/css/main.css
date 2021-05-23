@@ -143,7 +143,6 @@ button {
   appearance: none;
   border: unset;
   cursor: pointer;
-  font-family: sans-serif;
   border-radius: var(--border-radius);
   padding: var(--spacing-1) var(--spacing-2);
 }

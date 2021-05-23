@@ -271,7 +271,9 @@ Also, if all tests passed, capture it too:
 
 # Conclusion
 
-Check out the whole [compiler plugin](gist) in my dotfiles repo.
+Check out the whole
+[compiler plugin](https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim)
+in my dotfiles repo.
 
 It's tricky to figure out how to order the patterns, which I didn't risk to
 explain here since I wouldn't say I fully understand how it works. It was mostly
@@ -287,6 +289,3 @@ If you're interested, I recommend reading the
 
 If you're commited to learn Vim, It's worth it to know about this in order to
 integrate a command line program into Vim.
-
-[gist]:
-  https://github.com/phelipetls/dotfiles/blob/master/.config/nvim/compiler/pytest.vim

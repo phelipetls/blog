@@ -4,12 +4,12 @@ title: "Sobre"
 
 # Sobre mim
 
-Oi, sou desenvolvedor de software do Rio de Janeiro.
+Eu sou um desenvolvedor front-end, atualmente trabalhando na
+[Mutual](https://mutual.club/), fazendo apps web e mobile com React, React
+Native, JavaScript and TypeScript.
 
-Atualmente trabalho como desenvolvedor front-end, construindo interfaces de
-usuário para mobile e web com React, JavaScript e TypeScript.
+Aqui no blog normalmente compartilho coisas sobre desenvolvimento web e meu
+ambiente de desenvolvimento, entre outras coisas.
 
-Também tenho interesse em aprender como as coisas funcionam no back-end, com que
-não tenho muita experiência.
-
-Fora isso, gosto de Python, Lua e Linux.
+Eu costumava gostar bastante de data science e Econometria, então muitos dos
+meus projetos foram feitos para em ajudar a manipular e visualizar dados.

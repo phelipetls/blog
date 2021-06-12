@@ -4,12 +4,12 @@ title: "About"
 
 # About
 
-Hi, I'm a software developer based in Brazil, Rio.
+I'm a front-end developer from Brazil, currently working  at
+[Mutual](https://mutual.club/), building web and mobile apps with React, React
+Native, JavaScript and TypeScript.
 
-I am currently working as a front-end developer building mobile and web user
-interfaces with React, JavaScript and TypeScript.
+In this blog, you can expect me to share stuff about web development and my
+development environment, among other things.
 
-I'm also interested in learning how things work on the back-end, but my
-experience with it is limited.
-
-Other than that, I like Python, Lua and Linux.
+I used to be into data science and Econometrics, and most of my projects were
+built to help me manipulate and visualize data.

@@ -8,7 +8,7 @@ In this post I want to talk about how I use `ripgrep` in `vim` (`nvim` to me
 but it doesn't matter here).
 
 This is a crucial part of my daily workflow. It's fast because of `ripgrep` and
-extensible because of how nicely `vim` is integrate with the command line.
+extensible because of how nicely `vim` is integrated with the command line.
 
 Here's the configuration needed:
 
@@ -19,8 +19,8 @@ if executable("rg")
 endif
 ```
 
-At first, it was not obvious to me how would I use beyond `:grep foo`. So I
-want to share how I use it.
+At first, it was not obvious to me how I could use it beyond `:grep foo`, so I
+want to share how I do.
 
 # Common use cases
 
@@ -67,8 +67,12 @@ search down with `:Cfilter` too.
 
 # Downsides
 
-The only downside is that you can't use backreferences or look-around in
+A downside is that you can't use backreferences or look-around in
 regexes. In the rare case I need them, I use `:vimgrep`.
+
+Another is that it's synchronous, so if the directory is huge it may block vim
+for a few seconds. But I don't usually experience this because of how fast
+`ripgrep` is.
 
 # Conclusion
 

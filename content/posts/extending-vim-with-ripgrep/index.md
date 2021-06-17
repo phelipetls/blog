@@ -1,5 +1,5 @@
 ---
-title: "Extending vim with ripgrep"
+title: "Extending Vim with ripgrep"
 date: 2021-06-11
 tags: ["tools", "vim", "ripgrep"]
 ---
@@ -56,7 +56,7 @@ Or only modified files:
 
 I don't use this everyday but I enjoy it when I do.
 
-# Usage with vim
+# Usage with Vim
 
 This will populate the quickfix list with the search results, so I can navigate
 them with commands I'm already familiar with.

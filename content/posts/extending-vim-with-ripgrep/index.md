@@ -67,10 +67,14 @@ search down with `:Cfilter` too.
 
 # Downsides
 
-A downside is that you can't use backreferences or look-around in
-regexes. In the rare case I need them, I use `:vimgrep`.
+<s>A downside is that you can't use backreferences or look-around in regex. In
+the rare case I need them, I use `:vimgrep`.</s> I just find out, [thanks to
+ripgrep's
+author](https://www.reddit.com/r/neovim/comments/nyb8am/extending_vim_with_ripgrep/h2403y3?utm_source=share&utm_medium=web2x&context=3),
+that you can use backreferences/look-around in regex with the `-P/--pcre2` flag
+or `--engine auto` and I can't wait to use it!!
 
-Another is that it's synchronous, so if the directory is huge it may block vim
+Another one is that it's synchronous, so if the directory is huge it may block `vim`
 for a few seconds. But I don't usually experience this because of how fast
 `ripgrep` is.
 

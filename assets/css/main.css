@@ -132,6 +132,19 @@ pre {
   overflow-x: auto;
 }
 
+pre code {
+  float: left;
+  min-width: 100%;
+}
+
+pre .hl {
+  width: auto !important;
+  padding-right: var(--spacing-4);
+  padding-left: var(--spacing-4);
+  margin-left: calc(-1 * var(--spacing-4));
+  margin-right: calc(-1 * var(--spacing-4));
+}
+
 hr {
   margin: var(--spacing-4) 0;
   border: 1px solid var(--border-color);

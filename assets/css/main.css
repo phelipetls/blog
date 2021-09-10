@@ -158,16 +158,23 @@ button {
   appearance: none;
   border: unset;
   cursor: pointer;
+}
+
+.button {
   border-radius: var(--border-radius);
   padding: var(--spacing-1) var(--spacing-2);
 }
 
-button.primary {
+a.button {
+  text-decoration: none;
+}
+
+.button-primary {
   color: var(--bg-color);
   background-color: var(--primary-color);
 }
 
-button.secondary {
+.button-secondary {
   color: var(--fg-color);
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);

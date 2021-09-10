@@ -156,16 +156,17 @@ return typescriptTemplate.ast`
 `
 {{< /highlight >}}
 
-But it's stripped out from the final output file.
+But the type annotation, `: React.FC<SvgIconProps>` is stripped out from the
+final output file.
 
-Initially, I went with this hack:
+Then I went with this hack:
 
 ```javascript
 componentName.name = 'SvgComponent: React.FC<SvgIconProps>'
 ```
 
-It works but ultimately I decided to be a good boy and put in some effort
-until I came up with a less hacky solution:
+This works but it doesn't spark joy... Then I decided to put in more effort and
+I came up with this (more verbose) solution:
 
 ```javascript
 componentName.typeAnnotation = tsTypeAnnotation(
@@ -177,19 +178,21 @@ componentName.typeAnnotation = tsTypeAnnotation(
 ```
 
 It cost me some more hours but it made me learn more about how to build AST
-nodes so the next one will be hopefully more easy. By the way, everything is
-[very well documented](https://babeljs.io/docs/en/babel-types).
+nodes so the next time I have to do it will be hopefully more easy. I figured
+this out by reading the [babel-types](https://babeljs.io/docs/en/babel-types)
+docs.
 
 # Usage in Vim
 
 If you're a vimmer, you can convert the current file by using `%!npx @svgr/cli
---template path/to/template.js` and Vim will pass the entire file to svgr to
-process and replace its content with the output. This is built-in feature
-called a [filter](http://vimdoc.sourceforge.net/htmldoc/change.html#filter),
-and it's very useful for all sorts of things
+--template path/to/template.js`, which will pass the entire file to the command
+as standard input and replace its content with the command's standard output.
+In case you didn't know, this is a built-in feature called
+[filter](http://vimdoc.sourceforge.net/htmldoc/change.html#filter).
 
 You could also configure your project to use a template by default with a
-[`.svgrrc`](https://react-svgr.com/docs/configuration-files/) file at the project's root folder:
+[`.svgrrc`](https://react-svgr.com/docs/configuration-files/) file at the
+project's root folder:
 
 ```javascript
 // .svgrrc.js
@@ -202,9 +205,9 @@ template: require('./path/to/template.js')
 
 Of course, svgr also has a [VS Code
 extension](https://marketplace.visualstudio.com/items?itemName=NathHorrigan.code-svgr).
-But, if you prefer, you could also use the [Edit With Shell
+But, if you prefer, you could use the [Edit With Shell
 Command](https://marketplace.visualstudio.com/items?itemName=ryu1kn.edit-with-shell)
-extension, that allows you to do something similar to Vim's filter.
+extension, which allows you to do something similar to Vim's filter.
 
 # TODOs
 
@@ -223,6 +226,6 @@ Ideally I shouldn't be converting svg files into React components in this ad
 hoc way, but rather use a library with all the icons ready, which unfortunately
 nobody at work bothered to make.
 
-But if I'm the doing it, I'd probably use svgr since I could then update an
-arbitrary number of files by changing just a template and running a cli
-program, which isn't bad.
+But svgr seems like a good idea for maintaining an icons library, since I could
+then update an arbitrary number of files by changing just a template and
+running a cli program, which isn't bad.

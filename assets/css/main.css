@@ -51,10 +51,6 @@ body[data-theme='dark'] {
   --border-color: var(--light-black);
 }
 
-body[data-theme='dark'] .chroma .hl {
-  background-color: var(--code-bg-color);
-}
-
 body {
   min-height: 100%;
   display: flex;
@@ -143,6 +139,7 @@ pre code {
 }
 
 pre .hl {
+  background-color: var(--code-bg-color) !important;
   width: auto !important;
   padding-right: var(--spacing-4);
   padding-left: var(--spacing-4);

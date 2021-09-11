@@ -73,6 +73,8 @@ body {
 
 main {
   flex: 1;
+  display: flex;
+  flex-flow: column;
 }
 
 h1 {
@@ -241,7 +243,6 @@ footer {
 }
 
 .pagination {
-  margin-top: var(--spacing-3);
   text-align: center;
 }
 

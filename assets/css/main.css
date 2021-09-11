@@ -93,8 +93,7 @@ a:hover {
   color: var(--hover-fg-color);
 }
 
-:is(h1, h2, h3, h4, h5, h6, button, nav) :is(a, a:visited) {
-  color: inherit;
+:is(h1, h2, h3, h4, h5, h6) :is(a, a:visited) {
   text-decoration: none;
 }
 

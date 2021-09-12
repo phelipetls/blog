@@ -208,13 +208,6 @@ button.theme-toggler:hover {
   opacity: 100%;
 }
 
-header nav {
-  display: flex;
-  flex-flow: wrap;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-6);
-}
-
 footer {
   text-align: center;
   margin-top: var(--spacing-8);

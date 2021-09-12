@@ -5,7 +5,7 @@
     </a>
   </h1>
 
-  <nav>
+  <nav class="flex flex-row flex-wrap gap-2 mb-6">
     {{- range .Site.Menus.main -}}
       <a href="{{ .URL | absLangURL }}">{{ i18n .Name | default .Name }}</a>
     {{- end -}}

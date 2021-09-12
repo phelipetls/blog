@@ -236,8 +236,3 @@ button.theme-toggler:hover {
   display: flex;
   justify-content: flex-end;
 }
-
-.not-found {
-  align-items: center;
-  justify-content: center;
-}

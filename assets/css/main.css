@@ -188,31 +188,3 @@ button.theme-toggler:hover {
   text-align: end;
   margin-top: var(--spacing-4);
 }
-
-.post .metadata {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin: calc(-1 * var(--spacing-1));
-}
-
-.post .metadata * {
-  margin: var(--spacing-1);
-}
-
-.adjacent-posts {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-gap: var(--spacing-4);
-}
-
-@media screen and (max-width: 420px) {
-  .adjacent-posts {
-    grid-template-columns: 1fr;
-  }
-}
-
-.adjacent-posts .next {
-  text-align: right;
-}

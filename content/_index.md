@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-# About
-
 I'm a front-end developer from Brazil, currently working  at
 [Mutual](https://mutual.club/), building web and mobile apps with React, React
 Native, JavaScript and TypeScript.

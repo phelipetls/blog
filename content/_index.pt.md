@@ -2,8 +2,6 @@
 title: "Sobre"
 ---
 
-# Sobre mim
-
 Eu sou um desenvolvedor front-end, atualmente trabalhando na
 [Mutual](https://mutual.club/), fazendo apps web e mobile com React, React
 Native, JavaScript and TypeScript.

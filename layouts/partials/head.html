@@ -1,24 +1,20 @@
 {{ partial "meta.html" . }}
 
-{{ $cssReset := resources.Get "css/normalize.css"  }}
 {{ $css := resources.Get "css/main.css" }}
 {{ $tailwindCss := resources.Get "css/tailwind.css" | postCSS }}
 {{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
 {{ if .Site.IsServer }}
-  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}"/>
   <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
   <link rel="stylesheet" href="{{ $tailwindCss.RelPermalink }}"/>
   <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 {{ else }}
-  {{ $cssReset := $cssReset | minify }}
   {{ $css := $css | minify }}
   {{ $tailwindCss := $tailwindCss | minify }}
   {{ $syntaxHighlight := $syntaxHighlight | minify }}
   {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
-  <link rel="stylesheet" href="{{ $cssReset.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $tailwindCss.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />

@@ -245,14 +245,6 @@ footer {
   gap: var(--spacing-2);
 }
 
-.pagination {
-  text-align: center;
-}
-
-.pagination * {
-  padding: 0 var(--spacing-1);
-}
-
 .archive .posts {
   display: flex;
   flex-flow: column;

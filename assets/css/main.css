@@ -74,15 +74,7 @@ p, article li {
   line-height: var(--spacing-6);
 }
 
-article :is(h1, h2, h3, h4, h5, h6):not(:first-child) {
-  margin-top: var(--spacing-8);
-}
-
-article :is(h1, h2, h3, h4, h5, h6) .anchor {
-  display: none;
-}
-
-article :is(h1, h2, h3, h4, h5, h6):hover .anchor {
+:is(h1, h2, h3, h4, h5, h6):hover .anchor {
   display: inline;
   color: var(--hover-fg-color);
 }

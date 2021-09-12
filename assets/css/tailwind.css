@@ -38,4 +38,7 @@
   pre .hl {
     @apply px-4 -mx-4;
   }
+  .highlight {
+    @apply mb-4;
+  }
 }

@@ -91,30 +91,15 @@ code {
 
 :not(pre) > code {
   background-color: var(--code-bg-color);
-  padding: 0 var(--spacing-2);
-  border-radius: var(--border-radius);
 }
 
 pre {
-  padding: var(--spacing-4);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-  overflow-x: auto;
-}
-
-pre code {
-  float: left;
-  min-width: 100%;
-  line-height: 1.25;
+  border-color: var(--border-color);
 }
 
 pre .hl {
   background-color: var(--code-bg-color) !important;
   width: auto !important;
-  padding-right: var(--spacing-4);
-  padding-left: var(--spacing-4);
-  margin-left: calc(-1 * var(--spacing-4));
-  margin-right: calc(-1 * var(--spacing-4));
 }
 
 hr {

@@ -26,4 +26,16 @@
   hr {
     @apply my-2;
   }
+  pre {
+    @apply p-4 border rounded overflow-x-auto;
+  }
+  :not(pre) > code {
+    @apply px-2 rounded;
+  }
+  pre code {
+    @apply float-left min-w-full leading-tight;
+  }
+  pre .hl {
+    @apply px-4 -mx-4;
+  }
 }

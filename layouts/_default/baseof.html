@@ -10,11 +10,11 @@
     {{ end }}
   </head>
 
-  <body data-theme="light" class="preload">
+  <body class="flex flex-col container max-w-2xl min-h-full px-4 py-2 my-0 mx-auto" data-theme="light" class="preload">
     {{ partial "theme.html" }}
     {{ partial "header.html" . }}
 
-    <main>
+    <main class="flex flex-1 flex-col">
       {{ block "main" . }}
         {{ .Content }}
       {{ end }}

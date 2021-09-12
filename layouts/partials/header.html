@@ -13,7 +13,7 @@
     {{- if .IsTranslated -}}
       ·
       {{- range .Translations -}}
-        <a class="translation" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
+        <a href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
           {{ i18n .Lang }}
         </a>
       {{- end -}}

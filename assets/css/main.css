@@ -231,8 +231,3 @@ button.theme-toggler:hover {
 .adjacent-posts .next {
   text-align: right;
 }
-
-.flex-end {
-  display: flex;
-  justify-content: flex-end;
-}

@@ -2,7 +2,7 @@
   {{ partial "pages.html" . }}
 
   {{ $taxonomy := .Parent }}
-  <div class="flex-end">
+  <div class="flex justify-end">
     <a href="{{ $taxonomy.RelPermalink }}">{{ $taxonomy.Title }} »</a>
   </div>
 {{ end }}

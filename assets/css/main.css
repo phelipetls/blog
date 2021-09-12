@@ -208,12 +208,6 @@ button.theme-toggler:hover {
   opacity: 100%;
 }
 
-footer {
-  text-align: center;
-  margin-top: var(--spacing-8);
-  margin-bottom: var(--spacing-3);
-}
-
 .pages {
   flex: 1;
 }

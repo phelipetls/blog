@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{ $taxonomy := .Parent }}
+
+  <section class="flex-1">
+    {{ range .Pages }}
+      <article class="page">
+        <h2>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h2>
+
+        <div class="flex flex-wrap gap-2 fg-gray-300">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ if eq .Lang "en" }}
+              {{ .Date.Format "Jan 02, 2006" }}
+            {{ else }}
+              {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+              {{ .Date.Day }},
+              {{ .Date.Year }}
+            {{ end }}
+          </time>
+
+          <span class="hidden sm:inline">·</span>
+
+          <div class="hidden sm:flex gap-2">
+            {{- range .GetTerms "tags" -}}
+              <a class="no-underline" href="{{ .Permalink }}">#{{ .Title }}</a>
+            {{- end -}}
+          </div>
+        </div>
+
+        <hr class="my-4" />
+      </article>
+    {{ end }}
+  </section>
+
+  <div class="text-right">
+    <a class="no-underline" href="{{ $taxonomy.RelPermalink }}">
+      {{ $taxonomy.Title }} »
+    </a>
+  </div>
+{{ end }}

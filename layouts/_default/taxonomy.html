@@ -1,6 +1,9 @@
 {{ define "main" }}
   <section class="taxonomies">
+    <h2>{{ .Title }}</h2>
+
     {{ $total := len .Data.Terms }}
+
     <ul>
       {{ range sort .Data.Terms "Count" "desc" }}
         <li>

@@ -167,14 +167,3 @@ button.theme-toggler:hover {
   flex-wrap: wrap;
   gap: var(--spacing-2);
 }
-
-.archive .posts {
-  display: flex;
-  flex-flow: column;
-}
-
-.archive .posts .post {
-  display: grid;
-  grid-template-columns: 7ch 1fr;
-  margin-bottom: var(--spacing-4);
-}

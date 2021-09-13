@@ -43,9 +43,3 @@ DefaultContentLanguage = "en"
   name = "Projects"
   url = "/projects"
   weight = -2
-
-  [[menu.main]]
-  identifier = "Archive"
-  name = "Archive"
-  url = "/archive"
-  weight = -1

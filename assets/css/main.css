@@ -183,8 +183,3 @@ button.theme-toggler:hover {
   grid-template-columns: 7ch 1fr;
   margin-bottom: var(--spacing-4);
 }
-
-.projects .project .links {
-  text-align: end;
-  margin-top: var(--spacing-4);
-}

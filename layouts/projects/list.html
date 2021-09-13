@@ -1,23 +1,32 @@
 {{ define "main" }}
-  <section class="pages projects">
+  <section class="flex-1">
     {{ range .Pages }}
-      <article class="page project">
-        <h2>{{ .Title | title }}</h2>
+      <article>
+        <div class="flex items-center">
+          <h2>
+            <a href="{{ .Permalink }}">{{ .Title | title }}</a>
+          </h2>
+
+          {{ if isset .Params "github" }}
+            <a class="ml-2" href="{{ .Params.github }}">
+              {{ partial "svg" "bxl-github" }}
+            </a>
+          {{ end }}
+        </div>
 
         {{ .Content }}
 
-        <div class="tags">
-          {{- range (.GetTerms "softwares") -}}
-            <a class="button button-secondary" href="{{ .Permalink }}">{{- .Title -}}</a>
+        Softwares:
+        <span class="">
+          {{- range $index, $software := (first 5 (.GetTerms "softwares")) -}}
+            {{- if $index -}}, {{ end }}
+            <a class="no-underline" href="{{ .Permalink }}">
+              {{- .Title -}}
+            </a>
           {{- end -}}
-        </div>
+        </span>
 
-        <div class="links">
-          {{ if isset .Params "github" }}<a href="{{ .Params.github }}">GitHub</a>{{ end }}
-          {{ if isset .Params "website" }}· <a href="{{ .Params.website }}">Website</a>{{ end }}
-        </div>
-
-        <hr>
+        <hr />
       </article>
     {{ end }}
   </section>

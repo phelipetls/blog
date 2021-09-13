@@ -24,7 +24,7 @@
     @apply underline;
   }
   hr {
-    @apply my-2;
+    @apply my-4;
   }
   pre {
     @apply p-4 border rounded overflow-x-auto;

@@ -38,10 +38,6 @@ body[data-theme='dark'] {
   -o-transition: none !important;
 }
 
-code {
-  font-family: "Consolas", "Fira Mono", monospace;
-}
-
 pre .hl {
   background-color: var(--background-code) !important;
   width: auto !important;

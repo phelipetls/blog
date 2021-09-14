@@ -32,6 +32,9 @@
   hr {
     @apply my-4 border-divider;
   }
+  code {
+    font-family: "Consolas", "Fira Mono", monospace;
+  }
   pre {
     @apply p-4 border rounded overflow-x-auto border-divider;
   }

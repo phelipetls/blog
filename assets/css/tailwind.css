@@ -26,6 +26,9 @@
   a {
     @apply underline text-primary hover:text-highlight;
   }
+  :is(h1, h2, h3, h4) a {
+    @apply no-underline;
+  }
   hr {
     @apply my-4 border-divider;
   }

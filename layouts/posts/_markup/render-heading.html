@@ -1,4 +1,4 @@
-<h{{ add .Level 1 }} class="heading" id="{{ .Anchor | safeURL }}">
+<h{{ add .Level 1 }} class="group" id="{{ .Anchor | safeURL }}">
   {{ .Text | safeHTML }}
-  <a class="anchor hidden" href="#{{ .Anchor | safeURL }}">#</a>
+  <a class="hidden text-highlight group-hover:inline" href="#{{ .Anchor | safeURL }}">#</a>
 </h{{ add .Level 1 }}>

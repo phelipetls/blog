@@ -46,11 +46,6 @@ body[data-theme='dark'] {
   text-decoration: none;
 }
 
-:is(h1, h2, h3, h4, h5, h6):hover .anchor {
-  display: inline;
-  color: var(--highlight);
-}
-
 img {
   margin: 0 auto;
   max-width: 100%;

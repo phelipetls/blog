@@ -11,10 +11,6 @@
   --orange: #e25822;
 }
 
-html {
-  height: 100%;
-}
-
 body[data-theme='light'] {
   --primary: var(--dark-grey);
   --normal: var(--black);

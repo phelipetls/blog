@@ -9,28 +9,28 @@
     font-family: "Georgia", "Merriweather", serif;
   }
   h1 {
-    @apply text-2xl pt-3 mb-2 font-bold;
+    @apply text-2xl pt-3 mb-2 font-bold text-primary;
   }
   h2 {
-    @apply text-xl pt-3 mb-2 font-bold;
+    @apply text-xl pt-3 mb-2 font-bold text-primary;
   }
   h3 {
-    @apply text-lg pt-3 mb-2 font-bold;
+    @apply text-lg pt-3 mb-2 font-bold text-primary;
   }
   p {
     @apply my-5;
   }
   a {
-    @apply underline;
+    @apply underline hover:text-highlight;
   }
   hr {
-    @apply my-4;
+    @apply my-4 border-divider;
   }
   pre {
-    @apply p-4 border rounded overflow-x-auto;
+    @apply p-4 border rounded overflow-x-auto border-divider;
   }
   :not(pre) > code {
-    @apply px-2 rounded;
+    @apply px-2 rounded bg-background-code;
   }
   pre code {
     @apply float-left min-w-full leading-tight;

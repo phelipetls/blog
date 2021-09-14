@@ -16,29 +16,23 @@ html {
 }
 
 body[data-theme='light'] {
-  --bg-color: var(--white);
-  --fg-color: var(--black);
-  --primary-color: var(--dark-grey);
-  --code-bg-color: var(--light-white);
-  --code-fg-color: var(--fg-color);
-  --hover-fg-color: var(--orange);
-  --border-color: var(--beige);
+  --primary: var(--dark-grey);
+  --normal: var(--black);
+  --normal-code: var(--normal);
+  --background: var(--white);
+  --background-code: var(--light-white);
+  --highlight: var(--orange);
+  --divider: var(--beige);
 }
 
 body[data-theme='dark'] {
-  --bg-color: var(--black);
-  --fg-color: var(--grey);
-  --primary-color: var(--dark-beige);
-  --code-bg-color: var(--light-black);
-  --code-fg-color: var(--grey);
-  --hover-fg-color: var(--orange);
-  --border-color: var(--light-black);
-}
-
-body {
-  color: var(--fg-color);
-  background-color: var(--bg-color);
-  transition: color 0.25s ease-out, background 0.25s ease-out;
+  --primary: var(--dark-beige);
+  --normal: var(--grey);
+  --normal-code: var(--grey);
+  --background: var(--black);
+  --background-code: var(--light-black);
+  --highlight: var(--orange);
+  --divider: var(--light-black);
 }
 
 .preload {
@@ -48,17 +42,13 @@ body {
   -o-transition: none !important;
 }
 
-a:hover {
-  color: var(--hover-fg-color);
-}
-
 :is(h1, h2, h3, h4, h5, h6) :is(a, a:visited) {
   text-decoration: none;
 }
 
 :is(h1, h2, h3, h4, h5, h6):hover .anchor {
   display: inline;
-  color: var(--hover-fg-color);
+  color: var(--highlight);
 }
 
 img {
@@ -70,21 +60,9 @@ code {
   font-family: "Consolas", "Fira Mono", monospace;
 }
 
-:not(pre) > code {
-  background-color: var(--code-bg-color);
-}
-
-pre {
-  border-color: var(--border-color);
-}
-
 pre .hl {
-  background-color: var(--code-bg-color) !important;
+  background-color: var(--background-code) !important;
   width: auto !important;
-}
-
-hr {
-  border-color: var(--border-color);
 }
 
 .button {

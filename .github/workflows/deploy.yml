@@ -1,4 +1,4 @@
-name: Deploy website to Github Pages on push
+name: Deploy website to GitHub Pages on push
 
 on:
   push:
@@ -12,15 +12,16 @@ jobs:
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
-      - name: Install node
-        uses: actions/setup-node@v2
-      - name: Install npm dependencies
-        run: npm ci
-      - name: Deploy the site
-        uses: benmatselby/hugo-deploy-gh-pages@master
-        env:
-          NODE_ENV: production
-          HUGO_VERSION: 0.74.3
-          HUGO_EXTENDED: true
-          TARGET_REPO: phelipetls/phelipetls.github.io
-          TOKEN: ${{ secrets.TOKEN }}
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.75.0'
+      - run: npm ci
+      - run: hugo
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./public
+          external_repository: phelipetls/phelipetls.github.io
+          publish_branch: master
+          personal_token: ${{ secrets.TOKEN }}

@@ -42,11 +42,6 @@ body[data-theme='dark'] {
   text-decoration: none;
 }
 
-img {
-  margin: 0 auto;
-  max-width: 100%;
-}
-
 code {
   font-family: "Consolas", "Fira Mono", monospace;
 }

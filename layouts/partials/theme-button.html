@@ -1,5 +1,9 @@
-<button class="button button-primary icon theme-toggler" aria-label="{{ i18n "ThemeButton" }}">
-  <svg width="24" height="24" viewBox="0 0 24 24">
+<button
+  id="theme-button"
+  class="text-background bg-primary rounded-full w-12 h-12 fixed bottom-6 right-6 opacity-75 hover:opacity-100 transition transition-opacity duration-75 ease-in-out"
+  aria-label="{{ i18n "ThemeButton" }}"
+>
+  <svg class="mx-auto fill-current" width="24" height="24" viewBox="0 0 24 24">
     <defs>
       {{ partial "svg" "bx-moon" }}
       {{ partial "svg" "bxs-sun" }}
@@ -10,7 +14,7 @@
 </button>
 
 <script>
-  const btn = document.querySelector("button.theme-toggler");
+  const btn = document.querySelector("#theme-button");
   const btnSvgIcon = document.querySelector("use")
 
   const changeTogglerSvgIcon = function(theme) {

@@ -21,7 +21,7 @@
 
           <div class="hidden sm:flex gap-2">
             {{- range .GetTerms "tags" -}}
-              <a class="no-underline" href="{{ .Permalink }}">#{{ .Title }}</a>
+              <a class="no-underline text-normal" href="{{ .Permalink }}">#{{ .Title }}</a>
             {{- end -}}
           </div>
         </div>

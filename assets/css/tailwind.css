@@ -45,7 +45,7 @@
     @apply float-left min-w-full leading-tight;
   }
   pre .hl {
-    @apply px-4 -mx-4;
+    @apply px-4 -mx-4 bg-background-code w-auto !important;
   }
   .highlight {
     @apply mb-4;

@@ -38,8 +38,3 @@ body[data-theme='dark'] {
   -ms-transition: none !important;
   -o-transition: none !important;
 }
-
-pre .hl {
-  background-color: var(--background-code) !important;
-  width: auto !important;
-}

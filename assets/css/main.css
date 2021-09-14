@@ -6,6 +6,7 @@
   --light-white: #f5f5f5;
   --beige: #cfcdc2;
   --dark-beige: #cec9a7;
+  --light-beige: #eee0b1;
   --grey: #e6e1dc;
   --dark-grey: #41413e;
   --orange: #e25822;
@@ -27,7 +28,7 @@ body[data-theme='dark'] {
   --normal-code: var(--grey);
   --background: var(--black);
   --background-code: var(--light-black);
-  --highlight: var(--orange);
+  --highlight: var(--light-beige);
   --divider: var(--light-black);
 }
 

@@ -22,11 +22,6 @@
 
 html {
   height: 100%;
-  box-sizing: border-box;
-}
-
-*, *:after, *:before {
-  box-sizing: inherit;
 }
 
 body[data-theme='light'] {
@@ -70,17 +65,12 @@ a:hover {
   text-decoration: none;
 }
 
-p, article li {
-  line-height: var(--spacing-6);
-}
-
 :is(h1, h2, h3, h4, h5, h6):hover .anchor {
   display: inline;
   color: var(--hover-fg-color);
 }
 
 img {
-  display: block;
   margin: 0 auto;
   max-width: 100%;
 }
@@ -109,10 +99,6 @@ hr {
 .button {
   border-radius: var(--border-radius);
   padding: var(--spacing-1) var(--spacing-2);
-}
-
-a.button {
-  text-decoration: none;
 }
 
 .button-primary {
@@ -147,23 +133,4 @@ button.theme-toggler {
 
 button.theme-toggler:hover {
   opacity: 100%;
-}
-
-.pages {
-  flex: 1;
-}
-
-.pages .page:last-child > hr {
-  display: none;
-}
-
-.pages .page time {
-  display: block;
-  margin-bottom: var(--spacing-4);
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
 }

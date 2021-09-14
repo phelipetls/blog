@@ -6,7 +6,7 @@
           <a href="{{ .Permalink }}">{{ .Title }}</a>
         </h2>
 
-        <div class="flex flex-wrap gap-2 fg-gray-300">
+        <div class="flex flex-wrap gap-2">
           <time datetime="{{ .Date.Format "2006-01-02" }}">
             {{ if eq .Lang "en" }}
               {{ .Date.Format "Jan 02, 2006" }}

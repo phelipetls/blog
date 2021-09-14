@@ -5,7 +5,7 @@
     {{ range .Pages }}
       <article class="page">
         <div class="flex items-center">
-          <h2>
+          <h2 class="m-0">
             <a href="{{ .Permalink }}">{{ .Title | title }}</a>
           </h2>
 
@@ -16,7 +16,7 @@
           {{ end }}
         </div>
 
-        <div class="flex flex-wrap gap-2 fg-gray-300">
+        <div class="flex flex-wrap gap-2 fg-gray-300 mt-2">
           <time datetime="{{ .Date.Format "2006-01-02" }}">
             {{ if eq .Lang "en" }}
               {{ .Date.Format "Jan 02, 2006" }}

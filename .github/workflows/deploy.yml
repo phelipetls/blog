@@ -15,6 +15,7 @@ jobs:
       - name: Deploy the site
         uses: benmatselby/hugo-deploy-gh-pages@master
         env:
+          NODE_ENV: production
           HUGO_VERSION: 0.74.3
           HUGO_EXTENDED: true
           TARGET_REPO: phelipetls/phelipetls.github.io

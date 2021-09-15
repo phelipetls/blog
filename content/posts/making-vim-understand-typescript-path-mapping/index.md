@@ -21,16 +21,15 @@ from ..module import fun
 This complicates things a bit, but [the built-in ftplugin for Python configures
 Vim to understand this
 already](https://github.com/vim/vim/blob/4b4b1b84eee70b74fa3bb57624533c65bafd8428/runtime/ftplugin/python.vim#L19,L35)
-by changing the [`h:
+by changing the [`:h
 includeexpr`](http://vimdoc.sourceforge.net/htmldoc/options.html#'includeexpr')
 option.
 
 In the JavaScript world this is even more complex... There are [webpack
 aliases](https://webpack.js.org/configuration/resolve/), [Jest's
 moduleNameMapper](https://jestjs.io/docs/configuration#modulenamemapper-objectstring-string--arraystring)
-and god knows what else.
-
-The TypeScript compiler has this feature as well, it's called [path
+and god knows what else. The TypeScript compiler has this feature as well, it's
+called [path
 mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping).
 
 For example, to import a component from `src/components` from anywhere with
@@ -66,11 +65,12 @@ being slow.
 # Implementation details
 
 Our goal is to pass a function to the `includeexpr` option that will try to
-substitute the "alias" (`~/*`) with what they're mapped to (`src/*`) until it
-finds a path that exist and then return it. It will return `nil` otherwise.
+substitute the "alias" (`~/*`) with its associated path (`src/*`) until it
+finds a file/directory that exists, then return it. Otherwise, return `nil`.
 
-This function will be written in Lua and defined in the `lua/tsconfig.lua`
-module. Here's how we can configure `includeexpr` to use this lua function:
+I decided to write it in Lua in the `lua/tsconfig.lua` module. Here's how we
+can configure the `includeexpr` for JavaScript/TypeScript to use this lua
+function:
 
 ```vim {hl_lines=[9]}
 " after/ftplugin/javascript.vim
@@ -120,7 +120,7 @@ end
 return M
 ```
 
-We'll handle how to find a file later.
+How exactly we try to find a file will be explained later.
 
 ## Finding `tsconfig.json`
 
@@ -136,7 +136,7 @@ end
 ```
 
 You'll notice the `find_file` usage, which is just wrapper around `findfile`
-that returns `nil` if it doesn't find any:
+that returns `nil` if it doesn't find one (empty strings are not falsy in Lua):
 
 ```lua
 local function find_file(fname, path)
@@ -147,7 +147,7 @@ local function find_file(fname, path)
 end
 ```
 
-I use a similar function called `find_dir` that wraps finddir.
+I use a similar function called `find_dir` that wraps `:h finddir`.
 
 ## Reading JSON with comments
 
@@ -306,8 +306,8 @@ tool for the job but it does help me when tsserver/coc.nvim/watchman are being
 slow, unreliable or making my computer fans go crazy.
 
 Vim support for go-to-definition functionality [does not stop at the
-`includeexpr` option](https://vimways.org/2018/death-by-a-thousand-files/), and
-I tried to get go-to-defintion working for TypeScript by using `:h
-include-search` but had a hard time and eventually gave up (the `v:fname` API
-is not enough for nested imports, e.g. `index.ts` files), but it's nice to have
+`includeexpr` option](https://vimways.org/2018/death-by-a-thousand-files/), but
+the API is cumbersome to use. I tried to get go-to-defintion working for
+TypeScript by using `:h include-search` but had a hard time and eventually gave
+up (the `v:fname` API is not enough for nested imports), but it's nice to have
 a working `gf` at least...

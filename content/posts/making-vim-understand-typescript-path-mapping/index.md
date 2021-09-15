@@ -1,35 +1,49 @@
 ---
 title: "Making Neovim understand TypeScript path mapping"
-date: 2021-09-13
+date: 2021-09-15
 tags: ["typescript", "nvim", "lua"]
-draft: true
 ---
 
-Vim has this well-known feature of opening the filename/path under cursor with
-[`:h gf`](http://vimdoc.sourceforge.net/htmldoc/editing.html#gf). [This article
+Vim has this well-known feature of opening the path under cursor with [`:h
+gf`](http://vimdoc.sourceforge.net/htmldoc/editing.html#gf). [This article
 explains well how this
 works](https://vim.fandom.com/wiki/Open_file_under_cursor).
 
-But some languages like Python has custom syntax for imports:
+Thinks work out of the box with full paths with no special characters, like
+`/home/phelipe/script.js` but it even expands `~` and environment variables,
+like `$HOME/script.js` or `~/script.js`.
 
-```python
-import a.module
-from .other_module import fun
-from ..module import fun
+Things don't work well when languages have special syntax to import a file,
+i.e. most languages. For example, Java:
+
+```java
+import foo.bar
 ```
 
-This complicates things a bit, but [the built-in ftplugin for Python configures
-Vim to understand this
-already](https://github.com/vim/vim/blob/4b4b1b84eee70b74fa3bb57624533c65bafd8428/runtime/ftplugin/python.vim#L19,L35)
-by changing the [`:h
-includeexpr`](http://vimdoc.sourceforge.net/htmldoc/options.html#'includeexpr')
-option.
+Or Python:
 
-In the JavaScript world this is even more complex... There are [webpack
+```python
+import module
+import .module
+import ..module
+```
+
+But it's possible to configure Vim to understand this special syntax with the
+[`:h
+includeexpr`](http://vimdoc.sourceforge.net/htmldoc/options.html#'includeexpr')
+option, which is a function that receives the filename in the special variable
+`v:fname` so you can manipulate it.
+
+For Java, such a function could just replace `.` with `/`, but for Python [it's
+more
+complicated](https://github.com/vim/vim/blob/4b4b1b84eee70b74fa3bb57624533c65bafd8428/runtime/ftplugin/python.vim#L19,L35).
+
+In the JavaScript world this is even more complex... We have [webpack
 aliases](https://webpack.js.org/configuration/resolve/), [Jest's
 moduleNameMapper](https://jestjs.io/docs/configuration#modulenamemapper-objectstring-string--arraystring)
-and god knows what else. The TypeScript compiler has this feature as well, it's
-called [path
+and much more.
+
+The TypeScript compiler has this feature as well, it's called [path
 mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping).
 
 For example, to import a component from `src/components` from anywhere with
@@ -46,9 +60,8 @@ just `~/components`, you'd use the following `tsconfig.json`:
 }
 ```
 
-The bad thing is that, then, `gf` won't work, Vim has no idea what `~/` is
-supposed to mean, unless we configure the `includeexpr` option to tell it, so
-that's what I'm about to share with you.
+This is great but it breaks `gf`, so in this post I want to share how to make
+it work again for TypeScript projects that use this feature.
 
 # Why not LSP?
 
@@ -263,9 +276,12 @@ end
 
 ## Handling configuration inheritance
 
-We still one problem though... We're ignoring TS Config's
+One problem though... We're ignoring TS Config's
 [`extends`](https://www.typescriptlang.org/tsconfig#extends) option, which
 allows you to inherit from other configuration files.
+
+If a `tsconfig.json` inherits from another configuration, our algorithm as it
+is now just ignores these other configurations completely.
 
 To handle this, we'll need to recursively call `get_tsconfig_paths` for every
 `tsconfig.json` that has an `extends` option, until it doesn't:

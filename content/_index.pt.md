@@ -2,12 +2,14 @@
 title: "Sobre"
 ---
 
-Eu sou um desenvolvedor front-end, atualmente trabalhando na
-[Mutual](https://mutual.club/), fazendo apps web e mobile com React, React
-Native, JavaScript and TypeScript.
+Oi, sou um desenvolvedor front-end, atualmente trabalhando com aplicativos web
+e mobile usando React, React Native, JavaScript e TypeScript.
 
-Aqui no blog normalmente compartilho coisas sobre desenvolvimento web e meu
-ambiente de desenvolvimento, entre outras coisas.
+Eu me graduei em Economia mas meu interesse em Econometria e Estatística fez-me
+interessar por desenvolvimento de software, que eu estudei no meu tempo livre
+até conseguir um emprego, e definitivamente não pretendo trocar de carreira de
+novo.
 
-Eu costumava gostar bastante de data science e Econometria, então muitos dos
-meus projetos foram feitos para em ajudar a manipular e visualizar dados.
+Esse site é um projeto para experimentar com tecnologias web, [escrever sobre
+mim, o que aprendo e o que ando fazendo](/posts) e [compartilhar meus projetos
+paralelos](/projects).

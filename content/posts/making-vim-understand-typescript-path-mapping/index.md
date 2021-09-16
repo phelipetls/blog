@@ -285,7 +285,7 @@ is now just ignores these other configurations completely.
 To handle this, we'll need to recursively call `get_tsconfig_paths` for every
 `tsconfig.json` that has an `extends` option, until it doesn't:
 
-```lua {hl_lines=[10,"19-21"]}
+```lua {hl_lines=[10,16,"22-24"]}
 local function find_tsconfig_extends(extends, tsconfig_fname)
   if not extends or vim.startswith(extends, "@") then
     return
@@ -299,6 +299,9 @@ local function get_tsconfig_paths(tsconfig_fname, prev_base_url)
   if not tsconfig_fname then
     return {}
   end
+
+  local json = decode_json_with_comments(tsconfig_fname)
+  local base_url = json and json.compilerOptions and json.compilerOptions.baseUrl or prev_base_url
 
   local alias_to_paths = {}
 

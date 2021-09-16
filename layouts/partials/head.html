@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 {{ else }}
   {{ $css := $css | minify }}
-  {{ $tailwindCss := $tailwindCss | minify }}
+  {{ $tailwindCss := $tailwindCss | minify | resources.PostProcess }}
   {{ $syntaxHighlight := $syntaxHighlight | minify }}
   {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />

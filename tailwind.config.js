@@ -1,6 +1,6 @@
 module.exports = {
   purge: [
-    './layouts/**/*.html'
+    './layouts/**/*.html', './hugo_stats.json'
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {

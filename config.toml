@@ -7,6 +7,9 @@ pygmentsUseClasses = true
 
 DefaultContentLanguage = "en"
 
+[build]
+  writeStats = true
+
 [params]
   description = "A blog to share my interests (mostly programming)"
 

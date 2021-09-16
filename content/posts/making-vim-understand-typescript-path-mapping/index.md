@@ -9,12 +9,12 @@ gf`](http://vimdoc.sourceforge.net/htmldoc/editing.html#gf). [This article
 explains well how this
 works](https://vim.fandom.com/wiki/Open_file_under_cursor).
 
-Thinks work out of the box with full paths with no special characters, like
-`/home/phelipe/script.js` but it even expands `~` and environment variables,
+Things work out of the box with full paths with no special characters, like
+`/home/phelipe/script.js`, but it also expands `~` and environment variables,
 like `$HOME/script.js` or `~/script.js`.
 
 Things don't work well when languages have special syntax to import a file,
-i.e. most languages. For example, Java:
+which is most languages. For example, Java:
 
 ```java
 import foo.bar
@@ -90,7 +90,7 @@ function:
 " after/ftplugin/typescript.vim
 
 " It's common in JavaScript to omit the file extension
-" Also some plugins mess this up...
+" Also some plugins mess this up so I overwite it...
 setlocal suffixesadd=.js,.jsx,.ts,.tsx,.d.ts
 
 if has("nvim")
@@ -148,7 +148,7 @@ local function get_tsconfig_file()
 end
 ```
 
-You'll notice the `find_file` usage, which is just wrapper around `findfile`
+You'll notice the `find_file` usage, which is just a wrapper around `findfile`
 that returns `nil` if it doesn't find one (empty strings are not falsy in Lua):
 
 ```lua
@@ -164,11 +164,10 @@ I use a similar function called `find_dir` that wraps `:h finddir`.
 
 ## Reading JSON with comments
 
-Then we'll need to read the `tsconfig.json` file. Vim has a function to
-serialize JSON, [`:h
-json_decode`](https://vimhelp.org/eval.txt.html#json_decode%28%29), which is
-great, except that `tsconfig.json` is not strictly JSON, since it allows
-comments. No problem, we can just remove them before we pass it to
+We also need to read the `tsconfig.json` file. Vim has a function to serialize
+JSON, [`:h json_decode`](https://vimhelp.org/eval.txt.html#json_decode%28%29),
+which is great, except that `tsconfig.json` is not strictly JSON, since it
+allows comments. No problem, we can just remove them before we pass it to
 `json_decode`:
 
 ```lua
@@ -185,7 +184,7 @@ end
 ## Parsing `compilerOptions.paths`
 
 Next step is to parse `compilerOptions.paths` to create a table that maps
-aliases into their real full paths. For example, given this configuration:
+aliases into their full paths. For example, given this configuration:
 
 ```json
 {

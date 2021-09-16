@@ -1,7 +1,8 @@
 module.exports = {
-  purge: [
-    './layouts/**/*.html', './hugo_stats.json'
-  ],
+  purge: {
+    content: ['./layouts/**/*.html', './hugo_stats.json'],
+    enabled: process.env.HUGO_ENVIRONMENT === 'production'
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},

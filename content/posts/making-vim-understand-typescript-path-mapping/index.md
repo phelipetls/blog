@@ -325,4 +325,7 @@ Vim support for go-to-definition functionality [does not stop at the
 the API is cumbersome to use. I tried to get go-to-defintion working for
 TypeScript by using `:h include-search` but had a hard time and eventually gave
 up (the `v:fname` API is not enough for nested imports), but it's nice to have
-a working `gf` at least...
+a working `gf` at least... It's also a good idea to [check out what the
+vim-apathy plugin does for
+JavaScript](https://github.com/tpope/vim-apathy/blame/master/after/ftplugin/javascript_apathy.vim)
+if you want to dive more deep into it.

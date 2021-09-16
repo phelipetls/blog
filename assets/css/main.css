@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Merriweather);
+
 :root {
   --body-max-width: 65ch;
   --black: #2b2b2b;
@@ -32,6 +34,60 @@ body[data-theme='dark'] {
   --divider: var(--light-black);
 }
 
-.preload {
-  transition: none !important;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Georgia", "Merriweather", serif;
+  }
+  img {
+    @apply mx-auto max-w-full;
+  }
+  h1 {
+    @apply text-2xl mb-2 font-bold text-primary;
+  }
+  h2 {
+    @apply text-xl mb-2 font-bold text-primary;
+  }
+  h3 {
+    @apply text-lg mb-2 font-bold text-primary;
+  }
+  p {
+    @apply my-5;
+  }
+  a {
+    @apply underline text-primary hover:text-highlight;
+  }
+  :is(h1, h2, h3, h4) a {
+    @apply no-underline;
+  }
+  hr {
+    @apply my-4 border-divider;
+  }
+  code {
+    font-family: "Consolas", "Fira Mono", monospace;
+  }
+  pre {
+    @apply p-4 border rounded overflow-x-auto border-divider;
+  }
+  :not(pre) > code {
+    @apply px-2 rounded bg-background-code;
+  }
+  pre code {
+    @apply float-left min-w-full leading-tight;
+  }
+  pre .hl {
+    @apply px-4 -mx-4 bg-background-code w-auto !important;
+  }
+  .highlight {
+    @apply mb-4;
+  }
+  ul {
+    @apply list-disc;
+  }
+  .preload {
+    transition: none !important;
+  }
 }

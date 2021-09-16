@@ -25,7 +25,7 @@ body[data-theme='light'] {
 body[data-theme='dark'] {
   --primary: var(--dark-beige);
   --normal: var(--grey);
-  --normal-code: var(--grey);
+  --normal-code: var(--normal);
   --background: var(--black);
   --background-code: var(--light-black);
   --highlight: var(--light-beige);

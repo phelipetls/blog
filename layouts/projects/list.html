@@ -17,10 +17,10 @@
         {{ .Content }}
 
         Softwares:
-        <span class="">
+        <span>
           {{- range $index, $software := (.GetTerms "softwares") -}}
             {{- if $index -}}, {{ end }}
-            <a class="no-underline" href="{{ .Permalink }}">
+            <a href="{{ .Permalink }}">
               {{- .Title -}}
             </a>
           {{- end -}}

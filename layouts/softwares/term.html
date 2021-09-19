@@ -16,7 +16,7 @@
           {{ end }}
         </div>
 
-        <div class="flex flex-wrap gap-2 mt-2">
+        <div class="mt-2">
           <time datetime="{{ .Date.Format "2006-01-02" }}">
             {{ if eq .Lang "en" }}
               {{ .Date.Format "Jan 02, 2006" }}
@@ -27,16 +27,14 @@
             {{ end }}
           </time>
 
-          <span class="hidden sm:inline">·</span>
+          <span class="mx-1">·</span>
 
-          <div class="hidden sm:inline">
-            {{- range $index, $software := (.GetTerms "softwares") -}}
-              {{- if $index -}}, {{ end }}
-              <a href="{{ .Permalink }}">
-                {{- .Title -}}
-              </a>
-            {{- end -}}
-          </div>
+          {{- range $index, $software := (.GetTerms "softwares") -}}
+            {{- if $index -}}, {{ end }}
+            <a href="{{ .Permalink }}">
+              {{- .Title -}}
+            </a>
+          {{- end -}}
         </div>
       </article>
 

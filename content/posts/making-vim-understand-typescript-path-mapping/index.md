@@ -1,7 +1,7 @@
 ---
-title: "Making Neovim understand TypeScript path mapping"
+title: "Making Vim understand TypeScript path mapping"
 date: 2021-09-15
-tags: ["typescript", "nvim", "lua"]
+tags: ["typescript", "vim", "nvim", "lua"]
 ---
 
 Vim has this well-known feature of opening the path under cursor with [`:h

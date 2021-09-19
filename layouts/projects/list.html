@@ -18,7 +18,7 @@
 
         Softwares:
         <span class="">
-          {{- range $index, $software := (first 5 (.GetTerms "softwares")) -}}
+          {{- range $index, $software := (.GetTerms "softwares") -}}
             {{- if $index -}}, {{ end }}
             <a class="no-underline" href="{{ .Permalink }}">
               {{- .Title -}}

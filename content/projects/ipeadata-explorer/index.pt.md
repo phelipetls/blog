@@ -2,11 +2,10 @@
 title: "Ipeadata Explorer"
 date: 2020-09-02
 softwares:
-  ["javascript", "typescript", "react", "cypress", "d3", "chart.js", "react-testing-library"]
+  ["javascript", "typescript", "react", "cypress", "d3", "chart.js", "react-testing-library", "material-ui"]
 website: "http://ipeadata-explorer.surge.sh"
 github: "https://github.com/phelipetls/ipeadata-explorer"
 ---
 
-Um frontend escrito em [React](https://reactjs.org/docs/getting-started.html)
-para a base de dados [Ipeadata](http://ipeadata.gov.br/api/), que armazena
-diversas séries temporais.
+Um SPA escrito em React para estudantes e pesquisadores explorarem e
+visualizarem a base de dados do [Ipeadata](http://ipeadata.gov.br/api/).

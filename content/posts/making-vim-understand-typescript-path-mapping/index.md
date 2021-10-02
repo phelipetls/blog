@@ -316,7 +316,7 @@ end
 # Conclusion
 
 [You can check the full implementation
-here](https://github.com/phelipetls/dotfiles/blob/91e6f4929273e0af974c8c78a104f5bdb9f06125/.config/nvim/lua/tsconfig.lua).
+here](https://github.com/phelipetls/dotfiles/blob/84303bfdf877d1ded6b8287f83806ebb73af1cce/.config/nvim/lua/tsconfig.lua).
 Be aware that this will likely change.
 
 As I said earlier, Vim's built-in file navigation features are not the best

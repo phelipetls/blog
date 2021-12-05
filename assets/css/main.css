@@ -90,4 +90,7 @@ body[data-theme='dark'] {
   .preload {
     transition: none !important;
   }
+  blockquote {
+    @apply pl-8 border-l-2 border-divider;
+  }
 }

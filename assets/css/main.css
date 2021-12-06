@@ -87,10 +87,13 @@ body[data-theme='dark'] {
   ul {
     @apply list-disc;
   }
-  .preload {
-    transition: none !important;
+  ol {
+    @apply list-decimal;
   }
   blockquote {
     @apply pl-8 border-l-2 border-divider;
+  }
+  .preload {
+    transition: none !important;
   }
 }

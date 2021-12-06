@@ -54,7 +54,7 @@ body[data-theme='dark'] {
   h3 {
     @apply text-lg mb-2 font-bold text-primary;
   }
-  p {
+  article > p {
     @apply my-5;
   }
   a {

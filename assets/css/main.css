@@ -96,4 +96,26 @@ body[data-theme='dark'] {
   .preload {
     transition: none !important;
   }
+  kbd {
+    font-family: "Consolas", "Fira Mono", monospace;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 0px 4px;
+    box-shadow: 1px 1px 1px var(--black);
+    font-size: small;
+    font-variant: small-caps;
+    vertical-align: text-bottom;
+    background: var(--background-code);
+    color: var(--normal-code);
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 }

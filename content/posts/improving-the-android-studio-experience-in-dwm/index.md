@@ -17,11 +17,12 @@ ever wanting to focus the other ones (except by interacting with the mouse) and
 I don't want them to show up in the taskbar (since I use the
 [`awesomebar`](https://dwm.suckless.org/patches/awesomebar/) patch).
 
-At first, I went in and modified the source code ignore these windows by their
-`WM_NAME` properties, which is easy to find out with `xprop`. The thing is
-they're very badly named and not very distinct from each other).
+At first, I went in and modified the source code to ignore these windows by
+their `WM_NAME` properties, which is easy to find out with `xprop`. But these
+windows are very badly named and their names are not very distinct from the
+device window.
 
-But later I learned that these other windows are [*transient
+Later I learned that these other windows are [*transient
 windows*](https://en.wikipedia.org/wiki/Transient_(computer_programming)) in
 X11:
 
@@ -143,7 +144,7 @@ diff --git a/dwm.c b/dwm.c
 
 Later, by investigating various `xprop` output, I found that some windows give
 a hint called `_NET_WM_STATE_SKIP_TASKBAR` so window managers shouldn't include
-them in the taskbar, [so I went ahead with
+them in the taskbar, it seemed like a good idea so [I implemented
 it](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204cf40c19b63bc).
 
 # Skipping transient windows in monocle layout count
@@ -151,7 +152,7 @@ it](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204cf
 This is simple, we just need to *not* increment a counter when the window is
 transient:
 
-```c {hl_lines=["9-10"]}
+```c {hl_lines=["5-6","9-10"]}
 void
 monocle(Monitor *m)
 {

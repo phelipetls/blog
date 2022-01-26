@@ -151,7 +151,7 @@ it](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204cf
 This is simple, we just need to *not* increment a counter when the window is
 transient:
 
-```c {hl_lines=[9,12]}
+```c {hl_lines=["9-10"]}
 void
 monocle(Monitor *m)
 {

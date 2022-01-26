@@ -100,7 +100,7 @@ body[data-theme='dark'] {
     background-color: var(--background-code);
     border-radius: 3px;
     border: 1px solid var(--divider);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    box-shadow: 1px 1px 1px var(--normal-code);
     color: var(--normal-code);
     display: inline-block;
     font-size: .85em;

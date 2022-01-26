@@ -13,7 +13,7 @@ window with the Android device and a window with buttons to control it appear
 (maybe a modal window saying "Loading state..." too).
 
 The device window is usually the one I'm mostly interested in. I don't recall
-ever wanting to focus the other ones (expect by interacting with the mouse) and
+ever wanting to focus the other ones (except by interacting with the mouse) and
 I don't want them to show up in the taskbar (since I use the
 [`awesomebar`](https://dwm.suckless.org/patches/awesomebar/) patch).
 

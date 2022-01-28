@@ -12,24 +12,14 @@
           </h2>
 
           <div class="flex flex-wrap gap-2">
-            <div class="flex flex-wrap gap-2">
-              <time datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ if eq .Lang "en" }}
-                  {{ .Date.Format "Jan, 02" }}
-                {{ else }}
-                  {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-                  {{ .Date.Day }}
-                {{ end }}
-              </time>
-            </div>
-
-            <span class="text-divider hidden sm:inline">·</span>
-
-            <div class="hidden sm:flex gap-2">
-              {{- range .GetTerms "tags" -}}
-                <a class="no-underline text-normal" href="{{ .Permalink }}">#{{ .Title }}</a>
-              {{- end -}}
-            </div>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ if eq .Lang "en" }}
+                {{ .Date.Format "Jan, 02" }}
+              {{ else }}
+                {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+                {{ .Date.Day }}
+              {{ end }}
+            </time>
           </div>
         </article>
       {{ end }}

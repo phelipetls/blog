@@ -1,18 +1,18 @@
-<header class="mb-8">
-  <div class="flex flex-col justify-between gap-2 sm:flex-row">
-    <a class="no-underline font-bold text-primary" href="{{ .Site.Home.Permalink }}">
+<header class="mb-16">
+  <h1 class="mt-2 mb-4">
+    <a class="no-underline font-bold" href="{{ .Site.Home.Permalink }}">
       {{ .Site.Title }}
     </a>
+  </h1>
 
-    <nav class="flex flex-row flex-wrap gap-2">
-      {{- range .Site.Menus.main -}}
-        <a
-          class="no-underline text-normal"
-          href="{{ .URL | absLangURL }}"
-        >
-            {{ i18n .Name | default .Name }}
-        </a>
-      {{- end -}}
-    </nav>
-  </div>
+  <nav class="flex flex-row flex-wrap gap-2">
+    {{- range .Site.Menus.main -}}
+      <a
+        class="no-underline text-normal"
+        href="{{ .URL | absLangURL }}"
+      >
+        {{ i18n .Name | default .Name }}
+      </a>
+    {{- end -}}
+  </nav>
 </header>

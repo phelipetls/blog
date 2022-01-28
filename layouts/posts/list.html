@@ -1,33 +1,39 @@
 {{ define "main" }}
   <section>
-    {{ range .Pages }}
-      <article>
-        <h2>
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h2>
+    {{ range .Pages.GroupByDate "2006" }}
+      <h3 class="first:mt-0 mt-16 text-2xl">
+        <time datetime="{{ .Key }}-01-01">{{ .Key }}</time>
+      </h3>
 
-        <div class="flex flex-wrap gap-2">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ if eq .Lang "en" }}
-              {{ .Date.Format "Jan 02, 2006" }}
-            {{ else }}
-              {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-              {{ .Date.Day }},
-              {{ .Date.Year }}
-            {{ end }}
-          </time>
+      {{ range .Pages }}
+        <article class="mt-8">
+          <h2>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h2>
 
-          <span class="text-divider hidden sm:inline">·</span>
+          <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ if eq .Lang "en" }}
+                  {{ .Date.Format "Jan, 02" }}
+                {{ else }}
+                  {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+                  {{ .Date.Day }}
+                {{ end }}
+              </time>
+            </div>
 
-          <div class="hidden sm:flex gap-2">
-            {{- range .GetTerms "tags" -}}
-              <a class="no-underline text-normal" href="{{ .Permalink }}">#{{ .Title }}</a>
-            {{- end -}}
+            <span class="text-divider hidden sm:inline">·</span>
+
+            <div class="hidden sm:flex gap-2">
+              {{- range .GetTerms "tags" -}}
+                <a class="no-underline text-normal" href="{{ .Permalink }}">#{{ .Title }}</a>
+              {{- end -}}
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      {{ end }}
 
-      <hr class="last:hidden" />
     {{ end }}
   </section>
 {{ end }}

@@ -272,7 +272,7 @@ index 389c61d..70a6dc1 100644
  void
  focus(Client *c)
  {
-+	Client *i = NULL, *t = NULL;
++	Client *i, *t;
 +	Window trans = None;
 +
  	if (!c || !ISVISIBLE(c))
@@ -282,9 +282,13 @@ index 389c61d..70a6dc1 100644
  		grabbuttons(c, 1);
  		XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
  		setfocus(c);
+
++		if (XGetTransientForHint(dpy, c->win, &trans)) {
++			XRaiseWindow(dpy, c->win);
++		}
 +
 +		for (i = selmon->stack; i; i = i->snext) {
-+			if (ISVISIBLE(i) && XGetTransientForHint(dpy, i->win, &trans) && (t = wintoclient(trans)) && (t == c)) {
++			if (ISVISIBLE(i) && (XGetTransientForHint(dpy, i->win, &trans) && (t = wintoclient(trans)) && (t == c))) {
 +				XRaiseWindow(dpy, i->win);
 +			}
 +		}
@@ -292,6 +296,47 @@ index 389c61d..70a6dc1 100644
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
  		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
 ```
+
+This create another problem though... When the leader window gets unfocused,
+their transient windows would always reamin on top of everything else!
+
+Thanks to [a comment by
+r/bakkeby](https://www.reddit.com/r/dwm/comments/sctdxt/comment/huaveje), I
+found out that I could use
+[`XLowerWindow`](https://tronche.com/gui/x/xlib/window/XLowerWindow.html) in
+the `unfocus` function to fix this:
+
+```c {hl_lines=["12-19"]}
+void
+unfocus(Client *c, int setfocus)
+{
+	Client *i, *t;
+	Window trans = None;
+
+	if (!c)
+		return;
+	grabbuttons(c, 0);
+	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+
+	if (XGetTransientForHint(dpy, c->win, &trans))
+		XLowerWindow(dpy, c->win);
+
+	for (i = c->mon->stack; i; i = i->snext) {
+		if (ISVISIBLE(i) && (XGetTransientForHint(dpy, i->win, &trans) && (t = wintoclient(trans)) && (t == c))) {
+			XLowerWindow(dpy, i->win);
+		}
+	}
+
+	if (setfocus) {
+		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
+		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
+	}
+}
+```
+
+**Warning**: this is pretty cutting-edge and coming from a person with
+no expertise in C, so it might be broken in several ways. I'm just messing
+around.
 
 # Final result
 

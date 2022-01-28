@@ -38,7 +38,7 @@ whose value we can get with an Xlib function named
 Here's an example on how to use this function, taken from the [`dwm` source
 code](https://git.suckless.org/dwm/file/dwm.c.html#l1038):
 
-``` c {hl_lines=["9-11"]}
+``` c {hl_lines=["4-5","9-11"]}
 void
 manage(Window w, XWindowAttributes *wa)
 {
@@ -57,14 +57,14 @@ manage(Window w, XWindowAttributes *wa)
 ```
 
 As you can see, it's pretty simple, `XGetTransientForHint` assigns a `Window`
-to the `trans` variable, if it succeeds, and then we get the respective
+to the `trans` variable (if it succeeds), and then we get the respective
 `Client` with the `wintoclient` function.
 
 This example provided me with enough knowledge to solve most of my problems:
 
 - I don't want them in the taskbar.
 - I don't want them in the monocle layout count.
-- I never want to focus on these transient windows with the keyboard.
+- I never want to focus them with the keyboard.
 - When I apply the nth tag to the leader window, the same tag should be applied
   to its transient windows.
 - On floating layout, if I focus on a leader window, I want its transient
@@ -74,10 +74,9 @@ This example provided me with enough knowledge to solve most of my problems:
 
 The taskbar is drawn by the `drawbar` function.
 
-Since I applied the `awesomebar` patch to my `dwm` build, I wanted to ignore
-transient windows in the taskbar:
+I just need to check if a window is transient and, if so, skip:
 
-```c {hl_lines=["10-11","23-24"]}
+```c {hl_lines=["10-11","21-22"]}
 void
 drawbar(Monitor *m)
 {
@@ -142,15 +141,15 @@ diff --git a/dwm.c b/dwm.c
 						x += (1.0 / (double)m->bt) * m->btw;
 ```
 
-Later, by investigating various `xprop` output, I found that some windows give
-a hint called `_NET_WM_STATE_SKIP_TASKBAR` so window managers shouldn't include
-them in the taskbar, it seemed like a good idea so [I implemented
-it](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204cf40c19b63bc).
+Later, by investigating `xprop` output, I found that some windows give a hint
+called `_NET_WM_STATE_SKIP_TASKBAR` so window managers shouldn't include them
+in the taskbar, this seemed like a better idea too so [I implemented it as
+well](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204cf40c19b63bc).
 
 # Skipping transient windows in monocle layout count
 
 This is simple, we just need to *not* increment a counter when the window is
-transient:
+transient, in the `monocle` function:
 
 ```c {hl_lines=["5-6","9-10"]}
 void
@@ -257,11 +256,12 @@ Since the transient windows do not appear in the taskbar and we also ignore
 them in the `focusstack` function, there is no way to focus on them if they're
 not visible on the screen.
 
-So in floating layout there's an UX problem where transient windows are never
+So in floating layout there's an usability problem: transient windows are never
 visible.
 
-The natural thing to do here is to raise all windows into view when the leader
-window gets focus:
+The fix is to raise all transient windows when a window gets focused. Also,
+if a transient window gets focused in a non-floating layout, we should raise it
+as well since transient windows are always floating in dwm). Here's the code:
 
 ```diff
 diff --git a/suckless/dwm/dwm.c b/suckless/dwm/dwm.c

@@ -30,6 +30,11 @@
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
+
+    {{ if (not .Site.IsServer) }}
+      {{ $toggleThemeScript := $toggleThemeScript | minify }}
+    {{ end }}
+
     <script src="{{ $toggleThemeScript.Permalink }}"></script>
   </body>
 </html>

@@ -1,8 +1,25 @@
 <header class="mb-16">
   <h1 class="mb-4">
-    <a class="border-0 font-bold" href="{{ .Site.Home.Permalink }}">
-      {{ .Site.Title }}
-    </a>
+    <div class="flex justify-between">
+      <a class="border-0 font-bold" href="{{ .Site.Home.Permalink }}">
+        {{ .Site.Title }}
+      </a>
+
+      <button
+        id="theme-button"
+        class="text-background bg-primary rounded-lg px-1 ring-divider ring-offset-background focus:ring-offset-2 focus:ring-4"
+        aria-label="{{ i18n "ThemeButton" }}"
+      >
+        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24">
+          <defs>
+            {{ partial "svgs/bx-moon.svg" }}
+            {{ partial "svgs/bxs-sun.svg" }}
+          </defs>
+
+          <use id="theme-button-svg-icon" href="#sun" />
+        </svg>
+      </button>
+    </div>
   </h1>
 
   <nav class="flex flex-row flex-wrap gap-2">

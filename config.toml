@@ -25,9 +25,7 @@ DefaultContentLanguage = "en"
       htmlLang = "pt-BR"
 
 [taxonomies]
-  category = "categories"
   tag = "tags"
-  software = "softwares"
 
 [markup]
   [markup.goldmark]

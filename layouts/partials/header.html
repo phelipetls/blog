@@ -27,15 +27,12 @@
   <nav class="flex flex-row flex-wrap gap-2">
     {{- range .Site.Menus.main -}}
       <a
+        id="{{ .Identifier }}"
         class="text-normal {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
         href="{{ .URL | absLangURL }}"
       >
         {{ i18n .Name | default .Name }}
       </a>
     {{- end -}}
-
-    <a id="resume-download" class="text-normal">
-      {{ i18n "Resume" }}
-    </a>
   </nav>
 </header>

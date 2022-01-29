@@ -31,3 +31,9 @@ DefaultContentLanguage = "en"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[menu]
+[[menu.main]]
+    identifier = "resume-download"
+    name = "Resumé"
+    weight = 9999

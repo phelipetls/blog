@@ -36,5 +36,13 @@
     {{ end }}
 
     <script src="{{ $toggleThemeScript.Permalink }}"></script>
+
+    {{ $resumeDownloadScript := resources.Get "js/resume-download.js" }}
+
+    {{ if (not .Site.IsServer) }}
+      {{ $resumeDownloadScript := $resumeDownloadScript | minify }}
+    {{ end }}
+
+    <script src="{{ $resumeDownloadScript.Permalink }}"></script>
   </body>
 </html>

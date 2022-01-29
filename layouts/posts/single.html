@@ -2,16 +2,12 @@
   <article>
     <h1>{{ .Title }}</h1>
 
-    <div class="flex flex-col gap-2 flex-wrap align-center sm:flex-row sm:justify-between my-1">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ .Date.Format "Jan 02, 2006" }}
-      </time>
+    <time datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "Jan 02, 2006" }}
+    </time>
 
-      <div class="sm:flex gap-2">
-        {{ range (.GetTerms "tags") }}
-          <a class="no-underline text-normal" href="{{ .RelPermalink }}">#{{- .Title -}}</a>
-        {{ end }}
-      </div>
+    <div class="sm:flex gap-2 mt-2">
+      {{ partial "post-tags.html" . }}
     </div>
 
     <hr class="my-8" />

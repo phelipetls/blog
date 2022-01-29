@@ -1,0 +1,10 @@
+{{ with (.GetTerms "tags") }}
+  {{ range . }}
+    <a
+      class="no-underline rounded px-2 bg-background-code border border-divider hover:bg-highlight hover:text-background"
+      href="{{ .RelPermalink }}"
+    >
+      {{- .Title -}}
+    </a>
+  {{ end }}
+{{ end }}

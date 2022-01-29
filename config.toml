@@ -36,13 +36,19 @@ DefaultContentLanguage = "en"
 
 [menu]
   [[menu.main]]
+  identifier = "About"
+  name = "About"
+  url = "/"
+  weight = -3
+
+  [[menu.main]]
   identifier = "Posts"
   name = "Posts"
   url = "/posts"
-  weight = -3
+  weight = -2
 
   [[menu.main]]
   identifier = "Projects"
   name = "Projects"
   url = "/projects"
-  weight = -2
+  weight = -1

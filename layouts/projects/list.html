@@ -15,16 +15,6 @@
         </div>
 
         {{ .Content }}
-
-        Softwares:
-        <span>
-          {{- range $index, $software := (.GetTerms "softwares") -}}
-            {{- if $index -}}, {{ end }}
-            <a href="{{ .Permalink }}">
-              {{- .Title -}}
-            </a>
-          {{- end -}}
-        </span>
       </article>
 
       <hr class="last:hidden" />

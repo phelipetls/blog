@@ -1,7 +1,6 @@
 ---
 title: "Seriesbr"
 date: 2019-11-22
-softwares: ["python", "pandas", "requests", "unittest"]
 website: "https://seriesbr.readthedocs.io"
 github: "https://github.com/phelipetls/seriesbr"
 ---

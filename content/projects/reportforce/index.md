@@ -1,7 +1,6 @@
 ---
 title: "Reportforce"
 date: 2020-01-25
-softwares: ["python", "pandas", "requests", "pytest"]
 website: "https://reportforce.readthedocs.io"
 github: "https://github.com/phelipetls/reportforce"
 ---

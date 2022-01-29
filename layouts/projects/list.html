@@ -2,14 +2,14 @@
   <section>
     {{ range .Pages }}
       <article class="mb-16">
-        <div class="flex gap-2 items-center justify-between">
-          <h2 class="m-0">
+        <div>
+          <h2 class="m-0 inline">
             <a href="{{ or .Params.website .Params.github }}">{{ .Title | title }}</a>
           </h2>
 
-          <time class="text-lg" datetime="{{ .Date.Format "2006-01-02" }}">
+          (<time class="text-lg" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "2006" }}
-          </time>
+          </time>)
         </div>
 
         {{ .Content }}

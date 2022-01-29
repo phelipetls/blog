@@ -16,9 +16,9 @@
 
     <hr class="my-8" />
 
-    <div class="grid grid-cols-auto gap-4">
-      {{ with .PrevInSection }}
-        <div class="flex group gap-2 col-start-1 col-end-1">
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      <div class="flex group gap-2 sm:max-w-1/2">
+        {{ with .PrevInSection }}
           <div class="group-hover:text-highlight">
             ←
           </div>
@@ -26,11 +26,11 @@
           <a class="border-0" href="{{ .RelPermalink }}">
             {{ .Title }}
           </a>
-        </div>
-      {{ end }}
+        {{ end }}
+      </div>
 
-      {{ with .NextInSection }}
-        <div class="flex group justify-end gap-2 col-start-2 col-end-2">
+      <div class="flex group justify-end gap-2 sm:max-w-1/2">
+        {{ with .NextInSection }}
           <a class="border-0 text-right" href="{{ .RelPermalink }}">
             {{ .Title }}
           </a>
@@ -38,8 +38,8 @@
           <div class="group-hover:text-highlight">
             →
           </div>
-        </div>
-      {{ end }}
+        {{ end }}
+      </div>
     </div>
   </article>
 {{ end }}

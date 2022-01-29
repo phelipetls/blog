@@ -5,7 +5,8 @@ website: "https://seriesbr.readthedocs.io"
 github: "https://github.com/phelipetls/seriesbr"
 ---
 
-A Python package to get time series from brazilian government institutions'
-databases, such as the [Brazilian Central Bank](https://www3.bcb.gov.br/sgspub),
-[Institute of Applied Economic Research](http://ipeadata.gov.br/beta3/) and
-[Brazilian Institute of Geography and Statistics](https://sidra.ibge.gov.br/home/ipp/brasil).
+A **Python** library to get time series from databases maintained by brazilian
+institutions, such as [BCB](https://www3.bcb.gov.br/sgspub),
+[IPEA](http://ipeadata.gov.br/beta3/) and
+[IBGE](https://sidra.ibge.gov.br/home/ipp/brasil), into a **pandas**
+`DataFrame`.

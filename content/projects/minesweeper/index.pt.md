@@ -5,5 +5,5 @@ website: "https://some-minesweeper.herokuapp.com"
 github: "https://github.com/phelipetls/minesweeper.js"
 ---
 
-Esta é uma implementação de campo minado escrito com JavaScript, CSS, Node.js e
-PostgreSQL, para me ajudar a aprender uma stack básica de desenvolvimento web.
+Implementação de Campo Minado que me ajudou a aprender desenvolvimento web
+full-stack básico com **JavaScript**, **CSS**, **Node.js** e **PostgreSQL**.

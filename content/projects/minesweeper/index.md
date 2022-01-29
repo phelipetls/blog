@@ -5,5 +5,5 @@ website: "https://some-minesweeper.herokuapp.com"
 github: "https://github.com/phelipetls/minesweeper.js"
 ---
 
-This is a minesweeper implementation in pure JavaScript, to help me learn a
-basic web development stack with vanilla JS, CSS, Node and PostgreSQL.
+A Minesweeper implementation that helped me learn the very basics of full-stack
+web development with **JavaScript**, **CSS**, **Node.js** and **PostgreSQL**.

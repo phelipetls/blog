@@ -5,6 +5,5 @@ website: "https://reportforce.readthedocs.io"
 github: "https://github.com/phelipetls/reportforce"
 ---
 
-This project is a client for Salesforce's
-[Analytics REST API](https://resources.docs.salesforce.com/226/latest/en-us/sfdc/pdf/bi_dev_guide_rest.pdf)
-for downloading reports.
+A **Python** library to get reports from **Salesforce** through the [Analytics REST
+API](https://resources.docs.salesforce.com/226/latest/en-us/sfdc/pdf/bi_dev_guide_rest.pdf).

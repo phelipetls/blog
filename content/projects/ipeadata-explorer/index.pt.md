@@ -5,5 +5,5 @@ website: "http://ipeadata-explorer.surge.sh"
 github: "https://github.com/phelipetls/ipeadata-explorer"
 ---
 
-Um SPA escrito em React para estudantes e pesquisadores explorarem e
-visualizarem a base de dados do [Ipeadata](http://ipeadata.gov.br/api/).
+Aplicação em **React** para explorar e visualizar a base de dados do
+[Ipeadata](http://ipeadata.gov.br/api/).

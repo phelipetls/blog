@@ -5,7 +5,6 @@ website: "https://mapsbr.readthedocs.io"
 github: "https://github.com/phelipetls/mapsbr"
 ---
 
-Esta é uma biblioteca em Python que serve como interface para obter dados
-geoespaciais de fontes como
-[IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) ou um servidor
-ArcGIS em um DataFrame incrementado pela biblioteca `geopandas`.
+Biblioteca em **Python** para obter dados geoespaciais da [API de malhas do
+IBGE](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) ou de um
+servidor ArcGIS em um DataFrame do [`geopandas`](https://geopandas.org/)

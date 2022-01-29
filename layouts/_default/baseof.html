@@ -29,6 +29,7 @@
       {{ end }}
     {{ end }}
 
-    {{ partial "theme-button.html" }}
+    {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
+    <script src="{{ $toggleThemeScript.Permalink }}"></script>
   </body>
 </html>

@@ -7,4 +7,4 @@ github: "https://github.com/phelipetls/mapsbr"
 
 **Python** library to get geospatial data from the [IBGE
 API](https://servicodados.ibge.gov.br/api/docs/malhas?versao=2) or an ArcGIS
-server directly into a [`geopandas`](https://geopandas.org/) DataFrame.
+server directly into a [geopandas](https://geopandas.org/) DataFrame.

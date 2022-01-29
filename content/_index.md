@@ -7,12 +7,10 @@ menu:
     weight: 1
 ---
 
-Hi, I'm a front-end developer, currently working on web and mobile apps with
-React, React Native, JavaScript and TypeScript.
+Hi 👋, I'm a front-end developer based in Rio, Brazil.
 
-I graduated in Economics but my interest in Econometrics and Statistics got me
-into software development.
+I currently work at [Mutual](https://mutual.club/), building web and mobile
+apps with React, React Native and TypeScript.
 
-This site is a project to experiment on web technologies, [write about myself,
-what I learn and what I'm building](/posts), and [share my side
-projects](/projects).
+Apart from front-end development, I'm also interested in back-end development,
+Linux, DevOps, Data visualization, Econometrics and Statistics.

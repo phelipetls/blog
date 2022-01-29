@@ -57,8 +57,8 @@ body[data-theme='dark'] {
   article > p {
     @apply my-5;
   }
-  a {
-    @apply underline text-primary hover:text-highlight;
+  :is(main, footer) a {
+    @apply no-underline border-b-2 border-divider text-primary hover:border-highlight;
   }
   :is(h1, h2, h3, h4) a {
     @apply no-underline;

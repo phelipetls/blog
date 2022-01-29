@@ -1,23 +1,19 @@
 {{ define "main" }}
-  <section class="flex-1">
+  <section>
     {{ range .Pages }}
-      <article>
-        <div class="flex items-center">
+      <article class="mb-16">
+        <div class="flex gap-2 items-center justify-between">
           <h2 class="m-0">
-            <a href="{{ .Permalink }}">{{ .Title | title }}</a>
+            <a href="{{ or .Params.website .Params.github }}">{{ .Title | title }}</a>
           </h2>
 
-          {{ if isset .Params "github" }}
-            <a class="ml-2 text-primary" href="{{ .Params.github }}">
-              {{ partial "svgs/bxl-github.svg" }}
-            </a>
-          {{ end }}
+          <time class="text-lg" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "2006" }}
+          </time>
         </div>
 
         {{ .Content }}
       </article>
-
-      <hr class="last:hidden" />
     {{ end }}
   </section>
 {{ end }}

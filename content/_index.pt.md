@@ -1,5 +1,10 @@
 ---
 title: "Sobre"
+menu:
+  main:
+    name: Sobre
+    url: /
+    weight: 1
 ---
 
 Oi, sou um desenvolvedor front-end, atualmente trabalhando com aplicativos web

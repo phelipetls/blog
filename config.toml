@@ -33,22 +33,3 @@ DefaultContentLanguage = "en"
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-[menu]
-  [[menu.main]]
-  identifier = "About"
-  name = "About"
-  url = "/"
-  weight = -3
-
-  [[menu.main]]
-  identifier = "Posts"
-  name = "Posts"
-  url = "/posts"
-  weight = -2
-
-  [[menu.main]]
-  identifier = "Projects"
-  name = "Projects"
-  url = "/projects"
-  weight = -1

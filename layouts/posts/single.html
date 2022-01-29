@@ -16,7 +16,7 @@
 
     <hr class="my-8" />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="grid grid-cols-auto gap-4">
       {{ with .PrevInSection }}
         <div class="flex group gap-2 col-start-1 col-end-1">
           <div class="group-hover:text-highlight">
@@ -31,7 +31,7 @@
 
       {{ with .NextInSection }}
         <div class="flex group justify-end gap-2 col-start-2 col-end-2">
-          <a class="border-0" href="{{ .RelPermalink }}">
+          <a class="border-0 text-right" href="{{ .RelPermalink }}">
             {{ .Title }}
           </a>
 

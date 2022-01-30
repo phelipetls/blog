@@ -1,7 +1,8 @@
 const themeButton = document.querySelector("#theme-button");
-const svgIcon = document.querySelector("#theme-button-svg-icon");
 
 const toggleSvgIcon = function(theme) {
+  const svgIcon = document.querySelector("#theme-button-svg-icon");
+
   const icon = theme === "dark" ? "#sun" : "#moon";
   svgIcon.setAttribute("href", icon);
 }

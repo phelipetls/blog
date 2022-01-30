@@ -57,9 +57,6 @@ body[data-theme='dark'] {
   article > p {
     @apply my-5;
   }
-  article > p:first-of-type {
-    @apply mt-0;
-  }
   a {
     @apply no-underline border-b-2 border-divider text-primary hover:border-highlight;
   }

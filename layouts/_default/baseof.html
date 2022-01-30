@@ -31,10 +31,8 @@
 
     {{ partial "footer.html" . }}
 
-    {{ block "scripts" . }}
-      {{ range (.Resources.Match "*.js") }}
-        <script src="{{ .RelPermalink }}"></script>
-      {{ end }}
+    {{ range (.Resources.Match "*.js") }}
+      <script src="{{ .RelPermalink }}"></script>
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}

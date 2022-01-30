@@ -16,28 +16,30 @@
 
     <hr class="my-8" />
 
-    <div class="float-left sm:max-w-1/2 flex group gap-2">
-      {{ with .PrevInSection }}
-        <div class="group-hover:text-highlight">
-          ←
-        </div>
+    <nav>
+      <div class="float-left sm:max-w-1/2 flex group gap-2">
+        {{ with .PrevInSection }}
+          <div class="group-hover:text-highlight">
+            ←
+          </div>
 
-        <a class="border-0" href="{{ .RelPermalink }}">
-          {{ .Title }}
-        </a>
-      {{ end }}
-    </div>
+          <a class="border-0" href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
+        {{ end }}
+      </div>
 
-    <div class="float-right text-right mt-2 sm:mt-0 sm:max-w-1/2 flex group justify-end gap-2">
-      {{ with .NextInSection }}
-        <a class="border-0" href="{{ .RelPermalink }}">
-          {{ .Title }}
-        </a>
+      <div class="float-right text-right mt-2 sm:mt-0 sm:max-w-1/2 flex group justify-end gap-2">
+        {{ with .NextInSection }}
+          <a class="border-0" href="{{ .RelPermalink }}">
+            {{ .Title }}
+          </a>
 
-        <div class="group-hover:text-highlight">
-          →
-        </div>
-      {{ end }}
-    </div>
+          <div class="group-hover:text-highlight">
+            →
+          </div>
+        {{ end }}
+      </div>
+    </nav>
   </article>
 {{ end }}

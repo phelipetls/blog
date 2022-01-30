@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <article>
+    {{ $email := "phelipe_teles@hotmail.com" }}
+    {{ $emailMd5 := md5 $email }}
+    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" $emailMd5 }}
+
+    <img
+      alt="{{ i18n "GravatarAltText" }}"
+      class="rounded-full sm:float-left sm:mr-4 border-4 border-divider"
+      src="{{ $gravatarUrl }}"
+    ></img>
+
+    {{ .Content }}
+  </article>
+{{ end }}

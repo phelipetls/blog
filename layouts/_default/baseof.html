@@ -11,15 +11,13 @@
   </head>
 
   <body class="px-4 py-8 preload text-normal bg-background flex flex-col container max-w-2xl min-h-full mx-auto transition transition-colors duration-75 ease-out" data-theme="light">
-    <script>
-      {{ $themeScript := resources.Get "js/theme.js" }}
+    {{ $themeScript := resources.Get "js/theme.js" }}
 
-      {{ if (not .Site.IsServer) }}
-        {{ $themeScript := $themeScript | minify }}
-      {{ end }}
+    {{ if (not .Site.IsServer) }}
+      {{ $themeScript := $themeScript | minify }}
+    {{ end }}
 
-      {{ $themeScript.Content | safeJS }}
-    </script>
+    <script>{{ $themeScript.Content | safeJS }}</script>
 
     {{ partial "header.html" . }}
 
@@ -36,19 +34,14 @@
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
-
-    {{ if (not .Site.IsServer) }}
-      {{ $toggleThemeScript := $toggleThemeScript | minify }}
-    {{ end }}
-
-    <script src="{{ $toggleThemeScript.Permalink }}"></script>
-
     {{ $resumeDownloadScript := resources.Get "js/resume-download.js" }}
 
     {{ if (not .Site.IsServer) }}
+      {{ $toggleThemeScript := $toggleThemeScript | minify }}
       {{ $resumeDownloadScript := $resumeDownloadScript | minify }}
     {{ end }}
 
+    <script src="{{ $toggleThemeScript.Permalink }}"></script>
     <script src="{{ $resumeDownloadScript.Permalink }}"></script>
   </body>
 </html>

@@ -12,3 +12,6 @@ other = 'Resumé'
 
 [GravatarAltText]
 other = 'A photo of me'
+
+[MainNavigation]
+other = 'Main navigation'

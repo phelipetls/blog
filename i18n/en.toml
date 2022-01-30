@@ -15,3 +15,12 @@ other = 'A photo of me'
 
 [MainNavigation]
 other = 'Main navigation'
+
+[PostsNavigation]
+other = 'Posts navigation'
+
+[PrevPost]
+other = 'Previous post'
+
+[NextPost]
+other = 'Next post'

@@ -16,14 +16,14 @@
 
     <hr class="my-8" />
 
-    <nav>
+    <nav aria-label="{{ i18n "PostsNavigation" }}">
       <div class="float-left sm:max-w-1/2 flex group gap-2">
         {{ with .PrevInSection }}
           <div class="group-hover:text-highlight">
             ←
           </div>
 
-          <a class="border-0" href="{{ .RelPermalink }}">
+          <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "PrevPost" }}">
             {{ .Title }}
           </a>
         {{ end }}
@@ -31,7 +31,7 @@
 
       <div class="float-right text-right mt-2 sm:mt-0 sm:max-w-1/2 flex group justify-end gap-2">
         {{ with .NextInSection }}
-          <a class="border-0" href="{{ .RelPermalink }}">
+          <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "NextPost" }}">
             {{ .Title }}
           </a>
 

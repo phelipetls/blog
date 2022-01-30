@@ -11,7 +11,15 @@
   </head>
 
   <body class="px-4 py-8 preload text-normal bg-background flex flex-col container max-w-2xl min-h-full mx-auto transition transition-colors duration-75 ease-out" data-theme="light">
-    {{ partial "theme.html" }}
+    <script>
+      {{ $themeScript := resources.Get "js/theme.js" }}
+
+      {{ if (not .Site.IsServer) }}
+        {{ $themeScript := $themeScript | minify }}
+      {{ end }}
+
+      {{ $themeScript.Content | safeJS }}
+    </script>
 
     {{ partial "header.html" . }}
 

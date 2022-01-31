@@ -1,5 +1,5 @@
 ---
-title: "Reportforce"
+title: "reportforce"
 date: 2020-01-25
 website: "https://reportforce.readthedocs.io"
 github: "https://github.com/phelipetls/reportforce"

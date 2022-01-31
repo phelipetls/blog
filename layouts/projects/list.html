@@ -4,7 +4,7 @@
       <article class="mb-16 last:mb-0">
         <div>
           <h2 class="inline-block">
-            <a href="{{ or .Params.website .Params.github }}">{{ .Title | title }}</a>
+            <a href="{{ or .Params.website .Params.github }}">{{ .Title }}</a>
           </h2>
 
           (<time class="text-lg" datetime="{{ .Date.Format "2006-01-02" }}">

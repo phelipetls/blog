@@ -1,5 +1,5 @@
 ---
-title: "MapsBR"
+title: "mapsbr"
 date: 2019-12-29
 website: "https://mapsbr.readthedocs.io"
 github: "https://github.com/phelipetls/mapsbr"

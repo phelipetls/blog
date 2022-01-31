@@ -76,7 +76,7 @@ body[data-theme='dark'] {
     @apply px-2 rounded bg-background-code;
   }
   pre code {
-    @apply float-left min-w-full leading-tight;
+    @apply float-left min-w-full leading-normal;
   }
   .chroma .hl {
     @apply px-4 -mx-4 bg-background-code w-auto !important;

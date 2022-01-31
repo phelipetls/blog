@@ -33,3 +33,6 @@ other = 'Previous post'
 
 [NextPost]
 other = 'Next post'
+
+[Contacts]
+other = 'Contacts'

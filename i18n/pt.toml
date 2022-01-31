@@ -38,3 +38,6 @@ other = 'Post anterior'
 
 [NextPost]
 other = 'Próximo post'
+
+[Contacts]
+other = 'Contatos'

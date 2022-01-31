@@ -1,15 +1,29 @@
 {{ define "main" }}
   <section class="grid-cols-2">
-    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
+    {{ $gravatarSize := 200 }}
+    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=%d" (md5 .Site.Params.email) $gravatarSize }}
 
     <aside class="sm:float-left sm:mr-4 mb-4 sm:mb-0">
-      <img
-        alt="{{ i18n "GravatarAltText" }}"
-        width="200"
-        height="200"
-        class="rounded-full border-4 border-divider"
-        src="{{ $gravatarUrl }}"
-      ></img>
+      <div class="relative" style="width: {{ $gravatarSize }}px; height: {{ $gravatarSize }}px;">
+        <canvas
+          id="gravatar-blurhash"
+          class="absolute w-full h-full inset-0 rounded-full border-4 border-divider"
+          width="{{ $gravatarSize }}"
+          height="{{ $gravatarSize }}"
+        ></canvas>
+
+        <div class="relative h-full">
+          <img
+            id="gravatar"
+            alt="{{ i18n "GravatarAltText" }}"
+            width="{{ $gravatarSize }}"
+            height="{{ $gravatarSize }}"
+            class="absolute h-full w-full rounded-full border-4 border-divider"
+            src="{{ $gravatarUrl }}"
+            loading="lazy"
+          ></img>
+        </div>
+      </div>
 
       <nav class="flex sm:hidden gap-2 mt-4 justify-center align-end" aria-label="{{ i18n "Contacts" }}">
         {{ partial "contact.html" . }}
@@ -24,4 +38,16 @@
       </section>
     </article>
   </section>
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $gravatarSize := 200 }}
+
+  {{ $gravatarBlurhash := (resources.Get "blurhash-gravatar.txt").Content }}
+
+  {{ $blurhashScriptTemplate := resources.Get "js/blurhash.js" }}
+  {{ $blurhashScript := $blurhashScriptTemplate | resources.ExecuteAsTemplate "blurhash.js" (dict "Blurhash" $gravatarBlurhash "Size" $gravatarSize) }}
+  {{ $blurhashScriptBuilt := $blurhashScript | js.Build "blurhash.js" | minify }}
+
+  <script>{{ $blurhashScriptBuilt.Content | safeJS }}</script>
 {{ end }}

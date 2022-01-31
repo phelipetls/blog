@@ -4,7 +4,9 @@
   "description": "A blog to share stuff I find interesting or helpful and experiment with web technologies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-gravatar-blurhash": "node scripts/generate-gravatar-blurhash.js",
+    "postinstall": "simple-git-hooks"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,16 @@
     "tailwindcss": "^2.2.15"
   },
   "dependencies": {
+    "blurhash": "^1.1.4",
+    "canvas": "^2.9.0",
+    "cross-spawn": "^7.0.3",
+    "node-fetch": "^2.6.7",
     "postcss-cli": "^8.3.1",
+    "sharp": "^0.29.3",
+    "simple-git-hooks": "^2.7.0",
     "tailwind": "^3.1.0"
+  },
+  "simple-git-hooks": {
+    "pre-push": "npm run generate-gravatar-blurhash"
   }
 }

@@ -108,4 +108,7 @@ body[data-theme='dark'] {
     white-space: nowrap;
     vertical-align: text-bottom;
   }
+  img#gravatar:-moz-loading {
+    visibility: hidden;
+  }
 }

@@ -1,0 +1,51 @@
+{
+  "DefaultContentLanguage": "en",
+  "assetsDir": "assets",
+  "baseURL": "https://phelipetls.github.io",
+  "languageCode": "en-us",
+  "pygmentsUseClasses": true,
+  "summaryLength": 20,
+  "title": "Phelipe Teles",
+  "build": {
+    "writeStats": true
+  },
+  "languages": {
+    "en": {
+      "languageName": "English",
+      "weight": 1
+    },
+    "pt": {
+      "languageName": "Português",
+      "weight": 2,
+      "params": {
+        "description": "Um blog para compartilhar meus interesses em programação, estatística e mais",
+        "htmlLang": "pt-BR"
+      }
+    }
+  },
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    }
+  },
+  "menu": {
+    "main": [
+      {
+        "identifier": "resume-download",
+        "name": "Resumé",
+        "weight": 9999
+      }
+    ]
+  },
+  "params": {
+    "description": "A blog to share my interests (mostly programming)",
+    "email": "phelipe_teles@hotmail.com",
+    "github": "https://github.com/phelipetls",
+    "linkedin": "https://linkedin.com/in/phelipeteles"
+  },
+  "taxonomies": {
+    "tag": "tags"
+  }
+}

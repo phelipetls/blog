@@ -1,7 +1,6 @@
 {{ define "main" }}
   <article>
-    {{ $emailMd5 := md5 .Site.Params.email }}
-    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" $emailMd5 }}
+    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
 
     <div class="sm:float-left sm:mr-4 mb-4 sm:mb-0">
       <img

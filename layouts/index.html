@@ -1,7 +1,6 @@
 {{ define "main" }}
   <article>
-    {{ $email := "phelipe_teles@hotmail.com" }}
-    {{ $emailMd5 := md5 $email }}
+    {{ $emailMd5 := md5 .Site.Params.email }}
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" $emailMd5 }}
 
     <img

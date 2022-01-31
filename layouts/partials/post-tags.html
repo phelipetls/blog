@@ -1,9 +1,8 @@
 {{ with (.GetTerms "tags") }}
   {{ range . }}
-    <a
-      class="no-underline rounded px-2 bg-background-code border border-divider hover:bg-highlight hover:text-background"
-      href="{{ .RelPermalink }}"
-    >
+    <a href="{{ .RelPermalink }}"class="inline-flex items-center gap-1 no-underline rounded px-3 border border-divider hover:bg-highlight hover:text-background">
+      {{ partial "svgs/tag.svg" (dict "width" 16 "height" 16 "style" "display: inline;") }}
+
       {{- .Title -}}
     </a>
   {{ end }}

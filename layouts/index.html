@@ -3,13 +3,29 @@
     {{ $emailMd5 := md5 .Site.Params.email }}
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" $emailMd5 }}
 
-    <img
-      alt="{{ i18n "GravatarAltText" }}"
-      width="200"
-      height="200"
-      class="rounded-full sm:float-left sm:mr-4 border-4 border-divider"
-      src="{{ $gravatarUrl }}"
-    ></img>
+    <div class="sm:float-left sm:mr-4 mb-4 sm:mb-0">
+      <img
+        alt="{{ i18n "GravatarAltText" }}"
+        width="200"
+        height="200"
+        class="rounded-full border-4 border-divider"
+        src="{{ $gravatarUrl }}"
+      ></img>
+
+      <div class="mt-4 flex gap-2 justify-center align-end">
+        <a class="border-0" href="{{ .Site.Params.email }}">
+          {{ partial "svgs/mail.svg" }}
+        </a>
+
+        <a class="border-0" href="{{ .Site.Params.linkedin }}">
+          {{ partial "svgs/linkedin.svg" }}
+        </a>
+
+        <a class="border-0" href="{{ .Site.Params.github }}">
+          {{ partial "svgs/github.svg" }}
+        </a>
+      </div>
+    </div>
 
     {{ .Content }}
   </article>

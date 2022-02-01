@@ -11,10 +11,10 @@
   {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
 {{ end }}
 
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" as="style" />
 <link rel="stylesheet" href="{{ $fontsCss.RelPermalink }}" rel="preload" as="font" />
-<link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
-<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
+<link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" as="style" />
+<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled as="style" />
 
 <title>
   {{ .Title }} | {{ .Site.Title }}

@@ -5,10 +5,10 @@
 {{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
-{{ if not .Site.IsServer }}
-  {{ $css := $css | minify | resources.PostProcess }}
-  {{ $syntaxHighlight := $syntaxHighlight | minify }}
-  {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
+{{ if (not .Site.IsServer) }}
+  {{ $css = $css | minify | resources.PostProcess }}
+  {{ $syntaxHighlight = $syntaxHighlight | minify }}
+  {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
 
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />

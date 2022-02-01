@@ -1,7 +1,6 @@
 {{ partial "meta.html" . }}
 
 {{ $css := resources.Get "css/main.css" | postCSS }}
-{{ $fontsCss := resources.Get "css/fonts.css" }}
 {{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
@@ -12,7 +11,8 @@
 {{ end }}
 
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-<link rel="stylesheet" href="{{ $fontsCss.RelPermalink }}" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Merriweather" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather" />
 <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
 <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 

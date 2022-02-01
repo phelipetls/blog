@@ -1,18 +1,22 @@
 {{ partial "meta.html" . }}
 
 {{ $css := resources.Get "css/main.css" | postCSS }}
+{{ $fontsCss := resources.Get "css/fonts.css" | postCSS }}
 {{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
 {{ if .Site.IsServer }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}"/>
+  <link rel="stylesheet" href="{{ $fontsCss.RelPermalink }}" rel="preload" as="font" />
   <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 {{ else }}
   {{ $css := $css | minify | resources.PostProcess }}
+  {{ $fontsCss := $css | minify | resources.PostProcess }}
   {{ $syntaxHighlight := $syntaxHighlight | minify }}
   {{ $darkSyntaxHighlight := $darkSyntaxHighlight | minify }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $fontsCss.RelPermalink }}" rel="preload" as="font" />
   <link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
   <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
 {{end}}

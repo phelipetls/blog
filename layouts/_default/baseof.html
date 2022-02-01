@@ -34,15 +34,12 @@
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
-    {{ $resumeDownloadScript := resources.Get "js/resume-download.js" }}
 
     {{ if (not .Site.IsServer) }}
       {{ $toggleThemeScript := $toggleThemeScript | minify }}
-      {{ $resumeDownloadScript := $resumeDownloadScript | minify }}
     {{ end }}
 
     <script src="{{ $toggleThemeScript.Permalink }}"></script>
-    <script src="{{ $resumeDownloadScript.Permalink }}"></script>
 
     {{ block "scripts" . }}
     {{ end }}

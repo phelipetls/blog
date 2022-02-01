@@ -36,3 +36,9 @@ other = 'Next post'
 
 [Contacts]
 other = 'Contacts'
+
+[Moon]
+other = 'Moon'
+
+[Sun]
+other = 'Sun'

@@ -1,3 +1,11 @@
 <footer class="mt-16 text-center text-sm">
+  {{- if .IsTranslated -}}
+    {{- range .Translations -}}
+      <a class="inline-block mb-1" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
+        {{ i18n .Lang }}
+      </a>
+    {{ end }}
+  {{ end }}
+
   <div>{{ i18n "License" | safeHTML }}</div>
 </footer>

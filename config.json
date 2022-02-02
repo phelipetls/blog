@@ -33,7 +33,7 @@
   "menu": {
     "main": [
       {
-        "name": "Resumé",
+        "name": "Resume",
         "url": "/resume/phelipe-teles-resume.pdf",
         "weight": 9999
       }

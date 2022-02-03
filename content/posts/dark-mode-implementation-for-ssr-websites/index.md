@@ -3,6 +3,8 @@ layout: "post"
 title: "Implementing dark mode for SSR websites"
 date: 2021-04-29
 tags: ["hugo", "html", "css", "javascript"]
+summary: |
+  From the basic to the hacky stuff you should do to deliver the best experience.
 ---
 
 Implementing dark mode in a server side rendered website is not as simple as you

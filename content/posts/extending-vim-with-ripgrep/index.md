@@ -2,6 +2,8 @@
 title: "Extending Vim with ripgrep"
 date: 2021-06-11
 tags: ["tools", "vim", "ripgrep"]
+summary: |
+  Take full advantage of Vim's shel integration and the quick fix list.
 ---
 
 In this post I want to talk about how I use `ripgrep` in `vim` (`nvim` to me

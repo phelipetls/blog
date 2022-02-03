@@ -3,6 +3,9 @@ layout: post
 title: "My experience testing React applications"
 date: 2021-04-28
 tags: ["react", "javascript"]
+summary: |
+  Thoughts about writing integration tests for React apps, from
+  react-testing-library to Cypress.
 ---
 
 Testing is not easy, it's a trade-off: either you slow down new feature

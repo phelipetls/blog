@@ -2,6 +2,7 @@
 title: "Node.js one-liner to read JSON files"
 date: 2022-01-26
 tags: ["javascript"]
+summary: How to use Node instead of jq for trivial property accessors
 ---
 
 Imagine we have the following JSON file and we want to use the highlighted

@@ -39,3 +39,6 @@ other = 'Moon'
 
 [Sun]
 other = 'Sun'
+
+[Subscribe]
+other = 'Subscribe'

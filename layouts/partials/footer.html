@@ -1,7 +1,17 @@
 <footer class="mt-16 text-right text-sm">
+  <div>
+    <a href="{{ .Site.Params.tinyletter }}">
+      {{ i18n "Subscribe" }}
+    </a>
+    ·
+    {{ with .OutputFormats.Get "rss" -}}
+      <a href="{{ .Permalink }}">RSS</a>
+    {{ end -}}
+  </div>
+
   {{- if .IsTranslated -}}
     {{- range .Translations -}}
-      <a class="inline-block mb-1" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
+      <a class="inline-block" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
         {{ i18n .Lang }}
       </a>
     {{ end }}

@@ -12,12 +12,16 @@ jobs:
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.75.0'
+
       - run: npm ci
+
       - run: hugo
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

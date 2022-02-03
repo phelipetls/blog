@@ -1,7 +1,6 @@
 {{ define "main" }}
   <section class="grid-cols-2">
-    {{ $gravatarSize := 384 }}
-    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=%d" (md5 .Site.Params.email) $gravatarSize }}
+    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
     <aside class="sm:float-left sm:mr-4 mb-4 sm:mb-0">
       <div class="relative mx-auto" style="width: 200px; height: 200px;">

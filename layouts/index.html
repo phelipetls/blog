@@ -40,12 +40,10 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $gravatarSize := 200 }}
-
   {{ $gravatarBlurhash := (resources.Get "blurhash-gravatar.txt").Content }}
 
   {{ $blurhashScriptTemplate := resources.Get "js/blurhash.js" }}
-  {{ $blurhashScript := $blurhashScriptTemplate | resources.ExecuteAsTemplate "blurhash.js" (dict "Blurhash" $gravatarBlurhash "Size" $gravatarSize) }}
+  {{ $blurhashScript := $blurhashScriptTemplate | resources.ExecuteAsTemplate "blurhash.js" (dict "Blurhash" $gravatarBlurhash) }}
   {{ $blurhashScriptBuilt := $blurhashScript | js.Build "blurhash.js" | minify }}
 
   <script>{{ $blurhashScriptBuilt.Content | safeJS }}</script>

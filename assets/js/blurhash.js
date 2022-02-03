@@ -1,7 +1,7 @@
 import { decode } from "blurhash";
 
-const width = Number("{{ .Size }}");
-const height = Number("{{ .Size }}");
+const width = 200;
+const height = 200;
 
 const pixels = decode("{{ .Blurhash }}", width, height);
 

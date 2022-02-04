@@ -1,5 +1,5 @@
 <footer class="mt-16 text-right text-sm">
-  <div>
+  <div class="mb-2">
     <a href="{{ .Site.Params.tinyletter }}">
       {{ i18n "Subscribe" }}
     </a>
@@ -11,7 +11,7 @@
 
   {{- if .IsTranslated -}}
     {{- range .Translations -}}
-      <a class="inline-block" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
+      <a class="inline-block mb-2" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
         {{ i18n .Lang }}
       </a>
     {{ end }}

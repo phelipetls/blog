@@ -5,7 +5,7 @@
     </a>
     {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
       ·
-      <a href="{{ .Permalink }}">RSS</a>
+      <a href="{{ .Permalink }}">RSS</a> {{ partial "svgs/rss.svg" (dict "width" 16 "height" 16) }}
     {{ end -}}
   </div>
 

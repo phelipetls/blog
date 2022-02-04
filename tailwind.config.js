@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    content: ['./hugo_stats.json'],
+    content: ['./hugo_stats.json', './assets/css/main.css'],
     enabled: process.env.HUGO_ENVIRONMENT === 'production'
   },
   darkMode: false, // or 'media' or 'class'

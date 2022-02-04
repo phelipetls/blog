@@ -9,6 +9,7 @@
           class="absolute w-full h-full inset-0 rounded-full border-4 border-divider"
           width="200"
           height="200"
+          data-blurhash="{{ (resources.Get "blurhash-gravatar.txt").Content }}"
         ></canvas>
 
         <div class="relative h-full">
@@ -39,10 +40,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $gravatarBlurhash := (resources.Get "blurhash-gravatar.txt").Content }}
-
-  {{ $blurhashScriptTemplate := resources.Get "js/blurhash.js" }}
-  {{ $blurhashScript := $blurhashScriptTemplate | resources.ExecuteAsTemplate "blurhash.js" (dict "Blurhash" $gravatarBlurhash) }}
+  {{ $blurhashScript := resources.Get "js/blurhash.js" }}
   {{ $blurhashScriptBuilt := $blurhashScript | js.Build "blurhash.js" | minify }}
 
   <script>{{ $blurhashScriptBuilt.Content | safeJS }}</script>

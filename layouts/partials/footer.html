@@ -3,8 +3,8 @@
     <a href="{{ .Site.Params.tinyletter }}">
       {{ i18n "Subscribe" }}
     </a>
-    ·
     {{ with .OutputFormats.Get "rss" -}}
+      ·
       <a href="{{ .Permalink }}">RSS</a>
     {{ end -}}
   </div>

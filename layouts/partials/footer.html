@@ -3,7 +3,7 @@
     <a href="{{ .Site.Params.tinyletter }}">
       {{ i18n "Subscribe" }}
     </a>
-    {{ with .OutputFormats.Get "rss" -}}
+    {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
       ·
       <a href="{{ .Permalink }}">RSS</a>
     {{ end -}}

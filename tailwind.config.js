@@ -1,3 +1,6 @@
+/**
+ * @type {import('tailwindcss').Config}
+ */
 module.exports = {
   purge: {
     content: ['./hugo_stats.json', './assets/css/main.css'],

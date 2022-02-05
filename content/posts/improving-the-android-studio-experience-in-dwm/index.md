@@ -301,7 +301,7 @@ This create another problem though... When the leader window gets unfocused,
 their transient windows would always reamin on top of everything else!
 
 Thanks to [a comment by
-r/bakkeby](https://www.reddit.com/r/dwm/comments/sctdxt/comment/huaveje), I
+/u/bakkeby](https://www.reddit.com/r/dwm/comments/sctdxt/comment/huaveje), I
 found out that I could use
 [`XLowerWindow`](https://tronche.com/gui/x/xlib/window/XLowerWindow.html) in
 the `unfocus` function to fix this:

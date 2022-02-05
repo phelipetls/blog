@@ -6,9 +6,11 @@
       {{ .Date.Format "Jan 02, 2006" }}
     </time>
 
-    <div class="mt-4">
-      {{ partial "post-tags.html" . }}
-    </div>
+    {{ with (.GetTerms "tags") }}
+      <div class="mt-4">
+        {{ partial "post-tags.html" . }}
+      </div>
+    {{ end }}
 
     <hr class="my-8" />
 

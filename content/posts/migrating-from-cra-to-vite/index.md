@@ -2,7 +2,7 @@
 title: "Migrating from create-react-app to Vite"
 date: 2021-04-23
 tags: ["javascript", "typescript"]
-summary: How and why to migrate a CRA project to Vite
+summary: How and why to migrate a CRA project to Vite.
 ---
 
 I started to learn React with `create-react-app` like everyone else, and it

@@ -7,7 +7,13 @@
 
     {{ $css := resources.Get "css/email.css" }}
 
-    <style>{{ $css.Content | safeCSS }}</style>
+    <style>
+      {{ $css.Content | safeCSS }}
+
+      .post-metadata {
+        margin-bottom: 16px;
+      }
+    </style>
   </head>
 
   <body>
@@ -28,6 +34,16 @@
                     <tr>
                       <td>
                         <h1>{{ .Title }}</h1>
+
+                        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="post-metadata">
+                          <tbody>
+                            <tr>
+                              <td align="center">
+                                {{ .Date.Format "January 02, 2006" }} · {{ .ReadingTime }} min. read time
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
 
                         <p>{{ .Summary }}</p>
 

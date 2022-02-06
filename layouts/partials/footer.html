@@ -1,10 +1,6 @@
 <footer class="mt-16 text-right text-sm">
   <div class="mb-2">
-    <a href="{{ .Site.Params.subscribeLink }}">
-      {{ i18n "Subscribe" }}
-    </a>
     {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-      &nbsp;·&nbsp;
       <a href="{{ .Permalink }}">RSS</a> {{ partial "svgs/rss.svg" (dict "width" 16 "height" 16) }}
     {{ end -}}
   </div>

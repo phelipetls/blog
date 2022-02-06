@@ -42,5 +42,19 @@
   },
   "taxonomies": {
     "tag": "tags"
+  },
+  "outputFormats": {
+    "email": {
+      "name": "email",
+      "path": "email",
+      "mediaType": "text/html",
+      "isHTML": "true"
+    }
+  },
+  "outputs": {
+    "page": [
+      "html",
+      "email"
+    ]
   }
 }

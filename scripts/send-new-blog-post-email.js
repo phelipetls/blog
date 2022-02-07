@@ -81,6 +81,11 @@ const BUTTONDOWN_API_KEY = process.env.BUTTONDOWN_API_KEY;
     if (!response.ok) {
       const text = await response.text();
       console.error(`[${response.status}] Could not send email: \n${text}`);
+
+      if (response.status === 400 && text === 'You have already sent an email with an identical subject and body.') {
+        process.exit(0);
+      }
+
       process.exit(1);
     }
 

@@ -115,7 +115,6 @@ h1 {
   font-size: 35px;
   font-weight: 300;
   text-align: center;
-  text-transform: capitalize;
 }
 
 p,
@@ -170,7 +169,6 @@ a {
   margin: 0;
   padding: 16px 24px;
   text-decoration: none;
-  text-transform: capitalize;
 }
 
 .btn-primary table td {

@@ -24,9 +24,8 @@ jobs:
 
       - name: Send e-mail to subscribers about new blog post
         run: node ./scripts/send-new-blog-post-email.js
-        with:
-          env:
-            BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

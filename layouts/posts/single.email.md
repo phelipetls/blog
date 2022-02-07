@@ -4,4 +4,4 @@
 
 ---
 
-{{ .RawContent }}
+{{ .Content }}

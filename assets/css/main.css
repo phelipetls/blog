@@ -71,7 +71,7 @@ body[data-theme='dark'] {
     @apply p-4 border rounded overflow-x-auto border-divider;
   }
   :not(pre) > code {
-    @apply px-2 rounded bg-background-code;
+    @apply px-2 rounded bg-background-code text-normal-code;
   }
   pre code {
     @apply float-left min-w-full leading-normal;

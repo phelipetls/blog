@@ -13,13 +13,13 @@
 }
 
 body[data-theme='light'] {
-  --primary: var(--dark-grey);
-  --normal: var(--black);
+  --primary: #333333;
+  --normal: #333333;
   --normal-code: var(--normal);
-  --background: var(--white);
+  --background: #e9e3c1;
   --background-code: var(--light-white);
-  --highlight: var(--orange);
-  --divider: var(--beige);
+  --highlight: #b19cd9;
+  --divider: #cec9a7;
 }
 
 body[data-theme='dark'] {

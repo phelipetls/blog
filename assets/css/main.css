@@ -73,6 +73,9 @@ body[data-theme='dark'] {
   :not(pre) > code {
     @apply px-2 rounded bg-background-code text-normal-code;
   }
+  :not(pre) > a code {
+    @apply rounded-b-none;
+  }
   pre code {
     @apply float-left min-w-full leading-normal;
   }

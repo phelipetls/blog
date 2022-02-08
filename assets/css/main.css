@@ -23,13 +23,13 @@ body[data-theme='light'] {
 }
 
 body[data-theme='dark'] {
-  --primary: var(--dark-beige);
-  --normal: var(--grey);
-  --normal-code: var(--normal);
-  --background: var(--black);
-  --background-code: var(--light-black);
-  --highlight: var(--light-beige);
-  --divider: var(--light-black);
+  --primary: #e5e4c5;
+  --normal: #e5e4c5;
+  --background: #333333;
+  --normal-code: #e5e4c5;
+  --background-code: #4a4a4a;
+  --highlight: #e25822;
+  --divider: #4a4a4a;
 }
 
 @tailwind base;

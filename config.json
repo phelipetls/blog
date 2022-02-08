@@ -6,6 +6,7 @@
   "pygmentsUseClasses": true,
   "summaryLength": 20,
   "title": "Phelipe Teles",
+  "enableGitInfo": true,
   "build": {
     "writeStats": true
   },

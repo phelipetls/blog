@@ -4,6 +4,18 @@
       <time datetime="{{ .Date.Format "2006-01-02" }}">
         {{ .Date.Format "Jan 02, 2006" }}
       </time>
+
+      {{ if (.Lastmod.After .Date) }}
+        <span>
+          &nbsp;·&nbsp;
+
+          Last modified at
+
+          <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
+            {{ .Lastmod.Format "Jan 02, 2006" }}
+          </time>
+        </span>
+      {{ end }}
     </div>
 
     <h1 class="text-4xl mb-4">

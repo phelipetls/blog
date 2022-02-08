@@ -41,3 +41,6 @@ other = 'Lua'
 
 [Sun]
 other = 'Sol'
+
+[Lastmod]
+other = 'Editado em {{ .Date }}'

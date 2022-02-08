@@ -41,4 +41,4 @@ other = 'Moon'
 other = 'Sun'
 
 [Lastmod]
-other = 'Last modified at {{ .Date }}'
+other = 'Last modified at {{ .Lastmod.Format "Jan 02, 2006" }}'

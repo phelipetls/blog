@@ -16,8 +16,7 @@
               {{ if eq .Lang "en" }}
                 {{ .Date.Format "Jan, 02" }}
               {{ else }}
-                {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }},
-                {{ .Date.Day }}
+                {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
               {{ end }}
             </time>
           </div>

@@ -15,11 +15,11 @@
 body[data-theme='light'] {
   --primary: #333333;
   --normal: #333333;
-  --normal-code: var(--normal);
-  --background: #e9e3c1;
-  --background-code: var(--light-white);
-  --highlight: #b19cd9;
-  --divider: #cec9a7;
+  --background: #e5e4c5;
+  --normal-code: #333333;
+  --background-code: #c0c09b;
+  --highlight: #e25822;
+  --divider: #c0c09b;
 }
 
 body[data-theme='dark'] {

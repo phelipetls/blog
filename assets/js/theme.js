@@ -1,13 +1,6 @@
 window.__setTheme = function(newTheme) {
   document.body.setAttribute("data-theme", newTheme);
   localStorage.setItem("__theme", newTheme);
-  const oldTheme = newTheme === "dark" ? "light" : "dark";
-  document
-    .querySelector("link[href*='" + oldTheme + "']")
-    .setAttribute("disabled", "");
-  document
-    .querySelector("link[href*='" + newTheme + "']")
-    .removeAttribute("disabled");
 };
 
 const storedTheme = localStorage.getItem("__theme");

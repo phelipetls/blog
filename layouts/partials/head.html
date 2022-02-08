@@ -8,18 +8,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather" />
 
 {{ $css := resources.Get "css/main.css" | postCSS }}
-{{ $syntaxHighlight := resources.Get "css/light-syntax-highlight.css" }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
 {{ if (not .Site.IsServer) }}
   {{ $css = $css | minify | resources.PostProcess }}
-  {{ $syntaxHighlight = $syntaxHighlight | minify }}
   {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
 
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
-<link rel="stylesheet" href="{{ $syntaxHighlight.RelPermalink }}" />
-<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" disabled />
+<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 
 <title>
   {{ .Title }} | {{ .Site.Title }}

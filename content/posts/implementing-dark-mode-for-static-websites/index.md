@@ -1,15 +1,16 @@
 ---
 layout: "post"
-title: "Implementing dark mode in static or SSR websites"
+title: "Implementing dark mode for static websites"
 date: 2021-04-29
 tags: ["hugo", "html", "css", "javascript"]
+aliases: ["/posts/dark-mode-implementation-for-ssr-websites"]
 summary: |
   From the basic to the hacky stuff you should do to deliver the best experience.
 ---
 
-Implementing dark mode in a static or server side rendered website is not as
-simple as you may initially think. There are some hacky things we should do to
-avoid flash of incorrect theme on reload, animation etc.
+Implementing dark mode for a static website is not as simple as you may
+initially think. There are some hacky things we should do to avoid flash of
+incorrect theme on reload, animation etc.
 
 In this blog post I'll dive into the implementation details on how to make it
 work in general and then on how to implement it in Hugo-powered websites.

@@ -42,3 +42,9 @@ other = 'Sol'
 
 [Lastmod]
 other = 'Editado em {{ .Lastmod.Format "02 de Agosto" }}'
+
+[Document]
+other = 'Documento'
+
+[ThemeIcon]
+other = 'Ícone do tema'

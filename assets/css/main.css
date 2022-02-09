@@ -1,21 +1,29 @@
+:root {
+  --beige: #e5e4c5;
+  --black: #333333;
+  --grey: #4a4a4a;
+  --orange: #e25822;
+  --dark-beige: #c0c09b;
+}
+
 body[data-theme='light'] {
-  --primary: #333333;
-  --normal: #333333;
-  --background: #e5e4c5;
-  --normal-code: #333333;
-  --background-code: #c0c09b;
-  --highlight: #e25822;
-  --divider: #c0c09b;
+  --primary: var(--black);
+  --normal: var(--black);
+  --background: var(--beige);
+  --normal-code: var(--black);
+  --background-code: var(--dark-beige);
+  --highlight: var(--orange);
+  --divider: var(--dark-beige);
 }
 
 body[data-theme='dark'] {
-  --primary: #e5e4c5;
-  --normal: #e5e4c5;
-  --background: #333333;
-  --normal-code: #e5e4c5;
-  --background-code: #4a4a4a;
-  --highlight: #e25822;
-  --divider: #4a4a4a;
+  --primary: var(--beige);
+  --normal: var(--beige);
+  --background: var(--black);
+  --normal-code: var(--beige);
+  --background-code: var(--grey);
+  --highlight: var(--orange);
+  --divider: var(--grey);
 }
 
 @tailwind base;

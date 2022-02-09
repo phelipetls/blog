@@ -9,9 +9,9 @@
 
 body[data-theme='light'] {
   --primary: var(--black);
-  --normal: var(--black);
+  --foreground: var(--black);
   --background: var(--beige);
-  --normal-code: var(--black);
+  --foreground-code: var(--black);
   --background-code: var(--darker-beige);
   --highlight: var(--orange);
   --divider: var(--darker-beige);
@@ -19,9 +19,9 @@ body[data-theme='light'] {
 
 body[data-theme='dark'] {
   --primary: var(--dark-beige);
-  --normal: var(--dark-beige);
+  --foreground: var(--dark-beige);
   --background: var(--black);
-  --normal-code: var(--beige);
+  --foreground-code: var(--beige);
   --background-code: var(--grey);
   --highlight: var(--orange);
   --divider: var(--grey);

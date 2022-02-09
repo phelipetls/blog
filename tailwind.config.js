@@ -19,14 +19,12 @@ module.exports = {
       primary: 'var(--primary)',
       highlight: 'var(--highlight)',
       divider: 'var(--divider)',
-      normal: {
-        DEFAULT: 'var(--normal)',
-        code: 'var(--normal-code)',
+      foreground: 'var(--foreground)',
+      background: 'var(--background)',
+      code: {
+        DEFAULT: 'var(--foreground-code)',
+        background: 'var(--background-code)',
       },
-      background: {
-        DEFAULT: 'var(--background)',
-        code: 'var(--background-code)',
-      }
     },
   },
   variants: {

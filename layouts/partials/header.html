@@ -32,7 +32,7 @@
     {{- range .Site.Menus.main -}}
       <a
         id="{{ .Identifier }}"
-        class="text-normal {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
+        class="text-foreground {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
         href="{{ .URL | absLangURL }}"
       >
         {{ i18n .Name | default .Name }}

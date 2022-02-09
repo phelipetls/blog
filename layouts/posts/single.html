@@ -9,9 +9,13 @@
         {{ end }}
       </time>
 
+      <br class="inline sm:hidden" />
+
       {{ if (.Lastmod.After .Date) }}
         <span>
-          &nbsp;·&nbsp;
+          <span class="hidden sm:inline">
+            &nbsp;·&nbsp;
+          </span>
 
           <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
             {{ i18n "Lastmod" . }}

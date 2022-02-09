@@ -31,6 +31,7 @@ body[data-theme='dark'] {
   }
   article img {
     background-color: white;
+    @apply rounded;
   }
   h1 {
     @apply text-2xl mb-2 font-bold text-primary;

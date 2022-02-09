@@ -78,7 +78,7 @@ body[data-theme='dark'] {
     @apply list-decimal ml-4;
   }
   blockquote {
-    @apply pl-8 border-l-2 border-divider;
+    @apply pl-8 border-l-4 border-highlight;
   }
   .preload {
     transition: none !important;

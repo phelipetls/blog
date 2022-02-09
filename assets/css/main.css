@@ -1,9 +1,10 @@
 :root {
-  --beige: #e5e4c5;
+  --beige: #f5f5dc;
+  --dark-beige: #e5e4c5;
+  --darker-beige: #d5d3a8;
   --black: #333333;
   --grey: #4a4a4a;
   --orange: #e25822;
-  --dark-beige: #c0c09b;
 }
 
 body[data-theme='light'] {
@@ -11,14 +12,14 @@ body[data-theme='light'] {
   --normal: var(--black);
   --background: var(--beige);
   --normal-code: var(--black);
-  --background-code: var(--dark-beige);
+  --background-code: var(--darker-beige);
   --highlight: var(--orange);
-  --divider: var(--dark-beige);
+  --divider: var(--darker-beige);
 }
 
 body[data-theme='dark'] {
-  --primary: var(--beige);
-  --normal: var(--beige);
+  --primary: var(--dark-beige);
+  --normal: var(--dark-beige);
   --background: var(--black);
   --normal-code: var(--beige);
   --background-code: var(--grey);

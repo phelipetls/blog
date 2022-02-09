@@ -1,7 +1,7 @@
 ---
 title: "Node.js one-liner to read JSON files"
 date: 2022-01-26
-tags: ["javascript"]
+tags: ["javascript", "node"]
 summary: How to use Node instead of jq for trivial property accessors.
 ---
 

@@ -29,10 +29,6 @@ body[data-theme='dark'] {
   img {
     @apply mx-auto max-w-full;
   }
-  article img {
-    background-color: white;
-    @apply rounded my-8;
-  }
   h1 {
     @apply text-2xl mb-2 font-bold text-primary;
   }

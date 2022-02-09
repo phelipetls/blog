@@ -1,0 +1,7 @@
+<img
+  src="{{ .Destination | safeURL }}"
+  alt="{{ .Text }}"
+  {{ with .Title}}title="{{ . }}"{{ end }}
+  class="rounded my-8"
+  style="background-color: white;"
+/>

@@ -5,6 +5,10 @@
   --black: #333333;
   --grey: #4a4a4a;
   --orange: #e25822;
+  --white: #ffffff;
+  --blue: #a3c6ff;
+  --dark-blue: #4f92ff;
+  --darker-blue: #4682b4;
 }
 
 body[data-theme='light'] {
@@ -15,6 +19,9 @@ body[data-theme='light'] {
   --background-code: var(--darker-beige);
   --highlight: var(--orange);
   --divider: var(--darker-beige);
+  --foreground-note: var(--black);
+  --background-note: var(--blue);
+  --border-note: var(--dark-blue);
 }
 
 body[data-theme='dark'] {
@@ -25,6 +32,9 @@ body[data-theme='dark'] {
   --background-code: var(--grey);
   --highlight: var(--orange);
   --divider: var(--grey);
+  --foreground-note: var(--white);
+  --background-note: var(--darker-blue);
+  --border-note: var(--dark-blue);
 }
 
 @tailwind base;
@@ -66,7 +76,7 @@ body[data-theme='dark'] {
     @apply p-4 rounded overflow-x-auto;
   }
   :not(pre) > code {
-    @apply px-2 rounded bg-background-code text-normal-code;
+    @apply px-2 rounded bg-code-background text-code;
   }
   :not(pre) > a code {
     @apply rounded-b-none;
@@ -93,11 +103,11 @@ body[data-theme='dark'] {
     transition: none !important;
   }
   kbd {
-    background-color: var(--background-code);
+    background-color: var(--code-background);
     border-radius: 3px;
     border: 1px solid var(--divider);
-    box-shadow: 1px 1px 1px var(--normal-code);
-    color: var(--normal-code);
+    box-shadow: 1px 1px 1px var(--foreground-code);
+    color: var(--foreground-code);
     display: inline-block;
     font-size: .85em;
     font-weight: 700;

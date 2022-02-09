@@ -9,8 +9,10 @@ summary: |
 ---
 
 Implementing dark mode for a static website is not as simple as you may
-initially think. There are some hacky things we should do to avoid flash of
-incorrect theme on reload, animation etc.
+initially think. There are some hacky things we should do to provide the best
+experience and avoid things like [flash of incorrect
+theme](https://css-tricks.com/flash-of-inaccurate-color-theme-fart/) on reload,
+handling transitions, persistence etc.
 
 In this blog post I'll dive into the implementation details on how to make it
 work in general and then on how to implement it in Hugo-powered websites.

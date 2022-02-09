@@ -72,10 +72,10 @@ body[data-theme='dark'] {
     @apply mb-4;
   }
   ul {
-    @apply list-disc;
+    @apply list-disc ml-4;
   }
   ol {
-    @apply list-decimal;
+    @apply list-decimal ml-4;
   }
   blockquote {
     @apply pl-8 border-l-2 border-divider;

@@ -104,7 +104,9 @@ body[data-theme='dark'] {
     @apply float-left min-w-full leading-normal;
   }
   .chroma .hl {
-    @apply px-4 -mx-4 w-auto border-l-4 border-highlight !important;
+    /* unmaintainable hack to fix offset due to 4px border */
+    padding-left: calc(1rem - 4px);
+    @apply pr-4 -mx-4 w-auto border-l-4 border-highlight !important;
   }
   .highlight {
     @apply mb-4;

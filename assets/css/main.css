@@ -124,18 +124,9 @@ body[data-theme='dark'] {
     transition: none !important;
   }
   kbd {
-    background-color: var(--code-background);
-    border-radius: 3px;
-    border: 1px solid var(--divider);
-    box-shadow: 1px 1px 1px var(--foreground-code);
-    color: var(--foreground-code);
-    display: inline-block;
-    font-size: .85em;
-    font-weight: 700;
-    line-height: 1;
     padding: 2px 4px;
-    white-space: nowrap;
-    vertical-align: text-bottom;
+    box-shadow: 1px 1px 1px var(--foreground-code);
+    @apply inline-block rounded text-xs font-bold whitespace-nowrap align-text-bottom leading-none text-foreground border border-divider;
   }
   img#gravatar:-moz-loading {
     visibility: hidden;

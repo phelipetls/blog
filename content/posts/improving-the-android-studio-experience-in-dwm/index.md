@@ -334,9 +334,11 @@ unfocus(Client *c, int setfocus)
 }
 ```
 
-**Warning**: this is pretty cutting-edge and coming from a person with
+{{< warn >}}
+This is pretty cutting-edge and coming from a person with
 no expertise in C, so it might be broken in several ways. I'm just messing
 around.
+{{< /warn >}}
 
 # Final result
 

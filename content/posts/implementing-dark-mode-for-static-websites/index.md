@@ -137,8 +137,10 @@ button.addEventListener("click", function() {
 });
 ```
 
-**NOTE:** The script tag _has_ to be inline, otherwise the flash will still
+{{< note >}}
+The script tag _has_ to be inline, otherwise the flash will still
 happen.
+{{< /note >}}
 
 # Transition between themes
 

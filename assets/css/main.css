@@ -13,12 +13,16 @@
 
 body[data-theme='light'] {
   --primary: var(--black);
+
   --foreground: var(--black);
   --background: var(--beige);
+
   --foreground-code: var(--black);
   --background-code: var(--darker-beige);
+
   --highlight: var(--orange);
   --divider: var(--darker-beige);
+
   --foreground-note: var(--black);
   --background-note: var(--blue);
   --border-note: var(--dark-blue);
@@ -26,12 +30,16 @@ body[data-theme='light'] {
 
 body[data-theme='dark'] {
   --primary: var(--dark-beige);
+
   --foreground: var(--dark-beige);
   --background: var(--black);
+
   --foreground-code: var(--beige);
   --background-code: var(--grey);
+
   --highlight: var(--orange);
   --divider: var(--grey);
+
   --foreground-note: var(--white);
   --background-note: var(--darker-blue);
   --border-note: var(--dark-blue);

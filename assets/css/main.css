@@ -9,9 +9,9 @@
   --blue: #a3c6ff;
   --dark-blue: #4f92ff;
   --darker-blue: #4682b4;
-  --red: #e4615b;
-  --dark-red: #cc3336;
-  --darker-red: #cf142b;
+  --red: #f7394f;
+  --dark-red: #dc143c;
+  --darker-red: #c2002a;
 }
 
 body[data-theme='light'] {

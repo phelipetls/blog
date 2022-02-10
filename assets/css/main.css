@@ -92,7 +92,7 @@ body[data-theme='dark'] {
     font-family: "Consolas", "Fira Mono", monospace;
   }
   pre {
-    @apply p-4 rounded overflow-x-auto;
+    @apply py-4 px-8 rounded overflow-x-auto;
   }
   :not(pre) > code {
     @apply px-2 rounded bg-code-background text-code;
@@ -105,8 +105,8 @@ body[data-theme='dark'] {
   }
   .chroma .hl {
     /* unmaintainable hack to fix offset due to 4px border */
-    padding-left: calc(1rem - 4px);
-    @apply pr-4 -mx-4 w-auto border-l-4 border-highlight !important;
+    padding-left: calc(2rem - 4px);
+    @apply pr-8 -mx-8 w-auto border-l-4 border-highlight !important;
   }
   .highlight {
     @apply mb-4;

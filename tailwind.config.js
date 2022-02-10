@@ -29,6 +29,11 @@ module.exports = {
         DEFAULT: 'var(--foreground-note)',
         background: 'var(--background-note)',
         border: 'var(--border-note)',
+      },
+      warn: {
+        DEFAULT: 'var(--foreground-warn)',
+        background: 'var(--background-warn)',
+        border: 'var(--border-warn)',
       }
     },
   },

@@ -9,6 +9,9 @@
   --blue: #a3c6ff;
   --dark-blue: #4f92ff;
   --darker-blue: #4682b4;
+  --red: #e4615b;
+  --dark-red: #cc3336;
+  --darker-red: #cf142b;
 }
 
 body[data-theme='light'] {
@@ -26,6 +29,10 @@ body[data-theme='light'] {
   --foreground-note: var(--black);
   --background-note: var(--blue);
   --border-note: var(--dark-blue);
+
+  --foreground-warn: var(--white);
+  --background-warn: var(--red);
+  --border-warn: var(--dark-red);
 }
 
 body[data-theme='dark'] {
@@ -43,6 +50,10 @@ body[data-theme='dark'] {
   --foreground-note: var(--white);
   --background-note: var(--darker-blue);
   --border-note: var(--dark-blue);
+
+  --foreground-warn: var(--white);
+  --background-warn: var(--dark-red);
+  --border-warn: var(--darker-red);
 }
 
 @tailwind base;

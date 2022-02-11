@@ -1,10 +1,30 @@
-<nav class="mb-16" aria-label="{{ i18n "MainNavigation" }}">
-  <div class="flex justify-between mb-4 top-0">
-    <h1 class="text-3xl mb-0">
-      <a class="border-0" href="{{ .Site.Home.Permalink }}">
-        {{ .Site.Title }}
-      </a>
-    </h1>
+<div class="sticky top-0 py-4 border-b-2 border-divider">
+  <div class="flex justify-between mx-auto max-w-prose px-4">
+    <div class="flex items-center gap-4">
+      <header class="hidden sm:block">
+        <h1 class="text-xl mt-0 mb-0">
+          <a class="border-0" href="{{ .Site.Home.Permalink }}">
+            {{ .Site.Title }}
+          </a>
+        </h1>
+      </header>
+
+      <nav class="" aria-label="{{ i18n "MainNavigation" }}">
+        {{ $currentPage := . }}
+
+        <div class="flex flex-row flex-wrap gap-2">
+          {{- range .Site.Menus.main -}}
+            <a
+              id="{{ .Identifier }}"
+              class="text-foreground {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
+              href="{{ .URL | absLangURL }}"
+            >
+              {{ i18n .Name | default .Name }}
+            </a>
+          {{- end -}}
+        </div>
+      </nav>
+    </div>
 
     <button
       id="theme-button"
@@ -23,18 +43,4 @@
       </svg>
     </button>
   </div>
-
-  {{ $currentPage := . }}
-
-  <div class="flex flex-row flex-wrap gap-2">
-    {{- range .Site.Menus.main -}}
-      <a
-        id="{{ .Identifier }}"
-        class="text-foreground {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
-        href="{{ .URL | absLangURL }}"
-      >
-        {{ i18n .Name | default .Name }}
-      </a>
-    {{- end -}}
-  </div>
-</nav>
+</div>

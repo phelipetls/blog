@@ -10,7 +10,7 @@
     {{ end }}
   </head>
 
-  <body class="px-4 py-8 preload text-foreground bg-background flex flex-col container max-w-prose min-h-full mx-auto transition transition-colors duration-75 ease-out">
+  <body class="preload h-full text-foreground bg-background transition transition-colors duration-75 ease-out">
     {{ $themeScript := resources.Get "js/theme.js" }}
 
     {{ if (not .Site.IsServer) }}
@@ -19,15 +19,19 @@
 
     <script>{{ $themeScript.Content | safeJS }}</script>
 
-    {{ partial "nav.html" . }}
+    <div class="flex flex-col h-full overflow-auto">
+      {{ partial "nav.html" . }}
 
-    <main class="flex flex-1 flex-col">
-      {{ block "main" . }}
-        {{ .Content }}
-      {{ end }}
-    </main>
+      <div class="mt-8 py-8 px-4 flex-1 max-w-prose mx-auto flex flex-col container mx-auto">
+        <main class="flex flex-1 flex-col">
+          {{ block "main" . }}
+            {{ .Content }}
+          {{ end }}
+        </main>
 
-    {{ partial "footer.html" . }}
+        {{ partial "footer.html" . }}
+      </div>
+    </div>
 
     {{ range (.Resources.Match "*.js") }}
       <script src="{{ .RelPermalink }}"></script>

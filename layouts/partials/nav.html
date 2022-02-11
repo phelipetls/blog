@@ -1,5 +1,5 @@
-<header class="mb-16">
-  <div class="flex justify-between mb-4">
+<nav class="mb-16" aria-label="{{ i18n "MainNavigation" }}">
+  <div class="flex justify-between mb-4 top-0">
     <h1 class="text-3xl mb-0">
       <a class="border-0" href="{{ .Site.Home.Permalink }}">
         {{ .Site.Title }}
@@ -26,7 +26,7 @@
 
   {{ $currentPage := . }}
 
-  <nav class="flex flex-row flex-wrap gap-2" aria-label="{{ i18n "MainNavigation" }}">
+  <div class="flex flex-row flex-wrap gap-2">
     {{- range .Site.Menus.main -}}
       <a
         id="{{ .Identifier }}"
@@ -36,5 +36,5 @@
         {{ i18n .Name | default .Name }}
       </a>
     {{- end -}}
-  </nav>
-</header>
+  </div>
+</nav>

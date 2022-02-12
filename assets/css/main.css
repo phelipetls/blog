@@ -143,4 +143,7 @@ body[data-theme='dark'] {
     margin: -35px;
     z-index: -1;
   }
+  .nav-container.stuck {
+    @apply border-b border-divider;
+  }
 }

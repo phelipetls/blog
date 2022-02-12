@@ -144,10 +144,17 @@ body[data-theme='dark'] {
     z-index: -1;
   }
   .nav-container {
-    transition: border-color 0.2s ease-in;
+    will-change: transform;
+    transition: transform 200ms linear, border-color 0.2s ease-in;
     @apply border-b border-background;
   }
   .nav-container.stuck {
     @apply border-b border-divider;
+  }
+  .nav-container[data-is-scrolling="down"] {
+    transform: translateY(-100%);
+  }
+  .nav-container[data-is-scrolling="up"] {
+    transform: translateY(0%);
   }
 }

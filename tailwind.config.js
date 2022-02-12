@@ -20,6 +20,9 @@ module.exports = {
     extend: {
       maxWidth: {
         '1/2': '50%'
+      },
+      zIndex: {
+        '-1': '-1',
       }
     },
     colors: {

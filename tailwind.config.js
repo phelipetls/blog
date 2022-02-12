@@ -1,3 +1,12 @@
+function withOpacityValue(variable) {
+  return ({ opacityValue }) => {
+    if (opacityValue === undefined) {
+      return `rgb(var(${variable}))`
+    }
+    return `rgb(var(${variable}), ${opacityValue})`
+  }
+}
+
 /**
  * @type {import('tailwindcss').Config}
  */
@@ -16,24 +25,24 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: 'var(--primary)',
-      highlight: 'var(--highlight)',
-      divider: 'var(--divider)',
-      foreground: 'var(--foreground)',
-      background: 'var(--background)',
+      primary: withOpacityValue('--primary'),
+      highlight: withOpacityValue('--highlight'),
+      divider: withOpacityValue('--divider'),
+      foreground: withOpacityValue('--foreground'),
+      background: withOpacityValue('--background'),
       code: {
-        DEFAULT: 'var(--foreground-code)',
-        background: 'var(--background-code)',
+        DEFAULT: withOpacityValue('--foreground-code'),
+        background: withOpacityValue('--background-code'),
       },
       note: {
-        DEFAULT: 'var(--foreground-note)',
-        background: 'var(--background-note)',
-        border: 'var(--border-note)',
+        DEFAULT: withOpacityValue('--foreground-note'),
+        background: withOpacityValue('--background-note'),
+        border: withOpacityValue('--border-note'),
       },
       warn: {
-        DEFAULT: 'var(--foreground-warn)',
-        background: 'var(--background-warn)',
-        border: 'var(--border-warn)',
+        DEFAULT: withOpacityValue('--foreground-warn'),
+        background: withOpacityValue('--background-warn'),
+        border: withOpacityValue('--border-warn'),
       }
     },
   },

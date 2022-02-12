@@ -1,17 +1,17 @@
 :root {
-  --beige: #f5f5dc;
-  --dark-beige: #e5e4c5;
-  --darker-beige: #d5d3a8;
-  --black: #333333;
-  --grey: #4a4a4a;
-  --orange: #e25822;
-  --white: #ffffff;
-  --blue: #a3c6ff;
-  --dark-blue: #4f92ff;
-  --darker-blue: #4682b4;
-  --red: #f7394f;
-  --dark-red: #dc143c;
-  --darker-red: #c2002a;
+  --beige: 245, 245, 220;
+  --dark-beige: 229, 228, 197;
+  --darker-beige: 213, 211, 168;
+  --black: 51, 51, 51;
+  --grey: 74, 74, 74;
+  --orange: 226, 88, 34;
+  --white: 255, 255, 255;
+  --blue: 163, 198, 255;
+  --dark-blue: 79, 146, 255;
+  --darker-blue: 70, 130, 180;
+  --red: 247, 57, 79;
+  --dark-red: 220, 20, 60;
+  --darker-red: 194, 0, 42;
 }
 
 body[data-theme='light'] {

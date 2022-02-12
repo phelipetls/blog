@@ -21,7 +21,7 @@ To run pytest in Vim I then put this line in a `:h compiler` plugin (see
 `:h write-compiler-plugin`):
 
 ```vim
-    CompilerSet makeprg=pytest\ --tb=short\ -vv\ $*\ %
+CompilerSet makeprg=pytest\ --tb=short\ -vv\ $*\ %
 ```
 
 So that I can run `pytest` with `:make` or even with more arguments with

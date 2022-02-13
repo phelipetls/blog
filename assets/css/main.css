@@ -1,6 +1,7 @@
 :root {
   --default-font-family: 'Fira Sans', sans-serif;
   --heading-font-family: 'Merriweather', serif;
+  --code-font-family: 'Consolas', 'Fira Code', monospace;
   --beige: 245, 245, 220;
   --dark-beige: 229, 228, 197;
   --darker-beige: 213, 211, 168;
@@ -72,6 +73,9 @@ body[data-theme='dark'] {
     font-family: var(--heading-font-family);
     @apply mb-2 font-bold text-primary;
   }
+  code {
+    font-family: var(--code-font-family);
+  }
   h1 {
     @apply text-2xl;
   }
@@ -95,9 +99,6 @@ body[data-theme='dark'] {
   }
   hr {
     @apply my-4 border-divider;
-  }
-  code {
-    font-family: 'Consolas', 'Fira Mono', monospace;
   }
   pre {
     @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-code-background;

@@ -23,18 +23,10 @@
           ></img>
         </div>
       </div>
-
-      <nav class="flex sm:hidden gap-2 mt-4 justify-center align-end" aria-label="{{ i18n "Contacts" }}">
-        {{ partial "contact.html" . }}
-      </nav>
     </aside>
 
     <article>
       {{ .Content }}
-
-      <section class="hidden sm:flex gap-2 justify-end">
-        {{ partial "contact.html" . }}
-      </section>
     </article>
   </section>
 {{ end }}

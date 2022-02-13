@@ -1,10 +1,10 @@
-const navContainer = document.querySelector(".nav-container");
+const navContainer = document.querySelector('.nav-container')
 
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-let lastScrollDirection = 0;
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop
+let lastScrollDirection = 0
 
 function handleScroll() {
-  const newScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const newScrollTop = window.pageYOffset || document.documentElement.scrollTop
 
   const scrollDirection = Math.sign(newScrollTop - lastScrollTop)
 
@@ -23,9 +23,9 @@ window.addEventListener('scroll', handleScroll)
 
 const observer = new IntersectionObserver(
   function ([e]) {
-    e.target.classList.toggle("stuck", e.intersectionRatio < 1);
+    e.target.classList.toggle('stuck', e.intersectionRatio < 1)
   },
-  { rootMargin: "-1px 0px 0px 0px", threshold: [1] }
-);
+  { rootMargin: '-1px 0px 0px 0px', threshold: [1] }
+)
 
-observer.observe(navContainer);
+observer.observe(navContainer)

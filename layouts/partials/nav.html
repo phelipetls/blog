@@ -16,22 +16,7 @@
       </div>
     </nav>
 
-    <button
-      id="theme-button"
-      class="rounded-full text-primary p-1"
-      aria-label="{{ i18n "ThemeButton" }}"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <title>{{ i18n "ThemeIcon" }}</title>
-
-        <defs>
-          {{ partial "svgs/moon.svg" }}
-          {{ partial "svgs/sun.svg" }}
-        </defs>
-
-        <use id="theme-button-svg-icon" href="#sun" />
-      </svg>
-    </button>
+    {{ partial "theme-button.html" }}
   </div>
 </div>
 

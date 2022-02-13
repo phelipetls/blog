@@ -45,14 +45,6 @@
 
     <script src="{{ $toggleThemeScript.Permalink }}"></script>
 
-    {{ if (not .Site.IsServer) }}
-      <script async src="https://cdn.panelbear.com/analytics.js?site=I8KFO1BpnCi"></script>
-      <script>
-          window.panelbear = window.panelbear || function() { (window.panelbear.q = window.panelbear.q || []).push(arguments); };
-          panelbear('config', { site: 'I8KFO1BpnCi' });
-      </script>
-    {{ end }}
-
     {{ block "scripts" . }}
     {{ end }}
   </body>

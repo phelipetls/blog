@@ -38,7 +38,7 @@
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
-    {{ $navScript := resources.Get "js/nav.js" }}
+    {{ $navScript := resources.Get "js/nav.js" | js.Build }}
 
     {{ if (not .Site.IsServer) }}
       {{ $toggleThemeScript := $toggleThemeScript | minify }}

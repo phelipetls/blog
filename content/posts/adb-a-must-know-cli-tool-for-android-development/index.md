@@ -87,7 +87,7 @@ mobile device will have access to the server running on your computer.
 
 An example from React Native is the Metro bundler, that usually serves the
 bundled JS of your app at port `8081`, so we need to run `adb reverse tcp:8081
-tcp:8081` to make the server reachable by the Android device. This is usually
+tcp:8081` to make the server available at your mobile device. This is usually
 done under the hood when we run `npx react-native run-android`, but if the
 device can't find the JS bundle or is stuck loading it we usually need to run
 it again.

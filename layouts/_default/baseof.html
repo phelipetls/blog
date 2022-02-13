@@ -38,12 +38,15 @@
     {{ end }}
 
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
+    {{ $navScript := resources.Get "js/nav.js" }}
 
     {{ if (not .Site.IsServer) }}
       {{ $toggleThemeScript := $toggleThemeScript | minify }}
+      {{ $navScript := $navScript | minify }}
     {{ end }}
 
     <script src="{{ $toggleThemeScript.Permalink }}"></script>
+    <script src="{{ $navScript.Permalink }}"></script>
 
     {{ block "scripts" . }}
     {{ end }}

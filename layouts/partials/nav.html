@@ -19,13 +19,3 @@
     {{ partial "theme-button.html" }}
   </div>
 </div>
-
-{{ define "scripts" }}
-  {{ $navScript := resources.Get "js/nav.js" }}
-
-  {{ if (not .Site.IsServer) }}
-    {{ $navScript := $navScript | minify }}
-  {{ end }}
-
-  <script src="{{ $navScript.Permalink }}"></script>
-{{ end }}

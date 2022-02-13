@@ -104,10 +104,10 @@ body[data-theme='dark'] {
     @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-code-background;
   }
   :not(pre) > code {
-    @apply px-2 rounded bg-code-background text-code;
+    @apply px-1 text-code font-bold;
   }
-  :not(pre) > a code {
-    @apply rounded-b-none;
+  :not(pre) > code::before, :not(pre) > code::after {
+    content: '\`';
   }
   pre code {
     @apply float-left min-w-full leading-normal;

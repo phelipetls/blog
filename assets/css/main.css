@@ -135,7 +135,7 @@ body[data-theme='dark'] {
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px var(--foreground-code);
-    @apply inline-block rounded text-xs font-bold whitespace-nowrap align-text-bottom leading-none text-foreground border border-divider;
+    @apply inline-block rounded font-bold whitespace-nowrap align-text-bottom leading-none text-foreground border border-divider;
   }
   img#gravatar:-moz-loading {
     visibility: hidden;

@@ -38,30 +38,6 @@
 
     <hr class="my-8" />
 
-    <nav class="grid grid-cols-1 gap-2 sm:grid-cols-2" aria-label="{{ i18n "PostsNavigation" }}">
-      <div class="sm:col-start-1 sm:col-end-1 h-full flex items-center gap-2 group">
-        {{ with .PrevInSection }}
-          <div class="flex items-center group-hover:text-highlight">
-            {{ partial "svgs/chevron-left.svg" }}
-          </div>
-
-          <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "PrevPost" }}">
-            {{ .Title }}
-          </a>
-        {{ end }}
-      </div>
-
-      <div class="sm:col-start-2 sm:col-end-2 text-right mt-2 sm:mt-0 h-full flex justify-end gap-2 group">
-        {{ with .NextInSection }}
-          <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "NextPost" }}">
-            {{ .Title }}
-          </a>
-
-          <div class="flex items-center group-hover:text-highlight">
-            {{ partial "svgs/chevron-right.svg" }}
-          </div>
-        {{ end }}
-      </div>
-    </nav>
+    {{ partial "post-nav.html" . }}
   </article>
 {{ end }}

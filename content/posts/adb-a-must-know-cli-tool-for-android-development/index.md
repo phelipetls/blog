@@ -34,43 +34,38 @@ emulator-5554	device
 
 # Record screen with `adb shell screenrecord`
 
-It's as simple as running `adb shell screenrecord /sdcard/video.mp4` to start
-recording and then <kbd>Ctrl</kbd> + <kbd>C</kbd> when you're done. And then
-`adb pull /sdcard/video.mp4 ~/Videos/video.mp4` to get it into your computer.
-
-This is invaluable to me. I'm now able to more easily record how a feature
-works or to demonstrate a bug.
+To record your screen, it's as simple as running `adb shell screenrecord
+/sdcard/video.mp4`. After you're done, press <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+Run `adb pull /sdcard/video.mp4 ~/Videos/video.mp4` to get the video into your
+computer.
 
 It's also useful to know some of the [command line
 options](https://developer.android.com/studio/command-line/adb#screenrecord),
-my favorite ones being to limit the video size `--size` and limit recording
-time `--time-limit`.
+my favorite ones being to limit the video size with `--size` and recording time
+with `--time-limit`.
 
-I usually run `adb shell screenrecord --size 320x568 --time-limit=120
-/sdcard/video.mp4`, to keep the video small.
+For example, I typically run `adb shell screenrecord --size 320x568
+--time-limit=120 /sdcard/video.mp4`.
 
 # Capture screen with `adb shell screencap`
 
-This is straightforward, just capture the screen with `adb shell screencap
+This is straightforward, it just captures the screen with `adb shell screencap
 /sdcard/img.png`, then getit locally with `adb pull /sdcard/img.png
 ~/Images/img.png`.
 
 # Debugging with `adb logcat`
 
 This has proved useful to me so many times. In the context of React Native
-development, this is usually less useful during development on debug builds.
-But in release builds it's the only way to debug when something wrong happens.
+development, this is usually less useful in debug builds. But in release builds
+it's sometimes the only way to debug when something wrong happens.
 
 For example, when an app crashes or some SDK call is not working, you'll
 probably be able to see why with `adb logcat`.
 
-The downside is that the output can be overwhelming, since it's usually a wall
-of text that is growing constantly. So it's useful to know how you can filter
-this
-output.
-
-For example, if I wanted to see only logs tagged with `Sentry`, `ReactNative`
-and `ReactNativeJS` at any priority:
+The downside is that the output can be overwhelming, since it's a huge wall of
+text that is growing constantly. So it pays off to know how to filter it, e.g.
+if I wanted to see only logs tagged with `Sentry`, `ReactNative` and
+`ReactNativeJS` at any priority level:
 
 ```sh
 adb logcat Sentry:* ReactNative:* ReactNativeJS:* *:S
@@ -82,27 +77,25 @@ explains nicely how this works.
 
 # Networking with `adb reverse`
 
-This one is best explained through an example.
+Imagine you want to see your [Storybook](https://storybook.js.org/) files in a
+mobile web browser. If you go to `localhost:6006` in your computer's browser,
+it works, but nothing shows up in your mobile device's browser, since no
+process is bound to port `6060` there.
 
-Image you want to see your [Storybook](https://storybook.js.org/) files in a
-mobile web browser. In your computer's browser, it works if you go to
-`localhost:6006` but not in your mobile device's browser.
+You can solve this problem by running `adb reverse tcp:6006 tcp:6006`. Now your
+mobile device will have access to the server running on your computer.
 
-Well, you can solve this with `adb reverse tcp:6006 tcp:6006`.
+An example from React Native is the Metro bundler, that usually serves the
+bundled JS of your app at port `8081`, so we need to run `adb reverse tcp:8081
+tcp:8081` to make the server reachable by the Android device. This is usually
+done under the hood when we run `npx react-native run-android`, but if the
+device can't find the JS bundle or is stuck loading it we usually need to run
+it again.
 
-This is useful for any web server running in your local computer, e.g., a web
-API server or a webpack development server.
+There's also `adb forward`, in case you need to make a web server running on
+your phone also available to your computer.
 
-In the React Native world, we sometimes need to run `adb reverse tcp:8081
-tcp:8081` it the device is stuck at loading the JS bundle or can't find it at
-all. If you run this once without knowing what it does, now you know. It's
-routing a your mobile device's request to `localhost:8081` to your computer's
-`localhost`.
-
-There's also `adb forward`, which is the opposite of `adb reverse`, so it's
-hardly as useful.
-
-# Start/kill app
+# Start/kill apps
 
 You can start and kill an app with the `adb shell am`, in which `am` stands for
 [*Activity Manager*](https://developer.android.com/studio/command-line/adb#am).
@@ -125,7 +118,7 @@ You can also open a URL, this is specially useful to test deep links:
 adb shell am start -a android.intent.action.VIEW -d company://Screen
 ```
 
-# Install and uninstall apps
+# Install/uninstall apps
 
 You can install an `.apk` file with `adb install app.apk`.
 

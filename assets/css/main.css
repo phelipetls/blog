@@ -1,4 +1,6 @@
 :root {
+  --default-font-family: "Fira Sans", sans-serif;
+  --heading-font-family: "Merriweather", serif;
   --beige: 245, 245, 220;
   --dark-beige: 229, 228, 197;
   --darker-beige: 213, 211, 168;
@@ -62,13 +64,13 @@ body[data-theme='dark'] {
 
 @layer base {
   body {
-    font-family: "Fira Sans", sans-serif;
+    font-family: var(--default-font-family);
   }
   img {
     @apply mx-auto max-w-full;
   }
   h1, h2, h3 {
-    font-family: "Merriweather", serif;
+    font-family: var(--heading-font-family);
   }
   h1 {
     @apply text-2xl mb-2 font-bold text-primary;

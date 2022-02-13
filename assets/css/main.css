@@ -62,10 +62,13 @@ body[data-theme='dark'] {
 
 @layer base {
   body {
-    font-family: "Georgia", "Merriweather", serif;
+    font-family: "Fira Sans", sans-serif;
   }
   img {
     @apply mx-auto max-w-full;
+  }
+  h1, h2, h3 {
+    font-family: "Merriweather", serif;
   }
   h1 {
     @apply text-2xl mb-2 font-bold text-primary;

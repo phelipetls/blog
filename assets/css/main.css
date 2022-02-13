@@ -66,9 +66,6 @@ body[data-theme='dark'] {
   body {
     font-family: var(--default-font-family);
   }
-  img {
-    @apply mx-auto max-w-full;
-  }
   h1, h2, h3 {
     font-family: var(--heading-font-family);
     @apply mb-2 font-bold text-primary;
@@ -81,6 +78,9 @@ body[data-theme='dark'] {
   }
   h3 {
     @apply text-lg;
+  }
+  img {
+    @apply mx-auto max-w-full;
   }
   article p {
     @apply mb-4 leading-relaxed;

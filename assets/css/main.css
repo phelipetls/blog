@@ -80,7 +80,7 @@ body[data-theme='dark'] {
     @apply mb-4 leading-relaxed;
   }
   a {
-    @apply no-underline border-b-2 border-divider text-primary hover:border-highlight;
+    @apply no-underline border-b-2 border-divider hover:border-highlight;
   }
   :is(h1, h2, h3, h4) a {
     @apply no-underline;

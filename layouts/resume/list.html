@@ -1,0 +1,48 @@
+{{ define "main" }}
+  <div class="flex flex-col flex-1">
+    <div class="flex justify-between align-center mb-4">
+      <h1 class="mb-0">
+        Resumé
+      </h1>
+
+      <a
+        download
+        href="{{ .Site.Params.resume }}"
+        class="border-0 p-1"
+        aria-label="Download resumé"
+      >
+        {{ partial "svgs/download.svg" }}
+      </a>
+    </div>
+
+    <div class="resume-loading flex flex-1 justify-center items-center flex-1">
+      {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+    </div>
+
+    <div
+      data-resume="{{ .Site.Params.resume }}"
+      class="hidden resume-pdf h-screen w-full border-2 border-dashed border-foreground"
+    >
+    </div>
+
+    <div class="resume-pdf-fallback hidden flex flex-col flex-1 justify-center items-center">
+      <a
+        class="mt-4 border-0 bg-foreground text-background rounded px-4 py-2"
+        download
+        href="{{ .Site.Params.resume }}"
+      >
+        Download
+      </a>
+    </div>
+  </div>
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build }}
+
+  {{ if (not .Site.IsServer) }}
+    {{ $resumeScript := $resumeScript | minify }}
+  {{ end }}
+
+  <script src="{{ $resumeScript.Permalink }}"></script>
+{{ end }}

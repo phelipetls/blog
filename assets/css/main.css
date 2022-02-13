@@ -157,10 +157,10 @@ body[data-theme='dark'] {
   .nav-container.stuck {
     @apply border-b border-divider;
   }
-  .nav-container[data-is-scrolling="down"] {
-    transform: translateY(-100%);
-  }
-  .nav-container[data-is-scrolling="up"] {
+  .nav-container {
     transform: translateY(0%);
+  }
+  .nav-container.is-scrolling-down {
+    transform: translateY(-100%);
   }
 }

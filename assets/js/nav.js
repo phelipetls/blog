@@ -10,9 +10,9 @@ function handleScroll() {
 
   if (scrollDirection !== lastScrollDirection) {
     if (scrollDirection === 1) {
-      navContainer.setAttribute('data-is-scrolling', 'down')
+      navContainer.classList.add('is-scrolling-down')
     } else if (scrollDirection === -1) {
-      navContainer.setAttribute('data-is-scrolling', 'up')
+      navContainer.classList.remove('is-scrolling-down')
     }
   }
 

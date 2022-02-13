@@ -1,25 +1,20 @@
 const navContainer = document.querySelector('.nav-container')
 
-let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop
-let lastScrollDirection = 0
+let lastScrollPosition = window.scrollY
 
 function handleScroll() {
-  const newScrollTop = window.pageYOffset || document.documentElement.scrollTop
+  const newScrollPosition = window.scrollY
 
-  const scrollDirection = Math.sign(newScrollTop - lastScrollTop)
-
-  if (scrollDirection !== lastScrollDirection) {
-    if (scrollDirection === 1) {
-      navContainer.classList.add('is-scrolling-down')
-    } else if (scrollDirection === -1) {
-      navContainer.classList.remove('is-scrolling-down')
-    }
+  if (newScrollPosition > lastScrollPosition) {
+    navContainer.classList.add('is-scrolling-down')
+  } else {
+    navContainer.classList.remove('is-scrolling-down')
   }
 
-  lastScrollTop = Math.max(newScrollTop, 0)
+  lastScrollPosition = Math.max(newScrollPosition, 0)
 }
 
-window.addEventListener('scroll', handleScroll)
+window.addEventListener('scroll', handleScroll, false)
 
 const observer = new IntersectionObserver(
   function ([e]) {

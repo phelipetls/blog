@@ -178,4 +178,7 @@ body[data-theme='dark'] {
   * {
     @apply focus:outline-foreground;
   }
+  ::selection {
+    @apply bg-foreground text-background;
+  }
 }

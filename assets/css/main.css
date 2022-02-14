@@ -175,9 +175,6 @@ body[data-theme='dark'] {
   a.btn {
     @apply border-0;
   }
-  * {
-    @apply focus:outline-foreground;
-  }
   ::selection {
     @apply bg-foreground text-background;
   }

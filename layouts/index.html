@@ -1,8 +1,8 @@
 {{ define "main" }}
-  <section class="grid-cols-2">
+  <div class="flex flex-col sm:flex-row">
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
-    <aside class="sm:float-left sm:mr-4 mb-4 sm:mb-0">
+    <aside class="sm:mr-4 mb-4 sm:mb-0">
       <div class="relative mx-auto" style="width: 200px; height: 200px;">
         <canvas
           id="gravatar-blurhash"
@@ -25,10 +25,10 @@
       </div>
     </aside>
 
-    <article>
+    <article class="">
       {{ .Content }}
     </article>
-  </section>
+  </div>
 {{ end }}
 
 {{ define "scripts" }}

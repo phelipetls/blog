@@ -3,6 +3,6 @@ title: "Resumé"
 menu:
   main:
     name: Resumé
-    url: /resume/
+    url: /embedded-resume/
     weight: 9999
 ---

@@ -48,3 +48,6 @@ other = 'Documento'
 
 [ThemeIcon]
 other = 'Ícone do tema'
+
+[Contact]
+other = 'Contato'

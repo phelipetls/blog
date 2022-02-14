@@ -46,3 +46,6 @@ other = 'Document'
 
 [ThemeIcon]
 other = 'Theme icon'
+
+[Contact]
+other = 'Contact'

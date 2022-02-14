@@ -166,4 +166,13 @@ body[data-theme='dark'] {
   .nav-container.stuck.is-scrolling-down {
     transform: translateY(-100%);
   }
+  .btn {
+    @apply rounded px-4 py-2;
+  }
+  .btn-primary {
+    @apply bg-foreground text-background;
+  }
+  a.btn {
+    @apply border-0;
+  }
 }

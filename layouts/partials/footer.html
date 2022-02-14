@@ -1,23 +1,44 @@
-<footer class="mt-16 text-right text-sm">
-  <div class="mb-2">
-    {{ if (eq .Site.Language.Lang "en") }}
-      <a href="{{ .Site.Params.subscribeLink }}">Subscribe</a>
+<footer class="mt-16 text-sm">
+  <div class="flex justify-start gap-16">
+    <nav class="" aria-label="Links">
+      <p class="text-lg mb-2"></p>
 
-      &nbsp;·&nbsp;
-    {{ end }}
+      <ul class="list-none my-0 mx-0">
+        <li>
+          {{ $rss := (.Site.GetPage "/posts").OutputFormats.Get "rss" }}
+          <a href="{{ $rss.Permalink }}">
+            RSS
+          </a>
+        </li>
 
-    {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-      <a href="{{ .Permalink }}">RSS</a> {{ partial "svgs/rss.svg" (dict "width" 16 "height" 16) }}
-    {{ end -}}
+        <li>
+          <a href="{{ .Site.Params.subscribeLink }}">
+            Subscribe
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="" aria-label="{{ i18n "Contact" }}">
+      <p class="text-lg mb-2">Contact</p>
+
+      <ul class="list-none my-0 mx-0">
+        <li>
+          <a href="mailto:{{ .Site.Params.email }}">E-mail</a>
+        </li>
+
+        <li>
+          <a href="{{ .Site.Params.GitHub }}">GitHub</a>
+        </li>
+
+        <li>
+          <a href="{{ .Site.Params.linkedin }}">LinkedIn</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 
-  {{- if .IsTranslated -}}
-    {{- range .Translations -}}
-      <a class="inline-block mb-2" href="{{ .Permalink | absLangURL }}" title="{{ i18n .Lang }}">
-        {{ i18n .Lang }}
-      </a>
-    {{ end }}
-  {{ end }}
-
-  <div>{{ i18n "License" | safeHTML }}</div>
+  <p class="align-self-end mt-2">
+    {{ i18n "License" | safeHTML }}
+  </p>
 </footer>

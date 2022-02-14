@@ -1,20 +1,5 @@
 {{ define "main" }}
   <div class="flex flex-col flex-1">
-    <div class="flex justify-between align-center mb-4">
-      <h1 class="mb-0">
-        Resumé
-      </h1>
-
-      <a
-        download
-        href="{{ .Site.Params.resume }}"
-        class="border-0 p-1"
-        aria-label="Download resumé"
-      >
-        {{ partial "svgs/download.svg" }}
-      </a>
-    </div>
-
     <div class="resume-loading flex flex-1 justify-center items-center flex-1">
       {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
     </div>
@@ -25,7 +10,7 @@
     >
     </div>
 
-    <div class="resume-pdf-fallback hidden flex flex-col flex-1 justify-center items-center">
+    <div class="hidden resume-pdf-fallback flex flex-col flex-1 justify-center items-center">
       <a
         class="mt-4 btn btn-primary"
         download

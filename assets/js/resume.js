@@ -5,9 +5,7 @@ const pdfContainer = document.querySelector('.resume-pdf')
 if (PDFObject.supportsPDFs) {
   const resumeUrl = pdfContainer.dataset.resume
 
-  PDFObject.embed(resumeUrl, pdfContainer, {
-    height: '100vh'
-  })
+  PDFObject.embed(resumeUrl, pdfContainer)
 
   pdfContainer.classList.remove('hidden')
 } else {

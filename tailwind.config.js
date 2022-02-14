@@ -23,6 +23,9 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1',
+      },
+      outline: {
+        foreground: ['2px dashed rgb(var(--foreground))', '1px']
       }
     },
     colors: {

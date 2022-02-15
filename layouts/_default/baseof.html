@@ -10,7 +10,7 @@
     {{ end }}
   </head>
 
-  <body class="preload text-foreground bg-background transition transition-colors duration-75 ease-out">
+  <body data-preload class="text-foreground bg-background transition transition-colors duration-75 ease-out">
     {{ $themeScript := resources.Get "js/theme.js" }}
 
     {{ if (not .Site.IsServer) }}
@@ -19,7 +19,7 @@
 
     <script>{{ $themeScript.Content | safeJS }}</script>
 
-    <div class="scroll-container flex flex-col min-h-screen">
+    <div data-scroll-container class="flex flex-col min-h-screen">
       {{ partial "nav.html" . }}
 
       <div class="py-16 px-4 flex-1 max-w-prose mx-auto flex flex-col container mx-auto">

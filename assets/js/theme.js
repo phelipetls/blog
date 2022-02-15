@@ -15,5 +15,5 @@ if (storedTheme) {
 
 /* Enable animations */
 window.addEventListener('load', function () {
-  document.body.classList.remove('preload')
+  document.body.removeAttribute('data-preload')
 })

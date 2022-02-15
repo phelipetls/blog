@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle'
 
-const navContainer = document.querySelector('.nav-container')
+const navContainer = document.querySelector('[data-nav-container]')
 
 let lastScrollPosition = window.scrollY
 
@@ -29,7 +29,7 @@ const observer = new IntersectionObserver(
     }
   },
   {
-    root: document.querySelector('.scroll-container'),
+    root: document.querySelector('[data-scroll-container]'),
     rootMargin: `-${navContainer.clientHeight}px 0px 0px 0px`,
     threshold: 1
   }

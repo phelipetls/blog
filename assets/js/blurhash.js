@@ -1,6 +1,6 @@
 import { decode } from 'blurhash'
 
-const canvas = document.getElementById('gravatar-blurhash')
+const canvas = document.querySelector('[data-gravatar-blurhash]')
 const ctx = canvas.getContext('2d')
 
 const pixels = decode(canvas.dataset.blurhash, canvas.width, canvas.height)

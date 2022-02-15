@@ -9,6 +9,8 @@ if (storedTheme) {
   window.__setTheme(storedTheme)
 } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   window.__setTheme('dark')
+} else {
+  window.__setTheme('light')
 }
 
 /* Enable animations */

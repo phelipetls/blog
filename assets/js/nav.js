@@ -20,9 +20,17 @@ window.addEventListener('scroll', throttle(handleScroll, 300), false)
 
 const observer = new IntersectionObserver(
   function ([e]) {
-    e.target.classList.toggle('stuck', e.intersectionRatio < 1)
+    if (e.isIntersecting) {
+      navContainer.classList.add('stuck')
+    } else {
+      navContainer.classList.remove('stuck')
+    }
   },
-  { rootMargin: '-1px 0px 0px 0px', threshold: [1] }
+  {
+    root: document.querySelector('.scroll-container'),
+    rootMargin: `-${navContainer.clientHeight}px 0px 0px 0px`,
+    threshold: 1
+  }
 )
 
 observer.observe(navContainer)

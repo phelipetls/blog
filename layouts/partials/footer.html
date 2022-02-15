@@ -1,26 +1,14 @@
 <footer class="flex flex-col mt-16 gap-4">
-  <div class="flex flex-wrap gap-2 justify-center sm:justify-between">
+  <div class="flex flex-wrap gap-2 justify-center">
     <nav
       class="flex gap-4 order-last sm:order-first"
       aria-label="Links"
     >
       {{ partial "contact.html" . }}
     </nav>
-
-    <nav class="flex gap-4">
-      {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-        <a href="{{ .Permalink }}">
-          RSS {{ partial "svgs/rss.svg" (dict "width" 16 "height" 16) }}
-        </a>
-      {{ end -}}
-
-      <a href="{{ .Site.Params.subscribeLink }}">
-        {{ i18n "Subscribe" }} {{ partial "svgs/radio.svg" (dict "width" 16 "height" 16) }}
-      </a>
-    </nav>
   </div>
 
-  <p class="text-center sm:text-left mt-2">
+  <p class="text-center mt-2">
     {{ i18n "License" | safeHTML }}
   </p>
 </footer>

@@ -154,17 +154,17 @@ body[data-theme='dark'] {
   }
   .nav-container {
     will-change: transform;
-    transition: transform 200ms linear, border-color 0.2s ease-in;
-    @apply border-b border-background;
+    transition: transform 200ms linear;
   }
   .nav-container.stuck {
-    @apply border-b border-divider;
+    @apply shadow-md;
   }
   .nav-container {
     transform: translateY(0%);
   }
   .nav-container.stuck.is-scrolling-down {
     transform: translateY(-100%);
+    @apply shadow-none;
   }
   .btn {
     @apply rounded px-4 py-2;

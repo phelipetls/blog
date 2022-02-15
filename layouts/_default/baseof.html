@@ -22,15 +22,15 @@
     <div data-scroll-container class="flex flex-col min-h-screen">
       {{ partial "nav.html" . }}
 
-      <div class="py-16 px-4 flex-1 max-w-prose mx-auto flex flex-col container mx-auto">
+      <div class="my-8 px-4 flex-1 max-w-prose mx-auto flex flex-col container mx-auto">
         <main class="flex flex-1 flex-col">
           {{ block "main" . }}
             {{ .Content }}
           {{ end }}
         </main>
-
-        {{ partial "footer.html" . }}
       </div>
+
+      {{ partial "footer.html" . }}
     </div>
 
     {{ range (.Resources.Match "*.js") }}

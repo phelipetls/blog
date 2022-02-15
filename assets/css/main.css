@@ -162,7 +162,7 @@ body[data-theme='dark'] {
   .nav-container {
     transform: translateY(0%);
   }
-  .nav-container.stuck.is-scrolling-down {
+  .nav-container.is-scrolling-down {
     transform: translateY(-100%);
     @apply shadow-none;
   }

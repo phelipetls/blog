@@ -8,7 +8,9 @@ function handleScroll() {
   const newScrollPosition = window.scrollY
 
   if (newScrollPosition > lastScrollPosition) {
-    navContainer.classList.add('is-scrolling-down')
+    if (navContainer.classList.contains('stuck')) {
+      navContainer.classList.add('is-scrolling-down')
+    }
   } else {
     navContainer.classList.remove('is-scrolling-down')
   }

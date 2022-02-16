@@ -140,17 +140,17 @@ body[data-theme='dark'] {
   img[data-gravatar-blurhash]:-moz-loading {
     visibility: hidden;
   }
+  [data-nav-container] {
+    will-change: transform;
+    transform: translateY(0%);
+    transition: transform 200ms linear;
+  }
   [data-nav-container]::before {
     content: '';
     background-color: rgb(var(--background));
     filter: blur(20px);
     margin: -35px;
     @apply absolute inset-0 -z-1;
-  }
-  [data-nav-container] {
-    will-change: transform;
-    transform: translateY(0%);
-    transition: transform 200ms linear;
   }
   [data-nav-container].stuck {
     @apply shadow;

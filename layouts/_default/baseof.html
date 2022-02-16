@@ -14,7 +14,7 @@
     {{ $themeScript := resources.Get "js/theme.js" }}
 
     {{ if (not .Site.IsServer) }}
-      {{ $themeScript := $themeScript | minify }}
+      {{ $themeScript = $themeScript | minify }}
     {{ end }}
 
     <script>{{ $themeScript.Content | safeJS }}</script>
@@ -40,9 +40,9 @@
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
 
-    {{ if (not .Site.IsServer) }}
-      {{ $toggleThemeScript := $toggleThemeScript | minify }}
-      {{ $navScript := $navScript | minify }}
+    {{ if (.Site.IsServer) }}
+      {{ $toggleThemeScript = $toggleThemeScript | minify }}
+      {{ $navScript = $navScript | minify }}
     {{ end }}
 
     <script src="{{ $toggleThemeScript.Permalink }}"></script>

@@ -26,7 +26,7 @@
   {{ $resumeScript := resources.Get "js/resume.js" | js.Build }}
 
   {{ if (not .Site.IsServer) }}
-    {{ $resumeScript := $resumeScript | minify }}
+    {{ $resumeScript = $resumeScript | minify }}
   {{ end }}
 
   <script src="{{ $resumeScript.Permalink }}"></script>

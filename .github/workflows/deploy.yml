@@ -22,7 +22,7 @@ jobs:
 
       - run: npm ci
 
-      - run: hugo
+      - run: hugo --minify
 
       - name: Send e-mail to subscribers about new blog post
         run: node ./scripts/send-new-blog-post-email.js

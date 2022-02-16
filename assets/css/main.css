@@ -147,7 +147,6 @@ body[data-theme='dark'] {
   }
   [data-nav-container]::before {
     content: '';
-    background-color: rgb(var(--background));
     filter: blur(20px);
     margin: -35px;
     @apply absolute inset-0 -z-1;

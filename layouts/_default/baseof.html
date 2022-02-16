@@ -40,7 +40,7 @@
     {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
 
-    {{ if (.Site.IsServer) }}
+    {{ if (not .Site.IsServer) }}
       {{ $toggleThemeScript = $toggleThemeScript | minify }}
       {{ $navScript = $navScript | minify }}
     {{ end }}

@@ -157,7 +157,7 @@ body[data-theme='dark'] {
     transition: transform 200ms linear;
   }
   [data-nav-container].stuck {
-    @apply shadow-md;
+    @apply shadow;
   }
   [data-nav-container] {
     transform: translateY(0%);

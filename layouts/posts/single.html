@@ -37,7 +37,41 @@
     {{ .Content }}
   </article>
 
+  {{ if (eq .Site.Language.LanguageName "English") }}
+    <div class="rounded border-2 border-divider p-4 my-8">
+      <p class="text-center">
+        Subscribe via {{ partial "rss-posts-link" . }} or e-mail. <i>Unsubscribe at any time</i>.
+      </p>
+
+      <form
+        class="embeddable-buttondown-form flex justify-center items-center my-4"
+        action="https://buttondown.email/api/emails/embed-subscribe/phelipetls"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.email/phelipetls', 'popupwindow')"
+      >
+        <label for="bd-email" class="hidden">E-mail</label>
+        <input type="email" name="email" id="bd-email" placeholder='E-mail' class="h-full p-2 rounded min-w-0" />
+        <button class="btn btn-primary rounded-r" type="submit" value="Subscribe">
+          Subscribe
+        </button>
+      </form>
+
+      <p class="text-center">
+        <a href="https://buttondown.email" target="_blank">
+          Powered by Buttondown
+        </a>
+      </p>
+    </div>
+  {{ end }}
+
   <hr class="my-8" />
 
   {{ partial "post-nav.html" . }}
+{{ end }}
+
+{{ define "partials/rss-posts-link" }}
+  {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+    <a href="{{ .Permalink }}">RSS</a>
+  {{ end }}
 {{ end }}

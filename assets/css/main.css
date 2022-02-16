@@ -167,7 +167,7 @@ body[data-theme='dark'] {
     @apply shadow-none;
   }
   .btn {
-    @apply rounded px-4 py-2;
+    @apply px-4 py-2;
   }
   .btn-primary {
     @apply bg-foreground text-background;

@@ -54,3 +54,8 @@ other = 'Contato'
 
 [Subscribe]
 other = 'Assine'
+
+[SubscribeSectionDescription]
+other = '''
+Subscribe via {{ partial "rss-posts-link" . }} or e-mail. <i>Unsubscribe at any time</i>.
+'''

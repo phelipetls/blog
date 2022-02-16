@@ -154,13 +154,11 @@ body[data-theme='dark'] {
   }
   [data-nav-container] {
     will-change: transform;
+    transform: translateY(0%);
     transition: transform 200ms linear;
   }
   [data-nav-container].stuck {
     @apply shadow;
-  }
-  [data-nav-container] {
-    transform: translateY(0%);
   }
   [data-nav-container].is-scrolling-down {
     transform: translateY(-100%);

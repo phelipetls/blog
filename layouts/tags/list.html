@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article>
+    <h1 class="mb-8">
+      Tags
+    </h1>
+
+    <ul>
+    {{- range .Data.Terms.ByCount -}}
+      <li>
+        <a href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/">
+          {{ .Term -}}
+        </a>
+
+        ({{ .Count }})
+      </li>
+    {{- end -}}
+    </ul>
+  </article>
+{{ end }}

@@ -11,9 +11,7 @@
         </h2>
 
         <div>
-          {{ with (.GetTerms "tags") }}
-            {{ partial "post-tags.html" . }}
-          {{ end }}
+          {{ partial "post-tags.html" . }}
         </div>
       </div>
     {{ end }}

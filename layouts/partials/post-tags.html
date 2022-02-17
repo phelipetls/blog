@@ -2,7 +2,7 @@
   {{ partial "svgs/tag.svg" (dict "width" 16 "height" 16 "style" "display: inline;") }}
 </span>
 
-{{ range . }}
+{{ range (.GetTerms "tags") }}
   <a href="{{ .RelPermalink }}" class="no-underline">
     {{- .Title -}}
   </a><span class="last:hidden">,</span>

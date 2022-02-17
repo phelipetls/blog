@@ -26,11 +26,9 @@
       {{ end }}
     </div>
 
-    {{ with (.GetTerms "tags") }}
-      <div>
-        {{ partial "post-tags.html" . }}
-      </div>
-    {{ end }}
+    <div>
+      {{ partial "post-tags.html" . }}
+    </div>
 
     <hr class="my-8" />
 

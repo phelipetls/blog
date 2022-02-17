@@ -145,10 +145,12 @@ body[data-theme='dark'] {
     transform: translateY(0%);
     transition: transform 200ms linear;
   }
-  [data-nav-container]::before {
-    content: '';
-    filter: blur(20px);
-    @apply absolute inset-0 -z-1 bg-background;
+  @supports not (backdrop-filter: blur(2px)) {
+    [data-nav-container]::before {
+      content: '';
+      filter: blur(20px);
+      @apply absolute inset-0 -z-1 bg-highlight;
+    }
   }
   [data-nav-container].stuck {
     @apply shadow;

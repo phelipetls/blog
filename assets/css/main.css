@@ -149,7 +149,7 @@ body[data-theme='dark'] {
     [data-nav-container]::before {
       content: '';
       filter: blur(20px);
-      @apply absolute inset-0 -z-1 bg-highlight;
+      @apply absolute inset-0 -z-1 bg-background;
     }
   }
   [data-nav-container].stuck {

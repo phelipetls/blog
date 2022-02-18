@@ -15,7 +15,7 @@ module.exports = {
     content: ['./hugo_stats.json', './assets/css/main.css'],
     enabled: process.env.HUGO_ENVIRONMENT === 'production'
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       maxWidth: {

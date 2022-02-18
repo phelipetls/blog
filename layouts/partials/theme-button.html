@@ -1,7 +1,10 @@
 <button
   data-theme-button
-  class="rounded-full p-1"
+  class="p-1"
   aria-label="{{ i18n "ThemeButton" }}"
+  aria-expanded="false"
+  aria-controls="theme-menu"
+  aria-haspopup="true"
 >
   <svg width="24" height="24" viewBox="0 0 24 24">
     <title>{{ i18n "ThemeIcon" }}</title>
@@ -9,8 +12,52 @@
     <defs>
       {{ partial "svgs/moon.svg" }}
       {{ partial "svgs/sun.svg" }}
+      {{ partial "svgs/monitor.svg" }}
     </defs>
 
     <use data-theme-button-svg-icon href="#sun" />
   </svg>
 </button>
+
+<ul
+  data-theme-menu
+  id="theme-menu"
+  class="hidden absolute bg-background border-2 border-divider rounded z-50 shadow-xl shadow-divider/50 flex flex-col list-none m-0"
+  role="menu"
+  aria-orientation="vertical"
+  aria-activedescendant="theme-option-auto"
+  aria-label="{{ i18n "ThemeOptions" }}"
+  tabindex="-1"
+>
+  <li
+    id="theme-option-light"
+    data-theme="light"
+    role="menuitem"
+    tabindex="-1"
+  >
+    {{ partial "svgs/sun.svg" (dict "Width" 16 "Height" 16) }}
+    {{ i18n "Light" }}
+  </li>
+
+  <li
+    id="theme-option-dark"
+    data-theme="dark"
+    role="menuitem"
+    tabindex="-1"
+  >
+    {{ partial "svgs/moon.svg" (dict "Width" 16 "Height" 16) }}
+    {{ i18n "Dark" }}
+  </li>
+
+  <li
+    id="theme-option-auto"
+    data-focus
+    aria-selected="true"
+    data-theme="auto"
+    role="menuitem"
+    tabindex="-1"
+  >
+    {{ partial "svgs/monitor.svg" (dict "Width" 16 "Height" 16) }}
+    Auto
+  </li>
+</ul>

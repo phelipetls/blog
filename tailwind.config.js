@@ -12,7 +12,7 @@ function withOpacityValue(variable) {
  */
 module.exports = {
   purge: {
-    content: ['./hugo_stats.json', './assets/css/main.css'],
+    content: ['./hugo_stats.json', './assets/css/main.css', './assets/js/*'],
     enabled: process.env.HUGO_ENVIRONMENT === 'production'
   },
   darkMode: 'class', // or 'media' or 'class'

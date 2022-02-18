@@ -144,13 +144,7 @@ body.dark {
     will-change: transform;
     transform: translateY(0%);
     transition: transform 200ms linear;
-  }
-  @supports not (backdrop-filter: blur(2px)) {
-    [data-nav-container]::before {
-      content: '';
-      filter: blur(20px);
-      @apply absolute inset-0 -z-1 bg-background;
-    }
+    @apply bg-background bg-opacity-90;
   }
   [data-nav-container].stuck {
     @apply shadow shadow-divider;
@@ -158,6 +152,15 @@ body.dark {
   [data-nav-container].is-scrolling-down {
     transform: translateY(-100%);
     @apply shadow-none;
+  }
+  [data-theme] {
+    @apply px-2 py-1 m-0 cursor-pointer flex items-center gap-1;
+  }
+  [data-theme-menu] [aria-selected='true'] {
+    @apply font-bold;
+  }
+  [data-theme-menu] [data-focus] {
+    @apply bg-divider;
   }
   .btn {
     @apply px-4 py-2;

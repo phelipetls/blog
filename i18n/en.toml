@@ -55,3 +55,12 @@ other = 'Subscribe'
 
 [MoreTags]
 other = 'More tags'
+
+[Light]
+other = 'Light'
+
+[Dark]
+other = 'Dark'
+
+[ThemeOptions]
+other = 'Theme options'

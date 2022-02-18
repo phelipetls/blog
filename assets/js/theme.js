@@ -1,22 +1,47 @@
-window.__setTheme = function (newTheme) {
-  if (newTheme === 'dark') {
-    document.body.classList.add('dark');
-  } else {
-    document.body.classList.remove('dark');
+function storeTheme(newTheme) {
+  if (newTheme) {
+    localStorage.setItem('__theme', newTheme)
+  }
+}
+
+function getStoredTheme() {
+  return localStorage.getItem('__theme')
+}
+
+function setTheme(newTheme) {
+  if (newTheme === 'auto') {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      newTheme = 'dark'
+    }
   }
 
-  localStorage.setItem('__theme', newTheme)
+  if (newTheme === 'dark') {
+    document.body.classList.add('dark')
+  } else {
+    document.body.classList.remove('dark')
+  }
 }
 
-const storedTheme = localStorage.getItem('__theme')
+function dispatchNewThemeEvent(newTheme) {
+  const event = new CustomEvent('newTheme', {
+    detail: {
+      theme: newTheme,
+    },
+  })
 
-if (storedTheme) {
-  window.__setTheme(storedTheme)
-} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  window.__setTheme('dark')
+  document.body.dispatchEvent(event)
 }
 
-/* Enable animations */
+window.__setTheme = function (newTheme) {
+  setTheme(newTheme)
+  storeTheme(newTheme)
+  dispatchNewThemeEvent(newTheme)
+}
+
+const storedTheme = getStoredTheme() || 'auto'
+window.__setTheme(storedTheme)
+
 window.addEventListener('load', function () {
   document.body.removeAttribute('data-preload')
+  dispatchNewThemeEvent(storedTheme)
 })

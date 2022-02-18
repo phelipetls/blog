@@ -11,6 +11,9 @@
   </head>
 
   <body data-preload class="h-full text-foreground bg-background transition transition-colors duration-75 ease-out">
+    {{ block "script-elements" . }}
+    {{ end }}
+
     {{ $themeScript := resources.Get "js/theme.js" }}
 
     {{ if (not .Site.IsServer) }}
@@ -37,15 +40,15 @@
       <script src="{{ .RelPermalink }}"></script>
     {{ end }}
 
-    {{ $toggleThemeScript := resources.Get "js/toggle-theme.js" }}
+    {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
 
     {{ if (not .Site.IsServer) }}
-      {{ $toggleThemeScript = $toggleThemeScript | minify }}
+      {{ $themeButtonScript = $themeButtonScript | minify }}
       {{ $navScript = $navScript | minify }}
     {{ end }}
 
-    <script src="{{ $toggleThemeScript.Permalink }}"></script>
+    <script src="{{ $themeButtonScript.Permalink }}"></script>
     <script src="{{ $navScript.Permalink }}"></script>
 
     {{ block "scripts" . }}

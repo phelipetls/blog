@@ -57,3 +57,12 @@ other = 'Assine'
 
 [MoreTags]
 other = 'Mais tags'
+
+[Light]
+other = 'Claro'
+
+[Dark]
+other = 'Escuro'
+
+[ThemeOptions]
+other = 'Opções de tema'

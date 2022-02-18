@@ -17,7 +17,7 @@
   --darker-red: 194, 0, 42;
 }
 
-body[data-theme='light'] {
+body {
   --primary: var(--black);
 
   --foreground: var(--black);
@@ -38,7 +38,7 @@ body[data-theme='light'] {
   --border-warn: var(--dark-red);
 }
 
-body[data-theme='dark'] {
+body.dark {
   --primary: var(--dark-beige);
 
   --foreground: var(--dark-beige);

@@ -14,7 +14,7 @@ if (theme) {
 }
 
 themeButton.addEventListener('click', function () {
-  const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark'
+  const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark'
 
   window.__setTheme(newTheme)
   toggleSvgIcon(newTheme)

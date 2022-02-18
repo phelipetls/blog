@@ -1,5 +1,10 @@
 window.__setTheme = function (newTheme) {
-  document.body.setAttribute('data-theme', newTheme)
+  if (newTheme === 'dark') {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
+
   localStorage.setItem('__theme', newTheme)
 }
 
@@ -9,8 +14,6 @@ if (storedTheme) {
   window.__setTheme(storedTheme)
 } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   window.__setTheme('dark')
-} else {
-  window.__setTheme('light')
 }
 
 /* Enable animations */

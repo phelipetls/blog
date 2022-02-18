@@ -1,7 +1,7 @@
-const themeButton = document.querySelector('#theme-button')
+const themeButton = document.querySelector('[data-theme-button]')
 
 const toggleSvgIcon = function (theme) {
-  const svgIcon = document.querySelector('#theme-button-svg-icon')
+  const svgIcon = document.querySelector('[data-theme-button-svg-icon]')
 
   const icon = theme === 'dark' ? '#sun' : '#moon'
   svgIcon.setAttribute('href', icon)

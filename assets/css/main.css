@@ -153,7 +153,7 @@ body.dark {
     }
   }
   [data-nav-container].stuck {
-    @apply shadow;
+    @apply shadow shadow-divider;
   }
   [data-nav-container].is-scrolling-down {
     transform: translateY(-100%);

@@ -111,6 +111,14 @@ menu.addEventListener('keydown', function (e) {
       nextActiveItem =
         activeItem.previousElementSibling || menu.lastElementChild
       break
+    case 'Home':
+    case 'PageUp':
+      nextActiveItem = menu.firstElementChild
+      break
+    case 'End':
+    case 'PageDown':
+      nextActiveItem = menu.lastElementChild
+      break
   }
 
   if (nextActiveItem) {

@@ -2,16 +2,21 @@
   --default-font-family: 'Fira Sans', sans-serif;
   --heading-font-family: 'Merriweather', serif;
   --code-font-family: 'Consolas', 'Fira Code', monospace;
+
   --beige: 245, 245, 220;
   --dark-beige: 229, 228, 197;
   --darker-beige: 213, 211, 168;
+
   --black: 51, 51, 51;
   --grey: 74, 74, 74;
-  --orange: 226, 88, 34;
   --white: 255, 255, 255;
+
+  --orange: 226, 88, 34;
+
   --blue: 163, 198, 255;
   --dark-blue: 79, 146, 255;
   --darker-blue: 70, 130, 180;
+
   --red: 247, 57, 79;
   --dark-red: 220, 20, 60;
   --darker-red: 194, 0, 42;

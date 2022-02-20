@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "generate-gravatar-blurhash": "node scripts/generate-gravatar-blurhash.js",
-    "postinstall": "simple-git-hooks"
+    "postinstall": "simple-git-hooks",
+    "hugo:dev": "hugo serve",
+    "tailwind:dev": "tailwindcss ./assets/css/main.css -o ./static/tailwind.dev.css --watch",
+    "dev": "run-p hugo:dev tailwind:dev"
   },
   "repository": {
     "type": "git",

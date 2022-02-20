@@ -8,15 +8,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" rel="stylesheet">
 
-{{ $css := resources.Get "css/main.css" | postCSS }}
+{{ if hugo.IsProduction }}
+  {{ $css := resources.Get "css/main.css" | postCSS | resources.PostProcess | minify }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+{{ else }}
+  <link rel="stylesheet" href="/tailwind.dev.css" />
+{{ end }}
+
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
 {{ if hugo.IsProduction }}
-  {{ $css = $css | resources.PostProcess | minify }}
   {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
 
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 
 <title>

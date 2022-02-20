@@ -12,7 +12,7 @@
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
 {{ if hugo.IsProduction }}
-  {{ $css = $css | minify | resources.PostProcess }}
+  {{ $css = $css | resources.PostProcess | minify }}
   {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
 

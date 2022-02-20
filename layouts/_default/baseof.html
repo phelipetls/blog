@@ -16,7 +16,7 @@
 
     {{ $themeScript := resources.Get "js/theme.js" }}
 
-    {{ if (not .Site.IsServer) }}
+    {{ if hugo.IsProduction }}
       {{ $themeScript = $themeScript | minify }}
     {{ end }}
 
@@ -43,7 +43,7 @@
     {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
 
-    {{ if (not .Site.IsServer) }}
+    {{ if hugo.IsProduction }}
       {{ $themeButtonScript = $themeButtonScript | minify }}
       {{ $navScript = $navScript | minify }}
     {{ end }}

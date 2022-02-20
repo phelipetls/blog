@@ -11,7 +11,7 @@
 {{ $css := resources.Get "css/main.css" | postCSS }}
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
 
-{{ if (not .Site.IsServer) }}
+{{ if hugo.IsProduction }}
   {{ $css = $css | minify | resources.PostProcess }}
   {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
@@ -31,7 +31,7 @@
 {{ template "_internal/twitter_cards.html" . }}
 
 {{ range .AlternativeOutputFormats -}}
-  {{ if (and (eq .Name "RSS") ($.Site.IsServer)) }}
+  {{ if (and (eq .Name "RSS") hugo.IsProduction) }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end }}
 {{ end -}}

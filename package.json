@@ -4,7 +4,6 @@
   "description": "A blog to share stuff I find interesting or helpful and experiment with web technologies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "generate-gravatar-blurhash": "node scripts/generate-gravatar-blurhash.js",
     "postinstall": "simple-git-hooks"
   },

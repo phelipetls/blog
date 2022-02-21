@@ -8,9 +8,8 @@ function withOpacityValue(variable) {
 }
 
 module.exports = {
-  purge: {
-    content: ['./hugo_stats.json', './assets/css/main.css', './assets/js/*'],
-    enabled: process.env.HUGO_ENVIRONMENT === 'production'
+  content: {
+    content: ['./hugo_stats.json', './assets/css/main.css', './assets/js/*']
   },
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -44,12 +43,6 @@ module.exports = {
         background: withOpacityValue('--background-warn'),
         border: withOpacityValue('--border-warn'),
       }
-    },
-  },
-  variants: {
-    extend: {
-      display: ['last', 'group-hover'],
-      margin: ['last', 'first']
     },
   },
   plugins: [],

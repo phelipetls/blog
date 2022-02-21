@@ -109,7 +109,7 @@ body.dark {
     @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-code-background;
   }
   :not(pre) > code {
-    @apply px-1 text-code font-bold;
+    @apply px-1 font-bold;
   }
   :not(pre) > code::before, :not(pre) > code::after {
     content: '\`';

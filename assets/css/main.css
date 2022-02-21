@@ -34,13 +34,13 @@ body {
   --highlight: var(--orange);
   --divider: var(--darker-beige);
 
-  --foreground-note: var(--black);
-  --background-note: var(--blue);
-  --border-note: var(--dark-blue);
+  --foreground-note: var(--white);
+  --background-note: var(--darker-blue);
+  --border-note: var(--blue);
 
   --foreground-warn: var(--white);
-  --background-warn: var(--red);
-  --border-warn: var(--dark-red);
+  --background-warn: var(--dark-red);
+  --border-warn: var(--darker-red);
 }
 
 body.dark {
@@ -113,6 +113,12 @@ body.dark {
   }
   :not(pre) > code::before, :not(pre) > code::after {
     content: '\`';
+  }
+  [data-note] code {
+    @apply text-note !important;
+  }
+  [data-warn] code {
+    @apply text-warn !important;
   }
   pre code {
     @apply float-left min-w-full leading-normal;

@@ -48,20 +48,20 @@ function fadeOut(element, duration) {
 function showMenu() {
   button.setAttribute('aria-expanded', 'true')
 
+  fadeIn(menu, 500)
+
   menu.setAttribute('aria-descendant', getSelectedMenuItem().id)
   focusMenuItem(getSelectedMenuItem())
   menu.focus()
-
-  fadeIn(menu, 500)
 }
 
 function hideMenu() {
+  fadeOut(menu, 500)
+
   button.setAttribute('aria-expanded', 'false')
   button.focus()
 
   menu.removeAttribute('aria-activedescendant')
-
-  fadeOut(menu, 500)
 }
 
 function setMenuItemTheme(item) {

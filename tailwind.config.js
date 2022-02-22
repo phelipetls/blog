@@ -15,11 +15,11 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        '1/2': '50%'
+        '1/2': '50%',
       },
       zIndex: {
         '-1': '-1',
-      }
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -42,7 +42,7 @@ module.exports = {
         DEFAULT: withOpacityValue('--foreground-warn'),
         background: withOpacityValue('--background-warn'),
         border: withOpacityValue('--border-warn'),
-      }
+      },
     },
   },
   plugins: [],

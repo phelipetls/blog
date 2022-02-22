@@ -72,98 +72,91 @@ body.dark {
   body {
     font-family: var(--default-font-family);
   }
+
   h1,
   h2,
   h3 {
     font-family: var(--heading-font-family);
     @apply mb-2 font-bold text-primary;
   }
+
   code {
     font-family: var(--code-font-family);
   }
+
   h1 {
     @apply text-2xl;
   }
+
   h2 {
     @apply text-xl;
   }
+
   h3 {
     @apply text-lg;
   }
+
   img {
     @apply mx-auto max-w-full;
   }
+
   article p {
     @apply mb-4 leading-relaxed;
   }
+
   a {
     @apply no-underline border-b-2 border-divider hover:border-highlight;
   }
+
   :is(h1, h2, h3, h4) a {
     @apply no-underline;
   }
+
   hr {
     @apply my-4 border-t-2 border-divider;
   }
+
   pre {
     @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-code-background;
   }
+
   :not(pre) > code {
     @apply px-1 font-bold;
   }
-  :not(pre) > code::before, :not(pre) > code::after {
+
+  :not(pre) > code::before,
+  :not(pre) > code::after {
     content: '\`';
   }
+
   pre code {
     @apply float-left min-w-full leading-normal;
   }
-  .chroma .hl {
-    /* unmaintainable hack to fix offset due to 4px border */
-    padding-left: calc(2rem - 4px);
-    @apply pr-8 -mx-8 w-auto border-l-4 border-highlight !important;
-  }
+
   ul {
     @apply list-disc ml-4 mb-4;
   }
+
   ol {
     @apply list-decimal ml-4 mb-4;
   }
+
   blockquote {
     @apply pl-8 border-l-4 border-highlight;
   }
-  [data-preload] {
-    transition: none !important;
-  }
+
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px var(--foreground-code);
     @apply inline-block rounded font-bold whitespace-nowrap align-text-bottom leading-none text-foreground border border-divider;
   }
-  img[data-gravatar-blurhash]:-moz-loading {
-    visibility: hidden;
+
+  ::selection {
+    @apply bg-foreground text-background;
   }
-  [data-nav-container] {
-    will-change: transform;
-    transform: translateY(0%);
-    transition: transform 200ms linear;
-    @apply bg-background bg-opacity-90;
-  }
-  [data-nav-container].stuck {
-    @apply shadow shadow-divider;
-  }
-  [data-nav-container].is-scrolling-down {
-    transform: translateY(-100%);
-    @apply shadow-none;
-  }
-  [data-theme] {
-    @apply px-2 py-1 m-0 cursor-pointer flex items-center gap-1;
-  }
-  [data-theme-menu] [aria-selected='true'] {
-    @apply font-bold;
-  }
-  [data-theme-menu] [data-focus] {
-    @apply bg-divider;
-  }
+}
+
+@layer components {
   .btn {
     @apply px-4 py-2;
   }
@@ -173,7 +166,46 @@ body.dark {
   a.btn {
     @apply border-0;
   }
-  ::selection {
-    @apply bg-foreground text-background;
-  }
+}
+
+img[data-gravatar-blurhash]:-moz-loading {
+  visibility: hidden;
+}
+
+[data-nav-container] {
+  will-change: transform;
+  transform: translateY(0%);
+  transition: transform 200ms linear;
+  @apply bg-background bg-opacity-90;
+}
+
+[data-nav-container].stuck {
+  @apply shadow shadow-divider;
+}
+
+[data-nav-container].is-scrolling-down {
+  transform: translateY(-100%);
+  @apply shadow-none;
+}
+
+[data-theme] {
+  @apply px-2 py-1 m-0 cursor-pointer flex items-center gap-1;
+}
+
+[data-theme-menu] [aria-selected='true'] {
+  @apply font-bold;
+}
+
+[data-theme-menu] [data-focus] {
+  @apply bg-divider;
+}
+
+[data-preload] {
+  transition: none !important;
+}
+
+.chroma .hl {
+  /* unmaintainable hack to fix offset due to 4px border */
+  padding-left: calc(2rem - 4px);
+  @apply pr-8 -mx-8 w-auto border-l-4 border-highlight !important;
 }

@@ -8,9 +8,7 @@ function withOpacityValue(variable) {
 }
 
 module.exports = {
-  content: {
-    content: ['./hugo_stats.json', './assets/css/main.css', './assets/js/*']
-  },
+  content: ['./hugo_stats.json', './assets/css/main.css'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {

@@ -19,6 +19,15 @@
   </svg>
 </button>
 
+{{
+$themeOptions := (
+     slice
+     (dict "Id" "light" "IconName" "sun"     "Name" (i18n "Light"))
+     (dict "Id" "dark"  "IconName" "moon"    "Name" (i18n "Dark"))
+     (dict "Id" "auto"  "IconName" "monitor" "Name" "Auto")
+)
+}}
+
 <ul
   data-theme-menu
   id="theme-menu"
@@ -30,35 +39,16 @@
   aria-label="{{ i18n "ThemeOptions" }}"
   tabindex="-1"
 >
+{{ range $themeOptions }}
   <li
-    id="theme-option-light"
-    data-theme="light"
+    class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+    id="theme-option-{{ .Id }}"
+    data-theme="{{ .Id }}"
     role="menuitem"
     tabindex="-1"
   >
-    {{ partial "svgs/sun.svg" (dict "Width" 16 "Height" 16) }}
-    {{ i18n "Light" }}
+    {{ partial (printf "svgs/%s.svg" .IconName) (dict "Width" 16 "Height" 16) }}
+    {{ .Name }}
   </li>
-
-  <li
-    id="theme-option-dark"
-    data-theme="dark"
-    role="menuitem"
-    tabindex="-1"
-  >
-    {{ partial "svgs/moon.svg" (dict "Width" 16 "Height" 16) }}
-    {{ i18n "Dark" }}
-  </li>
-
-  <li
-    id="theme-option-auto"
-    data-focus
-    aria-selected="true"
-    data-theme="auto"
-    role="menuitem"
-    tabindex="-1"
-  >
-    {{ partial "svgs/monitor.svg" (dict "Width" 16 "Height" 16) }}
-    Auto
-  </li>
+{{ end }}
 </ul>

@@ -134,9 +134,6 @@ body.dark {
   ol {
     @apply list-decimal ml-4 mb-4;
   }
-  :is(ul, ol) li {
-    @apply mb-2;
-  }
   blockquote {
     @apply pl-8 border-l-4 border-highlight;
   }

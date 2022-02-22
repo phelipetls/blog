@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" rel="stylesheet">
 
 {{ if hugo.IsProduction }}
-  {{ $css := resources.Get "css/main.css" | postCSS | resources.PostProcess | minify }}
+  {{ $css := resources.Get "css/main.css" | postCSS | minify | resources.PostProcess }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 {{ else }}
   <link rel="stylesheet" href="/tailwind.dev.css" />

@@ -31,17 +31,28 @@ function focusMenuItem(newItem) {
   })
 }
 
+function fadeIn(element, duration) {
+  element.style.transition = `visibility 0s linear, opacity ${duration}ms`
+  element.style.pointerEvents = 'auto'
+  element.style.opacity = 1
+  element.style.visibility = 'visible'
+}
+
+function fadeOut(element, duration) {
+  element.style.transition = `visibility 0s linear ${duration}ms, opacity ${duration}ms`
+  element.style.pointerEvents = 'none'
+  element.style.opacity = 0
+  element.style.visibility = 'hidden'
+}
+
 function showMenu() {
   button.setAttribute('aria-expanded', 'true')
-
-  menu.classList.remove('pointer-events-none')
-
-  menu.classList.remove('opacity-0')
-  menu.classList.add('opacity-1')
 
   menu.setAttribute('aria-descendant', getSelectedMenuItem().id)
   focusMenuItem(getSelectedMenuItem())
   menu.focus()
+
+  fadeIn(menu, 500)
 }
 
 function hideMenu() {
@@ -50,10 +61,7 @@ function hideMenu() {
 
   menu.removeAttribute('aria-activedescendant')
 
-  menu.classList.add('pointer-events-none')
-
-  menu.classList.remove('opacity-1')
-  menu.classList.add('opacity-0')
+  fadeOut(menu, 500)
 }
 
 function setMenuItemTheme(item) {

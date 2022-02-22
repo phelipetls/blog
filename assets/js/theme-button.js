@@ -34,7 +34,11 @@ function focusMenuItem(newItem) {
 function showMenu() {
   button.setAttribute('aria-expanded', 'true')
 
-  menu.classList.remove('hidden')
+  menu.classList.remove('pointer-events-none')
+
+  menu.classList.remove('opacity-0')
+  menu.classList.add('opacity-1')
+
   menu.setAttribute('aria-descendant', getSelectedMenuItem().id)
   focusMenuItem(getSelectedMenuItem())
   menu.focus()
@@ -45,12 +49,16 @@ function hideMenu() {
   button.focus()
 
   menu.removeAttribute('aria-activedescendant')
-  menu.classList.add('hidden')
+
+  menu.classList.add('pointer-events-none')
+
+  menu.classList.remove('opacity-1')
+  menu.classList.add('opacity-0')
 }
 
 function setMenuItemTheme(item) {
-  window.__setTheme(item.dataset.theme)
   hideMenu()
+  window.__setTheme(item.dataset.theme)
 }
 
 button.addEventListener('click', async function () {

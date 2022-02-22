@@ -114,12 +114,6 @@ body.dark {
   :not(pre) > code::before, :not(pre) > code::after {
     content: '\`';
   }
-  [data-note] code {
-    @apply text-note !important;
-  }
-  [data-warn] code {
-    @apply text-warn !important;
-  }
   pre code {
     @apply float-left min-w-full leading-normal;
   }

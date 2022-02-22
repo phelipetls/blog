@@ -23,9 +23,9 @@ function getSelectedMenuItem() {
 function focusMenuItem(newItem) {
   menuItems.forEach(function (item) {
     if (item !== newItem) {
-      item.removeAttribute('data-focus')
+      item.classList.remove('bg-divider')
     } else {
-      item.setAttribute('data-focus', '')
+      item.classList.add('bg-divider')
       menu.setAttribute('aria-activedescendant', item.id)
     }
   })
@@ -152,8 +152,10 @@ document.body.addEventListener('newTheme', function (e) {
     for (const item of menuItems) {
       if (item.dataset.theme === theme) {
         item.setAttribute('aria-selected', 'true')
+        item.classList.add('font-bold')
       } else {
         item.removeAttribute('aria-selected')
+        item.classList.remove('font-bold')
       }
     }
   }

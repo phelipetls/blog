@@ -188,14 +188,6 @@ img[data-gravatar-blurhash]:-moz-loading {
   @apply shadow-none;
 }
 
-[data-theme-menu] [aria-selected='true'] {
-  @apply font-bold;
-}
-
-[data-theme-menu] [data-focus] {
-  @apply bg-divider;
-}
-
 [data-preload] {
   transition: none !important;
 }

@@ -35,7 +35,7 @@ function showMenu() {
   button.setAttribute('aria-expanded', 'true')
 
   menu.classList.remove('hidden')
-  menu.setAttribute('aria-descendant', getSelectedMenuItem())
+  menu.setAttribute('aria-descendant', getSelectedMenuItem().id)
   focusMenuItem(getSelectedMenuItem())
   menu.focus()
 }

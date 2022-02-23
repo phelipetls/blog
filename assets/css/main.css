@@ -157,8 +157,14 @@ body.dark {
   .btn-primary {
     @apply bg-primary text-background;
   }
+  .btn-secondary {
+    @apply text-secondary;
+  }
   a.btn {
     @apply border-0;
+  }
+  .btn-icon {
+    @apply rounded-full;
   }
 }
 

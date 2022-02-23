@@ -1,7 +1,6 @@
 <a
   href="{{ .Destination | safeURL }}"
   {{ with .Title}}title="{{ . }}"{{ end }}
-  class="{{ if (hasPrefix .Text "<code") }}border-foreground{{ end }}"
 >
   {{- .Text | safeHTML -}}
 </a>

@@ -23,22 +23,14 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       primary: withOpacityValue('--primary'),
+      secondary: withOpacityValue('--secondary'),
       divider: withOpacityValue('--divider'),
+      surface: withOpacityValue('--surface'),
       foreground: withOpacityValue('--foreground'),
+      code: withOpacityValue('--code'),
       background: withOpacityValue('--background'),
-      code: {
-        DEFAULT: withOpacityValue('--foreground-code'),
-        background: withOpacityValue('--background-code'),
-      },
-      note: {
-        DEFAULT: withOpacityValue('--note'),
-      },
-      warn: {
-        DEFAULT: withOpacityValue('--warn'),
-      },
-      heading: {
-        DEFAULT: withOpacityValue('--foreground-heading'),
-      }
+      note: withOpacityValue('--note'),
+      warn: withOpacityValue('--warn'),
     },
   },
   plugins: [],

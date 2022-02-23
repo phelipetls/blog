@@ -24,20 +24,19 @@
   --muted-blue: 64, 118, 210;
   --brown: 122, 93, 69;
   --palegoldenrod: 238, 232, 170;
-  --tonkatsu: 236, 170, 54;
+  --flaming-june: 240, 187, 94;
+  --ash: 178, 177, 146;
 }
 
 body {
   --primary: var(--muted-blue);
+  --secondary: var(--brown);
 
   --foreground: var(--black);
   --background: var(--beige);
 
-  --foreground-heading: var(--brown);
-
-  --foreground-code: var(--black);
-  --background-code: var(--darker-beige);
-
+  --code: var(--black);
+  --surface: var(--darker-beige);
   --divider: var(--darker-beige);
 
   --note: var(--dark-blue);
@@ -45,16 +44,14 @@ body {
 }
 
 body.dark {
-  --primary: var(--tonkatsu);
+  --primary: var(--flaming-june);
+  --secondary: var(--ash);
 
-  --foreground: var(--white);
+  --foreground: var(--dark-beige);
   --background: var(--black);
 
-  --foreground-heading: var(--palegoldenrod);
-
-  --foreground-code: var(--beige);
-  --background-code: var(--grey);
-
+  --code: var(--beige);
+  --surface: var(--grey);
   --divider: var(--grey);
 
   --note: var(--dark-blue);
@@ -74,7 +71,7 @@ body.dark {
   h2,
   h3 {
     font-family: var(--heading-font-family);
-    @apply mb-2 font-bold text-heading;
+    @apply mb-2 font-bold text-secondary;
   }
 
   code {
@@ -102,7 +99,7 @@ body.dark {
   }
 
   a {
-    @apply text-heading no-underline border-b-2 border-divider hover:border-primary;
+    @apply text-secondary no-underline border-b-2 border-divider hover:border-primary;
   }
 
   :is(h1, h2, h3, h4) a {
@@ -114,11 +111,11 @@ body.dark {
   }
 
   pre {
-    @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-code-background;
+    @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-surface;
   }
 
   :not(pre) > code {
-    @apply px-1 font-bold text-heading;
+    @apply px-1 font-bold text-code;
   }
 
   :not(pre) > code::before,

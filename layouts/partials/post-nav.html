@@ -1,7 +1,7 @@
 <nav class="flex justify-between flex-wrap sm:flex-nowrap gap-2" aria-label="{{ i18n "PostsNavigation" }}">
-  <div class="flex items-center gap-2 group">
+  <div class="flex items-center gap-2">
     {{ with .PrevInSection }}
-      <div class="flex items-center group-hover:text-primary">
+      <div class="flex items-center text-primary">
         {{ partial "svgs/chevron-left.svg" }}
       </div>
 
@@ -11,13 +11,13 @@
     {{ end }}
   </div>
 
-  <div class="self-end text-right mt-2 sm:mt-0 h-full flex justify-end gap-2 group">
+  <div class="self-end text-right mt-2 sm:mt-0 h-full flex justify-end gap-2">
     {{ with .NextInSection }}
       <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "NextPost" }}">
         {{ .Title }}
       </a>
 
-      <div class="flex items-center group-hover:text-primary">
+      <div class="flex items-center text-primary">
         {{ partial "svgs/chevron-right.svg" }}
       </div>
     {{ end }}

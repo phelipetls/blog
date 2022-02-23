@@ -6,20 +6,18 @@
       </h3>
 
       {{ range .Pages }}
-        <article class="mt-8">
+        <article class="mt-8 flex flex-col gap-2">
+          <time class="uppercase text-sm text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ if eq .Lang "en" }}
+              {{ .Date.Format "January, 02" }}
+            {{ else }}
+              {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+            {{ end }}
+          </time>
+
           <h2>
             <a href="{{ .Permalink }}">{{ .Title }}</a>
           </h2>
-
-          <div class="flex flex-wrap gap-2">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">
-              {{ if eq .Lang "en" }}
-                {{ .Date.Format "January, 02" }}
-              {{ else }}
-                {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-              {{ end }}
-            </time>
-          </div>
         </article>
       {{ end }}
 

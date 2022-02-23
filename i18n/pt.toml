@@ -41,7 +41,10 @@ other = 'Lua'
 other = 'Sol'
 
 [Lastmod]
-other = 'Editado em {{ .Lastmod.Format "02 de Agosto" }}'
+other = 'Editado em:'
+
+[DateFormat]
+other = '{{ .Format "02 de Agosto" }}'
 
 [Document]
 other = 'Documento'

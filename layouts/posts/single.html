@@ -3,12 +3,8 @@
     <div class="border-t-4 border-primary mb-8" style="width: 8ch;">
     </div>
 
-    <h1 class="text-4xl mb-4">
-      {{ .Title }}
-    </h1>
-
-    <div class="mb-4">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">
+    <div class="flex flex-row items-center gap-2 mb-4">
+      <time class="uppercase text-sm text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
         {{ if eq .Lang "en" }}
           {{ .Date.Format "January 02, 2006" }}
         {{ else }}
@@ -16,20 +12,24 @@
         {{ end }}
       </time>
 
-      <br class="inline sm:hidden" />
-
       {{ if (.Lastmod.After .Date) }}
-        <span class="hidden sm:inline text-secondary">
-          &nbsp;·&nbsp;
-        </span>
+        ·
 
-        <time class="italic" datetime="{{ .Lastmod.Format "2006-01-02" }}">
+        <div class="uppercase text-sm text-secondary">
           {{ i18n "Lastmod" . }}
-        </time>
+
+          <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
+            {{ i18n "DateFormat" (.Lastmod) }}
+          </time>
+        </div>
       {{ end }}
     </div>
 
-    <div>
+    <h1 class="text-4xl mb-4">
+      {{ .Title }}
+    </h1>
+
+    <div class="mb-4">
       {{ partial "post-tags.html" . }}
     </div>
 

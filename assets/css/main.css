@@ -148,7 +148,7 @@ body.dark {
   }
 
   blockquote {
-    @apply pl-8 border-l-4 border-primary;
+    @apply pl-8 border-l-4 border-divider;
   }
 
   kbd {

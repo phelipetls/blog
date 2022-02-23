@@ -8,11 +8,11 @@ function handleScroll() {
   const newScrollPosition = window.scrollY
 
   if (newScrollPosition > lastScrollPosition) {
-    if (navContainer.classList.contains('stuck')) {
-      navContainer.classList.add('is-scrolling-down')
-    }
+    navContainer.style.transform = `translateY(-100%)`
+    navContainer.classList.add('!shadow-none')
   } else {
-    navContainer.classList.remove('is-scrolling-down')
+    navContainer.style.transform = `translateY(0%)`
+    navContainer.classList.remove('!shadow-none')
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)
@@ -23,9 +23,9 @@ window.addEventListener('scroll', throttle(handleScroll, 300), false)
 const observer = new IntersectionObserver(
   function ([e]) {
     if (e.isIntersecting) {
-      navContainer.classList.add('stuck')
+      navContainer.classList.add('shadow', 'shadow-divider')
     } else {
-      navContainer.classList.remove('stuck')
+      navContainer.classList.remove('shadow', 'shadow-divider')
     }
   },
   {

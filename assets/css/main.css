@@ -172,22 +172,6 @@ img[data-gravatar-blurhash]:-moz-loading {
   visibility: hidden;
 }
 
-[data-nav-container] {
-  will-change: transform;
-  transform: translateY(0%);
-  transition: transform 200ms linear;
-  @apply bg-background bg-opacity-90;
-}
-
-[data-nav-container].stuck {
-  @apply shadow shadow-divider;
-}
-
-[data-nav-container].is-scrolling-down {
-  transform: translateY(-100%);
-  @apply shadow-none;
-}
-
 [data-preload] {
   transition: none !important;
 }

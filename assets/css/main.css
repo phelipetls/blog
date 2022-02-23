@@ -168,10 +168,6 @@ body.dark {
   }
 }
 
-img[data-gravatar-blurhash]:-moz-loading {
-  visibility: hidden;
-}
-
 [data-preload] {
   transition: none !important;
 }

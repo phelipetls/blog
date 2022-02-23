@@ -24,7 +24,7 @@
 body {
   --primary: var(--muted-blue);
 
-  --foreground: var(--black);
+  --foreground: var(--grey);
   --background: var(--beige);
 
   --surface: var(--darker-beige);

@@ -1,6 +1,7 @@
 <h{{ add .Level 1 }} class="mb-8 mt-16 flex items-center gap-2" id="{{ .Anchor | safeURL }}">
-  {{ .Text | safeHTML }}
   <a class="border-0 text-primary" href="#{{ .Anchor | safeURL }}">
-    #
+    {{ strings.Repeat .Level "#" }}
   </a>
+
+  {{ .Text | safeHTML }}
 </h{{ add .Level 1 }}>

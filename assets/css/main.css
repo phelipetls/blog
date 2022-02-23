@@ -21,11 +21,13 @@
   --dark-red: 220, 20, 60;
   --darker-red: 194, 0, 42;
 
+  --muted-blue: 64, 118, 210;
+  --skydiver: 135, 175, 215;
   --brown: 80, 77, 57;
 }
 
 body {
-  --primary: var(--black);
+  --primary: var(--muted-blue);
 
   --foreground: var(--black);
   --background: var(--beige);
@@ -47,9 +49,9 @@ body {
 }
 
 body.dark {
-  --primary: var(--dark-beige);
+  --primary: var(--skydiver);
 
-  --foreground: var(--dark-beige);
+  --foreground: var(--white);
   --background: var(--black);
 
   --foreground-heading: var(--dark-beige);

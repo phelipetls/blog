@@ -20,6 +20,8 @@
   --red: 247, 57, 79;
   --dark-red: 220, 20, 60;
   --darker-red: 194, 0, 42;
+
+  --brown: 80, 77, 57;
 }
 
 body {
@@ -27,6 +29,8 @@ body {
 
   --foreground: var(--black);
   --background: var(--beige);
+
+  --foreground-heading: var(--brown);
 
   --foreground-code: var(--black);
   --background-code: var(--darker-beige);
@@ -47,6 +51,8 @@ body.dark {
 
   --foreground: var(--dark-beige);
   --background: var(--black);
+
+  --foreground-heading: var(--dark-beige);
 
   --foreground-code: var(--beige);
   --background-code: var(--grey);
@@ -75,7 +81,7 @@ body.dark {
   h2,
   h3 {
     font-family: var(--heading-font-family);
-    @apply mb-2 font-bold;
+    @apply mb-2 font-bold text-heading;
   }
 
   code {
@@ -119,7 +125,7 @@ body.dark {
   }
 
   :not(pre) > code {
-    @apply px-1 font-bold;
+    @apply px-1 font-bold text-heading;
   }
 
   :not(pre) > code::before,

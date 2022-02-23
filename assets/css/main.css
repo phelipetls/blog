@@ -18,7 +18,7 @@
   --muted-blue: 64, 118, 210;
   --brown: 122, 93, 69;
   --ash: 198, 201, 164;
-  --dark-green: 107, 135, 59;
+  --orange: 236, 170, 54;
 }
 
 body {
@@ -35,7 +35,7 @@ body {
 }
 
 body.dark {
-  --primary: var(--dark-green);
+  --primary: var(--orange);
 
   --foreground: var(--beige);
   --background: var(--black);

@@ -7,7 +7,7 @@
 
       {{ range .Pages }}
         <article class="mt-8 flex flex-col gap-2">
-          <time class="uppercase text-sm text-secondary" datetime="{{ .Date.Format "2006-01-02" }}">
+          <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ if eq .Lang "en" }}
               {{ .Date.Format "January, 02" }}
             {{ else }}

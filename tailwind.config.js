@@ -23,7 +23,6 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       primary: withOpacityValue('--primary'),
-      secondary: withOpacityValue('--secondary'),
       divider: withOpacityValue('--divider'),
       surface: withOpacityValue('--surface'),
       foreground: withOpacityValue('--foreground'),

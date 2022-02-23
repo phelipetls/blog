@@ -23,7 +23,6 @@
 
 body {
   --primary: var(--muted-blue);
-  --secondary: var(--brown);
 
   --foreground: var(--black);
   --background: var(--beige);
@@ -37,7 +36,6 @@ body {
 
 body.dark {
   --primary: var(--dark-green);
-  --secondary: var(--ash);
 
   --foreground: var(--beige);
   --background: var(--black);
@@ -62,7 +60,7 @@ body.dark {
   h2,
   h3 {
     font-family: var(--heading-font-family);
-    @apply mb-2 font-bold text-secondary;
+    @apply mb-2 font-bold;
   }
 
   code {
@@ -90,7 +88,7 @@ body.dark {
   }
 
   a {
-    @apply text-secondary no-underline border-b-2 border-divider hover:border-primary;
+    @apply no-underline border-b-2 border-divider hover:border-primary;
   }
 
   :is(h1, h2, h3, h4) a {
@@ -106,7 +104,7 @@ body.dark {
   }
 
   :not(pre) > code {
-    @apply px-1 text-secondary font-bold;
+    @apply px-1 font-bold;
   }
 
   :not(pre) > code::before,
@@ -147,9 +145,6 @@ body.dark {
   }
   .btn-primary {
     @apply bg-primary text-background dark:text-foreground;
-  }
-  .btn-secondary {
-    @apply text-secondary;
   }
   a.btn {
     @apply border-0;

@@ -144,7 +144,7 @@ body.dark {
     @apply px-4 py-2;
   }
   .btn-primary {
-    @apply bg-primary text-background dark:text-foreground;
+    @apply bg-primary text-background;
   }
   a.btn {
     @apply border-0;

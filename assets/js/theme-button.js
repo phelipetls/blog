@@ -21,11 +21,13 @@ function getSelectedMenuItem() {
 }
 
 function focusMenuItem(newItem) {
+  const focusedStyle = ['bg-divider']
+
   menuItems.forEach(function (item) {
     if (item !== newItem) {
-      item.classList.remove('bg-divider')
+      item.classList.remove(...focusedStyle)
     } else {
-      item.classList.add('bg-divider')
+      item.classList.add(...focusedStyle)
       menu.setAttribute('aria-activedescendant', item.id)
     }
   })
@@ -149,13 +151,15 @@ menu.addEventListener('keydown', function (e) {
 
 document.body.addEventListener('newTheme', function (e) {
   function selectMenuItem(theme) {
+    const selectedStyle = ['font-bold', 'text-primary']
+
     for (const item of menuItems) {
       if (item.dataset.theme === theme) {
         item.setAttribute('aria-selected', 'true')
-        item.classList.add('font-bold')
+        item.classList.add(...selectedStyle)
       } else {
         item.removeAttribute('aria-selected')
-        item.classList.remove('font-bold')
+        item.classList.remove(...selectedStyle)
       }
     }
   }

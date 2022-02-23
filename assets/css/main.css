@@ -22,8 +22,9 @@
   --darker-red: 194, 0, 42;
 
   --muted-blue: 64, 118, 210;
-  --skydiver: 135, 175, 215;
-  --brown: 80, 77, 57;
+  --brown: 122, 93, 69;
+  --palegoldenrod: 238, 232, 170;
+  --tonkatsu: 236, 170, 54;
 }
 
 body {
@@ -44,12 +45,12 @@ body {
 }
 
 body.dark {
-  --primary: var(--skydiver);
+  --primary: var(--tonkatsu);
 
   --foreground: var(--white);
   --background: var(--black);
 
-  --foreground-heading: var(--dark-beige);
+  --foreground-heading: var(--palegoldenrod);
 
   --foreground-code: var(--beige);
   --background-code: var(--grey);

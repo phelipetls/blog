@@ -11,20 +11,12 @@
   --grey: 74, 74, 74;
   --white: 255, 255, 255;
 
-  --orange: 226, 88, 34;
-
-  --blue: 163, 198, 255;
   --dark-blue: 79, 146, 255;
-  --darker-blue: 70, 130, 180;
 
-  --red: 247, 57, 79;
-  --dark-red: 220, 20, 60;
   --darker-red: 194, 0, 42;
 
   --muted-blue: 64, 118, 210;
   --brown: 122, 93, 69;
-  --palegoldenrod: 238, 232, 170;
-  --flaming-june: 240, 187, 94;
   --ash: 198, 201, 164;
   --dark-green: 107, 135, 59;
 }
@@ -44,7 +36,7 @@ body {
 }
 
 body.dark {
-  --primary: var(--flaming-june);
+  --primary: var(--dark-green);
   --secondary: var(--ash);
 
   --foreground: var(--dark-beige);

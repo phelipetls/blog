@@ -35,7 +35,6 @@ body {
   --foreground: var(--black);
   --background: var(--beige);
 
-  --code: var(--black);
   --surface: var(--darker-beige);
   --divider: var(--darker-beige);
 
@@ -50,7 +49,6 @@ body.dark {
   --foreground: var(--dark-beige);
   --background: var(--black);
 
-  --code: var(--beige);
   --surface: var(--grey);
   --divider: var(--grey);
 
@@ -99,7 +97,7 @@ body.dark {
   }
 
   a {
-    @apply text-secondary no-underline border-b-2 border-divider hover:border-primary;
+    @apply text-foreground no-underline border-b-2 border-divider hover:border-primary;
   }
 
   :is(h1, h2, h3, h4) a {
@@ -115,7 +113,7 @@ body.dark {
   }
 
   :not(pre) > code {
-    @apply px-1 font-bold text-code;
+    @apply px-1 font-bold;
   }
 
   :not(pre) > code::before,

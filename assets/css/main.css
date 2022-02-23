@@ -39,13 +39,8 @@ body {
 
   --divider: var(--darker-beige);
 
-  --foreground-note: var(--white);
-  --background-note: var(--darker-blue);
-  --border-note: var(--blue);
-
-  --foreground-warn: var(--white);
-  --background-warn: var(--dark-red);
-  --border-warn: var(--darker-red);
+  --note: var(--dark-blue);
+  --warn: var(--darker-red);
 }
 
 body.dark {
@@ -61,13 +56,8 @@ body.dark {
 
   --divider: var(--grey);
 
-  --foreground-note: var(--white);
-  --background-note: var(--darker-blue);
-  --border-note: var(--dark-blue);
-
-  --foreground-warn: var(--white);
-  --background-warn: var(--dark-red);
-  --border-warn: var(--darker-red);
+  --note: var(--dark-blue);
+  --warn: var(--red);
 }
 
 @tailwind base;

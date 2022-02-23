@@ -1,5 +1,7 @@
-<section data-warn class="flex gap-4 my-8 px-8 py-4 rounded bg-warn-background !text-warn border-2 border-warn-border">
-  <div>{{ partial "svgs/x-octagon.svg" }}</div>
+<section data-warn class="flex my-8 gap-4 p-4 bg-divider border-l-2 border-warn">
+  <div class="text-warn">
+    {{ partial "svgs/x-octagon.svg" }}
+  </div>
 
   <div>
     {{ .Inner | markdownify }}

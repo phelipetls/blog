@@ -31,14 +31,10 @@ module.exports = {
         background: withOpacityValue('--background-code'),
       },
       note: {
-        DEFAULT: withOpacityValue('--foreground-note'),
-        background: withOpacityValue('--background-note'),
-        border: withOpacityValue('--border-note'),
+        DEFAULT: withOpacityValue('--note'),
       },
       warn: {
-        DEFAULT: withOpacityValue('--foreground-warn'),
-        background: withOpacityValue('--background-warn'),
-        border: withOpacityValue('--border-warn'),
+        DEFAULT: withOpacityValue('--warn'),
       },
       heading: {
         DEFAULT: withOpacityValue('--foreground-heading'),

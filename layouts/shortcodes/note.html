@@ -1,5 +1,7 @@
-<section data-note class="flex gap-4 my-8 px-8 py-4 rounded bg-note-background !text-note border-2 border-note-border">
-  <div>{{ partial "svgs/info.svg" }}</div>
+<section data-note class="flex my-8 gap-4 p-4 bg-divider border-l-2 border-note">
+  <div class="text-note">
+    {{ partial "svgs/info.svg" }}
+  </div>
 
   <div>
     {{ .Inner | markdownify }}

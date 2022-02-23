@@ -1,7 +1,7 @@
 <nav class="flex justify-between flex-wrap sm:flex-nowrap gap-2" aria-label="{{ i18n "PostsNavigation" }}">
   <div class="flex items-center gap-2 group">
     {{ with .PrevInSection }}
-      <div class="flex items-center group-hover:text-highlight">
+      <div class="flex items-center group-hover:text-primary">
         {{ partial "svgs/chevron-left.svg" }}
       </div>
 
@@ -17,7 +17,7 @@
         {{ .Title }}
       </a>
 
-      <div class="flex items-center group-hover:text-highlight">
+      <div class="flex items-center group-hover:text-primary">
         {{ partial "svgs/chevron-right.svg" }}
       </div>
     {{ end }}

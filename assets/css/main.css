@@ -31,7 +31,6 @@ body {
   --foreground-code: var(--black);
   --background-code: var(--darker-beige);
 
-  --highlight: var(--orange);
   --divider: var(--darker-beige);
 
   --foreground-note: var(--white);
@@ -52,7 +51,6 @@ body.dark {
   --foreground-code: var(--beige);
   --background-code: var(--grey);
 
-  --highlight: var(--orange);
   --divider: var(--grey);
 
   --foreground-note: var(--white);
@@ -105,7 +103,7 @@ body.dark {
   }
 
   a {
-    @apply no-underline border-b-2 border-divider hover:border-highlight;
+    @apply no-underline border-b-2 border-divider hover:border-primary;
   }
 
   :is(h1, h2, h3, h4) a {
@@ -142,7 +140,7 @@ body.dark {
   }
 
   blockquote {
-    @apply pl-8 border-l-4 border-highlight;
+    @apply pl-8 border-l-4 border-primary;
   }
 
   kbd {
@@ -161,7 +159,7 @@ body.dark {
     @apply px-4 py-2;
   }
   .btn-primary {
-    @apply bg-foreground text-background;
+    @apply bg-primary text-background;
   }
   a.btn {
     @apply border-0;
@@ -175,5 +173,5 @@ body.dark {
 .chroma .hl {
   /* unmaintainable hack to fix offset due to 4px border */
   padding-left: calc(2rem - 4px);
-  @apply pr-8 -mx-8 w-auto border-l-4 border-highlight !important;
+  @apply pr-8 -mx-8 w-auto border-l-4 border-primary !important;
 }

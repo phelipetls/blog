@@ -23,7 +23,6 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       primary: withOpacityValue('--primary'),
-      highlight: withOpacityValue('--highlight'),
       divider: withOpacityValue('--divider'),
       foreground: withOpacityValue('--foreground'),
       background: withOpacityValue('--background'),
@@ -41,6 +40,9 @@ module.exports = {
         background: withOpacityValue('--background-warn'),
         border: withOpacityValue('--border-warn'),
       },
+      heading: {
+        DEFAULT: withOpacityValue('--foreground-heading'),
+      }
     },
   },
   plugins: [],

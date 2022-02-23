@@ -4,20 +4,16 @@
   --code-font-family: 'Consolas', 'Fira Code', monospace;
 
   --beige: 245, 245, 220;
-  --dark-beige: 229, 228, 197;
   --darker-beige: 213, 211, 168;
 
   --black: 51, 51, 51;
   --grey: 74, 74, 74;
-  --white: 255, 255, 255;
 
   --dark-blue: 79, 146, 255;
 
   --darker-red: 194, 0, 42;
 
   --muted-blue: 64, 118, 210;
-  --brown: 122, 93, 69;
-  --ash: 198, 201, 164;
   --orange: 236, 170, 54;
 }
 
@@ -25,6 +21,7 @@ body {
   --primary: var(--muted-blue);
 
   --foreground: var(--grey);
+
   --background: var(--beige);
 
   --surface: var(--darker-beige);
@@ -38,6 +35,7 @@ body.dark {
   --primary: var(--orange);
 
   --foreground: var(--beige);
+
   --background: var(--black);
 
   --surface: var(--grey);

@@ -7,7 +7,9 @@ let lastScrollPosition = window.scrollY
 function handleScroll() {
   const newScrollPosition = window.scrollY
 
-  if (newScrollPosition > lastScrollPosition) {
+  const isScrollingDown = newScrollPosition > lastScrollPosition
+
+  if (isScrollingDown) {
     navContainer.style.transform = `translateY(-100%)`
     navContainer.classList.add('!shadow-none')
   } else {

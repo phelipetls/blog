@@ -23,8 +23,10 @@ function handleScroll() {
 window.addEventListener('scroll', throttle(handleScroll, 300), false)
 
 const observer = new IntersectionObserver(
-  function ([e]) {
-    if (e.isIntersecting) {
+  function (entries) {
+    const entry = entries[0]
+
+    if (entry.isIntersecting) {
       navContainer.classList.add('shadow', 'shadow-divider')
     } else {
       navContainer.classList.remove('shadow', 'shadow-divider')

@@ -2,26 +2,6 @@ import throttle from 'lodash.throttle'
 
 const navContainer = document.querySelector('[data-nav-container]')
 
-let lastScrollPosition = window.scrollY
-
-function handleScroll() {
-  const newScrollPosition = window.scrollY
-
-  const isScrollingDown = newScrollPosition > lastScrollPosition
-
-  if (isScrollingDown) {
-    navContainer.style.transform = `translateY(-100%)`
-    navContainer.classList.add('!shadow-none')
-  } else {
-    navContainer.style.transform = `translateY(0%)`
-    navContainer.classList.remove('!shadow-none')
-  }
-
-  lastScrollPosition = Math.max(newScrollPosition, 0)
-}
-
-window.addEventListener('scroll', throttle(handleScroll, 300), false)
-
 const observer = new IntersectionObserver(
   function (entries) {
     const entry = entries[0]
@@ -40,3 +20,23 @@ const observer = new IntersectionObserver(
 )
 
 observer.observe(navContainer)
+
+let lastScrollPosition = window.scrollY
+
+function handleScroll() {
+  const newScrollPosition = window.scrollY
+
+  const isScrollingDown = newScrollPosition > lastScrollPosition
+
+  if (isScrollingDown && isIntersecting) {
+    navContainer.style.transform = `translateY(-100%)`
+    navContainer.classList.add('!shadow-none')
+  } else {
+    navContainer.style.transform = `translateY(0%)`
+    navContainer.classList.remove('!shadow-none')
+  }
+
+  lastScrollPosition = Math.max(newScrollPosition, 0)
+}
+
+window.addEventListener('scroll', throttle(handleScroll, 300), false)

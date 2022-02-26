@@ -10,7 +10,9 @@
       </time>
 
       {{ if (.Lastmod.After .Date) }}
-        ·
+        <span class="hidden sm:inline">
+          ·
+        </span>
 
         <span class="uppercase text-sm">
           {{ i18n "Lastmod" . }}

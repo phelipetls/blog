@@ -2,20 +2,23 @@ import throttle from 'lodash.throttle'
 
 const navContainer = document.querySelector('[data-nav-container]')
 
+let navIsStuck = false
+
 const observer = new IntersectionObserver(
   function (entries) {
     const entry = entries[0]
 
+    navIsStuck = entry.isIntersecting
+
     if (entry.isIntersecting) {
-      navContainer.classList.add('shadow', 'shadow-divider')
+      entry.target.classList.add('shadow', 'shadow-divider')
     } else {
-      navContainer.classList.remove('shadow', 'shadow-divider')
+      entry.target.classList.remove('shadow', 'shadow-divider')
     }
   },
   {
-    root: document.querySelector('[data-scroll-container]'),
-    rootMargin: `-${navContainer.clientHeight}px 0px 0px 0px`,
-    threshold: 1
+    rootMargin: '0px 0px -100% 0px',
+    threshold: 0,
   }
 )
 
@@ -28,7 +31,7 @@ function handleScroll() {
 
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
-  if (isScrollingDown && isIntersecting) {
+  if (isScrollingDown && navIsStuck) {
     navContainer.style.transform = `translateY(-100%)`
     navContainer.classList.add('!shadow-none')
   } else {

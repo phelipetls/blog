@@ -1,6 +1,6 @@
 {{ define "main" }}
   <article>
-    <div class="flex flex-row items-center gap-2 mb-4">
+    <div class="mb-4">
       <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
         {{ if eq .Lang "en" }}
           {{ .Date.Format "January 02, 2006" }}
@@ -12,13 +12,13 @@
       {{ if (.Lastmod.After .Date) }}
         ·
 
-        <div class="uppercase text-sm">
+        <span class="uppercase text-sm">
           {{ i18n "Lastmod" . }}
 
           <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
             {{ i18n "DateFormat" (.Lastmod) }}
           </time>
-        </div>
+        </span>
       {{ end }}
     </div>
 

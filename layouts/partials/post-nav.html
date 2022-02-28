@@ -1,25 +1,21 @@
 <nav class="flex justify-between flex-wrap sm:flex-nowrap gap-2" aria-label="{{ i18n "PostsNavigation" }}">
-  <div class="flex items-center gap-2">
-    {{ with .PrevInSection }}
-      <div class="flex items-center text-primary">
+  {{ with .PrevInSection }}
+    <a class="flex items-center gap-2 border-0" href="{{ .RelPermalink }}" title="{{ i18n "PrevPost" }}">
+      <span class="text-primary">
         {{ partial "svgs/arrow-left.svg" }}
-      </div>
+      </span>
 
-      <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "PrevPost" }}">
-        {{ .Title }}
-      </a>
-    {{ end }}
-  </div>
+      {{ .Title }}
+    </a>
+  {{ end }}
 
-  <div class="self-end text-right mt-2 sm:mt-0 h-full flex justify-end gap-2">
-    {{ with .NextInSection }}
-      <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "NextPost" }}">
-        {{ .Title }}
-      </a>
+  {{ with .NextInSection }}
+    <a class="flex items-center self-end text-right mt-2 sm:mt-0 h-full justify-end gap-2 border-0" href="{{ .RelPermalink }}" title="{{ i18n "NextPost" }}">
+      {{ .Title }}
 
-      <div class="flex items-center text-primary">
+      <span class="text-primary">
         {{ partial "svgs/arrow-right.svg" }}
-      </div>
-    {{ end }}
-  </div>
+      </span>
+    </a>
+  {{ end }}
 </nav>

@@ -1,8 +1,8 @@
 <svg
   id="moon"
   xmlns="http://www.w3.org/2000/svg"
-  width="{{ .Width | default 24 }}"
-  height="{{ .Height | default 24 }}"
+  width="{{ .width | default 24 }}"
+  height="{{ .height | default 24 }}"
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"

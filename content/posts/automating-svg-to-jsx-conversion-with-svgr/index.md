@@ -1,21 +1,20 @@
 ---
-title: "Automating svg to jsx conversion with svgr"
+title: "Automating SVG to JSX conversion with svgr"
 date: 2021-09-08
 tags: ["react", "javascript", "typescript"]
 ---
 
-I found that getting svg files from Figma ready to be used in your React
-applications can be a bottleneck and prone to error. One way to tackle this is
-by using [svgr](https://react-svgr.com/) to do this. Its defaults are good
-enough, but you're more likely to customize the JavaScript output with a
+Transforming SVG files into JSX is boring and prone to error. We can handle it
+better with [svgr](https://react-svgr.com/). Its defaults are good enough, but
+you'll likely need to customize it for your needs, which is made possible by writing a
 [template](https://react-svgr.com/docs/custom-templates/).
 
-These templates are babel plugins. Learning how to build one can be quite
+These templates are babel plugins. Learning how to build one can be
 intimidating since it's a
 [huge](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md)
-topic, but worth it.
+topic, but it's worth it.
 
-In this blog post I want to share a template that converts a svg like this:
+In this blog post I want to share a template that converts this SVG file:
 
 ```svg
 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -38,13 +37,13 @@ export const SvgComponent: React.FC<SvgIconProps> = (props) => {
 };
 ```
 
-You'll notice it uses the Material-UI's [SvgIcon](https://next.material-ui.com/api/svg-icon/) component and it's written in TypeScript.
+So we need to wrap the SVG around the
+[SvgIcon](https://next.material-ui.com/api/svg-icon/) component from
+Material-UI library, with type annotations and we need to override props using the spread syntax.
 
-It has some tricky things like type annotations and spread syntax, which is not
-obvious how to insert with babel. So let's get to it.
+# Template
 
-First, the full code if you're only interested in that, but I'll break down the
-code further below:
+Here's the template that worked for me, followed by the explanation.
 
 ```javascript
 const {
@@ -100,8 +99,9 @@ const template = (
 module.exports = template
 ```
 
-First, we use the TypeScript plugin by default to build the AST, there is no
-opt out of it:
+## Setting up plugins
+
+We need to use the TypeScript plugin:
 
 ```javascript
 const plugins = ['jsx', 'typescript']
@@ -109,7 +109,7 @@ const plugins = ['jsx', 'typescript']
 const typescriptTemplate = template.smart({ plugins })
 ```
 
-# Jsx
+## Building the JSX
 
 Now, the jsx part. Our goal is to replace the built-in `svg` element with the
 `SvgIcon` component. We can do this by creating a new
@@ -135,11 +135,9 @@ You'll notice how we reuse the same attributes from the original jsx opening
 element and also spread `props` into them using
 [jsxSpreadAttribute](https://babeljs.io/docs/en/babel-types#jsxspreadattribute).
 
-# Type Annotation
+# Writing type annotations
 
-Now, to inject the type annotation into the template is what took me the most part.
-
-Initially I thought that this would have worked:
+I thought that this would work:
 
 {{< highlight javascript "hl_lines=7" >}}
 // ...
@@ -165,8 +163,8 @@ Then I went with this hack:
 componentName.name = 'SvgComponent: React.FC<SvgIconProps>'
 ```
 
-This works but it doesn't spark joy... Then I decided to put in more effort and
-I came up with this (more verbose) solution:
+This works but it doesn't feel right... This seems to be the proper, although
+more verbose, way:
 
 ```javascript
 componentName.typeAnnotation = tsTypeAnnotation(
@@ -177,18 +175,14 @@ componentName.typeAnnotation = tsTypeAnnotation(
 )
 ```
 
-It cost me some more hours but it made me learn more about how to build AST
-nodes so the next time I have to do it will be hopefully more easy. I figured
-this out by reading the [babel-types](https://babeljs.io/docs/en/babel-types)
-docs.
+To come up with this, I needed to learn how to properly [build an AST with
+Babel](https://babeljs.io/docs/en/babel-types).
 
 # Usage in Vim
 
-If you're a vimmer, you can convert the current file by using `%!npx @svgr/cli
---template path/to/template.js`, which will pass the entire file to the command
-as standard input and replace its content with the command's standard output.
-In case you didn't know, this is a built-in feature called
-[filter](http://vimdoc.sourceforge.net/htmldoc/change.html#filter).
+If you use Vim, you can convert a file using `%!npx @svgr/cli --template
+path/to/template.js`. In case you didn't know, this is a built-in feature
+called [filter](http://vimdoc.sourceforge.net/htmldoc/change.html#filter).
 
 You could also configure your project to use a template by default with a
 [`.svgrrc`](https://react-svgr.com/docs/configuration-files/) file at the
@@ -197,19 +191,19 @@ project's root folder:
 ```javascript
 // .svgrrc.js
 module.exports = {
-template: require('./path/to/template.js')
+  template: require('./path/to/template.js')
 }
 ```
 
 # Usage in VS Code
 
-Of course, svgr also has a [VS Code
+`svgr` also has a [VS Code
 extension](https://marketplace.visualstudio.com/items?itemName=NathHorrigan.code-svgr).
 But, if you prefer, you could use the [Edit With Shell
 Command](https://marketplace.visualstudio.com/items?itemName=ryu1kn.edit-with-shell)
-extension, which allows you to do something similar to Vim's filter.
+extension, which is similar to Vim's filter feature.
 
-# TODOs
+# Pending improvements
 
 Here are some improvements I couldn't figure out how to do/don't care so much,
 but it would be nice to have:
@@ -219,13 +213,3 @@ but it would be nice to have:
 - Remove semicolons.
 
 Right now this still requires some manual labor to get 100% right, but it's ok.
-
-# Conclusion
-
-Ideally I shouldn't be converting svg files into React components in this ad
-hoc way, but rather use a library with all the icons ready, which unfortunately
-nobody at work bothered to make.
-
-But svgr seems like a good idea for maintaining an icons library, since I could
-then update an arbitrary number of files by changing just a template and
-running a cli program, which isn't bad.

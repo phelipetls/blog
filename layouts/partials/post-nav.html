@@ -2,7 +2,7 @@
   <div class="flex items-center gap-2">
     {{ with .PrevInSection }}
       <div class="flex items-center text-primary">
-        {{ partial "svgs/chevron-left.svg" }}
+        {{ partial "svgs/arrow-left.svg" }}
       </div>
 
       <a class="border-0" href="{{ .RelPermalink }}" title="{{ i18n "PrevPost" }}">
@@ -18,7 +18,7 @@
       </a>
 
       <div class="flex items-center text-primary">
-        {{ partial "svgs/chevron-right.svg" }}
+        {{ partial "svgs/arrow-right.svg" }}
       </div>
     {{ end }}
   </div>

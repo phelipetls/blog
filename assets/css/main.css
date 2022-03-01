@@ -31,7 +31,7 @@ body {
 
 body.dark {
   --primary: var(--orange);
-  --foreground: 245, 241, 206;
+  --foreground: var(--beige);
   --background: var(--black);
   --surface: var(--grey);
   --divider: var(--grey);

@@ -15,8 +15,10 @@ exports.fn = () => {
     element: {
       enter: (node) => {
         for (const name of Object.keys(node.attributes)) {
-          if (node.name === 'svg' && name === 'width' || name === 'height') {
-            node.attributes[name] = `{{ .${name} | default 24 }}`
+          if (node.name === 'svg') {
+            if (name === 'width' || name === 'height') {
+              node.attributes[name] = `{{ .${name} | default 24 }}`
+            }
           }
         }
       },

@@ -3,6 +3,10 @@
   "extends": [
     "eslint:recommended"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "parserOptions": {
     "ecmaVersion": 2015,
     "sourceType": "module"

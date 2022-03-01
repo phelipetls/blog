@@ -19,28 +19,20 @@
 
 body {
   --primary: var(--muted-blue);
-
   --foreground: var(--grey);
-
   --background: var(--beige);
-
   --surface: var(--darker-beige);
   --divider: var(--darker-beige);
-
   --note: var(--dark-blue);
   --warn: var(--darker-red);
 }
 
 body.dark {
   --primary: var(--orange);
-
   --foreground: 245, 241, 206;
-
   --background: var(--black);
-
   --surface: var(--grey);
   --divider: var(--grey);
-
   --note: var(--dark-blue);
   --warn: var(--red);
 }

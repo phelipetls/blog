@@ -29,5 +29,5 @@
     {{ $resumeScript = $resumeScript | minify }}
   {{ end }}
 
-  <script src="{{ $resumeScript.Permalink }}"></script>
+  <script type="module" src="{{ $resumeScript.Permalink }}"></script>
 {{ end }}

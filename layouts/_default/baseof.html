@@ -37,7 +37,7 @@
     </div>
 
     {{ range (.Resources.Match "*.js") }}
-      <script src="{{ .RelPermalink }}"></script>
+      <script type="module" src="{{ .RelPermalink }}"></script>
     {{ end }}
 
     {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
@@ -48,8 +48,8 @@
       {{ $navScript = $navScript | minify }}
     {{ end }}
 
-    <script src="{{ $themeButtonScript.Permalink }}"></script>
-    <script src="{{ $navScript.Permalink }}"></script>
+    <script type="module" src="{{ $themeButtonScript.Permalink }}"></script>
+    <script type="module" src="{{ $navScript.Permalink }}"></script>
 
     {{ block "scripts" . }}
     {{ end }}

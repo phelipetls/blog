@@ -32,20 +32,11 @@ other = 'Next post'
 [Contacts]
 other = 'Contacts'
 
-[Moon]
-other = 'Moon'
-
-[Sun]
-other = 'Sun'
-
 [Lastmod]
 other = 'Last modified:'
 
 [DateFormat]
 other = '{{ .Format "January 02, 2006" }}'
-
-[Document]
-other = 'Document'
 
 [ThemeIcon]
 other = 'Theme icon'

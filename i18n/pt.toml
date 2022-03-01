@@ -34,20 +34,11 @@ other = 'Próximo post'
 [Contacts]
 other = 'Contatos'
 
-[Moon]
-other = 'Lua'
-
-[Sun]
-other = 'Sol'
-
 [Lastmod]
 other = 'Editado em:'
 
 [DateFormat]
 other = '{{ .Format "02 de Agosto" }}'
-
-[Document]
-other = 'Documento'
 
 [ThemeIcon]
 other = 'Ícone do tema'

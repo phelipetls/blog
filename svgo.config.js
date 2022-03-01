@@ -5,6 +5,7 @@ module.exports = {
     pretty: true,
   },
   plugins: [
-    require('./svg-template.js')
+    require('./svg-template.js'),
+    'removeTitle',
   ],
 };

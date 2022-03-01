@@ -11,5 +11,5 @@
     "ecmaVersion": 2015,
     "sourceType": "module"
   },
-  "ignorePatterns": ["*.min.js"]
+  "ignorePatterns": ["public", "*.min.js"]
 }

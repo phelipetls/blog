@@ -9,7 +9,7 @@
   --black: 51, 51, 51;
   --grey: 74, 74, 74;
 
-  --dark-blue: 79, 146, 255;
+  --blue: 79, 146, 255;
 
   --darker-red: 194, 0, 42;
 
@@ -23,7 +23,7 @@ body {
   --background: var(--beige);
   --surface: var(--darker-beige);
   --divider: var(--darker-beige);
-  --note: var(--dark-blue);
+  --note: var(--blue);
   --warn: var(--darker-red);
 }
 
@@ -33,7 +33,7 @@ body.dark {
   --background: var(--black);
   --surface: var(--grey);
   --divider: var(--grey);
-  --note: var(--dark-blue);
+  --note: var(--blue);
   --warn: var(--red);
 }
 

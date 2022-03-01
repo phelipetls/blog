@@ -11,15 +11,16 @@
   --grey: 74, 74, 74;
 
   --blue: 79, 146, 255;
+  --dark-blue: 64, 118, 210;
+  --darker-blue: 97, 125, 185;
 
   --darker-red: 194, 0, 42;
 
-  --muted-blue: 64, 118, 210;
   --orange: 236, 170, 54;
 }
 
 body {
-  --primary: var(--muted-blue);
+  --primary: var(--dark-blue);
   --foreground: var(--grey);
   --background: var(--beige);
   --surface: var(--dark-beige);
@@ -34,7 +35,7 @@ body.dark {
   --background: var(--black);
   --surface: var(--grey);
   --divider: var(--grey);
-  --note: var(--blue);
+  --note: var(--darker-blue);
   --warn: var(--red);
 }
 

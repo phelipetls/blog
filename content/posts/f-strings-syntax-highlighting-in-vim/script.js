@@ -1,3 +1,4 @@
+/* global Cocoen */
 const before = document.querySelector("[alt='Before']");
 const after = document.querySelector("[alt='After']");
 

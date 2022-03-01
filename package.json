@@ -40,6 +40,10 @@
     "tailwindcss": "^3.0.23"
   },
   "simple-git-hooks": {
-    "pre-push": "npm run generate-gravatar-blurhash"
+    "pre-push": "npm run generate-gravatar-blurhash",
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
   }
 }

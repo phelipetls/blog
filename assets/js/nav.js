@@ -28,7 +28,7 @@ function handleScroll() {
 
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
-  if (isScrollingDown && isIntersecting) {
+  if (isScrollingDown) {
     navContainer.style.transform = `translateY(-100%)`
     navContainer.classList.add('!shadow-none')
   } else {

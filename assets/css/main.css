@@ -24,7 +24,7 @@ body {
   --foreground: var(--grey);
   --background: var(--beige);
   --surface: var(--dark-beige);
-  --divider: var(--beige);
+  --divider: var(--darker-beige);
   --note: var(--blue);
   --warn: var(--darker-red);
 }

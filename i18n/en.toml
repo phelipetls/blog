@@ -33,7 +33,7 @@ other = 'Next post'
 other = 'Contacts'
 
 [Lastmod]
-other = 'Last modified:'
+other = 'Last modified at'
 
 [DateFormat]
 other = '{{ .Format "January 02, 2006" }}'

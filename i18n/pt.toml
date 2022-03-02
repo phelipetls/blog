@@ -35,7 +35,7 @@ other = 'Próximo post'
 other = 'Contatos'
 
 [Lastmod]
-other = 'Editado em:'
+other = 'Editado em'
 
 [DateFormat]
 other = '{{ .Format "02 de Agosto" }}'

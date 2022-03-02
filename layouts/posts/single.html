@@ -1,12 +1,14 @@
 {{ define "main" }}
   <article>
-    <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
-      {{ if eq .Lang "en" }}
-        {{ .Date.Format "January 02, 2006" }}
-      {{ else }}
-        {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-      {{ end }}
-    </time>
+    <div class="mb-2">
+      <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ if eq .Lang "en" }}
+          {{ .Date.Format "January 02, 2006" }}
+        {{ else }}
+          {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+        {{ end }}
+      </time>
+    </div>
 
     <h1 class="text-4xl mb-4">
       {{ .Title }}

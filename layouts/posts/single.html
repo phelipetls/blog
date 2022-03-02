@@ -1,32 +1,25 @@
 {{ define "main" }}
   <article>
-    <div class="mb-4">
-      <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
-        {{ if eq .Lang "en" }}
-          {{ .Date.Format "January 02, 2006" }}
-        {{ else }}
-          {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-        {{ end }}
-      </time>
-
-      {{ if (.Lastmod.After .Date) }}
-        <span class="hidden sm:inline">
-          ·
-        </span>
-
-        <span class="uppercase text-sm">
-          {{ i18n "Lastmod" . }}
-
-          <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
-            {{ i18n "DateFormat" (.Lastmod) }}
-          </time>
-        </span>
+    <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ if eq .Lang "en" }}
+        {{ .Date.Format "January 02, 2006" }}
+      {{ else }}
+        {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
       {{ end }}
-    </div>
+    </time>
 
     <h1 class="text-4xl mb-4">
       {{ .Title }}
     </h1>
+
+    {{ if (.Lastmod.After .Date) }}
+      <div class="text-sm mb-4 italic">
+        {{ i18n "Lastmod" . }}
+        <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
+          {{ i18n "DateFormat" (.Lastmod) }}
+        </time>
+      </div>
+    {{ end }}
 
     <div class="mb-4">
       {{ partial "post-tags.html" . }}

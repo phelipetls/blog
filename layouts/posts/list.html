@@ -6,7 +6,7 @@
       </h3>
 
       {{ range .Pages }}
-        <article class="mt-8 flex flex-col gap-2">
+        <div class="mt-8 flex flex-col gap-2">
           <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ if eq .Lang "en" }}
               {{ .Date.Format "January, 02" }}
@@ -18,7 +18,7 @@
           <h2>
             <a href="{{ .Permalink }}">{{ .Title }}</a>
           </h2>
-        </article>
+        </div>
       {{ end }}
 
     {{ end }}

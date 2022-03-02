@@ -237,3 +237,21 @@ Native.
 Besides that, everything worked as expected and I hope it works for your
 project too! I didn't have this problem with a project using Expo's Bare
 Workflow, not sure why though.
+
+# Advice for `react-query` users
+
+If you use `react-query`, I think it's also wise to call
+[`QueryClient.clear`](https://react-query.tanstack.com/reference/QueryClient#queryclientclear)
+in a decorator, to avoid surprises with the cache.
+
+```javascript
+// storybook/index.js
+import { addDecorator } from '@storybook/react-native'
+import { queryClient } from '../lib/react-query'
+
+addDecorator((storyFn) => {
+  queryClient.clear()
+
+  return storyFn()
+})
+```

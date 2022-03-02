@@ -35,11 +35,11 @@
   </article>
 
   {{ if (eq .Site.Language.LanguageName "English") }}
-    <div class="rounded border-2 border-divider p-4 my-8">
-      <h1 class="text-center">Subscribe</h1>
+    <div class="rounded bg-surface p-4 my-8">
+      <h1 class="text-center">Subscribe for latest content</h1>
 
       <p class="text-center">
-        Subscribe via {{ partial "rss-posts-link" . }} or e-mail. <i>Unsubscribe at any time</i>.
+        {{ partial "rss-posts-link" . }} or subscribe via e-mail below.
       </p>
 
       <form
@@ -74,6 +74,6 @@
 
 {{ define "partials/rss-posts-link" }}
   {{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-    <a href="{{ .Permalink }}">RSS</a>
+    <a href="{{ .Permalink }}">Grab the RSS link</a>
   {{ end }}
 {{ end }}

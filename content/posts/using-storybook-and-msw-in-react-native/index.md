@@ -100,9 +100,9 @@ export default StorybookUIRoot
 # Porting `msw-storybook-addon` to React Native
 
 A decorator is simply a function that does something before rendering the
-storybok, which is a React component.
+story, which is a React component.
 
-Here's what we need to do before rendering the story:
+Here is what we need to do:
 
 * Initialize the MSW server.
 * Clean it up, which means to reset old request handlers.

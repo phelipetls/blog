@@ -34,7 +34,7 @@ Our end goal is to port `msw-storybook-addon` to React Native. So let's first
 understand how it works.
 
 This is a library by the MSW team that provides you with a
-[global decorator](https://storybook.js.org/docs/react/writing-stories/decorators).
+[global Storybook decorator](https://storybook.js.org/docs/react/writing-stories/decorators).
 From the docs, [here's how you add to your Storybook configuration](https://github.com/mswjs/msw-storybook-addon):
 
 ```js
@@ -74,7 +74,7 @@ This code is using Storybook v6, but only Storybook v5 is available for React
 Native. Fortunately, both versions support decorators, they differ mostly about
 how you configure/use it:
 
-```js {hl_lines=["3-4","8"]}
+```js {hl_lines=["3-4","8-9"]}
 // storybook/index.js
 import { getStorybookUI, configure } from '@storybook/react-native'
 import { addDecorator } from '@storybook/react-native'
@@ -99,14 +99,14 @@ export default StorybookUIRoot
 
 # Porting `msw-storybook-addon` to React Native
 
-A decorator is simply a function that takes the story and do something with it
-before it renders.
+A decorator is simply a function that do something before rendering the
+storybok, which is a React component.
 
 Here's what we need to do before rendering the story:
 
 * Initialize the MSW server.
 * Clean it up, which means to reset old request handlers.
-* Configure it to use new handlers.
+* Set up the new request handlers, if any.
 
 Our implementation should not differ very much from the `msw-storybook-addon`
 [implementation](https://github.com/mswjs/msw-storybook-addon/blob/35a4b198a4b4eead9a2d0771f81460c6788e77a7/packages/msw-addon/src/mswDecorator.ts#L69-L102).
@@ -115,18 +115,20 @@ Our implementation should not differ very much from the `msw-storybook-addon`
 
 We can't use [`setupWorker`](https://mswjs.io/docs/api/setup-worker) because
 we're not in a browser, we don't have service workers.
-[`setupServer`](https://mswjs.io/docs/api/setup-server) also won't work, we
-don't have Node.
+[`setupServer`](https://mswjs.io/docs/api/setup-server) also won't work,
+because we're not in a Node.js environment.
 
-It turns out that we need to use `setupServer` function from the `msw/native`
-module. This is still undocumented, you'll only read about it in [this GitHub
-issue](https://github.com/mswjs/msw/issues/203) and in [this example has more
-details on how to use it](https://github.com/mswjs/examples/pull/60).
+It turns out that we need to use the `setupServer` function from the
+`msw/native` module. This is still undocumented, you'll only read about it in
+[this GitHub issue](https://github.com/mswjs/msw/issues/203) and in [this
+example with more details on how to use
+it](https://github.com/mswjs/examples/pull/60).
 
-## Show me the code
+## Implementation
 
-What follows is what worked for me. You can ignore all non highlighted code,
-since it's only meant to stay compatible with the [`msw-storybook-addon`
+What follows is an implementation that worked for me. You can ignore all non
+highlighted code, since it's only meant to stay compatible with the
+[`msw-storybook-addon`
 API](https://github.com/mswjs/msw-storybook-addon/blob/35a4b198a4b4eead9a2d0771f81460c6788e77a7/packages/msw-addon/src/mswDecorator.ts#L69-L102).
 
 ```js {hl_lines=["2","3-12"]}
@@ -170,8 +172,9 @@ export const withMsw = (storyFn, { parameters: { msw } }) => {
 }
 ```
 
-You'll notice that we import a polyfill. This is required, as explained
-[here](https://github.com/mswjs/examples/pull/60/files):
+You'll notice that we import a polyfill. [This is required, as explained in
+this Pull Request with an
+example](https://github.com/mswjs/examples/pull/60/files):
 
 >  The polyfill `react-native-url-polyfill` is required or else calling
 >  `server.start()` will result in an Error: not implemented message followed

@@ -99,7 +99,7 @@ export default StorybookUIRoot
 
 # Porting `msw-storybook-addon` to React Native
 
-A decorator is simply a function that do something before rendering the
+A decorator is simply a function that does something before rendering the
 storybok, which is a React component.
 
 Here's what we need to do before rendering the story:

@@ -60,3 +60,6 @@ other = 'Escuro'
 
 [ThemeOptions]
 other = 'Opções de tema'
+
+[System]
+other = 'Sistema'

@@ -58,3 +58,6 @@ other = 'Dark'
 
 [ThemeOptions]
 other = 'Theme options'
+
+[System]
+other = 'System'

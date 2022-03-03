@@ -131,7 +131,7 @@ highlighted code, since it's only meant to stay compatible with the
 [`msw-storybook-addon`
 API](https://github.com/mswjs/msw-storybook-addon/blob/35a4b198a4b4eead9a2d0771f81460c6788e77a7/packages/msw-addon/src/mswDecorator.ts#L69-L102).
 
-```js {hl_lines=["2","3-12"]}
+```js {hl_lines=["2","3-12","15"]}
 // ./mswDecorator.js
 import 'react-native-url-polyfill/auto'
 import { setupServer } from 'msw/native'

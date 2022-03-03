@@ -233,7 +233,7 @@ and to [`Promise.finally` being
 undefined](https://github.com/storybookjs/react-native/issues/20). I fixed it
 by using `patch-package` to remove the line importing the polyfill, [as the
 `@storybook/react-native` maintainer
-recommended](https://github.com/storybookjs/react-native/issues/20). This is
+recommended](https://github.com/storybookjs/react-native/issues/20#issuecomment-1046101914). This is
 unfortunate... I hope that a stable Storybook v6 comes soon enough for React
 Native.
 

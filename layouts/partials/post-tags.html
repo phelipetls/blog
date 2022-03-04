@@ -1,5 +1,7 @@
-{{ range (.GetTerms "tags") }}
-  <a href="{{ .RelPermalink }}" class="no-underline rounded-full border-2 px-2">
-    {{- .Title -}}
-  </a>
-{{ end }}
+<div class="flex flex-wrap gap-2 py-2">
+  {{ range (.GetTerms "tags") }}
+    <a href="{{ .RelPermalink }}" class="no-underline rounded-full border-2 px-2 py-1">
+      {{- .Title -}}
+    </a>
+  {{ end }}
+</div>

@@ -139,6 +139,9 @@ body.dark {
   .btn-primary {
     @apply bg-primary text-background;
   }
+  .btn-secondary {
+    @apply text-primary;
+  }
   a.btn {
     @apply border-0;
   }

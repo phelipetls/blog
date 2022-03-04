@@ -1,16 +1,20 @@
 {{ define "main" }}
-  <h1 class="mb-8">{{ .Name }}</h1>
+  <h1>{{ .Name }}</h1>
 
   <section class="flex-1">
     {{ range .Pages }}
-      <div class="flex flex-col mb-8">
-        <h2 class="inline text-base">
-          <a href="{{ .Permalink }}">
-            {{ .Title }}
-          </a>
-        </h2>
+      <div class="mt-8 flex flex-col gap-2">
+        <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ if eq .Lang "en" }}
+            {{ .Date.Format "January, 02" }}
+          {{ else }}
+            {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+          {{ end }}
+        </time>
 
-        {{ partial "post-tags.html" . }}
+        <h2>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </h2>
       </div>
     {{ end }}
   </section>

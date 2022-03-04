@@ -146,7 +146,7 @@ body.dark {
     @apply border-0;
   }
   .btn-icon {
-    @apply rounded-full p-1;
+    @apply rounded-full p-2;
   }
 }
 

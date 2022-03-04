@@ -7,7 +7,7 @@ menu:
     weight: 1
 ---
 
-Hi 👋, I'm a front-end developer based in Rio, Brazil.
+Hi 👋, I'm a front-end developer from Rio, Brazil.
 
 I currently work at [Mutual](https://mutual.club/), building web and mobile
 apps with React, React Native and TypeScript.

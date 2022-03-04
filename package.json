@@ -7,7 +7,7 @@
     "generate-gravatar-blurhash": "node scripts/generate-gravatar-blurhash.js",
     "postinstall": "simple-git-hooks",
     "hugo:dev": "hugo serve",
-    "tailwind:dev": "tailwindcss -i ./assets/css/main.css -o ./static/tailwind.dev.css --watch",
+    "tailwind:dev": "tailwindcss -i ./assets/css/main.css -o ./assets/css/tailwind.dev.css --watch",
     "dev": "run-p hugo:dev tailwind:dev"
   },
   "repository": {

@@ -12,7 +12,8 @@
   {{ $css := resources.Get "css/main.css" | postCSS | minify | resources.PostProcess }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 {{ else }}
-  <link rel="stylesheet" href="/tailwind.dev.css" />
+  {{ $css := resources.Get "css/tailwind.dev.css" | resources.ExecuteAsTemplate (printf "tailwind.dev.%v.css" now.UnixMilli) . }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 {{ end }}
 
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}

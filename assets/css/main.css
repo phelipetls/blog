@@ -113,6 +113,10 @@ body.dark {
     @apply list-disc ml-4 mb-4;
   }
 
+  ::marker {
+    @apply text-primary;
+  }
+
   ol {
     @apply list-decimal ml-4 mb-4;
   }

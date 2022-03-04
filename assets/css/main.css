@@ -113,7 +113,7 @@ body.dark {
     @apply list-disc ml-4 mb-4;
   }
 
-  ::marker {
+  ul li::marker {
     @apply text-primary;
   }
 

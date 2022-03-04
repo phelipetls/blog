@@ -3,16 +3,10 @@
     {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}
       {{ $year := $pagesByYear.Key }}
 
-      <div class="flex justify-between items-center first:mt-0 mt-16">
+      <div class="first:mt-0 mt-16">
         <h3 class="text-2xl mb-0">
           <time datetime="{{ $year }}-01-01">{{ $year }}</time>
         </h3>
-
-        {{ if eq $i 0 }}
-          {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-            <a class="btn btn-icon" href="{{ .Permalink }}">{{ partial "svgs/rss.svg" }}</a>
-          {{ end }}
-        {{ end }}
       </div>
 
       {{ range .Pages }}
@@ -28,6 +22,16 @@
           <h2>
             <a href="{{ .Permalink }}">{{ .Title }}</a>
           </h2>
+        </div>
+      {{ end }}
+
+      {{ if eq $i 0 }}
+        <div class="flex justify-center my-8">
+          {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+            <a class="btn btn-secondary inline-flex items-center gap-1" href="{{ .Permalink }}">
+              <span class="text-xl">RSS</span> {{ partial "svgs/rss.svg" (dict "width" 24 "height" 24) }}
+            </a>
+          {{ end }}
         </div>
       {{ end }}
 

@@ -26,7 +26,7 @@
       {{ end }}
 
       {{ if eq $i 0 }}
-        <div class="flex justify-center my-8">
+        <div class="flex justify-center my-16">
           {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
             <a class="btn btn-secondary inline-flex items-center gap-1" href="{{ .Permalink }}">
               <span class="text-xl">RSS</span> {{ partial "svgs/rss.svg" (dict "width" 24 "height" 24) }}

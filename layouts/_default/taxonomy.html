@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section>
+  <div>
     <h2>{{ .Title }}</h2>
 
     {{ $total := len .Data.Terms }}
@@ -12,5 +12,5 @@
         </li>
       {{ end }}
     </ul>
-  </section>
+  </div>
 {{ end }}

@@ -1,7 +1,7 @@
 {{ define "main" }}
   <h1 class="mb-0">{{ .Name }}</h1>
 
-  <section class="flex-1">
+  <div class="flex-1">
     {{ range .Pages }}
       <div class="mt-8 flex flex-col gap-2">
         <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
@@ -17,7 +17,7 @@
         </h2>
       </div>
     {{ end }}
-  </section>
+  </div>
 
   <div class="mt-8 mx-auto">
     <a class="btn btn-primary rounded" href="{{ .Parent.Permalink }}">

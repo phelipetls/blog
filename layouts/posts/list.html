@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section>
+  <div>
     {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}
       {{ $year := $pagesByYear.Key }}
 
@@ -36,5 +36,5 @@
       {{ end }}
 
     {{ end }}
-  </section>
+  </div>
 {{ end }}

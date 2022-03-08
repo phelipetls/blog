@@ -1,11 +1,15 @@
-<a class="border-0" href="mailto:{{ .Site.Params.email }}" title="E-mail">
+{{ define "partials/animated-icon-classes" }}
+transform hover:scale-110 hover:text-primary transition transition-transform transition-colors
+{{ end }}
+
+<a class="border-0 {{ partial "animated-icon-classes" }}" href="mailto:{{ .Site.Params.email }}" title="E-mail">
   {{ partial "svgs/mail.svg" (dict "width" 32 "height" 32) }}
 </a>
 
-<a class="border-0" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
+<a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
   {{ partial "svgs/linkedin.svg" (dict "width" 32 "height" 32) }}
 </a>
 
-<a class="border-0" href="{{ .Site.Params.github }}" title="GitHub">
+<a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.github }}" title="GitHub">
   {{ partial "svgs/github.svg" (dict "width" 32 "height" 32) }}
 </a>

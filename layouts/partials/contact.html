@@ -1,11 +1,11 @@
 <a class="border-0" href="mailto:{{ .Site.Params.email }}" title="E-mail">
-  {{ partial "svgs/mail.svg" }}
+  {{ partial "svgs/mail.svg" (dict "width" 32 "height" 32) }}
 </a>
 
 <a class="border-0" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
-  {{ partial "svgs/linkedin.svg" }}
+  {{ partial "svgs/linkedin.svg" (dict "width" 32 "height" 32) }}
 </a>
 
 <a class="border-0" href="{{ .Site.Params.github }}" title="GitHub">
-  {{ partial "svgs/github.svg" }}
+  {{ partial "svgs/github.svg" (dict "width" 32 "height" 32) }}
 </a>

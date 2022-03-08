@@ -11,9 +11,9 @@ const observer = new IntersectionObserver(
     navIsStuck = entry.isIntersecting
 
     if (entry.isIntersecting) {
-      navContainer.classList.add('shadow', 'shadow-divider')
+      navContainer.classList.add('border-b', 'border-divider')
     } else {
-      navContainer.classList.remove('shadow', 'shadow-divider')
+      navContainer.classList.remove('border-b', 'border-divider')
     }
   },
   {

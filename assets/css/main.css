@@ -15,7 +15,7 @@
   --dark-blue: 64, 118, 210;
   --darker-blue: 97, 125, 185;
 
-  --darker-red: 194, 0, 42;
+  --red: 202, 19, 47;
 
   --orange: 236, 170, 54;
 }
@@ -27,7 +27,7 @@ body {
   --surface: var(--dark-beige);
   --divider: var(--darker-beige);
   --note: var(--blue);
-  --warn: var(--darker-red);
+  --warn: var(--red);
 }
 
 body.dark {
@@ -37,7 +37,7 @@ body.dark {
   --surface: var(--light-black);
   --divider: var(--lighter-black);
   --note: var(--darker-blue);
-  --warn: var(--darker-red);
+  --warn: var(--red);
 }
 
 @tailwind base;

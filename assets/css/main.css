@@ -93,7 +93,7 @@ body.dark {
   }
 
   pre {
-    @apply mb-4 py-4 px-8 rounded overflow-x-auto bg-surface;
+    @apply my-8 py-4 px-8 rounded overflow-x-auto bg-surface;
   }
 
   :not(pre) > code {

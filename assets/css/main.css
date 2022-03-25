@@ -140,15 +140,19 @@ body.dark {
   .btn {
     @apply px-4 py-2 rounded;
   }
+
   .btn-primary {
     @apply bg-primary text-background;
   }
+
   .btn-secondary {
     @apply border-2 border-primary text-primary;
   }
+
   a.btn-primary {
     @apply border-0;
   }
+
   .btn-icon {
     @apply rounded-full p-2;
   }

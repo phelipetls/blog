@@ -32,7 +32,7 @@ body {
 
 body.dark {
   --primary: var(--orange);
-  --foreground: var(--beige);
+  --foreground: var(--darker-beige);
   --background: var(--black);
   --surface: var(--light-black);
   --divider: var(--lighter-black);

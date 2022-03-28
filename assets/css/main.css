@@ -1,24 +1,26 @@
+@context colors {
+  --beige: #f5f5dc;
+  --dark-beige: #f3f3ca;
+  --darker-beige: #d5d3a8;
+  --darkest-beige: #f1efc3;
+
+  --black: #212121;
+  --light-black: #333333;
+  --lighter-black: #595959;
+
+  --blue: #4f92ff;
+  --dark-blue: #4076d2;
+  --darker-blue: #617db9;
+
+  --red: #ca132f;
+
+  --orange: #ecaa36;
+}
+
 :root {
   --default-font-family: 'Fira Sans', sans-serif;
   --heading-font-family: 'Merriweather', serif;
   --code-font-family: 'Consolas', 'Fira Code', monospace;
-
-  --beige: 245, 245, 220;
-  --dark-beige: 243, 243, 202;
-  --darker-beige: 213, 211, 168;
-  --darkest-beige: 241, 239, 195;
-
-  --black: 33, 33, 33;
-  --light-black: 51, 51, 51;
-  --lighter-black: 89, 89, 89;
-
-  --blue: 79, 146, 255;
-  --dark-blue: 64, 118, 210;
-  --darker-blue: 97, 125, 185;
-
-  --red: 202, 19, 47;
-
-  --orange: 236, 170, 54;
 }
 
 body {

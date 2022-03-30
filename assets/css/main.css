@@ -100,7 +100,11 @@ body.dark {
   }
 
   pre {
-    @apply my-8 py-4 px-8 rounded overflow-x-auto bg-surface;
+    @apply py-4 px-8 rounded overflow-x-auto bg-surface;
+  }
+
+  pre, picture, img {
+    @apply my-8;
   }
 
   :not(pre) > code {

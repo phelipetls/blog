@@ -1,9 +1,9 @@
-<h{{ add .Level 1 }} class="mb-8 mt-16 flex items-center gap-2 group" id="{{ .Anchor | safeURL }}">
+<h{{ add .Level 1 }} class="mb-8 pt-8 mt-8 flex items-center gap-4 group" id="{{ .Anchor | safeURL }}">
   <span class="text-dark-foreground">
     {{ .Text | safeHTML }}
   </span>
 
-  <a class="border-0 hidden group-hover:inline-block" href="#{{ .Anchor | safeURL }}">
+  <a class="text-primary border-0 hidden group-hover:inline-block" href="#{{ .Anchor | safeURL }}">
     {{ partial "svgs/link-2.svg" }}
   </a>
 </h{{ add .Level 1 }}>

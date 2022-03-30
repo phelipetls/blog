@@ -2,16 +2,16 @@
 transform hover:scale-110 hover:text-primary transition transition-transform transition-colors
 {{ end }}
 
-<div class="flex gap-4" style="--icon-size: 24px;">
+<div class="flex gap-4">
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="mailto:{{ .Site.Params.email }}" title="E-mail">
-    {{ partial "svgs/mail.svg" (dict "width" "var(--icon-size)" "height" "var(--icon-size)") }}
+    {{ partial "svgs/mail.svg" }}
   </a>
 
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
-    {{ partial "svgs/linkedin.svg" (dict "width" "var(--icon-size)" "height" "var(--icon-size)") }}
+    {{ partial "svgs/linkedin.svg" }}
   </a>
 
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.github }}" title="GitHub">
-    {{ partial "svgs/github.svg" (dict "width" "var(--icon-size)" "height" "var(--icon-size)") }}
+    {{ partial "svgs/github.svg" }}
   </a>
 </div>

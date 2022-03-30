@@ -3,6 +3,8 @@
   --heading-font-family: 'Merriweather', serif;
   --code-font-family: 'Consolas', 'Fira Code', monospace;
 
+  --icon-size: 1.75rem;
+
   --beige: hexToRgb(#f5f5dc);
   --dark-beige: hexToRgb(#f3f3ca);
   --darker-beige: hexToRgb(#d5d3a8);
@@ -142,6 +144,10 @@ body.dark {
 
   ::selection {
     @apply bg-foreground text-background;
+  }
+
+  svg.feather {
+    @apply w-[var(--icon-size)] h-[var(--icon-size)];
   }
 }
 

@@ -6,7 +6,7 @@
   aria-controls="theme-menu"
   aria-haspopup="true"
 >
-  <svg width="24" height="24" viewBox="0 0 24 24">
+  <svg width="var(--icon-size)" height="var(--icon-size)" viewBox="0 0 24 24">
     <title>{{ i18n "ThemeIcon" }}</title>
 
     <defs>
@@ -32,7 +32,7 @@ $themeOptions := (
   data-theme-menu
   id="theme-menu"
   class="absolute bg-background border border-divider rounded z-50 shadow-xl shadow-divider/50 flex flex-col list-none m-0 text-lg"
-  style="visibility: hidden; opacity: 0; pointer-events: none;"
+  style="visibility: hidden; opacity: 0; pointer-events: none; --icon-size: 24px"
   role="menu"
   aria-orientation="vertical"
   aria-activedescendant="theme-option-auto"
@@ -47,7 +47,7 @@ $themeOptions := (
     role="menuitem"
     tabindex="-1"
   >
-    {{ partial (printf "svgs/%s.svg" .IconName) (dict "width" 16 "height" 16) }}
+    {{ partial (printf "svgs/%s.svg" .IconName) }}
     {{ .Name }}
   </li>
 {{ end }}

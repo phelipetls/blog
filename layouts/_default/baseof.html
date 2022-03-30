@@ -25,12 +25,17 @@
     <div data-scroll-container class="flex flex-col min-h-full">
       {{ partial "nav.html" . }}
 
-      <div class="my-16 px-4 flex-1 max-w-prose flex flex-col container mx-auto">
-        <main class="flex flex-1 flex-col">
+      <div class="my-16 px-4 flex-1 max-w-5xl flex container mx-auto">
+        <main class="flex flex-1 shrink-0 flex-col w-full {{ block "main-max-w" . }}max-w-prose{{ end }}">
           {{ block "main" . }}
             {{ .Content }}
           {{ end }}
         </main>
+
+        <aside>
+          {{ block "aside" . }}
+          {{ end }}
+        </aside>
       </div>
 
       {{ partial "footer.html" . }}

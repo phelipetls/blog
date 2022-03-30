@@ -120,10 +120,6 @@ body.dark {
     @apply float-left min-w-full leading-normal;
   }
 
-  article p, article pre {
-    @apply max-w-prose;
-  }
-
   ul {
     @apply list-disc ml-4 mb-4;
   }

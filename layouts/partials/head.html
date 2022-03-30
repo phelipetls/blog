@@ -8,7 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" rel="stylesheet">
 
-{{ $css := resources.Get "css/main.css" | postCSS | minify | resources.PostProcess }}
+{{ $css := resources.Get "css/main.css" | postCSS }}
+
+{{ if hugo.IsProduction }}
+  {{ $css = $css | resources.PostProcess | minify }}
+{{ else }}
+  {{ $css = $css | resources.ExecuteAsTemplate (printf "styles.dev.%v.css" now.UnixMilli) . | resources.PostProcess }}
+{{ end }}
+
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}

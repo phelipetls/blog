@@ -2,38 +2,19 @@
   <div class="flex flex-col sm:flex-row">
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
-    <aside class="sm:mr-4 mb-4 sm:mb-0">
-      <div class="relative mx-auto" style="width: 200px; height: 200px;">
-        <canvas
-          data-gravatar-blurhash
-          class="absolute w-full h-full inset-0 rounded-full border-4 border-divider"
-          width="200"
-          height="200"
-          data-blurhash="{{ (resources.Get "blurhash-gravatar.txt").Content }}"
-        ></canvas>
-
-        <div class="relative h-full">
-          <img
-            id="gravatar"
-            alt="{{ i18n "GravatarAltText" }}"
-            width="200"
-            height="200"
-            class="absolute h-full w-full rounded-full border-4 border-divider bg-transparent"
-            src="{{ $gravatarUrl }}"
-          ></img>
-        </div>
-      </div>
-    </aside>
+    <div class="sm:mr-4 mb-4 sm:mb-0 shrink-0 w-[200] h-[200]">
+      <img
+        id="gravatar"
+        alt="{{ i18n "GravatarAltText" }}"
+        width="200"
+        height="200"
+        class="rounded-full border-4 border-divider bg-transparent max-w-full"
+        src="{{ $gravatarUrl }}"
+      ></img>
+    </div>
 
     <article class="">
       {{ .Content }}
     </article>
   </div>
-{{ end }}
-
-{{ define "scripts" }}
-  {{ $blurhashScript := resources.Get "js/blurhash.js" }}
-  {{ $blurhashScriptBuilt := $blurhashScript | js.Build "blurhash.js" | minify }}
-
-  <script>{{ $blurhashScriptBuilt.Content | safeJS }}</script>
 {{ end }}

@@ -225,7 +225,7 @@ npx react-native init projectName
 repository](https://github.com/phelipetls/react-native-storybook-msw). Here's a
 video:
 
-{{< video "./demo-msw-storybook-react-native.mp4" >}}
+{{< video src="./demo-msw-storybook-react-native.mp4" caption="A demo showing Storybook and MSW working in React Native" >}}
 
 To my surprise, I struggled the most to get Storybook working. I came up with
 issues related with a Promise polyfill that caused `Promises` to never resolve

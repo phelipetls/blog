@@ -1,4 +1,10 @@
-<div class="bg-surface rounded py-4 px-8 my-8">
-  <video class="mx-auto" controls src="{{ .Get 0 }}">
+<figure class="bg-surface rounded py-4 px-8 my-8">
+  <video class="mx-auto" controls src="{{ .Get "src" }}">
   </video>
-</div>
+
+  {{ with .Get "caption" }}
+    <figcaption class="mt-2 text-center">
+      {{ . }}
+    </figcaption>
+  {{ end }}
+</figure>

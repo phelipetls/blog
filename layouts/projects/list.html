@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div>
+  <section class="max-w-prose">
     {{ range .Pages }}
       <article class="mb-8 last:mb-0">
         <div>
@@ -15,5 +15,5 @@
         {{ .Content }}
       </article>
     {{ end }}
-  </div>
+  </section>
 {{ end }}

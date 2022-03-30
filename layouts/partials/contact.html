@@ -7,6 +7,12 @@ transform hover:scale-110 hover:text-primary transition transition-transform tra
     {{ partial "svgs/mail.svg" }}
   </a>
 
+  {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+    <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Permalink }}">
+      {{ partial "svgs/rss.svg" }}
+    </a>
+  {{ end }}
+
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
     {{ partial "svgs/linkedin.svg" }}
   </a>

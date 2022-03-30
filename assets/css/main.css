@@ -1,26 +1,24 @@
-@context colors {
-  --beige: #f5f5dc;
-  --dark-beige: #f3f3ca;
-  --darker-beige: #d5d3a8;
-  --darkest-beige: #f1efc3;
-
-  --black: #212121;
-  --light-black: #333333;
-  --lighter-black: #595959;
-
-  --blue: #4f92ff;
-  --dark-blue: #4076d2;
-  --darker-blue: #617db9;
-
-  --red: #ca132f;
-
-  --orange: #ecaa36;
-}
-
 :root {
   --default-font-family: 'Fira Sans', sans-serif;
   --heading-font-family: 'Merriweather', serif;
   --code-font-family: 'Consolas', 'Fira Code', monospace;
+
+  --beige: hexToRgb(#f5f5dc);
+  --dark-beige: hexToRgb(#f3f3ca);
+  --darker-beige: hexToRgb(#d5d3a8);
+  --darkest-beige: hexToRgb(#f1efc3);
+
+  --black: hexToRgb(#212121);
+  --light-black: hexToRgb(#333333);
+  --lighter-black: hexToRgb(#595959);
+
+  --blue: hexToRgb(#4f92ff);
+  --dark-blue: hexToRgb(#4076d2);
+  --darker-blue: hexToRgb(#617db9);
+
+  --red: hexToRgb(#ca132f);
+
+  --orange: hexToRgb(#ecaa36);
 }
 
 body {

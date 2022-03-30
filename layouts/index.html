@@ -1,3 +1,5 @@
+{{ define "main-max-w" }}max-w-full{{ end }}
+
 {{ define "main" }}
   <div class="flex flex-col sm:flex-row">
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
@@ -13,7 +15,7 @@
       ></img>
     </div>
 
-    <article class="">
+    <article class="max-w-prose">
       {{ .Content }}
     </article>
   </div>

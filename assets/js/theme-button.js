@@ -21,7 +21,7 @@ function getSelectedMenuItem() {
 }
 
 function focusMenuItem(newItem) {
-  const focusedStyle = ['bg-divider']
+  const focusedStyle = ['bg-surface']
 
   menuItems.forEach(function (item) {
     if (item !== newItem) {

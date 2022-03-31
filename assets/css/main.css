@@ -31,7 +31,6 @@
 body {
   --primary: var(--blue);
   --foreground: var(--black-100);
-  --foreground-secondary: var(--beige-700);
   --background: var(--beige-100);
   --surface: var(--beige-200);
   --divider: var(--beige-500);

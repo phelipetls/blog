@@ -11,7 +11,7 @@
 {{ $css := resources.Get "css/main.css" | postCSS }}
 
 {{ if hugo.IsProduction }}
-  {{ $css = $css | resources.PostProcess | minify }}
+  {{ $css = $css | minify | resources.PostProcess }}
 {{ else }}
   {{ $css = $css | resources.ExecuteAsTemplate (printf "styles.dev.%v.css" now.UnixMilli) . | resources.PostProcess }}
 {{ end }}

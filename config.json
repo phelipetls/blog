@@ -38,8 +38,7 @@
     "email": "phelipe_teles@hotmail.com",
     "github": "https://github.com/phelipetls",
     "linkedin": "https://linkedin.com/in/phelipeteles",
-    "resume": "https://phelipetls.github.io/resume/phelipe-teles-resume.pdf",
-    "subscribeLink": "https://buttondown.email/phelipetls/"
+    "resume": "https://phelipetls.github.io/resume/phelipe-teles-resume.pdf"
   },
   "taxonomies": {
     "tag": "tags"
@@ -50,18 +49,5 @@
            "md"
         ]
      }
-  },
-  "outputFormats": {
-    "email": {
-      "name": "email",
-      "path": "email",
-      "mediaType": "text/markdown"
-    }
-  },
-  "outputs": {
-    "page": [
-      "html",
-      "email"
-    ]
   }
 }

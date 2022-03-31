@@ -40,7 +40,7 @@ body {
 
 body.dark {
   --primary: var(--orange);
-  --foreground: var(--beige-400);
+  --foreground: var(--beige-300);
   --background: var(--black-700);
   --surface: var(--black-500);
   --divider: var(--black-100);

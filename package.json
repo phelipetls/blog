@@ -41,6 +41,6 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.js": "eslint"
+    "*.js": ["eslint --fix", "prettier --write"]
   }
 }

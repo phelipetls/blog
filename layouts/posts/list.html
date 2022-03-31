@@ -15,19 +15,27 @@
             <a href="{{ .Permalink }}">{{ .Title }}</a>
           </h2>
 
-          <div class="flex space-x">
-            <time class="" datetime="{{ .Date.Format "2006-01-02" }}">
-              {{ if eq .Lang "en" }}
-                {{ .Date.Format "January, 02" }}
-              {{ else }}
-                {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-              {{ end }}
-            </time>
+          <div class="flex space-x" style="--icon-size: 24px;">
+            <div class="flex items-center gap-2">
+              {{ partial "svgs/calendar.svg" . }}
+
+              <time class="" datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ if eq .Lang "en" }}
+                  {{ .Date.Format "January, 02" }}
+                {{ else }}
+                  {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
+                {{ end }}
+              </time>
+            </div>
 
             <div class="whitespace-pre"> · </div>
 
-            <div>
-              {{ .ReadingTime }} min.
+            <div class="flex items-center gap-2">
+              {{ partial "svgs/book-open.svg" . }}
+
+              <div>
+                {{ .ReadingTime }} min.
+              </div>
             </div>
           </div>
         </div>

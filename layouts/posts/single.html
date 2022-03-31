@@ -1,28 +1,31 @@
 {{ define "main" }}
   <article>
     <header>
-      <div class="mb-2">
-        <time class="uppercase text-sm" datetime="{{ .Date.Format "2006-01-02" }}">
+      <h1 class="text-4xl mb-4">
+        {{ .Title }}
+      </h1>
+
+      <div class="flex flex-col sm:flex-row items-start sm:items-center mb-4">
+        <time class="" datetime="{{ .Date.Format "2006-01-02" }}">
           {{ if eq .Lang "en" }}
             {{ .Date.Format "January 02, 2006" }}
           {{ else }}
             {{ .Date.Day }} de {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
           {{ end }}
         </time>
+
+        {{ if (.Lastmod.After .Date) }}
+          <div class="hidden sm:block whitespace-pre"> · </div>
+
+          <div>
+            {{ i18n "Lastmod" . }}
+
+            <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
+              {{ i18n "DateFormat" (.Lastmod) }}
+            </time>
+          </div>
+        {{ end }}
       </div>
-
-      <h1 class="text-4xl mb-4">
-        {{ .Title }}
-      </h1>
-
-      {{ if (.Lastmod.After .Date) }}
-        <div class="text-sm mb-4 italic">
-          {{ i18n "Lastmod" . }}
-          <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
-            {{ i18n "DateFormat" (.Lastmod) }}
-          </time>
-        </div>
-      {{ end }}
     </header>
 
     <div class="mb-4">

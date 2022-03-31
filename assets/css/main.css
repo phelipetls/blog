@@ -176,6 +176,11 @@ body.dark {
   .btn-icon {
     @apply rounded-full p-2;
   }
+
+  svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
 }
 
 [data-preload] {

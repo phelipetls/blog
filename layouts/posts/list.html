@@ -15,7 +15,7 @@
             <a href="{{ .Permalink }}">{{ .Title }}</a>
           </h2>
 
-          <div class="flex space-x" style="--icon-size: 24px;">
+          <div class="flex gap-2" style="--icon-size: 24px;">
             <div class="flex items-center gap-2">
               {{ partial "svgs/calendar.svg" . }}
 
@@ -27,8 +27,6 @@
                 {{ end }}
               </time>
             </div>
-
-            <div class="whitespace-pre"> · </div>
 
             <div class="flex items-center gap-2">
               {{ partial "svgs/book-open.svg" . }}

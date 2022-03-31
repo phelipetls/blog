@@ -5,14 +5,21 @@
 
   --icon-size: 1.75rem;
 
-  --beige: hexToRgb(#f5f5dc);
-  --dark-beige: hexToRgb(#f3f3ca);
-  --darker-beige: hexToRgb(#d5d3a8);
-  --darkest-beige: hexToRgb(#f1efc3);
+  --beige-100: hexToRgb(#f5f5dc);
+  --beige-200: hexToRgb(#f0efd3);
+  --beige-300: hexToRgb(#eaeacb);
+  --beige-400: hexToRgb(#e5e4c2);
+  --beige-500: hexToRgb(#dfdeb9);
+  --beige-600: hexToRgb(#dad9b1);
+  --beige-700: hexToRgb(#d5d3a8);
 
-  --black: hexToRgb(#212121);
-  --light-black: hexToRgb(#333333);
-  --lighter-black: hexToRgb(#595959);
+  --black-100: hexToRgb(#595959);
+  --black-200: hexToRgb(#4f4f4f);
+  --black-300: hexToRgb(#454545);
+  --black-400: hexToRgb(#3c3c3c);
+  --black-500: hexToRgb(#333333);
+  --black-600: hexToRgb(#2a2a2a);
+  --black-700: hexToRgb(#212121);
 
   --blue: hexToRgb(#4f92ff);
   --dark-blue: hexToRgb(#4076d2);
@@ -25,20 +32,20 @@
 
 body {
   --primary: var(--dark-blue);
-  --foreground: var(--lighter-black);
-  --background: var(--beige);
-  --surface: var(--dark-beige);
-  --divider: var(--darker-beige);
+  --foreground: var(--black-100);
+  --background: var(--beige-100);
+  --surface: var(--beige-200);
+  --divider: var(--beige-700);
   --note: var(--blue);
   --warn: var(--red);
 }
 
 body.dark {
   --primary: var(--orange);
-  --foreground: var(--darker-beige);
-  --background: var(--black);
-  --surface: var(--light-black);
-  --divider: var(--lighter-black);
+  --foreground: var(--beige-700);
+  --background: var(--black-700);
+  --surface: var(--black-500);
+  --divider: var(--black-100);
   --note: var(--darker-blue);
   --warn: var(--red);
 }

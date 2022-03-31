@@ -26,7 +26,6 @@ module.exports = {
       divider: withOpacityValue('--divider'),
       surface: withOpacityValue('--surface'),
       foreground: withOpacityValue('--foreground'),
-      ['dark-foreground']: withOpacityValue('--dark-foreground'),
       background: withOpacityValue('--background'),
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),

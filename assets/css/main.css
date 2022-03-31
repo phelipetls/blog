@@ -107,7 +107,7 @@ body.dark {
     @apply py-4 px-8 rounded overflow-x-auto bg-surface;
   }
 
-  [data-blog-post] :is(pre, picture, img) {
+  [data-blog-post] :is(pre, picture, img, blockquote) {
     @apply my-8;
   }
 

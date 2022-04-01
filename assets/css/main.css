@@ -177,7 +177,7 @@ body.dark {
     @apply rounded-full p-2;
   }
 
-  svg {
+  svg.feather {
     width: var(--icon-size);
     height: var(--icon-size);
   }

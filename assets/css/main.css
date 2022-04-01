@@ -174,7 +174,7 @@ body.dark {
   }
 
   .btn-icon {
-    @apply rounded-full p-2;
+    @apply rounded-md p-2 flex items-center justify-center;
   }
 
   svg.feather {

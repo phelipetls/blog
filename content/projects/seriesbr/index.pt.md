@@ -3,6 +3,7 @@ title: "seriesbr"
 date: 2019-11-22
 website: "https://seriesbr.readthedocs.io"
 github: "https://github.com/phelipetls/seriesbr"
+weight: 3
 ---
 
 Biblioteca em Python para obter séries temporais de bancos de dados mantidos

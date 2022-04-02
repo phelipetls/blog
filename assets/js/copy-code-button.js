@@ -30,16 +30,16 @@ function createCopyCodeButton() {
     })
 
     Object.assign(tooltip.style, {
-      visibility: 'visible',
-      opacity: 1,
       left: `${x}px`,
       top: `${y}px`,
+      animation: 'tooltip-animation 1.5s',
     })
 
     setTimeout(() => {
       Object.assign(tooltip.style, {
         left: '0px',
         top: '0px',
+        animation: '',
       })
     }, 1000)
 

@@ -25,13 +25,17 @@
           </div>
 
           <div class="flex mt-4 gap-4 justify-end">
-            <a class="border-0" href="{{ .Params.website }}">
-              {{ partial "svgs/external-link.svg" }}
-            </a>
+            {{ with .Params.website }}
+              <a class="border-0" href="{{ . }}">
+                {{ partial "svgs/external-link.svg" }}
+              </a>
+            {{ end }}
 
-            <a class="border-0" href="{{ .Params.github }}">
-              {{ partial "svgs/github.svg" }}
-            </a>
+            {{ with .Params.github }}
+              <a class="border-0" href="{{ . }}">
+                {{ partial "svgs/github.svg" }}
+              </a>
+            {{ end }}
           </div>
         </div>
       </article>

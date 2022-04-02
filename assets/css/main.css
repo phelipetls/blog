@@ -144,7 +144,7 @@ body.dark {
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply py-[2px] px-[4px] inline-block rounded font-bold whitespace-nowrap align-text-bottom leading-none text-foreground bg-surface;
+    @apply py-[2px] px-[6px] mx-[2px] inline-block rounded font-bold whitespace-nowrap align-text-bottom leading-none text-foreground bg-surface;
   }
 
   ::selection {

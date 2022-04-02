@@ -1,18 +1,35 @@
 {{ define "main" }}
   <section class="max-w-prose">
     {{ range .Pages }}
-      <article class="mb-8 last:mb-0">
-        <div>
-          <h2 class="inline-block">
-            <a href="{{ or .Params.website .Params.github }}">{{ .Title }}</a>
-          </h2>
-
-          (<time class="text-lg" datetime="{{ .Date.Format "2006-01-02" }}">
-            {{ .Date.Format "2006" }}
-          </time>)
+      <article class="flex flex-col mb-8 last:mb-0">
+        <div class="rounded-md overflow-hidden h-[200px] border border-divider">
+          <img class="object-cover object-left-top min-w-full h-full" src="{{ (.Resources.GetMatch "*.png").Permalink }}">
+          </img>
         </div>
 
-        {{ .Content }}
+        <div class="py-4">
+          <div class="flex items-center justify-between text-xl mb-4">
+            <h2 class="m-0 inline-block">
+              <a href="{{ or .Params.website .Params.github }}">{{ .Title }}</a>
+            </h2>
+
+            <time class="font-bold" datetime="{{ .Date.Format "2006-01-02" }}">
+              {{ .Date.Format "2006" }}
+            </time>
+          </div>
+
+          {{ .Content }}
+
+          <div class="flex mt-4 gap-4 justify-end">
+            <a class="border-0" href="{{ .Params.website }}">
+              {{ partial "svgs/external-link.svg" }}
+            </a>
+
+            <a class="border-0" href="{{ .Params.github }}">
+              {{ partial "svgs/github.svg" }}
+            </a>
+          </div>
+        </div>
       </article>
     {{ end }}
   </section>

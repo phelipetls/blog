@@ -1,12 +1,13 @@
 {{ define "main" }}
   <article>
     <header>
-      <h1 class="text-4xl">
+      <div class="text-primary mb-4">
+        {{ strings.Repeat 10 "░" }}
+      </div>
+
+      <h1 class="text-4xl mb-4">
         {{ .Title }}
       </h1>
-
-      <div class="w-[12ch] h-[4px] bg-primary mb-4">
-      </div>
 
       <div class="flex flex-col gap-2 mb-4" style="--icon-size: 24px;">
         <div class="flex items-center gap-2">

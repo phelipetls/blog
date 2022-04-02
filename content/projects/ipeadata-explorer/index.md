@@ -5,5 +5,5 @@ website: "http://ipeadata-explorer.surge.sh"
 github: "https://github.com/phelipetls/ipeadata-explorer"
 ---
 
-A **React** app to explore and visualize the
+A React app to search and visualize time series from the
 [Ipeadata](http://ipeadata.gov.br/api/) database.

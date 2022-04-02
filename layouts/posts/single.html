@@ -58,16 +58,3 @@
 
   {{ partial "post-nav.html" . }}
 {{ end }}
-
-{{ define "scripts" }}
-  {{ $copyCodeButtonScript := resources.Get "js/copy-code-button.js"
-    | js.Build
-    | resources.ExecuteAsTemplate "js/copy-code-button.js" (dict "ClipboardIcon" (partial "svgs/clipboard.svg" | safeHTML))
-  }}
-
-  {{ if hugo.IsProduction }}
-    {{ $copyCodeButtonScript = $copyCodeButtonScript | minify }}
-  {{ end }}
-
-  <script type="module" src="{{ $copyCodeButtonScript.Permalink }}"></script>
-{{ end }}

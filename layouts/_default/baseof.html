@@ -42,14 +42,18 @@
 
     {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
+    {{ $copyCodeButtonScript := resources.Get "js/copy-code-button.js"
+      | js.Build
+      | resources.ExecuteAsTemplate "js/copy-code-button.js" (dict "ClipboardIcon" (partial "svgs/clipboard.svg" | safeHTML))
+    }}
+
+    {{ $bundle := slice $navScript $themeButtonScript $copyCodeButtonScript | resources.Concat "js/bundle.js" }}
 
     {{ if hugo.IsProduction }}
-      {{ $themeButtonScript = $themeButtonScript | minify }}
-      {{ $navScript = $navScript | minify }}
+      {{ $bundle = $bundle | minify }}
     {{ end }}
 
-    <script type="module" src="{{ $themeButtonScript.Permalink }}"></script>
-    <script type="module" src="{{ $navScript.Permalink }}"></script>
+    <script type="module" src="{{ $bundle.Permalink }}"></script>
 
     {{ block "scripts" . }}
     {{ end }}

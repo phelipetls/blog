@@ -8,5 +8,5 @@ github: "https://github.com/phelipetls/seriesbr"
 Biblioteca em Python para obter séries temporais de bancos de dados mantidos
 por instituições brasileiras como o [BCB](https://www3.bcb.gov.br/sgspub),
 [IPEA](http://ipeadata.gov.br/beta3/) e
-[IBGE](https://sidra.ibge.gov.br/home/ipp/brasil) em um DataFrame do
-[pandas](https://pandas.pydata.org).
+[IBGE](https://sidra.ibge.gov.br/home/ipp/brasil) em um
+[pandas](https://pandas.pydata.org) DataFrame.

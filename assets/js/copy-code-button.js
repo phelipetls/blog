@@ -18,7 +18,7 @@ function createCopyCodeButton() {
 
   button.addEventListener('click', async function () {
     const codeBlock = button.parentElement.querySelector('pre code')
-    await navigator.clipboard.writeText(codeBlock.textContent)
+    await navigator.clipboard.writeText(codeBlock.textContent.trimEnd())
 
     const { x, y, middlewareData } = await computePosition(button, tooltip, {
       placement: 'top',

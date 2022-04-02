@@ -13,7 +13,7 @@
           <div>
             <div class="flex items-center justify-between text-xl mb-4">
               <h2 class="m-0 inline-block">
-                <a href="{{ or .Params.website .Params.github }}">{{ .Title }}</a>
+                {{ .Title }}
               </h2>
 
               <time class="font-bold" datetime="{{ .Date.Format "2006-01-02" }}">

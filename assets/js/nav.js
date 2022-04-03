@@ -27,17 +27,25 @@ observer.observe(navContainer)
 
 let lastScrollPosition = window.scrollY
 
+function hideNav(nav) {
+  nav.style.transform = `translateY(-100%)`
+  nav.classList.add('!shadow-none')
+}
+
+function showNav(nav) {
+  nav.style.transform = `translateY(0%)`
+  nav.classList.remove('!shadow-none')
+}
+
 function handleScroll() {
   const newScrollPosition = window.scrollY
 
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
   if (isScrollingDown && navIsStuck) {
-    navContainer.style.transform = `translateY(-100%)`
-    navContainer.classList.add('!shadow-none')
+    hideNav(navContainer)
   } else {
-    navContainer.style.transform = `translateY(0%)`
-    navContainer.classList.remove('!shadow-none')
+    showNav(navContainer)
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)

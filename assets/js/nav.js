@@ -1,29 +1,40 @@
 import throttle from 'lodash.throttle'
 
+const main = document.querySelector('main')
 const navContainer = document.querySelector('[data-nav-container]')
 
-let navIsStuck = false
+let mainEnteredIntoView = false
+let navEnteredIntoView = false
 
 const observer = new IntersectionObserver(
   function (entries) {
-    const entry = entries[0]
+    const mainEntry = entries.find((entry) => entry.target === main)
+    const navContainerEntry = entries.find(
+      (entry) => entry.target === navContainer
+    )
 
-    navIsStuck = entry.isIntersecting
+    mainEnteredIntoView = mainEntry
+      ? mainEntry.isIntersecting
+      : mainEnteredIntoView
 
-    if (entry.isIntersecting) {
+    navEnteredIntoView = navContainerEntry
+      ? navContainerEntry.isIntersecting
+      : navEnteredIntoView
+
+    if (navEnteredIntoView) {
       navContainer.classList.add('border-b', 'border-divider')
     } else {
       navContainer.classList.remove('border-b', 'border-divider')
     }
   },
   {
-    root: document.querySelector('[data-scroll-container]'),
-    rootMargin: `-${navContainer.clientHeight}px 0px 0px 0px`,
-    threshold: 1,
+    rootMargin: `0px 0px -100% 0px`,
+    threshold: [0, 1],
   }
 )
 
 observer.observe(navContainer)
+observer.observe(main)
 
 let lastScrollPosition = window.scrollY
 
@@ -43,8 +54,9 @@ function handleScroll() {
   const newScrollPosition = window.scrollY
 
   const isScrollingDown = newScrollPosition > lastScrollPosition
+  const navIsInsideMain = mainEnteredIntoView && navEnteredIntoView
 
-  if (isScrollingDown && navIsStuck) {
+  if (isScrollingDown && navIsInsideMain) {
     hideNav(navContainer)
   } else {
     showNav(navContainer)

@@ -28,12 +28,16 @@ observer.observe(navContainer)
 let lastScrollPosition = window.scrollY
 
 function hideNav(nav) {
-  nav.style.transform = `translateY(-100%)`
+  Object.assign(nav.style, {
+    transform: 'translateY(-100%)',
+  })
   nav.classList.add('!shadow-none')
 }
 
 function showNav(nav) {
-  nav.style.transform = `translateY(0%)`
+  Object.assign(nav.style, {
+    transform: 'translateY(0%)',
+  })
   nav.classList.remove('!shadow-none')
 }
 

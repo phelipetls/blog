@@ -31,14 +31,12 @@ function hideNav(nav) {
   Object.assign(nav.style, {
     transform: 'translateY(-100%)',
   })
-  nav.classList.add('!shadow-none')
 }
 
 function showNav(nav) {
   Object.assign(nav.style, {
     transform: 'translateY(0%)',
   })
-  nav.classList.remove('!shadow-none')
 }
 
 function handleScroll() {

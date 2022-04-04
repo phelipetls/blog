@@ -12,21 +12,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" rel="stylesheet">
 
 {{ $css := resources.Get "css/main.css" | postCSS }}
-
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | resources.PostProcess }}
 {{ else }}
   {{ $css = $css | resources.ExecuteAsTemplate (printf "styles.dev.%v.css" now.UnixMilli) . | resources.PostProcess }}
 {{ end }}
-
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
 {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
-
 {{ if hugo.IsProduction }}
   {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
 {{ end }}
-
 <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 
 <title>

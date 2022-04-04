@@ -7,12 +7,6 @@ transform hover:scale-110 hover:text-primary transition transition-transform tra
     {{ partial "svgs/mail.svg" }}
   </a>
 
-  {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-    <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Permalink }}" title="Blog's RSS Feed">
-      {{ partial "svgs/rss.svg" }}
-    </a>
-  {{ end }}
-
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.linkedin }}" title="LinkedIn">
     {{ partial "svgs/linkedin.svg" }}
   </a>
@@ -20,4 +14,10 @@ transform hover:scale-110 hover:text-primary transition transition-transform tra
   <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.github }}" title="GitHub">
     {{ partial "svgs/github.svg" }}
   </a>
+
+  {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+    <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Permalink }}" title="Blog's RSS Feed">
+      {{ partial "svgs/rss.svg" }}
+    </a>
+  {{ end }}
 </div>

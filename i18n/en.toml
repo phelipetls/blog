@@ -61,3 +61,6 @@ other = 'Theme options'
 
 [System]
 other = 'System'
+
+[Copied]
+other = 'Copied'

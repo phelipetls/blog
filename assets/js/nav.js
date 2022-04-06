@@ -1,21 +1,35 @@
-import throttle from 'lodash.throttle'
-
-const navContainer = document.querySelector('[data-nav-container]')
-const navContainerHeight = navContainer.clientHeight
-
 const main = document.querySelector('main')
+const nav = document.querySelector('[data-nav-container]')
 
-let hasMainIntersectedTop = false
+let isNavFullyVisible = false
+let isNavVisible = false
 
-const observer = new IntersectionObserver(
+const navObserver = new IntersectionObserver(
   function (entries) {
     const entry = entries[0]
-    hasMainIntersectedTop = entry.isIntersecting
 
-    if (hasMainIntersectedTop) {
-      navContainer.classList.add('border-b', 'border-divider')
+    isNavVisible = entry.isIntersecting
+    isNavFullyVisible = entry.intersectionRatio === 1
+  },
+  {
+    threshold: [0, 1],
+  }
+)
+
+navObserver.observe(nav)
+
+let isMainIntersectingTop = false
+
+const topObserver = new IntersectionObserver(
+  function (entries) {
+    const entry = entries[0]
+
+    isMainIntersectingTop = entry.isIntersecting
+
+    if (isMainIntersectingTop) {
+      nav.classList.add('border-b', 'border-divider')
     } else {
-      navContainer.classList.remove('border-b', 'border-divider')
+      nav.classList.remove('border-b', 'border-divider')
     }
   },
   {
@@ -24,34 +38,78 @@ const observer = new IntersectionObserver(
   }
 )
 
-observer.observe(main)
-
-function hideNav(nav) {
-  Object.assign(nav.style, {
-    top: `-${navContainerHeight}px`,
-  })
-}
-
-function showNav(nav) {
-  Object.assign(nav.style, {
-    top: '0px',
-  })
-}
+topObserver.observe(main)
 
 let lastScrollPosition = window.scrollY
 
-function handleScroll() {
-  const newScrollPosition = window.scrollY
+function hideNav() {
+  if (!isMainIntersectingTop) {
+    return
+  }
 
+  if (isNavFullyVisible) {
+    Object.assign(nav.style, {
+      position: 'absolute',
+      top: `${window.scrollY - 1}px`,
+    })
+    return
+  }
+
+  if (!isNavVisible) {
+    Object.assign(nav.style, {
+      position: 'fixed',
+      top: `-${nav.offsetHeight}px`,
+    })
+  }
+}
+
+function showNav() {
+  if (isNavFullyVisible) {
+    Object.assign(nav.style, {
+      position: 'fixed',
+      top: '0px',
+    })
+    return
+  }
+
+  // TODO: improve this condition to be ui related
+  // ideally it should just check if the nav is not visible
+  if (
+    nav.style.position === 'fixed' &&
+    nav.style.top === `-${nav.offsetHeight}px`
+  ) {
+    Object.assign(nav.style, {
+      position: 'absolute',
+      top: `${window.scrollY - nav.offsetHeight}px`,
+    })
+  }
+}
+
+function setNavPosition() {
+  const newScrollPosition = window.scrollY
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
-  if (isScrollingDown && hasMainIntersectedTop) {
-    hideNav(navContainer)
+  const shouldHide = isScrollingDown && isMainIntersectingTop
+
+  if (shouldHide) {
+    hideNav()
   } else {
-    showNav(navContainer)
+    showNav()
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)
 }
 
-window.addEventListener('scroll', throttle(handleScroll, 300), false)
+let timeout
+
+function handleScroll() {
+  if (timeout) {
+    window.cancelAnimationFrame(timeout)
+  }
+
+  timeout = window.requestAnimationFrame(function () {
+    setNavPosition()
+  })
+}
+
+window.addEventListener('scroll', handleScroll, false)

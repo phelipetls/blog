@@ -5,7 +5,7 @@ tags: ["git"]
 ---
 
 `git rebase` is a command for rewriting history, which sure seems scary at
-first but I learned to love it.
+first but you'll learn to love it.
 
 # Why learn `git rebase`?
 
@@ -27,10 +27,11 @@ it to:
 - edit a commit message.
 - delete a commit.
 
-This is most commonly used to tidy up the commit history, whatever the reason.
+This is most commonly used to tidy up the commit history. And that's it, that's
+the major reason why I use rebase, to organize my commit history.
 
-In this blog post, I'll try to explain my mental model of rebase and how I use
-it with examples.
+In this blog post, I'll try to explain what rebase is with examples of how I
+use it daily.
 
 # Understanding `git rebase`
 

@@ -5,7 +5,7 @@ tags: ["git"]
 ---
 
 `git rebase` é um comando usado para reescrever histórico de commit, que parece
-assustador de início mas você aprende a gostar com o tempo.
+assustador de início mas você vai aprender a gostar.
 
 # Por que aprender `git rebase`?
 
@@ -28,7 +28,11 @@ usa para pegar commits mais recentes em uma branch upstream. Mas, além disso, �
 - deletar um commit.
 
 Normalmente você vai querer fazer uma dessas coisas para arrumar o histórico de
-commit, por qualquer razão que seja.
+commit, por qualquer razão que seja. E é isso, é essa razão de usar o *rebase*,
+deixar o *commit history* organizado.
+
+Nesse blog post, eu vou tentar explicar o que é o *rebase* com vários exemplos
+de como eu uso diariamente.
 
 # Entendendo o `git rebase`
 

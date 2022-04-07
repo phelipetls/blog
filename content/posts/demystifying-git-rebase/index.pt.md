@@ -4,17 +4,17 @@ date: 2022-04-06
 tags: ["git"]
 ---
 
-`git rebase` é um comando suado para reescrever histórico de commit, o que pode
-parecer assustado de início mas que você vai começar a gostar de pois.
+`git rebase` é um comando usado para reescrever histórico de commit, que parece
+assustador de início mas você aprende a gostar com o tempo.
 
 # Por que aprender `git rebase`?
 
-Eu lembro que, como inciante no git, como foi difícil entender o *rebase*. Eu não
-sei explicar o porquê da dificuldade, mas eu chutaria que é porque eu não
-entendia quando eu precisaria usar esse comando.
+Eu lembro que, como inciante no git, foi muito difícil para entender o que era
+o *rebase*. Eu não sei explicar o porquê da dificuldade, mas eu chutaria que é
+porque eu não entendia quando eu precisaria usar esse comando.
 
-Acontece que você *não precisa de rebase* no seu dia-a-dia, você pode trabalhar
-de boa sabendo o básico do git: add-commit-push-pull.
+E acontece que você *não precisa de rebase* no seu dia-a-dia, você pode
+trabalhar tranquilamente sabendo o básico do git: add-commit-push-pull.
 
 `git rebase` é bastante similar ao `git merge`, no sentido de que você também o
 usa para pegar commits mais recentes em uma branch upstream. Mas, além disso, é
@@ -30,10 +30,10 @@ usa para pegar commits mais recentes em uma branch upstream. Mas, além disso, �
 Normalmente você vai querer fazer uma dessas coisas para arrumar o histórico de
 commit, por qualquer razão que seja.
 
-# Um modelo mental para `git rebase`
+# Entendendo o `git rebase`
 
-Eis como eu entendo: `git rebase` vai repetir os commits da sua branch sobre os
-commits de outra branch.
+`git rebase` vai repetir os commits da sua branch sobre os commits de outra
+branch.
 
 Para ilustrar, vamos imaginar que você esteja trabalhar numa feature branch, e
 a main branch foi atualizada com código que você quer:
@@ -125,8 +125,8 @@ Você deve estar se perguntando: ok mas como o *rebase* vai me ajudar a separar 
 commit?
 
 Isso é possível no modo interativo, disponível sob a opção `--interactive`.
-Nesse modo, o git vai abrir o seu editor de texto listando os commits que serão
-repetidos sobre outra branch, com instruções logo abaixo:
+Nesse modo, o git vai abrir o seu editor de texto com uma lista dos commits que
+serão repetidos sobre a outra branch:
 
 ```
 pick df4adc E
@@ -163,7 +163,7 @@ Isso é referido como uma todo list. Aqui, você usa comandos para descrever o
 que o git deve fazer a cada commit para te ajudar a produzir o *commit history*
 desejado.
 
-{{< warn >}}
+{{< note >}}
 
 O editor que será aberto é controlado pela variável de ambiente `GIT_EDITOR`,
 cujo valor padrão é o valor das variáveis de ambiente (normalmente `vim` ou
@@ -184,7 +184,7 @@ git config --global core.editor 'code --wait'
 Se você tiver instalada a extensão *GitLens*, você vai ver uma [interface mais
 sofisticada para a todo list](https://www.youtube.com/watch?v=P5p71fguFNI).
 
-{{< /warn >}}
+{{< /note >}}
 
 O comando padrão para todos os commits é "pick", que significa "repita esse
 commit nessa ordem, sem mudar nada".
@@ -250,8 +250,8 @@ Se o commit for o mais recente, você pode só escrever o fix e commitar com `gi
 commit --amend`. Se você não quiser editar a mensagem, você pode até usar `git
 commit --amend --no-edit`.
 
-Mas, caso o commit não seja o mais recente, você vai precisar usar o *rebase*. Se
-você não quer editar a mensagem também, o comando certo a se usar é o `fixup`.
+Mas, caso o commit não seja o mais recente, você vai precisar usar o *rebase*.
+Se você não quer editar a mensagem, o comando certo a se usar é o `fixup`.
 
 Por exemplo, suponha que você tenha a seguinte branch:
 
@@ -321,8 +321,8 @@ dicas.
 
 # Juntar commits, mas preservando a mensagem
 
-Se quisermos juntar vários commits e quisermos preservar ou reusar a mensagem
-deles, precisamos usar o comando `squash`.
+Se quisermos juntar vários commits porém preservar ou reusar suas mensagens,
+precisamos usar o comando `squash`.
 
 A única diferença de usar o comando `fixup` é que você vai ter a chance de
 editar a mensagem de commit final durante o processo de *rebase*:
@@ -343,8 +343,8 @@ squash! Fix script
 # ...
 ```
 
-Analogamente à opção `--fixup` no `git commit`, também pode-se usar `git commit
---squash=sha` para se ter o mesmo efeito.
+Analogamente à opção `--fixup` disponível no `git commit`, também pode-se usar
+`git commit --squash=sha`.
 
 # Separar um commit
 
@@ -354,7 +354,7 @@ O git vai então parar o *rebase* naquele commit e deixar você fazer o que bem
 entender. Quando terminar, rode o comando `git rebase --continue`.
 
 Para separar um commit, eu normalmente primeiro desfaço o commit com `git
-reset`, e então vou adicionando e commitando as changes de novo de forma
+reset HEAD^`, e então vou adicionando e commitando as changes de novo de forma
 diferente.
 
 ```sh

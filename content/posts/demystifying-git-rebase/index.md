@@ -32,10 +32,9 @@ This is most commonly used to tidy up the commit history, whatever the reason.
 In this blog post, I'll try to explain my mental model of rebase and how I use
 it with examples.
 
-# A mental model for `git rebase`
+# Understanding `git rebase`
 
-Here's how I understand it: `git rebase` tries to replay a bunch of commits on
-top of another branch.
+`git rebase` tries to replay a bunch of commits on top of another branch.
 
 Let's imagine you're working on a feature branch and the main branch was
 updated with some code you want:
@@ -156,10 +155,11 @@ pick 490b6c G
 #
 ```
 
-This is known as a todo list. Here, you're supposed to describe what git should
-do at each commit in order to help you achieve the desired commit history.
+This is known as the rebase todo list. Here, you're supposed to describe what
+git should do at each commit in order to help you achieve the desired commit
+history.
 
-{{< warn >}}
+{{< note >}}
 
 The opened editor is controlled by the `GIT_EDITOR` environment variable, whose
 value defaults to whatever is in the `VISUAL` or `EDITOR` environment variable
@@ -181,7 +181,7 @@ If you have the GitLens extension installed, you'll see [a
 nicer user interface to the todo
 list](https://www.youtube.com/watch?v=P5p71fguFNI).
 
-{{< /warn >}}
+{{< /note >}}
 
 The default command for every commit is "pick", meaning "replay this commit in
 this specific order, unchanged".

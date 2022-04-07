@@ -1,5 +1,5 @@
 ---
-title: Demistifying git rebase
+title: Demystifying git rebase
 date: 2022-04-06
 tags: ["git"]
 ---

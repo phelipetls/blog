@@ -64,7 +64,7 @@ function hideNav() {
 }
 
 function showNav() {
-  if (isNavFullyVisible) {
+  if (isNavFullyVisible || window.scrollX === 0) {
     Object.assign(nav.style, {
       position: 'fixed',
       top: '0px',

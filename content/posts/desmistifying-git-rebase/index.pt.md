@@ -9,7 +9,7 @@ parecer assustado de início mas que você vai começar a gostar de pois.
 
 # Por que aprender `git rebase`?
 
-Eu lembro que, como inciante no git, como foi difícil entender o rebase. Eu não
+Eu lembro que, como inciante no git, como foi difícil entender o *rebase*. Eu não
 sei explicar o porquê da dificuldade, mas eu chutaria que é porque eu não
 entendia quando eu precisaria usar esse comando.
 
@@ -60,9 +60,9 @@ Isto é parecido com o `git merge main`, mas a branch resultante é mais limpa,
 porque o histórico é linear: parece que você nunca começou a desenvolver a
 feature a partir de um commit antigo de main.
 
-# Razões para temer o rebase
+# Razões para temer o *rebase*
 
-Devido ao rebase poder mudar a identidade de um commit (seu hash), você nunca
+Devido ao *rebase* poder mudar a identidade de um commit (seu hash), você nunca
 deve fazê-lo em uma branch pública, ou seja, uma branch que mais alguém pode
 estar contribuindo.
 
@@ -83,8 +83,8 @@ Por alguma razão, um colega de trabalho decidiu colaborar com um commit:
 A---B---C---D main
 ```
 
-Mas, antes disso, você decidiu fazer um rebase, talvez porque quis melhorar a
-commit message de `E`, e deu um push:
+Mas, antes disso, você decidiu fazer um *rebase*, talvez porque quis melhorar a
+a mensagem do commit `E`, e deu um push:
 
 ```
               E'---F' feature
@@ -107,9 +107,9 @@ Agora que o dano foi feito, você precisa recomendar a leitura da seção
 REBASE`](https://git-scm.com/docs/git-rebase#_recovering_from_upstream_rebase)
 na man page do `git-rebase`, e proceder como aconselhado lá.
 
-# Razões para NÃO temer rebase
+# Razões para NÃO temer *rebase*
 
-Você não deveria evitar rebase com medo de trabalho perdido -- se você commitou
+Você não deveria evitar *rebase* com medo de trabalho perdido -- se você commitou
 seu código, é muito difícil de perder.
 
 Mesmo que você acabe se enrolando e feito cagada, você pode sempre resetar sua
@@ -119,9 +119,9 @@ para voltar àquele estado, por exemplo com `git reset --hard feature@{1}` ou
 `git reset --hard feature@{one.min.ago}`. [Leia a documentação sobre
 `git-reflog` para aprender mais](https://git-scm.com/docs/git-reflog).
 
-# Rebase interativo
+# *Rebase* interativo
 
-Você deve estar se perguntando: ok mas como o rebase vai me ajudar a separar um
+Você deve estar se perguntando: ok mas como o *rebase* vai me ajudar a separar um
 commit?
 
 Isso é possível no modo interativo, disponível sob a opção `--interactive`.
@@ -160,7 +160,7 @@ pick 490b6c G
 ```
 
 Isso é referido como uma todo list. Aqui, você usa comandos para descrever o
-que o git deve fazer a cada commit para te ajudar a produzir o commit history
+que o git deve fazer a cada commit para te ajudar a produzir o *commit history*
 desejado.
 
 {{< warn >}}
@@ -181,7 +181,7 @@ Por exemplo, caso você use o VS Code:
 git config --global core.editor 'code --wait'
 ```
 
-Se você tiver instalada a extensão GitLens, você vai ver uma [interface mais
+Se você tiver instalada a extensão *GitLens*, você vai ver uma [interface mais
 sofisticada para a todo list](https://www.youtube.com/watch?v=P5p71fguFNI).
 
 {{< /warn >}}
@@ -196,7 +196,7 @@ Agora, vamos ver na prática como usar o `git rebase -i`.
 
 # Mudando a ordem dos commits
 
-Digamos que você queira inverter a ordem dos commits, dado o git history
+Digamos que você queira inverter a ordem dos commits, dado o *commit history*
 abaixo:
 
 ```
@@ -222,7 +222,7 @@ pick df4adc E
 ```
 
 Salve o arquivo e feche. Caso não haja conflitos, tudo funcionará e o resultado
-vai ser esse novo commit history:
+vai ser esse novo *commit history*:
 
 ```
               G'---F'---E' feature
@@ -236,7 +236,7 @@ A---B---C---D main
 resolvê-los como normalmente já o faz, por exemplo usando `git mergetool`.
 
 Re-ordenar commits provavelmente vai resultar em conflitos. Se você não tiver
-certeza do que está fazendo, você pode cancelar o rebase a qualquer momento com
+certeza do que está fazendo, você pode cancelar o *rebase* a qualquer momento com
 `git rebase --abort`.
 
 {{< /warn >}}
@@ -250,7 +250,7 @@ Se o commit for o mais recente, você pode só escrever o fix e commitar com `gi
 commit --amend`. Se você não quiser editar a mensagem, você pode até usar `git
 commit --amend --no-edit`.
 
-Mas, caso o commit não seja o mais recente, você vai precisar usar o rebase. Se
+Mas, caso o commit não seja o mais recente, você vai precisar usar o *rebase*. Se
 você não quer editar a mensagem também, o comando certo a se usar é o `fixup`.
 
 Por exemplo, suponha que você tenha a seguinte branch:
@@ -290,7 +290,7 @@ pick 180a94 foo
 pick 490b6c bar
 ```
 
-No commit history resultante vai parecer que você nunca introduziu aquele bug:
+No *commit history* resultante vai parecer que você nunca introduziu aquele bug:
 
 ```
 2d5b33 Add script
@@ -325,7 +325,7 @@ Se quisermos juntar vários commits e quisermos preservar ou reusar a mensagem
 deles, precisamos usar o comando `squash`.
 
 A única diferença de usar o comando `fixup` é que você vai ter a chance de
-editar a mensagem de commit final durante o processo de rebase:
+editar a mensagem de commit final durante o processo de *rebase*:
 
 ```
 # This is a combination of 2 commits.
@@ -350,7 +350,7 @@ Analogamente à opção `--fixup` no `git commit`, também pode-se usar `git com
 
 Para separar um commit em um ou mais, você pode usar o comando `edit`.
 
-O git vai então parar o rebase naquele commit e deixar você fazer o que bem
+O git vai então parar o *rebase* naquele commit e deixar você fazer o que bem
 entender. Quando terminar, rode o comando `git rebase --continue`.
 
 Para separar um commit, eu normalmente primeiro desfaço o commit com `git

@@ -245,7 +245,7 @@ certeza do que está fazendo, você pode cancelar o *rebase* a qualquer momento 
 
 {{< /warn >}}
 
-# Juntando commits, sem mudar a commit message
+# Juntando commits, sem mudar a mensagem
 
 Eis um cenário mais típico: você commitou algum código quebrado e só percebeu
 um tempo depois e agora quer consertar aquele commit.
@@ -323,7 +323,7 @@ dicas.
 
 {{< /note >}}
 
-# Juntar commits, mas preservando a mensagem
+# Juntar commits, preservando a mensagem
 
 Se quisermos juntar vários commits porém preservar ou reusar suas mensagens,
 precisamos usar o comando `squash`.

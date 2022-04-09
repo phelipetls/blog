@@ -30,6 +30,11 @@ const topObserver = new IntersectionObserver(
       nav.classList.add('border-b', 'border-divider')
     } else {
       nav.classList.remove('border-b', 'border-divider')
+
+      Object.assign(nav.style, {
+        position: 'fixed',
+        top: '0px',
+      })
     }
   },
   {
@@ -64,7 +69,7 @@ function hideNav() {
 }
 
 function showNav() {
-  if (isNavFullyVisible || window.scrollY === 0) {
+  if (isNavFullyVisible) {
     Object.assign(nav.style, {
       position: 'fixed',
       top: '0px',

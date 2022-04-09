@@ -8,7 +8,8 @@
   "title": "Phelipe Teles",
   "enableGitInfo": true,
   "build": {
-    "writeStats": true
+    "writeStats": true,
+    "noJSConfigInAssets": false
   },
   "languages": {
     "en": {

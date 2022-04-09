@@ -8,11 +8,11 @@ const navObserver = new IntersectionObserver(
   function (entries) {
     const entry = entries[0]
 
-    isNavVisible = entry.isIntersecting
+    isNavVisible = entry.isIntersecting && entry.intersectionRatio > 0
     isNavFullyVisible = entry.intersectionRatio === 1
   },
   {
-    threshold: [0, 1],
+    threshold: [0, 1e-4, 1],
   }
 )
 
@@ -77,15 +77,10 @@ function showNav() {
     return
   }
 
-  // TODO: improve this condition to be ui related
-  // ideally it should just check if the nav is not visible
-  if (
-    nav.style.position === 'fixed' &&
-    nav.style.top === `-${nav.offsetHeight}px`
-  ) {
+  if (!isNavVisible) {
     Object.assign(nav.style, {
       position: 'absolute',
-      top: `${window.scrollY - nav.offsetHeight}px`,
+      top: `${window.scrollY - nav.offsetHeight + 1}px`,
     })
   }
 }

@@ -205,10 +205,14 @@ export function initialize(button, options) {
   })
 
   getMenuItems(menu).forEach(function (item) {
+    if (item.getAttribute('aria-selected') === 'true') {
+      applySelectedStyle(item)
+      return
+    }
+
     if (
-      item.hasAttribute('aria-selected') ||
-      (typeof options.isSelectedItem === 'function' &&
-        options.isSelectedItem(item))
+      typeof options.isSelectedItem === 'function' &&
+      options.isSelectedItem(item)
     ) {
       selectMenuItem(menu, item)
     }

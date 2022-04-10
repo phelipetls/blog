@@ -21,7 +21,7 @@
     aria-label="{{ i18n "languageOptions" }}"
     tabindex="-1"
   >
-    {{ range (union (slice .) .Translations) }}
+    {{ range (sort (union (slice .) .Translations) ".Lang") }}
       <li
         id="language-{{ .Lang }}"
         class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"

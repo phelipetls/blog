@@ -1,19 +1,17 @@
 <div data-nav-container class="fixed top-0 w-full h-20 bg-background bg-opacity-90 backdrop-filter backdrop-blur-sm flex-shrink-0 z-30">
   <div class="flex items-center justify-between mx-auto max-w-5xl py-4 px-4">
-    <nav class="" aria-label="{{ i18n "MainNavigation" }}">
+    <nav class="flex flex-row flex-nowrap gap-2" aria-label="{{ i18n "MainNavigation" }}">
       {{ $currentPage := . }}
 
-      <div class="flex flex-row flex-wrap gap-2">
-        {{- range .Site.Menus.main -}}
-          <a
-            id="{{ .Identifier }}"
-            class="{{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
-            href="{{ .URL | absLangURL }}"
-          >
-            {{ i18n .Name | default .Name }}
-          </a>
-        {{- end -}}
-      </div>
+      {{- range .Site.Menus.main -}}
+        <a
+          id="{{ .Identifier }}"
+          class="{{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}border-primary{{- end -}}"
+          href="{{ .URL | absLangURL }}"
+        >
+          {{ i18n .Name | default .Name }}
+        </a>
+      {{- end -}}
     </nav>
 
     <div class="flex items-center">

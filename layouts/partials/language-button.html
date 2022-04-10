@@ -1,0 +1,58 @@
+{{ if .IsTranslated }}
+  <button
+    data-language-button
+    class="btn btn-icon"
+    aria-label="{{ i18n "languageButton" }}"
+    aria-expanded="false"
+    aria-controls="language-menu"
+    aria-haspopup="true"
+  >
+    {{ partial "svgs/globe.svg" }}
+  </button>
+
+  <ul
+    data-language-menu
+    id="language-menu"
+    class="absolute top-0 left-0 bg-background border border-divider rounded z-50 shadow-xl shadow-divider/50 flex flex-col list-none m-0 text-lg"
+    style="visibility: hidden; opacity: 0; pointer-events: none; --icon-size: 24px"
+    role="menu"
+    aria-orientation="vertical"
+    aria-activedescendant="language-{{ .Lang }}"
+    aria-label="{{ i18n "languageOptions" }}"
+    tabindex="-1"
+  >
+  <li
+    id="language-{{ .Lang }}"
+    class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+    role="menuitem"
+    tabindex="-1"
+    aria-selected="true"
+    >
+    <a
+      class="border-0"
+      href="{{ .Permalink }}"
+      data-lang="{{ .Lang }}"
+    >
+      {{ .Language.LanguageName }}
+    </a>
+  </li>
+
+  {{ range .Translations }}
+    <li
+      id="language-{{ .Lang }}"
+      class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+      role="menuitem"
+      tabindex="-1"
+      aria-selected="true"
+    >
+      <a
+        class="border-0"
+        href="{{ .Permalink }}"
+        data-lang="{{ .Lang }}"
+      >
+        {{ .Language.LanguageName }}
+      </a>
+    </li>
+  {{ end }}
+  </ul>
+{{ end }}

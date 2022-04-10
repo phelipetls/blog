@@ -66,3 +66,9 @@ other = 'Sistema'
 
 [Copied]
 other = 'Copiado'
+
+[TranslationButton]
+other = 'Clique para ver as traduções disponíveis'
+
+[TranslationOptions]
+other = 'Traduções'

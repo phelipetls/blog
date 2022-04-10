@@ -99,8 +99,12 @@ function showMenu(menu, button) {
 
   fadeIn(menu, 500)
 
-  menu.setAttribute('aria-descendant', getSelectedMenuItem(menu).id)
-  focusMenuItem(menu, getSelectedMenuItem(menu))
+  const selectedMenuItem = getSelectedMenuItem(menu)
+  if (selectedMenuItem) {
+    menu.setAttribute('aria-descendant', selectedMenuItem.id)
+    focusMenuItem(menu, selectedMenuItem)
+  }
+
   menu.focus()
 }
 

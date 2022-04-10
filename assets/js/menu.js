@@ -38,35 +38,63 @@ function getSelectedMenuItem(menu) {
   return selectedMenuitem
 }
 
+const focusedStyle = ['bg-surface']
+
+/**
+ * @type {(item: HTMLElement) => void}
+ */
+function applyFocusedStyle(item) {
+  item.classList.add(...focusedStyle)
+}
+
+/**
+ * @type {(item: HTMLElement) => void}
+ */
+function removeFocusedStyle(item) {
+  item.classList.remove(...focusedStyle)
+}
+
 /**
  * @type {(menu: HTMLElement, targetItem: EventTarget) => void}
  */
 function focusMenuItem(menu, targetItem) {
-  const focusedStyle = ['bg-surface']
-
   getMenuItems(menu).forEach(function (item) {
     if (item !== targetItem) {
-      item.classList.remove(...focusedStyle)
+      removeFocusedStyle(item)
     } else {
-      item.classList.add(...focusedStyle)
+      applyFocusedStyle(item)
       menu.setAttribute('aria-activedescendant', item.id)
     }
   })
+}
+
+const selectedStyle = ['font-bold', 'text-primary']
+
+/**
+ * @type {(item: HTMLElement) => void}
+ */
+function applySelectedStyle(item) {
+  item.classList.add(...selectedStyle)
+}
+
+/**
+ * @type {(item: HTMLElement) => void}
+ */
+function removeSelectedStyle(item) {
+  item.classList.remove(...selectedStyle)
 }
 
 /**
  * @type {(menu: HTMLElement, targetItem: EventTarget) => void}
  */
 function selectMenuItem(menu, targetItem) {
-  const selectedStyle = ['font-bold', 'text-primary']
-
   getMenuItems(menu).forEach(function (item) {
     if (item === targetItem) {
       item.setAttribute('aria-selected', 'true')
-      item.classList.add(...selectedStyle)
+      applySelectedStyle(item)
     } else {
       item.removeAttribute('aria-selected')
-      item.classList.remove(...selectedStyle)
+      removeSelectedStyle(item)
     }
   })
 }

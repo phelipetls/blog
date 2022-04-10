@@ -21,38 +21,22 @@
     aria-label="{{ i18n "languageOptions" }}"
     tabindex="-1"
   >
-  <li
-    id="language-{{ .Lang }}"
-    class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
-    role="menuitem"
-    tabindex="-1"
-    aria-selected="true"
-    >
-    <a
-      class="border-0"
-      href="{{ .Permalink }}"
-      data-lang="{{ .Lang }}"
-    >
-      {{ .Language.LanguageName }}
-    </a>
-  </li>
-
-  {{ range .Translations }}
-    <li
-      id="language-{{ .Lang }}"
-      class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
-      role="menuitem"
-      tabindex="-1"
-      aria-selected="true"
-    >
-      <a
-        class="border-0"
-        href="{{ .Permalink }}"
-        data-lang="{{ .Lang }}"
+    {{ range (union (slice .) .Translations) }}
+      <li
+        id="language-{{ .Lang }}"
+        class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+        role="menuitem"
+        tabindex="-1"
+        {{ if (eq $.Lang .Lang) }}aria-selected="true"{{ end }}
       >
-        {{ .Language.LanguageName }}
-      </a>
-    </li>
-  {{ end }}
+        <a
+          class="border-0"
+          href="{{ .Permalink }}"
+          data-lang="{{ .Lang }}"
+        >
+          {{ .Language.LanguageName }}
+        </a>
+      </li>
+    {{ end }}
   </ul>
 {{ end }}

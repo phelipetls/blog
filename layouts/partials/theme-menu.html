@@ -1,0 +1,33 @@
+{{
+$themeOptions := (
+     slice
+     (dict "Id" "light" "IconName" "sun"     "Name" (i18n "Light"))
+     (dict "Id" "dark"  "IconName" "moon"    "Name" (i18n "Dark"))
+     (dict "Id" "auto"  "IconName" "monitor" "Name" (i18n "System"))
+)
+}}
+
+<ul
+  data-theme-menu
+  id="theme-menu"
+  class="absolute top-0 left-0 bg-background border border-divider rounded z-50 shadow-xl shadow-divider/50 flex flex-col list-none m-0 text-lg"
+  style="visibility: hidden; opacity: 0; pointer-events: none; --icon-size: 24px"
+  role="menu"
+  aria-orientation="vertical"
+  aria-activedescendant="theme-option-auto"
+  aria-label="{{ i18n "ThemeOptions" }}"
+  tabindex="-1"
+>
+{{ range $themeOptions }}
+  <li
+    class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+    id="theme-option-{{ .Id }}"
+    data-theme="{{ .Id }}"
+    role="menuitem"
+    tabindex="-1"
+  >
+    {{ partial (printf "svgs/%s.svg" .IconName) }}
+    {{ .Name }}
+  </li>
+{{ end }}
+</ul>

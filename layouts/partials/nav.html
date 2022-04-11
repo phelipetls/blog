@@ -21,8 +21,15 @@
     <div class="relative flex items-center gap-2">
       <div class="absolute h-full top-0 -left-[24px] w-[24px] bg-gradient-to-r from-transparent to-background"></div>
 
-      {{ partial "language-button.html" . }}
+      {{ if .IsTranslated }}
+        {{ partial "language-button.html" . }}
+      {{ end }}
       {{ partial "theme-button.html" . }}
     </div>
+
+    {{ if .IsTranslated }}
+      {{ partial "language-menu.html" . }}
+    {{ end }}
+    {{ partial "theme-menu.html" . }}
   </div>
 </div>

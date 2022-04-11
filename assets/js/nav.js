@@ -1,6 +1,8 @@
 const main = document.querySelector('main')
 const nav = document.querySelector('[data-nav-container]')
 
+nav.querySelector('a.active').scrollIntoView()
+
 let isNavFullyVisible = false
 let isNavVisible = false
 

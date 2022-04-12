@@ -8,12 +8,12 @@
 <meta name="author" content="{{ site.Author.name }}">
 <meta name="color-scheme" content="dark light">
 
-{{ define "partials/taxonomyTitle" }}
+{{ define "partials/getTaxonomyTitle" }}
   {{- .Title -}}
 {{ end }}
 
 {{ with (.GetTerms "tags") }}
-  {{ $tags := (apply . "partial" "taxonomyTitle" ".") }}
+  {{ $tags := (apply . "partial" "getTaxonomyTitle" ".") }}
   {{ $tagsSeparatedByComma := (delimit $tags ", ") }}
   <meta name="keywords" content="{{ $tagsSeparatedByComma }}">
 {{ end }}

@@ -29,12 +29,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 {{ with resources.GetRemote "https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" }}
-  {{ $fontsCss := .Content | safeCSS }}
-  {{ if eq (sha256 $fontsCss) "39b9d5570e32cf75e6d93bfce71557945ebb90e74557e94e08328ee5f608ad80" }}
-    <style>
-      {{ $fontsCss }}
-    </style>
-  {{ end }}
+  <style>
+    {{ .Content | safeCSS }}
+  </style>
 {{ end }}
 
 {{ $css := resources.Get "css/main.css" | postCSS }}

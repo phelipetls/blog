@@ -1,12 +1,10 @@
-<h{{ add .Level 1 }} class="mb-8 pt-8 mt-8 flex items-center gap-4 group" id="{{ .Anchor | safeURL }}">
-  <div class="w-[0.75em] h-[0.75em] rotate-45 bg-primary rounded-sm shrink-0">
-  </div>
+<h{{ add .Level 1 }}
+  class="mb-8 pt-8 mt-8 group relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:bg-primary after:w-6 after:h-1"
+  id="{{ .Anchor | safeURL }}"
+>
+  {{ .Text | safeHTML }}
 
-  <span class="">
-    {{ .Text | safeHTML }}
-  </span>
-
-  <a class="text-primary border-0 hidden group-hover:inline-block" style="--icon-size: 24px;" href="#{{ .Anchor | safeURL }}">
+  <a class="text-primary border-0 hidden group-hover:inline-block align-middle" style="--icon-size: 24px;" href="#{{ .Anchor | safeURL }}">
     {{ partial "svgs/link-2.svg" }}
   </a>
 </h{{ add .Level 1 }}>

@@ -9,7 +9,7 @@
   "enableGitInfo": true,
   "build": {
     "writeStats": true,
-    "noJSConfigInAssets": false
+    "noJSConfigInAssets": true
   },
   "languages": {
     "en": {

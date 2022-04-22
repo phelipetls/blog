@@ -1,6 +1,7 @@
 import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
+import * as params from '@params'
 
-const clipboardIconSvg = `{{ .ClipboardIcon }}`
+const clipboardIconSvg = params.clipboardIcon
 
 const tooltip = document.querySelector('[data-theme-copy-code-tooltip]')
 const tooltipArrow = document.querySelector(

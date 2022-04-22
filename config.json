@@ -14,13 +14,11 @@
   "languages": {
     "en": {
       "languageName": "English",
-      "weight": 1,
-      "copyright": "Content licensed under a Creative Commons Attribution 4.0 International license"
+      "weight": 1
     },
     "pt": {
       "languageName": "Português",
       "weight": 2,
-      "copyright": "Conteúdo licenciado sob a licença Creative Commons Attribution 4.0 International",
       "params": {
         "description": "Um blog para compartilhar meus interesses em programação, estatística e mais",
         "htmlLang": "pt-BR"

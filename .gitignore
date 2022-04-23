@@ -4,3 +4,5 @@ node_modules
 hugo_stats.json
 tailwind.dev*.css
 .hugo_build.lock
+cypress/screenshots
+cypress/videos

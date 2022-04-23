@@ -68,7 +68,7 @@ other = 'Sistema'
 other = 'Copiado'
 
 [LanguageButton]
-other = 'Clique para ver as traduções disponíveis'
+other = 'Clique para ler em outra linguagem'
 
 [LanguageOptions]
 other = 'Traduções'

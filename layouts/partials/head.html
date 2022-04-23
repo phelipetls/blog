@@ -19,7 +19,7 @@
 {{ end }}
 
 {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
-<link rel="prelaod" as="image" href="{{ $gravatarUrl }}">
+<link rel="preload" as="image" href="{{ $gravatarUrl }}">
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">

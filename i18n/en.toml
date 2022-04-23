@@ -65,8 +65,8 @@ other = 'System'
 [Copied]
 other = 'Copied'
 
-[TranslationButton]
+[LanguageButton]
 other = 'Click to check available translations'
 
-[TranslationOptions]
+[LanguageOptions]
 other = 'Translations'

@@ -1,4 +1,3 @@
-const main = document.querySelector('main')
 const nav = document.querySelector('[data-nav-container]')
 
 nav.querySelector('a.active').scrollIntoView()
@@ -20,40 +19,9 @@ const navObserver = new IntersectionObserver(
 
 navObserver.observe(nav)
 
-let isMainIntersectingTop = false
-
-const topObserver = new IntersectionObserver(
-  function (entries) {
-    const entry = entries[0]
-
-    isMainIntersectingTop = entry.isIntersecting
-
-    if (isMainIntersectingTop) {
-      nav.classList.add('border-b', 'border-divider')
-    } else {
-      nav.classList.remove('border-b', 'border-divider')
-
-      Object.assign(nav.style, {
-        position: 'fixed',
-        top: '0px',
-      })
-    }
-  },
-  {
-    rootMargin: '0px 0px -100%',
-    threshold: [0, 1],
-  }
-)
-
-topObserver.observe(main)
-
 let lastScrollPosition = window.scrollY
 
 function hideNav() {
-  if (!isMainIntersectingTop) {
-    return
-  }
-
   if (isNavFullyVisible) {
     Object.assign(nav.style, {
       position: 'absolute',
@@ -91,7 +59,7 @@ function setNavPosition() {
   const newScrollPosition = window.scrollY
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
-  const shouldHide = isScrollingDown && isMainIntersectingTop
+  const shouldHide = isScrollingDown
 
   if (shouldHide) {
     hideNav()
@@ -102,6 +70,14 @@ function setNavPosition() {
   lastScrollPosition = Math.max(newScrollPosition, 0)
 }
 
+function setNavStyle() {
+  for (const className of ['border-b', 'border-divider']) {
+    nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
+  }
+}
+
+setNavStyle()
+
 let timeout
 
 function handleScroll() {
@@ -111,6 +87,7 @@ function handleScroll() {
 
   timeout = window.requestAnimationFrame(function () {
     setNavPosition()
+    setNavStyle()
   })
 }
 

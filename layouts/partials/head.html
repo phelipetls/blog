@@ -17,9 +17,6 @@
   <meta name="keywords" content="{{ $tagsSeparatedByComma }}">
 {{ end }}
 
-{{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
-<link rel="preload" as="image" href="{{ $gravatarUrl }}">
-
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -60,3 +57,6 @@
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end }}
 {{ end -}}
+
+{{ block "head" . }}
+{{ end }}

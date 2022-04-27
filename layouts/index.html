@@ -20,3 +20,8 @@
     </article>
   </div>
 {{ end }}
+
+{{ define "head" }}
+  {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
+  <link rel="preload" as="image" href="{{ $gravatarUrl }}">
+{{ end }}

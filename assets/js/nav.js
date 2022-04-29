@@ -2,69 +2,16 @@ const nav = document.querySelector('[data-nav-container]')
 
 nav.querySelector('a.active').scrollIntoView()
 
-let isNavFullyVisible = false
-let isNavVisible = false
-
-const navObserver = new IntersectionObserver(
-  function (entries) {
-    const entry = entries[0]
-
-    isNavVisible = entry.isIntersecting && entry.intersectionRatio > 0
-    isNavFullyVisible = entry.intersectionRatio === 1
-  },
-  {
-    threshold: [0, 1e-4, 1],
-  }
-)
-
-navObserver.observe(nav)
-
 let lastScrollPosition = window.scrollY
-
-function hideNav() {
-  if (isNavFullyVisible) {
-    Object.assign(nav.style, {
-      position: 'absolute',
-      top: `${window.scrollY - 1}px`,
-    })
-    return
-  }
-
-  if (!isNavVisible) {
-    Object.assign(nav.style, {
-      position: 'fixed',
-      top: `-${nav.offsetHeight}px`,
-    })
-  }
-}
-
-function showNav() {
-  if (isNavFullyVisible) {
-    Object.assign(nav.style, {
-      position: 'fixed',
-      top: '0px',
-    })
-    return
-  }
-
-  if (!isNavVisible) {
-    Object.assign(nav.style, {
-      position: 'absolute',
-      top: `${window.scrollY - nav.offsetHeight + 1}px`,
-    })
-  }
-}
 
 function setNavPosition() {
   const newScrollPosition = window.scrollY
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
-  const shouldHide = isScrollingDown
-
-  if (shouldHide) {
-    hideNav()
+  if (isScrollingDown) {
+    nav.style.top = `-${nav.offsetHeight}px`
   } else {
-    showNav()
+    nav.style.top = '0'
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)

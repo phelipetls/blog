@@ -7,4 +7,4 @@ weight: 1
 ---
 
 Personal site and blog built with [Hugo](https://gohugo.io/), vanilla
-JavaScript and Tailwind CSS.
+JavaScript and [Tailwind CSS](https://tailwindcss.com/).

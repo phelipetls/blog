@@ -7,4 +7,4 @@ weight: 1
 ---
 
 Site pessoal e blog feito com [Hugo](https://gohugo.io/), JavaScript puro e
-Tailwind CSS.
+[Tailwind CSS](https://tailwindcss.com/).

@@ -62,6 +62,9 @@ other = 'Theme options'
 [System]
 other = 'System'
 
+[CopyCodeButtonLabel]
+other = 'Copy code'
+
 [Copied]
 other = 'Copied'
 

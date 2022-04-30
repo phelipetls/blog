@@ -44,7 +44,7 @@
     {{ $languageButtonScript := resources.Get "js/language-button.js" | js.Build }}
     {{ $navScript := resources.Get "js/nav.js" | js.Build }}
     {{ $copyCodeButtonScript := resources.Get "js/copy-code-button.js"
-      | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg")))
+      | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
     }}
 
     {{ $bundle := slice $navScript $themeButtonScript $languageButtonScript $copyCodeButtonScript | resources.Concat "js/bundle.js" }}

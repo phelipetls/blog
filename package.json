@@ -22,6 +22,7 @@
   "homepage": "https://github.com/phelipetls/blog#readme",
   "dependencies": {
     "@floating-ui/dom": "^0.2.0",
+    "@testing-library/cypress": "^8.0.2",
     "autoprefixer": "^10.4.2",
     "canvas": "^2.9.0",
     "cross-spawn": "^7.0.3",

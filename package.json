@@ -6,7 +6,9 @@
   "scripts": {
     "postinstall": "simple-git-hooks",
     "hugo:dev": "hugo serve",
-    "dev": "run-p hugo:dev"
+    "dev": "run-p hugo:dev",
+    "cy:open": "cypress run",
+    "cy:run": "cypress run"
   },
   "repository": {
     "type": "git",

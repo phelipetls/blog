@@ -5,27 +5,39 @@
 
       <ul class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full py-2">
         {{- range .Site.Menus.main -}}
-          <li
-            class="
-              h-full
-              px-2
-              flex
-              items-center
-              justify-center
-              border-b-2
-              border-background
-              {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
-                active
-                border-primary
-              {{ else }}
-                hover:border-divider
-              {{ end }}
-            "
-          >
+          <li class="h-full">
             <a
               id="{{ .Identifier }}"
-              class="border-0"
               href="{{ .URL | absLangURL }}"
+              class="
+                h-full
+                border-0
+                px-2
+                flex
+                relative
+                items-center
+                justify-center
+                overflow-hidden
+                after:content-['']
+                after:absolute
+                after:bottom-0
+                after:left-0
+                after:w-full
+                after:h-[2px]
+                {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+                  active
+                  after:bg-primary
+                {{ else }}
+                  after:bg-divider
+                  after:opacity-0
+                  after:-translate-x-full
+                  hover:after:translate-x-0
+                  hover:after:opacity-100
+                  after:transition-opacity
+                  after:transition-transform
+                  after:duration-300
+                {{ end }}
+              "
             >
               {{ i18n .Name | default .Name }}
             </a>

@@ -27,6 +27,13 @@ jobs:
         env:
           CYPRESS_video: false
 
+      - name: Archive Cypress screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
       - run: hugo --minify
 
       - name: Deploy to GitHub Pages

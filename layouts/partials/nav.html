@@ -1,14 +1,30 @@
-<div data-nav-container class="fixed top-0 w-full h-16 sm:h-20 bg-background backdrop-filter backdrop-blur-sm flex-shrink-0 z-30 transition-[top] transition-duration-700 transition-ease-out">
+<div data-nav-container class="fixed top-0 w-full h-16 bg-background backdrop-filter backdrop-blur-sm flex-shrink-0 z-30 transition-[top] transition-duration-700 transition-ease-out">
   <div class="h-full flex items-center justify-between mx-auto max-w-5xl px-4">
     <nav class="h-full overflow-x-auto flex items-center pr-[12px]" aria-label="{{ i18n "MainNavigation" }}">
       {{ $currentPage := . }}
 
-      <ul class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full">
+      <ul class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full py-2">
         {{- range .Site.Menus.main -}}
-          <li>
+          <li
+            class="
+              h-full
+              px-2
+              flex
+              items-center
+              justify-center
+              border-b-2
+              border-background
+              {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+                active
+                border-primary
+              {{ else }}
+                hover:border-divider
+              {{ end }}
+            "
+          >
             <a
               id="{{ .Identifier }}"
-              class="{{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) -}}active border-primary{{- end -}}"
+              class="border-0"
               href="{{ .URL | absLangURL }}"
             >
               {{ i18n .Name | default .Name }}

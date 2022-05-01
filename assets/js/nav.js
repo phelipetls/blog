@@ -1,6 +1,10 @@
 const nav = document.querySelector('[data-nav-container]')
 
-nav.querySelector('a.active').scrollIntoView()
+const navActiveLink = nav.querySelector('nav a.active')
+
+if (navActiveLink) {
+  navActiveLink.scrollIntoView()
+}
 
 let lastScrollPosition = window.scrollY
 

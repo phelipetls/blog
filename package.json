@@ -9,7 +9,7 @@
     "dev": "run-p hugo:dev",
     "cy:open": "cypress run",
     "cy:run": "cypress run",
-    "test": "HUGO_ENV=production start-server-and-test dev 1313 cy:run"
+    "test": "cross-env HUGO_ENV=production start-server-and-test dev 1313 cy:run"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "@testing-library/cypress": "^8.0.2",
     "autoprefixer": "^10.4.2",
     "canvas": "^2.9.0",
+    "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "cypress": "^9.5.4",
     "eslint": "^8.10.0",

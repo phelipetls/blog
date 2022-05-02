@@ -12,9 +12,19 @@
         <div class="flex-1 sm:flex sm:flex-col sm:justify-between">
           <div>
             <div class="flex items-center justify-between text-xl mb-4">
-              <h2 class="m-0 inline-block">
-                {{ .Title }}
-              </h2>
+              {{ if .Params.website }}
+                <h2 class="m-0 inline-block">
+                  <a class="border-0 flex items-center gap-2" style="--icon-size: 1em;" href="{{ .Params.website }}">
+                    {{ .Title }}
+
+                    {{ partial "svgs/external-link.svg" }}
+                  </a>
+                </h2>
+              {{ else }}
+                <h2 class="m-0 inline-block">
+                  {{ .Title }}
+                </h2>
+              {{ end }}
 
               <time class="font-bold" datetime="{{ .Date.Format "2006-01-02" }}">
                 {{ .Date.Format "2006" }}
@@ -25,12 +35,6 @@
           </div>
 
           <div class="flex mt-4 gap-4 justify-end">
-            {{ with .Params.website }}
-              <a class="border-0" href="{{ . }}">
-                {{ partial "svgs/external-link.svg" }}
-              </a>
-            {{ end }}
-
             {{ with .Params.github }}
               <a class="border-0" href="{{ . }}">
                 {{ partial "svgs/github.svg" }}

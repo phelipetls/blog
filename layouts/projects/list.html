@@ -2,7 +2,7 @@
   <section class="">
     {{ range .Pages }}
       <article class="flex gap-4 flex-col sm:flex-row mb-16 last:mb-0">
-        <div class="rounded-md overflow-hidden h-[200px] sm:w-2/5 border border-divider">
+        <div class="rounded-md overflow-hidden h-[216px] sm:w-2/5 border border-divider">
           {{ with (index (.Resources.ByType "image") 0) }}
             <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}">
             </img>
@@ -34,10 +34,10 @@
             {{ .Content }}
           </div>
 
-          <div class="flex mt-4 gap-4 justify-end">
+          <div class="flex mt-4 gap-4">
             {{ with .Params.github }}
-              <a class="border-0" href="{{ . }}">
-                {{ partial "svgs/github.svg" }}
+              <a class="flex items-center gap-2 rounded-full bg-[#1b1f23] text-[#ffffff] border-[#ffffff] border-2 hover:border-[#ffffff] px-4 py-1" style="--icon-size: 1.5em;" href="{{ . }}">
+                GitHub {{ partial "svgs/github.svg" }}
               </a>
             {{ end }}
           </div>

@@ -22,7 +22,7 @@ function setNavPosition() {
 }
 
 function setNavStyle() {
-  for (const className of ['border-b', 'border-divider']) {
+  for (const className of ['shadow-lg', 'dark:shadow-[#0d0d0d]']) {
     nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
   }
 }

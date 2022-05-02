@@ -15,14 +15,14 @@ describe('Main navigation bar', () => {
     cy.get('[data-nav-container]').should('be.visible')
   })
 
-  it('should have border only after some scrolling', () => {
+  it('should have shadow only after some scrolling', () => {
     cy.visit('/posts')
-    cy.get('[data-nav-container]').should('not.have.class', 'border-b')
+    cy.get('[data-nav-container]').should('not.have.class', 'shadow-lg')
 
     cy.scrollTo('bottom')
     // Make the navbar visible again
     cy.scrollTo('center', { duration: 10 })
 
-    cy.get('[data-nav-container]').should('have.class', 'border-b')
+    cy.get('[data-nav-container]').should('have.class', 'shadow-lg')
   })
 })

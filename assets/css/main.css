@@ -14,12 +14,12 @@
   --beige-700: hexToRgb(#c4c286);
 
   --black-100: hexToRgb(#595959);
-  --black-200: hexToRgb(#4f4f4f);
-  --black-300: hexToRgb(#454545);
-  --black-400: hexToRgb(#3c3c3c);
-  --black-500: hexToRgb(#333333);
-  --black-600: hexToRgb(#2a2a2a);
-  --black-700: hexToRgb(#212121);
+  --black-200: hexToRgb(#4c4c4c);
+  --black-300: hexToRgb(#3e3e3e);
+  --black-400: hexToRgb(#323232);
+  --black-500: hexToRgb(#262626);
+  --black-600: hexToRgb(#1a1a1a);
+  --black-700: hexToRgb(#0d0d0d);
 
   --blue: hexToRgb(#4076d2);
   --red: hexToRgb(#ca132f);
@@ -41,8 +41,8 @@ body {
 body.dark {
   --primary: var(--orange);
   --foreground: var(--beige-100);
-  --background: var(--black-700);
-  --surface: var(--black-500);
+  --background: var(--black-600);
+  --surface: var(--black-300);
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);

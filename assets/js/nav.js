@@ -6,6 +6,12 @@ if (navActiveLink) {
   navActiveLink.scrollIntoView()
 }
 
+const navClasses = ['shadow-lg', 'dark:shadow-700']
+
+if (window.scrollY > nav.offsetHeight) {
+  nav.classList.add(...navClasses)
+}
+
 let lastScrollPosition = window.scrollY
 
 function setNavPosition() {
@@ -14,20 +20,17 @@ function setNavPosition() {
 
   if (isScrollingDown) {
     nav.style.top = `-${nav.offsetHeight}px`
+    nav.classList.remove(...navClasses)
   } else {
     nav.style.top = '0'
+
+    for (const className of navClasses) {
+      nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
+    }
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)
 }
-
-function setNavStyleBasedOnScroll() {
-  for (const className of ['shadow-lg', 'dark:shadow-700']) {
-    nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
-  }
-}
-
-setNavStyleBasedOnScroll()
 
 let timeout
 
@@ -38,7 +41,6 @@ function handleScroll() {
 
   timeout = window.requestAnimationFrame(function () {
     setNavPosition()
-    setNavStyleBasedOnScroll()
   })
 }
 

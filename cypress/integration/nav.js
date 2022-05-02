@@ -15,14 +15,22 @@ describe('Main navigation bar', () => {
     cy.get('[data-nav-container]').should('be.visible')
   })
 
-  it('should have shadow only after some scrolling', () => {
+  it('should have shadow when scrolling up and based on scroll position', () => {
     cy.visit('/posts')
     cy.get('[data-nav-container]').should('not.have.class', 'shadow-lg')
 
-    cy.scrollTo('bottom')
-    // Make the navbar visible again
-    cy.scrollTo('center', { duration: 10 })
+    cy.scrollTo('bottom', { duration: 500 })
+    cy.get('[data-nav-container]').should('not.have.class', 'shadow-lg')
 
+    cy.scrollTo('center', { duration: 500 })
     cy.get('[data-nav-container]').should('have.class', 'shadow-lg')
+
+    // Test if the navbar still have a shadow if the initial scroll position is
+    // at the center
+    cy.reload()
+    cy.get('[data-nav-container]').should('have.class', 'shadow-lg')
+
+    cy.scrollTo('top', { duration: 500 })
+    cy.get('[data-nav-container]').should('not.have.class', 'shadow-lg')
   })
 })

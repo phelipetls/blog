@@ -1,7 +1,7 @@
 ---
 title: "Personal site and blog"
 date: 2019-01-01
-website: "{{ .Site.BaseURL }}"
+website: https://phelipetls.github.io
 github: "https://github.com/phelipetls/blog"
 weight: 1
 ---

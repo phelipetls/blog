@@ -21,13 +21,13 @@ function setNavPosition() {
   lastScrollPosition = Math.max(newScrollPosition, 0)
 }
 
-function setNavStyle() {
+function setNavStyleBasedOnScroll() {
   for (const className of ['shadow-lg', 'dark:shadow-700']) {
     nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
   }
 }
 
-setNavStyle()
+setNavStyleBasedOnScroll()
 
 let timeout
 
@@ -38,7 +38,7 @@ function handleScroll() {
 
   timeout = window.requestAnimationFrame(function () {
     setNavPosition()
-    setNavStyle()
+    setNavStyleBasedOnScroll()
   })
 }
 

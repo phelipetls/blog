@@ -19,10 +19,10 @@ function setNavPosition() {
   const isScrollingDown = newScrollPosition > lastScrollPosition
 
   if (isScrollingDown) {
-    nav.style.top = `-${nav.offsetHeight}px`
+    nav.style.transform = `translateY(-100%)`
     nav.classList.remove(...navClasses)
   } else {
-    nav.style.top = '0'
+    nav.style.transform = `translateY(0)`
 
     for (const className of navClasses) {
       nav.classList.toggle(className, window.scrollY > nav.offsetHeight)

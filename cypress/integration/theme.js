@@ -7,9 +7,7 @@ describe('Dark, light and system theme', () => {
     cy.findByRole('menu', { name: /theme options/i }).should('not.exist')
     cy.findByRole('button', { name: /change theme/i }).click()
 
-    cy.findByRole('menu', { name: /theme options/i })
-      .should('be.visible')
-      .and('be.focused')
+    cy.findByRole('menu', { name: /theme options/i }).should('be.visible')
 
     cy.findByRole('menuitem', { name: /dark/i }).click()
     cy.findByRole('button', { name: /change theme/i }).should('be.visible')

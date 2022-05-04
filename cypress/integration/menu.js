@@ -19,9 +19,9 @@ describe('Menu', () => {
       )
 
       cy.root()
-        .should('be.visible')
+        .should('have.attr', 'aria-activedescendant', 'theme-option-light')
         .and('be.focused')
-        .and('have.attr', 'aria-activedescendant', 'theme-option-light')
+        .and('be.visible')
         .type('{downArrow}')
         .should('have.attr', 'aria-activedescendant', 'theme-option-dark')
         .type('{upArrow}')

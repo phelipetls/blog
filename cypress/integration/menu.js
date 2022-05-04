@@ -11,31 +11,29 @@ describe('Menu', () => {
       .click()
       .should('have.attr', 'aria-expanded', 'true')
 
-    cy.findByRole('menu').within(() => {
-      cy.findByRole('menuitem', { name: /light/i }).should(
-        'have.attr',
-        'aria-selected',
-        'true'
-      )
+    cy.findByRole('menuitem', { name: /light/i }).should(
+      'have.attr',
+      'aria-selected',
+      'true'
+    )
 
-      cy.root()
-        .should('be.visible')
-        .and('be.focused')
-        .and('have.attr', 'aria-activedescendant', 'theme-option-light')
-        .type('{downArrow}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-dark')
-        .type('{upArrow}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-light')
-        .type('{pageDown}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-auto')
-        .type('{pageUp}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-light')
-        .type('{home}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-light')
-        .type('{end}')
-        .should('have.attr', 'aria-activedescendant', 'theme-option-auto')
-        .type('{esc}')
-    })
+    cy.findByRole('menu')
+      .should('be.visible')
+      .and('be.focused')
+      .and('have.attr', 'aria-activedescendant', 'theme-option-light')
+      .type('{downArrow}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-dark')
+      .type('{upArrow}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-light')
+      .type('{pageDown}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-auto')
+      .type('{pageUp}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-light')
+      .type('{home}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-light')
+      .type('{end}')
+      .should('have.attr', 'aria-activedescendant', 'theme-option-auto')
+      .type('{esc}')
 
     cy.findByRole('button', { name: /change theme/i })
       .should('be.focused')

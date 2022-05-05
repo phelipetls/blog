@@ -4,12 +4,13 @@ date: 2022-05-01
 tags: ["linux", "dwm", "gnome", "ansible", "fedora", "xubuntu"]
 ---
 
-This is the story about how I'm moving away from a tiling window manager, dwm,
-to a full-blown desktop environment, GNOME. It's hardly an
-interesting story, but I feel like writing about it.
+This is the story about how I'm moving away from a tiling window manager,
+[dwm](https://dwm.suckless.org/), to a full-blown desktop environment,
+[GNOME](https://www.gnome.org/). It's hardly an interesting story, but I feel
+like writing about it.
 
 I started using tiling window managers quite early in my Linux desktop journey,
-which started in 2019 with Xubuntu.
+which started in 2019 with [Xubuntu](https://xubuntu.org/).
 
 # Why Xubuntu?
 

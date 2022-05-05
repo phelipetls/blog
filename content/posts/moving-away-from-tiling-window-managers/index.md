@@ -1,11 +1,11 @@
 ---
 title: "Moving away from tiling window managers"
 date: 2022-05-01
-tags: ["linux", "dwm", "gnome", "ansible"]
+tags: ["linux", "dwm", "gnome", "ansible", "fedora", "xubuntu"]
 ---
 
 This is the story about how I'm moving away from a tiling window manager, dwm,
-to a full-blown desktop environment, GNOME (in Fedora 35). It's hardly an
+to a full-blown desktop environment, GNOME. It's hardly an
 interesting story, but I feel like writing about it.
 
 I started using tiling window managers quite early in my Linux desktop journey,
@@ -16,35 +16,32 @@ which started in 2019 with Xubuntu.
 My choice for Xubuntu was largely influenced by my hardware constraints: I
 wanted a lightweight distribution, meaning it shouldn't require too much of my
 8GB of RAM (at the time). Because of that, I was drawn into tiling window
-managers since that's the most lightweight option.
+managers since that's as lightweight as you can get.
 
 # dwm, a weird choice for a beginner
 
-I made a weird choice for a beginner: dwm. I guess because I was curious about
-it and felt challenged by it, like what does it mean to compile it from source
-and configure it by changing its source code?
-
-I don't regret it, since I learned a ton from it.
+I made a weird choice for a beginner: dwm. I guess because I felt challenged by
+it, like what does it mean to compile it from source and configure it by
+changing its source code? Since I learned a ton from it, so I don't regret it,
+but it wasn't without struggles.
 
 ## The bad parts
 
-It was perfect out of the box for my workflow at the time (mostly terminals and
-Firefox), until I started to use more GUIs that have a lot of modal windows
+It was perfect out of the box for my workflow for some time (mostly terminals
+and Firefox), until I started to use more GUIs that have a lot of modal windows
 (like Android Studio, GIMP, Inkscape etc.) and whatnot, as you can attest by
 [my attempts to tweak
 it](/posts/improving-the-android-studio-experience-in-dwm/).
 
-Some surprising stuff come with it too: the function keys don't do anything out
-of the box -- if you try to increase or decrease volume with it, nothing will
-happen. You have to add this functionality yourself, typically with shell
-scripts like
-[this](https://github.com/phelipetls/dotfiles/blob/df7cd1be47f216c42a8f9a82ad97dd913e3ce6bb/scripts/change-volume)
-and then bind the key to call this script with
+It might come as a surprise that the function keys don't do anything out of the
+box -- if you try to increase or decrease volume with it, nothing will happen.
+You have to add this functionality yourself, typically by binding these keys to
+a shell script like
+[this](https://github.com/phelipetls/dotfiles/blob/df7cd1be47f216c42a8f9a82ad97dd913e3ce6bb/scripts/change-volume),
+with software like
 [sxhkd](https://github.com/phelipetls/dotfiles/blob/df7cd1be47f216c42a8f9a82ad97dd913e3ce6bb/scripts/change-volume)
-or in [dwm
+or in your [dwm
 `config.h`](https://github.com/phelipetls/dotfiles/blob/0616a6e0879a8dbfa4373da14780a609773aa6c0/suckless/dwm/config.h#L74-L84).
-At the time, I wasn't discouraged by this, on the contrary. It was fun to get
-something working in Xubuntu... that didn't work in Fedora.
 
 A notification system also needs to be set up,
 [dunst](https://github.com/dunst-project/dunst) being a popular choice. For
@@ -52,59 +49,70 @@ example, I used
 [systemd-timer](https://www.freedesktop.org/software/systemd/man/systemd.timer.html)
 to [check every
 minute](https://github.com/phelipetls/dotfiles/blob/df7cd1be47f216c42a8f9a82ad97dd913e3ce6bb/.config/systemd/user/battery-notifier.timer)
-if my [battery is dying and when it's fully
+if my [battery is dying or if it's fully
 charged](https://github.com/phelipetls/dotfiles/blob/df7cd1be47f216c42a8f9a82ad97dd913e3ce6bb/scripts/battery-notifier).
 
-My point is, these are all stuff you have to add manually **and** maintain. And
-it's never gonna be as good and polished as something you have out of the box
-with GNOME or KDE.
+But this is all stuff you need to maintain. For example, the shell script I
+used to increase/decrease/mute volume worked fine in Xubuntu but not in Fedora.
+
+The experience will likely never gonna be as good and polished as something you
+have out of the box with GNOME or KDE, as well.
 
 ## The good parts
 
-Being lightweight is what made me stick with dwm, apart from curiosity. It
-hardly requires any RAM to work, and does it job very well.
+Being lightweight is what made me stick with dwm initially, apart from
+curiosity. It hardly requires any RAM to work, and does it job very well.
 
-Managing windows with dwm was often not a problem too (unless using a GUI
-program with various modal windows etc., which wasn't typical for me), the
-default keybindings are very well thought and the concept of tagging windows is
-really powerful.
+Managing windows with dwm was often not a problem too (unless for some GUIs as
+I already noted, which wasn't typical for me anyway), the default keybindings
+are very well thought, and tagging windows is really powerful.
 
-But I also don't mind Windows-style of floating windows too much. I really like
-Windows-style Alt+Tab too, I'm guessing because I'm very familiar with it. And
-tiling window managers was never such a big sell for me, since I have just a
-laptop screen to work with and would always use the monocle layout if not in a
-terminal.
+But I also don't mind Windows-style floating windows. I really like
+Windows-style <kbd>Alt</kbd>+<kbd>Tab</kbd> too, and that's something I missed, particularly to
+toggle between the last two used windows.
+
+Tiling windows are not a huge productivity gain for me, since I don't have a
+huge monitor and other apps other terminals are less usable with half the
+screen real estate. In fact, I would mostly use monocle layout for GUI apps
+anyway.
 
 # GNOME
 
-Recently, I found myself more interested in beautiful user interfaces,
-appreciating details like animations, transitions... That stuff really makes a
-difference. I'm trying to incorporate these concepts into my work more often,
-but my desktop was very plain and boring and I wanted a change.
+Recently, I found myself more interested by beautiful user interfaces,
+animations etc.. dwm, of course, is by design very plain and boring.
 
-Because of that, I installed Fedora 35, with comes with GNOME as desktop
-environment by default and my overall impression until now is that **it's
-beautiful**.
+So I decided to install Fedora 35, with comes with GNOME as desktop environment
+by default and my overall impression until now is that **it's beautiful**.
 
 ## The good parts
 
 The whole desktop is beautiful, the animations are smooth and everything works
-out of the box.
+out of the box, and that's a major good part.
 
-And that's pretty much all the good parts. I see now the value in not having to
-maintain your desktop environment. I guess that I'm a case of [Linux rice
+This doesn't come at a cost in usability too. I love to use touchpad gestures
+to navigate through the desktop when I'm being lazy laying on my bed browsing
+the web with one hand on the touchpad.
+
+The notification system is pretty good too.
+
+I'm still getting familiar with the keybindings, but I'm trying not to
+complicate it too much. For example, I didn't even add one to open a terminal.
+I just hit <kbd>Super</kbd> to open up a terminal.
+
+I see now the value in not having to maintain your desktop environment. I guess
+I just declared [dotfiles
 bankruptcy](https://www.emacswiki.org/emacs/DotEmacsBankruptcy), I'm wondering
-if one day I'll have to declare init.vim bankruptcy too...
+if one day I'll have to declare `init.vim` bankruptcy too...
 
 Having learned that lesson, I'll try as much as possible to stick with the
-vanilla experience. No tweaks whatsoever, I just want to get to like the stock
-experience and be productive with it.
+vanilla experience. As minimal tweaks as possible. It's best if I just get used
+to the stock experience, be productive with it, and avoid maintaining various
+Ansible tasks to reproduce my desktop environment the way I like it.
 
 ## The bad parts
 
-Unfortunately, there were more bad parts than I expected (nothing major), and
-some of them not related to GNOME but rather Fedora, but I'll talk about them
-anyway.
+Unfortunately, there were more bad parts than I expected, but nothing major.
+Some of them are more Fedora-related than GNOME-related.
 
 To start with one related to GNOME (or shall I say GNOME in Wayland): Alacritty
 window decorations are broken (as in not consistent, ugly etc.). [It seems to

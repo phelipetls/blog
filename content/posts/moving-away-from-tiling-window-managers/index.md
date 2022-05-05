@@ -15,7 +15,7 @@ which started in 2019 with Xubuntu.
 
 My choice for Xubuntu was largely influenced by my hardware constraints: I
 wanted a lightweight distribution, meaning it shouldn't require too much of my
-8GB of RAM (at the time). Because of that, I was drawn into tiling window
+8GB of RAM (at the time). Because of that, I was later drawn into tiling window
 managers since that's as lightweight as you can get.
 
 # dwm, a weird choice for a beginner
@@ -97,7 +97,8 @@ The notification system is pretty good too.
 
 I'm still getting familiar with the keybindings, but I'm trying not to
 complicate it too much. For example, I didn't even add one to open a terminal.
-I just hit <kbd>Super</kbd> to open up a terminal.
+I just hit <kbd>Super</kbd>, type Terminal and press <kbd>Enter</kbd> to open
+it.
 
 I see now the value in not having to maintain your desktop environment. I guess
 I just declared [dotfiles

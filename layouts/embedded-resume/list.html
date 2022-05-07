@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div class="flex flex-col flex-1">
-    <div data-resume-loading class="hidden flex flex-1 justify-center items-center flex-1">
+    <div data-resume-loading role="progressbar" class="hidden flex flex-1 justify-center items-center flex-1">
       {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
     </div>
 

@@ -9,8 +9,8 @@ menu:
 
 Hi 👋, I'm a front-end developer from Rio, Brazil.
 
-I currently work at [Mutual](https://mutual.club/), building web and mobile
-apps with React, React Native and TypeScript.
+I currently work building web and mobile apps with React, React Native and
+TypeScript.
 
-I'm also interested in back-end development, Linux, DevOps, data visualization,
-Econometrics and Statistics.
+Other than that, I'm also interested in Linux, Vim/Neovim, Econometrics,
+Statistics and data visualization.

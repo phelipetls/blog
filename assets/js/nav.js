@@ -6,7 +6,7 @@ if (navActiveLink) {
   navActiveLink.scrollIntoView()
 }
 
-const navClasses = ['shadow-lg', 'dark:shadow-700']
+const navClasses = ['shadow-md', 'dark:shadow-divider']
 
 if (window.scrollY > nav.offsetHeight) {
   nav.classList.add(...navClasses)

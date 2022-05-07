@@ -1,19 +1,18 @@
 import PDFObject from 'pdfobject'
 
-const pdfContainer = document.querySelector('.resume-pdf')
+const resumeLoading = document.querySelector('[data-resume-loading]')
+const resumeContainer = document.querySelector('[data-resume]')
+const resumeFallback = document.querySelector('[data-resume-fallback]')
 
 if (PDFObject.supportsPDFs) {
-  const resumeUrl = pdfContainer.dataset.resume
+  const resumeUrl = resumeContainer.dataset.resume
 
-  PDFObject.embed(resumeUrl, pdfContainer)
+  PDFObject.embed(resumeUrl, resumeContainer)
 
-  pdfContainer.classList.remove('hidden')
+  resumeContainer.classList.remove('hidden')
 } else {
-  const pdfFallback = document.querySelector('.resume-pdf-fallback')
-
-  pdfContainer.classList.add('hidden')
-  pdfFallback.classList.remove('hidden')
+  resumeContainer.classList.add('hidden')
+  resumeFallback.classList.remove('hidden')
 }
 
-const pdfLoading = document.querySelector('.resume-loading')
-pdfLoading.classList.add('hidden')
+resumeLoading.classList.add('hidden')

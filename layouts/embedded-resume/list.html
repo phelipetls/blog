@@ -1,16 +1,16 @@
 {{ define "main" }}
   <div class="flex flex-col flex-1">
-    <div class="resume-loading flex flex-1 justify-center items-center flex-1">
+    <div data-resume-loading class="hidden flex flex-1 justify-center items-center flex-1">
       {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
     </div>
 
     <div
       data-resume="{{ .Site.Params.resume }}"
-      class="hidden resume-pdf h-screen w-full border-2 border-foreground"
+      class="hidden h-screen w-full border-2 border-foreground"
     >
     </div>
 
-    <div class="hidden resume-pdf-fallback flex flex-col flex-1 justify-center items-center">
+    <div data-resume-fallback class="hidden flex flex-col flex-1 justify-center items-center">
       <a
         class="mt-4 btn btn-primary"
         download

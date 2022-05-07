@@ -8,8 +8,6 @@ if (PDFObject.supportsPDFs) {
   const resumeUrl = resumeContainer.dataset.resume
 
   PDFObject.embed(resumeUrl, resumeContainer)
-
-  resumeContainer.classList.remove('hidden')
 } else {
   resumeContainer.classList.add('hidden')
   resumeFallback.classList.remove('hidden')

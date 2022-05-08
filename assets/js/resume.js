@@ -45,6 +45,9 @@ if (PDFObject.supportsPDFs) {
         page.render(renderContext)
       })
     })
+    .catch(function () {
+      resumeContainer.classList.add('hidden')
+    })
     .then(function () {
       resumeLoading.classList.add('hidden')
     })

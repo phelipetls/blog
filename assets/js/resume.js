@@ -42,7 +42,8 @@ if (PDFObject.supportsPDFs) {
           viewport: viewport,
         }
 
-        page.render(renderContext)
+        const renderTask = page.render(renderContext)
+        return renderTask.promise
       })
     })
     .catch(function () {

@@ -1,7 +1,7 @@
 import PDFObject from 'pdfobject'
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.entry'
+import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js'
+import pdfjsWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry'
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker
-import * as pdfjsLib from 'pdfjs-dist'
 
 const resumeLoading = document.querySelector('[data-resume-loading]')
 const resumeContainer = document.querySelector('[data-resume]')

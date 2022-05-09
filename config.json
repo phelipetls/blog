@@ -14,14 +14,18 @@
   "languages": {
     "en": {
       "languageName": "English",
-      "weight": 1
+      "weight": 1,
+      "params": {
+        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-en.pdf"
+      }
     },
     "pt": {
       "languageName": "Português",
       "weight": 2,
       "params": {
         "description": "Um blog para compartilhar meus interesses em programação, estatística e mais",
-        "htmlLang": "pt-BR"
+        "htmlLang": "pt-BR",
+        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-ptbr.pdf"
       }
     }
   },

@@ -34,7 +34,6 @@
 
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
-    {{ $pdfWorker = $pdfWorker | minify }}
   {{ end }}
 
   <script type="module" src="{{ $resumeScript.Permalink }}"></script>

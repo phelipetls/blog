@@ -34,10 +34,10 @@
             {{ .Content }}
           </div>
 
-          <div class="flex mt-4 gap-4">
+          <div class="flex mt-4 gap-4 justify-end">
             {{ with .Params.github }}
-              <a class="flex items-center gap-2 rounded-full bg-[#1b1f23] text-[#ffffff] border-[#ffffff] border-2 hover:border-[#ffffff] px-4 py-1" style="--icon-size: 1.5em;" href="{{ . }}">
-                GitHub {{ partial "svgs/github.svg" }}
+              <a class="btn border-0 flex items-center gap-2 bg-[#1b1f23] text-[#ffffff]" style="--icon-size: 1.5em;" href="{{ . }}">
+                {{ partial "svgs/github.svg" }} GitHub
               </a>
             {{ end }}
           </div>

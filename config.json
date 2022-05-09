@@ -45,12 +45,5 @@
   },
   "taxonomies": {
     "tag": "tags"
-  },
-  "mediaTypes": {
-     "text/markdown": {
-        "suffixes": [
-           "md"
-        ]
-     }
   }
 }

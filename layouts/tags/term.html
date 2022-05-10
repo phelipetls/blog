@@ -1,11 +1,11 @@
 {{ define "main" }}
   <h1 class="mb-0">{{ .Name }}</h1>
 
-  <div class="flex-1">
+  <ul class="list-none m-0 flex-1">
     {{ range .Pages }}
       {{ partial "post-list-item.html" . }}
     {{ end }}
-  </div>
+  </ul>
 
   <div class="mt-8 mx-auto">
     <a class="btn btn-primary rounded" href="{{ .Parent.Permalink }}">

@@ -9,9 +9,11 @@
         </h3>
       </div>
 
-      {{ range .Pages }}
-        {{ partial "post-list-item.html" . }}
-      {{ end }}
+      <ul class="list-none m-0">
+        {{ range .Pages }}
+          {{ partial "post-list-item.html" . }}
+        {{ end }}
+      </ul>
     {{ end }}
   </div>
 {{ end }}

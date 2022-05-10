@@ -6,9 +6,13 @@
 
     <ul class="list-none m-0 p-0 flex flex-wrap items-center justify-center leading-normal gap-2">
     {{- range .Data.Terms.Alphabetical -}}
-      <li style="font-size: calc({{ .Count }} * 0.5rem + 0.5rem);">
-        <a href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/">
-          {{ .Term -}} <sup>{{ .Count }}</sup>
+      <li>
+        <a
+          href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
+          class="no-underline rounded-full border-2 px-4 py-1/2"
+          style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
+        >
+          {{ .Term -}}
         </a>
       </li>
     {{- end -}}

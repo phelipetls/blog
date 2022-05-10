@@ -11,6 +11,14 @@
 
       <div class="flex flex-col gap-2 mb-4" style="--icon-size: 24px;">
         <div class="flex items-center gap-2">
+          {{ partial "svgs/book-open.svg" . }}
+
+          <div>
+            {{ .ReadingTime }} min.
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
           {{ partial "svgs/calendar.svg" . }}
 
           <time class="" datetime="{{ .Date.Format "2006-01-02" }}">

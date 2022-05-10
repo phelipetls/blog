@@ -1,5 +1,7 @@
 {{ define "main" }}
-  <h1 class="mb-0">{{ .Name }}</h1>
+  <h1 class="flex gap-2 items-center mb-0" style="--icon-size: 1.5rem;">
+    {{ partial "svgs/tag.svg" }} {{ .Name }}
+  </h1>
 
   <ul class="list-none m-0 flex-1">
     {{ range .Pages }}

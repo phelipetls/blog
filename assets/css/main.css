@@ -104,6 +104,10 @@ body.dark {
     @apply my-4 border-t-2 border-divider;
   }
 
+  [data-blog-post] hr {
+    @apply border-0 overflow-visible text-center after:content-['⁂'];
+  }
+
   pre {
     @apply py-4 px-8 rounded overflow-x-auto bg-surface;
   }

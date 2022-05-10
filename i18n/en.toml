@@ -73,3 +73,7 @@ other = 'Click to read in another language'
 
 [LanguageOptions]
 other = 'Translations'
+
+[TagDescription]
+one = '{{ .Count }} post on {{ .Term }}'
+other = '{{ .Count }} posts on {{ .Term }}'

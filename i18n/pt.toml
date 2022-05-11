@@ -25,12 +25,6 @@ other = 'Navegação principal'
 [PostsNavigation]
 other = 'Navegação entre posts'
 
-[PrevPost]
-other = 'Post anterior'
-
-[NextPost]
-other = 'Próximo post'
-
 [Contacts]
 other = 'Contatos'
 

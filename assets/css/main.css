@@ -108,8 +108,16 @@ body.dark {
     @apply border-0 overflow-visible text-center after:content-['⁂'];
   }
 
+  [data-blog-post] figure {
+    @apply -mx-4 sm:mx-0;
+  }
+
+  [data-blog-post] :is(blockquote, h1, h2, h3, h4) {
+    @apply -mx-4 sm:mx-0;
+  }
+
   pre {
-    @apply py-4 px-8 rounded overflow-x-auto bg-surface;
+    @apply -mx-4 sm:mx-0 py-4 px-8 sm:rounded overflow-x-auto bg-surface;
   }
 
   [data-blog-post] :is(pre, picture, img, blockquote) {

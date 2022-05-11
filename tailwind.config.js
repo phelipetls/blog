@@ -18,6 +18,9 @@ module.exports = {
       zIndex: {
         '-1': '-1',
       },
+      spacing: {
+        'default-padding': '1rem',
+      },
     },
     colors: {
       transparent: 'transparent',

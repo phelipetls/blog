@@ -344,8 +344,6 @@ around.
 
 Here's a demonstration of the final result:
 
-<video controls width="100%">
-  <source src="./demo.mp4" type="video/mp4">
-</video>
+{{< video src="./demo.mp4" caption="Demo of Android Studio running in dwm" >}}
 
 [^1]: https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html

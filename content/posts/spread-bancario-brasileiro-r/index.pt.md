@@ -137,7 +137,7 @@ dados %>%
   )
 ```
 
-![img3](./unnamed-chunk-7-1.png)
+{{< figure >}}{{< figure title="img3" src="./unnamed-chunk-7-1.png" >}}
 
 Veja como o spread vinha caindo sistematicamente, embora ainda fosse muito alto
 pros padrões internacionais. Com a crise, ele voltou a aumentar, voltando aos
@@ -224,7 +224,7 @@ dados %>%
   coord_flip()
 ```
 
-![img1](./output_9_0.png)
+{{< figure title="img1" src="./output_9_0.png" >}}
 
 E que tal contrastar os 15 maiores spreads de países em desenvolvimento versus
 desenvolvidos, pro ano de 2017? Na outra tabela tem uma coluna que pode nos
@@ -255,7 +255,7 @@ library(gridExtra)
 grid.arrange(plot1, plot2, nrow = 2)
 ```
 
-![img2](./output_11_0.png)
+{{< figure title="img2" src="./output_11_0.png" >}}
 
 Vemos, assim, que a situação do Brasil é meio crítica quando se olha para o
 mercado de crédito. Está no meio de países muito pequenos ou pobres (não que o

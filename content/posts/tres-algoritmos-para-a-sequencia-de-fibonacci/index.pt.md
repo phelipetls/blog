@@ -123,7 +123,7 @@ Para calcular o vigésimo número ele demorou muito mais do que o algoritmo
 anterior, que calculou um número muito maior\!\! Por que será que isso
 aconteceu? Uma imagem pode ajudar a ilustrar o porquê disso.
 
-![Fib](./fibo.png)
+{{< figure title="Fib" src="./fibo.png" >}}
 
 O que acontece é que a função recursiva acaba requisitando os mesmos números de
 fibonacci múltiplas vezes e, para números muito grandes, esse excesso de
@@ -203,7 +203,7 @@ pode ser bem pesado matematicamente. Felizmente, existe uma maneira muito
 conveniente para resolver esses casos, e envolve os autovalores/autovetores
 (_eigenvalues/eigenvectors_) de uma matriz. Mas, afinal, o que são eles?
 
-![Eigenvectors](./evectors.gif)
+{{< figure title="Eigenvectors" src="./evectors.gif" >}}
 
 Simply put, os autovetores são vetores característicos de uma matriz que, após
 transformados por ela, não mudam de direção, mas é possível que mudem em

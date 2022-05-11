@@ -78,7 +78,7 @@ df %>%
   )
 ```
 
-![plot1](./unnamed-chunk-2-1.png)
+{{< figure title="plot1" src="./unnamed-chunk-2-1.png" >}}
 
 Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com os
 anos…
@@ -107,7 +107,7 @@ df %>%
   scale_x_continuous(breaks = 2007:2012)
 ```
 
-![plot2](./unnamed-chunk-3-1.png)<!-- -->
+{{< figure title="plot2" src="./unnamed-chunk-3-1.png" >}}
 
 Essa é a primeira visualização do que já era esperado: na cidade de Baltimore, a
 violência afeta muito mais os negros do que a qualquer outra raça. Impressiona a
@@ -147,7 +147,7 @@ acumulado <- df %>%
 acumulado
 ```
 
-![plot3](./unnamed-chunk-4-1.png)<!-- -->
+{{< figure title="plot3" src="./unnamed-chunk-4-1.png" >}}
 
 E aqui fica claro o porquê da queda em 2012: não temos os dados de todos os
 meses. Também salta aos olhos que a violência diminuiu em relação a 2007, mas se
@@ -175,7 +175,7 @@ df %>%
   scale_x_continuous(breaks = seq(0, 100, 10))
 ```
 
-![plot3](./unnamed-chunk-5-1.png)<!-- -->
+{{< figure title="plot3" src="./unnamed-chunk-5-1.png" >}}
 
 E assim podemos ver que o mais afetado pela violência é o homem negro da faixa
 dos 20-30 anos. Se olharmos bem, pode-se também observar que a mulher negra está
@@ -205,7 +205,7 @@ df %>%
   scale_fill_brewer(palette = "Set1")
 ```
 
-![plot5](./unnamed-chunk-6-1.png)<!-- -->
+{{< figure title="plot5" src="./unnamed-chunk-6-1.png" >}}
 
 Os homicídios por armas de fogo são de longe os mais comuns, seguido por
 esfaqueamento e contusão.
@@ -266,7 +266,7 @@ anim <- baltimore_map +
 animate(anim, fps = 5)
 ```
 
-![gif1](./unnamed-chunk-7-1.gif)<!-- -->
+{{< figure title="gif1" src="./unnamed-chunk-7-1.gif" >}}
 
 Fica evidente daí como a violência é concentrada em certos bairros.
 
@@ -296,7 +296,7 @@ df %>%
   transition_states(ano)
 ```
 
-![gif2](./unnamed-chunk-8-1.gif)<!-- -->
+{{< figure title="gif2" src="./unnamed-chunk-8-1.gif" >}}
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
 `gganimate::transition_reveal()` para revelar ao longo do eixo do tempo como os
@@ -314,7 +314,7 @@ acumulado +
   transition_reveal(mes)
 ```
 
-![gif3](./unnamed-chunk-9-1.gif)<!-- -->
+{{< figure title="gif3" src="./unnamed-chunk-9-1.gif" >}}
 
 # Conclusões
 

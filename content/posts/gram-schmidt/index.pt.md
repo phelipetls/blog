@@ -38,7 +38,7 @@ ax.set_ylim(-1, 1, 1)
 ax.set_zlim(-1, 1, 1)
 ```
 
-![Vetores na terceira dimensão](./vetores.png)
+{{< figure title="Vetores na terceira dimensão" src="./vetores.png" >}}
 
 Para ver isso com matrizes, vamos supor uma matriz \\( Q \\) cujas colunas são
 vetores ortogonais com o comprimento
@@ -97,7 +97,7 @@ ax.annotate("$e = a_1 - \hat{x}a_2$", e + projection + [1, -2], fontsize=15)
 ax.set_title(r"Projeção de \\( a_1 \\) em \\( a_2 \\)")
 ```
 
-![Projeção vetorial](./projecao-vetorial.png)
+{{< figure title="Projeção vetorial" src="./projecao-vetorial.png" >}}
 
 Dados esses dois vetores, podemos gerar um vetor perpendicular ao \\( a_2 \\)
 que denominaremos \\( e \\), que é o resultado da subtração em \\( a_1 \\) do

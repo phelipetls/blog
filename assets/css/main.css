@@ -120,7 +120,7 @@ body.dark {
     @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded overflow-x-auto bg-surface;
   }
 
-  [data-blog-post] :is(pre, picture, img, blockquote) {
+  [data-blog-post] :is(pre, figure, blockquote) {
     @apply my-8;
   }
 

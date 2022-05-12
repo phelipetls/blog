@@ -116,6 +116,10 @@ body.dark {
     @apply text-center;
   }
 
+  [data-blog-post] lite-youtube {
+    @apply -mx-default-padding;
+  }
+
   pre {
     @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded overflow-x-auto bg-surface;
   }

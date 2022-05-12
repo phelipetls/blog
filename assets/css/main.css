@@ -117,7 +117,7 @@ body.dark {
   }
 
   [data-blog-post] lite-youtube {
-    @apply -mx-default-padding;
+    @apply -mx-default-padding sm:mx-0;
   }
 
   [data-blog-post] :is(pre, figure, blockquote) {

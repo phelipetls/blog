@@ -116,10 +116,6 @@ body.dark {
     @apply -mx-default-padding sm:mx-0;
   }
 
-  [data-blog-post] :is(blockquote, h1, h2, h3, h4) {
-    @apply -mx-default-padding sm:mx-0;
-  }
-
   pre {
     @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded overflow-x-auto bg-surface;
   }

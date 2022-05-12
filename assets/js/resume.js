@@ -14,6 +14,7 @@ const resumeUrl = resumeContainer.dataset.resume
 if (PDFObject.supportsPDFs) {
   PDFObject.embed(resumeUrl, resumeContainer)
 } else {
+  resumeLoading.classList.remove('hidden')
   resumeDownloadButton.classList.remove('hidden')
 
   pdfjsLib
@@ -49,6 +50,7 @@ if (PDFObject.supportsPDFs) {
       resumeContainer.classList.add('hidden')
     })
     .then(function () {
+      resumeCanvas.classList.remove('hidden')
       resumeLoading.classList.add('hidden')
     })
 }

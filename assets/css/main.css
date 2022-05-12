@@ -205,6 +205,10 @@ body.dark {
   @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-code-highlight !important;
 }
 
+[data-blog-post] .katex-display {
+  @apply overflow-x-auto;
+}
+
 @keyframes tooltip-animation {
   0% {
     opacity: 0;

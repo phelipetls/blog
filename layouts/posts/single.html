@@ -67,3 +67,23 @@
 
   {{ partial "post-nav.html" . }}
 {{ end }}
+
+{{ define "head" }}
+  {{ $liteYoutubeEmbedCss := resources.Get "/css/lite-yt-embed.css" | postCSS }}
+
+  {{ if hugo.IsProduction }}
+    {{ $liteYoutubeEmbedCss = $liteYoutubeEmbedCss | minify }}
+  {{ end }}
+
+  <link rel="stylesheet" href="{{ $liteYoutubeEmbedCss.Permalink }}" />
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
+
+  {{ if hugo.IsProduction }}
+    {{ $liteYoutubeEmbedJs = $liteYoutubeEmbedJs | minify }}
+  {{ end }}
+
+  <script src="{{ $liteYoutubeEmbedJs.Permalink }}"></script>
+{{ end }}

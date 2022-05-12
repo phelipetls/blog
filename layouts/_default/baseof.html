@@ -3,6 +3,9 @@
   <head>
     {{ partial "head.html" . }}
 
+    {{ block "head" . }}
+    {{ end }}
+
     {{ block "css" . }}
       {{ range (.Resources.Match "*.css") }}
         <link href="{{ .RelPermalink }}" rel="stylesheet" />

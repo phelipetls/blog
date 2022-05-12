@@ -29,20 +29,6 @@
             {{ end }}
           </time>
         </div>
-
-        {{ if (.Lastmod.After .Date) }}
-          <div class="flex items-center gap-2">
-            {{ partial "svgs/edit-2.svg" . }}
-
-            <div>
-              {{ i18n "Lastmod" . }}
-
-              <time datetime="{{ .Lastmod.Format "2006-01-02" }}">
-                {{ i18n "DateFormat" (.Lastmod) }}
-              </time>
-            </div>
-          </div>
-        {{ end }}
       </div>
     </header>
 

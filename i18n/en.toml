@@ -26,9 +26,6 @@ other = 'Posts navigation'
 [Contacts]
 other = 'Contacts'
 
-[Lastmod]
-other = 'Last modified at'
-
 [DateFormat]
 other = '{{ .Format "January 02, 2006" }}'
 

@@ -28,9 +28,6 @@ other = 'Navegação entre posts'
 [Contacts]
 other = 'Contatos'
 
-[Lastmod]
-other = 'Editado em'
-
 [DateFormat]
 other = '{{ .Format "02 de Agosto" }}'
 

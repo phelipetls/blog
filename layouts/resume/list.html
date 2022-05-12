@@ -1,8 +1,8 @@
 {{ define "main" }}
-  <div class="flex flex-col flex-1">
+  <div class="flex flex-col flex-1 -mx-default-padding">
     <div
       data-resume="{{ .Site.Params.resume }}"
-      class="relative h-96 w-full border-2 border-foreground overflow-y-auto"
+      class="relative h-96 w-full border-y-2 sm:border-2 border-foreground overflow-y-auto"
     >
       <div data-resume-loading role="progressbar" class="hidden absolute inset-0 h-full flex justify-center items-center">
         {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}

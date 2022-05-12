@@ -17,10 +17,6 @@
   <meta name="keywords" content="{{ $tagsSeparatedByComma }}">
 {{ end }}
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
 {{ with resources.GetRemote "https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" }}
   <style>
     {{ .Content | safeCSS }}

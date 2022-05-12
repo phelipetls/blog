@@ -12,8 +12,10 @@ that adds support for string modifiers and escape sequences.
 Getting Python syntax highlighting to work in Vim requires very little code, to
 my surprise.
 
-{{< figure title="Before" src="./before.png" >}}
-{{< figure title="After" src="./after.png" >}}
+<figure class="cocoen">
+  <img alt="Before" src="./before.png">
+  <img alt="After" src="./after.png">
+</figure>
 
 Here is everything that you need and an explanation below.
 

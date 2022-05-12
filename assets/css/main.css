@@ -116,10 +116,6 @@ body.dark {
     @apply text-center;
   }
 
-  [data-blog-post] lite-youtube {
-    @apply -mx-default-padding sm:mx-0;
-  }
-
   [data-blog-post] :is(pre, figure, blockquote) {
     @apply my-8;
   }

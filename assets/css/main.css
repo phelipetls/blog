@@ -121,7 +121,7 @@ body.dark {
   }
 
   :not(pre) > code {
-    @apply px-1 font-bold;
+    @apply px-1 font-bold break-all;
   }
 
   :not(pre) > code::before,

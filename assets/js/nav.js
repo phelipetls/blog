@@ -3,7 +3,10 @@ const nav = document.querySelector('[data-nav-container]')
 const navActiveLink = nav.querySelector('nav a.active')
 
 if (navActiveLink) {
-  navActiveLink.scrollIntoView()
+  navActiveLink.scrollIntoView({
+    behavior: 'auto',
+    block: 'center',
+  })
 }
 
 const navClasses = ['shadow-md', 'dark:shadow-divider']

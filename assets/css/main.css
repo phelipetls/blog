@@ -209,7 +209,7 @@ body.dark {
 }
 
 [data-blog-post] .katex-display {
-  @apply overflow-x-auto;
+  @apply overflow-x-auto overflow-y-hidden;
 }
 
 svg.feather {

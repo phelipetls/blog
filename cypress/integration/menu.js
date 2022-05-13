@@ -48,7 +48,7 @@ describe('Menu', () => {
     cy.findByRole('button', { name: /change theme/i }).should('be.focused')
   })
 
-  it('should focus on button after selecting menuitem', () => {
+  it('should focus on button after clicking on a menu item', () => {
     cy.visit('/')
 
     cy.findByRole('button', { name: /change theme/i }).click()

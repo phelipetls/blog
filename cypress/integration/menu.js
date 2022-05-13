@@ -39,4 +39,12 @@ describe('Menu', () => {
       .should('be.focused')
       .and('have.attr', 'aria-expanded', 'false')
   })
+
+  it('should focus on button after escaping menu', () => {
+    cy.visit('/')
+
+    cy.findByRole('button', { name: /change theme/i }).click()
+    cy.findByRole('menu').type('{esc}')
+    cy.findByRole('button', { name: /change theme/i }).should('be.focused')
+  })
 })

@@ -9,7 +9,7 @@
       <li>
         <a
           href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
-          class="{{ partial "tag-classes.html" }}"
+          class="tag"
           style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
         >
           {{ .Term -}}

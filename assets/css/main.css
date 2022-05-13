@@ -193,6 +193,10 @@ body.dark {
     width: var(--icon-size);
     height: var(--icon-size);
   }
+
+  .tag {
+    @apply no-underline rounded-full border-2 px-4;
+  }
 }
 
 [data-preload] {

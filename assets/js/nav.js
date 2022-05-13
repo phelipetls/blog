@@ -9,12 +9,6 @@ if (navActiveLink) {
   })
 }
 
-const navClasses = ['shadow-md', 'dark:shadow-divider']
-
-if (window.scrollY > nav.offsetHeight) {
-  nav.classList.add(...navClasses)
-}
-
 let lastScrollPosition = window.scrollY
 
 function setNavPosition() {
@@ -23,13 +17,8 @@ function setNavPosition() {
 
   if (isScrollingDown) {
     nav.style.transform = `translateY(-100%)`
-    nav.classList.remove(...navClasses)
   } else {
     nav.style.transform = `translateY(0)`
-
-    for (const className of navClasses) {
-      nav.classList.toggle(className, window.scrollY > nav.offsetHeight)
-    }
   }
 
   lastScrollPosition = Math.max(newScrollPosition, 0)

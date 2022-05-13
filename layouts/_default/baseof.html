@@ -13,7 +13,7 @@
     {{ end }}
   </head>
 
-  <body data-preload class="h-full text-foreground bg-background transition transition-colors duration-500 ease-out">
+  <body data-preload class="text-foreground bg-secondary-background transition transition-colors duration-500 ease-out">
     {{ block "script-elements" . }}
     {{ end }}
 
@@ -25,11 +25,11 @@
 
     <script>{{ $themeScript.Content | safeJS }}</script>
 
-    <div data-scroll-container class="flex flex-col min-h-full">
+    <div data-scroll-container>
       {{ partial "nav.html" . }}
 
-      <div class="mt-36 mb-16 px-default-padding flex-1 max-w-5xl flex container mx-auto">
-        <main class="flex flex-1 shrink-0 flex-col w-full">
+      <div class="max-w-5xl mx-auto w-full px-default-padding mt-20 py-4">
+        <main class="bg-background w-full rounded-lg shadow-md shadow-divider py-16 sm:px-16 px-default-padding">
           {{ block "main" . }}
             {{ .Content }}
           {{ end }}

@@ -1,6 +1,6 @@
-<div data-nav-container class="fixed top-0 w-full h-16 bg-background flex-shrink-0 z-30 transition-transform transition-duration-700 transition-ease-out">
-  <div class="h-full flex items-center justify-between mx-auto max-w-5xl px-default-padding">
-    <nav class="h-full overflow-x-auto flex items-center pr-[12px]" aria-label="{{ i18n "MainNavigation" }}">
+<div data-nav-container class="fixed top-0 w-full h-20 bg-secondary-background z-30 transition-transform transition-duration-700 transition-ease-out">
+  <div class="h-full pt-4 pb-4 flex items-center justify-between mx-auto max-w-5xl pr-default-padding">
+    <nav class="h-full py-1 overflow-x-auto flex items-center px-default-padding" aria-label="{{ i18n "MainNavigation" }}">
       {{ $currentPage := . }}
 
       <ul class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full">
@@ -17,25 +17,13 @@
                 relative
                 items-center
                 justify-center
-                overflow-hidden
-                after:content-['']
-                after:absolute
-                after:bottom-0
-                after:left-0
-                after:w-full
-                after:h-[2px]
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
                   active
-                  after:bg-primary
+                  bg-background
+                  rounded
+                  shadow-md
+                  shadow-divider
                 {{ else }}
-                  after:bg-divider
-                  after:opacity-0
-                  after:-translate-x-full
-                  hover:after:translate-x-0
-                  hover:after:opacity-100
-                  after:transition-opacity
-                  after:transition-transform
-                  after:duration-300
                 {{ end }}
               "
             >
@@ -46,13 +34,13 @@
       </ul>
     </nav>
 
-    <div class="relative flex items-center gap-2">
-      <div class="absolute h-full top-0 -left-[24px] w-[24px] bg-gradient-to-r from-[rgba(255,255,255,0.001)] dark:from-[rgba(0,0,0,0.001)] to-background pointer-events-none"></div>
-
-      {{ if .IsTranslated }}
-        {{ partial "language-button.html" . }}
-      {{ end }}
-      {{ partial "theme-button.html" . }}
+    <div class="h-full py-1">
+      <div class="h-full px-2 flex items-center gap-2 bg-background rounded shadow-md shadow-divider">
+        {{ if .IsTranslated }}
+          {{ partial "language-button.html" . }}
+        {{ end }}
+        {{ partial "theme-button.html" . }}
+      </div>
     </div>
 
     {{ if .IsTranslated }}

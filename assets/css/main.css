@@ -189,13 +189,12 @@ body.dark {
     @apply rounded-md p-1 flex items-center justify-center;
   }
 
-  svg.feather {
-    width: var(--icon-size);
-    height: var(--icon-size);
-  }
-
   .tag {
     @apply no-underline rounded-full border-2 px-4;
+  }
+
+  .alert {
+    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded bg-surface -mx-default-padding sm:mx-0;
   }
 }
 
@@ -211,6 +210,11 @@ body.dark {
 
 [data-blog-post] .katex-display {
   @apply overflow-x-auto;
+}
+
+svg.feather {
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 
 @keyframes tooltip-animation {

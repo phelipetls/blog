@@ -55,4 +55,24 @@ describe('Menu', () => {
     cy.findByRole('menuitem', { name: /system/i }).click()
     cy.findByRole('button', { name: /change theme/i }).should('be.focused')
   })
+
+  it('should be able to change theme with keyboard consecutively', () => {
+    cy.visit('/', {
+      onBeforeLoad: (win) => {
+        win.localStorage.setItem('__theme', 'light')
+      },
+    })
+
+    cy.findByRole('button', { name: /change theme/i }).click()
+    cy.findByRole('menu').should('be.focused').type('{downArrow}{enter}')
+
+    cy.get('body').should('have.class', 'dark')
+
+    cy.findByRole('button', { name: /change theme/i })
+      .should('be.focused')
+      .click()
+    cy.findByRole('menu').type('{downArrow}{enter}')
+
+    cy.get('body').should('not.have.class', 'dark')
+  })
 })

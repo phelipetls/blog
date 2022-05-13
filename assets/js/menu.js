@@ -238,7 +238,7 @@ export function initialize(button, options) {
       case ' ':
         if (options.onClick) {
           options.onClick(getActiveMenuItem(menu))
-          selectMenuItem(menu, e.target)
+          selectMenuItem(menu, getActiveMenuItem(menu))
           hideMenu(menu, button)
         }
         shouldPreventDefault = true

@@ -143,7 +143,10 @@ function hideMenu(menu, button) {
   fadeOut(menu, 500)
 
   button.setAttribute('aria-expanded', 'false')
-  if (document.activeElement === menu) {
+  if (
+    document.activeElement === menu ||
+    document.activeElement === getActiveMenuItem(menu)
+  ) {
     button.focus()
   }
 

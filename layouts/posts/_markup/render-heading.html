@@ -1,10 +1,10 @@
 <h{{ add .Level 1 }}
-  class="mb-8 mt-8 pt-8 pl-4 group relative overflow-hidden after:content-[''] after:absolute after:top-8 after:left-0 after:bg-primary after:w-[2px] after:h-full"
+  class="mb-8 mt-8 pt-8"
   id="{{ .Anchor | safeURL }}"
 >
   {{ .Text | safeHTML }}
 
-  <a class="text-primary border-0 hidden group-hover:inline-block align-middle" style="--icon-size: 24px;" href="#{{ .Anchor | safeURL }}">
-    {{ partial "svgs/link-2.svg" }}
+  <a class="text-primary border-0 pl-2" href="#{{ .Anchor | safeURL }}">
+    #
   </a>
 </h{{ add .Level 1 }}>

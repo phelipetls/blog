@@ -194,7 +194,7 @@ body.dark {
   }
 
   .alert {
-    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-2 rounded-md bg-secondary-background;
+    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded bg-secondary-background -mx-default-padding sm:mx-0;
   }
 }
 

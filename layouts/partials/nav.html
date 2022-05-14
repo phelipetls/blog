@@ -17,7 +17,7 @@
                 relative
                 items-center
                 justify-center
-                rounded
+                rounded-md
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
                   active
                   bg-background
@@ -47,7 +47,7 @@
     </nav>
 
     <div class="h-full py-1">
-      <div class="h-full px-2 flex items-center gap-2 bg-background rounded shadow-md shadow-divider">
+      <div class="h-full px-2 flex items-center gap-2 bg-background rounded-md shadow-md shadow-divider">
         {{ if .IsTranslated }}
           {{ partial "language-button.html" . }}
         {{ end }}

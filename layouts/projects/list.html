@@ -4,7 +4,7 @@
     {{ range .Pages }}
       <li class="mb-16 last:mb-0">
         <article class="flex gap-4 flex-col sm:flex-row">
-          <div class="rounded-md overflow-hidden h-[216px] sm:w-2/5 border border-divider">
+          <div class="rounded-0 sm:rounded-md -mx-default-padding overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 border-divider">
             {{ with (index (.Resources.ByType "image") 0) }}
               <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}">
               </img>

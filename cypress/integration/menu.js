@@ -71,7 +71,7 @@ describe('Menu', () => {
     cy.findByRole('button', { name: /change theme/i })
       .should('be.focused')
       .click()
-    cy.findByRole('menu').type('{downArrow}{enter}')
+    cy.findByRole('menu').type('{upArrow}{enter}')
 
     cy.get('body').should('not.have.class', 'dark')
   })

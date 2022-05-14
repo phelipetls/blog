@@ -42,7 +42,7 @@ body.dark {
   --primary: var(--orange);
   --foreground: var(--beige-300);
   --background: var(--black-600);
-  --secondary-background: hexToRgb(#2e2e2e);
+  --secondary-background: var(--black-400);
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);

@@ -24,8 +24,6 @@
   --blue: hexToRgb(#4076d2);
   --red: hexToRgb(#ca132f);
   --orange: hexToRgb(#ecaa36);
-
-  --code-highlight: var(--black-500);
 }
 
 body {
@@ -205,7 +203,7 @@ body.dark {
 .chroma .hl {
   /* unmaintainable hack to fix offset due to 4px border */
   padding-left: calc(2rem - 4px);
-  @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-code-highlight !important;
+  @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-secondary-background !important;
 }
 
 [data-blog-post] .katex-display {

@@ -17,13 +17,25 @@
                 relative
                 items-center
                 justify-center
+                rounded
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
                   active
                   bg-background
-                  rounded
                   shadow-md
                   shadow-divider
                 {{ else }}
+                  overflow-hidden
+                  after:content-['']
+                  after:absolute
+                  after:-z-10
+                  after:bg-background
+                  after:w-full
+                  after:h-full
+                  after:rounded-full
+                  after:scale-0
+                  hover:after:scale-150
+                  after:transition-transform
+                  after:duration-500
                 {{ end }}
               "
             >

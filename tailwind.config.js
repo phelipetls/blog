@@ -27,7 +27,6 @@ module.exports = {
       current: 'currentColor',
       primary: withOpacityValue('--primary'),
       divider: withOpacityValue('--divider'),
-      surface: withOpacityValue('--surface'),
       foreground: withOpacityValue('--foreground'),
       background: withOpacityValue('--background'),
       ['secondary-background']: withOpacityValue('--secondary-background'),

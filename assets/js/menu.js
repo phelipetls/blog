@@ -38,7 +38,7 @@ function getSelectedMenuItem(menu) {
   return selectedMenuitem
 }
 
-const focusedStyle = ['bg-surface']
+const focusedStyle = ['bg-secondary-background']
 
 /**
  * @type {(item: HTMLElement) => void}

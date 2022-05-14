@@ -12,7 +12,7 @@ const copyCodeButtonClassName = [
   'btn',
   'btn-icon',
   'p-1',
-  'bg-surface',
+  'bg-secondary-background',
   'text-foreground',
   'border',
   'border-divider',

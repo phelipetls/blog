@@ -33,7 +33,6 @@ body {
   --foreground: var(--black-100);
   --background: var(--beige-100);
   --secondary-background: var(--beige-300);
-  --surface: var(--beige-200);
   --divider: var(--beige-500);
   --note: var(--blue);
   --warn: var(--red);
@@ -44,7 +43,6 @@ body.dark {
   --foreground: var(--beige-300);
   --background: var(--black-600);
   --secondary-background: hexToRgb(#2e2e2e);
-  --surface: var(--black-300);
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);
@@ -123,7 +121,7 @@ body.dark {
   }
 
   pre {
-    @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded-md overflow-x-auto bg-surface;
+    @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded-md overflow-x-auto bg-secondary-background;
   }
 
   :not(pre) > code {
@@ -158,7 +156,7 @@ body.dark {
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply py-[2px] px-[6px] mx-[2px] inline-block rounded-md font-bold whitespace-nowrap align-text-bottom leading-none text-foreground bg-surface;
+    @apply py-[2px] px-[6px] mx-[2px] inline-block rounded-md font-bold whitespace-nowrap align-text-bottom leading-none text-foreground bg-secondary-background;
   }
 
   ::selection {
@@ -196,7 +194,7 @@ body.dark {
   }
 
   .alert {
-    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-2 rounded-md bg-surface;
+    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-2 rounded-md bg-secondary-background;
   }
 }
 

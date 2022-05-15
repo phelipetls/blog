@@ -53,3 +53,7 @@
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end }}
 {{ end -}}
+
+{{ if hugo.IsProduction }}
+  <script async defer data-website-id="32b90065-c2a6-4390-9684-dfde99409815" src="https://umami-production-10b2.up.railway.app/umami.js"></script>
+{{ end }}

@@ -77,10 +77,13 @@
 
 {{ define "scripts" }}
   {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
+  {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $liteYoutubeEmbedJs = $liteYoutubeEmbedJs | minify }}
+    {{ $themeUtterancesJs = $themeUtterancesJs | minify }}
   {{ end }}
 
   <script src="{{ $liteYoutubeEmbedJs.Permalink }}"></script>
+  <script src="{{ $themeUtterancesJs.Permalink }}"></script>
 {{ end }}

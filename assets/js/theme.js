@@ -39,7 +39,7 @@ function setTheme(themeOption) {
 function dispatchNewThemeEvent(themeOption) {
   const event = new CustomEvent('newTheme', {
     detail: {
-      theme: themeOption,
+      theme: getThemeFromOption(themeOption),
     },
   })
 

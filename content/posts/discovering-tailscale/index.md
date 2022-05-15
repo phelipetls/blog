@@ -87,67 +87,38 @@ Where `100.x.y.z` is the laptop's Tailscale IP address, i.e. the output of
 `tailscale ip -4`. Now just open the URL `http://100.x.y.z:1313` on your mobile
 device.
 
-## Debugging Hugo website in a mobile device
+## Test any website in a mobile device
 
-Something wasn't right with my code though, since the PDF was not being drawn
-on the mobile device only. So I needed some way to to discover the exact error
-that happened.
-
-Fortunately, it's possible to do remote debugging with both Firefox and Chrome.
-This is usually achievable by making your device discoverable to
-[Firefox](https://firefox-source-docs.mozilla.org/devtools-user/about_colon_debugging/index.html)
-and [Chrome](https://developer.chrome.com/docs/devtools/remote-debugging/)
-with an USB cable, but how can we remove the need for an USB?
-
-Since Android 11, [it's possible to connect to an Android device in the same
-Wi-Fi](https://remysharp.com/2016/12/17/chrome-remote-debugging-over-wifi).
-Apart from the usual setup, you'll also need to enable Wi-Fi debugging, grab
-the mobile device IP address and run
+Of course, the same can be achieved with many web servers. Say, for example,
+you want to serve the static build. You can do the same with Python's
+http.server module:
 
 ```sh
-adb connect $MOBILE_DEVICE_IP_ADDRESS:5555
+% python3 -m http.server --bind $(tailscale ip -4) --directory .
 ```
 
-### Chrome
+Or [`serve`](https://www.npmjs.com/package/vercel):
 
-If everything was [set
-up](https://developer.chrome.com/docs/devtools/remote-debugging/#discover)
-correctly, you'll be able to see your device listed when you open
-`chrome:inspect`:
+```sh
+% npx serve --listen %(tailscale ip -4) public
+```
 
-{{< figure src="./chrome-remote-debugging.png" alt="Remote debugging an Android device with Chrome" >}}
+It usually is one of these two command-line options, `--bind` or `--listen`.
 
-Click the Inspect next to the tab you want to debug.
+# Taildrop
 
-{{< note >}}
-The opened browser tabs will only show up while the Chrome app is being used
-though, so this can be confusing.
-{{< /note >}}
+Another convenient feature is what they called
+[Taildrop](https://tailscale.com/kb/1106/taildrop/), which is just a way to
+share files between devices.
 
-### Firefox
+For example, in your Android emulator you can choose Tailscale after clicking
+on the Share button, and you'll be able to get these file into the current
+directory of your laptop with `sudo tailscale file get .`.
 
-Firefox requires a bit more of extra setup, like enabling [remote debugging in
-its
-settings](https://firefox-source-docs.mozilla.org/devtools-user/remote_debugging/firefox_for_android/index.html#enable-remote-debugging).
+Alternatively, you can sendo files from your laptop to your mobile device with
 
-But then, upon opening `about:debugging` you should see your mobile device
-listed on the side, be able to connect to it, and start inspecting some tabs.
+```sh
+% sudo tailscale file cp $file $mobile_device_tailscale_ip_address:
+```
 
-{{< figure src="./firefox-remote-debugging.png" alt="Remote debugging an Android device with Firefox" >}}
-
-{{< note >}}
-You'll notice I blurred my Tailscale IP addresses. I'm pretty sure this is not
-needed, it's not like this is exposed to everyone, I would have to deliberately
-enable access to someone for this. But, just to be extra safe...
-{{< /note >}}
-
-# Conclusion
-
-And that's how Tailscale helped me found out that minifying the `pdf.js`
-service worker file with esbuild was causing it not to render my resumé, for
-some odd reason. So for the mean time I'll just let people download a huge
-amount of JavaScript instead, sorry.
-
-I recognize this might seem a pretty obvious use case, not very impressive. But
-it is a non-trivial improvement to my workflow, so I'm hoping it will be for
-someone else out there too.
+And you'll be notified about the received file.

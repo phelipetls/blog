@@ -215,6 +215,10 @@ svg.feather {
   height: var(--icon-size);
 }
 
+.utterances {
+  @apply max-w-prose mx-0;
+}
+
 @keyframes tooltip-animation {
   0% {
     opacity: 0;

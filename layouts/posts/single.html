@@ -43,13 +43,24 @@
     </section>
   </article>
 
-  <hr class="my-8" />
-
   <div data-theme-copy-code-tooltip role="tooltip" class="absolute pointer-events-none border border-divider bg-secondary-background rounded-md px-2" style="opacity: 0">
     {{ i18n "Copied" }}
 
     <div data-theme-copy-code-tooltip-arrow class="absolute bg-secondary-background border-r border-b border-divider w-[8px] h-[8px] rotate-45"></div>
   </div>
+
+  <hr class="my-8" />
+
+  <script
+    src="https://utteranc.es/client.js"
+    repo="phelipetls/phelipetls.github.io"
+    issue-term="pathname"
+    theme="preferred-color-scheme"
+    crossorigin="anonymous"
+    async
+  ></script>
+
+  <hr class="my-8" />
 
   {{ partial "post-nav.html" . }}
 {{ end }}

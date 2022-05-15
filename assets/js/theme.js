@@ -1,47 +1,63 @@
-function storeTheme(newTheme) {
-  if (newTheme) {
-    localStorage.setItem('__theme', newTheme)
+// @ts-check
+
+/** @typedef {'dark' | 'light'} Theme */
+/** @typedef {'dark' | 'light' | 'auto'} ThemeOption */
+
+/** @type {(themeOption: ThemeOption) => void} */
+function storeThemeOption(themeOption) {
+  if (themeOption) {
+    localStorage.setItem('__theme', themeOption)
   }
 }
 
-function getStoredTheme() {
-  return localStorage.getItem('__theme')
+function getStoredThemeOption() {
+  return /** @type {ThemeOption} */ (localStorage.getItem('__theme') || 'auto')
 }
 
-function setTheme(newTheme) {
-  if (newTheme === 'auto') {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      newTheme = 'dark'
-    }
-  }
-
-  if (newTheme === 'dark') {
-    document.body.classList.add('dark')
-  } else {
-    document.body.classList.remove('dark')
-  }
+/** @type {() => Theme} */
+function getAutoTheme() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light'
 }
 
-function dispatchNewThemeEvent(newTheme) {
+/** @type {(themeOption: ThemeOption) => Theme} */
+function getThemeFromOption(themeOption) {
+  if (themeOption === 'auto') {
+    return getAutoTheme()
+  }
+  return themeOption
+}
+
+/** @type {(themeOption: ThemeOption) => void} */
+function setTheme(themeOption) {
+  const newTheme = getThemeFromOption(themeOption)
+  document.body.classList.toggle('dark', newTheme === 'dark')
+}
+
+/** @type {(themeOption: ThemeOption) => void} */
+function dispatchNewThemeEvent(themeOption) {
   const event = new CustomEvent('newTheme', {
     detail: {
-      theme: newTheme,
+      theme: themeOption,
     },
   })
 
   document.body.dispatchEvent(event)
 }
 
-window.__setTheme = function (newTheme) {
-  setTheme(newTheme)
-  storeTheme(newTheme)
-  dispatchNewThemeEvent(newTheme)
+/** @type {(themeOption: ThemeOption) => void} */
+window.__setTheme = function (themeOption) {
+  setTheme(themeOption)
+  storeThemeOption(themeOption)
+  dispatchNewThemeEvent(themeOption)
 }
 
-const storedTheme = getStoredTheme() || 'auto'
-window.__setTheme(storedTheme)
+/** @type {ThemeOption} */
+const storedThemeOption = getStoredThemeOption()
+window.__setTheme(storedThemeOption)
 
 window.addEventListener('load', function () {
   document.body.removeAttribute('data-preload')
-  dispatchNewThemeEvent(storedTheme)
+  dispatchNewThemeEvent(storedThemeOption)
 })

@@ -13,5 +13,5 @@
     "ecmaVersion": 8,
     "sourceType": "module"
   },
-  "ignorePatterns": ["public", "*.min.js"]
+  "ignorePatterns": ["public", "*.min.js", "*.d.ts"]
 }

@@ -6,6 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "*": ["assets/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./assets/js/types"]
   }
 }

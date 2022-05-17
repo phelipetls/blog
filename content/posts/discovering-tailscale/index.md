@@ -58,26 +58,25 @@ device should be listed in there as well:
 # Use cases
 
 What initially made me reach to Tailscale was that I wanted to run my blog in
-my mobile device, mainly because I needed to test if previewing my
-[resumé](/resume) with [`pdf.js`](https://mozilla.github.io/pdf.js/) worked,
-since PDF preview is not built into mobile browsers.
+my mobile device, because I needed to test if previewing PDF with
+[`pdf.js`](https://mozilla.github.io/pdf.js/) was working.
 
 Initially, I went with what I was familiar to me, which is using
 [`adb`](/posts/adb-a-must-know-cli-tool-for-android-development/). But the
-initial setup required was huge and demotivating, just look at the [steps
-needed to connect via
-Wi-Fi](https://developer.android.com/studio/command-line/adb#connect-to-a-device-over-wi-fi-android-11+),
-it includes installing Android Studio, the Android SDK, among other things for
-such a seemingly simple thing.
+[initial setup
+required](https://developer.android.com/studio/command-line/adb#connect-to-a-device-over-wi-fi-android-11+)
+is non-trivial, and you'd have to install `adb`. It's still a good option
+though, if the initial setup has already been done.
 
-This made me suspicious there's gotta be an easier way to do this. I got a hint
-that Tailscale might help with that, so I went to read about it.
+Anyway, this made me suspicious that there's gotta be an easier way to do this.
+I got a hint that Tailscale might help with that, so I went to read about it.
 
 ## Testing Hugo website in a mobile device
 
-Having done the initial setup, it took me some time to find how to make the web
-development server running Hugo on my laptop available on my phone. Eventually
-I found that this works:
+Having done the initial setup, [it took me some
+help](https://www.reddit.com/r/Tailscale/comments/ukittc/how_to_access_a_web_server_running_on_my_laptop/)
+to find out how to make Hugo's development server, running in my laptop,
+available to my mobile device. Eventually I found this does the trick:
 
 ```sh
 hugo serve --bind 100.x.y.z --baseUrl 100.x.y.z
@@ -85,40 +84,43 @@ hugo serve --bind 100.x.y.z --baseUrl 100.x.y.z
 
 Where `100.x.y.z` is the laptop's Tailscale IP address, i.e. the output of
 `tailscale ip -4`. Now just open the URL `http://100.x.y.z:1313` on your mobile
-device.
+device. In fact, you don't even need to be on the same Wi-Fi for this to work,
+it's going to be available as long you're still connected to Tailscale. That's
+the magic thing about it.
 
-## Test any website in a mobile device
+## Test any server in a mobile device
 
-Of course, the same can be achieved with many web servers. Say, for example,
-you want to serve the static build. You can do the same with Python's
-http.server module:
+Of course, this is not limited to Hugo. Many web servers provide a way to do
+the same. Say, for example, you want to serve the static build of your site, in
+the `public` directory and check it out in your phone.
 
-```sh
-% python3 -m http.server --bind $(tailscale ip -4) --directory .
-```
-
-Or [`serve`](https://www.npmjs.com/package/vercel):
+You can use Python's `http.server` module:
 
 ```sh
-% npx serve --listen %(tailscale ip -4) public
+% python3 -m http.server --bind $(tailscale ip -4) --directory public
 ```
 
-It usually is one of these two command-line options, `--bind` or `--listen`.
+Or Vercel's [`serve`](https://github.com/vercel/serve):
 
-# Taildrop
+```sh
+% npx serve --listen $(tailscale ip -4) public
+```
 
-Another convenient feature is what they called
-[Taildrop](https://tailscale.com/kb/1106/taildrop/), which is just a way to
-share files between devices.
+Usually, one of these two command-line options, `--bind` or `--listen`, will be
+available.
 
-For example, in your Android emulator you can choose Tailscale after clicking
-on the Share button, and you'll be able to get these file into the current
-directory of your laptop with `sudo tailscale file get .`.
+## Taildrop
 
-Alternatively, you can sendo files from your laptop to your mobile device with
+Tailscale also has a feature called
+[Taildrop](https://tailscale.com/kb/1106/taildrop/), a convenient way to share
+files between devices.
+
+In your Android device, Tailscale will show up as an option to share files, and
+in doing so you'll be able to get the file into the current directory of your
+laptop with `sudo tailscale file get .`.
+
+Alternatively, you can send files from your laptop to your mobile device with:
 
 ```sh
 % sudo tailscale file cp $file $mobile_device_tailscale_ip_address:
 ```
-
-And you'll be notified about the received file.

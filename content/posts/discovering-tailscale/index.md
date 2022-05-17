@@ -1,8 +1,7 @@
 ---
 title: "Discovering Tailscale"
-date: 2022-05-14
+date: 2022-05-17
 tags: ["tailscale", "web", "hugo", "android"]
-draft: true
 ---
 
 I have recently started playing with Tailscale, and after a rough start I think

@@ -38,7 +38,7 @@ ax.set_ylim(-1, 1, 1)
 ax.set_zlim(-1, 1, 1)
 ```
 
-{{< figure title="Vetores na terceira dimensão" src="./vetores.png" >}}
+{{< figure alt="Vetores na terceira dimensão" title="Vetores na terceira dimensão" src="./vetores.png" >}}
 
 Para ver isso com matrizes, vamos supor uma matriz \\( Q \\) cujas colunas são
 vetores ortogonais com o comprimento

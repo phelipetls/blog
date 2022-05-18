@@ -37,7 +37,7 @@ X = np.linspace(-5, 5, 500)
 plt.plot(X, f(X))
 ```
 
-{{< figure title="png" src="./output_1_1.png" >}}
+{{< figure alt="Gráfico de uma função quadrática, ou seja, uma parábola" title="Uma função quadrática" src="./output_1_1.png" >}}
 
 Podemos verificar que ela intercepta o eixo x quando \\( x \\) é um pouquinho
 acima de 2, quer dizer, quando \\( x = \sqrt{5} \approx 2.23 \\).
@@ -55,7 +55,7 @@ deve ser um ponto mais próximo da raiz, mas não exatamente a raiz. Isto porque
 estamos calculando a raiz de uma reta pra nos aproximarmos da raiz de uma
 parábola, que não é linear, é claro.
 
-{{< figure title="Img" src="./newtonraphson1.png" >}}
+{{< figure title="Ilustração do método de Newton-Raphson para encontrar a raiz de uma função" alt="Ilustração do método de Newton-Raphson para encontrar a raiz de uma função" src="./newtonraphson1.png" >}}
 
 Até então, o método não parece tão impressionante. Mas e se fizermos isso de
 novo, usando como estimativa a raiz dessa reta? Acontece que se repetirmos esse
@@ -109,7 +109,7 @@ plt.xlim(-0.5, 3.5)
 plt.legend()
 ```
 
-{{< figure title="png" src="./output_3_1.png" >}}
+{{< figure alt="Primeira iteração produzida pelo Newton-Raphson, mostrando como uma função linear já se aproxima da quadrática" title="Primeira iteração produzida pelo Newton-Raphson" src="./output_3_1.png" >}}
 
 Nesse zoom, também podemos ver que a reta tangente ao ponto \\( (1, -4) \\)
 cruza o eixo \\( x \\) um pouco mais adiante de \\( 2.23 \\). Mais
@@ -175,7 +175,7 @@ plt.ylim(-10, 10)
 plt.legend()
 ```
 
-{{< figure title="Image" src="./newton_visualization.png" >}}
+{{< figure alt="Segunda iteração, mostrando como a aproximação melhorou" title="" src="./newton_visualization.png" >}}
 
 Seria interessante escrevermos uma função para fazer esses cálculos, e ela
 inevitavelmente teria lidar com cálculo diferencial. Para isso, existe uma
@@ -322,7 +322,7 @@ plt.xlim(-5, 5)
 plt.ylim(-7.5, 5)
 ```
 
-{{< figure title="png" src="./output_17_1.png" >}}
+{{< figure title="" alt="Gráfico de uma função de quarto grau" src="./output_17_1.png" >}}
 
 Vamos tentar achar essa outra raiz com nossa função. Para isso, basta mudarmos
 nossa estimativa inicial de forma a nos aproximarmos daquela outra raiz.
@@ -383,7 +383,7 @@ plt.xlim(-2, 2)
 plt.ylim(-0.5, 0.5)
 ```
 
-{{< figure title="png" src="./output_20_1.png" >}}
+{{< figure title="" alt="Gráfico de uma função cúbida" src="./output_20_1.png" >}}
 
 Pelo gráfico, salta à vista que as três raízes são 0, 1 e -1. Ok, mas imagine
 que queiramos estimar a raiz não-nula positiva com este método.
@@ -435,7 +435,7 @@ plt.ylim(-0.5, 0.5)
 plt.legend()
 ```
 
-{{< figure title="png" src="./output_26_1.png" >}}
+{{< figure title="" alt="Gráfico de uma função cúbica e de uma aproximação linear conseguida pelo método de Newton-Raphson em 5 iterações mas que não foi boa" src="./output_26_1.png" >}}
 
 # Conclusões
 

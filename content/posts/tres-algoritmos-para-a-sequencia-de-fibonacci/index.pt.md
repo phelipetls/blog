@@ -7,7 +7,7 @@ aliases: ["/tres-algoritmos-para-a-sequencia-de-fibonacci"]
 math: true
 ---
 
-![FibSeq](./kisspng-fibonacci-number-golden-spiral-golden-ratio-mathem-spiral-5b4a12ee4a0493.6897256215315811663032.png)
+{{< figure alt="A espiral dourada" src="./kisspng-fibonacci-number-golden-spiral-golden-ratio-mathem-spiral-5b4a12ee4a0493.6897256215315811663032.png" >}}
 
 A sequência de fibonacci é uma velha conhecida dos que estudam programação. Por
 isso, esse post não deve soar tão estimulante para pessoas que trabalham com
@@ -123,7 +123,7 @@ Para calcular o vigésimo número ele demorou muito mais do que o algoritmo
 anterior, que calculou um número muito maior\!\! Por que será que isso
 aconteceu? Uma imagem pode ajudar a ilustrar o porquê disso.
 
-{{< figure title="Fib" src="./fibo.png" >}}
+{{< figure title="Uma ilustração do algoritmo recursivo para a sequência de Fibonacci" src="./fibo.png" >}}
 
 O que acontece é que a função recursiva acaba requisitando os mesmos números de
 fibonacci múltiplas vezes e, para números muito grandes, esse excesso de
@@ -203,7 +203,7 @@ pode ser bem pesado matematicamente. Felizmente, existe uma maneira muito
 conveniente para resolver esses casos, e envolve os autovalores/autovetores
 (_eigenvalues/eigenvectors_) de uma matriz. Mas, afinal, o que são eles?
 
-{{< figure title="Eigenvectors" src="./evectors.gif" >}}
+{{< figure alt="Animação de como funcionam os Eigenvectors, mostrando que eles não mudam de direção mesmo após uma transformação matricial" title="Ilustração de como funcionam os Eigenvectors" src="./evectors.gif" >}}
 
 Simply put, os autovetores são vetores característicos de uma matriz que, após
 transformados por ela, não mudam de direção, mas é possível que mudem em

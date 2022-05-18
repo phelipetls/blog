@@ -78,7 +78,7 @@ df %>%
   )
 ```
 
-{{< figure title="plot1" src="./unnamed-chunk-2-1.png" >}}
+{{< figure alt="Gráfico mostrando um declínio no número de homicídios na cidade de Baltimore do ano de 2007 a 2012" title="Declínio nos homicídios nos anos de 2007-2012 em Baltimore" src="./unnamed-chunk-2-1.png" >}}
 
 Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com os
 anos…
@@ -107,7 +107,7 @@ df %>%
   scale_x_continuous(breaks = 2007:2012)
 ```
 
-{{< figure title="plot2" src="./unnamed-chunk-3-1.png" >}}
+{{< figure title="A maioria das vítimas de homicídio é negra" alt="Gráfico mostrando que a maioria das vítimas de homicídio é negra" src="./unnamed-chunk-3-1.png" >}}
 
 Essa é a primeira visualização do que já era esperado: na cidade de Baltimore, a
 violência afeta muito mais os negros do que a qualquer outra raça. Impressiona a
@@ -147,7 +147,7 @@ acumulado <- df %>%
 acumulado
 ```
 
-{{< figure title="plot3" src="./unnamed-chunk-4-1.png" >}}
+{{< figure title="Os homicídios tendem a aumentar ao longo dos meses" alt="Gráfico mostrando como cresceu o número de homicídios em Baltimore por mês, a cada ano, de 2007 a 2012" src="./unnamed-chunk-4-1.png" >}}
 
 E aqui fica claro o porquê da queda em 2012: não temos os dados de todos os
 meses. Também salta aos olhos que a violência diminuiu em relação a 2007, mas se
@@ -175,7 +175,7 @@ df %>%
   scale_x_continuous(breaks = seq(0, 100, 10))
 ```
 
-{{< figure title="plot3" src="./unnamed-chunk-5-1.png" >}}
+{{< figure title="Conclui-se, de cara, que a maioria das vítimas é negra e do sexo masculino" alt="Gráfico mostrando as vítimas de homicídio por recortes sociais, do que se conclui que a maioria das vítimas é negra e do sexo masculino" src="./unnamed-chunk-5-1.png" >}}
 
 E assim podemos ver que o mais afetado pela violência é o homem negro da faixa
 dos 20-30 anos. Se olharmos bem, pode-se também observar que a mulher negra está
@@ -205,7 +205,7 @@ df %>%
   scale_fill_brewer(palette = "Set1")
 ```
 
-{{< figure title="plot5" src="./unnamed-chunk-6-1.png" >}}
+{{< figure alt="Gráfico mostrando os homicídios por causa de morte, sendo por arma de fogo a mais comum, seguida de esfaqueamento" title="Os homicídios por armas de fogo são os mais comuns" src="./unnamed-chunk-6-1.png" >}}
 
 Os homicídios por armas de fogo são de longe os mais comuns, seguido por
 esfaqueamento e contusão.
@@ -266,7 +266,7 @@ anim <- baltimore_map +
 animate(anim, fps = 5)
 ```
 
-{{< figure title="gif1" src="./unnamed-chunk-7-1.gif" >}}
+{{< figure alt="Animação mostrando a evolução dos homicídios por localização" title="Nota-se que a violência é concentrada em certos bairros, mas em toda a região" src="./unnamed-chunk-7-1.gif" >}}
 
 Fica evidente daí como a violência é concentrada em certos bairros.
 
@@ -296,7 +296,7 @@ df %>%
   transition_states(ano)
 ```
 
-{{< figure title="gif2" src="./unnamed-chunk-8-1.gif" >}}
+{{< figure alt="Animação mostrando a evolução no tempo dos homicídios, por causa de morte" title="Não é uma visualização interessante, porque o homicídio por arma de fogo é o mais comum em todos os anos" src="./unnamed-chunk-8-1.gif" >}}
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
 `gganimate::transition_reveal()` para revelar ao longo do eixo do tempo como os
@@ -314,7 +314,7 @@ acumulado +
   transition_reveal(mes)
 ```
 
-{{< figure title="gif3" src="./unnamed-chunk-9-1.gif" >}}
+{{< figure alt="Animação mostrando a evolução no tempo dos homicídios, por mês" title="O comportamento do crescimento é consistente durante os anos" src="./unnamed-chunk-9-1.gif" >}}
 
 # Conclusões
 

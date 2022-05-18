@@ -111,7 +111,7 @@ body.dark {
   }
 
   [data-blog-post] figure figcaption {
-    @apply text-center;
+    @apply text-center px-default-padding mt-2;
   }
 
   [data-blog-post] :is(pre, figure, blockquote) {

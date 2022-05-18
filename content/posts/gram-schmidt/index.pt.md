@@ -97,7 +97,7 @@ ax.annotate("$e = a_1 - \hat{x}a_2$", e + projection + [1, -2], fontsize=15)
 ax.set_title(r"Projeção de \\( a_1 \\) em \\( a_2 \\)")
 ```
 
-{{< figure title="Projeção vetorial" src="./projecao-vetorial.png" >}}
+{{< figure title="Projeção vetorial" alt="Projeção do vetor a1 sobre o vetor a2" src="./projecao-vetorial.png" >}}
 
 Dados esses dois vetores, podemos gerar um vetor perpendicular ao \\( a_2 \\)
 que denominaremos \\( e \\), que é o resultado da subtração em \\( a_1 \\) do

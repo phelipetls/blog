@@ -271,7 +271,7 @@ animate(anim, fps = 5)
 Fica evidente daí como a violência é concentrada em certos bairros.
 
 Outra ideia é visualizar a evolução dos homicídios no tempo, por causa de morte.
-Para isso, vamos usar ot `gganimate::transition_states`, para visualizarmos as
+Para isso, vamos usar o `gganimate::transition_states`, para visualizarmos as
 mudanças ocorridas no decorrer dos anos.
 
 ```r

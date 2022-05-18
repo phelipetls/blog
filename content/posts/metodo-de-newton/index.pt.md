@@ -178,7 +178,7 @@ plt.legend()
 {{< figure alt="Segunda iteração, mostrando como a aproximação melhorou" title="" src="./newton_visualization.png" >}}
 
 Seria interessante escrevermos uma função para fazer esses cálculos, e ela
-inevitavelmente teria lidar com cálculo diferencial. Para isso, existe uma
+inevitavelmente teria que lidar com cálculo diferencial. Para isso, existe uma
 biblioteca que pode nos ajudar.
 
 # Introduzindo SymPy

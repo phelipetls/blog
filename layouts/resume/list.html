@@ -29,15 +29,11 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $defines := (dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`)) }}
-  {{ $opts := dict "defines" $defines }}
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build $opts }}
-
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build }}
   {{ $pdfWorker := resources.Get "js/pdf.worker.js" | js.Build }}
 
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
-    {{ $pdfWorker := $pdfWorker | minify }}
   {{ end }}
 
   <script type="module" src="{{ $resumeScript.Permalink }}"></script>

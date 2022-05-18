@@ -6,7 +6,7 @@
         <article class="flex gap-4 flex-col sm:flex-row">
           <div class="rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 border-divider">
             {{ with (index (.Resources.ByType "image") 0) }}
-              <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}" loading="lazy" width="auto" height="216" alt="">
+              <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}" width="auto" height="216" alt="">
               </img>
             {{ end }}
           </div>

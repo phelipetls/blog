@@ -203,7 +203,7 @@ body.dark {
 .chroma .hl {
   /* unmaintainable hack to fix offset due to 4px border */
   padding-left: calc(2rem - 4px);
-  @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-[#424339] !important;
+  @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-[#34362e] !important;
 }
 
 [data-blog-post] .katex-display {

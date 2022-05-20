@@ -9,6 +9,9 @@
             <a
               id="{{ .Identifier }}"
               href="{{ .URL | absLangURL }}"
+              {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+                data-active-navlink
+              {{ end }}
               class="
                 h-full
                 border-0
@@ -19,7 +22,6 @@
                 justify-center
                 rounded-md
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
-                  active
                   bg-background
                   shadow-md
                   shadow-divider

@@ -1,9 +1,9 @@
 const nav = document.querySelector('[data-nav-container]')
 
-const navActiveLink = nav.querySelector('nav a.active')
+const activeNavLink = nav.querySelector('[data-active-navlink]')
 
-if (navActiveLink) {
-  navActiveLink.scrollIntoView({
+if (activeNavLink) {
+  activeNavLink.scrollIntoView({
     behavior: 'auto',
     block: 'center',
   })

@@ -219,6 +219,10 @@ svg.feather {
   @apply max-w-prose mx-0;
 }
 
+.feather-loader {
+  animation-duration: 1.5s;
+}
+
 @keyframes tooltip-animation {
   0% {
     opacity: 0;

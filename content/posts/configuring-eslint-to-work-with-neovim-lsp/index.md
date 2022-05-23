@@ -13,15 +13,15 @@ command-line tools and for any programming language.
 
 {{< warn >}}
 
-This blog post is old and Neovim's built-in LSP development is fast-paced, so
-it might have changed significantly since the time of writing.
+This blog post is old and Neovim's built-in LSP development is fast, so things
+changed significantly since the time of writing.
 
 I have moved on to use [`coc.nvim`](https://github.com/neoclide/coc.nvim), so I
-can't update this post with an up-to-date configuration using Neovim's built-in
-LSP client. I do know, though, that now use
-[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim) to get the same
-functionality `efm-langserver` provides, so you might be interested in taking a
-look at that instead.
+can't update this post with an up-to-date working configuration using Neovim's
+built-in LSP client. I'm at least aware that
+[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim) is a popular
+alternative to `efm-langserver`, and written entirely in Lua, so you might be
+interested in taking a look at it.
 
 But in case you're interested in `coc.nvim`, you can check out the relevant
 section of my

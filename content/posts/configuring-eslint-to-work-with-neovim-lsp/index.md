@@ -11,6 +11,27 @@ Go.
 These Language Servers are generic in that they were made to be powered by
 command-line tools and for any programming language.
 
+{{< warn >}}
+
+This blog post is old and Neovim's built-in LSP development is fast-paced, so
+it might have changed significantly since the time of writing.
+
+I have moved on to use [`coc.nvim`](https://github.com/neoclide/coc.nvim), so I
+can't update this post with an up-to-date configuration using Neovim's built-in
+LSP client. I do know, though, that now use
+[`null-ls`](https://github.com/jose-elias-alvarez/null-ls.nvim) to get the same
+functionality `efm-langserver` provides, so you might be interested in taking a
+look at that instead.
+
+But in case you're interested in `coc.nvim`, you can check out the relevant
+section of my
+[`coc-settings.json`](https://github.com/phelipetls/dotfiles/blob/d10072c4ab01d02018f5caeb1510d3c6c0ebbd95/.config/nvim/coc-settings.json#L20-L26)
+and my
+[`.config/efm-langserver/config.yaml`](https://github.com/phelipetls/dotfiles/blob/d10072c4ab01d02018f5caeb1510d3c6c0ebbd95/.config/efm-langserver/config.yaml)
+to learn how I use `efm-langserver` with it.
+
+{{< /warn >}}
+
 # Making eslint faster with eslint_d
 
 To reduce latency when invoking `eslint`, I'm gonna use

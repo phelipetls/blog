@@ -24,7 +24,7 @@ connected over USB.
 If everything works correctly, by running `adb devices` you should see
 something like this:
 
-```sh
+```shell-sesson
 $ adb devices
 
 List of devices attached
@@ -67,8 +67,8 @@ text that is growing constantly. So it pays off to know how to filter it, e.g.
 if I wanted to see only logs tagged with `Sentry`, `ReactNative` and
 `ReactNativeJS` at any priority level:
 
-```sh
-adb logcat Sentry:* ReactNative:* ReactNativeJS:* *:S
+```shell-sesson
+$ adb logcat Sentry:* ReactNative:* ReactNativeJS:* *:S
 ```
 
 The official Google
@@ -102,20 +102,20 @@ You can start and kill an app with the `adb shell am`, in which `am` stands for
 
 Given the app's package name, you can start it with:
 
-```sh
-adb shell am start -n com.company.app/.MainActivity
+```shell-sesson
+$ adb shell am start -n com.company.app/.MainActivity
 ```
 
 And kill it with:
 
-```sh
-adb shell am force-stop com.company.app
+```shell-sesson
+$ adb shell am force-stop com.company.app
 ```
 
 You can also open a URL, this is specially useful to test deep links:
 
-```sh
-adb shell am start -a android.intent.action.VIEW -d company://Screen
+```shell-sesson
+$ adb shell am start -a android.intent.action.VIEW -d company://Screen
 ```
 
 # Install/uninstall apps

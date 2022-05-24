@@ -23,8 +23,8 @@ facilite a extração dos elementos, como a `BeautifulSoup`.
 
 Utilizo essas duas bibliotecas no script abaixo. E podemos instalá-las com:
 
-```sh
-pip3 instal selenium bs4
+```shell-sesson
+$ pip3 instal selenium bs4
 ```
 
 Para fazer o crawleamento, criei uma classe que aceita o nome de uma empresa e o

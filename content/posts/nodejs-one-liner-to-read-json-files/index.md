@@ -20,20 +20,20 @@ line's value in a script.
 
 I think most people would use `jq` to do it:
 
-```sh
-jq .expo.name app.json
+```shell-sesson
+$ jq .expo.name app.json
 ```
 
 But it turns out it's just as easy with Node.js:
 
-```sh
-node -p "require('./app.json').expo.name"
+```shell-sesson
+$ node -p "require('./app.json').expo.name"
 ```
 
 But a quick research revealed that this just works if the file has a `.json`
 extension, otherwise Node.js wouldn't parse its contents as JSON automatically.
 So you'd have to do it yourself:
 
-```sh
-node -p "JSON.parse(require('fs').readFileSync('./app)).expo.name"
+```shell-sesson
+$ node -p "JSON.parse(require('fs').readFileSync('./app)).expo.name"
 ```

@@ -217,8 +217,8 @@ storiesOf('Routes', module)
 To prove my point, I implemented the whole thing in a brand new React Native
 project using `react-native` CLI:
 
-```sh
-npx react-native init projectName
+```shell-sesson
+$ npx react-native init projectName
 ```
 
 [You can check the final result in this GitHub

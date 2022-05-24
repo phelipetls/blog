@@ -168,14 +168,14 @@ value defaults to whatever is in the `VISUAL` or `EDITOR` environment variable
 
 You can change this in your git config in your `~/.gitconfig` or with the CLI:
 
-```sh
-git config --global core.editor emacs
+```shell-session
+$ git config --global core.editor emacs
 ```
 
 For example, to use VS Code:
 
-```sh
-git config --global core.editor 'code --wait'
+```shell-session
+$ git config --global core.editor 'code --wait'
 ```
 
 If you have the GitLens extension installed, you'll see [a
@@ -352,14 +352,14 @@ done editing, run `git rebase --continue`.
 To split a commit, you can first "undo" it with `git reset`, then just add
 changes and commit them differently.
 
-```sh
-# undo the commit, but keep its changes in the working tree
-git reset HEAD^
-git add foo
-git commit -m "One commit"
-git add bar
-git commit -m "Another commit"
-git rebase --continue
+```shell-sesson
+$ # undo the commit, but keep its changes in the working tree
+$ git reset HEAD^
+$ git add foo
+$ git commit -m "One commit"
+$ git add bar
+$ git commit -m "Another commit"
+$ git rebase --continue
 ```
 
 # Remove a file from a commit
@@ -370,13 +370,13 @@ But now, it's more convenient to use `git reset --soft` to "undo" the commit,
 because it'll keep the changes in the staging area. Now all you need to do is
 unstage the file you want to remove and commit again.
 
-```sh
-# undo the commit, but keep its changes in the staging area
-git reset --soft HEAD^
-# remove the file from the staging area
-git rm --cached .env
-# reuse the previous commit message
-git commit -c ORIG_HEAD
+```shell-sesson
+$ # undo the commit, but keep its changes in the staging area
+$ git reset --soft HEAD^
+$ # remove the file from the staging area
+$ git rm --cached .env
+$ # reuse the previous commit message
+$ git commit -c ORIG_HEAD
 ```
 
 # Edit a commit message

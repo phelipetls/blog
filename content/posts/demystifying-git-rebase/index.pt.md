@@ -175,14 +175,14 @@ cujo valor padrão é o valor das variáveis de ambiente (normalmente `vim` ou
 
 Você pode mudar isso em configuração do git em `~/.gitconfig` ou com a CLI:
 
-```sh
-git config --global core.editor emacs
+```shell-sesson
+$ git config --global core.editor emacs
 ```
 
 Por exemplo, caso você use o VS Code:
 
-```sh
-git config --global core.editor 'code --wait'
+```shell-sesson
+$ git config --global core.editor 'code --wait'
 ```
 
 Se você tiver instalada a extensão *GitLens*, você vai ver uma [interface mais
@@ -361,14 +361,14 @@ Para separar um commit, eu normalmente primeiro desfaço o commit com `git
 reset HEAD^`, e então vou adicionando e commitando as changes de novo de forma
 diferente.
 
-```sh
-# undo the commit, but keep its changes in the working tree
-git reset HEAD^
-git add foo
-git commit -m "One commit"
-git add bar
-git commit -m "Another commit"
-git rebase --continue
+```shell-sesson
+$ # undo the commit, but keep its changes in the working tree
+$ git reset HEAD^
+$ git add foo
+$ git commit -m "One commit"
+$ git add bar
+$ git commit -m "Another commit"
+$ git rebase --continue
 ```
 
 # Remover um arquivo de um commit
@@ -379,13 +379,13 @@ Mas agora, é mais conveniente usar o `git reset --soft` para desfazer o commit,
 porque as mudanças daquele commit vão permanecer na staging area, e então basta
 remover o arquivo da staging area e commitar de novo:
 
-```sh
-# undo the commit, but keep its changes in the staging area
-git reset --soft HEAD^
-# remove the file from the staging area
-git rm --cached .env
-# reuse the previous commit message
-git commit -c ORIG_HEAD
+```shell-sesson
+$ # undo the commit, but keep its changes in the staging area
+$ git reset --soft HEAD^
+$ # remove the file from the staging area
+$ git rm --cached .env
+$ # reuse the previous commit message
+$ git commit -c ORIG_HEAD
 ```
 
 # Editar uma mensagem

@@ -23,8 +23,8 @@ is convenient.
 [You can download Tailscale here](https://tailscale.com/download/). A shell
 script is provided for Linux:
 
-```sh
-% curl -fsSL https://tailscale.com/install.sh | sh
+```shell-sesson
+$ curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
 This will install a command-line interface, which is the primary way you'll use
@@ -34,22 +34,22 @@ it in Linux.
 
 You just need to run one command to start Tailscale and authenticate:
 
-```sh
-% tailscale up
+```shell-sesson
+$ tailscale up
 ```
 
 To check your connected devices and their IP addresses, 
 
-```sh
-% tailscale status
+```shell-sesson
+$ tailscale status
 100.x.y.z   fedora               phelipetls@  linux   -
 ```
 
 Now try downloading the mobile app and activate it there, and your mobile
 device should be listed in there as well:
 
-```sh
-% tailscale status
+```shell-sesson
+$ tailscale status
 100.x.y.z   fedora               phelipetls@  linux   -
 100.x.y.z   s20-fe-de-phelipe    phelipetls@  android idle, tx 6685800 rx 260204
 ```
@@ -77,8 +77,8 @@ help](https://www.reddit.com/r/Tailscale/comments/ukittc/how_to_access_a_web_ser
 to find out how to make Hugo's development server, running in my laptop,
 available to my mobile device. Eventually I found this does the trick:
 
-```sh
-hugo serve --bind 100.x.y.z --baseUrl 100.x.y.z
+```shell-sesson
+$ hugo serve --bind 100.x.y.z --baseUrl 100.x.y.z
 ```
 
 Where `100.x.y.z` is the laptop's Tailscale IP address, i.e. the output of
@@ -95,14 +95,14 @@ the `public` directory and check it out in your phone.
 
 You can use Python's `http.server` module:
 
-```sh
-% python3 -m http.server --bind $(tailscale ip -4) --directory public
+```shell-sesson
+$ python3 -m http.server --bind $(tailscale ip -4) --directory public
 ```
 
 Or Vercel's [`serve`](https://github.com/vercel/serve):
 
-```sh
-% npx serve --listen $(tailscale ip -4) public
+```shell-sesson
+$ npx serve --listen $(tailscale ip -4) public
 ```
 
 Usually, one of these two command-line options, `--bind` or `--listen`, will be
@@ -120,6 +120,6 @@ laptop with `sudo tailscale file get .`.
 
 Alternatively, you can send files from your laptop to your mobile device with:
 
-```sh
-% sudo tailscale file cp $file $mobile_device_tailscale_ip_address:
+```shell-sesson
+$ sudo tailscale file cp $file $mobile_device_tailscale_ip_address:
 ```

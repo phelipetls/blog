@@ -21,8 +21,8 @@ written in Typescript, to Vite. And it was more easy than I expected.
 
 First, I installed Vite:
 
-```sh
-npm install vite
+```shell-sesson
+$ npm install vite
 ```
 
 Updated my npm scripts:
@@ -81,8 +81,8 @@ supports, apart from
 [path mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping),
 `include` and `exclude` properties as well:
 
-```sh
-npm install vite-tsconfig-paths
+```shell-sesson
+$ npm install vite-tsconfig-paths
 ```
 
 Once installed, we add it to our `vite.config.ts`:
@@ -141,6 +141,6 @@ But I'm amazed by that first experience and how straightforward it was.
 
 Finally, I uninstalled my CRA-related dev dependencies:
 
-```sh
-npm uninstall react-scripts customize-cra react-app-rewired babel-plugin-import
+```shell-sesson
+$ npm uninstall react-scripts customize-cra react-app-rewired babel-plugin-import
 ```

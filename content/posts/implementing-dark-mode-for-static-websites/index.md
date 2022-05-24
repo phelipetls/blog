@@ -224,9 +224,9 @@ Also, to change syntax highlighting colorscheme, we need to add
 Then, we need to generate stylesheets for each different colorscheme and move
 them to our assets folder.
 
-```sh
-hugo gen chromastyles --style=monokai > dark-syntax-highlight.css
-hugo gen chromastyles --style=lovelace > light-syntax-highlight.css
+```shell-sesson
+$ hugo gen chromastyles --style=monokai > dark-syntax-highlight.css
+$ hugo gen chromastyles --style=lovelace > light-syntax-highlight.css
 ```
 
 Add them to our html (with the dark stylesheet disabled).

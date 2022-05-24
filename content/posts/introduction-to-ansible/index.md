@@ -5,39 +5,35 @@ draft: true
 tags: ["ansible", "linux", "fedora", "ubuntu", "macos"]
 ---
 
-Here's the problem: you have your dotfiles hosted somewhere, with your
-preferred configuration for git, tmux etc., but you don't have neither git or
-tmux installed, so they're useless. You solved the configuration problem, but
-not the dependencies one: you still need to install git and tmux when on a new
-machine. Ansible can help solve this, let's see how.
+Here's the problem: you have a new machine and you gotta set up your
+environment. Thankfully, you have a dotfiles with all your preferred
+configuration for git, tmux etc., but you'll have yet to install git and tmux.
+A dotfiles repo helps to solve the configuration problem, but it doesn't help
+with the dependencies problem. Let's see how Ansible can help solve with this.
 
-Ansible would often come up as a solution to dependency management, but I'd
-quickly dismiss it because it seemed overkill for my needs. [The landing page
-certainly contributed to this impression](https://www.ansible.com), it looks
-too big, complex and enterprise-y. It doesn't help convey the idea of what
-Ansible essentially is: a tool to automate tasks in a declarative way. The
-[official docs is a better place to
+Whenever I took the time to search for a dependency management problem, Ansible
+would come up as a solution, but I'd quickly dismiss it because it seemed
+overkill for my needs. [The landing page certainly contributed to this
+decision](https://www.ansible.com): it looks too big, complex, enterprise-y. It
+doesn't help convey the idea of what Ansible essentially is: a tool to automate
+tasks in a declarative way. The [official docs is a better place to
 start](https://docs.ansible.com/ansible/latest/user_guide/index.html#getting-started),
 but I think it's overwhelming as an introduction.
 
 I wish I was introduced to Ansible differently, in a way that made clear how it
-would help me automatically set up my machine in the way I like -- with my
-preferred programs, appearances, settings etc. We'll deliberately abstract away
-the more complex applications of Ansible that most companies neeed.
+would help me automatically set up my machine the way I like it -- with my
+preferred programs, appearances, settings etc. This is my attempt at writing
+that introduction.
+
+We'll deliberately abstract away the more complex applications of Ansible, and
+focus only on this problem, since that's the only experience I got with it
+anyway.
 
 # Installing Ansible
 
-First things first, let's install Ansible. It's available on most Linux distros
-package managers and in Homebrew. The official docs has an [an extensive list
-with instructions for many Unix-like operating
+First things first, let's install Ansible. The official docs has an an
+extensive [list with installation instructions for many Unix-like operating
 systems](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-specific-operating-systems).
-
-Another option is to use [pip](https://pypi.org/project/pip/), the package
-manager for Python, like I did:
-
-```sh
-% pip install ansible
-```
 
 {{< warn >}}
 
@@ -48,17 +44,26 @@ Unix-like OS, such as WSL.
 
 {{< /warn >}}
 
+An option available at every operating system is
+[pip](https://pypi.org/project/pip/), the package manager for Python, which was
+what I used:
+
+```shell-session
+$ pip install ansible
+```
+
 # How Ansible clicked for me
 
 I don't remember what actually got me into Ansible, but I think it was by
-looking at the source code of a dotfiles repo that used it. Its `README.md`
-explained that you needed just one command to set up everything:
+looking at the source code of a dotfiles repo that used it. The `README.md`
+explained what you need to run to set up everything:
 
-```sh
-% ansible-playbook --ask-become-pass bootstrap.yml
+```shell-session
+$ ansible-playbook --ask-become-pass bootstrap.yml
 ```
 
-So I went and looked at the `bootstrap.yml` file:
+Just one command! So I went and looked at what was going on at the
+`bootstrap.yml` file:
 
 ```yaml
 ---
@@ -189,8 +194,8 @@ An Ansible module can tell if something changed between runs. For example,
 let's say I already have git and tmux installed and run the `bootstrap.yml`
 playbook:
 
-```sh {hl_lines=["9-10","13"]}
-% ansible-playbook -K bootstrap.yml
+```shell-session {hl_lines=["9-10"]}
+$ ansible-playbook -K bootstrap.yml
 BECOME password:
 
 PLAY [Bootstrap development environment] *****************************************************************************
@@ -214,58 +219,36 @@ Ansible wouldn't know about it unless the module is smart enough to tell it.
 
 To illustrate this, let's use the
 [`ansible.builtin.shell`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html#shell-module),
-which is used to run arbitrary commands into a shell.
+which is used to run arbitrary commands into a shell. [Let's run a task using
+this module in an ad hoc
+way](https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html)
+(outside of a playbook):
 
-[Let's run a task using this module in an ad hoc
-way](https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html), i.e.
-outside of a playbook:
-
-```sh
-% ansible localhost -m ansible.builtin.shell -a 'echo $SHELL'
+```shell-session
+$ ansible localhost -m ansible.builtin.shell -a 'echo $SHELL'
 
 [WARNING]: No inventory was parsed, only implicit localhost is available
 localhost | CHANGED | rc=0 >>
 /bin/bash
 ```
 
-Ansible says something has changed, but why? Running `echo $SHELL` cannot
-change anything in a system (I guess?). But Ansible has no way to know this,
-since it could be any arbitrary command, such as `rm -rf $HOME`.
+Ansible says something changed, but why? Running `echo $SHELL` cannot change
+anything in a system (I guess?). But Ansible has no way to know this, since it
+could be any arbitrary command, such as `rm -rf $HOME`.
 
 Most of Ansible built-in modules are idempotent and smart enough to tell if
 something changed between runs. `ansible.builtin.shell` is kind of a low-level
-one, so it's best to avoid it whenever possible.
-
-# Check mode
-
-Ansible can also run playbooks in [check
-mode](https://docs.ansible.com/ansible/latest/user_guide/playbooks_checkmode.html#using-check-mode),
-or dry-run mode.
-
-```sh
-% ansible-playbook bootstrap.yml --check
-```
-
-In this mode, tasks won't make any changes to the system, instead they'll tell
-you what changes they *would* have made.
-
-But not every module has support for it. You can check for support in the
-module's documentation page, e.g. [`ansible.builtin.apt` fully supports
-check_mode](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html#attribute-check_mode),
-while [`ansible.builtin.shell` does
-not](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html#attribute-check_mode).
-
-# Diff mode
-
-Running a playbook in [diff
-mode](https://docs.ansible.com/ansible/latest/user_guide/playbooks_checkmode.html#using-diff-mode),
-with `--diff`, will report the changes at the end, whether in check mode or
-not. Again, not every module supports this mode too.
+one, so it's best to avoid it whenever possible. There are ways to make it
+smarter with parameters such as
+[`creates`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html#parameter-creates),
+[`removes`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html#parameter-removes),
+or, at the task level,
+[`changed_when`](https://docs.ansible.com/ansible/latest/user_guide/playbooks_error_handling.html#defining-changed).
 
 # Facts and conditionals
 
-Now let's imagine you use macOS and Ubuntu. You want to install git and tmux in
-both operating systems with Ansible. You'll need to add some sort of
+Now let's imagine you use both macOS and Ubuntu. You want to install git and
+tmux in both operating systems with Ansible. You'll need to add some sort of
 conditional logic to your playbook since `apt` isn't available in macOS, and
 you probably don't want to use Homebrew in Linux, even though you could.
 
@@ -298,34 +281,36 @@ The task will run if the expression passed to `when` evaluates to `True`. This
 expression is a Jinja2 expression, a template engine written in Python, so it's
 not strictly Python syntax but it looks a lot like it.
 
-The `ansible_distribution` variable is an Ansible fact: information about your
-system gathered and provided by Ansible, for convenience. There are a LOT of
-facts, you can run `ansible localhost -m ansible.builtin.setup` to check what's
-available, but here's the [most commonly used
+The `ansible_distribution` variable is an [Ansible
+fact](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html):
+information about your system gathered and provided by Ansible, for
+convenience. There are a LOT of facts, you can run `ansible localhost -m
+ansible.builtin.setup` to check what's available, but here's the [most commonly
+used
 ones](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#commonly-used-facts):
 `ansible_distribution`, `ansible_distribution_version` and `ansible_os_family`.
 
 # Ansible Galaxy
 
 The module `community.general.homebrew` is not a built-in module, you have to
-install it separately with [Ansible Galaxy](https://galaxy.ansible.com/docs/),
+install it separately via [Ansible Galaxy](https://galaxy.ansible.com/docs/),
 which is a hub for Ansible content.
 
 Ansible Galaxy provides a command-line interface to install stuff, like
 [collections](https://galaxy.ansible.com/docs/contributing/creating_collections.html)
 and roles (which we'll learn about shortly). `community.general` is a
-collection, which we can install with this command:
+collection of modules, which we can install by running:
 
-```sh
-% ansible-galaxy collection install community.general
+```shell-session
+$ ansible-galaxy collection install community.general
 ```
 
 # Loops
 
 You may eventually need a loop to accomplish a task.
 
-For example, the following task will build dwm, slock and dmenu from source, by
-running `sudo make install` in their directories:
+For example, the following task will build `dwm`, `slock` and `dmenu` from
+source, by running `sudo make install` in their directories:
 
 ```yaml
 - name: Build and install suckless tools
@@ -340,10 +325,10 @@ running `sudo make install` in their directories:
     make: /usr/bin/make
 ```
 
-Some modules, like
+Another example is if a module do not accept a list of strings as argument,
+just a string, as is the case of the
 [`community.general.npm`](https://docs.ansible.com/ansible/latest/collections/community/general/npm_module.html),
-do not accept a list of strings as argument, just a string, so a `loop` will be
-needed. For example, to install some npm modules globally:
+so a `loop` will be needed. For example, to install some npm modules globally:
 
 ```yaml {hl_lines=["2-5",7]}
 - name: Install npm global packages
@@ -358,24 +343,27 @@ needed. For example, to install some npm modules globally:
 ```
 
 This task will be executed for each item in the array, with the variable `item`
-holding the current item's value.
+holding the current iteration value.
 
 # Jinja2
 
 [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/templates/) was mentioned
-briefly, but since it's a huge component of Ansible, let's see more examples on
-how it's used.
+briefly in conditionals, but because it's a huge component of Ansible, it
+deserves a few more words than that.
 
-Actually, we've been using Jinja2 throughout this post, e.g., `{{ item }}` is a
+We've been using Jinja2 throughout this post already, e.g., `{{ item }}` is a
 Jinja2 expression to expand the value in the variable `item`.
 
 It's possible to manipulate this value with
 [filters](https://jinja.palletsprojects.com/en/3.1.x/templates/#filters), e.g.
-`{{ item | upper }}` would make it uppercase. [There are a lot of filters
-available by
-default](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters).
+`{{ item | upper }}` would make it uppercase.
 
-Filters may also come in handy in complex loops:
+[There are a lot of filters available by
+default](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters).
+The `upper` filter is kind of an innocuous one. There are some more powerful,
+e.g., to repeat tasks using a [cartesian
+product](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_filters.html#product-filters)
+of lists:
 
 ```yaml {hl_lines=["3-4","7"]}
 - name: Give users access to multiple databases
@@ -390,7 +378,7 @@ Filters may also come in handy in complex loops:
 Ansible uses [Jinja2
 tests](https://docs.ansible.com/ansible/latest/user_guide/playbooks_tests.html#playbooks-tests)
 for conditional logic, i.e. expressions that must evaluate to a Boolean. The
-syntax for tests is different than filter syntax:
+syntax for tests is slightly different than the filter syntax:
 
 ```yaml {hl_lines=[7]}
 vars:
@@ -402,27 +390,33 @@ tasks:
       when: url is match("https://example.com/users/.*/resources")
 ```
 
-There usual [comparison
+The usual [comparison
 operators](https://jinja.palletsprojects.com/en/latest/templates/#comparisons)
-are available, like `<`, `lt`, `<=`, `>`, `>=`, `==`, `=`, `!=`, as well as
-[combining boolean
+are available, like `<`, `lt`, `<=`, `>`, `>=`, `==`, `=`, `!=`. 
+
+It's also possible to [combine multiple boolean
 expressions](https://jinja.palletsprojects.com/en/latest/templates/#logic) with
-`and` and `or`. It's very Python-like, as you can see, just slightly different
-in some ways.
+`and` and `or`, as expected. It's very Python-like, as you can see.
 
 # Roles
 
-An Ansible role is a way to organize your tasks logic into a file structure.
+An Ansible role is a way to organize your tasks logic by using a file structure
+defined by Ansible.
 
-A role is the format in which you use other people's code, e.g., [there is an
-Ansible role to install Visual Studio
+A role is usually the format in which you use other people's Ansible tasks,
+e.g., [there is an Ansible role to install Visual Studio
 Code](https://github.com/gantsign/ansible-role-visual-studio-code). It's
-available in Ansible Galaxy, so we can isntall it with `ansible-galaxy role
-install gantsign.visual-studio-code`. It has parameters for customizability,
-e.g. to install extensions:
+available in Ansible Galaxy, so we can install it with:
 
-```yaml
-# ...
+```shell-session
+$ ansible-galaxy role install gantsign.visual-studio-code
+```
+
+An Ansible is usually customizable with parameters. For example, the
+`gantsign.visual-studio-code` extension has a parameter for which extensions
+you want it to install:
+
+```yaml {hl_lines=["4-9"]}
     - role: gantsign.visual-studio-code
       users:
         - username: phelipe
@@ -432,19 +426,18 @@ e.g. to install extensions:
             - "PhilHindle.errorlens"
             - "sleistner.vscode-fileutils"
             - "vscodevim.vim"
-# ...
 ```
 
-In practice, it's just a way to organize tasks into file structure that Ansible
-understands.
+In practice, creating a role is a matter of organizing things like tasks,
+default variables, templates, files etc. in a known Ansible-defined file
+structured.
 
-You'll usually start by creating a `tasks/main.yml`, which is the entry point,
-from which tasks will be defined.
+You'll usually start by creating a `tasks/main.yml` file, which is the role
+entry point, in which you define all tasks. For example, here's a role I made
+to install neovim:
 
-For example, here's a role I made to install neovim:
-
-```sh
-% tree roles/nvim
+```shell-session
+$ tree roles/nvim
 roles/nvim
 └── tasks
     ├── fedora.yml
@@ -456,7 +449,7 @@ roles/nvim
 ```
 
 The contents of `main.yml` simply import tasks from other files depending on
-which OS I'm on:
+the host's operating system:
 
 ```yaml
 ---
@@ -488,15 +481,22 @@ dotfiles](https://github.com/phelipetls/dotfiles).
 Let's build Neovim from source with Ansible, in Ubuntu, with the help of the
 [official guide](https://github.com/neovim/neovim/wiki/Building-Neovim).
 
-I already have Neovim source code, as a git submodule in `deps/neovim`, but
-it's also possible to add a task to clone its repository with the
+{{< note >}}
+
+I say Ubuntu because Fedora and Homebrew usually have an up-to-date Neovim
+stable, so I can't be bothered.
+
+{{< /note >}}
+
+I already have Neovim source code as a git submodule in `deps/neovim`, but it's
+also possible to add a task to clone its repository with the
 [`ansible.builtin.git`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html)
 module.
 
 We'll need to install build dependencies, run some `make` commands, and that's
 it!
 
-```sh
+```yaml
 # In case you don't like git submodules
 - name: Clone nvim repository
   git:
@@ -538,13 +538,14 @@ it!
 ## Installing efm-langserver
 
 [`efm-langserver`](https://github.com/mattn/efm-langserver) is a Language
-Server written to make any LSP client understand the output of an arbitrary
-linter or formatter.
+Server to make any LSP client understand the output of an arbitrary linter or
+formatter.
 
-Let's install it using Ansible too! It's a go app, so we could use Go toolchain
-to install it, but I had too much trouble going down this path, so now I just
-download the tarball from GitHub, unpack (with `ansible.builtin.archive`
-module) it and put the binary into my `PATH` (in `$HOME/.local/bin`):
+Let's install it using Ansible too! It's a Golang app, so we could use the Go
+toolchain to install it, but I had too much trouble going down this path, so
+now I just download the tarball from GitHub, unpack (with
+`ansible.builtin.archive` module) it and put the binary into my `PATH` (in
+`$HOME/.local/bin`):
 
 ```yaml
 - name: Create directory ~/.local/bin/
@@ -570,15 +571,15 @@ just because it's a zip file instead, which lacks the convenience of the
 
 ## Installing linters and formatters
 
-I also install every linters and formatter programs I use with Ansible. Here's
-a snippet of it:
+I also install the linters and formatters I use with Ansible. Here's a snippet
+of it:
 
 ```yaml
 - name: Install linters and formatters with dnf
   become: true
   dnf:
     name:
-      - ShellCheck
+      - ShellCheck # this is shellcheck in apt and brew
     state: present
   when: ansible_distribution == "Fedora"
 
@@ -604,7 +605,7 @@ a snippet of it:
     state: present
 ```
 
-[If you're interested, you can look at the entire file at
+[If you're interested, you can look at the file on
 GitHub](https://github.com/phelipetls/dotfiles/blob/d10072c4ab01d02018f5caeb1510d3c6c0ebbd95/roles/efm-langserver/tasks/main.yml#L21-L62).
 
 ## stow

@@ -271,10 +271,11 @@ u_k = A^ku_0 = S \Lambda^{k}S^{-1} Sc = S \Lambda^{k}c
 $$
 
 Isso implica que, no nosso caso, para uma matrix 2x2 (só dois autovetores), \\(
-u*k = c_1\lambda*{1}^{k}x*1 + c_2\lambda*{2}^{k}x_2 \\), onde os \\( x_i \\) são
-os autovetores, e o restante escalares. O que indica que a evolução do nosso
-sistema de equações é totalmente ditada pelos autovalores (não importa quantas
-vezes a matriz A transforme os autovetores, a direção deles nunca muda).
+u_k = c_1\lambda_{1}^{k}x_1 + c_2\lambda_{2}^{k}x_2 \\), onde os \\( x_i \\)
+são os autovetores, e o restante escalares. O que indica que a evolução do
+nosso sistema de equações é totalmente ditada pelos autovalores (não importa
+quantas vezes a matriz A transforme os autovetores, a direção deles nunca
+muda).
 
 Agora resta calcular tudo com o NumPy.
 
@@ -317,8 +318,8 @@ Lambda
 
 O primeiro número pode parecer familiar para o leitor, afinal é um dos mais
 famosos: o número de ouro. E é precisamente ele que descreve como os números de
-Fibonacci estão crescendo\!\! Como sabemos que \\( u*k = c_1\lambda*{1}^{k}x*1 +
-c_2\lambda*{2}^{k}x_2 \\), substituindo temos:
+Fibonacci estão crescendo\!\! Como sabemos que \\( u_k =
+c_1\lambda_{1}^{k}x_1 + c_2\lambda_{2}^{k}x_2 \\), substituindo temos:
 
 $$
 u_k = c_1\cdot(1.618)^{k}\cdot x_1 + c_2\cdot(-0.618)^{k}\cdot

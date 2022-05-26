@@ -1,7 +1,6 @@
 ---
 title: "Ansible for dotfiles: the introduction I wish I've had"
 date: 2022-05-26
-draft: true
 tags: ["ansible", "linux", "fedora", "ubuntu", "macos"]
 ---
 

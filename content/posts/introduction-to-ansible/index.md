@@ -1,37 +1,28 @@
 ---
-title: "Ansible for your dotfiles: the introduction I wish I've had"
-date: 2022-05-18
+title: "Ansible for dotfiles: the introduction I wish I've had"
+date: 2022-05-26
 draft: true
 tags: ["ansible", "linux", "fedora", "ubuntu", "macos"]
 ---
 
-Here's the problem: you have a new machine and you gotta set up your
-environment. Thankfully, you have a dotfiles with all your preferred
-configuration for git, tmux etc., but you'll have yet to install git and tmux.
-A dotfiles repo helps to solve the configuration problem, but it doesn't help
-with the dependencies problem. Let's see how Ansible can help solve with this.
+A dotfiles repo will help you manage configuration over time and synchronize
+them across machines, but it won't help you with your dependencies -- you still
+have to install git, tmux, vim, etc. Let's see how Ansible can help with that.
 
-Whenever I took the time to search for a dependency management problem, Ansible
-would come up as a solution, but I'd quickly dismiss it because it seemed
-overkill for my needs. [The landing page certainly contributed to this
-decision](https://www.ansible.com): it looks too big, complex, enterprise-y. It
-doesn't help convey the idea of what Ansible essentially is: a tool to automate
-tasks in a declarative way. The [official docs is a better place to
-start](https://docs.ansible.com/ansible/latest/user_guide/index.html#getting-started),
-but I think it's overwhelming as an introduction.
+Ansible would often come up as a solution to dependency management, but I'd
+quickly dismiss it because it looked too complex and enterprise-y, an
+impression that the [landing page](https://www.ansible.com) certainly
+contributed to. In my opinion, It doesn't help convey the idea of what Ansible
+turned out to be for me: a tool to automate tasks in a declarative way.
 
-I wish I was introduced to Ansible differently, in a way that made clear how it
-would help me automatically set up my machine the way I like it -- with my
-preferred programs, appearances, settings etc. This is my attempt at writing
-that introduction.
-
-We'll deliberately abstract away the more complex applications of Ansible, and
-focus only on this problem, since that's the only experience I got with it
-anyway.
+I wish I was introduced to Ansible differently, so this post is an attempt to
+write the introduction I wish I've had. We'll deliberately abstract away the
+more complex applications of Ansible and focus on solving one problem: how to
+set up a machine with your preferred programs, appearances, settings etc.
 
 # Installing Ansible
 
-First things first, let's install Ansible. The official docs has an an
+First things first, let's install Ansible. The official docs has an
 extensive [list with installation instructions for many Unix-like operating
 systems](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-specific-operating-systems).
 
@@ -44,9 +35,9 @@ Unix-like OS, such as WSL.
 
 {{< /warn >}}
 
-An option available at every operating system is
+Another option, available at every operating system, is to use
 [pip](https://pypi.org/project/pip/), the package manager for Python, which was
-what I used:
+my choice:
 
 ```shell-session
 $ pip install ansible
@@ -54,19 +45,17 @@ $ pip install ansible
 
 # How Ansible clicked for me
 
-I don't remember what actually got me into Ansible, but I think it was by
-looking at the source code of a dotfiles repo that used it. The `README.md`
-explained what you need to run to set up everything:
+If I remember correctly, it was by looking at the source code of a dotfiles
+repo that used it. The `README.md` explained that you needed to run a one
+single command to set up everything:
 
 ```shell-session
 $ ansible-playbook --ask-become-pass bootstrap.yml
 ```
 
-Just one command! So I went and looked at what was going on at the
-`bootstrap.yml` file:
+So I went and looked at what was going on at the `bootstrap.yml` file:
 
 ```yaml
----
 - name: Bootstrap development environment
   hosts: localhost
 
@@ -80,15 +69,21 @@ Just one command! So I went and looked at what was going on at the
       state: present
 ```
 
-Then things immediately clicked for me: it's using `apt` to download packages!
+Things immediately clicked for me once I saw it, like, it's clear that this is
+using `apt` to download packages!
 
-There's a lot going on that we still have to understand, like what is `become`,
-`hosts` etc. But this already shows Ansible's primary goal, which is *to leave
-a machine in a desired state after playing various tasks*. In this example,
-that desired state is to have git and tmux installed, but that state will
-likely not be that simple. Also, what if we're on macOS? Or Fedora? We would
-have to use another package manager then. We'll see that Ansible makes it easy
-to do all this.
+Of course, at this level, how is that much better than directly running `apt
+install git tmux` in a shell script called, say, `bootstrap.sh`? In this
+particular example, it's not much better but it's better already, as we'll see.
+We're just getting started.
+
+There's still a lot going on that we have to understand, e.g. what is `become`,
+and `hosts`? But I think the terminology already shows what is Ansible's
+primary goal: *to leave a machine in a desired state by playing a bunch of
+tasks*. In this example, the desired state is to have git and tmux installed
+(or "present"), but the desired state will likely not be that simple. Also,
+what if we're on macOS? Or Fedora? We won't be able to use `apt` in this case.
+We'll see that Ansible makes it easy to handle this.
 
 # Playbook
 
@@ -112,7 +107,7 @@ where these machines (`hosts`) are classified with patterns like "prod",
 
 We're not interested in that here since we just want to run tasks on our local
 machine. Passing `localhost` as a playbook's `hosts` will do what we want,
-without any inventory, because [Ansible will implicitly define localhost to
+without any inventory, because [Ansible will implicitly define `localhost` to
 match the local
 machine](https://docs.ansible.com/ansible/latest/inventory/implicit_localhost.html).
 
@@ -123,9 +118,9 @@ machine](https://docs.ansible.com/ansible/latest/inventory/implicit_localhost.ht
 
 # Tasks
 
-Now, let's dissect the "Install packages with apt" task:
+Now, let's dissect the "Install packages with apt" task. Here it is again:
 
-```yaml {hl_lines=["4-8"]}
+```yaml
   tasks:
   - name: Install packages with apt
     become: yes
@@ -136,18 +131,15 @@ Now, let's dissect the "Install packages with apt" task:
       state: present
 ```
 
-This is the equivalent of running `sudo apt install git tmux`, but in a
-declarative way.
-
 ## Become
 
-[`become`](https://docs.ansible.com/ansible/latest/user_guide/become.html) is
-an Ansible keyword that means "become another user when playing this task",
-that user being, by default, "root".
-
-So it's the equivalent of using `sudo`. This is also why you need to run the
-playbook with the option `--ask-become-pass` (`-K` for short), because it'll be
-necessary to prompt for your password.
+Let's start with the keyword
+[`become`](https://docs.ansible.com/ansible/latest/user_guide/become.html). It
+is used so that you can "become another user while this task is executing",
+that user being by default `root`. So it's, effectively, the equivalent of
+using `sudo`. This is also why you need to run the playbook with the option
+`--ask-become-pass` (`-K` for short), because it'll be necessary to prompt for
+your password.
 
 If you need to become another user other than `root`, use the `become_user`
 keyword.
@@ -165,7 +157,8 @@ It has modules for most Linux distributions package managers, like
 [`dnf`](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/dnf_module.html).
 But there are also community-developed modules, like one for
 [Homebrew](https://docs.ansible.com/ansible/latest/collections/community/general/homebrew_module.html),
-if you're on macOS, which we'll have to download separately.
+if you're on macOS, which we'll have to download separately, which we'll learn
+how shortly.
 
 An Ansible module takes arguments to accomplish a task. In the
 `ansible.builtin.apt` case, we pass a list of packages to the
@@ -307,10 +300,9 @@ $ ansible-galaxy collection install community.general
 
 # Loops
 
-You may eventually need a loop to accomplish a task.
-
-For example, the following task will build `dwm`, `slock` and `dmenu` from
-source, by running `sudo make install` in their directories:
+You may need a loop to accomplish a task. For example, the following task will
+build `dwm`, `slock` and `dmenu` from source, by running `sudo make install` in
+each directory containing the source code:
 
 ```yaml
 - name: Build and install suckless tools
@@ -325,10 +317,11 @@ source, by running `sudo make install` in their directories:
     make: /usr/bin/make
 ```
 
-Another example is if a module do not accept a list of strings as argument,
-just a string, as is the case of the
-[`community.general.npm`](https://docs.ansible.com/ansible/latest/collections/community/general/npm_module.html),
-so a `loop` will be needed. For example, to install some npm modules globally:
+Another example is if a module do not accept a list of strings as an argument,
+just a string.
+[`community.general.npm`](https://docs.ansible.com/ansible/latest/collections/community/general/npm_module.html)
+is one of such modules. Here's an example of how to install some npm modules
+globally:
 
 ```yaml {hl_lines=["2-5",7]}
 - name: Install npm global packages
@@ -342,9 +335,6 @@ so a `loop` will be needed. For example, to install some npm modules globally:
     global: true
 ```
 
-This task will be executed for each item in the array, with the variable `item`
-holding the current iteration value.
-
 # Jinja2
 
 [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/templates/) was mentioned
@@ -356,14 +346,14 @@ Jinja2 expression to expand the value in the variable `item`.
 
 It's possible to manipulate this value with
 [filters](https://jinja.palletsprojects.com/en/3.1.x/templates/#filters), e.g.
-`{{ item | upper }}` would make it uppercase.
+`{{ item | upper }}`.
 
-[There are a lot of filters available by
-default](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters).
-The `upper` filter is kind of an innocuous one. There are some more powerful,
-e.g., to repeat tasks using a [cartesian
+[There are a lot of built-in
+filters](https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters).
+The `upper` filter is kind of an innocuous one, there are some more powerful,
+e.g. `product` to build a [cartesian
 product](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_filters.html#product-filters)
-of lists:
+from lists:
 
 ```yaml {hl_lines=["3-4","7"]}
 - name: Give users access to multiple databases
@@ -377,8 +367,8 @@ of lists:
 
 Ansible uses [Jinja2
 tests](https://docs.ansible.com/ansible/latest/user_guide/playbooks_tests.html#playbooks-tests)
-for conditional logic, i.e. expressions that must evaluate to a Boolean. The
-syntax for tests is slightly different than the filter syntax:
+to express conditional logic. The syntax for tests is slightly different than
+the filter syntax:
 
 ```yaml {hl_lines=[7]}
 vars:
@@ -392,29 +382,26 @@ tasks:
 
 The usual [comparison
 operators](https://jinja.palletsprojects.com/en/latest/templates/#comparisons)
-are available, like `<`, `lt`, `<=`, `>`, `>=`, `==`, `=`, `!=`. 
-
-It's also possible to [combine multiple boolean
+are available, like `==`, `!=`, `<`, `<=`, `>`, `>=`, and it's, of course, also
+possible to [combine or transform multiple boolean
 expressions](https://jinja.palletsprojects.com/en/latest/templates/#logic) with
-`and` and `or`, as expected. It's very Python-like, as you can see.
+`and`, `or`, `not` etc.
 
 # Roles
 
-An Ansible role is a way to organize your tasks logic by using a file structure
-defined by Ansible.
-
-A role is usually the format in which you use other people's Ansible tasks,
-e.g., [there is an Ansible role to install Visual Studio
+An Ansible role is a way to organize your tasks logic in a file structure. A
+role is usually the format in which you use other people's Ansible tasks. For
+example, [there is an Ansible role to install Visual Studio
 Code](https://github.com/gantsign/ansible-role-visual-studio-code). It's
-available in Ansible Galaxy, so we can install it with:
+available in Ansible Galaxy, so we can install it like this:
 
 ```shell-session
 $ ansible-galaxy role install gantsign.visual-studio-code
 ```
 
-An Ansible is usually customizable with parameters. For example, the
-`gantsign.visual-studio-code` extension has a parameter for which extensions
-you want it to install:
+A role is usually customizable via parameters. For example, the
+`gantsign.visual-studio-code` extension has a parameter that allows you to
+install extensions:
 
 ```yaml {hl_lines=["4-9"]}
     - role: gantsign.visual-studio-code
@@ -429,12 +416,13 @@ you want it to install:
 ```
 
 In practice, creating a role is a matter of organizing things like tasks,
-default variables, templates, files etc. in a known Ansible-defined file
-structured.
+default variables, templates, files etc. in a file structure that Ansible can
+understand.
 
-You'll usually start by creating a `tasks/main.yml` file, which is the role
-entry point, in which you define all tasks. For example, here's a role I made
-to install neovim:
+You start by creating a `tasks/main.yml` file, which is the role's entry point,
+from which all tasks will derive.
+
+Let's check a role I made to install Neovim, to illustrate this:
 
 ```shell-session
 $ tree roles/nvim
@@ -448,11 +436,10 @@ roles/nvim
 1 directory, 4 files
 ```
 
-The contents of `main.yml` simply import tasks from other files depending on
-the host's operating system:
+The contents of `main.yml` simply import tasks from the other files, depending
+on the host's operating system:
 
 ```yaml
----
 - name: Build nvim from source in Ubuntu
   import_tasks: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
@@ -466,12 +453,13 @@ the host's operating system:
   when: ansible_distribution == "MacOSX"
 ```
 
-There's a LOT more than that, of course, but I won't go any further here. Check
-out the [official docs about
-roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
-to learn more.
+Ansible will make it easy for you to use templates and files stored in the
+role's `templates` and `files` directory. You can provide variables' default
+values in the `default/main.yml` file. The list could go on, but I won't go any
+further. Learn more about it in the [official docs about
+roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html).
 
-# Dotfiles use cases
+# dotfiles use cases
 
 Now let's look at some examples at how I used Ansible to manage [my
 dotfiles](https://github.com/phelipetls/dotfiles).
@@ -608,17 +596,17 @@ of it:
 [If you're interested, you can look at the file on
 GitHub](https://github.com/phelipetls/dotfiles/blob/d10072c4ab01d02018f5caeb1510d3c6c0ebbd95/roles/efm-langserver/tasks/main.yml#L21-L62).
 
-## stow
+## Stow
 
-stow is a huge part of dotfiles management: it's responsible to put the
+Stow is a huge part of dotfiles management: it's responsible to put the
 contents of my dofiles into my `$HOME` directory, as symlinks, while preserving
 the same folder structure.
 
-I also install and run stow in my playbook. There isn't an Ansible module for
-stow though, so I have to resort to `ansible.builtin.shell`, which isn't great
+I also install and run Stow in my playbook. There isn't an Ansible module for
+Stow though, so I have to resort to `ansible.builtin.shell`, which isn't great
 because it's dumb. But not all is lost, we can make it smarter by tweaking the
 task parameters. We can determine if something changed between runs by running
-stow in verbose mode (`--verbose=2`), to make it describe everything it did,
+Stow in verbose mode (`--verbose=2`), to make it describe everything it did,
 and then analyze its output.
 
 ```
@@ -626,23 +614,20 @@ stow dir is /home/phelipe/dotfiles
 stow dir path relative to target /home/phelipe is dotfiles
 Planning stow of package ....
 --- Skipping .profile as it already points to dotfiles/.profile
-
-# A lot of output omitted here...
-
 Planning stow of package .... done
 Processing tasks...
 ```
 
-By looking at the output, we see that stow says it's "skipping" files if there
-is already a symlink pointing at it in `$HOME`. But in the case there isn't,
-it'll describe it differently:
+By looking at the output, we see that Stow says it skipped a file if there is
+already a symlink for it in `$HOME`. But in the case there isn't, it'll say it
+linked that file, like so:
 
 ```
 LINK: .profile => dotfiles/.profile
 ```
 
-So, if the string `LINK` is in the stderr, it means a symlink had to be
-created:
+So if the string `LINK` is in the stderr, it means a symlink was created,
+something changed:
 
 ```yaml {hl_lines=["8"]}
 - name: Run stow
@@ -656,9 +641,9 @@ labelled as "ok".
 
 # GNOME
 
-We can't customize GNOME with configuration files, unlike most window managers.
-We normally configure it with GUIs, which is not a great thing if we're
-interested in automating the customization step.
+We can't customize GNOME with configuration files. We normally configure it
+with GUIs, which is not a great thing if we're interested in automating the
+customization step.
 
 Fortunately, there is a command line interface to make this possible called
 [`dconf`](https://wiki.gnome.org/Projects/dconf) (there's also `gsettings` but
@@ -671,9 +656,9 @@ For now, I just made two tweaks to my GNOME DE:
 - Click by tapping on the touchpad.
 - Show battery percentage next to the battery icon.
 
-Here's the equivalent tasks:
+Here are the equivalent tasks:
 
-```yaml {hl_lines=["1-4","6-9"]}
+```yaml
 - name: Enable tap to click on touchpad
   community.general.dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
@@ -685,10 +670,23 @@ Here's the equivalent tasks:
     value: "true"
 ```
 
-But how did I find that I needed
-`/org/gnome/desktop/peripherals/touchpad/tap-to-click` specifically? That's the
-hard part, but it's easier if we use
+But how did I find that I needed this specific key
+`/org/gnome/desktop/peripherals/touchpad/tap-to-click`? That's the hard part,
+but it's easier if we use
 [`dconf-editor`](https://wiki.gnome.org/Apps/DconfEditor), a GUI to explore
-GNOME applications internal settings. Navigate through it until you find the
+GNOME applications' internal settings. Navigate through it until you find the
 desired setting that seems responsible for what you want, grab its path and
 pass the value you want to it.
+
+# Conclusion
+
+You should now be able to automate downloading your favorite programs with your
+preferred configuration across operating systems, with tasks/roles written by
+you or by the community (which is the nicest part).
+
+The next step should be to test if it really works by using a virtual machine
+-- the Vagrant and Virtual Box combo seems to be a popular choice.
+
+It's not wise to assume that your playbook will work on a fresh machine because
+you might be relying on a dependency your playbook does not ensure it's true,
+even though it is in your current host.

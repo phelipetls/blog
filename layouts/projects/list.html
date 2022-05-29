@@ -9,7 +9,6 @@
           <div class="relative rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 {{ if $isUnmaintained }}border-warn{{ else }}border-divider{{ end }}">
             {{ with (index (.Resources.ByType "image") 0) }}
               <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}" width="auto" height="216" alt="">
-              </img>
             {{ end }}
 
             {{ if $isUnmaintained }}
@@ -59,7 +58,6 @@
                   src="https://skillicons.dev/icons?i={{ delimit .Params.icons "," }}&theme=light"
                   alt="{{ i18n "Tech" }}: {{ delimit .Params.icons ", " (printf " %s " (i18n "And")) }}"
                 >
-                </img>
               </div>
             </div>
           </div>

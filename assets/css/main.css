@@ -188,7 +188,7 @@ body.dark {
   }
 
   .btn-icon {
-    @apply rounded-md p-1 flex items-center justify-center;
+    @apply rounded-full p-2 flex items-center justify-center;
   }
 
   .tag {

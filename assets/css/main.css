@@ -83,7 +83,7 @@ body.dark {
   }
 
   img {
-    @apply mx-auto max-w-full;
+    @apply max-w-full;
   }
 
   article p {
@@ -104,6 +104,10 @@ body.dark {
 
   [data-blog-post] hr {
     @apply border-0 overflow-visible text-center after:content-['⁂'];
+  }
+
+  [data-blog-post] img {
+    @apply mx-auto;
   }
 
   [data-blog-post] figure {

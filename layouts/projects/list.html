@@ -16,28 +16,37 @@
               <div class="absolute top-2 right-2 rounded-md bg-warn text-background dark:text-foreground px-2 py-1">
                 Unmaintained
               </div>
+            {{ else }}
+              <time class="absolute top-2 right-2 rounded-md bg-foreground text-background px-2 py-1" datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "2006" }}
+              </time>
             {{ end }}
           </div>
 
           <div class="flex-1 sm:flex sm:flex-col sm:justify-between">
-            <div>
-              <div class="flex items-center justify-between text-xl mb-4">
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
                 <h2 class="m-0 inline-block">
-                  <a
-                    class="border-0 flex items-center gap-2"
-                    {{ if .Params.website }}href="{{ .Params.website }}"{{ end }}
-                  >
+                  {{ if isset .Params "website" }}
+                    <a
+                      class="flex items-center gap-2"
+                      href="{{ .Params.website }}"
+                    >
+                      {{ .Title }}
+                    </a>
+                  {{ else }}
                     {{ .Title }}
-
-                    {{ if .Params.website }}
-                      {{ partial "svgs/external-link.svg" }}
-                    {{ end }}
-                  </a>
+                  {{ end }}
                 </h2>
 
-                <time class="font-bold" datetime="{{ .Date.Format "2006-01-02" }}">
-                  {{ .Date.Format "2006" }}
-                </time>
+                {{ with .Params.github }}
+                  <a
+                    class="btn btn-icon border-0 text-xl"
+                    href="{{ . }}"
+                  >
+                    {{ partial "svgs/github.svg" }}
+                  </a>
+                {{ end }}
               </div>
 
               {{ .Content }}
@@ -52,16 +61,6 @@
                 >
                 </img>
               </div>
-
-              {{ with .Params.github }}
-                <a
-                  class="btn btn-primary btn-icon border-0"
-                  style="--icon-size: 1.5em"
-                  href="{{ . }}"
-                >
-                  {{ partial "svgs/github.svg" }}
-                </a>
-              {{ end }}
             </div>
           </div>
         </article>

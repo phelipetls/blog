@@ -176,11 +176,11 @@ body.dark {
   }
 
   .btn-primary {
-    @apply bg-primary text-background;
+    @apply bg-foreground text-background;
   }
 
   .btn-secondary {
-    @apply border-2 border-primary text-primary;
+    @apply border-2 border-foreground;
   }
 
   a.btn-primary {

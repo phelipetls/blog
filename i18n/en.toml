@@ -68,3 +68,9 @@ other = 'Translations'
 [TagDescription]
 one = '{{ .Count }} post on {{ .Term }}'
 other = '{{ .Count }} posts on {{ .Term }}'
+
+[Tech]
+other = 'Technologies'
+
+[And]
+other = 'and'

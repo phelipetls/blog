@@ -3,7 +3,7 @@ title: "dotfiles"
 date: 2020-01-01
 github: "https://github.com/phelipetls/dotfiles"
 weight: 2
-devicons: ["ansible", "linux", "lua", "bash", "vim", "vscode"]
+icons: ["ansible", "linux", "lua", "bash", "vim", "vscode"]
 ---
 
 Reproducible desktop and development environment in Ubuntu, Fedora and macOS,

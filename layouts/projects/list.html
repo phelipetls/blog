@@ -1,7 +1,3 @@
-{{ define "head" }}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-{{ end }}
-
 {{ define "main" }}
   <section class="">
     <ul class="list-none m-0">
@@ -50,9 +46,12 @@
 
             <div class="mt-4 flex flex-nowrap gap-2 justify-between">
               <div class="flex items-center gap-2 overflow-x-auto">
-                {{ range $_, $devicon := .Params.devicons }}
-                  <i class="devicon-{{ $devicon }}-plain text-3xl"></i>
-                {{ end }}
+                <img
+                  class="h-10"
+                  src="https://skillicons.dev/icons?i={{ delimit .Params.icons "," }}&theme=light"
+                  alt="{{ i18n "Tech" }}: {{ delimit .Params.icons ", " (printf " %s " (i18n "And")) }}"
+                >
+                </img>
               </div>
 
               {{ with .Params.github }}
@@ -71,4 +70,16 @@
     {{ end }}
     </ul>
   </section>
+{{ end }}
+
+{{ define "scripts" }}
+  <script>
+    document.body.addEventListener('newTheme', function (e) {
+      document.querySelectorAll('img[src*=skillicons]').forEach(function (img) {
+        const url = new URL(img.getAttribute('src'))
+        url.searchParams.set('theme', e.detail.theme)
+        img.setAttribute('src', url)
+      })
+    })
+  </script>
 {{ end }}

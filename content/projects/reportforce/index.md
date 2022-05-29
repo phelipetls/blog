@@ -4,6 +4,7 @@ date: 2020-01-25
 website: "https://reportforce.readthedocs.io"
 github: "https://github.com/phelipetls/reportforce"
 devicons: ["python", "pandas", "numpy", "pytest"]
+unmaintained: true
 ---
 
 A Python library to download reports from Salesforce via [Analytics REST

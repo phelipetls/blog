@@ -7,11 +7,19 @@
     <ul class="list-none m-0">
     {{ range .Pages }}
       <li class="mb-16 last:mb-0">
+        {{ $isUnmaintained := isset .Params "unmaintained" }}
+
         <article class="flex gap-4 flex-col sm:flex-row">
-          <div class="rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 border-divider">
+          <div class="relative rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 {{ if $isUnmaintained }}border-warn{{ else }}border-divider{{ end }}">
             {{ with (index (.Resources.ByType "image") 0) }}
               <img class="object-cover object-left-top min-w-full h-full" src="{{ .Permalink }}" width="auto" height="216" alt="">
               </img>
+            {{ end }}
+
+            {{ if $isUnmaintained }}
+              <div class="absolute top-2 right-2 rounded-md bg-warn text-background dark:text-foreground px-2 py-1">
+                Unmaintained
+              </div>
             {{ end }}
           </div>
 

@@ -1,3 +1,7 @@
+{{ define "head" }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+{{ end }}
+
 {{ define "main" }}
   <section class="">
     <ul class="list-none m-0">
@@ -36,10 +40,20 @@
               {{ .Content }}
             </div>
 
-            <div class="flex mt-4 gap-4 justify-end">
+            <div class="mt-4 flex flex-nowrap gap-2 justify-between">
+              <div class="flex items-center gap-2 overflow-x-auto">
+                {{ range $_, $devicon := .Params.devicons }}
+                  <i class="devicon-{{ $devicon }}-plain text-3xl"></i>
+                {{ end }}
+              </div>
+
               {{ with .Params.github }}
-                <a class="btn border-0 flex items-center gap-2 bg-[#1b1f23] text-[#ffffff] dark:bg-[#ffffff] dark:text-[#1b1f23]" style="--icon-size: 1.5em;" href="{{ . }}">
-                  {{ partial "svgs/github.svg" }} GitHub
+                <a
+                  class="btn btn-primary btn-icon border-0"
+                  style="--icon-size: 1.5em"
+                  href="{{ . }}"
+                >
+                  {{ partial "svgs/github.svg" }}
                 </a>
               {{ end }}
             </div>

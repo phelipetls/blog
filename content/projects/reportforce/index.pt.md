@@ -3,6 +3,7 @@ title: "reportforce"
 date: 2020-01-25
 website: "https://reportforce.readthedocs.io"
 github: "https://github.com/phelipetls/reportforce"
+devicons: ["python", "pandas", "numpy", "pytest"]
 ---
 
 Biblioteca em Python para baixar relatórios da Salesforce por meio da

@@ -5,7 +5,11 @@
         {{- .Title -}}
       </a>
     {{ end }}
-    <a href="{{ "/tags" | relLangURL }}" class="tag" aria-label="{{ i18n "MoreTags" }}">
+    <a
+      href="{{ "/tags" | relLangURL }}"
+      class="tag"
+      aria-label="{{ i18n "MoreTags" }}"
+    >
       ...
     </a>
   </div>

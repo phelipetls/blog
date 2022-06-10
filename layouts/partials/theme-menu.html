@@ -1,11 +1,11 @@
-{{
-$themeOptions := (
-     slice
-     (dict "Id" "light" "IconName" "sun"     "Name" (i18n "Light"))
-     (dict "Id" "dark"  "IconName" "moon"    "Name" (i18n "Dark"))
-     (dict "Id" "auto"  "IconName" "monitor" "Name" (i18n "System"))
-)
+{{ $themeOptions := (
+  slice
+  (dict "Id" "light" "IconName" "sun"     "Name" (i18n "Light"))
+  (dict "Id" "dark"  "IconName" "moon"    "Name" (i18n "Dark"))
+  (dict "Id" "auto"  "IconName" "monitor" "Name" (i18n "System"))
+  )
 }}
+
 
 <ul
   data-theme-menu
@@ -18,16 +18,16 @@ $themeOptions := (
   aria-label="{{ i18n "ThemeOptions" }}"
   tabindex="-1"
 >
-{{ range $themeOptions }}
-  <li
-    class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
-    id="theme-option-{{ .Id }}"
-    data-theme="{{ .Id }}"
-    role="menuitem"
-    tabindex="-1"
-  >
-    {{ partial (printf "svgs/%s.svg" .IconName) }}
-    {{ .Name }}
-  </li>
-{{ end }}
+  {{ range $themeOptions }}
+    <li
+      class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+      id="theme-option-{{ .Id }}"
+      data-theme="{{ .Id }}"
+      role="menuitem"
+      tabindex="-1"
+    >
+      {{ partial (printf "svgs/%s.svg" .IconName) }}
+      {{ .Name }}
+    </li>
+  {{ end }}
 </ul>

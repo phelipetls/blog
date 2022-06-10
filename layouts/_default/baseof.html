@@ -13,7 +13,10 @@
     {{ end }}
   </head>
 
-  <body data-preload class="text-foreground bg-secondary-background transition-colors duration-500 ease-out">
+  <body
+    data-preload
+    class="text-foreground bg-secondary-background transition-colors duration-500 ease-out"
+  >
     {{ block "script-elements" . }}
     {{ end }}
 
@@ -28,8 +31,11 @@
     <div data-scroll-container>
       {{ partial "nav.html" . }}
 
+
       <div class="max-w-5xl mx-auto w-full px-default-padding mt-20 py-4">
-        <main class="bg-background w-full rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding">
+        <main
+          class="bg-background w-full rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding"
+        >
           {{ block "main" . }}
             {{ .Content }}
           {{ end }}
@@ -55,6 +61,7 @@
     {{ if hugo.IsProduction }}
       {{ $bundle = $bundle | minify }}
     {{ end }}
+
 
     <script type="module" src="{{ $bundle.Permalink }}"></script>
 

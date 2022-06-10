@@ -1,22 +1,40 @@
 {{ define "partials/animated-icon-classes" }}
-transform hover:scale-110 hover:text-primary transition transition-transform transition-colors
+  transform hover:scale-110 hover:text-primary transition transition-transform
+  transition-colors
 {{ end }}
 
+
 <div class="flex gap-4">
-  <a class="border-0 {{ partial "animated-icon-classes" }}" href="mailto:{{ .Site.Params.email }}" aria-label="E-mail">
+  <a
+    class="border-0 {{ partial "animated-icon-classes" }}"
+    href="mailto:{{ .Site.Params.email }}"
+    aria-label="E-mail"
+  >
     {{ partial "svgs/mail.svg" }}
   </a>
 
-  <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.linkedin }}" aria-label="LinkedIn">
+  <a
+    class="border-0 {{ partial "animated-icon-classes" }}"
+    href="{{ .Site.Params.linkedin }}"
+    aria-label="LinkedIn"
+  >
     {{ partial "svgs/linkedin.svg" }}
   </a>
 
-  <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Site.Params.github }}" aria-label="GitHub">
+  <a
+    class="border-0 {{ partial "animated-icon-classes" }}"
+    href="{{ .Site.Params.github }}"
+    aria-label="GitHub"
+  >
     {{ partial "svgs/github.svg" }}
   </a>
 
   {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-    <a class="border-0 {{ partial "animated-icon-classes" }}" href="{{ .Permalink }}" aria-label="Blog RSS Feed">
+    <a
+      class="border-0 {{ partial "animated-icon-classes" }}"
+      href="{{ .Permalink }}"
+      aria-label="Blog RSS Feed"
+    >
       {{ partial "svgs/rss.svg" }}
     </a>
   {{ end }}

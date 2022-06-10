@@ -1,9 +1,20 @@
-<div data-nav-container class="fixed top-0 w-full h-20 bg-secondary-background z-30 transition-transform">
-  <div class="h-full pt-4 pb-4 flex items-center justify-between mx-auto max-w-5xl pr-default-padding">
-    <nav class="h-full py-1 overflow-x-auto flex items-center px-default-padding" aria-label="{{ i18n "MainNavigation" }}">
+<div
+  data-nav-container
+  class="fixed top-0 w-full h-20 bg-secondary-background z-30 transition-transform"
+>
+  <div
+    class="h-full pt-4 pb-4 flex items-center justify-between mx-auto max-w-5xl pr-default-padding"
+  >
+    <nav
+      class="h-full py-1 overflow-x-auto flex items-center px-default-padding"
+      aria-label="{{ i18n "MainNavigation" }}"
+    >
       {{ $currentPage := . }}
 
-      <ul class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full">
+
+      <ul
+        class="m-0 list-none flex items-center flex-row flex-nowrap gap-2 h-full"
+      >
         {{- range .Site.Menus.main -}}
           <li class="h-full">
             <a
@@ -22,26 +33,14 @@
                 justify-center
                 rounded-md
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
-                  bg-background
-                  shadow-md
-                  shadow-divider
-                {{ else }}
-                  after:content-['']
-                  after:absolute
-                  after:-z-10
-                  after:bg-background
-                  after:w-full
-                  after:h-full
-                  after:rounded-md
-                  after:shadow-md
-                  after:shadow-divider
-                  after:scale-0
-                  hover:after:scale-100
-                  after:opacity-0
-                  hover:after:opacity-100
-                  after:transition-[transform,_opacity]
-                  after:duration-500
-                {{ end }}
+                bg-background shadow-md shadow-divider
+              {{ else }}
+                after:content-[''] after:absolute after:-z-10
+                after:bg-background after:w-full after:h-full after:rounded-md
+                after:shadow-md after:shadow-divider after:scale-0
+                hover:after:scale-100 after:opacity-0 hover:after:opacity-100
+                after:transition-[transform,_opacity] after:duration-500
+              {{ end }}
               "
             >
               {{ i18n .Name | default .Name }}
@@ -52,7 +51,9 @@
     </nav>
 
     <div class="h-full py-1">
-      <div class="h-full px-2 flex items-center bg-background rounded-md shadow-md shadow-divider">
+      <div
+        class="h-full px-2 flex items-center bg-background rounded-md shadow-md shadow-divider"
+      >
         {{ if .IsTranslated }}
           {{ partial "language-button.html" . }}
         {{ end }}

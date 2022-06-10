@@ -17,11 +17,7 @@
       tabindex="-1"
       {{ if (eq $.Lang .Lang) }}aria-selected="true"{{ end }}
     >
-      <a
-        class="border-0"
-        href="{{ .Permalink }}"
-        data-lang="{{ .Lang }}"
-      >
+      <a class="border-0" href="{{ .Permalink }}" data-lang="{{ .Lang }}">
         {{ .Language.LanguageName }}
       </a>
     </li>

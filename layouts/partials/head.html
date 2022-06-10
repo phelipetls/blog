@@ -1,11 +1,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="{{ block "description" . }}{{ .Params.Description | default .Site.Params.Description }}{{ end }}" />
-<meta name="deploy-date" content="{{ now.Format "2006-01-02" }}">
-<meta name="publish-date" content="{{ .Date.Format "2006-01-02" }}">
-<meta name="last-modified-date" content="{{ .Lastmod.Format "2006-01-02" }}">
-<meta name="author" content="{{ site.Author.name }}">
-<meta name="color-scheme" content="dark light">
+<meta
+  name="description"
+  content="{{ block "description" . }}
+    {{ .Params.Description | default .Site.Params.Description }}
+  {{ end }}"
+/>
+<meta name="deploy-date" content="{{ now.Format "2006-01-02" }}" />
+<meta name="publish-date" content="{{ .Date.Format "2006-01-02" }}" />
+<meta name="last-modified-date" content="{{ .Lastmod.Format "2006-01-02" }}" />
+<meta name="author" content="{{ site.Author.name }}" />
+<meta name="color-scheme" content="dark light" />
 
 {{ define "partials/getTaxonomyTitle" }}
   {{- .Title -}}
@@ -14,7 +19,7 @@
 {{ with (.GetTerms "tags") }}
   {{ $tags := (apply . "partial" "getTaxonomyTitle" ".") }}
   {{ $tagsSeparatedByComma := (delimit $tags ", ") }}
-  <meta name="keywords" content="{{ $tagsSeparatedByComma }}">
+  <meta name="keywords" content="{{ $tagsSeparatedByComma }}" />
 {{ end }}
 
 {{ with resources.GetRemote "https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" }}
@@ -38,7 +43,8 @@
 <link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
 
 <title>
-  {{ .Title }} | {{ .Site.Title }}
+  {{ .Title }} |
+  {{ .Site.Title }}
 </title>
 
 {{ if or .Params.math .Site.Params.math }}
@@ -55,5 +61,10 @@
 {{ end -}}
 
 {{ if hugo.IsProduction }}
-  <script async defer data-website-id="32b90065-c2a6-4390-9684-dfde99409815" src="https://umami-production-10b2.up.railway.app/main.js"></script>
+  <script
+    async
+    defer
+    data-website-id="32b90065-c2a6-4390-9684-dfde99409815"
+    src="https://umami-production-10b2.up.railway.app/main.js"
+  ></script>
 {{ end }}

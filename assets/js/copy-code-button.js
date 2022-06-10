@@ -11,6 +11,7 @@ const tooltipArrow = document.querySelector(
 const copyCodeButtonClassName = [
   'btn',
   'btn-icon',
+  'rounded-md',
   'p-1',
   'bg-secondary-background',
   'text-foreground',

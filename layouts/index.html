@@ -1,22 +1,26 @@
 {{ define "main" }}
-  <div class="flex flex-col sm:flex-row">
-    {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
+  <div class="main-container">
+    <main class="main">
+      <div class="flex flex-col sm:flex-row">
+        {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
 
-    <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0 w-[200] h-[200]">
-      <img
-        id="gravatar"
-        alt="{{ i18n "GravatarAltText" }}"
-        width="200"
-        height="200"
-        class="rounded-full border-4 border-divider bg-transparent max-w-full mx-auto"
-        src="{{ $gravatarUrl }}"
-      />
-    </div>
+        <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0 w-[200] h-[200]">
+          <img
+            id="gravatar"
+            alt="{{ i18n "GravatarAltText" }}"
+            width="200"
+            height="200"
+            class="rounded-full border-4 border-divider bg-transparent max-w-full mx-auto"
+            src="{{ $gravatarUrl }}"
+          />
+        </div>
 
-    <article class="max-w-prose">
-      {{ .Content }}
-    </article>
+        <article class="max-w-prose">
+          {{ .Content }}
+        </article>
+      </div>
+    </main>
   </div>
 {{ end }}
 

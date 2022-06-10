@@ -198,6 +198,14 @@ body.dark {
   .alert {
     @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded-md bg-secondary-background -mx-default-padding sm:mx-0;
   }
+
+  .main-container {
+    @apply max-w-5xl mx-auto w-full sm:px-default-padding mt-20 py-4;
+  }
+
+  .main {
+    @apply bg-background w-full sm:rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding;
+  }
 }
 
 [data-preload] {

@@ -1,17 +1,21 @@
 {{ define "main" }}
-  <div>
-    <h2>{{ .Title }}</h2>
+  <div class="main-container">
+    <main class="main">
+      <div>
+        <h2>{{ .Title }}</h2>
 
-    {{ $total := len .Data.Terms }}
+        {{ $total := len .Data.Terms }}
 
 
-    <ul>
-      {{ range sort .Data.Terms "Count" "desc" }}
-        <li>
-          <a href="{{ .Page.Permalink }}">{{- .Page.Title -}}</a>
-          <span>({{ .Count }})</span>
-        </li>
-      {{ end }}
-    </ul>
+        <ul>
+          {{ range sort .Data.Terms "Count" "desc" }}
+            <li>
+              <a href="{{ .Page.Permalink }}">{{- .Page.Title -}}</a>
+              <span>({{ .Count }})</span>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    </main>
   </div>
 {{ end }}

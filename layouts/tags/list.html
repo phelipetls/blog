@@ -1,21 +1,25 @@
 {{ define "main" }}
-  <article>
-    <h1 class="mb-8">Tags</h1>
+  <div class="main-container">
+    <main class="main">
+      <article>
+        <h1 class="mb-8">Tags</h1>
 
-    <ul
-      class="list-none m-0 p-0 flex flex-wrap items-center justify-center leading-normal gap-2"
-    >
-      {{- range .Data.Terms.Alphabetical -}}
-        <li>
-          <a
-            href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
-            class="tag"
-            style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
-          >
-            {{ .Term -}}
-          </a>
-        </li>
-      {{- end -}}
-    </ul>
-  </article>
+        <ul
+          class="list-none m-0 p-0 flex flex-wrap items-center justify-center leading-normal gap-2"
+        >
+          {{- range .Data.Terms.Alphabetical -}}
+            <li>
+              <a
+                href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
+                class="tag"
+                style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
+              >
+                {{ .Term -}}
+              </a>
+            </li>
+          {{- end -}}
+        </ul>
+      </article>
+    </main>
+  </div>
 {{ end }}

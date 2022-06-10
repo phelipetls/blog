@@ -31,16 +31,13 @@
     <div data-scroll-container>
       {{ partial "nav.html" . }}
 
-
-      <div class="max-w-5xl mx-auto w-full sm:px-default-padding mt-20 py-4">
-        <main
-          class="bg-background w-full sm:rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding"
-        >
-          {{ block "main" . }}
+      {{ block "main" . }}
+        <div class="main-container">
+          <main class="main">
             {{ .Content }}
-          {{ end }}
-        </main>
-      </div>
+          </main>
+        </div>
+      {{ end }}
 
       {{ partial "footer.html" . }}
     </div>

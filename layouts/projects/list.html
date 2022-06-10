@@ -1,86 +1,90 @@
 {{ define "main" }}
-  <section class="">
-    <ul class="list-none m-0">
-      {{ range .Pages }}
-        <li class="mb-16 last:mb-0">
-          {{ $isUnmaintained := isset .Params "unmaintained" }}
+  <div class="main-container">
+    <main class="main">
+      <section class="">
+        <ul class="list-none m-0">
+          {{ range .Pages }}
+            <li class="mb-16 last:mb-0">
+              {{ $isUnmaintained := isset .Params "unmaintained" }}
 
 
-          <article class="flex gap-4 flex-col sm:flex-row">
-            <div
-              class="relative rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 {{ if $isUnmaintained }}
-                border-warn
-              {{ else }}
-                border-divider
-              {{ end }}"
-            >
-              {{ with (index (.Resources.ByType "image") 0) }}
-                <img
-                  class="object-cover object-left-top min-w-full h-full"
-                  src="{{ .Permalink }}"
-                  width="auto"
-                  height="216"
-                  alt=""
-                />
-              {{ end }}
-
-              {{ if $isUnmaintained }}
+              <article class="flex gap-4 flex-col sm:flex-row">
                 <div
-                  class="absolute top-2 right-2 rounded-md bg-warn text-background dark:text-foreground px-2 py-1"
+                  class="relative rounded-0 sm:rounded-md -mx-default-padding sm:mx-0 overflow-hidden h-[216px] sm:w-2/5 border-y-2 sm:border-2 {{ if $isUnmaintained }}
+                    border-warn
+                  {{ else }}
+                    border-divider
+                  {{ end }}"
                 >
-                  Unmaintained
-                </div>
-              {{ else }}
-                <time
-                  class="absolute top-2 right-2 rounded-md bg-foreground text-background px-2 py-1"
-                  datetime="{{ .Date.Format "2006-01-02" }}"
-                >
-                  {{ .Date.Format "2006" }}
-                </time>
-              {{ end }}
-            </div>
+                  {{ with (index (.Resources.ByType "image") 0) }}
+                    <img
+                      class="object-cover object-left-top min-w-full h-full"
+                      src="{{ .Permalink }}"
+                      width="auto"
+                      height="216"
+                      alt=""
+                    />
+                  {{ end }}
 
-            <div class="flex-1 sm:flex sm:flex-col sm:justify-between">
-              <div class="flex flex-col gap-2">
-                <div class="flex items-center justify-between">
-                  <h2 class="m-0 inline-block">
-                    {{ if isset .Params "website" }}
-                      <a
-                        class="flex items-center gap-2"
-                        href="{{ .Params.website }}"
-                      >
-                        {{ .Title }}
-                      </a>
-                    {{ else }}
-                      {{ .Title }}
-                    {{ end }}
-                  </h2>
-
-                  {{ with .Params.github }}
-                    <a class="btn btn-icon border-0 text-xl" href="{{ . }}">
-                      {{ partial "svgs/github.svg" }}
-                    </a>
+                  {{ if $isUnmaintained }}
+                    <div
+                      class="absolute top-2 right-2 rounded-md bg-warn text-background dark:text-foreground px-2 py-1"
+                    >
+                      Unmaintained
+                    </div>
+                  {{ else }}
+                    <time
+                      class="absolute top-2 right-2 rounded-md bg-foreground text-background px-2 py-1"
+                      datetime="{{ .Date.Format "2006-01-02" }}"
+                    >
+                      {{ .Date.Format "2006" }}
+                    </time>
                   {{ end }}
                 </div>
 
-                {{ .Content }}
-              </div>
+                <div class="flex-1 sm:flex sm:flex-col sm:justify-between">
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                      <h2 class="m-0 inline-block">
+                        {{ if isset .Params "website" }}
+                          <a
+                            class="flex items-center gap-2"
+                            href="{{ .Params.website }}"
+                          >
+                            {{ .Title }}
+                          </a>
+                        {{ else }}
+                          {{ .Title }}
+                        {{ end }}
+                      </h2>
 
-              <div class="mt-4 flex flex-nowrap gap-2 justify-between">
-                <div class="flex items-center gap-2 overflow-x-auto">
-                  <img
-                    class="h-10"
-                    src="https://skillicons.dev/icons?i={{ delimit .Params.icons "," }}&theme=light"
-                    alt="{{ i18n "Tech" }}: {{ delimit .Params.icons ", " (printf " %s " (i18n "And")) }}"
-                  />
+                      {{ with .Params.github }}
+                        <a class="btn btn-icon border-0 text-xl" href="{{ . }}">
+                          {{ partial "svgs/github.svg" }}
+                        </a>
+                      {{ end }}
+                    </div>
+
+                    {{ .Content }}
+                  </div>
+
+                  <div class="mt-4 flex flex-nowrap gap-2 justify-between">
+                    <div class="flex items-center gap-2 overflow-x-auto">
+                      <img
+                        class="h-10"
+                        src="https://skillicons.dev/icons?i={{ delimit .Params.icons "," }}&theme=light"
+                        alt="{{ i18n "Tech" }}: {{ delimit .Params.icons ", " (printf " %s " (i18n "And")) }}"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </article>
-        </li>
-      {{ end }}
-    </ul>
-  </section>
+              </article>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    </main>
+  </div>
 {{ end }}
 
 {{ define "scripts" }}

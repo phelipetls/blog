@@ -5,7 +5,7 @@
     {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
 
-    <div class="sm:mr-4 mb-4 sm:mb-0 shrink-0 w-[200] h-[200]">
+    <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0 w-[200] h-[200]">
       <img
         id="gravatar"
         alt="{{ i18n "GravatarAltText" }}"

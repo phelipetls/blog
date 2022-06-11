@@ -28,7 +28,7 @@
 
 body {
   --primary: var(--blue);
-  --foreground: var(--black-100);
+  --foreground: var(--black-200);
   --background: var(--beige-300);
   --surface: var(--beige-100);
   --divider: var(--beige-500);

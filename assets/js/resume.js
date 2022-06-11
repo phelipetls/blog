@@ -14,8 +14,8 @@ const resumeUrl = resumeContainer.dataset.resume
 if (PDFObject.supportsPDFs) {
   PDFObject.embed(resumeUrl, resumeContainer)
 } else {
-  resumeLoading.classList.remove('hidden')
-  resumeDownloadButton.classList.remove('hidden')
+  resumeLoading.classList.replace('hidden', 'flex')
+  resumeDownloadButton.classList.replace('hidden', 'flex')
 
   pdfjsLib
     .getDocument(resumeUrl)

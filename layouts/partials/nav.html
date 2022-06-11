@@ -33,8 +33,7 @@
                 justify-center
                 rounded-md
                 {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
-                bg-surface hover:bg-hover shadow-md shadow-divider
-                transition-colors duration-500
+                hover:bg-hover card transition-colors duration-500
               {{ else }}
                 after:content-[''] after:absolute after:-z-10 after:bg-surface
                 after:w-full after:h-full after:rounded-md after:shadow-md
@@ -53,9 +52,7 @@
     </nav>
 
     <div class="h-full py-1">
-      <div
-        class="h-full px-2 flex items-center bg-surface rounded-md shadow-md shadow-divider"
-      >
+      <div class="h-full px-2 flex items-center card">
         {{ if .IsTranslated }}
           {{ partial "language-button.html" . }}
         {{ end }}

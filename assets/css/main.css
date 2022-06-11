@@ -208,6 +208,10 @@ body.dark {
   .main {
     @apply bg-surface w-full sm:rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding;
   }
+
+  .card {
+    @apply bg-surface rounded-md shadow-md shadow-divider;
+  }
 }
 
 [data-preload] {

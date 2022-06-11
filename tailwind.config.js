@@ -29,7 +29,7 @@ module.exports = {
       divider: withOpacityValue('--divider'),
       foreground: withOpacityValue('--foreground'),
       background: withOpacityValue('--background'),
-      ['secondary-background']: withOpacityValue('--secondary-background'),
+      surface: withOpacityValue('--surface'),
       ['code-highlight']: withOpacityValue('--code-highlight'),
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),

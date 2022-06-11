@@ -21,9 +21,9 @@
   --black-600: hexToRgb(#1a1a1a);
   --black-700: hexToRgb(#151515);
 
-  --blue: hexToRgb(#4076d2);
+  --blue: hexToRgb(#558ff7);
   --red: hexToRgb(#dd0022);
-  --orange: hexToRgb(#ecaa36);
+  --orange: hexToRgb(#f7bd55);
 }
 
 body {

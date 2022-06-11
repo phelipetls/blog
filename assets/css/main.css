@@ -31,6 +31,7 @@ body {
   --foreground: var(--black-200);
   --background: var(--beige-300);
   --surface: var(--beige-100);
+  --hover: var(--beige-200);
   --divider: var(--beige-500);
   --note: var(--blue);
   --warn: var(--red);
@@ -41,6 +42,7 @@ body.dark {
   --foreground: var(--beige-300);
   --background: var(--black-500);
   --surface: var(--black-600);
+  --hover: var(--black-700);
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);

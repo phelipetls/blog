@@ -30,6 +30,7 @@ module.exports = {
       foreground: withOpacityValue('--foreground'),
       background: withOpacityValue('--background'),
       surface: withOpacityValue('--surface'),
+      hover: withOpacityValue('--hover'),
       ['code-highlight']: withOpacityValue('--code-highlight'),
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),

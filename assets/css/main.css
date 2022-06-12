@@ -166,10 +166,6 @@ body.dark {
   ::selection {
     @apply bg-foreground text-background;
   }
-
-  svg.feather {
-    @apply w-[var(--icon-size)] h-[var(--icon-size)];
-  }
 }
 
 @layer components {

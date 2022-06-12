@@ -7,6 +7,7 @@ function withOpacityValue(variable) {
   }
 }
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./hugo_stats.json', './assets/js/**.js'],
   darkMode: 'class',

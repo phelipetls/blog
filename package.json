@@ -42,7 +42,7 @@
     "prettier-plugin-go-template": "0.0.13",
     "simple-git-hooks": "^2.7.0",
     "start-server-and-test": "^1.14.0",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.1.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",

@@ -1,0 +1,9 @@
+{{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+  <a
+    class="btn btn-icon border-0"
+    href="{{ .Permalink }}"
+    aria-label="Blog RSS Feed"
+  >
+    {{ partial "svgs/rss.svg" }}
+  </a>
+{{ end }}

@@ -24,7 +24,8 @@
       </div>
     </div>
 
-    {{ $allPosts := (.Site.GetPage "/posts").Pages }}
+    {{ $posts := .Site.GetPage "/posts" }}
+    {{ $allPosts := $posts.Pages }}
 
     {{ $latestPosts := first 5 $allPosts }}
     {{ $latestPost := index $latestPosts 0 }}
@@ -34,9 +35,13 @@
     <div class="my-8 sm:my-16">
       <div class="flex flex-col gap-16 lg:flex-row">
         <div class="flex flex-col gap-8 justify-around">
-          <h1 class="">
-            <a href="{{ "/posts" | relLangURL }}">Blog</a>
-          </h1>
+          <div class="flex justify-between items-center">
+            <h1 class="">
+              <a href="{{ $posts.Permalink }}">Blog</a>
+            </h1>
+
+            {{ partial "rss-button.html" . }}
+          </div>
 
           <div class="flex flex-col gap-2 justify-between">
             <div class="flex items-center gap-2">

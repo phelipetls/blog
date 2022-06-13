@@ -109,11 +109,22 @@
       </a>
     </h1>
 
-    <img
-      class="h-16 bg-cover my-8"
-      src="{{ $projectIconsUrl }}"
-      alt="{{ $projectIconsAltText }}"
-    />
+    <div class="w-full col-full sm:col-content h-10 overflow-x-hidden my-8">
+      <div
+        data-skillicons-slide
+        class="h-full flex flex-nowrap"
+        style="animation: slideshow linear 15s infinite;"
+      >
+        <div
+          class="w-[calc(100%_*_2)] min-h-full flex-none"
+          style="background: left / cover repeat-x url('{{ $projectIconsUrl }}');"
+        ></div>
+        <div
+          class="w-[calc(100%_*_2)] min-h-full flex-none"
+          style="background: left / cover repeat-x url('{{ $projectIconsUrl }}');"
+        ></div>
+      </div>
+    </div>
 
     <div class="gallery-wrapper mb-8 sm:mb-16">
       <ul class="gallery list-none m-0">

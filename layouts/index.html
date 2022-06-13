@@ -109,20 +109,27 @@
       </a>
     </h1>
 
-    <div class="w-full col-full sm:col-content h-10 overflow-x-hidden my-8">
+    <div class="w-full col-full h-12 overflow-x-hidden my-8">
       <div
-        data-skillicons-slide
-        class="h-full flex flex-nowrap"
-        style="animation: slideshow linear 15s infinite;"
+        data-skillicons-slideshow
+        class="h-full flex flex-nowrap gap-2 will-change-transform"
+        style="animation: skillicons-slideshow linear 10s infinite;"
       >
-        <div
-          class="w-[calc(100%_*_2)] min-h-full flex-none"
-          style="background: left / cover repeat-x url('{{ $projectIconsUrl }}');"
-        ></div>
-        <div
-          class="w-[calc(100%_*_2)] min-h-full flex-none"
-          style="background: left / cover repeat-x url('{{ $projectIconsUrl }}');"
-        ></div>
+        <img
+          data-skillicons
+          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          src="{{ $projectIconsUrl }}"
+        />
+        <img
+          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          src="{{ $projectIconsUrl }}"
+          alt=""
+        />
+        <img
+          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          src="{{ $projectIconsUrl }}"
+          alt=""
+        />
       </div>
     </div>
 
@@ -145,11 +152,14 @@
 
 {{ define "scripts" }}
   {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" }}
+  {{ $skillIconsSlide := resources.Get "/js/skill-icons-slide.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $skillIconsTheme := $skillIconsTheme | minify }}
+    {{ $skillIconsSlide := $skillIconsSlide | minify }}
   {{ end }}
 
 
   <script src="{{ $skillIconsTheme.Permalink }}"></script>
+  <script src="{{ $skillIconsSlide.Permalink }}"></script>
 {{ end }}

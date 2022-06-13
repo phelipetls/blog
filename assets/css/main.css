@@ -283,3 +283,13 @@ svg.feather {
     transform: translateY(-100%);
   }
 }
+
+@keyframes skillicons-slideshow {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(var(--slideshow-reset, 0%));
+  }
+}

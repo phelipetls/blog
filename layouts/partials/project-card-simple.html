@@ -1,19 +1,13 @@
 <article class="card flex flex-row w-full h-full">
-  {{ with (index (.Resources.ByType "image") 0) }}
-    <img
-      class="object-cover object-left-top max-w-full rounded-l-md"
-      src="{{ .Permalink }}"
-      alt=""
-      width="300"
-    />
-  {{ end }}
-
-
   <div class="p-8 max-w-xs flex flex-col justify-between">
     <div>
-      <h1 class="text-md mb-4">
-        <a href="{{ .Params.website }}">{{ .Title }}</a>
-      </h1>
+      <div class="flex items-center gap-2 mb-4">
+        <h1 class="text-md m-0">
+          <a href="{{ .Params.website }}">{{ .Title }}</a>
+        </h1>
+
+        {{ partial "svgs/external-link.svg" . }}
+      </div>
 
       {{ .Content }}
     </div>

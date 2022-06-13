@@ -2,13 +2,7 @@
 
 
 <article class="card grid grid-cols-1 sm:grid-cols-[40%_60%] rounded-md">
-  <div
-    class="relative border-b-2 sm:border-b-0 sm:border-r-2 {{ if $isUnmaintained }}
-      border-warn
-    {{ else }}
-      border-divider
-    {{ end }}"
-  >
+  <div class="relative">
     {{ with (index (.Resources.ByType "image") 0) }}
       <img
         class="object-cover object-left-top min-w-full max-h-[250px] sm:max-h-full sm:h-full rounded-l-md"

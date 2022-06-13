@@ -1,16 +1,5 @@
-{{ with (.GetTerms "tags") }}
-  <div class="flex flex-wrap gap-2 py-2">
-    {{ range . }}
-      <a href="{{ .RelPermalink }}" class="tag">
-        {{- .Title -}}
-      </a>
-    {{ end }}
-    <a
-      href="{{ "/tags" | relLangURL }}"
-      class="tag"
-      aria-label="{{ i18n "MoreTags" }}"
-    >
-      ...
-    </a>
-  </div>
+{{ range (.GetTerms "tags") }}
+  <a href="{{ .RelPermalink }}" class="tag whitespace-nowrap">
+    {{- .Title -}}
+  </a>
 {{ end }}

@@ -1,0 +1,23 @@
+<article class="card p-8 h-full flex flex-col justify-between">
+  <div>
+    <h1 class="max-w-md">
+      <a href="{{ .Permalink }}">
+        {{ .Title }}
+      </a>
+    </h1>
+
+    <div class="mt-4 flex nowrap overflow-x-auto gap-2 -mx-8 px-8 pb-4 mb-4">
+      {{ partial "post-tags.html" . }}
+    </div>
+  </div>
+
+  <div class="max-w-sm">
+    {{ .Summary }}
+  </div>
+
+  <div class="flex whitespace-nowrap gap-2 mt-8">
+    {{ partial "post-reading-time.html" . }}
+
+    {{ partial "post-date.html" . }}
+  </div>
+</article>

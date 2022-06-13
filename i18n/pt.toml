@@ -4,9 +4,6 @@ Este conteúdo está sob a licença
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a>.
 '''
 
-[Projects]
-other = 'Projetos'
-
 [ThemeButton]
 other = 'Mudar tema'
 
@@ -76,3 +73,9 @@ other = 'Tecnologias'
 
 [And]
 other = 'e'
+
+[LatestPost]
+other = 'Último post'
+
+[Projects]
+other = 'Projetos'

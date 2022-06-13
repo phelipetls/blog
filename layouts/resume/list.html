@@ -1,6 +1,6 @@
 {{ define "main" }}
-  <div class="main-container">
-    <main class="">
+  <main class="grid grid-cols-layout">
+    <div class="">
       <div
         data-resume="{{ .Site.Params.resume }}"
         class="relative h-96 w-full border-y-2 sm:border-2 border-divider rounded-none sm:rounded-md overflow-y-auto"
@@ -38,8 +38,8 @@
           {{ partial "svgs/download.svg" }} Download
         </a>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 {{ end }}
 
 {{ define "scripts" }}

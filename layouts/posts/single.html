@@ -3,8 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
-  <div class="main-container">
-    <main class="main">
+  <main class="grid grid-cols-layout">
+    <div class="card py-16 sm:px-16 px-page-padding">
       <article>
         <header>
           <h1 class="text-4xl mb-4">
@@ -12,31 +12,16 @@
           </h1>
 
           <div class="flex flex-col gap-2 mb-4" style="--icon-size: 24px;">
-            <div class="flex items-center gap-2">
-              {{ partial "svgs/book-open.svg" . }}
+            {{ partial "post-reading-time.html" . }}
 
-
-              <div>{{ .ReadingTime }} min.</div>
-            </div>
-
-            <div class="flex items-center gap-2">
-              {{ partial "svgs/calendar.svg" . }}
-
-
-              <time class="" datetime="{{ .Date.Format "2006-01-02" }}">
-                {{ if eq .Lang "en" }}
-                  {{ .Date.Format "January 02, 2006" }}
-                {{ else }}
-                  {{ .Date.Day }} de
-                  {{ index $.Site.Data.portugueseMonths (printf "%d" .Date.Month) }}
-                {{ end }}
-              </time>
-            </div>
+            {{ partial "post-date.html" . }}
           </div>
         </header>
 
-        <div class="mb-4">
+        <div class="flex flex-wrap gap-2 py-2 mb-4">
           {{ partial "post-tags.html" . }}
+
+          {{ partial "all-tags-button.html" . }}
         </div>
 
         <hr class="my-8" />
@@ -75,8 +60,8 @@
       <hr class="my-8" />
 
       {{ partial "post-nav.html" . }}
-    </main>
-  </div>
+    </div>
+  </main>
 {{ end }}
 
 {{ define "head" }}

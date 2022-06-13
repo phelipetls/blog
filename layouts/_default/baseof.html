@@ -32,11 +32,9 @@
       {{ partial "nav.html" . }}
 
       {{ block "main" . }}
-        <div class="main-container">
-          <main class="main">
-            {{ .Content }}
-          </main>
-        </div>
+        <main class="grid grid-cols-layout">
+          {{ .Content }}
+        </main>
       {{ end }}
 
       {{ partial "footer.html" . }}

@@ -3,6 +3,10 @@
   --heading-font-family: 'Merriweather', serif;
   --code-font-family: 'Consolas', 'Menlo', 'Monaco', 'Fira Code', monospace;
 
+  --page-padding: 1rem;
+  --gallery-gap: var(--page-padding);
+  --content-max-width: 64rem;
+
   --icon-size: 1.75rem;
 
   --beige-100: hexToRgb(#fffff5);
@@ -113,11 +117,11 @@ body.dark {
   }
 
   [data-blog-post] figure {
-    @apply -mx-default-padding sm:mx-0;
+    @apply -mx-page-padding sm:mx-0;
   }
 
   [data-blog-post] figure figcaption {
-    @apply text-center px-default-padding mt-2;
+    @apply text-center px-page-padding mt-2;
   }
 
   [data-blog-post] :is(pre, figure, blockquote) {
@@ -125,7 +129,7 @@ body.dark {
   }
 
   pre {
-    @apply -mx-default-padding sm:mx-0 py-default-padding px-8 sm:rounded-md overflow-x-auto bg-background;
+    @apply -mx-page-padding sm:mx-0 py-page-padding px-8 sm:rounded-md overflow-x-auto bg-background;
   }
 
   :not(pre) > code {
@@ -189,25 +193,50 @@ body.dark {
     @apply rounded-full p-2 flex items-center justify-center;
   }
 
+  .chip {
+    @apply bg-surface rounded-full border-2 px-4;
+  }
+
   .tag {
-    @apply no-underline rounded-full border-2 px-4;
+    @apply chip no-underline hover:bg-hover;
   }
 
   .alert {
-    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded-md bg-background -mx-default-padding sm:mx-0;
-  }
-
-  .main-container {
-    @apply max-w-5xl mx-auto w-full sm:px-default-padding mt-20 py-4;
-  }
-
-  .main {
-    @apply bg-surface w-full sm:rounded-md shadow-md shadow-divider py-16 sm:px-16 px-default-padding;
+    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded-md bg-background -mx-page-padding sm:mx-0;
   }
 
   .card {
     @apply bg-surface rounded-md shadow-md shadow-divider;
   }
+
+  .grid-cols-layout > * {
+    @apply col-content;
+  }
+
+  .gallery-wrapper {
+    @apply overflow-x-auto col-full grid grid-cols-[inherit];
+  }
+
+  .gallery-wrapper .gallery {
+    @apply flex col-start-2 col-end-2 gap-[var(--gallery-gap)];
+  }
+
+  .gallery-wrapper .gallery::after {
+    content: '';
+    align-self: stretch;
+    padding-inline-end: max(
+      var(--gallery-gap),
+      (100vw - var(--content-max-width)) / 2 - var(--gallery-gap)
+    );
+  }
+}
+
+[data-nav-container] + main {
+  @apply mt-24;
+}
+
+main + footer {
+  @apply mt-8;
 }
 
 [data-preload] {

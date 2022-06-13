@@ -1,6 +1,6 @@
 {{ define "main" }}
-  <div class="main-container">
-    <main class="main">
+  <main class="grid grid-cols-layout">
+    <div class="card py-16 sm:px-16 px-page-padding">
       <h1 class="flex gap-2 items-center mb-0">
         {{ .Name }}
       </h1>
@@ -16,6 +16,6 @@
           {{ i18n "MoreTags" }}
         </a>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 {{ end }}

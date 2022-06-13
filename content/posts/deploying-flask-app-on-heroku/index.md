@@ -2,6 +2,10 @@
 title: "Deploying a Flask app on a Heroku free dyno"
 date: "2020-10-11"
 tags: ["python", "flask", "heroku"]
+summary: >
+    The typical production-grade server used to deploy Python web apps,
+    gunicorn, did not quite work for me. This post is the story of how I got it
+    working.
 ---
 
 tl;dr: Use

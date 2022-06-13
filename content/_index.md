@@ -1,8 +1,8 @@
 ---
-title: "About"
+title: "Home"
 menu:
   main:
-    name: About
+    name: Home
     url: /
     weight: 1
 ---

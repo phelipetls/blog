@@ -1,30 +1,139 @@
 {{ define "main" }}
-  <div class="main-container">
-    <main class="main">
-      <div class="flex flex-col sm:flex-row">
+  <main class="grid grid-cols-layout" style="--page-padding: 2rem;">
+    <div class="my-20">
+      <div class="flex flex-col sm:flex-row justify-center items-center">
         {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
 
-        <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0 w-[200] h-[200]">
+        <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0">
           <img
             id="gravatar"
             alt="{{ i18n "GravatarAltText" }}"
             width="200"
             height="200"
-            class="rounded-full border-4 border-divider bg-transparent max-w-full mx-auto"
+            class="rounded-full border-4 border-divider bg-transparent"
             src="{{ $gravatarUrl }}"
           />
         </div>
 
         <article class="max-w-prose">
+          <h1 class="mb-4">About</h1>
+
           {{ .Content }}
         </article>
       </div>
-    </main>
-  </div>
+    </div>
+
+    {{ $allPosts := (.Site.GetPage "/posts").Pages }}
+
+    {{ $latestPosts := first 5 $allPosts }}
+    {{ $latestPost := index $latestPosts 0 }}
+    {{ $otherPosts := last 4 $latestPosts }}
+
+
+    <div class="my-8 sm:my-16">
+      <div class="flex flex-col gap-16 lg:flex-row">
+        <div class="flex flex-col gap-8 justify-around">
+          <h1 class="">
+            <a href="{{ "/posts" | relLangURL }}">Blog</a>
+          </h1>
+
+          <div class="flex flex-col gap-2 justify-between">
+            <div class="flex items-center gap-2">
+              {{ partial "svgs/edit-2.svg" . }}
+
+
+              <div>{{ len $allPosts }} posts</div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              {{ partial "svgs/book-open.svg" . }}
+
+              {{ $totalReadingTime := 0 }}
+
+              {{ range $allPosts }}
+                {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+              {{ end }}
+
+
+              <div>{{ div $totalReadingTime (len $allPosts) }} min. avg.</div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {{ range first 10 (.Site.Taxonomies.tags.ByCount) }}
+              <a href="{{ .Page.RelPermalink }}" class="tag whitespace-nowrap">
+                {{- .Term -}}
+              </a>
+            {{ end }}
+
+            {{ partial "all-tags-button.html" . }}
+          </div>
+        </div>
+
+        {{ with $latestPost }}
+          <div class="relative">
+            {{ partial "post-card.html" . }}
+
+
+            <div
+              class="absolute top-0 right-8 -translate-y-[50%] text-primary chip"
+            >
+              {{ i18n "LatestPost" }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ $projects := (.Site.GetPage "/projects").Pages }}
+
+    {{ $scratch := newScratch }}
+    {{ range $projects }}
+      {{ $scratch.Add "projectIcons" .Params.icons }}
+    {{ end }}
+
+    {{ $uniqProjectIcons := uniq ($scratch.Get "projectIcons") }}
+    {{ $projectIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light&perline=%d" (delimit $uniqProjectIcons ",") (len $uniqProjectIcons) }}
+    {{ $projectIconsAltText := printf "%s: %s" (i18n "Tech") (delimit $uniqProjectIcons ", " (printf " %s " (i18n "And"))) }}
+
+
+    <h1 class="mt-8 sm:mt-16">
+      <a href="{{ (.Site.GetPage "projects").Permalink }}">
+        {{ i18n "Projects" }}
+      </a>
+    </h1>
+
+    <img
+      class="h-16 bg-cover my-8"
+      src="{{ $projectIconsUrl }}"
+      alt="{{ $projectIconsAltText }}"
+    />
+
+    <div class="gallery-wrapper mb-8 sm:mb-16">
+      <ul class="gallery list-none m-0">
+        {{ range (where $projects "Params.unmaintained" "!=" "true") }}
+          <li class="flex-none">
+            {{ partial "project-card-simple" . }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </main>
 {{ end }}
 
 {{ define "head" }}
   {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
   <link rel="preload" as="image" href="{{ $gravatarUrl }}" />
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" }}
+
+  {{ if hugo.IsProduction }}
+    {{ $skillIconsTheme := $skillIconsTheme | minify }}
+  {{ end }}
+
+
+  <script src="{{ $skillIconsTheme.Permalink }}"></script>
 {{ end }}

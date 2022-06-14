@@ -1,6 +1,6 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="">
+    <div class="px-page-padding">
       {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}
         {{ $year := $pagesByYear.Key }}
 

@@ -4,62 +4,64 @@
 
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="card py-16 sm:px-16 px-page-padding">
-      <article>
-        <header>
-          <h1 class="text-4xl mb-4">
-            {{ .Title }}
-          </h1>
+    <div class="px-page-padding">
+      <div class="card py-16 sm:px-16 px-page-padding">
+        <article>
+          <header>
+            <h1 class="text-4xl mb-4">
+              {{ .Title }}
+            </h1>
 
-          <div class="flex flex-col gap-2 mb-4" style="--icon-size: 24px;">
-            {{ partial "post-reading-time.html" . }}
+            <div class="flex flex-col gap-2 mb-4" style="--icon-size: 24px;">
+              {{ partial "post-reading-time.html" . }}
 
-            {{ partial "post-date.html" . }}
+              {{ partial "post-date.html" . }}
+            </div>
+          </header>
+
+          <div class="flex flex-wrap gap-2 py-2 mb-4">
+            {{ partial "post-tags.html" . }}
+
+            {{ partial "all-tags-button.html" . }}
           </div>
-        </header>
 
-        <div class="flex flex-wrap gap-2 py-2 mb-4">
-          {{ partial "post-tags.html" . }}
+          <hr class="my-8" />
 
-          {{ partial "all-tags-button.html" . }}
+          <section data-blog-post class="max-w-prose">
+            {{ .Content }}
+          </section>
+        </article>
+
+        <div
+          data-theme-copy-code-tooltip
+          role="tooltip"
+          class="absolute pointer-events-none border border-divider bg-background rounded-md px-2"
+          style="opacity: 0"
+        >
+          {{ i18n "Copied" }}
+
+
+          <div
+            data-theme-copy-code-tooltip-arrow
+            class="absolute bg-background border-r border-b border-divider w-[8px] h-[8px] rotate-45"
+          ></div>
         </div>
 
         <hr class="my-8" />
 
-        <section data-blog-post class="max-w-prose">
-          {{ .Content }}
-        </section>
-      </article>
+        <script
+          src="https://utteranc.es/client.js"
+          repo="phelipetls/phelipetls.github.io"
+          issue-term="pathname"
+          theme="preferred-color-scheme"
+          crossorigin="anonymous"
+          async
+        ></script>
 
-      <div
-        data-theme-copy-code-tooltip
-        role="tooltip"
-        class="absolute pointer-events-none border border-divider bg-background rounded-md px-2"
-        style="opacity: 0"
-      >
-        {{ i18n "Copied" }}
+        <hr class="my-8" />
 
-
-        <div
-          data-theme-copy-code-tooltip-arrow
-          class="absolute bg-background border-r border-b border-divider w-[8px] h-[8px] rotate-45"
-        ></div>
+        {{ partial "post-nav.html" . }}
       </div>
-
-      <hr class="my-8" />
-
-      <script
-        src="https://utteranc.es/client.js"
-        repo="phelipetls/phelipetls.github.io"
-        issue-term="pathname"
-        theme="preferred-color-scheme"
-        crossorigin="anonymous"
-        async
-      ></script>
-
-      <hr class="my-8" />
-
-      {{ partial "post-nav.html" . }}
     </div>
   </main>
 {{ end }}

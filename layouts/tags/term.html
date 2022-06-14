@@ -1,20 +1,22 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="card py-16 sm:px-16 px-page-padding">
-      <h1 class="flex gap-2 items-center mb-0">
-        {{ .Name }}
-      </h1>
+    <div class="px-page-padding">
+      <div class="card py-16 sm:px-16 px-page-padding">
+        <h1 class="flex gap-2 items-center mb-0">
+          {{ .Name }}
+        </h1>
 
-      <ul class="list-none m-0 flex-1">
-        {{ range .Pages }}
-          {{ partial "post-list-item.html" . }}
-        {{ end }}
-      </ul>
+        <ul class="list-none m-0 flex-1">
+          {{ range .Pages }}
+            {{ partial "post-list-item.html" . }}
+          {{ end }}
+        </ul>
 
-      <div class="mt-8 flex justify-center">
-        <a class="btn btn-primary rounded-md" href="{{ .Parent.Permalink }}">
-          {{ i18n "MoreTags" }}
-        </a>
+        <div class="mt-8 flex justify-center">
+          <a class="btn btn-primary rounded-md" href="{{ .Parent.Permalink }}">
+            {{ i18n "MoreTags" }}
+          </a>
+        </div>
       </div>
     </div>
   </main>

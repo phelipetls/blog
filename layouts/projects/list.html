@@ -1,6 +1,6 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <ul class="list-none m-0 flex flex-col gap-16">
+    <ul class="list-none m-0 flex flex-col gap-16 px-page-padding">
       {{ range .Pages }}
         <li class="">
           {{ partial "project-card-full.html" . }}

@@ -229,10 +229,6 @@ body.dark {
       (100vw - var(--content-max-width)) / 2 - var(--gallery-gap)
     );
   }
-
-  .gallery-item {
-    @apply snap-center;
-  }
 }
 
 [data-nav-container] + main {

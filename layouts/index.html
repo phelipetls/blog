@@ -131,7 +131,7 @@
     <div class="gallery-wrapper mb-8 sm:mb-16">
       <ul class="gallery list-none m-0">
         {{ range (where $projects "Params.unmaintained" "!=" "true") }}
-          <li class="gallery-item flex-none max-w-fit">
+          <li class="snap-center flex-none max-w-fit">
             {{ partial "project-card-simple" . }}
           </li>
         {{ end }}

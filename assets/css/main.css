@@ -214,11 +214,11 @@ body.dark {
   }
 
   .gallery-wrapper {
-    @apply overflow-x-auto col-full grid grid-cols-[inherit];
+    @apply overflow-x-scroll snap-x snap-proximity col-full grid grid-cols-[inherit];
   }
 
   .gallery-wrapper .gallery {
-    @apply flex col-start-2 col-end-2 gap-[var(--gallery-gap)];
+    @apply flex col-content gap-[var(--gallery-gap)];
   }
 
   .gallery-wrapper .gallery::after {
@@ -228,6 +228,10 @@ body.dark {
       var(--gallery-gap),
       (100vw - var(--content-max-width)) / 2 - var(--gallery-gap)
     );
+  }
+
+  .gallery-item {
+    @apply snap-center;
   }
 }
 

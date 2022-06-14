@@ -6,8 +6,14 @@
       </a>
     </h1>
 
-    <div class="mt-4 flex nowrap overflow-x-auto gap-2 -mx-8 px-8 pb-4 mb-4">
-      {{ partial "post-tags.html" . }}
+    <div
+      class="mt-4 flex nowrap overflow-x-auto gap-2 -mx-8 px-8 pb-4 mb-4 snap-x snap-proximity scroll-pl-8"
+    >
+      {{ range (.GetTerms "tags") }}
+        <a href="{{ .RelPermalink }}" class="tag whitespace-nowrap snap-start">
+          {{- .Title -}}
+        </a>
+      {{ end }}
     </div>
   </div>
 

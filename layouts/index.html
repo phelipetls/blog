@@ -32,63 +32,61 @@
     {{ $otherPosts := last 4 $latestPosts }}
 
 
-    <div class="my-8 sm:my-16">
-      <div class="flex flex-col gap-16 lg:flex-row">
-        <div class="flex flex-col gap-8 justify-around">
-          <div class="flex justify-between items-center">
-            <h1 class="">
-              <a href="{{ $posts.Permalink }}">Blog</a>
-            </h1>
+    <div class="flex flex-col gap-16 lg:flex-row my-8 sm:my-16">
+      <div class="flex flex-col gap-8 justify-around">
+        <div class="flex justify-between items-center">
+          <h1 class="">
+            <a href="{{ $posts.Permalink }}">Blog</a>
+          </h1>
 
-            {{ partial "rss-button.html" . }}
+          {{ partial "rss-button.html" . }}
+        </div>
+
+        <div class="flex flex-col gap-2 justify-between">
+          <div class="flex items-center gap-2">
+            {{ partial "svgs/edit-2.svg" . }}
+
+
+            <div>{{ len $allPosts }} posts</div>
           </div>
 
-          <div class="flex flex-col gap-2 justify-between">
-            <div class="flex items-center gap-2">
-              {{ partial "svgs/edit-2.svg" . }}
+          <div class="flex items-center gap-2">
+            {{ partial "svgs/book-open.svg" . }}
 
+            {{ $totalReadingTime := 0 }}
 
-              <div>{{ len $allPosts }} posts</div>
-            </div>
-
-            <div class="flex items-center gap-2">
-              {{ partial "svgs/book-open.svg" . }}
-
-              {{ $totalReadingTime := 0 }}
-
-              {{ range $allPosts }}
-                {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
-              {{ end }}
-
-
-              <div>{{ div $totalReadingTime (len $allPosts) }} min. avg.</div>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2">
-            {{ range first 10 (.Site.Taxonomies.tags.ByCount) }}
-              <a href="{{ .Page.RelPermalink }}" class="tag whitespace-nowrap">
-                {{- .Term -}}
-              </a>
+            {{ range $allPosts }}
+              {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
             {{ end }}
 
-            {{ partial "all-tags-button.html" . }}
+
+            <div>{{ div $totalReadingTime (len $allPosts) }} min. avg.</div>
           </div>
         </div>
 
-        {{ with $latestPost }}
-          <div class="relative">
-            {{ partial "post-card.html" . }}
+        <div class="flex flex-wrap gap-2">
+          {{ range first 10 (.Site.Taxonomies.tags.ByCount) }}
+            <a href="{{ .Page.RelPermalink }}" class="tag whitespace-nowrap">
+              {{- .Term -}}
+            </a>
+          {{ end }}
 
-
-            <div
-              class="absolute top-0 right-8 -translate-y-[50%] text-primary chip"
-            >
-              {{ i18n "LatestPost" }}
-            </div>
-          </div>
-        {{ end }}
+          {{ partial "all-tags-button.html" . }}
+        </div>
       </div>
+
+      {{ with $latestPost }}
+        <div class="relative">
+          {{ partial "post-card.html" . }}
+
+
+          <div
+            class="absolute top-0 right-8 -translate-y-[50%] text-primary chip"
+          >
+            {{ i18n "LatestPost" }}
+          </div>
+        </div>
+      {{ end }}
     </div>
 
     {{ $projects := (.Site.GetPage "/projects").Pages }}

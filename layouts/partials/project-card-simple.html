@@ -1,23 +1,21 @@
-<article class="card flex flex-row w-full h-full">
-  <div class="p-8 max-w-xs flex flex-col justify-between">
-    <div>
-      <div class="flex items-center gap-2 mb-4">
-        <h1 class="text-md m-0">
-          <a href="{{ .Params.website }}">{{ .Title }}</a>
-        </h1>
+<article class="card flex flex-col w-full h-full max-w-xs p-8 justify-between">
+  <div>
+    <div class="flex items-center gap-2 mb-4">
+      <h1 class="text-md m-0 whitespace-nowrap">
+        <a href="{{ .Params.website }}">{{ .Title }}</a>
+      </h1>
 
-        {{ partial "svgs/external-link.svg" . }}
-      </div>
-
-      {{ .Content }}
+      {{ partial "svgs/external-link.svg" . }}
     </div>
 
-    <div class="flex gap-2">
-      {{ with .Params.github }}
-        <a class="btn btn-icon border-0 text-xl" href="{{ . }}">
-          {{ partial "svgs/github.svg" }}
-        </a>
-      {{ end }}
-    </div>
+    {{ .Content }}
+  </div>
+
+  <div class="flex gap-2">
+    {{ with .Params.github }}
+      <a class="btn btn-icon border-0 text-xl" href="{{ . }}">
+        {{ partial "svgs/github.svg" }}
+      </a>
+    {{ end }}
   </div>
 </article>

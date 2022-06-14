@@ -1,0 +1,15 @@
+<ul class="gallery list-none m-0 flex flex-row gap-4">
+  {{ range $i, $post := . }}
+    <li class="snap-center lg:snap-start relative max-w-full lg:max-w-md">
+      {{ partial "post-card.html" $post }}
+
+      {{ if (eq $i 0) }}
+        <div
+          class="absolute top-0 right-8 -translate-y-[50%] text-primary chip"
+        >
+          {{ i18n "LatestPost" }}
+        </div>
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

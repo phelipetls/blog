@@ -32,7 +32,9 @@
     {{ $otherPosts := last 4 $latestPosts }}
 
 
-    <div class="flex flex-col gap-16 lg:flex-row my-8 sm:my-16">
+    <div
+      class="my-8 sm:my-16 flex flex-col lg:flex-row gap-16 lg:col-start-[content-start] lg:col-end-[full-end] overflow-x-hidden"
+    >
       <div class="flex flex-col gap-8 justify-around">
         <div class="flex justify-between items-center">
           <h1 class="">
@@ -75,18 +77,13 @@
         </div>
       </div>
 
-      {{ with $latestPost }}
-        <div class="relative">
-          {{ partial "post-card.html" . }}
+      <div class="hidden lg:block gallery-wrapper overflow-x-auto">
+        {{ partial "post-cards-gallery.html" $latestPosts }}
+      </div>
+    </div>
 
-
-          <div
-            class="absolute top-0 right-8 -translate-y-[50%] text-primary chip"
-          >
-            {{ i18n "LatestPost" }}
-          </div>
-        </div>
-      {{ end }}
+    <div class="lg:hidden overflow-x-auto gallery-wrapper">
+      {{ partial "post-cards-gallery.html" $latestPosts }}
     </div>
 
     {{ $projects := (.Site.GetPage "/projects").Pages }}

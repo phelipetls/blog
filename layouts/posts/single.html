@@ -20,7 +20,11 @@
           </div>
 
           <div class="mb-4 flex flex-wrap gap-2">
-            {{ partial "post-tags.html" . }}
+            {{ range (.GetTerms "tags") }}
+              <a href="{{ .RelPermalink }}" class="tag whitespace-nowrap">
+                {{- .Title -}}
+              </a>
+            {{ end }}
 
             {{ partial "all-tags-button.html" . }}
           </div>

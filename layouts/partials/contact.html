@@ -6,7 +6,7 @@
 
 <div class="flex gap-4">
   <a
-    class="border-0 {{ partial "animated-icon-classes" }}"
+    class="{{ partial "animated-icon-classes" }} border-0"
     href="mailto:{{ .Site.Params.email }}"
     aria-label="E-mail"
   >
@@ -14,7 +14,7 @@
   </a>
 
   <a
-    class="border-0 {{ partial "animated-icon-classes" }}"
+    class="{{ partial "animated-icon-classes" }} border-0"
     href="{{ .Site.Params.linkedin }}"
     aria-label="LinkedIn"
   >
@@ -22,7 +22,7 @@
   </a>
 
   <a
-    class="border-0 {{ partial "animated-icon-classes" }}"
+    class="{{ partial "animated-icon-classes" }} border-0"
     href="{{ .Site.Params.github }}"
     aria-label="GitHub"
   >
@@ -31,7 +31,7 @@
 
   {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
     <a
-      class="border-0 {{ partial "animated-icon-classes" }}"
+      class="{{ partial "animated-icon-classes" }} border-0"
       href="{{ .Permalink }}"
       aria-label="Blog RSS Feed"
     >

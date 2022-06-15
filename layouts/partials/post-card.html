@@ -1,4 +1,4 @@
-<article class="card p-8 h-full flex flex-col justify-between">
+<article class="card flex h-full flex-col justify-between p-8">
   <div>
     <h1 class="max-w-md">
       <a href="{{ .Permalink }}">
@@ -7,10 +7,10 @@
     </h1>
 
     <div
-      class="mt-4 flex nowrap overflow-x-auto gap-2 -mx-8 px-8 pb-4 mb-4 snap-x snap-proximity scroll-pl-8"
+      class="nowrap -mx-8 mt-4 mb-4 flex snap-x snap-proximity scroll-pl-8 gap-2 overflow-x-auto px-8 pb-4"
     >
       {{ range (.GetTerms "tags") }}
-        <a href="{{ .RelPermalink }}" class="tag whitespace-nowrap snap-start">
+        <a href="{{ .RelPermalink }}" class="tag snap-start whitespace-nowrap">
           {{- .Title -}}
         </a>
       {{ end }}
@@ -21,7 +21,7 @@
     {{ .Summary }}
   </div>
 
-  <div class="flex whitespace-nowrap gap-2 mt-8">
+  <div class="mt-8 flex gap-2 whitespace-nowrap">
     {{ partial "post-reading-time.html" . }}
 
     {{ partial "post-date.html" . }}

@@ -1,11 +1,11 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
     <div class="my-20">
-      <div class="flex flex-col sm:flex-row justify-center items-center">
+      <div class="flex flex-col items-center justify-center sm:flex-row">
         {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}
 
 
-        <div class="sm:mr-8 mb-8 sm:mb-0 shrink-0">
+        <div class="mb-8 shrink-0 sm:mr-8 sm:mb-0">
           <img
             id="gravatar"
             alt="{{ i18n "GravatarAltText" }}"
@@ -33,10 +33,10 @@
 
 
     <div
-      class="my-8 sm:my-16 flex flex-col lg:flex-row gap-16 lg:col-start-[content-start] lg:col-end-[full-end] overflow-x-hidden"
+      class="my-8 flex flex-col gap-16 overflow-x-hidden sm:my-16 lg:col-start-[content-start] lg:col-end-[full-end] lg:flex-row"
     >
-      <div class="flex flex-col gap-8 justify-around py-4">
-        <div class="flex justify-between items-center">
+      <div class="flex flex-col justify-around gap-8 py-4">
+        <div class="flex items-center justify-between">
           <h1 class="">
             <a href="{{ $posts.Permalink }}">Blog</a>
           </h1>
@@ -44,7 +44,7 @@
           {{ partial "rss-button.html" . }}
         </div>
 
-        <div class="flex flex-col gap-2 justify-between">
+        <div class="flex flex-col justify-between gap-2">
           <div class="flex items-center gap-2">
             {{ partial "svgs/edit-2.svg" . }}
 
@@ -77,12 +77,12 @@
         </div>
       </div>
 
-      <div class="hidden lg:block gallery-wrapper overflow-x-auto py-4">
+      <div class="gallery-wrapper hidden overflow-x-auto py-4 lg:block">
         {{ partial "post-cards-gallery.html" $latestPosts }}
       </div>
     </div>
 
-    <div class="lg:hidden overflow-x-auto gallery-wrapper py-8">
+    <div class="gallery-wrapper overflow-x-auto py-8 lg:hidden">
       {{ partial "post-cards-gallery.html" $latestPosts }}
     </div>
 
@@ -104,24 +104,24 @@
       </a>
     </h1>
 
-    <div class="w-full col-full h-12 overflow-x-hidden my-8">
+    <div class="col-full my-8 h-12 w-full overflow-x-hidden">
       <div
         data-skillicons-slideshow
-        class="h-full flex flex-nowrap gap-2 will-change-transform"
+        class="flex h-full flex-nowrap gap-2 will-change-transform"
         style="animation: skillicons-slideshow linear 10s infinite;"
       >
         <img
           data-skillicons
-          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          class="min-h-full max-w-none flex-none object-cover object-left-top"
           src="{{ $projectIconsUrl }}"
         />
         <img
-          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          class="min-h-full max-w-none flex-none object-cover object-left-top"
           src="{{ $projectIconsUrl }}"
           alt=""
         />
         <img
-          class="min-h-full object-cover object-left-top flex-none max-w-none"
+          class="min-h-full max-w-none flex-none object-cover object-left-top"
           src="{{ $projectIconsUrl }}"
           alt=""
         />
@@ -129,9 +129,9 @@
     </div>
 
     <div class="gallery-wrapper mb-8 sm:mb-16">
-      <ul class="gallery list-none m-0">
+      <ul class="gallery m-0 list-none">
         {{ range (where $projects "Params.unmaintained" "!=" "true") }}
-          <li class="snap-center flex-none max-w-fit">
+          <li class="max-w-fit flex-none snap-center">
             {{ partial "project-card-simple" . }}
           </li>
         {{ end }}

@@ -1,10 +1,10 @@
 <nav
-  class="flex justify-between flex-wrap sm:flex-nowrap gap-2"
+  class="flex flex-wrap justify-between gap-2 sm:flex-nowrap"
   aria-label="{{ i18n "PostsNavigation" }}"
 >
   {{ with .PrevInSection }}
     <a
-      class="flex basis-1/2 grow items-center gap-2 border-0"
+      class="flex grow basis-1/2 items-center gap-2 border-0"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -17,7 +17,7 @@
 
   {{ with .NextInSection }}
     <a
-      class="flex basis-1/2 grow items-center self-end text-right h-full justify-end gap-2 border-0"
+      class="flex h-full grow basis-1/2 items-center justify-end gap-2 self-end border-0 text-right"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}

@@ -1,11 +1,11 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="card py-16 sm:px-16 px-page-padding">
+    <div class="card py-16 px-page-padding sm:px-16">
       <article>
         <h1 class="mb-8">Tags</h1>
 
         <ul
-          class="list-none m-0 p-0 flex flex-wrap items-center justify-center leading-normal gap-2"
+          class="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 leading-normal"
         >
           {{- range .Data.Terms.Alphabetical -}}
             <li>

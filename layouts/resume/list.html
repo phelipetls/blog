@@ -2,12 +2,12 @@
   <main class="grid grid-cols-layout">
     <div
       data-resume="{{ .Site.Params.resume }}"
-      class="relative h-96 col-full sm:col-content w-full sm:border-2 border-divider sm:rounded-md overflow-y-auto"
+      class="relative col-full h-96 w-full overflow-y-auto border-divider sm:col-content sm:rounded-md sm:border-2"
     >
       <div
         data-resume-loading
         role="progressbar"
-        class="hidden absolute inset-0 h-full justify-center items-center"
+        class="absolute inset-0 hidden h-full items-center justify-center"
       >
         {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
       </div>
@@ -26,10 +26,10 @@
 
     <div
       data-resume-download-button
-      class="hidden flex-col flex-1 justify-center items-center"
+      class="hidden flex-1 flex-col items-center justify-center"
     >
       <a
-        class="mt-4 btn btn-primary flex gap-2"
+        class="btn btn-primary mt-4 flex gap-2"
         style="--icon-size: 1.5rem;"
         download
         href="{{ .Site.Params.resume }}"

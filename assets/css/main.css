@@ -97,7 +97,7 @@ body.dark {
   }
 
   a {
-    @apply no-underline border-b-2 border-divider hover:border-primary;
+    @apply border-b-2 border-divider no-underline hover:border-primary;
   }
 
   :is(h1, h2, h3, h4) a {
@@ -109,7 +109,7 @@ body.dark {
   }
 
   [data-blog-post] hr {
-    @apply border-0 overflow-visible text-center after:content-['⁂'];
+    @apply overflow-visible border-0 text-center after:content-['⁂'];
   }
 
   [data-blog-post] img {
@@ -121,7 +121,7 @@ body.dark {
   }
 
   [data-blog-post] figure figcaption {
-    @apply text-center px-page-padding mt-2;
+    @apply mt-2 px-page-padding text-center;
   }
 
   [data-blog-post] :is(pre, figure, blockquote) {
@@ -129,7 +129,7 @@ body.dark {
   }
 
   pre {
-    @apply -mx-page-padding sm:mx-0 py-page-padding px-8 sm:rounded-md overflow-x-auto bg-background;
+    @apply -mx-page-padding overflow-x-auto bg-background py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
   :not(pre) > code {
@@ -146,7 +146,7 @@ body.dark {
   }
 
   ul {
-    @apply list-disc ml-4 mb-4;
+    @apply ml-4 mb-4 list-disc;
   }
 
   ul li::marker {
@@ -154,17 +154,17 @@ body.dark {
   }
 
   ol {
-    @apply list-decimal ml-4 mb-4;
+    @apply ml-4 mb-4 list-decimal;
   }
 
   blockquote {
-    @apply pl-8 border-l-2 border-divider;
+    @apply border-l-2 border-divider pl-8;
   }
 
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply py-[2px] px-[6px] mx-[2px] inline-block rounded-md font-bold whitespace-nowrap align-text-bottom leading-none text-foreground bg-background;
+    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-background py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
   }
 
   ::selection {
@@ -174,7 +174,7 @@ body.dark {
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md;
+    @apply rounded-md px-4 py-2;
   }
 
   .btn-primary {
@@ -190,23 +190,23 @@ body.dark {
   }
 
   .btn-icon {
-    @apply rounded-full p-2 flex items-center justify-center;
+    @apply flex items-center justify-center rounded-full p-2;
   }
 
   .chip {
-    @apply bg-surface rounded-full border-2 px-4;
+    @apply rounded-full border-2 bg-surface px-4;
   }
 
   .tag {
-    @apply chip no-underline hover:bg-hover shadow-sm shadow-divider;
+    @apply chip no-underline shadow-sm shadow-divider hover:bg-hover;
   }
 
   .alert {
-    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-2 rounded-md bg-background sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-2 bg-background px-8 py-4 sm:mx-0;
   }
 
   .card {
-    @apply bg-surface rounded-md shadow-md shadow-divider;
+    @apply rounded-md bg-surface shadow-md shadow-divider;
   }
 
   .grid-cols-layout > * {
@@ -214,11 +214,11 @@ body.dark {
   }
 
   .gallery-wrapper {
-    @apply overflow-x-scroll snap-x snap-proximity col-full grid grid-cols-[inherit];
+    @apply col-full grid snap-x snap-proximity grid-cols-[inherit] overflow-x-scroll;
   }
 
   .gallery-wrapper .gallery {
-    @apply flex col-content gap-[var(--gallery-gap)];
+    @apply col-content flex gap-[var(--gallery-gap)];
   }
 
   .gallery-wrapper .gallery::after {
@@ -246,7 +246,7 @@ main + footer {
 .chroma .hl {
   /* unmaintainable hack to fix offset due to 4px border */
   padding-left: calc(2rem - 4px);
-  @apply pr-8 -mx-8 w-auto border-l-2 border-primary bg-black-300 !important;
+  @apply -mx-8 w-auto border-l-2 border-primary bg-black-300 pr-8 !important;
 }
 
 [data-blog-post] .katex-display {
@@ -259,7 +259,7 @@ svg.feather {
 }
 
 .utterances {
-  @apply max-w-prose mx-0;
+  @apply mx-0 max-w-prose;
 }
 
 .feather-loader {

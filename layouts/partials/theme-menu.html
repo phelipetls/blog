@@ -10,7 +10,7 @@
 <ul
   data-theme-menu
   id="theme-menu"
-  class="absolute top-0 left-0 card border border-divider z-50 flex flex-col list-none m-0 text-lg"
+  class="card absolute top-0 left-0 z-50 m-0 flex list-none flex-col border border-divider text-lg"
   style="visibility: hidden; opacity: 0; pointer-events: none; --icon-size: 24px"
   role="menu"
   aria-orientation="vertical"
@@ -20,7 +20,7 @@
 >
   {{ range $themeOptions }}
     <li
-      class="px-2 py-1 m-0 cursor-pointer flex items-center gap-1"
+      class="m-0 flex cursor-pointer items-center gap-1 px-2 py-1"
       id="theme-option-{{ .Id }}"
       data-theme="{{ .Id }}"
       role="menuitem"

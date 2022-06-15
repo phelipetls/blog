@@ -34,7 +34,6 @@ function createCopyCodeButton() {
   const button = document.createElement('button')
 
   button.className = copyCodeButtonClassName
-  button.style = '--icon-size: 24px;'
   button.setAttribute('aria-label', params.copyCodeButtonLabel)
 
   button.innerHTML = clipboardIconSvg

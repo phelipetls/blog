@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <main class="grid grid-cols-layout" style="--page-padding: 2rem;">
+  <main class="grid grid-cols-layout">
     <div class="my-20">
       <div class="flex flex-col sm:flex-row justify-center items-center">
         {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=384" (md5 .Site.Params.email) }}

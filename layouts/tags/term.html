@@ -1,13 +1,15 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="card py-16 px-page-padding sm:px-16">
-      <h1 class="mb-0 flex items-center gap-2">
+    <div>
+      <h1 class="mb-8 flex items-center gap-2">
         {{ .Name }}
       </h1>
 
-      <ul class="m-0 flex-1 list-none">
+      <ul class="m-0 grid flex-1 list-none grid-cols-1 gap-4 sm:grid-cols-2">
         {{ range .Pages }}
-          {{ partial "post-list-item.html" . }}
+          <li class="h-full">
+            {{ partial "post-card.html" . }}
+          </li>
         {{ end }}
       </ul>
 

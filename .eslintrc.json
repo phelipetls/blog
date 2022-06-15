@@ -1,9 +1,6 @@
 {
   "root": true,
-  "extends": [
-    "eslint:recommended",
-    "plugin:cypress/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:cypress/recommended"],
   "env": {
     "browser": true,
     "es6": true,

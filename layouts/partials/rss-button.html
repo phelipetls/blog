@@ -1,4 +1,4 @@
-{{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
+{{ with (.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
   <a
     class="btn btn-icon border-0"
     href="{{ .Permalink }}"

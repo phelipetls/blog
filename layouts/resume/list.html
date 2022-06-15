@@ -1,29 +1,27 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="px-page-padding">
+    <div
+      data-resume="{{ .Site.Params.resume }}"
+      class="relative h-96 col-full sm:col-content w-full sm:border-2 border-divider sm:rounded-md overflow-y-auto"
+    >
       <div
-        data-resume="{{ .Site.Params.resume }}"
-        class="relative h-96 col-full sm:col-content w-full sm:border-2 border-divider sm:rounded-md overflow-y-auto"
+        data-resume-loading
+        role="progressbar"
+        class="hidden absolute inset-0 h-full justify-center items-center"
       >
-        <div
-          data-resume-loading
-          role="progressbar"
-          class="hidden absolute inset-0 h-full justify-center items-center"
-        >
-          {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
-        </div>
-
-        <canvas class="hidden" data-resume-canvas></canvas>
-
-        <noscript>
-          <embed
-            width="100%"
-            height="100%"
-            type="application/pdf"
-            src="{{ .Site.Params.resume }}"
-          />
-        </noscript>
+        {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
       </div>
+
+      <canvas class="hidden" data-resume-canvas></canvas>
+
+      <noscript>
+        <embed
+          width="100%"
+          height="100%"
+          type="application/pdf"
+          src="{{ .Site.Params.resume }}"
+        />
+      </noscript>
     </div>
 
     <div

@@ -28,14 +28,4 @@
   >
     {{ partial "svgs/github.svg" }}
   </a>
-
-  {{ with ($.Site.GetPage "/posts").OutputFormats.Get "rss" -}}
-    <a
-      class="{{ partial "animated-icon-classes" }} border-0"
-      href="{{ .Permalink }}"
-      aria-label="Blog RSS Feed"
-    >
-      {{ partial "svgs/rss.svg" }}
-    </a>
-  {{ end }}
 </div>

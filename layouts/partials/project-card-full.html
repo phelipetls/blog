@@ -5,7 +5,7 @@
   <div class="relative">
     {{ with (index (.Resources.ByType "image") 0) }}
       <img
-        class="max-h-[250px] min-w-full rounded-l-md object-cover object-left-top sm:h-full sm:max-h-full"
+        class="max-h-[250px] min-w-full rounded-t-md object-cover object-left-top sm:h-full sm:max-h-full sm:rounded-l-md"
         src="{{ .Permalink }}"
         width="auto"
         alt=""

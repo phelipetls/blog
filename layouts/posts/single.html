@@ -16,13 +16,13 @@
 
             {{ partial "post-date.html" . }}
           </div>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            {{ partial "post-tags.html" . }}
+
+            {{ partial "all-tags-button.html" . }}
+          </div>
         </header>
-
-        <div class="flex flex-wrap gap-2 mb-4">
-          {{ partial "post-tags.html" . }}
-
-          {{ partial "all-tags-button.html" . }}
-        </div>
 
         <hr class="my-8" />
 

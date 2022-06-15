@@ -6,7 +6,7 @@
     class="mx-auto flex h-full max-w-5xl items-center justify-between py-4 pr-page-padding"
   >
     <nav
-      class="flex h-full items-center overflow-x-auto py-1 px-page-padding"
+      class="flex h-full snap-x snap-proximity items-center overflow-x-scroll py-1 px-page-padding"
       aria-label="{{ i18n "MainNavigation" }}"
     >
       {{ $currentPage := . }}
@@ -16,7 +16,7 @@
         class="m-0 flex h-full list-none flex-row flex-nowrap items-center gap-2"
       >
         {{- range .Site.Menus.main -}}
-          <li class="h-full">
+          <li class="h-full snap-start">
             <a
               id="{{ .Identifier }}"
               href="{{ .URL | absLangURL }}"

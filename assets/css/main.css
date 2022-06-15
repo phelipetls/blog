@@ -202,7 +202,7 @@ body.dark {
   }
 
   .alert {
-    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-y-2 sm:border-2 sm:rounded-md bg-background -mx-page-padding sm:mx-0;
+    @apply max-w-prose flex my-8 gap-4 px-8 py-4 border-2 rounded-md bg-background sm:mx-0;
   }
 
   .card {

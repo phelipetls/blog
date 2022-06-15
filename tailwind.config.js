@@ -24,8 +24,11 @@ module.exports = {
         'page-padding': 'var(--page-padding)',
       },
       gridTemplateColumns: {
-        layout:
-          '[full-start] 1fr [content-start] min(var(--content-max-width), 100% - var(--page-padding) * 2) [content-end] 1fr [full-end]',
+        layout: `
+          [full-start] 1fr
+          [content-start] min(var(--content-max-width), 100% - var(--page-padding) * 2) [content-end]
+          1fr [full-end]
+        `,
       },
       gridColumn: {
         content: 'content',

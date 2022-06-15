@@ -231,6 +231,26 @@ body.dark {
   }
 }
 
+.pretty-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.pretty-scrollbar::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  background-color: rgb(var(--black-400));
+  border-radius: 0.5rem;
+}
+
+.pretty-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
 [data-nav-container] + main {
   @apply mt-24;
 }

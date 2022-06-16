@@ -1,1 +1,1 @@
-import 'pdfjs-dist/legacy/build/pdf.worker.js'
+import 'pdfjs-dist/legacy/build/pdf.worker.min.js'

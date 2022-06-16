@@ -43,10 +43,11 @@
 
 {{ define "scripts" }}
   {{ $resumeScript := resources.Get "js/resume.js" | js.Build }}
-  {{ $pdfWorker := resources.Get "js/pdf.worker.js" | js.Build }}
+  {{ $pdfWorker := resources.Get "js/pdf.worker.js" | js.Build (dict "minify" true) }}
 
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
+    {{ $pdfWorker = $pdfWorker | minify }}
   {{ end }}
 
 

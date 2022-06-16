@@ -16,15 +16,16 @@
         class="m-0 flex h-full list-none flex-row flex-nowrap items-center gap-2"
       >
         {{- range .Site.Menus.main -}}
+          {{ $isActive := (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
           <li class="h-full snap-start">
             <a
               id="{{ .Identifier }}"
               href="{{ .URL | absLangURL }}"
-              {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+              {{ if $isActive }}
                 data-active-navlink
               {{ end }}
               class="
-                {{ if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+                {{ if $isActive }}
                 hover:bg-hover card transition-colors duration-500
               {{ else }}
                 after:content-[''] after:absolute after:-z-10 after:bg-surface

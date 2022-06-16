@@ -56,13 +56,12 @@
             {{ partial "svgs/book-open.svg" . }}
 
             {{ $totalReadingTime := 0 }}
-
             {{ range $allPosts }}
               {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
             {{ end }}
 
-
-            <div>{{ div $totalReadingTime (len $allPosts) }} min. avg.</div>
+            {{ $averageReadingTime := div $totalReadingTime (len $allPosts) }}
+            <div>{{ $averageReadingTime }} min. avg.</div>
           </div>
         </div>
 

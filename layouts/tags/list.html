@@ -1,25 +1,23 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="card py-16 px-page-padding sm:px-16">
-      <article>
-        <h1 class="mb-8">Tags</h1>
+    <div class="">
+      <h1 class="mb-4 text-center">Tags</h1>
 
-        <ul
-          class="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 leading-normal"
-        >
-          {{- range .Data.Terms.Alphabetical -}}
-            <li>
-              <a
-                href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
-                class="tag"
-                style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
-              >
-                {{ .Term -}}
-              </a>
-            </li>
-          {{- end -}}
-        </ul>
-      </article>
+      <ul
+        class="m-0 flex list-none flex-wrap items-center justify-center gap-2 p-0 leading-normal"
+      >
+        {{- range .Data.Terms.Alphabetical -}}
+          <li>
+            <a
+              href="{{ "/tags" | relLangURL }}/{{ .Term | urlize }}/"
+              class="tag"
+              style="font-size: calc({{ .Count }} * 0.5em + 0.5em);"
+            >
+              {{ .Term -}}
+            </a>
+          </li>
+        {{- end -}}
+      </ul>
     </div>
   </main>
 {{ end }}

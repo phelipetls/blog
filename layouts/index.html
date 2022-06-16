@@ -109,12 +109,12 @@
 
     <div class="col-full my-8 h-12 w-full overflow-x-hidden">
       <div
-        data-skillicons-slideshow
+        data-skill-icons-marquee
         class="flex h-full flex-nowrap gap-2 will-change-transform"
-        style="animation: skillicons-slideshow linear 12s infinite;"
+        style="animation: skill-icons-marquee linear 12s infinite;"
       >
         <img
-          data-skillicons
+          data-skill-icons
           class="min-h-full max-w-none flex-none object-cover object-left-top"
           src="{{ $projectIconsUrl }}"
           alt="{{ $projectIconsAltText }}"
@@ -151,14 +151,14 @@
 
 {{ define "scripts" }}
   {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" }}
-  {{ $skillIconsSlide := resources.Get "/js/skill-icons-slide.js" }}
+  {{ $skillIconsMarquee := resources.Get "/js/marquee-skill-icons.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $skillIconsTheme := $skillIconsTheme | minify }}
-    {{ $skillIconsSlide := $skillIconsSlide | minify }}
+    {{ $skillIconsMarquee := $skillIconsMarquee | minify }}
   {{ end }}
 
 
   <script src="{{ $skillIconsTheme.Permalink }}"></script>
-  <script src="{{ $skillIconsSlide.Permalink }}"></script>
+  <script src="{{ $skillIconsMarquee.Permalink }}"></script>
 {{ end }}

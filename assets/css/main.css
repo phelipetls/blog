@@ -304,12 +304,12 @@ svg.feather {
   }
 }
 
-@keyframes skillicons-slideshow {
+@keyframes skill-icons-marquee {
   0% {
     transform: translateX(0%);
   }
 
   100% {
-    transform: translateX(var(--slideshow-reset, 0%));
+    transform: translateX(var(--marquee-reset, 0%));
   }
 }

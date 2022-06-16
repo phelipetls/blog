@@ -1,20 +1,19 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
+    <h1 class="mb-4 flex flex-row items-center justify-center text-center">
+      Posts
+      {{ partial "rss-button.html" . }}
+    </h1>
+
     <div class="">
       {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}
         {{ $year := $pagesByYear.Key }}
 
 
-        <div
-          class="mt-16 mb-8 flex flex-row items-center justify-between first:mt-0"
-        >
-          <h3 class="mb-0 text-2xl">
+        <div class="mt-16 mb-8 first:mt-0">
+          <h2 class="mb-0 text-2xl">
             <time datetime="{{ $year }}-01-01">{{ $year }}</time>
-          </h3>
-
-          {{ if eq $i 0 }}
-            {{ partial "rss-button.html" $ }}
-          {{ end }}
+          </h2>
         </div>
 
         <ul class="m-0 grid list-none grid-cols-1 gap-4 sm:grid-cols-2">

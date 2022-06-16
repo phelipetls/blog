@@ -1,9 +1,10 @@
 {{ define "main" }}
-  <div class="main-container">
-    <main class="main">
-      <article>
-        {{ .Content }}
-      </article>
-    </main>
-  </div>
+  <main class="grid grid-cols-layout">
+    <article class="card py-16 px-page-padding sm:px-16">
+      <header>
+        <h1 class="mb-4">{{ .Title }}</h1>
+      </header>
+      {{ .Content }}
+    </article>
+  </main>
 {{ end }}

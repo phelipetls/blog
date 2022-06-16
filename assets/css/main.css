@@ -251,6 +251,11 @@ body.dark {
   background-color: transparent;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
 [data-nav-container] + main {
   @apply mt-24;
 }

@@ -8,7 +8,8 @@ menu:
     weight: 1
 ---
 
-Olá 👋, sou um desenvolvedor front-end do Rio.
+Olá <span style="display: inline-block; animation: waving-hand 2.5s linear
+infinite;">👋</span>, sou um desenvolvedor front-end do Rio.
 
 Atualmente trabalho construíndo aplicações mobile e web com React, React Native
 e TypeScript.

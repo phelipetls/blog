@@ -2,40 +2,40 @@
 import { computePosition, shift, offset } from '@floating-ui/dom'
 
 /**
- * @type {(menu: HTMLElement) => NodeListOf<HTMLElement>}
+ * @type {(listbox: HTMLElement) => NodeListOf<HTMLElement>}
  */
-export function getMenuItems(menu) {
-  return menu.querySelectorAll('[role="menuitem"]')
+export function getOptions(listbox) {
+  return listbox.querySelectorAll('[role="option"]')
 }
 
 /**
- * @type {(menu: HTMLElement) => HTMLElement}
+ * @type {(listbox: HTMLElement) => HTMLElement}
  */
-function getActiveMenuItem(menu) {
-  let activeMenuItem
+function getActiveDescendant(listbox) {
+  let activeDescendant
 
-  getMenuItems(menu).forEach(function (item) {
-    if (item.id === menu.getAttribute('aria-activedescendant')) {
-      activeMenuItem = item
+  getOptions(listbox).forEach(function (item) {
+    if (item.id === listbox.getAttribute('aria-activedescendant')) {
+      activeDescendant = item
     }
   })
 
-  return activeMenuItem
+  return activeDescendant
 }
 
 /**
- * @type {(menu: HTMLElement) => HTMLElement}
+ * @type {(listbox: HTMLElement) => HTMLElement}
  */
-function getSelectedMenuItem(menu) {
-  let selectedMenuitem
+function getSelectedOption(listbox) {
+  let selectedListboxitem
 
-  getMenuItems(menu).forEach(function (item) {
+  getOptions(listbox).forEach(function (item) {
     if (item.getAttribute('aria-selected') === 'true') {
-      selectedMenuitem = item
+      selectedListboxitem = item
     }
   })
 
-  return selectedMenuitem
+  return selectedListboxitem
 }
 
 const focusedStyle = ['bg-background']
@@ -55,15 +55,15 @@ function removeFocusedStyle(item) {
 }
 
 /**
- * @type {(menu: HTMLElement, targetItem: EventTarget) => void}
+ * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
  */
-function focusMenuItem(menu, targetItem) {
-  getMenuItems(menu).forEach(function (item) {
-    if (item !== targetItem) {
-      removeFocusedStyle(item)
+function focusOption(listbox, targetOption) {
+  getOptions(listbox).forEach(function (option) {
+    if (option !== targetOption) {
+      removeFocusedStyle(option)
     } else {
-      applyFocusedStyle(item)
-      menu.setAttribute('aria-activedescendant', item.id)
+      applyFocusedStyle(option)
+      listbox.setAttribute('aria-activedescendant', option.id)
     }
   })
 }
@@ -85,10 +85,10 @@ function removeSelectedStyle(item) {
 }
 
 /**
- * @type {(menu: HTMLElement, targetItem: EventTarget) => void}
+ * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
  */
-function selectMenuItem(menu, targetItem) {
-  getMenuItems(menu).forEach(function (item) {
+function selectOption(listbox, targetItem) {
+  getOptions(listbox).forEach(function (item) {
     if (item === targetItem) {
       item.setAttribute('aria-selected', 'true')
       applySelectedStyle(item)
@@ -120,37 +120,35 @@ function fadeOut(element, duration) {
 }
 
 /**
- * @type {(menu: HTMLElement, button: HTMLButtonElement) => void}
+ * @type {(listbox: HTMLElement, button: HTMLButtonElement) => void}
  */
-function showMenu(menu, button) {
+function showListbox(listbox, button) {
   button.setAttribute('aria-expanded', 'true')
 
-  fadeIn(menu, 500)
+  fadeIn(listbox, 500)
+  listbox.focus()
 
-  const selectedMenuItem = getSelectedMenuItem(menu)
-  if (selectedMenuItem) {
-    menu.setAttribute('aria-descendant', selectedMenuItem.id)
-    focusMenuItem(menu, selectedMenuItem)
+  const selectedListboxItem = getSelectedOption(listbox)
+  if (selectedListboxItem) {
+    focusOption(listbox, selectedListboxItem)
   }
-
-  menu.focus()
 }
 
 /**
- * @type {(menu: HTMLElement, button: HTMLButtonElement) => void}
+ * @type {(listbox: HTMLElement, button: HTMLButtonElement) => void}
  */
-function hideMenu(menu, button) {
-  fadeOut(menu, 500)
+function hideListbox(listbox, button) {
+  fadeOut(listbox, 500)
 
   button.setAttribute('aria-expanded', 'false')
   if (
-    document.activeElement === menu ||
-    document.activeElement === getActiveMenuItem(menu)
+    document.activeElement === listbox ||
+    document.activeElement === getActiveDescendant(listbox)
   ) {
     button.focus()
   }
 
-  menu.removeAttribute('aria-activedescendant')
+  listbox.removeAttribute('aria-activedescendant')
 }
 
 /**
@@ -163,53 +161,51 @@ function hideMenu(menu, button) {
  * @type {(button: HTMLButtonElement, options: InitializeOptions) => void}
  */
 export function initialize(button, options) {
-  const menu = document.getElementById(button.getAttribute('aria-controls'))
+  const listbox = document.getElementById(button.getAttribute('aria-controls'))
 
   button.addEventListener('click', async function () {
     if (button.getAttribute('aria-expanded') === 'true') {
-      hideMenu(menu, button)
+      hideListbox(listbox, button)
     } else {
-      showMenu(menu, button)
+      showListbox(listbox, button)
 
-      const { x, y } = await computePosition(button, menu, {
+      const { x, y } = await computePosition(button, listbox, {
         placement: 'bottom',
         middleware: [offset(8), shift({ padding: 16 })],
       })
 
-      Object.assign(menu.style, {
+      Object.assign(listbox.style, {
         left: `${x}px`,
         top: `${y}px`,
       })
     }
   })
 
-  let hideMenuOnBlurTimeout
+  let hideListboxOnBlurTimeout
 
-  menu.addEventListener('focus', function () {})
-
-  menu.addEventListener('blur', function () {
-    hideMenuOnBlurTimeout = setTimeout(function () {
-      hideMenu(menu, button)
+  listbox.addEventListener('blur', function () {
+    hideListboxOnBlurTimeout = setTimeout(function () {
+      hideListbox(listbox, button)
     }, 300)
   })
 
-  menu.addEventListener('click', function (e) {
+  listbox.addEventListener('click', function (e) {
     if (options.onClick) {
-      options.onClick(getActiveMenuItem(menu))
-      selectMenuItem(menu, e.target)
-      hideMenu(menu, button)
+      options.onClick(getActiveDescendant(listbox))
+      selectOption(listbox, e.target)
+      hideListbox(listbox, button)
     }
 
-    clearTimeout(hideMenuOnBlurTimeout)
+    clearTimeout(hideListboxOnBlurTimeout)
   })
 
-  getMenuItems(menu).forEach(function (item) {
+  getOptions(listbox).forEach(function (item) {
     item.addEventListener('mouseover', function () {
-      focusMenuItem(menu, item)
+      focusOption(listbox, item)
     })
   })
 
-  getMenuItems(menu).forEach(function (item) {
+  getOptions(listbox).forEach(function (item) {
     if (item.getAttribute('aria-selected') === 'true') {
       applySelectedStyle(item)
       return
@@ -219,49 +215,50 @@ export function initialize(button, options) {
       typeof options.isSelectedItem === 'function' &&
       options.isSelectedItem(item)
     ) {
-      selectMenuItem(menu, item)
+      selectOption(listbox, item)
     }
   })
 
-  menu.addEventListener('keydown', function (e) {
-    const activeItem = getActiveMenuItem(menu)
+  listbox.addEventListener('keydown', function (e) {
+    const activeItem = getActiveDescendant(listbox)
 
     let nextActiveItem
     let shouldPreventDefault
 
     switch (e.key) {
       case 'Escape':
-        hideMenu(menu, button)
+        hideListbox(listbox, button)
         shouldPreventDefault = true
         break
       case 'Enter':
       case ' ':
         if (options.onClick) {
-          options.onClick(getActiveMenuItem(menu))
-          selectMenuItem(menu, getActiveMenuItem(menu))
-          hideMenu(menu, button)
+          options.onClick(getActiveDescendant(listbox))
+          selectOption(listbox, getActiveDescendant(listbox))
+          hideListbox(listbox, button)
         }
         shouldPreventDefault = true
         break
       case 'ArrowDown':
-        nextActiveItem = activeItem.nextElementSibling || menu.firstElementChild
+        nextActiveItem =
+          activeItem.nextElementSibling || listbox.firstElementChild
         break
       case 'ArrowUp':
         nextActiveItem =
-          activeItem.previousElementSibling || menu.lastElementChild
+          activeItem.previousElementSibling || listbox.lastElementChild
         break
       case 'Home':
       case 'PageUp':
-        nextActiveItem = menu.firstElementChild
+        nextActiveItem = listbox.firstElementChild
         break
       case 'End':
       case 'PageDown':
-        nextActiveItem = menu.lastElementChild
+        nextActiveItem = listbox.lastElementChild
         break
     }
 
     if (nextActiveItem) {
-      focusMenuItem(menu, nextActiveItem)
+      focusOption(listbox, nextActiveItem)
       shouldPreventDefault = true
     }
 

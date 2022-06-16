@@ -1,4 +1,4 @@
-describe('Menu', () => {
+describe('Listbox', () => {
   it('should be keyboard accessible', () => {
     cy.visit('/', {
       onBeforeLoad: (win) => {
@@ -11,15 +11,15 @@ describe('Menu', () => {
       .click()
       .should('have.attr', 'aria-expanded', 'true')
 
-    cy.findByRole('menuitem', { name: /light/i }).should(
+    cy.findByRole('option', { name: /light/i }).should(
       'have.attr',
       'aria-selected',
       'true'
     )
 
-    cy.findByRole('menu')
+    cy.findByRole('listbox')
       .should('be.visible')
-      .and('be.focused')
+      .and('have.focus')
       .and('have.attr', 'aria-activedescendant', 'theme-option-light')
       .type('{downArrow}')
       .should('have.attr', 'aria-activedescendant', 'theme-option-dark')
@@ -40,19 +40,19 @@ describe('Menu', () => {
       .and('have.attr', 'aria-expanded', 'false')
   })
 
-  it('should focus on button after escaping menu', () => {
+  it('should focus on button after escaping listbox', () => {
     cy.visit('/')
 
     cy.findByRole('button', { name: /change theme/i }).click()
-    cy.findByRole('menu').type('{esc}')
+    cy.findByRole('listbox').type('{esc}')
     cy.findByRole('button', { name: /change theme/i }).should('be.focused')
   })
 
-  it('should focus on button after clicking on a menu item', () => {
+  it('should focus on button after clicking on a listbox item', () => {
     cy.visit('/')
 
     cy.findByRole('button', { name: /change theme/i }).click()
-    cy.findByRole('menuitem', { name: /system/i }).click()
+    cy.findByRole('option', { name: /system/i }).click()
     cy.findByRole('button', { name: /change theme/i }).should('be.focused')
   })
 
@@ -64,14 +64,14 @@ describe('Menu', () => {
     })
 
     cy.findByRole('button', { name: /change theme/i }).click()
-    cy.findByRole('menu').should('be.focused').type('{downArrow}{enter}')
+    cy.findByRole('listbox').should('be.focused').type('{downArrow}{enter}')
 
     cy.get('body').should('have.class', 'dark')
 
     cy.findByRole('button', { name: /change theme/i })
       .should('be.focused')
       .click()
-    cy.findByRole('menu').type('{upArrow}{enter}')
+    cy.findByRole('listbox').type('{upArrow}{enter}')
 
     cy.get('body').should('not.have.class', 'dark')
   })

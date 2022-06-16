@@ -1,13 +1,13 @@
-import { initialize } from './menu'
+import { initialize } from './listbox'
 
 const button = document.querySelector('[data-theme-button]')
 
-function setMenuItemTheme(item) {
+function setOptionTheme(item) {
   window.__setTheme(item.dataset.theme)
 }
 
 initialize(button, {
-  onClick: setMenuItemTheme,
+  onClick: setOptionTheme,
   isSelectedItem: function (item) {
     return item.dataset.theme === localStorage.getItem('__theme')
   },

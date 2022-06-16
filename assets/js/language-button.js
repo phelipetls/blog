@@ -1,4 +1,4 @@
-import { initialize } from './menu'
+import { initialize } from './listbox'
 
 const button = document.querySelector('[data-language-button]')
 

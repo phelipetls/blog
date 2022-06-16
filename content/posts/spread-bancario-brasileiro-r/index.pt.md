@@ -137,7 +137,7 @@ dados %>%
   )
 ```
 
-{{< figure >}}{{< figure title="img3" src="./unnamed-chunk-7-1.png" >}}
+{{< figure title="Spread do Brasil ao ano, de 1999 a 2016" alt="Gráfico de linhas com a série temporal do spread bancário brasileiro ao ano, de 1999 a 2016: começa por volta de 56% e termina em 38%" src="./unnamed-chunk-7-1.png" >}}
 
 Veja como o spread vinha caindo sistematicamente, embora ainda fosse muito alto
 pros padrões internacionais. Com a crise, ele voltou a aumentar, voltando aos
@@ -224,7 +224,7 @@ dados %>%
   coord_flip()
 ```
 
-{{< figure title="img1" src="./output_9_0.png" >}}
+{{< figure title="Comparação entre os spreads bancarios entre vários países" alt="Gráfico de barras comparando o spread bancário de vários países nos anos de 2015, 2016 e 2017, tendo o Brasil no topo em todos os anos." src="./output_9_0.png" >}}
 
 E que tal contrastar os 15 maiores spreads de países em desenvolvimento versus
 desenvolvidos, pro ano de 2017? Na outra tabela tem uma coluna que pode nos
@@ -255,7 +255,7 @@ library(gridExtra)
 grid.arrange(plot1, plot2, nrow = 2)
 ```
 
-{{< figure title="img2" src="./output_11_0.png" >}}
+{{< figure title="Comparação de spreads bancários entre países desenvolvidos e subdesenvolvidos" alt="Dois gráficos de barras horizontais mostrando o spread bancário de países desenvolvidos e subdesenvolvidos, onde se vê que o spread nos países subdesenvolvidos é muito maior" src="./output_11_0.png" >}}
 
 Vemos, assim, que a situação do Brasil é meio crítica quando se olha para o
 mercado de crédito. Está no meio de países muito pequenos ou pobres (não que o

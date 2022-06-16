@@ -117,7 +117,7 @@ cartesiano, em que o cavalo está no ponto de origem, (0, 0), podendo saltar dal
 para oito casas possíveis, com igual probabilidade, respeitando sempre as regras
 do xadrez, como na imagem:
 
-{{< figure title="Knight" src="./knight_moves.png" >}}
+{{< figure title="Cavalo de xadrez num plano cartesiano" alt="Um cavalo de xadrez em um tabuleiro, com setas apontando os possíveis movimentos do cavalo no xadrez e suas equivalentes coordenadas em um plano cartesiano" src="./knight_moves.png" >}}
 
 Daí podemos notar que, se o cavalo pular para uma casa de coordenada x, a
 coordenada y terá que ser igual a 3 - abs(x). Mas devemos tomar o cuidado para
@@ -276,7 +276,7 @@ knight_probs = [knight_infinite_board(100000) for _ in range(100)]
 plt.hist(knight_probs, bins = 20)
 ```
 
-{{< figure title="Histograma" src="./histograma.png" >}}
+{{< figure title="Histograma mostrando que a probabilidade estimada do cavalo voltar à origem após 20 saltos aleatórios é de 0.6%" alt="Histograma mostrando que a probabilidade estimada do cavalo voltar à origem após 20 saltos aleatórios é de 0.6%" src="./histograma.png" >}}
 
 # A eficiência em números
 

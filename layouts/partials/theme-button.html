@@ -10,9 +10,9 @@
     <title>{{ i18n "ThemeIcon" }}</title>
 
     <defs>
-      {{ partial "svgs/moon.svg" (dict "HTMLAttrs" (`id="moon"` | safeHTMLAttr)) }}
-      {{ partial "svgs/sun.svg" (dict "HTMLAttrs" (`id="sun"` | safeHTMLAttr)) }}
-      {{ partial "svgs/monitor.svg" (dict "HTMLAttrs" (`id="monitor"` | safeHTMLAttr)) }}
+      {{ partial "svgs/moon-with-id.svg" }}
+      {{ partial "svgs/sun-with-id.svg" }}
+      {{ partial "svgs/monitor-with-id.svg" }}
     </defs>
 
     <use data-theme-button-svg-icon href="#sun"></use>

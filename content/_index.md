@@ -3,6 +3,7 @@ title: "Home"
 menu:
   main:
     name: Home
+    identifier: home
     url: /
     weight: 1
 ---

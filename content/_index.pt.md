@@ -3,6 +3,7 @@ title: "Início"
 menu:
   main:
     name: Início
+    identifier: home
     url: /
     weight: 1
 ---

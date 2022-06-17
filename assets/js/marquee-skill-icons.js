@@ -12,7 +12,7 @@ marqueeImage.onload = function () {
   const marqueePercentageOfScreenWidth =
     (marqueeImage.clientWidth / screenWidth) * 100
 
-  const marqueeGaps = window.getComputedStyle(marquee).gap
+  const marqueeGaps = marquee.style.getPropertyValue('--gap')
 
   // Calculate the point at which we must reset the animation to look like the
   // repeating images are wrapping aroung themselves.

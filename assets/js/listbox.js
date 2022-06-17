@@ -157,6 +157,8 @@ function hideListbox(listbox, button) {
  * @property {(item: HTMLElement) => boolean} isSelectedItem
  */
 
+let hideListboxOnBlurTimeout
+
 /**
  * @type {(button: HTMLButtonElement, options: InitializeOptions) => void}
  */
@@ -164,6 +166,8 @@ export function initialize(button, options) {
   const listbox = document.getElementById(button.getAttribute('aria-controls'))
 
   button.addEventListener('click', async function () {
+    clearTimeout(hideListboxOnBlurTimeout)
+
     if (button.getAttribute('aria-expanded') === 'true') {
       hideListbox(listbox, button)
     } else {
@@ -180,8 +184,6 @@ export function initialize(button, options) {
       })
     }
   })
-
-  let hideListboxOnBlurTimeout
 
   listbox.addEventListener('blur', function () {
     hideListboxOnBlurTimeout = setTimeout(function () {

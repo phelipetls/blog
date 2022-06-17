@@ -1,16 +1,14 @@
 {{ define "main" }}
-  <div class="main-container">
-    <main class="main">
-      <div class="full-height flex flex-1 items-center justify-center">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/-RFunvF0mDw"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          style="border: 0px;"
-        ></iframe>
-      </div>
-    </main>
-  </div>
+  <main class="grid grid-cols-layout">
+    <div class="full-height col-full flex flex-1 items-center justify-center">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/-RFunvF0mDw"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="border: 0px;"
+      ></iframe>
+    </div>
+  </main>
 {{ end }}

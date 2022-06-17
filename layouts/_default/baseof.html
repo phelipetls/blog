@@ -44,11 +44,11 @@
       <script type="module" src="{{ .RelPermalink }}"></script>
     {{ end }}
 
-    {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build (dict "format" "esm") }}
-    {{ $languageButtonScript := resources.Get "js/language-button.js" | js.Build (dict "format" "esm") }}
-    {{ $navScript := resources.Get "js/nav.js" | js.Build (dict "format" "esm") }}
+    {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
+    {{ $languageButtonScript := resources.Get "js/language-button.js" | js.Build }}
+    {{ $navScript := resources.Get "js/nav.js" | js.Build }}
     {{ $copyCodeButtonScript := resources.Get "js/copy-code-button.js"
-      | js.Build (dict "format" "esm" "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
+      | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
     }}
 
     {{ $bundle := slice $navScript $themeButtonScript $languageButtonScript $copyCodeButtonScript | resources.Concat "js/bundle.js" }}

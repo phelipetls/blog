@@ -82,7 +82,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build (dict "format" "esm") }}
+  {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
   {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.js" }}
 
   {{ if hugo.IsProduction }}

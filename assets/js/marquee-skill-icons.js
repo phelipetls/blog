@@ -1,29 +1,21 @@
 const marquee = document.querySelector('[data-skill-icons-marquee]')
-const marqueeImage = marquee.querySelector('img')
+const skillIconsImage = marquee.querySelector('img')
 
 // Wait for the skill-icons image to load to grab its width
-marqueeImage.onload = function () {
+skillIconsImage.onload = function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return
   }
 
-  const screenWidth = document.documentElement.clientWidth
+  const skillIconsImageWidth = skillIconsImage.clientWidth
+  skillIconsImage.remove()
 
-  const marqueePercentageOfScreenWidth =
-    (marqueeImage.clientWidth / screenWidth) * 100
+  marquee.style.width = `calc(100vw + ${skillIconsImageWidth}px)`
+  marquee.style.backgroundImage = `url('${skillIconsImage.src}')`
+  marquee.style.backgroundRepeat = 'repeat-x'
+  marquee.style.backgroundPosition = 'left top'
+  marquee.style.backgroundSize = 'contain'
+  marquee.style.animation = 'skill-icons-marquee 12s linear infinite'
 
-  const marqueeGaps = Number(
-    marquee.style.getPropertyValue('--gap').replace('px', '')
-  )
-
-  // Calculate the point at which we must reset the animation to look like the
-  // repeating images are wrapping aroung themselves.
-
-  // This point is the percentage the image's width occupies in the viewport,
-  // but we also need to subtract the space between the images, otherwise the
-  // animation is janky at some point.
-  marquee.style.setProperty(
-    '--marquee-reset',
-    `-${marqueePercentageOfScreenWidth - marqueeGaps}%`
-  )
+  marquee.style.setProperty('--marquee-reset', `-${skillIconsImageWidth}px`)
 }

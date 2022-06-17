@@ -42,8 +42,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build }}
-  {{ $resumePdfJsScript := resources.Get "js/resume-pdfjs.js" | js.Build }}
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "format" "esm") }}
 
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}

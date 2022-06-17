@@ -139,7 +139,7 @@
   {{ $skillIconsMarquee := resources.Get "/js/marquee-skill-icons.js" }}
 
   {{ if hugo.IsProduction }}
-    {{ $skillIconsMarquee := $skillIconsMarquee | minify }}
+    {{ $skillIconsMarquee = $skillIconsMarquee | minify }}
   {{ end }}
 
 

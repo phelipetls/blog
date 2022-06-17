@@ -80,3 +80,6 @@ other = 'Latest post'
 
 [Projects]
 other = 'Projects'
+
+[About]
+other = 'About'

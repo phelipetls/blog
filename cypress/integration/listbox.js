@@ -64,15 +64,11 @@ describe('Listbox', () => {
     })
 
     cy.findByRole('button', { name: /change theme/i }).click()
-    cy.findByRole('listbox').should('be.focused').type('{downArrow}{enter}')
-
+    cy.findByRole('listbox').type('{downArrow}{enter}')
     cy.get('body').should('have.class', 'dark')
 
-    cy.findByRole('button', { name: /change theme/i })
-      .should('be.focused')
-      .click()
+    cy.findByRole('button', { name: /change theme/i }).click()
     cy.findByRole('listbox').type('{upArrow}{enter}')
-
     cy.get('body').should('not.have.class', 'dark')
   })
 })

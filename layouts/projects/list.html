@@ -16,7 +16,7 @@
   {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" }}
 
   {{ if hugo.IsProduction }}
-    {{ $skillIconsTheme := $skillIconsTheme | minify }}
+    {{ $skillIconsTheme = $skillIconsTheme | minify }}
   {{ end }}
 
 

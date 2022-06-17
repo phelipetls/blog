@@ -309,7 +309,7 @@ svg.feather {
   }
 }
 
-@keyframes skill-icons-marquee {
+@keyframes marquee-skill-icons {
   0% {
     transform: translateX(0%);
   }

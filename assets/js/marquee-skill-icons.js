@@ -15,7 +15,7 @@ skillIconsImage.onload = function () {
   marquee.style.backgroundRepeat = 'repeat-x'
   marquee.style.backgroundPosition = 'left top'
   marquee.style.backgroundSize = 'contain'
-  marquee.style.animation = 'skill-icons-marquee 12s linear infinite'
+  marquee.style.animation = 'marquee-skill-icons 12s linear infinite'
 
   marquee.style.setProperty('--marquee-reset', `-${skillIconsImageWidth}px`)
 }

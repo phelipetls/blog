@@ -1,5 +1,7 @@
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js'
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/js/pdf.worker.js'
+import * as params from '@params'
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = params.pdfjsWorkerUrl
 
 const resumeContainer = document.querySelector('[data-resume]')
 const resumeUrl = resumeContainer.dataset.resume

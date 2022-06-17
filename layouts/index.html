@@ -137,6 +137,8 @@
 
 {{ define "scripts" }}
   {{ $marqueeSkillIcons := resources.Get "/js/marquee-skill-icons.js" }}
+  {{ resources.Get "/js/resume-pdfjs.js" | js.Build "resume-pdfjs.js" }}
+  {{ resources.Get "/js/pdf.worker.js" | js.Build "resume-pdfjs.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $marqueeSkillIcons = $marqueeSkillIcons | minify }}

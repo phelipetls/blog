@@ -42,7 +42,9 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "format" "esm") }}
+  {{ $pdfjsWorker := resources.Get "js/pdf.worker.js" | js.Build (dict "format" "esm") }}
+  {{ $pdfjs := resources.Get "js/resume-pdfjs.js" | js.Build (dict "format" "esm" "params" (dict "pdfjsWorkerUrl" $pdfjsWorker.Permalink)) }}
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "format" "esm" "params" (dict "resumePdfjsUrl" $pdfjs.Permalink)) }}
 
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}

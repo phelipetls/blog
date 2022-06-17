@@ -8,14 +8,20 @@ skillIconsImage.onload = function () {
   }
 
   const skillIconsImageWidth = skillIconsImage.clientWidth
+  const backgroundImageUrl = new URL(skillIconsImage.src)
   skillIconsImage.remove()
 
   marquee.style.width = `calc(100vw + ${skillIconsImageWidth}px)`
-  marquee.style.backgroundImage = `url('${skillIconsImage.src}')`
+  marquee.style.backgroundImage = `url('${backgroundImageUrl}')`
   marquee.style.backgroundRepeat = 'repeat-x'
   marquee.style.backgroundPosition = 'left top'
   marquee.style.backgroundSize = 'contain'
   marquee.style.animation = 'marquee-skill-icons 12s linear infinite'
 
   marquee.style.setProperty('--marquee-reset', `-${skillIconsImageWidth}px`)
+
+  document.body.addEventListener('newTheme', function (e) {
+    backgroundImageUrl.searchParams.set('theme', e.detail.theme)
+    marquee.style.backgroundImage = `url('${backgroundImageUrl}')`
+  })
 }

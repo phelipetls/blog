@@ -136,12 +136,12 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $skillIconsMarquee := resources.Get "/js/marquee-skill-icons.js" }}
+  {{ $marqueeSkillIcons := resources.Get "/js/marquee-skill-icons.js" }}
 
   {{ if hugo.IsProduction }}
-    {{ $skillIconsMarquee = $skillIconsMarquee | minify }}
+    {{ $marqueeSkillIcons = $marqueeSkillIcons | minify }}
   {{ end }}
 
 
-  <script src="{{ $skillIconsMarquee.Permalink }}"></script>
+  <script src="{{ $marqueeSkillIcons.Permalink }}"></script>
 {{ end }}

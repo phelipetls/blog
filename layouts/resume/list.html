@@ -42,10 +42,17 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $pdfjsWorker := resources.Get "js/pdf.worker.js" | js.Build }}
-  {{ $pdfjs := resources.Get "js/resume-pdfjs.js" | js.Build (dict "params" (dict "pdfjsWorkerUrl" $pdfjsWorker.Permalink)) }}
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink)) }}
+  {{ $pdfjsWorker := resources.Get "js/pdf.worker.js" | js.Build (dict "minify" true) }}
+  {{ if hugo.IsProduction }}
+    {{ $pdfjsWorker = $pdfjsWorker | minify }}
+  {{ end }}
 
+  {{ $pdfjs := resources.Get "js/resume-pdfjs.js" | js.Build (dict "params" (dict "pdfjsWorkerUrl" $pdfjsWorker.Permalink "minify" true)) }}
+  {{ if hugo.IsProduction }}
+    {{ $pdfjs = $pdfjs | minify }}
+  {{ end }}
+
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink)) }}
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
   {{ end }}

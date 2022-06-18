@@ -36,12 +36,6 @@
 {{ end }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
 
-{{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
-{{ if hugo.IsProduction }}
-  {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
-{{ end }}
-<link rel="stylesheet" href="{{ $darkSyntaxHighlight.RelPermalink }}" />
-
 <title>
   {{ .Title }} |
   {{ .Site.Title }}

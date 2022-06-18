@@ -234,28 +234,13 @@ body.dark {
 }
 
 .pretty-scrollbar {
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-}
-
-.pretty-scrollbar::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 0.5rem;
-}
-
-.pretty-scrollbar::-webkit-scrollbar-thumb {
-  background: #ffffff;
-  background-color: rgb(var(--black-400), 0.5);
   border-radius: 0.5rem;
+  scrollbar-color: rgb(var(--black-100)) transparent;
+  scrollbar-width: thin;
 }
 
-.pretty-scrollbar::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  height: 0;
-  width: 0;
+.no-scrollbar {
+  scrollbar-width: none;
 }
 
 [data-nav-container] + main {

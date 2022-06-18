@@ -11,6 +11,7 @@ module.exports = {
     require('tailwindcss'),
     require('autoprefixer'),
     require('postcss-import'),
+    require('postcss-scrollbar'),
     require('postcss-functions')({
       functions: {
         hexToRgb,

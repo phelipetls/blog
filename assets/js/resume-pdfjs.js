@@ -15,7 +15,7 @@ resumeLoading.classList.replace('hidden', 'flex')
 resumeDownloadButton.classList.replace('hidden', 'flex')
 
 const pdfWorkerScript = document.createElement('script')
-pdfWorkerScript.src = '/js/pdf.worker.js'
+pdfWorkerScript.src = params.pdfjsWorkerUrl
 document.body.append(pdfWorkerScript)
 
 pdfWorkerScript.onload = function () {

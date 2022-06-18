@@ -142,6 +142,7 @@
     {{ $marqueeSkillIcons = $marqueeSkillIcons | minify }}
   {{ end }}
 
-
-  <script src="{{ $marqueeSkillIcons.Permalink }}"></script>
+  <script>
+    {{ $marqueeSkillIcons.Content | safeJS }}
+  </script>
 {{ end }}

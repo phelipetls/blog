@@ -1,9 +1,13 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
     <div>
-      <h1 class="mb-8 text-center">
-        {{ .Name | title }}
-      </h1>
+      <div class="mb-4 flex items-center justify-center gap-2">
+        <h1 class="m-0">
+          {{ .Name | title }}
+        </h1>
+
+        {{ partial "svgs/tag.svg" }}
+      </div>
 
       <ul class="m-0 grid flex-1 list-none grid-cols-1 gap-4 sm:grid-cols-2">
         {{ range .Pages }}

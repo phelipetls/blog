@@ -39,6 +39,7 @@ body {
   --divider: var(--beige-700);
   --note: var(--blue);
   --warn: var(--red);
+  color-scheme: light;
 }
 
 body.dark {
@@ -50,6 +51,7 @@ body.dark {
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);
+  color-scheme: dark;
 }
 
 @tailwind base;

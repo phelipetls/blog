@@ -1,13 +1,7 @@
-{{ define "partials/animated-icon-classes" }}
-  transform hover:scale-110 hover:text-primary transition transition-transform
-  transition-colors
-{{ end }}
-
-
 <div class="flex gap-4">
   <a
     id="contact-email"
-    class="{{ partial "animated-icon-classes" }} border-0"
+    class="border-0"
     href="mailto:{{ .Site.Params.email }}"
     aria-label="E-mail"
   >
@@ -16,7 +10,7 @@
 
   <a
     id="contact-linkedin"
-    class="{{ partial "animated-icon-classes" }} border-0"
+    class="border-0"
     href="{{ .Site.Params.linkedin }}"
     aria-label="LinkedIn"
   >
@@ -25,7 +19,7 @@
 
   <a
     id="contact-github"
-    class="{{ partial "animated-icon-classes" }} border-0"
+    class="border-0"
     href="{{ .Site.Params.github }}"
     aria-label="GitHub"
   >

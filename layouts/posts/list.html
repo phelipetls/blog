@@ -1,9 +1,10 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <h1 class="mb-4 flex flex-row items-center justify-center text-center">
-      Posts
+    <div class="mb-4 flex flex-row items-center justify-center gap-2">
+      <h1 class="m-0">Posts</h1>
+
       {{ partial "rss-button.html" . }}
-    </h1>
+    </div>
 
     <div class="">
       {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}

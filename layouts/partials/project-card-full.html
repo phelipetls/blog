@@ -3,14 +3,21 @@
 
 <article class="card grid grid-cols-1 rounded-md sm:grid-cols-[40%_60%]">
   <div class="relative">
-    {{ with (index (.Resources.ByType "image") 0) }}
-      <img
-        class="rounded-t-md object-cover object-left-top sm:h-full sm:max-h-full sm:rounded-l-md"
-        src="{{ .Permalink }}"
-        alt=""
-        width="{{ .Width }}"
-        height="{{ .Height }}"
-      />
+    {{ with .Resources.GetMatch "screenshot.png" }}
+      <picture>
+        {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
+          <source srcset="{{ .Permalink }}" type="image/webp" />
+        {{ end }}
+
+
+        <img
+          class="rounded-t-md object-cover object-left-top sm:h-full sm:max-h-full sm:rounded-l-md"
+          src="{{ .Permalink }}"
+          alt=""
+          width="{{ .Width }}"
+          height="{{ .Height }}"
+        />
+      </picture>
     {{ end }}
 
     {{ if $isUnmaintained }}

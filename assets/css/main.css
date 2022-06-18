@@ -32,6 +32,7 @@
 
 body {
   --primary: var(--blue);
+  --primary-fg: var(--beige-100);
   --foreground: var(--black-200);
   --background: var(--beige-400);
   --surface: var(--beige-200);
@@ -44,6 +45,7 @@ body {
 
 body.dark {
   --primary: var(--orange);
+  --primary-fg: var(--black-600);
   --foreground: var(--beige-300);
   --background: var(--black-400);
   --surface: var(--black-500);
@@ -180,7 +182,7 @@ body.dark {
   }
 
   .btn-primary {
-    @apply bg-foreground text-background;
+    @apply bg-primary text-primary-fg;
   }
 
   .btn-secondary {

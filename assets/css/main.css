@@ -267,6 +267,14 @@ main + footer {
   @apply overflow-x-auto overflow-y-hidden;
 }
 
+[data-nav-container] [role='listbox'] [role='option']:first-child {
+  @apply rounded-t-md;
+}
+
+[data-nav-container] [role='listbox'] [role='option']:last-child {
+  @apply rounded-b-md;
+}
+
 svg.feather {
   width: var(--icon-size);
   height: var(--icon-size);

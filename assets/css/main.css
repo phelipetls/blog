@@ -25,8 +25,9 @@
   --black-600: hexToRgb(#1a1a1a);
   --black-700: hexToRgb(#151515);
 
+  --blue: hexToRgb(#4169e1);
   --red: hexToRgb(#dd0022);
-  --blue: hexToRgb(#50646a);
+  --orange: hexToRgb(#f7bd55);
   --beige: hexToRgb(#c8c093);
 
   color-scheme: light dark;
@@ -46,7 +47,7 @@ body {
 }
 
 body.dark {
-  --primary: var(--beige);
+  --primary: var(--orange);
   --primary-fg: var(--black-600);
   --foreground: var(--beige-300);
   --background: var(--black-400);
@@ -75,7 +76,7 @@ body.dark {
   h2,
   h3 {
     font-family: var(--heading-font-family);
-    @apply mb-2 font-bold text-primary;
+    @apply mb-2 font-bold;
   }
 
   code {
@@ -278,7 +279,7 @@ main + footer {
 }
 
 svg.feather {
-  @apply h-[var(--icon-size)] w-[var(--icon-size)] text-primary;
+  @apply h-[var(--icon-size)] w-[var(--icon-size)];
 }
 
 .utterances {

@@ -1,0 +1,9 @@
+{{ $posts := .Site.GetPage "/posts" }}
+{{ $allPosts := $posts.Pages }}
+
+{{ $totalReadingTime := 0 }}
+{{ range $allPosts }}
+  {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
+{{ end }}
+
+{{ return div $totalReadingTime (len $allPosts) }}

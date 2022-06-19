@@ -49,12 +49,7 @@
           <div class="flex items-center gap-2">
             {{ partial "svgs/book-open.svg" . }}
 
-            {{ $totalReadingTime := 0 }}
-            {{ range $allPosts }}
-              {{ $totalReadingTime = add $totalReadingTime .ReadingTime }}
-            {{ end }}
-
-            {{ $averageReadingTime := div $totalReadingTime (len $allPosts) }}
+            {{ $averageReadingTime := partial "get-reading-time.html" . }}
             <div>{{ $averageReadingTime }} min. avg.</div>
           </div>
         </div>

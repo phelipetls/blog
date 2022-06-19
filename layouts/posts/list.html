@@ -6,7 +6,7 @@
       {{ partial "rss-button.html" . }}
     </div>
 
-    <div class="">
+    <div>
       {{ range $i, $pagesByYear := .Pages.GroupByDate "2006" }}
         {{ $year := $pagesByYear.Key }}
 

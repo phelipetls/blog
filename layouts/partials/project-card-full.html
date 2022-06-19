@@ -74,21 +74,19 @@
       {{ .Content }}
     </div>
 
-    <div class="mt-4 flex flex-nowrap justify-between gap-2">
-      <div class="flex items-center gap-2 overflow-x-auto">
-        {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit .Params.icons ",") }}
-        {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit .Params.icons ", " (printf " %s " (i18n "And"))) }}
+    <div class="mt-4">
+      {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit .Params.icons ",") }}
+      {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit .Params.icons ", " (printf " %s " (i18n "And"))) }}
 
-        {{ $svgDimensions := partial "get-svg-dimensions.html" (resources.GetRemote $skillIconsUrl) }}
+      {{ $svgDimensions := partial "get-svg-dimensions.html" (resources.GetRemote $skillIconsUrl) }}
 
 
-        <img
-          src="{{ $skillIconsUrl }}"
-          alt="{{ $skillIconsAltText }}"
-          width="{{ $svgDimensions.width }}"
-          height="{{ $svgDimensions.height }}"
-        />
-      </div>
+      <img
+        src="{{ $skillIconsUrl }}"
+        alt="{{ $skillIconsAltText }}"
+        width="{{ $svgDimensions.width }}"
+        height="{{ $svgDimensions.height }}"
+      />
     </div>
   </div>
 </article>

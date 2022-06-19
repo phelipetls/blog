@@ -19,6 +19,7 @@
     {{ $skillIconsTheme = $skillIconsTheme | minify }}
   {{ end }}
 
-
-  <script src="{{ $skillIconsTheme.Permalink }}"></script>
+  <script>
+    {{ $skillIconsTheme.Content }}
+  </script>
 {{ end }}

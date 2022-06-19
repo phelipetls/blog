@@ -278,8 +278,7 @@ main + footer {
 }
 
 svg.feather {
-  width: var(--icon-size);
-  height: var(--icon-size);
+  @apply h-[var(--icon-size)] w-[var(--icon-size)];
 }
 
 .utterances {

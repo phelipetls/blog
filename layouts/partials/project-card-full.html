@@ -68,18 +68,15 @@
         {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit .Params.icons ",") }}
         {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit .Params.icons ", " (printf " %s " (i18n "And"))) }}
 
-        {{ with resources.GetRemote $skillIconsUrl }}
-          {{ $svgWidth := replaceRE "[^0-9]" "" (index (findRE `width="([0-9]+)"` .Content) 0) }}
-          {{ $svgHeight := replaceRE "[^0-9]" "" (index (findRE `height="([0-9]+)"` .Content) 0) }}
+        {{ $svgDimensions := partial "get-svg-dimensions.html" (resources.GetRemote $skillIconsUrl) }}
 
 
-          <img
-            src="{{ $skillIconsUrl }}"
-            alt="{{ $skillIconsAltText }}"
-            width="{{ $svgWidth }}"
-            height="{{ $svgHeight }}"
-          />
-        {{ end }}
+        <img
+          src="{{ $skillIconsUrl }}"
+          alt="{{ $skillIconsAltText }}"
+          width="{{ $svgDimensions.width }}"
+          height="{{ $svgDimensions.height }}"
+        />
       </div>
     </div>
   </div>

@@ -1,0 +1,4 @@
+{{ $svgWidth := replaceRE "[^0-9]" "" (index (findRE `width="([0-9]+)"` .Content) 0) }}
+{{ $svgHeight := replaceRE "[^0-9]" "" (index (findRE `height="([0-9]+)"` .Content) 0) }}
+
+{{ return (dict "width" $svgWidth "height" $svgHeight) }}

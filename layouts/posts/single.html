@@ -92,13 +92,12 @@
     | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
   }}
 
-  {{ $scripts := slice ($liteYoutubeEmbedJs $themeUtterancesJs $copyCodeButtonScript) }}
-  {{ $bundle := resources.Concat $scripts "js/bundle.js" }}
+  {{ $bundle := slice $liteYoutubeEmbedJs $themeUtterancesJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $bundle = $bundle | minify }}
   {{ end }}
 
 
-  <script src="{{ $bundleliteYoutubeEmbedJs.Permalink }}"></script>
+  <script src="{{ $bundle.Permalink }}"></script>
 {{ end }}

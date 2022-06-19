@@ -22,7 +22,7 @@
               id="{{ .Identifier }}"
               href="{{ .URL | absLangURL }}"
               {{ if $isActive }}
-                data-active-navlink
+                aria-current="page"
               {{ end }}
               class="
                 {{ if $isActive }}

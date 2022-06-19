@@ -1,6 +1,6 @@
 const nav = document.querySelector('[data-nav-container]')
 
-const activeNavLink = nav.querySelector('[data-active-navlink]')
+const activeNavLink = nav.querySelector('[aria-current=page]')
 
 if (activeNavLink) {
   activeNavLink.scrollIntoView({

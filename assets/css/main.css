@@ -28,6 +28,8 @@
   --blue: hexToRgb(#4169e1);
   --red: hexToRgb(#dd0022);
   --orange: hexToRgb(#f7bd55);
+
+  color-scheme: light dark;
 }
 
 body {

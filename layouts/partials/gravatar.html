@@ -7,7 +7,6 @@
   {{ with resources.GetRemote $gravatarUrl }}
     {{ $blurred := .Filter (images.GaussianBlur 6) }}
     <img
-      id="blurred-gravatar"
       class="absolute inset-0 -z-1 h-full w-full"
       width="{{ .Width }}"
       height="{{ .Height }}"

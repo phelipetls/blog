@@ -20,6 +20,6 @@
   {{ end }}
 
   <script>
-    {{ $skillIconsTheme.Content }}
+    {{ $skillIconsTheme.Content | safeJS }}
   </script>
 {{ end }}

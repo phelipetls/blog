@@ -27,7 +27,7 @@
 
   --red: hexToRgb(#dd0022);
   --blue: hexToRgb(#50646a);
-  --beige: hexToRgb(#e7dda6);
+  --beige: hexToRgb(#c8c093);
 
   color-scheme: light dark;
 }

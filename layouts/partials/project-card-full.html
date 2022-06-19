@@ -22,13 +22,13 @@
 
     {{ if $isUnmaintained }}
       <div
-        class="absolute top-2 right-2 rounded-md bg-warn px-2 py-1 text-beige-100"
+        class="chip absolute top-0 left-2 -translate-y-1/2 bg-warn px-2 py-1 text-beige-100"
       >
         Unmaintained
       </div>
     {{ else }}
       <time
-        class="absolute top-2 right-2 rounded-md bg-foreground px-2 py-1 text-background"
+        class="chip absolute top-0 left-2 -translate-y-1/2 bg-primary px-2 py-1 text-primary-fg"
         datetime="{{ .Date.Format "2006-01-02" }}"
       >
         {{ .Date.Format "2006" }}

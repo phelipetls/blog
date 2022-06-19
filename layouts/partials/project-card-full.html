@@ -2,8 +2,19 @@
 
 
 <article class="card grid grid-cols-1 rounded-md sm:grid-cols-[40%_60%]">
-  <div class="relative">
+  <div class="relative z-0">
     {{ with .Resources.GetMatch "screenshot.png" }}
+      {{ $blurred := .Filter (images.GaussianBlur 6) }}
+
+
+      <img
+        class="absolute inset-0 -z-1 rounded-t-md sm:rounded-l-md sm:rounded-tr-none"
+        width="{{ .Width }}"
+        height="{{ .Height }}"
+        src="data:image/png;base64,{{ $blurred.Content | base64Encode }}"
+        alt=""
+      />
+
       <picture>
         {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
           <source srcset="{{ .Permalink }}" type="image/webp" />

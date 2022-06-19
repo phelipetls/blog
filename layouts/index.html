@@ -20,10 +20,7 @@
 
     {{ $posts := .Site.GetPage "/posts" }}
     {{ $allPosts := $posts.Pages }}
-
     {{ $latestPosts := first 5 $allPosts }}
-    {{ $latestPost := index $latestPosts 0 }}
-    {{ $otherPosts := last 4 $latestPosts }}
 
 
     <div

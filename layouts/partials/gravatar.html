@@ -1,27 +1,32 @@
 {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
 
-{{ with resources.GetRemote $gravatarUrl }}
-  {{ $blurred := .Filter (images.GaussianBlur 6) }}
-  <img
-    id="blurred-gravatar"
-    class="absolute inset-0 -z-1 h-full w-full"
-    width="{{ .Width }}"
-    height="{{ .Height }}"
-    src="data:image/png;base64,{{ $blurred.Content | base64Encode }}"
-  />
 
-  <picture>
-    {{ with .Resize (printf "%dx%d webp picture" .Width .Height) }}
-      <source srcset="{{ .Permalink }}" type="image/webp" />
-    {{ end }}
-
-
+<div
+  class="relative z-0 mb-8 shrink-0 overflow-hidden rounded-full border-4 border-divider sm:mr-8 sm:mb-0"
+>
+  {{ with resources.GetRemote $gravatarUrl }}
+    {{ $blurred := .Filter (images.GaussianBlur 6) }}
     <img
-      id="gravatar"
-      src="{{ .Permalink }}"
-      alt="{{ i18n "GravatarAltText" }}"
+      id="blurred-gravatar"
+      class="absolute inset-0 -z-1 h-full w-full"
       width="{{ .Width }}"
       height="{{ .Height }}"
+      src="data:image/png;base64,{{ $blurred.Content | base64Encode }}"
     />
-  </picture>
-{{ end }}
+
+    <picture>
+      {{ with .Resize (printf "%dx%d webp picture" .Width .Height) }}
+        <source srcset="{{ .Permalink }}" type="image/webp" />
+      {{ end }}
+
+
+      <img
+        id="gravatar"
+        src="{{ .Permalink }}"
+        alt="{{ i18n "GravatarAltText" }}"
+        width="{{ .Width }}"
+        height="{{ .Height }}"
+      />
+    </picture>
+  {{ end }}
+</div>

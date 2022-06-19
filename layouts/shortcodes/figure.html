@@ -2,13 +2,23 @@
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end -}}
-    <img src="{{ .Get "src" }}"
-         {{- if or (.Get "alt") (.Get "caption") }}
-         alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
-         {{- end -}}
-         {{- with .Get "width" }} width="{{ . }}"{{ end -}}
-         {{- with .Get "height" }} height="{{ . }}"{{ end -}}
-    /><!-- Closing img tag -->
+    <picture>
+        {{ with (.Page.Resources.GetMatch (substr (.Get "src") 2)) }}
+            {{ if and (eq .MediaType.MainType "image") (ne .MediaType.SubType "gif") }}
+                {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
+                    <source srcset="{{ .Permalink }}" type="image/webp">
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+        <img src="{{ .Get "src" }}"
+             {{- if or (.Get "alt") (.Get "caption") }}
+             alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
+             {{- end -}}
+             {{- with .Get "width" }} width="{{ . }}"{{ end -}}
+             {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+        /><!-- Closing img tag -->
+    </picture>
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
         <figcaption>

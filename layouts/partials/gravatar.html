@@ -1,32 +1,32 @@
 {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
+{{ $gravatar := resources.GetRemote $gravatarUrl }}
+{{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
+
+{{ $gravatarUrl2x := printf "https://www.gravatar.com/avatar/%s?s=400" (md5 .Site.Params.email) }}
+{{ $gravatar2x := resources.GetRemote $gravatarUrl2x }}
+{{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
 
 
 <div
   class="relative z-0 mb-8 shrink-0 overflow-hidden rounded-full border-4 border-divider sm:mr-8 sm:mb-0"
+  style="width: {{ $gravatar.Width }}px; height: {{ $gravatar.Height }}px;"
 >
-  {{ with resources.GetRemote $gravatarUrl }}
-    {{ $blurred := .Filter (images.GaussianBlur 6) }}
+  {{ $blurred := $gravatar.Filter (images.GaussianBlur 6) }}
+  <div
+    class="absolute inset-0 -z-1 h-full w-full"
+    style="background: url('data:image/png;base64,{{ $blurred.Content | base64Encode }}') no-repeat;"
+  ></div>
+
+  <picture>
+    <source srcset="{{ $gravatarUrlWebp.Permalink }} 1x" type="image/webp" />
+    <source srcset="{{ $gravatarUrl2xWebp.Permalink }} 2x" type="image/webp" />
+
     <img
-      class="absolute inset-0 -z-1 h-full w-full"
-      width="{{ .Width }}"
-      height="{{ .Height }}"
-      src="data:image/png;base64,{{ $blurred.Content | base64Encode }}"
-      alt=""
+      id="gravatar"
+      srcset="{{ $gravatarUrl }} 1x, {{ $gravatarUrl2x }} 2x"
+      alt="{{ i18n "GravatarAltText" }}"
+      width="{{ $gravatar.Width }}"
+      height="{{ $gravatar.Height }}"
     />
-
-    <picture>
-      {{ with .Resize (printf "%dx%d webp picture" .Width .Height) }}
-        <source srcset="{{ .Permalink }}" type="image/webp" />
-      {{ end }}
-
-
-      <img
-        id="gravatar"
-        src="{{ .Permalink }}"
-        alt="{{ i18n "GravatarAltText" }}"
-        width="{{ .Width }}"
-        height="{{ .Height }}"
-      />
-    </picture>
-  {{ end }}
+  </picture>
 </div>

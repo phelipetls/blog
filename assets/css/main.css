@@ -239,9 +239,12 @@ body.dark {
 }
 
 .pretty-scrollbar {
-  border-radius: 0.5rem;
   scrollbar-color: rgb(var(--black-100)) transparent;
   scrollbar-width: thin;
+}
+
+.pretty-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 6px;
 }
 
 .no-scrollbar {

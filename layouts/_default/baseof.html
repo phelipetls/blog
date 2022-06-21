@@ -41,21 +41,8 @@
     </div>
 
     {{ range (.Resources.Match "*.js") }}
-      <script type="module" src="{{ .RelPermalink }}"></script>
+      <script type="module" defer src="{{ .RelPermalink }}"></script>
     {{ end }}
-
-    {{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
-    {{ $languageButtonScript := resources.Get "js/language-button.js" | js.Build }}
-    {{ $navScript := resources.Get "js/nav.js" | js.Build }}
-
-    {{ $bundle := slice $navScript $themeButtonScript $languageButtonScript | resources.Concat "js/bundle.js" }}
-
-    {{ if hugo.IsProduction }}
-      {{ $bundle = $bundle | minify }}
-    {{ end }}
-
-
-    <script type="module" src="{{ $bundle.Permalink }}"></script>
 
     {{ block "scripts" . }}
     {{ end }}

@@ -1,9 +1,9 @@
 ---
-title: "Resumé"
-description: My Resumé/Curriculum Vitae in PDF
+title: "Résumé"
+description: My Résumé/Curriculum Vitae in PDF
 menu:
   main:
-    name: Resumé
+    name: Résumé
     identifier: resume
     url: /resume/
     weight: 9999

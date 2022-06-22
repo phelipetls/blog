@@ -4,18 +4,7 @@
 
 
 <article class="card grid grid-cols-1 rounded-md sm:grid-cols-[40%_60%]">
-  <div
-    class="relative z-0"
-    style="width={{ $screenshot.Width }}px; height={{ $screenshot.Height }}px;"
-  >
-    {{ $blurred := $screenshot.Filter (images.GaussianBlur 6) }}
-
-
-    <div
-      class="absolute inset-0 -z-1 h-full w-full rounded-t-md sm:rounded-l-md sm:rounded-tr-none"
-      style="background: url({{ $blurred.Permalink }}) no-repeat;"
-    ></div>
-
+  <div class="relative z-0">
     <picture>
       {{ with $screenshot.Resize (printf "%dx%d webp" $screenshot.Width $screenshot.Height) }}
         <source srcset="{{ .Permalink }}" type="image/webp" />

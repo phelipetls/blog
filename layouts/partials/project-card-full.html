@@ -1,5 +1,3 @@
-{{ $isUnmaintained := isset .Params "unmaintained" }}
-
 {{ $screenshot := .Resources.GetMatch "screenshot.png" }}
 
 
@@ -20,7 +18,7 @@
       />
     </picture>
 
-    {{ if $isUnmaintained }}
+    {{ if isset .Params "unmaintained" }}
       <div
         class="chip absolute top-0 left-2 -translate-y-1/2 bg-warn px-2 py-1 text-beige-100"
       >

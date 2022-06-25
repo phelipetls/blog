@@ -239,7 +239,7 @@ body.dark {
 }
 
 .pretty-scrollbar {
-  scrollbar-color: rgb(var(--black-100)) transparent;
+  scrollbar-color: rgb(var(--divider)) transparent;
   scrollbar-width: thin;
 }
 

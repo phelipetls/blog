@@ -26,9 +26,6 @@ other = 'Posts navigation'
 [Contacts]
 other = 'Contacts'
 
-[DateFormat]
-other = '{{ .Format "January 02, 2006" }}'
-
 [ThemeIcon]
 other = 'Theme icon'
 

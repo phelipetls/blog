@@ -22,13 +22,15 @@
   <meta name="keywords" content="{{ $tagsSeparatedByComma }}" />
 {{ end }}
 
-{{ with resources.GetRemote "https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&display=swap" }}
-  <style>
-    {{ .Content | safeCSS }}
-  </style>
+{{ $fontsCss := resources.Get "css/fonts.css" }}
+
+{{ if hugo.IsProduction }}
+  {{ $fontsCss = $fontsCss | minify }}
 {{ end }}
 
-{{ $css := resources.Get "css/main.css" | postCSS }}
+<style>
+  {{ $fontsCss.Content | safeCSS }}
+</style> {{ $css := resources.Get "css/main.css" | postCSS }}
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | resources.PostProcess }}
 {{ else }}

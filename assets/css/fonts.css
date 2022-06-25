@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/fira-sans-v16-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/fonts/fira-sans-v16-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/merriweather-v30-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/merriweather-v30-latin-700.woff2') format('woff2');
+}

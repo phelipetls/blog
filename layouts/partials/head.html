@@ -12,12 +12,12 @@
 <meta name="author" content="{{ site.Author.name }}" />
 <meta name="color-scheme" content="dark light" />
 
-{{ define "partials/getTaxonomyTitle" }}
+{{ define "partials/get-title" }}
   {{- .Title -}}
 {{ end }}
 
 {{ with (.GetTerms "tags") }}
-  {{ $tags := (apply . "partial" "getTaxonomyTitle" ".") }}
+  {{ $tags := (apply . "partial" "get-title" ".") }}
   {{ $tagsSeparatedByComma := (delimit $tags ", ") }}
   <meta name="keywords" content="{{ $tagsSeparatedByComma }}" />
 {{ end }}

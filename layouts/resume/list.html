@@ -52,7 +52,7 @@
     {{ $pdfjs = $pdfjs | minify }}
   {{ end }}
 
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink)) }}
+  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink "pdfjsWorkerUrl" $pdfjsWorker.Permalink)) }}
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
   {{ end }}

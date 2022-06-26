@@ -266,7 +266,7 @@ main + footer {
 .chroma .hl {
   /* unmaintainable hack to fix offset due to 4px border */
   padding-left: calc(2rem - 4px);
-  @apply -mx-8 w-auto border-l-2 border-primary bg-black-300 pr-8 !important;
+  @apply -mx-8 w-auto border-l-2 border-primary bg-black-400 pr-8 !important;
 }
 
 [data-blog-post] .katex-display {

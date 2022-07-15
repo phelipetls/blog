@@ -1,6 +1,8 @@
 <ul class="gallery m-0 flex list-none flex-row gap-4">
   {{ range $i, $post := . }}
-    <li class="relative max-w-full snap-center lg:max-w-md lg:snap-start">
+    <li
+      class="relative max-w-full shrink-0 snap-center lg:max-w-md lg:snap-start"
+    >
       {{ partial "post-card.html" $post }}
 
       {{ if (eq $i 0) }}

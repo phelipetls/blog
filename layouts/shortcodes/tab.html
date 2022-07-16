@@ -1,0 +1,11 @@
+{{ $tab := .Get 0 }}
+{{ $tabId := printf "%s-%s" (.Parent.Get "id") ($tab | lower) }}
+
+
+<div
+  role="tabpanel"
+  id="tabpanel-{{ $tabId }}"
+  aria-labelledby="tab-{{ $tabId }}"
+>
+  {{ .Inner }}
+</div>

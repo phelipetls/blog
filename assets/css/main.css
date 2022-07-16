@@ -135,6 +135,10 @@ body.dark {
     @apply my-8;
   }
 
+  [role='tabpanel'] :is(pre, figure, blockquote) {
+    @apply my-0;
+  }
+
   pre {
     @apply -mx-page-padding overflow-x-auto bg-background py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
@@ -176,6 +180,14 @@ body.dark {
 
   ::selection {
     @apply bg-foreground text-background;
+  }
+
+  [role='tab'] {
+    @apply rounded-t-md p-2;
+  }
+
+  [role='tab'][aria-selected='true'] {
+    @apply border-t-2 border-primary bg-background;
   }
 }
 

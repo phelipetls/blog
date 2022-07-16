@@ -87,12 +87,13 @@
 {{ define "scripts" }}
   {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
   {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.js" }}
+  {{ $tabsJs := resources.Get "/js/tabs.js" }}
   {{ $copyCodeButtonScript :=
     resources.Get "js/copy-code-button.js"
     | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
   }}
 
-  {{ $bundle := slice $liteYoutubeEmbedJs $themeUtterancesJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
+  {{ $bundle := slice $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $bundle = $bundle | minify }}

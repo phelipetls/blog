@@ -38,6 +38,14 @@ function createCopyCodeButton() {
 
   button.innerHTML = clipboardIconSvg
 
+  button.addEventListener('focus', function () {
+    button.classList.add('opacity-100')
+  })
+
+  button.addEventListener('blur', function () {
+    button.classList.remove('opacity-100')
+  })
+
   button.addEventListener('click', async function () {
     const codeBlock = button.parentElement.querySelector('pre code')
     await navigator.clipboard.writeText(codeBlock.textContent.trimEnd())

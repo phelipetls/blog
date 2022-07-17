@@ -189,6 +189,10 @@ body.dark {
   [role='tab'][aria-selected='true'] {
     @apply border-t-2 border-primary bg-background;
   }
+
+  [role='tabpanel'] {
+    @apply rounded-b-md rounded-tr-md bg-background py-8 px-page-padding;
+  }
 }
 
 @layer components {

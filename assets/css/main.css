@@ -190,8 +190,12 @@ body.dark {
     @apply border-t-2 border-primary bg-background;
   }
 
+  [role='tablist'] {
+    @apply ml-page-padding;
+  }
+
   [role='tabpanel'] {
-    @apply rounded-b-md rounded-tr-md bg-background py-8 px-page-padding;
+    @apply rounded-md bg-background py-8 px-page-padding;
   }
 }
 

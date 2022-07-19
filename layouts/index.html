@@ -112,7 +112,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $marqueeSkillIcons := resources.Get "/js/marquee-skill-icons.js" }}
+  {{ $marqueeSkillIcons := resources.Get "/js/marquee-skill-icons.js" | js.Build }}
 
   {{ if hugo.IsProduction }}
     {{ $marqueeSkillIcons = $marqueeSkillIcons | minify }}

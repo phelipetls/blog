@@ -1,14 +1,11 @@
 {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
 {{ $gravatar := resources.GetRemote $gravatarUrl }}
-{{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
 
 {{ $gravatarUrl2x := printf "https://www.gravatar.com/avatar/%s?s=400" (md5 .Site.Params.email) }}
 {{ $gravatar2x := resources.GetRemote $gravatarUrl2x }}
-{{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
 
 {{ $gravatarUrl3x := printf "https://www.gravatar.com/avatar/%s?s=600" (md5 .Site.Params.email) }}
 {{ $gravatar3x := resources.GetRemote $gravatarUrl2x }}
-{{ $gravatarUrl3xWebp := $gravatar3x.Resize (printf "%dx%d webp picture" $gravatar3x.Width $gravatar3x.Height) }}
 
 
 <div
@@ -22,14 +19,22 @@
   ></div>
 
   <picture>
-    <source
-      srcset="
-        {{ $gravatarUrlWebp.Permalink }} 1x,
-        {{ $gravatarUrl2xWebp.Permalink }} 2x,
-        {{ $gravatarUrl3xWebp.Permalink }} 3x
-      "
-      type="image/webp"
-    />
+    {{ if hugo.IsProduction }}
+      {{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
+      {{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
+      {{ $gravatarUrl3xWebp := $gravatar3x.Resize (printf "%dx%d webp picture" $gravatar3x.Width $gravatar3x.Height) }}
+
+
+      <source
+        srcset="
+          {{ $gravatarUrlWebp.Permalink }} 1x,
+          {{ $gravatarUrl2xWebp.Permalink }} 2x,
+          {{ $gravatarUrl3xWebp.Permalink }} 3x
+        "
+        type="image/webp"
+      />
+    {{ end }}
+
 
     <img
       id="gravatar"

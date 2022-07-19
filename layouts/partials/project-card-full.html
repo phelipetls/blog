@@ -4,8 +4,10 @@
 <article class="card grid grid-cols-1 rounded-md sm:grid-cols-[40%_60%]">
   <div class="relative z-0">
     <picture>
-      {{ with $screenshot.Resize (printf "%dx%d webp" $screenshot.Width $screenshot.Height) }}
-        <source srcset="{{ .Permalink }}" type="image/webp" />
+      {{ if hugo.IsProduction }}
+        {{ with $screenshot.Resize (printf "%dx%d webp" $screenshot.Width $screenshot.Height) }}
+          <source srcset="{{ .Permalink }}" type="image/webp" />
+        {{ end }}
       {{ end }}
 
 

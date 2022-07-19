@@ -107,6 +107,12 @@
 
   {{ if .Params.react }}
     {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build }}
+
+    {{ if hugo.IsProduction }}
+      {{ $reactBundle := $reactBundle | minify }}
+    {{ end }}
+
+
     <script src="{{ $reactBundle.Permalink }}"></script>
   {{ end }}
 {{ end }}

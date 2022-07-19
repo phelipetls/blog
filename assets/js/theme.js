@@ -61,3 +61,11 @@ window.addEventListener('load', function () {
   document.body.removeAttribute('data-preload')
   dispatchNewThemeEvent(storedThemeOption)
 })
+
+window.addEventListener('storage', function (e) {
+  const newTheme = e.newValue
+  if (e.key === '__theme') {
+    // @ts-expect-error
+    window.__setTheme(newTheme)
+  }
+})

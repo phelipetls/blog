@@ -88,7 +88,7 @@
       </a>
     </h2>
 
-    <div class="col-full my-8 h-12 w-full overflow-x-hidden">
+    <div class="col-full mt-8 h-12 w-full overflow-x-hidden">
       <div data-skill-icons-marquee class="flex h-full justify-center">
         <img
           data-skill-icons
@@ -99,7 +99,7 @@
       </div>
     </div>
 
-    <div class="gallery-wrapper pretty-scrollbar mb-8 sm:mb-16">
+    <div class="gallery-wrapper pretty-scrollbar mb-8 py-8 sm:mb-16">
       <ul class="gallery m-0 list-none">
         {{ range (where $projects "Params.unmaintained" "!=" "true") }}
           <li class="max-w-fit flex-none snap-center">

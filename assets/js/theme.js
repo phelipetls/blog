@@ -59,7 +59,6 @@ window.__setTheme(storedThemeOption)
 
 window.addEventListener('load', function () {
   document.body.removeAttribute('data-preload')
-  dispatchNewThemeEvent(storedThemeOption)
 })
 
 window.addEventListener('storage', function (e) {

@@ -24,8 +24,9 @@
       </a>
     {{ end }}
 
-    {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit (first 3 .Params.icons) ",") }}
-    {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit .Params.icons ", " (printf " %s " (i18n "And"))) }}
+    {{ $skillIcons := (first 3 .Params.icons) }}
+    {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit $skillIcons ",") }}
+    {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit $skillIcons ", " (printf " %s " (i18n "And"))) }}
 
 
     <img src="{{ $skillIconsUrl }}" alt="{{ $skillIconsAltText }}" />

@@ -2,14 +2,12 @@ import { initialize } from './listbox'
 
 const button = document.querySelector('[data-theme-button]')
 
-function setOptionTheme(item) {
-  window.__setTheme(item.dataset.theme)
-}
-
 initialize(button, {
-  onClick: setOptionTheme,
-  isSelectedItem: function (item) {
-    return item.dataset.theme === localStorage.getItem('__theme')
+  onClick: function (listItem) {
+    window.__setTheme(listItem.dataset.theme)
+  },
+  isSelectedItem: function (listItem) {
+    return listItem.dataset.theme === localStorage.getItem('__theme')
   },
 })
 

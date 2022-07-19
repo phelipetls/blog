@@ -31,8 +31,8 @@ function getThemeFromChoice(themeChoice) {
 
 /** @type {(themeChoice: ThemeChoice) => void} */
 function setTheme(themeChoice) {
-  const newTheme = getThemeFromChoice(themeChoice)
-  document.body.classList.toggle('dark', newTheme === 'dark')
+  const theme = getThemeFromChoice(themeChoice)
+  document.body.classList.toggle('dark', theme === 'dark')
 }
 
 /** @type {(themeChoice: ThemeChoice) => void} */

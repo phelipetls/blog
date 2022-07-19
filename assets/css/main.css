@@ -103,6 +103,10 @@ body.dark {
     @apply mb-4 leading-relaxed;
   }
 
+  article details {
+    @apply mb-4;
+  }
+
   a {
     @apply border-b-2 border-divider no-underline hover:border-primary;
   }

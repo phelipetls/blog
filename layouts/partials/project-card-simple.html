@@ -1,5 +1,5 @@
 <article class="card flex h-full w-full max-w-xs flex-col justify-between p-8">
-  <div>
+  <div class="">
     <header class="mb-4 flex items-center gap-2">
       {{ if .Params.website }}
         <h3 class="m-0 text-2xl">
@@ -13,7 +13,7 @@
     {{ .Content }}
   </div>
 
-  <div class="flex gap-2">
+  <div class="flex justify-between gap-2">
     {{ with .Params.github }}
       <a
         class="btn btn-icon border-0 text-xl"
@@ -23,5 +23,14 @@
         {{ partial "svgs/github.svg" }}
       </a>
     {{ end }}
+
+    {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit (first 3 .Params.icons) ",") }}
+
+
+    <div
+      data-skill-icons-bg-image
+      class="flex-1"
+      style="background-image: url('{{ $skillIconsUrl }}'); background-repeat: no-repeat; background-size: contain; background-position: right;"
+    ></div>
   </div>
 </article>

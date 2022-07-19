@@ -102,6 +102,8 @@
 
   <script src="{{ $bundle.Permalink }}"></script>
 
-  {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build }}
-  <script src="{{ $reactBundle.Permalink }}"></script>
+  {{ if .Params.react }}
+    {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build }}
+    <script src="{{ $reactBundle.Permalink }}"></script>
+  {{ end }}
 {{ end }}

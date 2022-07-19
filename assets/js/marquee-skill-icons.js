@@ -1,12 +1,14 @@
 // @ts-check
-import {
-  changeUrlTheme,
-  setCssBackgroundImageUrl,
-} from 'js/theme-skill-icons.js'
+import { changeUrlTheme } from 'js/theme-skill-icons.js'
 
 /** @type {HTMLElement} */
 const marquee = document.querySelector('[data-skill-icons-marquee]')
 const skillIconsImage = marquee.querySelector('img')
+
+/** @type {(elem: HTMLElement, url: string) => void} */
+function setCssBackgroundImageUrl(elem, url) {
+  elem.style.backgroundImage = `url('${url}')`
+}
 
 // Wait for the skill-icons image to load to grab its width
 skillIconsImage.onload = function () {

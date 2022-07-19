@@ -25,12 +25,9 @@
     {{ end }}
 
     {{ $skillIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light" (delimit (first 3 .Params.icons) ",") }}
+    {{ $skillIconsAltText := printf "%s: %s" (i18n "Tech") (delimit .Params.icons ", " (printf " %s " (i18n "And"))) }}
 
 
-    <div
-      data-skill-icons-bg-image
-      class="flex-1"
-      style="background-image: url('{{ $skillIconsUrl }}'); background-repeat: no-repeat; background-size: contain; background-position: right;"
-    ></div>
+    <img src="{{ $skillIconsUrl }}" alt="{{ $skillIconsAltText }}" />
   </div>
 </article>

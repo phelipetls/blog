@@ -25,6 +25,6 @@ document.body.addEventListener('newTheme', function (e) {
     buttonIcon.setAttribute('href', icon)
   }
 
-  const theme = e.detail.theme
-  changeButtonIcon(theme)
+  const themeChoice = e.detail.themeChoice
+  changeButtonIcon(themeChoice)
 })

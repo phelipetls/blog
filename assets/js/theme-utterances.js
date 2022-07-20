@@ -1,5 +1,10 @@
 document.body.addEventListener('newTheme', function (e) {
   const iframe = document.querySelector('.utterances-frame')
+
+  if (!iframe) {
+    return
+  }
+
   iframe.contentWindow.postMessage(
     {
       type: 'set-theme',

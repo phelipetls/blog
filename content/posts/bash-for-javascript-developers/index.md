@@ -101,7 +101,7 @@ Hello          World
 
 # Variables
 
-This is how you assign a value to a variable.
+Here's how to create a variable in Bash.
 
 {{< tabs tabs="Bash JavaScript" id="variables" >}}
   {{< tab "Bash" >}}
@@ -118,19 +118,15 @@ This is how you assign a value to a variable.
   {{< /tab >}}
 {{< /tabs >}}
 
-Notice the syntax for assigning a variable. `foo = bar` won't work, instead
-`foo` will be interpreted as a command and `= bar` as arguments.
-
-`foo` will be global by default. There isn't quite an equivalent in Bash to
-JavaScript's `const`, `var` or `let`, but it is possible to declare a variable
-that is local to the scope a function, which we'll see later.
-
-Bash has built-in variables, for instance `$HOME` is the current user's home
-directory and `$BASH_VERSION` is Bash's version.
+Pay attention to the syntax used for assignment: `foo = bar` won't work,
+instead `foo` will be interpreted as a command and `= bar` as its arguments.
 
 Variables may also be called parameters, or, better saying, they're a special
-type of parameters, a named parameter. There are also special parameters, like
-`$_` which holds the argument argument of the last executed command.
+type of parameters, a named parameter.
+
+Bash has built-in variables, like `$HOME` and `$BASH_VERSION`, and special
+parameters, like `$_` which holds the last argument passed to the last executed
+command.
 
 # Parameter expansion
 

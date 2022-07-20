@@ -201,6 +201,30 @@ body.dark {
   [role='tabpanel'] {
     @apply rounded-md bg-background py-8 px-page-padding;
   }
+
+  nav#TableOfContents {
+    @apply sticky top-4 max-h-screen w-full overflow-y-auto pb-8;
+  }
+
+  nav#TableOfContents ol {
+    @apply m-0 list-none pl-2;
+  }
+
+  nav#TableOfContents > ol li {
+    @apply whitespace-nowrap border-l-2 border-divider pl-4 text-divider transition-colors duration-100 ease-in-out;
+  }
+
+  nav#TableOfContents > ol li[data-active] {
+    @apply border-primary text-primary;
+  }
+
+  nav#TableOfContents > ol ol li {
+    @apply border-l-0 pl-0;
+  }
+
+  nav#TableOfContents > ol li a {
+    @apply border-0;
+  }
 }
 
 @layer components {

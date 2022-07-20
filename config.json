@@ -34,6 +34,10 @@
       "renderer": {
         "unsafe": true
       }
+    },
+    "tableOfContents": {
+      "ordered": true,
+      "startLevel": 1
     }
   },
   "params": {

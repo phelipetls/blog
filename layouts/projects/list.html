@@ -13,7 +13,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" }}
+  {{ $skillIconsTheme := resources.Get "/js/theme-skill-icons.js" | js.Build }}
 
   {{ if hugo.IsProduction }}
     {{ $skillIconsTheme = $skillIconsTheme | minify }}

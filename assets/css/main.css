@@ -65,7 +65,7 @@ body.dark {
 
 @layer base {
   :root {
-    @apply text-base sm:text-lg;
+    @apply scroll-smooth text-base sm:text-lg;
   }
 
   body {

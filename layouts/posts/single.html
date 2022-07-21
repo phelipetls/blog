@@ -37,7 +37,13 @@
             {{ .Content }}
           </div>
 
-          <aside class="hidden w-full sm:block">
+          <aside
+            class="sticky top-0 hidden max-h-screen w-full overflow-y-auto pb-8 pl-8 sm:block"
+          >
+            <h2 class="mt-8 mb-4">
+              {{ i18n "TableOfContents" }}
+            </h2>
+
             {{ .TableOfContents }}
           </aside>
         </div>

@@ -202,10 +202,6 @@ body.dark {
     @apply rounded-md bg-background py-8 px-page-padding;
   }
 
-  nav#TableOfContents {
-    @apply sticky top-4 max-h-screen w-full overflow-y-auto pb-8;
-  }
-
   nav#TableOfContents ol {
     @apply m-0 list-none pl-2;
   }

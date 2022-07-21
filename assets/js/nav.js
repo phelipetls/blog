@@ -21,6 +21,8 @@ function setNavPosition() {
     nav.style.transform = `translateY(0)`
   }
 
+  // document.documentElement.classList.toggle('scroll-pt-nav-height', isScrollingDown)
+
   lastScrollPosition = Math.max(newScrollPosition, 0)
 }
 

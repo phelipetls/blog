@@ -1,36 +1,42 @@
+// @ts-check
 const toc = document.querySelector('nav#TableOfContents')
 
+/** @type {(listItem: HTMLLIElement) => void} */
 function activate(listItem) {
   listItem.setAttribute('data-active', '')
 }
 
+/** @type {(listItem: HTMLLIElement) => void} */
 function reset(listItem) {
   listItem.removeAttribute('data-active')
 }
 
+/** @type {() => void} */
 function resetToc() {
   toc.querySelectorAll('li').forEach(reset)
 }
 
+/** @type {(heading: HTMLHeadingElement) => HTMLLIElement} */
 function getTocItemByHeading(heading) {
   const anchorHref = heading.querySelector('a').getAttribute('href')
   const tocAnchorElem = toc.querySelector(`li a[href="${anchorHref}"]`)
   return tocAnchorElem.closest('li')
 }
 
+/** @type {(initialElem: HTMLHeadingElement) => HTMLHeadingElement[]} */
 function getAllPreviousHeadingsUntilH2(initialElem) {
-  const headings = []
+  const headings = /** @type {HTMLHeadingElement[]} */ []
 
   let prevElem = initialElem.previousElementSibling
 
   do {
     if (prevElem.tagName === 'H2') {
-      headings.push(prevElem)
+      headings.push(/** @type {HTMLHeadingElement} */ (prevElem))
       break
     }
 
     if (['H3', 'H4', 'H5', 'H6'].includes(prevElem.tagName)) {
-      headings.push(prevElem)
+      headings.push(/** @type {HTMLHeadingElement} */ (prevElem))
     }
 
     prevElem = prevElem.previousElementSibling
@@ -40,6 +46,7 @@ function getAllPreviousHeadingsUntilH2(initialElem) {
   return headings
 }
 
+/** @type {(heading: HTMLHeadingElement) => void} */
 function handleChange(heading) {
   if (heading.tagName === 'H2') {
     activate(getTocItemByHeading(heading))
@@ -59,7 +66,7 @@ const observer = new IntersectionObserver((entries) => {
 
     if (entry.isIntersecting) {
       resetToc()
-      handleChange(heading)
+      handleChange(/** @type {HTMLHeadingElement} */ (heading))
     }
   })
 })

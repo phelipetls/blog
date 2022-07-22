@@ -208,27 +208,35 @@ body.dark {
   }
 
   nav#TableOfContents ol {
-    @apply m-0 list-none;
+    @apply m-0 list-none indent-4;
   }
 
   nav#TableOfContents ol ol {
-    @apply pl-4;
+    @apply indent-6;
+  }
+
+  nav#TableOfContents ol ol ol {
+    @apply indent-8;
+  }
+
+  nav#TableOfContents ol ol ol ol {
+    @apply indent-10;
   }
 
   nav#TableOfContents > ol li {
-    @apply whitespace-nowrap border-l-2 border-divider pl-4 text-divider transition-colors duration-100 ease-in-out;
+    @apply relative before:absolute before:top-0 before:left-0 before:h-full before:w-[2px] before:bg-divider before:content-[''];
   }
 
   nav#TableOfContents > ol li[data-active] {
-    @apply border-primary text-primary;
+    @apply before:bg-primary;
   }
 
-  nav#TableOfContents > ol ol li {
-    @apply border-l-0 pl-0;
+  nav#TableOfContents > ol li[data-active] > a {
+    @apply text-primary;
   }
 
   nav#TableOfContents > ol li a {
-    @apply border-0;
+    @apply whitespace-nowrap border-b-0 transition-colors duration-100 ease-in-out;
   }
 }
 

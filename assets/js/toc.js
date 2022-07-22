@@ -32,43 +32,6 @@ function getHeadingByTocItem(tocItem) {
     .closest('h2, h3, h4, h5, h6')
 }
 
-/** @type {(initialElem: HTMLHeadingElement) => HTMLHeadingElement[]} */
-function getAllPreviousHeadingsUntilH2(initialElem) {
-  const headings = /** @type {HTMLHeadingElement[]} */ []
-
-  let prevElem = initialElem.previousElementSibling
-
-  do {
-    if (prevElem.tagName === 'H2') {
-      headings.push(/** @type {HTMLHeadingElement} */ (prevElem))
-      break
-    }
-
-    if (['H3', 'H4', 'H5', 'H6'].includes(prevElem.tagName)) {
-      headings.push(/** @type {HTMLHeadingElement} */ (prevElem))
-    }
-
-    prevElem = prevElem.previousElementSibling
-    // eslint-disable-next-line no-constant-condition
-  } while (true)
-
-  return headings
-}
-
-/** @type {(heading: HTMLHeadingElement) => void} */
-function activateTocItemByHeading(heading) {
-  if (heading.tagName === 'H2') {
-    activate(getTocItemByHeading(heading))
-    return
-  }
-
-  activate(getTocItemByHeading(heading))
-
-  getAllPreviousHeadingsUntilH2(heading).forEach((prevSiblingHeading) =>
-    activate(getTocItemByHeading(prevSiblingHeading))
-  )
-}
-
 for (const tocListItem of toc.querySelectorAll('li a')) {
   // Add a onClick handler to add scroll-padding-top to document element,
   // equivalent to the navbar height, if the target heading is above the
@@ -96,7 +59,7 @@ const observer = new IntersectionObserver((entries) => {
 
     if (entry.isIntersecting) {
       resetToc()
-      activateTocItemByHeading(/** @type {HTMLHeadingElement} */ (heading))
+      activate(getTocItemByHeading(/** @type {HTMLHeadingElement} */ (heading)))
     }
   })
 })

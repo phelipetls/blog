@@ -115,7 +115,8 @@
   <script src="{{ $bundle.Permalink }}"></script>
 
   {{ if .Params.react }}
-    {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build }}
+    {{ $defines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
+    {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build (dict "defines" $defines "minify" true) }}
 
     {{ if hugo.IsProduction }}
       {{ $reactBundle := $reactBundle | minify }}

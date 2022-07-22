@@ -33,5 +33,8 @@
     {{ partial "partials/toc-title.html" . }}
   </summary>
 
+  <!-- TODO: since we use two table of contents, there are two elements with
+    the same ID in the document, which can be a problem and overall is not
+    valid HTML -->
   {{ .TableOfContents }}
 </details>

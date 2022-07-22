@@ -148,6 +148,10 @@ body.dark {
     @apply -mx-page-padding overflow-x-auto bg-background py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
+  [role='tabpanel'] pre {
+    @apply mx-0 rounded-md;
+  }
+
   :not(pre) > code {
     @apply px-1 font-bold;
   }

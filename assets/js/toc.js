@@ -56,7 +56,7 @@ function getAllPreviousHeadingsUntilH2(initialElem) {
 }
 
 /** @type {(heading: HTMLHeadingElement) => void} */
-function handleChange(heading) {
+function activateTocItemByHeading(heading) {
   if (heading.tagName === 'H2') {
     activate(getTocItemByHeading(heading))
     return
@@ -96,7 +96,7 @@ const observer = new IntersectionObserver((entries) => {
 
     if (entry.isIntersecting) {
       resetToc()
-      handleChange(/** @type {HTMLHeadingElement} */ (heading))
+      activateTocItemByHeading(/** @type {HTMLHeadingElement} */ (heading))
     }
   })
 })

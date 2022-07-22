@@ -208,7 +208,11 @@ body.dark {
   }
 
   nav#TableOfContents ol {
-    @apply m-0 list-none pl-2;
+    @apply m-0 list-none;
+  }
+
+  nav#TableOfContents ol ol {
+    @apply pl-4;
   }
 
   nav#TableOfContents > ol li {
@@ -340,6 +344,11 @@ svg.feather {
 
 .feather-loader {
   animation-duration: 1.5s;
+}
+
+details[data-toc-wrapper] summary::marker,
+details[data-toc-wrapper] summary::-webkit-details-marker {
+  display: none;
 }
 
 @keyframes tooltip-animation {

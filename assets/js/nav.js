@@ -9,32 +9,33 @@ if (activeNavLink) {
   })
 }
 
-let lastScrollPosition = window.scrollY
+function hideNav() {
+  nav.style.transform = `translateY(-100%)`
+}
 
-function setNavPosition() {
-  const newScrollPosition = window.scrollY
-  const isScrollingDown = newScrollPosition > lastScrollPosition
-
-  if (isScrollingDown) {
-    nav.style.transform = `translateY(-100%)`
-  } else {
-    nav.style.transform = `translateY(0)`
-  }
-
-  // document.documentElement.classList.toggle('scroll-pt-nav-height', isScrollingDown)
-
-  lastScrollPosition = Math.max(newScrollPosition, 0)
+function showNav() {
+  nav.style.transform = `translateY(0)`
 }
 
 let timeout
+let lastScrollPosition = window.scrollY
 
 function handleScroll() {
   if (timeout) {
     window.cancelAnimationFrame(timeout)
   }
 
+  const newScrollPosition = window.scrollY
+  const isScrollingDown = newScrollPosition > lastScrollPosition
+
   timeout = window.requestAnimationFrame(function () {
-    setNavPosition()
+    if (isScrollingDown) {
+      hideNav()
+    } else {
+      showNav()
+    }
+
+    lastScrollPosition = Math.max(newScrollPosition, 0)
   })
 }
 

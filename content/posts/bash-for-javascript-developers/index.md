@@ -148,18 +148,18 @@ Here's how to do string interpolation:
 {{< tabs tabs="Bash JavaScript" id="string-interpolation" >}}
   {{< tab "Bash" >}}
 {{< highlight bash >}}
-  $ foo=bar
-  $ echo "Here is the content of: $foo"
-  Here is the content of: bar
-  $ echo "This is also valid: ${foo}"
-  This is also valid: bar
+$ foo=bar
+$ echo "Here is the content of: $foo"
+Here is the content of: bar
+$ echo "This is also valid: ${foo}"
+This is also valid: bar
 {{< /highlight >}}
   {{< /tab >}}
 
   {{< tab "JavaScript" >}}
 {{< highlight javascript >}}
-  var foo = "bar"
-  console.log(`Here is the content of: ${foo}`)
+var foo = "bar"
+console.log(`Here is the content of: ${foo}`)
 {{< /highlight >}}
   {{< /tab >}}
 {{< /tabs >}}

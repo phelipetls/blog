@@ -1,5 +1,6 @@
 // @ts-check
 const toc = document.querySelector('nav#TableOfContents')
+const blogPost = document.querySelector('[data-blog-post]')
 
 /** @type {(listItem: HTMLLIElement) => void} */
 function activate(listItem) {
@@ -26,8 +27,7 @@ function getTocItemByHeading(heading) {
 /** @type {(tocItem: HTMLLIElement) => HTMLHeadingElement} */
 function getHeadingByTocItem(tocItem) {
   const anchorHref = tocItem.querySelector('a').getAttribute('href')
-  return document
-    .querySelector('[data-blog-post]')
+  return blogPost
     .querySelector(`a[href="${anchorHref}"]`)
     .closest('h2, h3, h4, h5, h6')
 }
@@ -101,9 +101,7 @@ const observer = new IntersectionObserver((entries) => {
   })
 })
 
-const headingsInBlogPost = document
-  .querySelector('[data-blog-post]')
-  .querySelectorAll('h2, h3, h4, h4, h6')
+const headingsInBlogPost = blogPost.querySelectorAll('h2, h3, h4, h4, h6')
 
 for (const headingInBlogPost of headingsInBlogPost) {
   observer.observe(headingInBlogPost)

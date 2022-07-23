@@ -18,23 +18,24 @@
   </div>
 {{ end }}
 
-
-<div class="hidden lg:block">
-  {{ partial "partials/toc-title.html" . }}
-  {{ .TableOfContents }}
-</div>
-
-<details
-  data-toc-wrapper
-  class="group lg:hidden"
-  aria-label="{{ i18n "TableOfContents" }}"
->
-  <summary class="list-none">
+{{ if not (eq .TableOfContents `<nav id="TableOfContents"></nav>`) }}
+  <div class="hidden lg:block">
     {{ partial "partials/toc-title.html" . }}
-  </summary>
+    {{ .TableOfContents }}
+  </div>
 
-  <!-- TODO: since we use two table of contents, there are two elements with
-    the same ID in the document, which can be a problem and overall is not
-    valid HTML -->
-  {{ .TableOfContents }}
-</details>
+  <details
+    data-toc-wrapper
+    class="group lg:hidden"
+    aria-label="{{ i18n "TableOfContents" }}"
+  >
+    <summary class="list-none">
+      {{ partial "partials/toc-title.html" . }}
+    </summary>
+
+    <!-- TODO: since we use two table of contents, there are two elements with
+      the same ID in the document, which can be a problem and overall is not
+      valid HTML -->
+    {{ .TableOfContents }}
+  </details>
+{{ end }}

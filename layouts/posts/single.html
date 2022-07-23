@@ -82,6 +82,12 @@
 {{ end }}
 
 {{ define "head" }}
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
   {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
   {{ $liteYoutubeEmbedCss := resources.Get "/css/lite-yt-embed.css" | postCSS }}
 

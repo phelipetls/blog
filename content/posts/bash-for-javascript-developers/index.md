@@ -1,16 +1,16 @@
 ---
 title: Bash for JavaScript developers
 date: 2022-07-15
-tags: [javascript, react, bash]
+tags: [javascript, react, bash, shell, linux, unix, node]
 react: true
 draft: true
 ---
 
 If there is one technology every developer has to deal with, no matter the
 stack, is the shell. But most do not bother learning it, so in this post we'll
-dig into one of the most common shells, Bash, as a scripting language, by
-comparing it with a more familiar programming language to most developers,
-JavaScript.
+learning deep into one of the most common shells, Bash, as a scripting
+language, by comparing it with a more familiar programming language to most
+developers, JavaScript.
 
 {{< note >}}
 
@@ -48,13 +48,13 @@ Let's start with the "Hello World" program in both languages:
 {{< tabs tabs="Bash JavaScript" id="hello-world" >}}
   {{< tab "Bash" >}}
 {{< highlight bash >}}
-  echo Hello World
+echo Hello World
 {{< /highlight >}}
   {{< /tab >}}
 
   {{< tab "JavaScript" >}}
 {{< highlight javascript >}}
-  console.log("Hello World")
+console.log("Hello World")
 {{< /highlight >}}
   {{< /tab >}}
 {{< /tabs >}}
@@ -98,6 +98,82 @@ Hello          World
 % echo 'Hello          World'
 Hello          World
 ```
+
+# Standard output
+
+The manual page for `echo`, which you can check by executing `man echo`, has
+the following description:
+
+> Echo the STRING(s) to standard output.
+
+The concept of "standard output" (`stdout`) might be unfamiliar, but in
+practice we already know it means the string will show up in the terminal.
+
+Technically, though, it is a [file
+descriptor](https://mywiki.wooledge.org/FileDescriptor), a file that is opened
+by default for every process and is associated with a number (in this case,
+`1`). So, `echo` writes the string into that file, and we see it in our
+terminal (somehow).
+
+# Standard Error
+
+There is also standard error (`stderr`, file descriptor `2`), meant to store
+error messages, similar to
+[`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error).
+
+In practice, when we send something to `stderr` it will also show up in the
+terminal. But the two are distinguishable, so it's possible to suppress or only
+show error messages, for example.
+
+# Standard input
+
+`stdin` is another default file descriptor, used to read input from the user or
+from a command. In Bash, you can use the `read` command for that, and [in
+Node.js the API is more
+involved](https://nodejs.org/en/knowledge/command-line/how-to-prompt-for-command-line-input/).
+
+We'll look how to do this later, since we need to introduce other concepts
+first.
+
+# Redirections
+
+We saw that `echo` simply sends a string to `stdout`, but that might not be
+what we want. That string could be an error message, in which case we'd want to
+send it to `stderr`, or we might want to send it into a file. What then?
+
+We can use [redirections](https://mywiki.wooledge.org/Redirection) for this.
+
+Here's how to redirect a command's `stdout` into a file:
+
+```shell-session
+$ echo "Hello World" > file
+$ echo "Hello World" > file
+$ cat file
+Hello World
+$ # We can also append
+$ echo "Second Hello World" >> file
+$ cat file
+Hello World
+Second Hello World
+```
+
+And here's how to redirect to `stderr`:
+
+```shell-session
+$ echo "An error occurred" >&2
+An error occurred
+```
+
+We can suppress error messages too, by redirecting what a command writes to
+`stderr` to `/dev/null`:
+
+```shell-session
+$ (echo "An error occurred" >&2) 2>/dev/null
+```
+
+The syntax used for redirections is cryptic though, so I won't dive much deeper
+into it than that. I just mention it because it's inevitable that it will come
+up eventually.
 
 # Variables
 
@@ -787,8 +863,9 @@ undefined
   {{< /tab >}}
 {{< /tabs >}}
 
-Notice that we had to use `declare -A user` to tell Bash that this variable
-should be treated as an associative array.
+You'll notice that we had to use `declare -A user` to tell Bash that this
+variable should be treated as an associative array, otherwise Bash cannot
+distinguish it from being simply an array of strings.
 
 # Fizz buzz
 
@@ -800,12 +877,12 @@ and JavaScript, while introducing the modulo operator along the way.
 {{< highlight bash >}}
 n=15
 
-for (( i=1; i <= $n; i++ )); do
-  if [[ $(( $i % 3 )) == 0 && $(( $i % 5 )) == 0 ]]; then
+for (( i=1; i <= n; i++ )); do
+  if [[ $(( "$i" % 3 )) == 0 && $(( "$i" % 5 )) == 0 ]]; then
     echo "FizzBuzz"
-  elif [[ $(( $i % 3 )) == 0 ]]; then
+  elif [[ $(( "$i" % 3 )) == 0 ]]; then
     echo "Fizz"
-  elif [[ $(( $i % 5 )) == 0 ]]; then
+  elif [[ $(( "$i" % 5 )) == 0 ]]; then
     echo "Buzz"
   else
     echo "$i"
@@ -840,7 +917,8 @@ use than in JavaScript since Bash does not have named parameters, only
 positional parameters accessible by the special parameters `$1`, `$2` and so
 on.
 
-Let's refactor our FizzBuzz implementation to illustrate the functions usage:
+Let's refactor our FizzBuzz implementation to illustrate how to use
+functions:
 
 {{< tabs tabs="Bash JavaScript" id="fizzbuzz-with-functions" >}}
   {{< tab "Bash" >}}
@@ -855,12 +933,12 @@ function is_divisible_by_5() {
   [[ $(( $1 % 3 )) == 0 ]]
 }
 
-for (( i=1; i <= $n; i++ )); do
-  if is_divisible_by_3 $i && is_divisible_by_5 $i; then
+for (( i=1; i <= n; i++ )); do
+  if is_divisible_by_3 "$i" && is_divisible_by_5 "$i"; then
     echo "FizzBuzz"
-  elif is_divisible_by_3 $i; then
+  elif is_divisible_by_3 "$i"; then
     echo "Fizz"
-  elif is_divisible_by_5 $i; then
+  elif is_divisible_by_5 "$i"; then
     echo "Buzz"
   else
     echo "$i"
@@ -895,3 +973,279 @@ for (let i = 1; i <= n; i++) {
 {{< /highlight >}}
   {{< /tab >}}
 {{< /tabs >}}
+
+You'll notice that calling a function in Bash is no different than executing a
+command: `is_divisible_by_5 "$i"`, not `is_divisible_by_5("$i")`.
+
+Also, we didn't use any `return` statements, the last executed command's exit
+code was used as the function exit code. But Bash does have them.
+
+# Scripts
+
+Until now, we have been executing ad hoc commands in the command line. Let's
+instead create a script, a text file containing Bash code we can execute.
+
+We first need to create a file with some code in it, say `echo "Hello World"`:
+
+```shell-session
+$ echo 'echo "Hello World"' > my-script.sh
+$ cat my-script.sh
+echo "Hello World"
+```
+
+Then, we can execute it like this:
+
+```shell-session
+$ bash my-script.sh
+Hello World
+```
+
+And this is fine but not the usual approach. We can instead create a
+`my-script` file, without extension, and execute it like a normal command (but
+we need to pass the absolute path to it):
+
+```shell-session {hl_lines="[5]"}
+$ echo 'echo "Hello World"' > my-script
+$ cat my-script
+echo "Hello World"
+$ ./my-script
+bash: ./my-script: Permission denied
+```
+
+That won't work though because the file does not have permission to be
+executed. We can change this with the `chmod` command:
+
+```
+$ chmod u+x my-script
+$ ./my-script
+Hello World
+```
+
+# Shebang
+
+When the command `./my-script` is executed, the shell you're using, be it bash
+or zsh, will simply run the commands in it. We can tell the operating system
+that this script should always be interpreted by bash with a shebang, which is
+a comment-like line at the start of the file:
+
+```
+#!/bin/bash
+echo "Hello World from Bash ${BASH_VERSION}"
+```
+
+Now, even if I'm in zsh or bash, the OS will the program `/bin/bash` to execute
+the script.
+
+```shell-session
+% zsh
+% ./my-script
+Hello World from Bash 5.1.16(1)-release
+% bash
+$ ./my-script
+Hello World from Bash 5.1.16(1)-release
+```
+
+Similarly, we can tell the OS to always execute a file with `node`:
+
+```javascript
+#!/bin/env node
+console.log("Hello World from Node.js")
+```
+
+We use the `env` program to find the `node`'s path because it's usually in a
+more dynamic place, depending on your OS or node version manager.
+
+# Script arguments
+
+A Bash script may take arguments to accomplish a task. Here's how we can handle
+them in Bash and Node.js:
+
+{{< tabs tabs="Bash JavaScript" id="script-args" >}}
+  {{< tab "Bash" >}}
+{{< highlight bash >}}
+#!/bin/bash
+echo "Script name is $0"
+echo "First argument: ${1:-empty}"
+echo "Second argument: ${2:-empty}"
+echo "All arguments: $*"
+{{< /highlight >}}
+  {{< /tab >}}
+
+  {{< tab "JavaScript" >}}
+{{< highlight javascript >}}
+#!/bin/env node
+console.log(`Script name is ${process.argv[0]}`)
+console.log(`First argument: ${process.argv[1] || 'empty'}`)
+console.log(`Second argument: ${process.argv[2] || 'empty'}`)
+console.log(`All arguments: ${process.argv.join(' ')}`)
+{{< /highlight >}}
+  {{< /tab >}}
+{{< /tabs >}}
+
+# Reading from `stdin`
+
+Let's modify our FizzBuzz implementation to get `n` from `stdin`:
+
+{{< tabs tabs="Bash JavaScript" id="fizzbuzz-from-stdin" >}}
+  {{< tab "Bash" >}}
+{{< highlight bash "hl_lines=1" >}}
+read -p "Insert a non-negative integer, please: " n
+
+function is_divisible_by_3() {
+  [[ $(( $1 % 3 )) == 0 ]]
+}
+
+function is_divisible_by_5() {
+  [[ $(( $1 % 3 )) == 0 ]]
+}
+
+for (( i=1; i <= $n; i++ )); do
+  if is_divisible_by_3 $i && is_divisible_by_5 $i; then
+    echo "FizzBuzz"
+  elif is_divisible_by_3 $i; then
+    echo "Fizz"
+  elif is_divisible_by_5 $i; then
+    echo "Buzz"
+  else
+    echo "$i"
+  fi
+done
+{{< /highlight >}}
+  {{< /tab >}}
+
+  {{< tab "JavaScript" >}}
+{{< highlight javascript "hl_lines=1-6 16 29" >}}
+const readline = require('readline')
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
+function isDivisibleBy3(i) {
+  return i % 3 === 0
+}
+
+function isDivisibleBy5(i) {
+  return i % 5 === 0
+}
+
+rl.question('Insert a non-negative integer, please: ', (n) => {
+  for (let i = 1; i <= n; i++) {
+    if (isDivisibleBy3(i) && isDivisibleBy5(i)) {
+      console.log('FizzBuzz')
+    } else if (isDivisibleBy3(i)) {
+      console.log('Fizz')
+    } else if (isDivisibleBy5(i)) {
+      console.log('Buzz')
+    } else {
+      console.log(i)
+    }
+  }
+
+  rl.close()
+})
+{{< /highlight >}}
+  {{< /tab >}}
+{{< /tabs >}}
+
+In Node.js, the API is a bit more cumbersome.
+
+# Signals
+
+Image we might want to do something before our script gets interrupted, for
+example. In Unix systems, this happens because the process opened by the
+program received a `SIGINT` signal, described as "Interrupt from keyboard" by
+[`man signal(7)`](https://man7.org/linux/man-pages/man7/signal.7.html), which
+is usually what happens when you press <kbd>Ctrl</kbd> + <kbd>c</kbd> while a
+program is running.
+
+If we wish to handle this signal differently, we can use the `trap` builtin
+command. For example, here's a script that forever echoes "Loading...", but
+upon interruption it says goodbye and exit.
+
+{{< tabs tabs="Bash JavaScript" id="signals" >}}
+  {{< tab "Bash" >}}
+{{< highlight bash >}}
+#!/bin/bash
+function close() {
+  echo "Ok. Bye :)"
+  exit 0
+}
+
+trap "close" "SIGINT"
+
+while true; do
+  echo "Loading..."
+  sleep 1
+done
+{{< /highlight >}}
+  {{< /tab >}}
+
+  {{< tab "JavaScript" >}}
+{{< highlight javascript >}}
+#!/bin/env node
+process.on('SIGINT', () => {
+  console.log( "Ok. Bye :)")
+  process.exit(0)
+})
+
+console.log("Loading...")
+
+setInterval(() => {
+  console.log("Loading...")
+}, 1000)
+{{< /highlight >}}
+  {{< /tab >}}
+{{< /tabs >}}
+
+
+```shell-session
+$ ./long-running-script
+Wait... I'm thinking
+Wait... I'm thinking
+Wait... I'm thinking
+Wait... I'm thinking
+^COk. Bye :)
+```
+
+Signals are a very important component of Unix systems, it's how processes
+communicate with each other. There are a bunch of them, in addition to
+`SIGINT`, such as `SIGTERM` to terminate processes, `SIGKILL` to kill processes
+(which cannot be handled differently by any program) etc.
+
+# Pipes
+
+A pipe is a way for us to combine commands to accomplish a task. It works by
+passing the previous command's stdout as stdin for the next command in the
+pipeline.
+
+For example, we can combine the `echo` and `cut` command to get the second
+field from a comma-delimited string:
+
+{{< tabs tabs="Bash JavaScript" id="echo-and-cut" >}}
+  {{< tab "Bash" >}}
+{{< highlight shell-session >}}
+$ echo "Apple,Oranges,Pear" | cut -d, -f 2
+Oranges
+{{< /highlight >}}
+  {{< /tab >}}
+
+  {{< tab "JavaScript" >}}
+{{< highlight javascript >}}
+"Apple,Oranges,Pear".split(',')[1]
+{{< /highlight >}}
+  {{< /tab >}}
+{{< /tabs >}}
+
+There's no equivalent in JavaScript, but as of time of writing there's a
+[proposal in stage 2 to add Hack-style pipes to
+ECMAScript](https://tc39.es/proposal-pipeline-operator/), which offers a
+similar syntax to compose functions.
+
+# Conclusion
+
+I hope this post helped you understand how to work with Bash to do basic tasks.
+
+To be really proficient with Bash though, you'll need to study more about the
+most common Unix commands, such as `grep`, `sed`, `cut`, `xargs` and others.

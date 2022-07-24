@@ -8,30 +8,29 @@ draft: true
 
 If there is one technology every developer has to deal with, no matter the
 stack, is the shell. But most do not bother learning it, so in this post we'll
-learning deep into one of the most common shells, Bash, as a scripting
-language, by comparing it with a more familiar programming language to most
-developers, JavaScript.
+dive deep into one of the most common shells, Bash, by comparing it with a more
+familiar programming language to most developers, JavaScript.
 
 {{< note >}}
 
 # What is a shell, anyway?
 
-This is often subject of confusion to beginners, so I want to clear things
-before we go any further.
+This is often subject of confusion initially, so I want to clear things before
+we go any further.
 
 A shell is an interface to your operating system, a way for you to tell your
 computer to run a program and do something.
 
 Bash is just one of many shells, it happens to be the default shell in most
-Linux systems, but you may also be familiar with zsh, the default in macOS, and
-PowerShell or cmd.exe, the default in Windows.
+Linux systems, but you may also be familiar with zsh, the default on macOS, and
+PowerShell or cmd.exe, the default on Windows.
 
 Each shell is different: they may have different features, like autocomplete,
 and scripting language capabilities, like regex support.
 
 Bash is considered to be a more powerful shell than `/bin/sh`, the Bourne Shell
-that Bash aims to replace (Bourne Again Shell), but less powerful than zsh and
-[fish](https://fishshell.com/).
+that Bash aims to replace (Bourne Again Shell), but less powerful, as
+interactive shell, than zsh and [fish](https://fishshell.com/).
 
 **A terminal is different than a shell**. The way I understand it, a terminal
 handles sending and showing data, while a shell interprets them. It used to be
@@ -61,20 +60,32 @@ console.log("Hello World")
 
 In Bash, the equivalent of JavaScript's
 [`console.log`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log)
-is the command `echo`, to which we pass the words `Hello World` as arguments
-and it prints them back.
+is the command `echo`, to which we just passed the words `Hello World` as
+arguments and promptly got them printed back.
 
 A correct understanding of what is a "command" and an "argument" is crucial to
 use Bash as a scripting language. This is already very well explained by the
 article [Commands and
 Arguments](https://mywiki.wooledge.org/BashGuide/CommandsAndArguments) at
-Greg's Wiki, but I'll touch the most important concepts for scripting here.
+Greg's Wiki, but I'll try to summarize the most important concepts in the next
+section.
 
 # Quoting and whitespace
 
 The correct way to understand the line `echo Hello World` is that `echo` is the
 command and `Hello` and `World` are two separate arguments passed to that
 command.
+
+{{< note >}}
+
+Bash does not magically know what is `echo`, that's just the name of an
+executable file in your computer, but Bash is able to find it without the need
+of the full absolute path (usually `/usr/bin/echo`) because the directory it is
+located in (`/usr/bin`) is in your `$PATH` environment variable. The command
+might also be a shell builtin command, i.e., not an executable. `echo` happens
+to be available in both forms.
+
+{{< /note >}}
 
 Each argument is delimited by whitespace (spaces and tabs), no matter how many
 whitespace between them:
@@ -87,8 +98,8 @@ Hello World
 ```
 
 If we want to print the extra whitespace between arguments, we need to
-**escape** the whitespace of its special meaning as argument-delimiter. Here
-are two ways to do this, with backslash and quotes:
+**escape** the whitespace characters of their special meaning as
+argument-delimiter. Here are two ways to do this, with backslash and quotes:
 
 ```bash
 % echo Hello\ \ \ \ \ \ \ \ \ \ World
@@ -101,36 +112,36 @@ Hello          World
 
 # Standard output
 
-The manual page for `echo`, which you can check by executing `man echo`, has
-the following description:
+The manual page for `echo`, which you can check with [`man
+echo`](https://linux.die.net/man/1/echo), has the following description:
 
 > Echo the STRING(s) to standard output.
 
 The concept of "standard output" (`stdout`) might be unfamiliar, but in
-practice we already know it means the string will show up in the terminal.
+practice we know that it means the string will show up in the terminal.
 
 Technically, though, it is a [file
 descriptor](https://mywiki.wooledge.org/FileDescriptor), a file that is opened
-by default for every process and is associated with a number (in this case,
-`1`). So, `echo` writes the string into that file, and we see it in our
-terminal (somehow).
+by default for every process. Each file descriptor is associated with a number,
+and that's how we reference them in scripts: `stdout` is `1`. So, what `echo`
+does is to write the string we pass to it to that file, which causes us to see
+it in our terminal (somehow).
 
 # Standard Error
 
-There is also standard error (`stderr`, file descriptor `2`), meant to store
-error messages, similar to
+There is also standard error (`stderr`, or `2`), which is meant to store error
+messages. It's similar to
 [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/console/error).
 
 In practice, when we send something to `stderr` it will also show up in the
-terminal. But the two are distinguishable, so it's possible to suppress or only
-show error messages, for example.
+terminal. But the two are distinguishable.
 
 # Standard input
 
 `stdin` is another default file descriptor, used to read input from the user or
-from a command. In Bash, you can use the `read` command for that, and [in
-Node.js the API is more
-involved](https://nodejs.org/en/knowledge/command-line/how-to-prompt-for-command-line-input/).
+from a command. In Bash, you can use the `read` command to get input from the
+user, and [in Node.js the readline
+module](https://nodejs.org/en/knowledge/command-line/how-to-prompt-for-command-line-input/).
 
 We'll look how to do this later, since we need to introduce other concepts
 first.
@@ -139,11 +150,11 @@ first.
 
 We saw that `echo` simply sends a string to `stdout`, but that might not be
 what we want. That string could be an error message, in which case we'd want to
-send it to `stderr`, or we might want to send it into a file. What then?
+send it to `stderr`, or we might want to send it to a file. What then?
 
-We can use [redirections](https://mywiki.wooledge.org/Redirection) for this.
+We can use [redirections](https://mywiki.wooledge.org/Redirection).
 
-Here's how to redirect a command's `stdout` into a file:
+For instance, here's how to redirect a command's `stdout` to a file:
 
 ```shell-session
 $ echo "Hello World" > file
@@ -157,7 +168,7 @@ Hello World
 Second Hello World
 ```
 
-And here's how to redirect to `stderr`:
+And here's how to redirect `echo`'s `stdout` to `stderr`:
 
 ```shell-session
 $ echo "An error occurred" >&2
@@ -194,8 +205,8 @@ Here's how to create a variable in Bash.
   {{< /tab >}}
 {{< /tabs >}}
 
-Pay attention to the syntax used for assignment: `foo = bar` won't work,
-instead `foo` will be interpreted as a command and `= bar` as its arguments.
+Pay attention to the syntax used for assignment -- `foo = bar` won't work,
+`foo` will, instead, be interpreted as a command and `= bar` as arguments.
 
 Variables may also be called parameters, or, better saying, they're a special
 type of parameters, a named parameter.
@@ -322,7 +333,7 @@ $ echo $foo
 3
 ```
 
-# Boolean
+# Exit codes
 
 There are no boolean values in Bash, but the commands `true` and `false` do
 exist. They apparently don't do anything, though:
@@ -332,11 +343,12 @@ $ true
 $ false
 ```
 
-This is just because they don't print anything, but they do something useful,
-but hidden at first sight: they have different **exit code**. The `true`
-command's exit code is `0`, which by convention denotes success, while
-`false`'s exit code is `1`, which denotes failure (is non-zero). As we saw, the
-special parameter `$?` gives us the last command exit code.
+They don't print anything, but they do something useful: they have different
+**exit code**.
+
+The `true` command's exit code is `0`, which by convention denotes success,
+while `false`'s exit code is `1`, which denotes failure (is non-zero). The
+special parameter `$?` gives us the last executed command's exit code.
 
 ```shell-session
 $ true
@@ -349,7 +361,7 @@ $ echo $?
 
 I think it's ok to understand command's exit code as the shell's boolean
 values, it's the way we can tell if everything went OK or if something bad
-happened after a command finished.
+happened.
 
 For instance, ESLint exits with `0` if everything was OK, `1` if something went
 wrong and `2` if the configuration is broken. Here's the [documentation on
@@ -375,8 +387,10 @@ true
 false
 ```
 
-A common pattern, particularly in React/JSX, is to conditionally render a
-component using short-circuit evaluation:
+A common pattern in React is to conditionally render a component using
+short-circuit evaluation, which [relies on the fact that booleans are ignored
+in
+JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored):
 
 {{< react "hl_lines=15" >}}
 import { useState } from 'react'
@@ -408,9 +422,8 @@ I will be executed
 $ false && echo "I won't be executed"
 ```
 
-But we can also execute another command only if the previous command failed,
-which is similar to providing a fallback expression in case the previous one is
-falsy:
+We could also execute a fallback command in case the previous command failed
+with the control operator `||`:
 
 {{< tabs tabs="Bash JavaScript" id="logical-or" >}}
 {{< tab "Bash" >}}
@@ -451,11 +464,9 @@ $ echo $?
 0
 ```
 
-# Comparisons
-
-Of course, using `true` and `false` commands is not very useful, we actually
-need to check for something, like if a number is equal to 10 or if the string
-`foo` is inside `$bar`.
+Of course, using `true` and `false` commands is not very useful per se, we
+actually need to check for something, like if a number is equal to 10 or if the
+string `foo` is inside `$bar`.
 
 ## Comparing numbers
 
@@ -503,8 +514,8 @@ $ [[ $num <= 10 ]] && echo "$num is less than or equal to 10"
 
 The `[[` command is a Bash feature, or a
 [Bashism](https://mywiki.wooledge.org/Bashism), the examples provided won't
-work in `/bin/sh` because `<` and `>` have special meaning and the Bourne Shell
-doesn't treat them especially when inside `[[`.
+work in `/bin/sh` because `<` and `>` are used for redirections and are no
+especially treated when inside `[[` by the Bourne Shell.
 
 The most POSIX-compliant way of writing a conditional is to use the command `[`
 (or `test`). `[` is similar to `[[`, but with less features. Read [`man
@@ -582,19 +593,15 @@ $foobar ends with 'bar'
 {{< warn >}}
 
 regex is tricky, there a bunch of different flavors, and the one used by Bash
-is certainly not the same one used by JavaScript engines.
-
-Also, the operator `=~` is a Bashism, so don't try to use it in `/bin/sh`, use
-the `grep` command instead.
+is certainly not the same one used by JavaScript engines. This might be a
+source of friction when writing shell scripts.
 
 {{< /warn >}}
 
 ## Glob patterns
 
-A glob pattern is possibly one of the best shell features and it's one of the
-important concepts for shell scripting, so let's see some examples.
-
-Here are some ways of using globs to check if a string is of certain shape:
+A glob pattern is possibly one of the best shell features. Let's look at some
+examples.
 
 ```shell-session
 $ [[ "foo bar" == foo* ]] && echo "'foo bar' starts with 'foo'"
@@ -608,11 +615,10 @@ there is a space between 'foo' and 'bar'
 ```
 
 You'll notice that `*` means "any (or many) character", `?` means "any single
-character" and `[ ]` a set of character, which kind of reminds regex syntax.
+character" and `[ ]` a set of character, which kind of regex-like.
 
-They are much more feature-rich, but let's stop here. [You can read more about
-globs here](https://mywiki.wooledge.org/BashGuide/Patterns), if you feel like
-it.
+They are much more feature-rich, but let's stop here for now, but [you can read
+more about globs here](https://mywiki.wooledge.org/BashGuide/Patterns).
 
 ## Conditional blocks
 
@@ -736,8 +742,8 @@ switch (true) {
 
 # Loops
 
-Bash has the same loop constructs than JavaScript, i.e., `for`, `while`,
-`until`. For brevity, we'll just cover `for` here.
+Bash has the same loop constructs than JavaScript, i.e., `for`, `while` etc.,
+but we'll just cover `for` here.
 
 Let's start by counting from number `0` to `n`:
 
@@ -773,8 +779,9 @@ for i in 0 1 2 3 4 5 6 7 8 9; do
 done
 ```
 
-But we're programmers, so we can't expect to fill this manually. Brace
-expansion can help with this:
+But since we're programmers, we can't expect to give a hard-coded list of words
+for a loop. Brace expansion can help us to generate a dynamic sequence of
+numbers:
 
 ```bash
 for i in {0..9}; do
@@ -782,8 +789,8 @@ for i in {0..9}; do
 done
 ```
 
-Although it's not possible to use something like `{0..$n}` to generate numbers
-from `0` to an arbitrary value `$n`, we can use the `seq` command for this:
+But it's not possible to use something like `{0..$n}`, we have to use the `seq`
+command for this:
 
 ```bash
 for i in $(seq 0 $(( n - 1))); do
@@ -793,7 +800,7 @@ done
 
 # Arrays
 
-Bash has arrays too, let's how to work with them:
+Bash has arrays too:
 
 {{< tabs tabs="Bash JavaScript" id="arrays" >}}
   {{< tab "Bash" >}}
@@ -864,13 +871,13 @@ undefined
 {{< /tabs >}}
 
 You'll notice that we had to use `declare -A user` to tell Bash that this
-variable should be treated as an associative array, otherwise Bash cannot
-distinguish it from being simply an array of strings.
+variable should be treated as an associative array, otherwise Bash wouldn't be
+able to distinguish it from simply being an array of strings.
 
 # Fizz buzz
 
 Let's combine what we've learned so far and implement Fizz buzz in both Bash
-and JavaScript, while introducing the modulo operator along the way.
+and JavaScript.
 
 {{< tabs tabs="Bash JavaScript" id="fizzbuzz" >}}
   {{< tab "Bash" >}}
@@ -912,13 +919,11 @@ for (let i = 1; i <= n; i++) {
 
 # Functions
 
-We can reuse logic with functions in Bash, but it's slightly more awkward to
-use than in JavaScript since Bash does not have named parameters, only
-positional parameters accessible by the special parameters `$1`, `$2` and so
-on.
+We can reuse logic with functions in Bash. Bash functions do not have named
+parameters, only positional parameters, accessible via special parameters `$1`,
+`$2` and so on.
 
-Let's refactor our FizzBuzz implementation to illustrate how to use
-functions:
+Let's refactor our Fizz buzz implementation to illustrate how to use functions:
 
 {{< tabs tabs="Bash JavaScript" id="fizzbuzz-with-functions" >}}
   {{< tab "Bash" >}}
@@ -977,15 +982,28 @@ for (let i = 1; i <= n; i++) {
 You'll notice that calling a function in Bash is no different than executing a
 command: `is_divisible_by_5 "$i"`, not `is_divisible_by_5("$i")`.
 
-Also, we didn't use any `return` statements, the last executed command's exit
-code was used as the function exit code. But Bash does have them.
+Also, we didn't use any `return` statements in Bash, we didn't need to: the
+last executed command's exit code was used as the function exit code. This is
+unlike JavaScript, since it does not have implicit return. Bash does have
+`return` though, but they'd just make our function more verbose in this case:
+
+```bash
+function is_divisible_by_3() {
+  if [[ $(( $1 % 3 )) == 0 ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+```
 
 # Scripts
 
-Until now, we have been executing ad hoc commands in the command line. Let's
-instead create a script, a text file containing Bash code we can execute.
+Until now, we have been executing commands in the command line. Let's instead
+create a script, a text file containing Bash code we can execute.
 
-We first need to create a file with some code in it, say `echo "Hello World"`:
+We first need to create a text file with some code in it, say `echo "Hello
+World"`:
 
 ```shell-session
 $ echo 'echo "Hello World"' > my-script.sh
@@ -1000,9 +1018,13 @@ $ bash my-script.sh
 Hello World
 ```
 
-And this is fine but not the usual approach. We can instead create a
-`my-script` file, without extension, and execute it like a normal command (but
-we need to pass the absolute path to it):
+Which is fine, but not the usual approach -- the programs you execute don't
+usually have extension and you don't have to pass them to bash as argument, you
+execute them directly.
+
+To do this, we just need to create the `my-script` file, without extension, and
+execute it like a normal command (notice we have to pass the script absolute
+path, `./my-script`):
 
 ```shell-session {hl_lines="[5]"}
 $ echo 'echo "Hello World"' > my-script
@@ -1013,7 +1035,8 @@ bash: ./my-script: Permission denied
 ```
 
 That won't work though because the file does not have permission to be
-executed. We can change this with the `chmod` command:
+executed. We can grant permission for the current user to execute a file with
+the `chmod` command:
 
 ```
 $ chmod u+x my-script
@@ -1024,17 +1047,17 @@ Hello World
 # Shebang
 
 When the command `./my-script` is executed, the shell you're using, be it bash
-or zsh, will simply run the commands in it. We can tell the operating system
-that this script should always be interpreted by bash with a shebang, which is
-a comment-like line at the start of the file:
+or zsh, will simply run the code in it. We can tell the operating system that
+this script should always be interpreted by bash with a shebang, a comment-like
+line at the start of the file:
 
 ```
 #!/bin/bash
 echo "Hello World from Bash ${BASH_VERSION}"
 ```
 
-Now, even if I'm in zsh or bash, the OS will the program `/bin/bash` to execute
-the script.
+Now, it doesn't matter if I'm using zsh or bash, the OS will use the program
+`/bin/bash` to interpret the code.
 
 ```shell-session
 % zsh
@@ -1084,7 +1107,7 @@ console.log(`All arguments: ${process.argv.join(' ')}`)
 
 # Reading from `stdin`
 
-Let's modify our FizzBuzz implementation to get `n` from `stdin`:
+Let's modify our Fizz buzz implementation to get `n` from `stdin`:
 
 {{< tabs tabs="Bash JavaScript" id="fizzbuzz-from-stdin" >}}
   {{< tab "Bash" >}}
@@ -1149,15 +1172,13 @@ rl.question('Insert a non-negative integer, please: ', (n) => {
   {{< /tab >}}
 {{< /tabs >}}
 
-In Node.js, the API is a bit more cumbersome.
-
 # Signals
 
-Image we might want to do something before our script gets interrupted, for
-example. In Unix systems, this happens because the process opened by the
-program received a `SIGINT` signal, described as "Interrupt from keyboard" by
-[`man signal(7)`](https://man7.org/linux/man-pages/man7/signal.7.html), which
-is usually what happens when you press <kbd>Ctrl</kbd> + <kbd>c</kbd> while a
+Image we might want to do something before our script gets interrupted. In Unix
+systems, this happens because the process opened by the program received a
+`SIGINT` signal, described as "Interrupt from keyboard" by [`man
+signal(7)`](https://man7.org/linux/man-pages/man7/signal.7.html), which is
+usually what happens when you press <kbd>Ctrl</kbd> + <kbd>c</kbd> while a
 program is running.
 
 If we wish to handle this signal differently, we can use the `trap` builtin
@@ -1210,9 +1231,10 @@ Wait... I'm thinking
 ```
 
 Signals are a very important component of Unix systems, it's how processes
-communicate with each other. There are a bunch of them, in addition to
-`SIGINT`, such as `SIGTERM` to terminate processes, `SIGKILL` to kill processes
-(which cannot be handled differently by any program) etc.
+communicate with each other. There are a bunch more, for example, others
+similar to `SIGINT` are `SIGTERM` to ask the process to terminate, `SIGKILL` to
+hard-kill processes -- kills it immediately and the program cannot handle it
+differently.
 
 # Pipes
 
@@ -1247,5 +1269,5 @@ similar syntax to compose functions.
 
 I hope this post helped you understand how to work with Bash to do basic tasks.
 
-To be really proficient with Bash though, you'll need to study more about the
-most common Unix commands, such as `grep`, `sed`, `cut`, `xargs` and others.
+To be proficient with Bash though, you'll need to study more about the most
+common Unix commands, such as `grep`, `sed`, `cut`, `xargs`, `tr`, and others.

@@ -43,7 +43,7 @@
 {{ $path := printf "js/react-widget-%s.js" $appRootId }}
 {{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
 
-{{ $shims := dict "react" "js/react.js" "react-dom" "js/react-dom.js" }}
+{{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
 {{ $builtJs := resources.Get "js/react-widget.jsx" | resources.ExecuteAsTemplate $path $context | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims) }}
 
 

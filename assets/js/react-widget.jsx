@@ -4,4 +4,8 @@ const root = window.ReactDOM.createRoot(
   document.getElementById("{{ .AppRootId }}")
 )
 
-root.render(<App />)
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

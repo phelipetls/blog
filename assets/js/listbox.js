@@ -39,6 +39,7 @@ function getSelectedOption(listbox) {
 }
 
 const focusedStyle = ['bg-background']
+const selectedStyle = ['font-bold', 'text-primary']
 
 /**
  * @type {(item: HTMLElement) => void}
@@ -55,22 +56,6 @@ function removeFocusedStyle(item) {
 }
 
 /**
- * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
- */
-function focusOption(listbox, targetOption) {
-  getOptions(listbox).forEach(function (option) {
-    if (option !== targetOption) {
-      removeFocusedStyle(option)
-    } else {
-      applyFocusedStyle(option)
-      listbox.setAttribute('aria-activedescendant', option.id)
-    }
-  })
-}
-
-const selectedStyle = ['font-bold', 'text-primary']
-
-/**
  * @type {(item: HTMLElement) => void}
  */
 function applySelectedStyle(item) {
@@ -82,6 +67,20 @@ function applySelectedStyle(item) {
  */
 function removeSelectedStyle(item) {
   item.classList.remove(...selectedStyle)
+}
+
+/**
+ * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
+ */
+function focusOption(listbox, targetOption) {
+  getOptions(listbox).forEach(function (option) {
+    if (option !== targetOption) {
+      removeFocusedStyle(option)
+    } else {
+      applyFocusedStyle(option)
+      listbox.setAttribute('aria-activedescendant', option.id)
+    }
+  })
 }
 
 /**

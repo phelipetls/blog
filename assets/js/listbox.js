@@ -39,7 +39,7 @@ function getSelectedOption(listbox) {
 }
 
 const focusedStyle = ['bg-background']
-const selectedStyle = ['font-bold', 'text-primary']
+const selectedStyle = ['text-primary']
 
 /**
  * @type {(item: HTMLElement) => void}

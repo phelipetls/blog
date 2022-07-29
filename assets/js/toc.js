@@ -57,45 +57,50 @@ for (const tocListItem of toc.querySelectorAll('li a')) {
 
 let timeout
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    const heading = entry.target
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const heading = entry.target
 
-    if (entry.isIntersecting) {
-      const tocItem = getTocItemByHeading(
-        /** @type {HTMLHeadingElement} */ (heading)
-      )
+      if (entry.isIntersecting) {
+        const tocItem = getTocItemByHeading(
+          /** @type {HTMLHeadingElement} */ (heading)
+        )
 
-      resetToc()
-      activate(tocItem)
+        resetToc()
+        activate(tocItem)
 
-      if (timeout) {
-        window.cancelAnimationFrame(timeout)
+        if (timeout) {
+          window.cancelAnimationFrame(timeout)
+        }
+
+        timeout = window.requestAnimationFrame(() => {
+          const containerCoords = container.getBoundingClientRect()
+          const tocItemCoords = tocItem.getBoundingClientRect()
+
+          if (tocItem === firstTocItem) {
+            container.scrollTop = 0
+            return
+          }
+
+          // Is the item not visible because it's above the scrollable area? Then
+          // make it visible by scrolling up.
+          if (containerCoords.top > tocItemCoords.top) {
+            container.scrollTop -= containerCoords.top - tocItemCoords.top
+            return
+          }
+
+          if (tocItemCoords.bottom > containerCoords.bottom) {
+            container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
+          }
+        })
       }
-
-      timeout = window.requestAnimationFrame(() => {
-        const containerCoords = container.getBoundingClientRect()
-        const tocItemCoords = tocItem.getBoundingClientRect()
-
-        if (tocItem === firstTocItem) {
-          container.scrollTop = 0
-          return
-        }
-
-        // Is the item not visible because it's above the scrollable area? Then
-        // make it visible by scrolling up.
-        if (containerCoords.top > tocItemCoords.top) {
-          container.scrollTop -= containerCoords.top - tocItemCoords.top
-          return
-        }
-
-        if (tocItemCoords.bottom > containerCoords.bottom) {
-          container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
-        }
-      })
-    }
-  })
-})
+    })
+  },
+  {
+    threshold: 1,
+  }
+)
 
 const headingsInBlogPost = blogPost.querySelectorAll('h2, h3, h4, h4, h6')
 

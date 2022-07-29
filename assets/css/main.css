@@ -211,15 +211,15 @@ body.dark {
   }
 
   nav#TableOfContents ol ol {
-    @apply indent-6;
-  }
-
-  nav#TableOfContents ol ol ol {
     @apply indent-8;
   }
 
+  nav#TableOfContents ol ol ol {
+    @apply indent-12;
+  }
+
   nav#TableOfContents ol ol ol ol {
-    @apply indent-10;
+    @apply indent-16;
   }
 
   nav#TableOfContents > ol li {

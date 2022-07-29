@@ -19,7 +19,8 @@
 {{ end }}
 
 {{ if not (eq .TableOfContents `<nav id="TableOfContents"></nav>`) }}
-  <aside
+  <div
+    data-toc-wrapper
     class="pretty-scrollbar w-full overflow-y-auto lg:sticky lg:top-4 lg:max-h-screen lg:pb-8 lg:pl-8"
   >
     <div class="hidden lg:block">
@@ -28,7 +29,7 @@
     </div>
 
     <details
-      data-toc-wrapper
+      data-toc-details-wrapper
       class="group lg:hidden"
       aria-label="{{ i18n "TableOfContents" }}"
     >
@@ -41,5 +42,5 @@
         valid HTML -->
       {{ .TableOfContents }}
     </details>
-  </aside>
+  </div>
 {{ end }}

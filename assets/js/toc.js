@@ -1,6 +1,6 @@
 // @ts-check
 const toc = document.querySelector('nav#TableOfContents')
-const sidebar = toc.closest('aside')
+const container = toc.closest('[data-toc-wrapper]')
 const blogPost = document.querySelector('[data-blog-post]')
 const firstTocItem = toc.querySelector('li')
 
@@ -74,27 +74,23 @@ const observer = new IntersectionObserver((entries) => {
       }
 
       timeout = window.requestAnimationFrame(() => {
-        const sidebarCoords = sidebar.getBoundingClientRect()
+        const containerCoords = container.getBoundingClientRect()
         const tocItemCoords = tocItem.getBoundingClientRect()
 
-        const top = Number(
-          window.getComputedStyle(sidebar).top.replace('px', '')
-        )
-
         if (tocItem === firstTocItem) {
-          sidebar.scrollTop = 0
+          container.scrollTop = 0
           return
         }
 
         // Is the item not visible because it's above the scrollable area? Then
         // make it visible by scrolling up.
-        if (sidebarCoords.top > tocItemCoords.top) {
-          sidebar.scrollTop -= sidebarCoords.top - tocItemCoords.top
+        if (containerCoords.top > tocItemCoords.top) {
+          container.scrollTop -= containerCoords.top - tocItemCoords.top
           return
         }
 
-        if (tocItemCoords.bottom > sidebarCoords.bottom) {
-          sidebar.scrollTop += tocItemCoords.bottom - sidebarCoords.bottom + top
+        if (tocItemCoords.bottom > containerCoords.bottom) {
+          container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
         }
       })
     }

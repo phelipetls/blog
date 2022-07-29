@@ -10,5 +10,9 @@
       "*": ["assets/*"]
     },
     "typeRoots": ["./node_modules/@types"]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "assets/js/react-widget.jsx"
+  ]
 }

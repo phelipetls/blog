@@ -20,7 +20,7 @@
   ],
   "ignorePatterns": [
     "public",
-    "assets/js/react-widget.jsx",
+    "assets/js/templates",
     "*.min.js"
   ]
 }

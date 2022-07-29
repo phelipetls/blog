@@ -55,8 +55,6 @@ for (const tocListItem of toc.querySelectorAll('li a')) {
   })
 }
 
-let timeout
-
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -70,30 +68,24 @@ const observer = new IntersectionObserver(
         resetToc()
         activate(tocItem)
 
-        if (timeout) {
-          window.cancelAnimationFrame(timeout)
+        const containerCoords = container.getBoundingClientRect()
+        const tocItemCoords = tocItem.getBoundingClientRect()
+
+        if (tocItem === firstTocItem) {
+          container.scrollTop = 0
+          return
         }
 
-        timeout = window.requestAnimationFrame(() => {
-          const containerCoords = container.getBoundingClientRect()
-          const tocItemCoords = tocItem.getBoundingClientRect()
+        // Is the item not visible because it's above the scrollable area? Then
+        // make it visible by scrolling up.
+        if (containerCoords.top > tocItemCoords.top) {
+          container.scrollTop -= containerCoords.top - tocItemCoords.top
+          return
+        }
 
-          if (tocItem === firstTocItem) {
-            container.scrollTop = 0
-            return
-          }
-
-          // Is the item not visible because it's above the scrollable area? Then
-          // make it visible by scrolling up.
-          if (containerCoords.top > tocItemCoords.top) {
-            container.scrollTop -= containerCoords.top - tocItemCoords.top
-            return
-          }
-
-          if (tocItemCoords.bottom > containerCoords.bottom) {
-            container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
-          }
-        })
+        if (tocItemCoords.bottom > containerCoords.bottom) {
+          container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
+        }
       }
     })
   },

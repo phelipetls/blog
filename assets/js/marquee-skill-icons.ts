@@ -1,12 +1,11 @@
-// @ts-check
 import { changeUrlTheme } from 'js/theme-skill-icons.js'
 
-/** @type {HTMLElement} */
-const marquee = document.querySelector('[data-skill-icons-marquee]')
+const marquee = document.querySelector<HTMLElement>(
+  '[data-skill-icons-marquee]'
+)
 const skillIconsImage = marquee.querySelector('img')
 
-/** @type {(elem: HTMLElement, url: string) => void} */
-function setCssBackgroundImageUrl(elem, url) {
+function setCssBackgroundImageUrl(elem: HTMLElement, url: string) {
   elem.style.backgroundImage = `url('${url}')`
 }
 
@@ -29,7 +28,7 @@ skillIconsImage.onload = function () {
 
   marquee.style.setProperty('--marquee-reset', `-${skillIconsImageWidth}px`)
 
-  document.body.addEventListener('newTheme', function (/** @type {any} */ e) {
+  document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     const newUrl = changeUrlTheme(backgroundImageUrl, e.detail.theme)
     setCssBackgroundImageUrl(marquee, newUrl)
   })

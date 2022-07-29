@@ -1,33 +1,27 @@
-// @ts-check
 const toc = document.querySelector('nav#TableOfContents')
 const container = toc.closest('[data-toc-wrapper]')
 const blogPost = document.querySelector('[data-blog-post]')
 const firstTocItem = toc.querySelector('li')
 
-/** @type {(listItem: HTMLLIElement) => void} */
-function activate(listItem) {
+function activate(listItem: HTMLLIElement): void {
   listItem.setAttribute('data-active', '')
 }
 
-/** @type {(listItem: HTMLLIElement) => void} */
-function reset(listItem) {
+function reset(listItem: HTMLLIElement): void {
   listItem.removeAttribute('data-active')
 }
 
-/** @type {() => void} */
-function resetToc() {
+function resetToc(): void {
   toc.querySelectorAll('li').forEach(reset)
 }
 
-/** @type {(heading: HTMLHeadingElement) => HTMLLIElement} */
-function getTocItemByHeading(heading) {
+function getTocItemByHeading(heading: HTMLHeadingElement): HTMLLIElement {
   const anchorHref = heading.querySelector('a').getAttribute('href')
   const tocAnchorElem = toc.querySelector(`li a[href="${anchorHref}"]`)
   return tocAnchorElem.closest('li')
 }
 
-/** @type {(tocItem: HTMLLIElement) => HTMLHeadingElement} */
-function getHeadingByTocItem(tocItem) {
+function getHeadingByTocItem(tocItem: HTMLLIElement): HTMLHeadingElement {
   const anchorHref = tocItem.querySelector('a').getAttribute('href')
   return blogPost
     .querySelector(`a[href="${anchorHref}"]`)
@@ -40,7 +34,7 @@ for (const tocListItem of toc.querySelectorAll('li a')) {
   // viewport (in which case the navbar will show up, because the an upwards
   // scroll will happen). Otherwise, remove it.
   tocListItem.addEventListener('click', function (e) {
-    const anchor = /** @type {HTMLAnchorElement} */ (e.target)
+    const anchor = e.target as HTMLAnchorElement
     const heading = getHeadingByTocItem(anchor.closest('li'))
     const headingCoords = heading.getBoundingClientRect()
 
@@ -61,9 +55,7 @@ const observer = new IntersectionObserver(
       const heading = entry.target
 
       if (entry.isIntersecting) {
-        const tocItem = getTocItemByHeading(
-          /** @type {HTMLHeadingElement} */ (heading)
-        )
+        const tocItem = getTocItemByHeading(heading as HTMLHeadingElement)
 
         resetToc()
         activate(tocItem)

@@ -1,7 +1,7 @@
 import PDFObject from 'pdfobject'
 import * as params from '@params'
 
-const resumeContainer = document.querySelector('[data-resume]')
+const resumeContainer = document.querySelector < HTMLElement > '[data-resume]'
 const resumeUrl = resumeContainer.dataset.resume
 
 const resumeLoading = document.querySelector('[data-resume-loading]')

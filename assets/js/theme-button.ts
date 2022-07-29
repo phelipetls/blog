@@ -1,18 +1,18 @@
 import { initialize } from './listbox'
 
-const button = document.querySelector('[data-theme-button]')
+const button = document.querySelector<HTMLButtonElement>('[data-theme-button]')
 
 initialize(button, {
   onClick: function (listItem) {
-    window.__setTheme(listItem.dataset.theme)
+    window.__setTheme(listItem.dataset.theme as ThemeChoice)
   },
   isSelectedItem: function (listItem) {
     return listItem.dataset.theme === localStorage.getItem('__theme')
   },
 })
 
-document.body.addEventListener('newTheme', function (e) {
-  function changeButtonIcon(theme) {
+document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
+  function changeButtonIcon(theme: ThemeChoice) {
     const icon = {
       dark: '#moon',
       light: '#sun',

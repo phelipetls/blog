@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
     "module": "es6",
     "moduleResolution": "node",
     "target": "esnext",
@@ -7,6 +9,6 @@
     "paths": {
       "*": ["assets/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./assets/js/types"]
+    "typeRoots": ["./node_modules/@types"]
   }
 }

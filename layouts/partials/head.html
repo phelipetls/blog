@@ -65,9 +65,9 @@
   ></script>
 {{ end }}
 
-{{ $themeButtonScript := resources.Get "js/theme-button.js" | js.Build }}
-{{ $languageButtonScript := resources.Get "js/language-button.js" | js.Build }}
-{{ $navScript := resources.Get "js/nav.js" | js.Build }}
+{{ $themeButtonScript := resources.Get "js/theme-button.ts" | js.Build }}
+{{ $languageButtonScript := resources.Get "js/language-button.ts" | js.Build }}
+{{ $navScript := resources.Get "js/nav.ts" | js.Build }}
 
 {{ $bundle := slice $navScript $themeButtonScript $languageButtonScript | resources.Concat "js/bundle.js" }}
 

@@ -1,18 +1,11 @@
-// @ts-check
 import { computePosition, shift, offset } from '@floating-ui/dom'
 
-/**
- * @type {(listbox: HTMLElement) => NodeListOf<HTMLElement>}
- */
-export function getOptions(listbox) {
+export function getOptions(listbox: HTMLElement): NodeListOf<HTMLElement> {
   return listbox.querySelectorAll('[role="option"]')
 }
 
-/**
- * @type {(listbox: HTMLElement) => HTMLElement}
- */
-function getActiveDescendant(listbox) {
-  let activeDescendant
+function getActiveDescendant(listbox: HTMLElement): HTMLElement {
+  let activeDescendant: HTMLElement
 
   getOptions(listbox).forEach(function (item) {
     if (item.id === listbox.getAttribute('aria-activedescendant')) {
@@ -23,11 +16,8 @@ function getActiveDescendant(listbox) {
   return activeDescendant
 }
 
-/**
- * @type {(listbox: HTMLElement) => HTMLElement}
- */
-function getSelectedOption(listbox) {
-  let selectedListboxitem
+function getSelectedOption(listbox: HTMLElement): HTMLElement {
+  let selectedListboxitem: HTMLElement
 
   getOptions(listbox).forEach(function (item) {
     if (item.getAttribute('aria-selected') === 'true') {
@@ -41,38 +31,23 @@ function getSelectedOption(listbox) {
 const focusedStyle = ['bg-background']
 const selectedStyle = ['text-primary']
 
-/**
- * @type {(item: HTMLElement) => void}
- */
-function applyFocusedStyle(item) {
+function applyFocusedStyle(item: HTMLElement): void {
   item.classList.add(...focusedStyle)
 }
 
-/**
- * @type {(item: HTMLElement) => void}
- */
-function removeFocusedStyle(item) {
+function removeFocusedStyle(item: HTMLElement): void {
   item.classList.remove(...focusedStyle)
 }
 
-/**
- * @type {(item: HTMLElement) => void}
- */
-function applySelectedStyle(item) {
+function applySelectedStyle(item: HTMLElement): void {
   item.classList.add(...selectedStyle)
 }
 
-/**
- * @type {(item: HTMLElement) => void}
- */
-function removeSelectedStyle(item) {
+function removeSelectedStyle(item: HTMLElement): void {
   item.classList.remove(...selectedStyle)
 }
 
-/**
- * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
- */
-function focusOption(listbox, targetOption) {
+function focusOption(listbox: HTMLElement, targetOption: EventTarget): void {
   getOptions(listbox).forEach(function (option) {
     if (option !== targetOption) {
       removeFocusedStyle(option)
@@ -83,10 +58,7 @@ function focusOption(listbox, targetOption) {
   })
 }
 
-/**
- * @type {(listbox: HTMLElement, targetItem: EventTarget) => void}
- */
-function selectOption(listbox, targetItem) {
+function selectOption(listbox: HTMLElement, targetItem: EventTarget): void {
   getOptions(listbox).forEach(function (item) {
     if (item === targetItem) {
       item.setAttribute('aria-selected', 'true')
@@ -98,30 +70,21 @@ function selectOption(listbox, targetItem) {
   })
 }
 
-/**
- * @type {(element: HTMLElement, duration: number) => void}
- */
-function fadeIn(element, duration) {
+function fadeIn(element: HTMLElement, duration: number): void {
   element.style.transition = `visibility 0s linear, opacity ${duration}ms`
   element.style.pointerEvents = 'auto'
   element.style.opacity = '1'
   element.style.visibility = 'visible'
 }
 
-/**
- * @type {(element: HTMLElement, duration: number) => void}
- */
-function fadeOut(element, duration) {
+function fadeOut(element: HTMLElement, duration: number): void {
   element.style.transition = `visibility 0s linear ${duration}ms, opacity ${duration}ms`
   element.style.pointerEvents = 'none'
   element.style.opacity = '0'
   element.style.visibility = 'hidden'
 }
 
-/**
- * @type {(listbox: HTMLElement, button: HTMLButtonElement) => void}
- */
-function showListbox(listbox, button) {
+function showListbox(listbox: HTMLElement, button: HTMLButtonElement): void {
   button.setAttribute('aria-expanded', 'true')
 
   fadeIn(listbox, 500)
@@ -133,10 +96,7 @@ function showListbox(listbox, button) {
   }
 }
 
-/**
- * @type {(listbox: HTMLElement, button: HTMLButtonElement) => void}
- */
-function hideListbox(listbox, button) {
+function hideListbox(listbox: HTMLElement, button: HTMLButtonElement): void {
   fadeOut(listbox, 500)
 
   button.setAttribute('aria-expanded', 'false')
@@ -150,18 +110,17 @@ function hideListbox(listbox, button) {
   listbox.removeAttribute('aria-activedescendant')
 }
 
-/**
- * @typedef {object} InitializeOptions
- * @property {(item: HTMLElement) => void} onClick
- * @property {(item: HTMLElement) => boolean} isSelectedItem
- */
+type InitializeOptions = {
+  onClick?: (item: HTMLElement) => void
+  isSelectedItem?: (item: HTMLElement) => boolean
+}
 
-let hideListboxOnBlurTimeout
+let hideListboxOnBlurTimeout: number
 
-/**
- * @type {(button: HTMLButtonElement, options: InitializeOptions) => void}
- */
-export function initialize(button, options) {
+export function initialize(
+  button: HTMLButtonElement,
+  options: InitializeOptions
+): void {
   const listbox = document.getElementById(button.getAttribute('aria-controls'))
 
   button.addEventListener('click', async function () {
@@ -185,7 +144,7 @@ export function initialize(button, options) {
   })
 
   listbox.addEventListener('blur', function () {
-    hideListboxOnBlurTimeout = setTimeout(function () {
+    hideListboxOnBlurTimeout = window.setTimeout(function () {
       hideListbox(listbox, button)
     }, 300)
   })
@@ -223,8 +182,8 @@ export function initialize(button, options) {
   listbox.addEventListener('keydown', function (e) {
     const activeItem = getActiveDescendant(listbox)
 
-    let nextActiveItem
-    let shouldPreventDefault
+    let nextActiveItem: Element
+    let shouldPreventDefault: boolean
 
     switch (e.key) {
       case 'Escape':

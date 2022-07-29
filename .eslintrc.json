@@ -1,14 +1,25 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "plugin:cypress/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:cypress/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "ignorePatterns": ["public", "*.min.js", "*.d.ts"]
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "ignorePatterns": [
+    "public",
+    "*.min.js"
+  ]
 }

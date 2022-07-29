@@ -20,7 +20,7 @@
     {{ block "script-elements" . }}
     {{ end }}
 
-    {{ $themeScript := resources.Get "js/theme.js" }}
+    {{ $themeScript := resources.Get "js/theme.ts" | js.Build }}
 
     {{ if hugo.IsProduction }}
       {{ $themeScript = $themeScript | minify }}

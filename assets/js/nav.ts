@@ -1,4 +1,4 @@
-const nav = document.querySelector('[data-nav-container]')
+const nav = document.querySelector<HTMLDivElement>('[data-nav-container]')
 
 const activeNavLink = nav.querySelector('[aria-current=page]')
 
@@ -17,7 +17,7 @@ function showNav() {
   nav.style.transform = `translateY(0)`
 }
 
-let timeout
+let timeout: number
 let lastScrollPosition = window.scrollY
 
 function handleScroll() {

@@ -4,8 +4,8 @@ export function getOptions(listbox: HTMLElement): NodeListOf<HTMLElement> {
   return listbox.querySelectorAll('[role="option"]')
 }
 
-function getActiveDescendant(listbox: HTMLElement): HTMLElement {
-  let activeDescendant: HTMLElement
+function getActiveDescendant(listbox: HTMLElement): HTMLElement | null {
+  let activeDescendant: HTMLElement | null = null
 
   getOptions(listbox).forEach(function (item) {
     if (item.id === listbox.getAttribute('aria-activedescendant')) {
@@ -16,8 +16,8 @@ function getActiveDescendant(listbox: HTMLElement): HTMLElement {
   return activeDescendant
 }
 
-function getSelectedOption(listbox: HTMLElement): HTMLElement {
-  let selectedListboxitem: HTMLElement
+function getSelectedOption(listbox: HTMLElement): HTMLElement | null {
+  let selectedListboxitem: HTMLElement | null = null
 
   getOptions(listbox).forEach(function (item) {
     if (item.getAttribute('aria-selected') === 'true') {
@@ -111,7 +111,7 @@ function hideListbox(listbox: HTMLElement, button: HTMLButtonElement): void {
 }
 
 type InitializeOptions = {
-  onClick?: (item: HTMLElement) => void
+  onClick?: (item: HTMLElement | null) => void
   isSelectedItem?: (item: HTMLElement) => boolean
 }
 
@@ -121,7 +121,17 @@ export function initialize(
   button: HTMLButtonElement,
   options: InitializeOptions
 ): void {
-  const listbox = document.getElementById(button.getAttribute('aria-controls'))
+  const listboxId = button.getAttribute('aria-controls')
+
+  if (listboxId === null) {
+    return
+  }
+
+  const listbox = document.getElementById(listboxId)
+
+  if (!listbox) {
+    return
+  }
 
   button.addEventListener('click', async function () {
     clearTimeout(hideListboxOnBlurTimeout)
@@ -150,6 +160,10 @@ export function initialize(
   })
 
   listbox.addEventListener('click', function (e) {
+    if (!e.target) {
+      return
+    }
+
     if (options.onClick) {
       options.onClick(getActiveDescendant(listbox))
       selectOption(listbox, e.target)
@@ -182,8 +196,8 @@ export function initialize(
   listbox.addEventListener('keydown', function (e) {
     const activeItem = getActiveDescendant(listbox)
 
-    let nextActiveItem: Element
-    let shouldPreventDefault: boolean
+    let nextActiveItem: Element | null = null
+    let shouldPreventDefault = false
 
     switch (e.key) {
       case 'Escape':
@@ -194,18 +208,23 @@ export function initialize(
       case ' ':
         if (options.onClick) {
           options.onClick(getActiveDescendant(listbox))
-          selectOption(listbox, getActiveDescendant(listbox))
+
+          const activeDescendant = getActiveDescendant(listbox)
+          if (activeDescendant) {
+            selectOption(listbox, activeDescendant)
+          }
+
           hideListbox(listbox, button)
         }
         shouldPreventDefault = true
         break
       case 'ArrowDown':
         nextActiveItem =
-          activeItem.nextElementSibling || listbox.firstElementChild
+          activeItem?.nextElementSibling || listbox.firstElementChild
         break
       case 'ArrowUp':
         nextActiveItem =
-          activeItem.previousElementSibling || listbox.lastElementChild
+          activeItem?.previousElementSibling || listbox.lastElementChild
         break
       case 'Home':
       case 'PageUp':

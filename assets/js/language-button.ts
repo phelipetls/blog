@@ -7,7 +7,7 @@ const button = document.querySelector<HTMLButtonElement>(
 if (button) {
   initialize(button, {
     onClick: function (item) {
-      item.querySelector('a').click()
+      item?.querySelector('a')?.click()
     },
   })
 }

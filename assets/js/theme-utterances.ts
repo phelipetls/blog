@@ -5,11 +5,11 @@ document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     return
   }
 
-  iframe.contentWindow.postMessage(
+  iframe.contentWindow?.postMessage(
     {
       type: 'set-theme',
-      theme: (e.detail).theme === 'dark' ? 'github-dark' : 'github-light',
+      theme: e.detail.theme === 'dark' ? 'github-dark' : 'github-light',
     },
     'https://utteranc.es'
   )
-})
+} as EventListener)

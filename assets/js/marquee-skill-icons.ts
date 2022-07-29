@@ -1,9 +1,9 @@
 import { changeUrlTheme } from 'js/theme-skill-icons.js'
 
-const marquee = document.querySelector<HTMLElement>(
+const marquee = document.querySelector(
   '[data-skill-icons-marquee]'
-)
-const skillIconsImage = marquee.querySelector('img')
+) as HTMLElement
+const skillIconsImage = marquee.querySelector('img') as HTMLImageElement
 
 function setCssBackgroundImageUrl(elem: HTMLElement, url: string) {
   elem.style.backgroundImage = `url('${url}')`
@@ -31,5 +31,5 @@ skillIconsImage.onload = function () {
   document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     const newUrl = changeUrlTheme(backgroundImageUrl, e.detail.theme)
     setCssBackgroundImageUrl(marquee, newUrl)
-  })
+  } as EventListener)
 }

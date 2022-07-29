@@ -7,6 +7,11 @@ export function changeUrlTheme(rawUrl: string, theme: Theme) {
 document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
   document.querySelectorAll('img[src*=skillicons]').forEach(function (img) {
     const url = img.getAttribute('src')
+
+    if (!url) {
+      return
+    }
+
     img.setAttribute('src', changeUrlTheme(url, e.detail.theme))
   })
-})
+} as EventListener)

@@ -1,4 +1,4 @@
-const nav = document.querySelector<HTMLDivElement>('[data-nav-container]')
+const nav = document.querySelector('[data-nav-container]') as HTMLDivElement
 
 const activeNavLink = nav.querySelector('[aria-current=page]')
 

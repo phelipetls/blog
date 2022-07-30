@@ -235,7 +235,7 @@ body.dark {
   }
 
   nav#TableOfContents > ol li a {
-    @apply whitespace-nowrap border-b-0 transition-colors duration-100;
+    @apply block w-full whitespace-nowrap border-b-0 transition-colors duration-500 hover:bg-hover;
   }
 }
 

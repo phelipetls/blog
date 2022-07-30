@@ -5,6 +5,7 @@
     "strict": true,
     "module": "es6",
     "moduleResolution": "node",
+    "isolatedModules": true,
     "target": "esnext",
     "baseUrl": ".",
     "paths": {

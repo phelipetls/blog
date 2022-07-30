@@ -1,4 +1,5 @@
 import { changeUrlTheme } from 'js/theme-skill-icons.js'
+import type { NewThemeEvent } from './theme'
 
 const marquee = document.querySelector(
   '[data-skill-icons-marquee]'

@@ -1,3 +1,5 @@
+import type { NewThemeEvent } from './theme'
+
 document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
   const iframe = document.querySelector<HTMLIFrameElement>('.utterances-frame')
 
@@ -13,3 +15,5 @@ document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     'https://utteranc.es'
   )
 } as EventListener)
+
+export {}

@@ -1,5 +1,5 @@
-type Theme = 'dark' | 'light'
-type ThemeChoice = 'dark' | 'light' | 'auto'
+export type Theme = 'dark' | 'light'
+export type ThemeChoice = 'dark' | 'light' | 'auto'
 
 function storeThemeChoice(themeChoice: ThemeChoice): void {
   if (themeChoice) {
@@ -29,7 +29,7 @@ function setTheme(themeChoice: ThemeChoice): void {
   document.body.classList.toggle('dark', theme === 'dark')
 }
 
-type NewThemeEvent = CustomEvent<{
+export type NewThemeEvent = CustomEvent<{
   theme: Theme
   themeChoice: ThemeChoice
 }>

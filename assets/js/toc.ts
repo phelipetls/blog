@@ -120,3 +120,5 @@ const headingsInBlogPost = blogPost.querySelectorAll('h2, h3, h4, h4, h6')
 for (const headingInBlogPost of headingsInBlogPost) {
   observer.observe(headingInBlogPost)
 }
+
+export {}

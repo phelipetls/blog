@@ -40,3 +40,5 @@ function handleScroll() {
 }
 
 window.addEventListener('scroll', handleScroll, false)
+
+export {}

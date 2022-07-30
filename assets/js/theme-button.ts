@@ -1,4 +1,5 @@
 import { initialize } from './listbox'
+import type { ThemeChoice, NewThemeEvent } from './theme'
 
 const button = document.querySelector(
   '[data-theme-button]'

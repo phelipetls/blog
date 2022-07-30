@@ -1,3 +1,5 @@
+import type { Theme, NewThemeEvent } from './theme'
+
 export function changeUrlTheme(rawUrl: string, theme: Theme) {
   const url = new URL(rawUrl)
   url.searchParams.set('theme', theme)

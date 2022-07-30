@@ -21,5 +21,8 @@ describe('Table of contents interactive sidebar', () => {
 
     cy.contains('h2', /functions/i).scrollIntoView()
     cy.isInViewport('nav#TableOfContents li a[href="#functions"]')
+
+    cy.scrollTo('top')
+    cy.isInViewport('nav#TableOfContents li a[href="#hello-world"]')
   })
 })

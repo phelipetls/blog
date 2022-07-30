@@ -50,9 +50,9 @@ body.dark {
   --primary: var(--orange);
   --primary-fg: var(--black-600);
   --foreground: var(--beige-300);
-  --background: var(--black-400);
-  --surface: var(--black-500);
-  --hover: var(--black-600);
+  --background: var(--black-500);
+  --surface: var(--black-400);
+  --hover: var(--black-300);
   --divider: var(--black-100);
   --note: var(--blue);
   --warn: var(--red);
@@ -144,7 +144,7 @@ body.dark {
   }
 
   pre {
-    @apply -mx-page-padding overflow-x-auto bg-background py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply -mx-page-padding overflow-x-auto bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
   [role='tabpanel'] pre {
@@ -183,7 +183,7 @@ body.dark {
   kbd {
     padding: 2px 4px;
     box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-background py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
+    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
   }
 
   ::selection {
@@ -195,7 +195,7 @@ body.dark {
   }
 
   [role='tab'][aria-selected='true'] {
-    @apply border-t-2 border-primary bg-background;
+    @apply border-t-2 border-primary bg-surface;
   }
 
   [role='tablist'] {
@@ -203,7 +203,7 @@ body.dark {
   }
 
   [role='tabpanel'] {
-    @apply rounded-md bg-background py-8 px-page-padding;
+    @apply rounded-md bg-surface py-8 px-page-padding shadow-sm shadow-divider;
   }
 
   nav#TableOfContents ol {
@@ -235,7 +235,7 @@ body.dark {
   }
 
   nav#TableOfContents > ol li a {
-    @apply whitespace-nowrap border-b-0 transition-colors duration-100 ease-in-out;
+    @apply whitespace-nowrap border-b-0 transition-colors duration-100;
   }
 }
 
@@ -265,15 +265,15 @@ body.dark {
   }
 
   .tag {
-    @apply chip no-underline shadow-sm shadow-divider hover:bg-hover;
+    @apply chip no-underline shadow-sm shadow-divider transition-colors duration-100 hover:bg-hover;
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-background px-page-padding py-4 sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-surface px-page-padding py-4 shadow-sm shadow-divider sm:mx-0;
   }
 
   .card {
-    @apply rounded-md bg-surface shadow-md shadow-divider;
+    @apply rounded-md bg-surface shadow-sm shadow-divider;
   }
 
   .grid-cols-layout > * {
@@ -331,6 +331,10 @@ main + footer {
 
 [data-blog-post] .katex-display {
   @apply overflow-x-auto overflow-y-hidden;
+}
+
+[data-nav-container] [role='listbox'] [role='option'] {
+  @apply hover:bg-hover;
 }
 
 [data-nav-container] [role='listbox'] [role='option']:first-child {

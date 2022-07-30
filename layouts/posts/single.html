@@ -5,7 +5,7 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
     <div
-      class="card col-full max-w-full rounded-none py-16 px-page-padding shadow-none sm:col-content sm:rounded-md sm:px-16 sm:shadow-md"
+      class="col-full max-w-full rounded-none py-16 px-page-padding shadow-none sm:col-content sm:px-0"
     >
       <article>
         <header>
@@ -46,7 +46,7 @@
       <div
         data-theme-copy-code-tooltip
         role="tooltip"
-        class="pointer-events-none absolute rounded-md border border-divider bg-background px-2"
+        class="pointer-events-none absolute rounded-md border border-divider bg-surface px-2"
         style="opacity: 0"
       >
         {{ i18n "Copied" }}
@@ -54,7 +54,7 @@
 
         <div
           data-theme-copy-code-tooltip-arrow
-          class="absolute h-[8px] w-[8px] rotate-45 border-r border-b border-divider bg-background"
+          class="absolute h-[8px] w-[8px] rotate-45 border-r border-b border-divider bg-surface"
         ></div>
       </div>
 

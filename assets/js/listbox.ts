@@ -28,7 +28,7 @@ function getSelectedOption(listbox: HTMLElement): HTMLElement | null {
   return selectedListboxitem
 }
 
-const focusedStyle = ['bg-background']
+const focusedStyle = ['bg-surface']
 const selectedStyle = ['text-primary']
 
 function applyFocusedStyle(item: HTMLElement): void {

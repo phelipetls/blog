@@ -42,6 +42,7 @@ module.exports = {
       primary: withOpacityValue('--primary'),
       ['primary-fg']: withOpacityValue('--primary-fg'),
       divider: withOpacityValue('--divider'),
+      shadow: withOpacityValue('--shadow'),
       foreground: withOpacityValue('--foreground'),
       background: withOpacityValue('--background'),
       surface: withOpacityValue('--surface'),

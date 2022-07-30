@@ -41,6 +41,7 @@ body {
   --surface: var(--beige-200);
   --hover: var(--beige-100);
   --divider: var(--beige-700);
+  --shadow: var(--beige-700);
   --note: var(--blue);
   --warn: var(--red);
   color-scheme: light;
@@ -54,6 +55,7 @@ body.dark {
   --surface: var(--black-400);
   --hover: var(--black-300);
   --divider: var(--black-100);
+  --shadow: var(--black-600);
   --note: var(--blue);
   --warn: var(--red);
   color-scheme: dark;
@@ -203,7 +205,7 @@ body.dark {
   }
 
   [role='tabpanel'] {
-    @apply rounded-md bg-surface py-8 px-page-padding shadow-sm shadow-divider;
+    @apply rounded-md bg-surface py-8 px-page-padding shadow-sm shadow-shadow;
   }
 
   nav#TableOfContents ol {
@@ -265,15 +267,15 @@ body.dark {
   }
 
   .tag {
-    @apply chip no-underline shadow-sm shadow-divider transition-colors duration-500 hover:border-divider hover:bg-hover;
+    @apply chip no-underline shadow-sm shadow-shadow transition-colors duration-500 hover:border-divider hover:bg-hover;
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-surface px-page-padding py-4 shadow-sm shadow-divider sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-surface px-page-padding py-4 shadow-sm shadow-shadow sm:mx-0;
   }
 
   .card {
-    @apply rounded-md bg-surface shadow-sm shadow-divider;
+    @apply rounded-md bg-surface shadow-sm shadow-shadow;
   }
 
   .grid-cols-layout > * {

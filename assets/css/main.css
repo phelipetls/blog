@@ -265,7 +265,7 @@ body.dark {
   }
 
   .tag {
-    @apply chip no-underline shadow-sm shadow-divider transition-colors duration-100 hover:bg-hover;
+    @apply chip no-underline shadow-sm shadow-divider transition-colors duration-500 hover:border-divider hover:bg-hover;
   }
 
   .alert {

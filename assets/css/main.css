@@ -205,7 +205,7 @@ body.dark {
   }
 
   [role='tabpanel'] {
-    @apply rounded-md bg-surface py-8 px-page-padding shadow-sm shadow-shadow;
+    @apply rounded-md bg-surface py-8 px-page-padding shadow-md shadow-shadow;
   }
 
   nav#TableOfContents ol {
@@ -271,11 +271,11 @@ body.dark {
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-surface px-page-padding py-4 shadow-sm shadow-shadow sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-l-2 bg-surface px-page-padding py-4 shadow-md shadow-shadow sm:mx-0;
   }
 
   .card {
-    @apply rounded-md bg-surface shadow-sm shadow-shadow;
+    @apply rounded-md bg-surface shadow-md shadow-shadow;
   }
 
   .grid-cols-layout > * {

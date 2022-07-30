@@ -11,8 +11,10 @@
       "*": ["assets/*"]
     }
   },
+  "include": [
+    "assets/js/**/*"
+  ],
   "exclude": [
-    "node_modules",
     "assets/js/templates"
   ]
 }

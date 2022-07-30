@@ -1,10 +1,10 @@
 <nav
-  class="flex flex-wrap justify-between gap-2 sm:flex-nowrap"
+  class="grid grid-cols-1 gap-2 sm:grid-cols-2"
   aria-label="{{ i18n "PostsNavigation" }}"
 >
   {{ with .PrevInSection }}
     <a
-      class="flex grow basis-1/2 items-center gap-2 border-0"
+      class="card flex items-center gap-2 border-0 p-2 transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -13,11 +13,15 @@
 
       {{ .Title }}
     </a>
+  {{ else }}
+    <!-- spacer element to keep next link to the right, when there is no
+      previous post -->
+    <div></div>
   {{ end }}
 
   {{ with .NextInSection }}
     <a
-      class="flex h-full grow basis-1/2 items-center justify-end gap-2 self-end border-0 text-right"
+      class="card flex items-center justify-end gap-2 self-end border-0 p-2 text-right transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}
@@ -27,5 +31,7 @@
         {{ partial "svgs/arrow-right.svg" }}
       </span>
     </a>
+  {{ else }}
+    <div></div>
   {{ end }}
 </nav>

@@ -15,7 +15,9 @@ function resetToc(): void {
   toc.querySelectorAll('li').forEach(reset)
 }
 
-function getTocItemByHeading(heading: HTMLHeadingElement): HTMLLIElement | null {
+function getTocItemByHeading(
+  heading: HTMLHeadingElement
+): HTMLLIElement | null {
   const anchorHref = heading.querySelector('a')?.getAttribute('href')
   const tocAnchorElem = toc.querySelector(`li a[href="${anchorHref}"]`)
 
@@ -26,14 +28,18 @@ function getTocItemByHeading(heading: HTMLHeadingElement): HTMLLIElement | null 
   return tocAnchorElem.closest('li')
 }
 
-function getHeadingByTocItem(tocItem: HTMLLIElement): HTMLHeadingElement | null {
+function getHeadingByTocItem(
+  tocItem: HTMLLIElement
+): HTMLHeadingElement | null {
   const tocItemAnchor = tocItem.querySelector('a')
 
   if (!tocItemAnchor) {
     return null
   }
 
-  const headingAnchor = blogPost.querySelector(`a[href="${tocItemAnchor?.getAttribute('href')}"]`)
+  const headingAnchor = blogPost.querySelector(
+    `a[href="${tocItemAnchor?.getAttribute('href')}"]`
+  )
 
   if (!headingAnchor) {
     return null

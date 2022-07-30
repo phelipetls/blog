@@ -2,9 +2,7 @@ export type Theme = 'dark' | 'light'
 export type ThemeChoice = 'dark' | 'light' | 'auto'
 
 function storeThemeChoice(themeChoice: ThemeChoice): void {
-  if (themeChoice) {
-    localStorage.setItem('__theme', themeChoice)
-  }
+  localStorage.setItem('__theme', themeChoice)
 }
 
 function getStoredThemeChoice() {
@@ -47,7 +45,11 @@ function dispatchNewThemeEvent(themeChoice: ThemeChoice): void {
   document.body.dispatchEvent(createNewThemeEvent(themeChoice))
 }
 
-window.__setTheme = function (themeChoice: ThemeChoice): void {
+window.__setTheme = function (themeChoice: ThemeChoice | null): void {
+  if (!themeChoice) {
+    return
+  }
+
   setTheme(themeChoice)
   storeThemeChoice(themeChoice)
   dispatchNewThemeEvent(themeChoice)

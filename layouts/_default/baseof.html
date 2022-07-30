@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html class="h-full" lang="{{ .Site.Params.htmlLang | default .Lang }}">
   <head>
+    {{ partialCached "head-common.html" . }}
     {{ partial "head.html" . }}
+    {{ partial "tailwindcss.html" . }}
 
     {{ block "head" . }}
     {{ end }}
@@ -29,7 +31,7 @@
     <script>{{ $themeScript.Content | safeJS }}</script>
 
     <div>
-      {{ partial "nav.html" . }}
+      {{ partialCached "nav.html" . .Section }}
 
       {{ block "main" . }}
         <main class="grid grid-cols-layout">

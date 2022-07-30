@@ -1,0 +1,35 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="deploy-date" content="{{ now.Format "2006-01-02" }}" />
+<meta name="author" content="{{ site.Author.name }}" />
+<meta name="color-scheme" content="dark light" />
+
+{{ $fontsCss := resources.Get "css/fonts.css" }}
+
+{{ if hugo.IsProduction }}
+  {{ $fontsCss = $fontsCss | minify }}
+{{ end }}
+
+<style>
+  {{ $fontsCss.Content | safeCSS }}
+</style> {{ if hugo.IsProduction }}
+  <script
+    async
+    defer
+    data-website-id="32b90065-c2a6-4390-9684-dfde99409815"
+    src="https://umami-production-10b2.up.railway.app/main.js"
+  ></script>
+{{ end }}
+
+{{ $themeButtonScript := resources.Get "js/theme-button.ts" | js.Build }}
+{{ $languageButtonScript := resources.Get "js/language-button.ts" | js.Build }}
+{{ $navScript := resources.Get "js/nav.ts" | js.Build }}
+
+{{ $bundle := slice $navScript $themeButtonScript $languageButtonScript | resources.Concat "js/bundle.js" }}
+
+{{ if hugo.IsProduction }}
+  {{ $bundle = $bundle | minify }}
+{{ end }}
+
+
+<script type="module" defer src="{{ $bundle.Permalink }}"></script>

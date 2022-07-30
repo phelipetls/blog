@@ -40,7 +40,10 @@ Cypress.Commands.add('isInViewport', (element) => {
     const bottom = Cypress.$(cy.state('window')).height()
     const rect = $el[0].getBoundingClientRect()
 
-    expect(rect.top).not.to.be.greaterThan(bottom)
-    expect(rect.bottom).not.to.be.greaterThan(bottom)
+    expect(rect.top).to.be.above(0)
+    expect(rect.bottom).to.be.above(0)
+
+    expect(rect.top).not.to.be.above(bottom)
+    expect(rect.bottom).not.to.be.above(bottom)
   })
 })

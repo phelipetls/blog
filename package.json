@@ -9,7 +9,7 @@
     "dev": "npm run hugo:dev",
     "cy:open": "cypress run",
     "cy:run": "cypress run",
-    "test": "cross-env HUGO_ENV=production start-server-and-test dev 1313 cy:run"
+    "test": "start-server-and-test dev 1313 cy:run"
   },
   "repository": {
     "type": "git",

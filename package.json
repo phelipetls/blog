@@ -56,7 +56,7 @@
     "pre-push": "npm run test"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],

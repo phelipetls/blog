@@ -2,7 +2,10 @@
 {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.ts" | js.Build }}
 {{ $tabsJs := resources.Get "/js/tabs.js" }}
 {{ $tocJs := resources.Get "/js/toc.ts" | js.Build }}
-{{ $copyCodeButtonScript := resources.Get "/js/copy-code-button.js" | js.Build }}
+{{ $copyCodeButtonScript :=
+  resources.Get "/js/copy-code-button.js"
+  | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
+}}
 
 {{ $bundle := slice $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $tocJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
 

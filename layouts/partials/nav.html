@@ -16,7 +16,7 @@
         class="m-0 flex h-full list-none flex-row flex-nowrap items-center gap-2"
       >
         {{- range .Site.Menus.main -}}
-          {{ $isActive := (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .)) }}
+          {{ $isActive := eq $currentPage.Section .Page.Section }}
           <li class="h-full">
             <a
               id="{{ .Identifier }}"

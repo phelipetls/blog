@@ -9,12 +9,16 @@ if (activeNavLink) {
   })
 }
 
+const visibleNavStyle = ['shadow-md', 'shadow-shadow']
+
 function hideNav() {
   nav.style.transform = `translateY(-100%)`
+  nav.classList.remove(...visibleNavStyle)
 }
 
 function showNav() {
   nav.style.transform = `translateY(0)`
+  nav.classList.add(...visibleNavStyle)
 }
 
 let timeout: number

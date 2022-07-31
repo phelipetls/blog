@@ -90,10 +90,11 @@ function wrapAroundElement(wrapper, element) {
   wrapper.append(element)
 }
 
-function hasOnlyCodeBlockAsChild(element) {
+function isHighlightedCodeBlock(element) {
+  const parentElement = element.parentElement
   return (
-    element.children.length === 1 &&
-    element.children[0] instanceof HTMLPreElement
+    parentElement instanceof HTMLDivElement &&
+    parentElement.classList.contains('highlight')
   )
 }
 
@@ -102,7 +103,7 @@ const codeBlocks = document.querySelectorAll('pre')
 for (const codeBlock of codeBlocks) {
   let codeBlockParent = codeBlock.parentElement
 
-  if (!hasOnlyCodeBlockAsChild(codeBlockParent)) {
+  if (!isHighlightedCodeBlock(codeBlock)) {
     const wrapper = document.createElement('div')
     wrapAroundElement(wrapper, codeBlock)
     codeBlockParent = wrapper

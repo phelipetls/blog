@@ -85,10 +85,9 @@ function createCopyCodeButton() {
   return button
 }
 
-function wrapAround(element, parentElement) {
-  element.insertAdjacentElement('afterend', parentElement)
-  parentElement.append(element)
-  return parentElement
+function wrapAroundElement(wrapper, element) {
+  element.insertAdjacentElement('afterend', wrapper)
+  wrapper.append(element)
 }
 
 function hasOnlyCodeBlockAsChild(element) {
@@ -104,12 +103,11 @@ for (const codeBlock of codeBlocks) {
   let codeBlockParent = codeBlock.parentElement
 
   if (!hasOnlyCodeBlockAsChild(codeBlockParent)) {
-    codeBlockParent = wrapAround(codeBlock, document.createElement('div'))
+    const wrapper = document.createElement('div')
+    wrapAroundElement(wrapper, codeBlock)
+    codeBlockParent = wrapper
   }
 
   codeBlockParent.classList.add('relative', 'group')
-
-  const copyCodeButton = createCopyCodeButton()
-
-  codeBlock.append(copyCodeButton)
+  codeBlock.append(createCopyCodeButton())
 }

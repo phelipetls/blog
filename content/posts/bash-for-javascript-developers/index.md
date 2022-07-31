@@ -1037,7 +1037,7 @@ That won't work though because the file does not have permission to be
 executed. We can grant permission for the current user to execute a file with
 the `chmod` command:
 
-```
+```shell-session
 $ chmod u+x my-script
 $ ./my-script
 Hello World
@@ -1050,7 +1050,7 @@ or zsh, will simply run the code in it. We can tell the operating system that
 this script should always be interpreted by bash with a shebang, a comment-like
 line at the start of the file:
 
-```
+```bash
 #!/bin/bash
 echo "Hello World from Bash ${BASH_VERSION}"
 ```

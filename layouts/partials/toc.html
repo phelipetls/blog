@@ -18,7 +18,8 @@
   </div>
 {{ end }}
 
-{{ if not (eq .TableOfContents `<nav id="TableOfContents"></nav>`) }}
+{{ $tocIsEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` }}
+{{ if not $tocIsEmpty }}
   <div
     data-toc-wrapper
     class="pretty-scrollbar w-full overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"

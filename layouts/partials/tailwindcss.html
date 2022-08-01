@@ -2,5 +2,5 @@
 {{ if hugo.IsProduction }}
   {{ $css = $css | minify | resources.PostProcess }}
 {{ else }}
-  {{ $css = $css | resources.ExecuteAsTemplate (printf "styles.dev.%v.css" now.UnixMilli) . | resources.PostProcess }}
+  {{ $css = $css | resources.Copy (printf "styles.dev.%v.css" now.UnixMilli) | resources.PostProcess }}
 {{ end }} <link rel="stylesheet" href="{{ $css.RelPermalink }}" />

@@ -208,6 +208,14 @@ body.dark {
     @apply rounded-md bg-surface py-8 px-page-padding shadow-md shadow-shadow;
   }
 
+  nav[data-toc] {
+    @apply mt-4;
+  }
+
+  nav[data-toc-mobile] ol {
+    @apply mb-0 list-inside;
+  }
+
   nav[data-toc-desktop] ol {
     @apply m-0 list-none indent-4;
   }
@@ -222,6 +230,10 @@ body.dark {
 
   nav[data-toc-desktop] ol ol ol ol {
     @apply indent-16;
+  }
+
+  nav[data-toc-mobile] ol li {
+    @apply leading-relaxed;
   }
 
   nav[data-toc-desktop] > ol li {

@@ -40,10 +40,12 @@ function createCopyCodeButton() {
 
   button.addEventListener('focus', function () {
     button.classList.add('opacity-100')
+    button.classList.remove('pointer-events-none')
   })
 
   button.addEventListener('blur', function () {
     button.classList.remove('opacity-100')
+    button.classList.add('pointer-events-none')
   })
 
   button.addEventListener('click', async function () {

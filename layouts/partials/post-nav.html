@@ -4,7 +4,7 @@
 >
   {{ with .PrevInSection }}
     <a
-      class="card flex items-center gap-2 border-0 p-2 transition-colors duration-500 hover:bg-hover"
+      class="card flex h-full items-center gap-2 border-0 p-2 transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -21,7 +21,7 @@
 
   {{ with .NextInSection }}
     <a
-      class="card flex items-center justify-end gap-2 self-end border-0 p-2 text-right transition-colors duration-500 hover:bg-hover"
+      class="card flex h-full items-center justify-end gap-2 self-end border-0 p-2 text-right transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}

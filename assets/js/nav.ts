@@ -9,16 +9,30 @@ if (activeNavLink) {
   })
 }
 
-const visibleNavStyle = ['shadow-md', 'shadow-shadow']
-
 function hideNav() {
   nav.style.transform = `translateY(-100%)`
-  nav.classList.remove(...visibleNavStyle)
+  hideNavShadow()
 }
 
 function showNav() {
   nav.style.transform = `translateY(0)`
-  nav.classList.add(...visibleNavStyle)
+  showNavShadow()
+}
+
+function showNavShadow() {
+  nav.style.setProperty('--shadow-opacity', '100')
+}
+
+function hideNavShadow() {
+  nav.style.setProperty('--shadow-opacity', '0')
+}
+
+function handleNavShadowVisibility() {
+  if (window.scrollY <= nav.clientHeight) {
+    hideNavShadow()
+  } else {
+    showNavShadow()
+  }
 }
 
 let timeout: number
@@ -39,10 +53,13 @@ function handleScroll() {
       showNav()
     }
 
+    handleNavShadowVisibility()
+
     lastScrollPosition = Math.max(newScrollPosition, 0)
   })
 }
 
+handleNavShadowVisibility()
 window.addEventListener('scroll', handleScroll, false)
 
 export {}

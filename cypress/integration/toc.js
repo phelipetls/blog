@@ -6,7 +6,7 @@ describe('Table of contents interactive sidebar', () => {
 
     cy.contains('h2', /variables/i).scrollIntoView()
 
-    cy.get('nav#TableOfContents li a[href="#variables"]')
+    cy.get('nav[data-toc] li a[href="#variables"]')
       .closest('li')
       .should('have.attr', 'data-active')
   })
@@ -17,12 +17,12 @@ describe('Table of contents interactive sidebar', () => {
     cy.visit('/posts/bash-for-javascript-developers')
 
     cy.scrollTo('bottom')
-    cy.isInViewport('nav#TableOfContents li a[href="#conclusion"]')
+    cy.isInViewport('nav[data-toc] li a[href="#conclusion"]')
 
     cy.contains('h2', /functions/i).scrollIntoView()
-    cy.isInViewport('nav#TableOfContents li a[href="#functions"]')
+    cy.isInViewport('nav[data-toc] li a[href="#functions"]')
 
     cy.scrollTo('top')
-    cy.isInViewport('nav#TableOfContents li a[href="#hello-world"]')
+    cy.isInViewport('nav[data-toc] li a[href="#hello-world"]')
   })
 })

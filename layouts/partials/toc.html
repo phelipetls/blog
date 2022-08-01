@@ -24,9 +24,13 @@
     data-toc-wrapper
     class="pretty-scrollbar w-full overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
   >
+    {{ $tableOfContentsDesktop := replace .TableOfContents `id="TableOfContents"` `data-toc data-toc-desktop` | safeHTML }}
+    {{ $tableOfContentsMobile := replace .TableOfContents `id="TableOfContents"` `data-toc data-toc-mobile` | safeHTML }}
+
+
     <div class="hidden lg:block">
       {{ partial "partials/toc-title.html" . }}
-      {{ .TableOfContents }}
+      {{ $tableOfContentsDesktop }}
     </div>
 
     <details
@@ -38,10 +42,7 @@
         {{ partial "partials/toc-title.html" . }}
       </summary>
 
-      <!-- TODO: since we use two table of contents, there are two elements with
-        the same ID in the document, which can be a problem and overall is not
-        valid HTML -->
-      {{ .TableOfContents }}
+      {{ $tableOfContentsMobile }}
     </details>
   </div>
 {{ end }}

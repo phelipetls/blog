@@ -1,4 +1,4 @@
-const toc = document.querySelector('nav#TableOfContents') as HTMLElement
+const toc = document.querySelector('nav[data-toc]') as HTMLElement
 const container = toc.closest('[data-toc-wrapper]') as HTMLElement
 const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
 const firstTocItem = toc.querySelector('li')

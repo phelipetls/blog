@@ -208,35 +208,35 @@ body.dark {
     @apply rounded-md bg-surface py-8 px-page-padding shadow-md shadow-shadow;
   }
 
-  nav#TableOfContents ol {
+  nav[data-toc-desktop] ol {
     @apply m-0 list-none indent-4;
   }
 
-  nav#TableOfContents ol ol {
+  nav[data-toc-desktop] ol ol {
     @apply indent-8;
   }
 
-  nav#TableOfContents ol ol ol {
+  nav[data-toc-desktop] ol ol ol {
     @apply indent-12;
   }
 
-  nav#TableOfContents ol ol ol ol {
+  nav[data-toc-desktop] ol ol ol ol {
     @apply indent-16;
   }
 
-  nav#TableOfContents > ol li {
+  nav[data-toc-desktop] > ol li {
     @apply relative before:absolute before:top-0 before:left-0 before:h-full before:w-[2px] before:bg-divider before:content-[''];
   }
 
-  nav#TableOfContents > ol li[data-active] {
+  nav[data-toc-desktop] > ol li[data-active] {
     @apply before:bg-primary;
   }
 
-  nav#TableOfContents > ol li[data-active] > a {
+  nav[data-toc-desktop] > ol li[data-active] > a {
     @apply text-primary;
   }
 
-  nav#TableOfContents > ol li a {
+  nav[data-toc-desktop] > ol li a {
     @apply block w-full whitespace-nowrap border-b-0 transition-colors duration-500 hover:bg-hover;
   }
 }

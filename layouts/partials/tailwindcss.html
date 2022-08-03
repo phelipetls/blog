@@ -3,4 +3,7 @@
   {{ $css = $css | minify | resources.PostProcess }}
 {{ else }}
   {{ $css = $css | resources.Copy (printf "styles.dev.%v.css" now.UnixMilli) | resources.PostProcess }}
-{{ end }} <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
+{{ end }}
+
+
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" />

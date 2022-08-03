@@ -109,6 +109,10 @@ body.dark {
     @apply mb-4;
   }
 
+  [data-toc-wrapper] details {
+    @apply mb-8;
+  }
+
   a {
     @apply border-b-2 border-divider no-underline hover:border-primary;
   }

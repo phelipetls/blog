@@ -520,27 +520,25 @@ The most POSIX-compliant way of writing a conditional is to use the command `[`
 (or `test`). `[` is similar to `[[`, but with less features. Read [`man
 test`](https://linux.die.net/man/1/test) for more information.
 
-<details>
-  <summary>
-    Click to see the same examples but using the `[` command.
-  </summary>
+{{< details "Click to see the same examples but using the `[` command." >}}
 
-  ```shell-session
-  $ num=1
-  $ [ "$num" = 1 ] && echo "$num is equal to 1"
-  1 is equal to 1
-  $ [ "$num" != 10 ] && echo "$num is different than 10"
-  1 is different than 10
-  $ [ "$num" -gt 0 ] && echo "$num is greater than 0"
-  1 is greater than 0
-  $ [ "$num" -lt 10 ] && echo "$num is less than 10"
-  1 is less than 10
-  $ [ "$num" -ge 0 ] && echo "$num is greater than or equal to 0"
-  1 is greater than or equal to 0
-  $ [ "$num" -le 10 ] && echo "$num is less than or equal to 10"
-  1 is less than or equal to 10
-  ```
-</details>
+```shell-session
+$ num=1
+$ [ "$num" = 1 ] && echo "$num is equal to 1"
+1 is equal to 1
+$ [ "$num" != 10 ] && echo "$num is different than 10"
+1 is different than 10
+$ [ "$num" -gt 0 ] && echo "$num is greater than 0"
+1 is greater than 0
+$ [ "$num" -lt 10 ] && echo "$num is less than 10"
+1 is less than 10
+$ [ "$num" -ge 0 ] && echo "$num is greater than or equal to 0"
+1 is greater than or equal to 0
+$ [ "$num" -le 10 ] && echo "$num is less than or equal to 10"
+1 is less than or equal to 10
+```
+
+{{< /details >}}
 
 There are other differences between `[[` and `[` that will need your attention,
 particularly around parameter expansion and quoting, but they're best explained

@@ -1,6 +1,6 @@
 <div
   data-nav-container
-  class="absolute top-0 h-nav-height w-full bg-background bg-opacity-95 py-2 backdrop-blur-sm backdrop-filter"
+  class="absolute top-0 z-0 h-nav-height w-full bg-background bg-opacity-95 py-2 backdrop-blur-sm backdrop-filter"
 >
   <div
     class="mx-auto flex h-full max-w-5xl items-center justify-between pr-page-padding"
@@ -28,7 +28,7 @@
                 {{ if $isActive }}
                 hover:bg-hover card transition-colors duration-500
               {{ else }}
-                after:content-[''] after:absolute after:-z-10 after:bg-surface
+                after:content-[''] after:absolute after:-z-1 after:bg-surface
                 after:w-full after:h-full after:rounded-md after:shadow-md
                 after:shadow-shadow after:scale-0 hover:after:scale-100
                 after:opacity-0 hover:after:opacity-100

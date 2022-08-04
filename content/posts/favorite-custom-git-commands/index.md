@@ -31,8 +31,8 @@ It works by listing branches sorted by commit date, in descending order.
   undo = reset --soft HEAD^
 ```
 
-It works by using the `git reset` command, which makes the tip of the branch
-point to a git revision (a commit reference).
+It works by using the `git reset` command, which will make the tip of the
+branch point to a specific git revision (a commit reference).
 
 Our goal is to undo the last commit, so we need a revision to the commit before
 the current one, which is what `HEAD^` means.
@@ -48,7 +48,7 @@ the working tree".
 
 The `--soft` option is to keep the undone commit's changes in the staging area.
 
-I use this command most often when rebasing, e.g. to [remove a file from a
+I often use this command when rebasing, e.g. to [remove a file from a
 commit]({{< ref "/posts/demystifying-git-rebase#remove-a-file-from-a-commit"
 >}}) or to split commits.
 
@@ -88,13 +88,13 @@ committed into `main` the whole time?
 > with its upstream. [...] This is useful to create a feature branch after work
 > has already began on the old branch (likely but not necessarily "master"). 
 
-But for those of use that don't use Emacs, there's
+But for those of us that don't use Emacs, there's
 [git-toolbelt](https://github.com/nvie/git-toolbelt/), a collection of
 git-related shell scripts, including [`git
 spinoff`](https://github.com/nvie/git-toolbelt/blob/main/git-spinoff)!
 
-The API works like `git checkout -b`, i.e. you need to pass the name of the new
-branch (and an optional base -- usually it'll be `main`).
+Its API is similar to `git checkout -b`, i.e. you need to pass the name of the
+new branch (and an optional base -- usually it'll be `main`).
 
 ```plaintext
 usage: git spinoff [-h] <new-name> [<base>]

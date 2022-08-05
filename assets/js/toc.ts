@@ -28,58 +28,6 @@ function getTocItemByHeading(
   return tocAnchorElem.closest('li')
 }
 
-function getHeadingByTocItem(
-  tocItem: HTMLLIElement
-): HTMLHeadingElement | null {
-  const tocItemAnchor = tocItem.querySelector('a')
-
-  if (!tocItemAnchor) {
-    return null
-  }
-
-  const headingAnchor = blogPost.querySelector(
-    `a[href="${tocItemAnchor?.getAttribute('href')}"]`
-  )
-
-  if (!headingAnchor) {
-    return null
-  }
-
-  return headingAnchor.closest('h2, h3, h4, h5, h6')
-}
-
-for (const tocListItem of toc.querySelectorAll('li a')) {
-  // Add a onClick handler to add scroll-padding-top to document element,
-  // equivalent to the navbar height, if the target heading is above the
-  // viewport (in which case the navbar will show up, because the an upwards
-  // scroll will happen). Otherwise, remove it.
-  tocListItem.addEventListener('click', function (e) {
-    const anchor = e.target as HTMLAnchorElement
-    const listItem = anchor.closest('li')
-
-    if (!listItem) {
-      return
-    }
-
-    const heading = getHeadingByTocItem(listItem)
-
-    if (!heading) {
-      return
-    }
-
-    const headingCoords = heading.getBoundingClientRect()
-    const headingTopPosition = Math.abs(headingCoords.top)
-
-    const willScrollUp = headingTopPosition < window.scrollY
-
-    if (willScrollUp) {
-      document.documentElement.classList.add('scroll-pt-nav-height')
-    } else {
-      document.documentElement.classList.remove('scroll-pt-nav-height')
-    }
-  })
-}
-
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {

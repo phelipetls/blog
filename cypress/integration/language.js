@@ -22,4 +22,21 @@ describe('Multi-language listbox', () => {
     cy.url().should('not.contain', 'pt')
     cy.get(':root').should('have.attr', 'lang', 'en')
   })
+
+  const pagesWithTranslations = [
+    '/',
+    '/posts',
+    '/projects',
+    '/resume',
+    '/posts/demystifying-git-rebase/',
+  ]
+
+  pagesWithTranslations.forEach((pageUrl) => {
+    it.only(`should have language button in page ${pageUrl}`, () => {
+      cy.visit(pageUrl)
+      cy.findByRole('button', {
+        name: /click to read in another language/i,
+      }).should('exist')
+    })
+  })
 })

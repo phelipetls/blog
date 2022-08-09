@@ -31,7 +31,7 @@
     <script>{{ $themeScript.Content | safeJS }}</script>
 
     <div>
-      {{ partialCached "nav.html" . .Section }}
+      {{ partialCached "nav.html" . .Section .IsTranslated }}
 
       {{ block "main" . }}
         <main class="grid grid-cols-layout">

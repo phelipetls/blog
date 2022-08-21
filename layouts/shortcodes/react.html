@@ -2,40 +2,12 @@
 {{ $appRootId := md5 $sourceCode }}
 
 
-<div class="my-8">
-  <div role="tablist" aria-label="Tabs" class="flex gap-1">
-    <button
-      role="tab"
-      id="tab-{{ $appRootId }}-source"
-      aria-selected="true"
-      aria-controls="tabpanel-{{ $appRootId }}-source"
-    >
-      Source
-    </button>
-
-    <button
-      role="tab"
-      id="tab-{{ $appRootId }}-app"
-      aria-selected="false"
-      aria-controls="tabpanel-{{ $appRootId }}-app"
-    >
-      App
-    </button>
-  </div>
-
-  <div
-    role="tabpanel"
-    id="tabpanel-{{ $appRootId }}-source"
-    aria-labelledby="tab-{{ $appRootId }}-source"
-  >
+<div class="card my-8 p-page-padding">
+  <div>
     {{ highlight $sourceCode "jsx" (.Get 0 | default "") }}
   </div>
 
-  <div
-    role="tabpanel"
-    id="tabpanel-{{ $appRootId }}-app"
-    aria-labelledby="tab-{{ $appRootId }}-app"
-  >
+  <div class="rounded-md border-2 border-divider bg-[white] p-8">
     <div id="{{ $appRootId }}"></div>
   </div>
 </div>

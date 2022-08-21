@@ -1,6 +1,6 @@
 describe('Copy code button', () => {
   it(
-    'should code block contents with the click of a button',
+    'should copy code block contents with the click of a button',
     { browser: 'electron' },
     () => {
       cy.visit('/posts/bash-for-javascript-developers')

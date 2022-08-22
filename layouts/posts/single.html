@@ -82,11 +82,13 @@
 {{ end }}
 
 {{ define "head" }}
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+  {{ if hugo.IsProduction }}
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  {{ end }}
 
   {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
   {{ $liteYoutubeEmbedCss := resources.Get "css/lite-yt-embed.css" | postCSS }}

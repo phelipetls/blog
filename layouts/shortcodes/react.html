@@ -20,7 +20,8 @@
   resources.Get "js/templates/react-widget.jsx"
   | resources.ExecuteAsTemplate $path $context
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
-}}
+  | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
+  }}
 
 
 <script defer type="module" src="{{ $builtJs.Permalink }}"></script>

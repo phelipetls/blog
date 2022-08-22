@@ -390,7 +390,7 @@ short-circuit evaluation, which [relies on the fact that booleans are ignored
 in
 JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored):
 
-{{< react "hl_lines=15" >}}
+{{< react "hl_lines=14" >}}
 import { useState } from 'react'
 
 function App() {

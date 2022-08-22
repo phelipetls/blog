@@ -2,7 +2,6 @@
 title: How not to write forms with React
 date: 2022-08-21
 tags: [javascript, react]
-react: true
 ---
 
 Forms are easy to not get right -- you can make something work with a

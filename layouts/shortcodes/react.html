@@ -1,17 +1,6 @@
 {{ $sourceCode := (trim .Inner "\n\r") }}
 {{ $appRootId := md5 $sourceCode }}
 
-
-<div class="card my-8 p-page-padding">
-  <div>
-    {{ highlight $sourceCode "jsx" (.Get 0 | default "") }}
-  </div>
-
-  <div class="bg-bakground rounded-md border-2 border-divider p-8">
-    <div id="{{ $appRootId }}" style="all: initial;"></div>
-  </div>
-</div>
-
 {{ $path := printf "js/react-widget-%s.js" $appRootId }}
 {{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
 
@@ -23,5 +12,18 @@
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
   }}
 
+{{ $html :=
+  resources.Get "html/templates/react-app.html"
+  | resources.ExecuteAsTemplate (printf "react-iframe-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $builtJs)
+}}
 
-<script defer type="module" src="{{ $builtJs.Permalink }}"></script>
+
+<div class="card my-8 p-page-padding">
+  <div>
+    {{ highlight $sourceCode "jsx" (.Get 0 | default "") }}
+  </div>
+
+  <div class="rounded-md border-2 border-divider bg-[white] p-8">
+    <iframe src="{{ $html.Permalink }}"> </iframe>
+  </div>
+</div>

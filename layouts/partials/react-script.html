@@ -5,5 +5,6 @@
   {{ $reactBundle := $reactBundle | minify }}
 {{ end }}
 
-
-<script src="{{ $reactBundle.Permalink }}"></script>
+<script>
+  {{ $reactBundle.Content | safeJS }}
+</script>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="{{ .AppRootId }}"></div>
+
+    {{ partial "react-script.html" . }}
+
+    <script type="module">
+      {{ .Js.Content | safeJS }}
+    </script>
+  </body>
+</html>

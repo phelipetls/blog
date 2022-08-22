@@ -14,35 +14,7 @@ us to make an arbitrary HTML elements behave like a form with JavaScript code
 -- for example, one may think that it's enough to send the data to the server
 on the click of a button:
 
-{{< react >}}
-import { useState } from 'react'
-
-function App() {
-  const [username, setUsername] = useState('')
-
-  const handleSubmit = () => {
-    alert(`Ok, ${username}, I sent your data to our server ✨`)
-  }
-
-  return (
-    <div>
-      <div>
-        What's your name?
-
-        <input
-          placeholder="Enter your name..."
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-
-      <button onClick={handleSubmit}>
-        Submit
-      </button>
-    </div>
-  )
-}
-{{< /react >}}
+{{< react path="bad-form.jsx" >}}
 
 So, what's the problem with this code? The `handleSubmit` function will
 execute, shouldn't that be enough?
@@ -53,34 +25,7 @@ in the text input.
 
 Here's what I think to be more appropriate:
 
-{{< react "hl_Lines=5-6 11 15-18 21" >}}
-import { useState } from 'react'
-
-function App() {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const username = e.target.elements['username'].value
-    alert(`Ok, ${username}, I sent your data to our server ✨`)
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        What's your name?
-
-        <input
-          name="username"
-          placeholder="Enter your name..."
-        />
-      </label>
-
-      <button>
-        Submit
-      </button>
-    </form>
-  )
-}
-{{< /react >}}
+{{< react path="good-form.jsx" hl_options="hl_Lines=5-6 11 15-18 21" >}}
 
 Now the form will be submitted when the user types their name and press enter
 -- not just when the button is clicked. [This is just how HTML
@@ -116,133 +61,14 @@ inefficient and difficult to maintain, so it's best to avoid it.
 I really like react-hook-form, it gives you a nicely object nicely maps input
 names to their values in the submit event handler:
 
-{{< react "hl_Lines=4-7 11 14 23-25" >}}
-import { useForm } from 'react-hook-form'
-
-function App() {
-  const { handleSubmit, register } = useForm()
-
-  const onSubmit = (d) => {
-    alert(JSON.stringify(d))
-  }
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>
-        Name:
-        <input {...register('name')} />
-      </label>
-
-      <div />
-
-      <label>
-        Age:
-        <input
-          type="number"
-          {...register('age', {
-            valueAsNumber: true,
-          })}
-        />
-      </label>
-
-      <div />
-
-      <button>Submit</button>
-    </form>
-  )
-}
-{{< /react >}}
+{{< react path="react-hook-form.jsx" hl_options="hl_Lines=4-7 11 14 23-25" >}}
 
 Here's the equivalent JavaScript code we'd without react-hook-form:
 
-{{< react "hl_Lines=2-14" >}}
-function App() {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    const name = e.target.elements.name.value
-    const age = e.target.elements.age.valueAsNumber
-
-    alert(
-      JSON.stringify({
-        name,
-        age,
-      })
-    )
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input name="name" />
-      </label>
-
-      <div />
-
-      <label>
-        Age:
-        <input name="age" type="number" />
-      </label>
-
-      <div />
-
-      <button>Submit</button>
-    </form>
-  )
-}
-{{< /react >}}
+{{< react path="form-without-lib.jsx" hl_options="hl_Lines=2-14" >}}
 
 There are other input components whose values are harder to parse -- without a
 library you'd have to worry about handling all of them.
-
-A form library may also help with form validation, for which you'd probably to
-use a controlled component otherwise.
-
-{{< react "hl_Lines=2-14" >}}
-import { useState } from 'react'
-
-function App() {
-  const [name, setName] = useState('')
-  const [age, setAge] = useState('')
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          name="name"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-
-      <div />
-
-      <label>
-        Age:
-        <input
-          name="age"
-          required
-          min="18"
-          type="number"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-      </label>
-
-      <div />
-
-      <button>Submit</button>
-    </form>
-  )
-}
-{{< /react >}}
 
 # Don't use accessible elements
 

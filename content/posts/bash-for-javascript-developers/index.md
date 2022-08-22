@@ -390,25 +390,7 @@ short-circuit evaluation, which [relies on the fact that booleans are ignored
 in
 JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored):
 
-{{< react "hl_lines=14" >}}
-import { useState } from 'react'
-
-function App() {
-  const [isShown, setIsShown] = useState(false)
-
-  return (
-    <div>
-      <button
-        onClick={() => setIsShown(!isShown)}
-      >
-        {isShown ? 'Hide me' : 'Show me'}
-      </button>
-
-      {isShown && <div>😊</div>}
-    </div>
-  )
-}
-{{< /react >}}
+{{< react path="short-circuit-react.jsx" hl_options="hl_lines=11" >}}
 
 Similarly in Bash, we can conditionally execute a command if the previous
 command's exit code is `0` by using the same operator `&&`:

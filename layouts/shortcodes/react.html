@@ -1,13 +1,15 @@
-{{ $sourceCode := (trim .Inner "\n\r") }}
-{{ $appRootId := md5 $sourceCode }}
+{{ $scriptPath := .Get "path" }}
+{{ $sourceCode := (.Page.Resources.Get $scriptPath).Content | safeJS }}
 
-{{ $path := printf "js/react-widget-%s.js" $appRootId }}
-{{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
+{{ $appRootId := $scriptPath }}
 
 {{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
+{{ $targetPath := printf "js/react-widget-%s.js" $appRootId }}
+{{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
+
 {{ $builtJs :=
   resources.Get "js/templates/react-widget.jsx"
-  | resources.ExecuteAsTemplate $path $context
+  | resources.ExecuteAsTemplate $targetPath $context
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
   }}
@@ -20,7 +22,7 @@
 
 <div class="card my-8 p-page-padding">
   <div>
-    {{ highlight $sourceCode "jsx" (.Get 0 | default "") }}
+    {{ highlight $sourceCode "jsx" (.Get "hl_options") }}
   </div>
 
   <div class="rounded-md border-2 border-divider bg-[white] p-8">

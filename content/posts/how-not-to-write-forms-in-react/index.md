@@ -26,8 +26,8 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-col text-center">
+    <div>
+      <div>
         What's your name?
 
         <input
@@ -37,7 +37,7 @@ function App() {
         />
       </div>
 
-      <button className="btn btn-primary" onClick={handleSubmit}>
+      <button onClick={handleSubmit}>
         Submit
       </button>
     </div>
@@ -65,8 +65,8 @@ function App() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <label className="flex flex-col text-center">
+    <form onSubmit={handleSubmit}>
+      <label>
         What's your name?
 
         <input
@@ -75,7 +75,7 @@ function App() {
         />
       </label>
 
-      <button className="btn btn-primary">
+      <button>
         Submit
       </button>
     </form>
@@ -145,13 +145,13 @@ function App() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-      <label className="flex gap-2">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>
         Name:
         <input {...register('name')} />
       </label>
 
-      <label className="flex gap-2">
+      <label>
         Age:
         <input
           type="number"
@@ -161,7 +161,7 @@ function App() {
         />
       </label>
 
-      <input className="btn btn-primary" type="submit" value="Submit" />
+      <input type="submit" value="Submit" />
     </form>
   )
 }
@@ -187,27 +187,28 @@ function App() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <label className="flex gap-2">
+    <form onSubmit={handleSubmit}>
+      <label>
         Name:
         <input name="name" />
       </label>
 
-      <label className="flex gap-2">
+      <label>
         Age:
         <input name="age" type="number" />
       </label>
 
-      <input className="btn btn-primary" type="submit" value="Submit" />
+      <input type="submit" value="Submit" />
     </form>
   )
 }
 {{< /react >}}
 
 Sometimes we can't avoid working with controlled components -- in fact, that's
-the most likely scenario, in my experience, particularly if your team uses a UI
-library. react-hook-form also has an API to handle that case, its use doesn't
-require you to 
+the most likely scenario, particularly if your team uses a UI library, but that
+does not mean you should lift state up and use an unhealthy amount of
+`useState` in your component. react-hook-form has an API to handle this case --
+the Controller component.
 
 # Don't use accessible elements
 

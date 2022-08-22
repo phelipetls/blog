@@ -398,9 +398,8 @@ function App() {
   const [isShown, setIsShown] = useState(false)
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
+    <div>
       <button
-        className="btn btn-primary"
         onClick={() => setIsShown(!isShown)}
       >
         {isShown ? 'Hide me' : 'Show me'}

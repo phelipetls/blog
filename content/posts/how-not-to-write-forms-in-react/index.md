@@ -103,24 +103,8 @@ all](https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving
 you can configure the HTTP request with the `action` and `method` `form`
 attributes:
 
-```html
-<form action="https://myservice.com/api/signup" method="POST">
-  <label>
-    Username
-    <input name="username">
-  </label>
-
-  <label>
-    Password
-    <input name="password" type="password">
-  </label>
-
-  <input type="submit">
-</form>
-```
-
-This is easy to forget (or never get to learn) when we're using React, since
-we're used to use JavaScript for everything.
+This is easy to forget (or to not even learn) when we're using React, since
+we're just use JavaScript for everything.
 
 # Don't use a library to handle form state
 
@@ -129,11 +113,10 @@ someone could still use plain `useState` to manage form state and get away with
 it during code review. Using `useState` for every input in a form is
 inefficient and difficult to maintain, so it's best to avoid it.
 
-I really like react-hook-form API. It abstracts away the DOM API needed to get
-form values into a nice object, that maps input names to their values, in the
-submit function.
+I really like react-hook-form, it gives you a nicely object nicely maps input
+names to their values in the submit event handler:
 
-{{< react >}}
+{{< react "hl_Lines=4-7 11 14 23-25" >}}
 import { useForm } from 'react-hook-form'
 
 function App() {
@@ -150,6 +133,8 @@ function App() {
         <input {...register('name')} />
       </label>
 
+      <div />
+
       <label>
         Age:
         <input
@@ -160,14 +145,15 @@ function App() {
         />
       </label>
 
-      <input type="submit" value="Submit" />
+      <div />
+
+      <button>Submit</button>
     </form>
   )
 }
 {{< /react >}}
 
-This is the equivalent JavaScript code we would need if we chose not to use
-react-hook-form:
+Here's the equivalent JavaScript code we'd without react-hook-form:
 
 {{< react "hl_Lines=2-14" >}}
 function App() {
@@ -192,22 +178,71 @@ function App() {
         <input name="name" />
       </label>
 
+      <div />
+
       <label>
         Age:
         <input name="age" type="number" />
       </label>
 
-      <input type="submit" value="Submit" />
+      <div />
+
+      <button>Submit</button>
     </form>
   )
 }
 {{< /react >}}
 
-Sometimes we can't avoid working with controlled components -- in fact, that's
-the most likely scenario, particularly if your team uses a UI library, but that
-does not mean you should lift state up and use an unhealthy amount of
-`useState` in your component. react-hook-form has an API to handle this case --
-the Controller component.
+There are other input components whose values are harder to parse -- without a
+library you'd have to worry about handling all of them.
+
+A form library may also help with form validation, for which you'd probably to
+use a controlled component otherwise.
+
+{{< react "hl_Lines=2-14" >}}
+import { useState } from 'react'
+
+function App() {
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input
+          name="name"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+
+      <div />
+
+      <label>
+        Age:
+        <input
+          name="age"
+          required
+          min="18"
+          type="number"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+      </label>
+
+      <div />
+
+      <button>Submit</button>
+    </form>
+  )
+}
+{{< /react >}}
 
 # Don't use accessible elements
 

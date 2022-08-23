@@ -141,11 +141,11 @@ body.dark {
     @apply mt-2 px-page-padding text-center;
   }
 
-  [data-blog-post] :is(pre, figure, blockquote) {
+  [data-blog-post] > :is(.highlight, pre, figure, blockquote) {
     @apply my-8;
   }
 
-  [role='tabpanel'] :is(pre, figure, blockquote) {
+  [role='tabpanel'] :is(.highlight, pre, figure, blockquote) {
     @apply my-0;
   }
 

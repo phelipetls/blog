@@ -1,7 +1,7 @@
 {{ $scriptPath := .Get "path" }}
 {{ $sourceCode := (.Page.Resources.Get $scriptPath).Content | safeJS }}
 
-{{ $appRootId := $scriptPath }}
+{{ $appRootId := md5 $sourceCode }}
 
 {{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
 {{ $targetPath := printf "js/react-widget-%s.js" $appRootId }}

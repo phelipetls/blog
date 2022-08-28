@@ -1,6 +1,6 @@
 ---
 title: How not to write forms with React
-date: 2022-08-21
+date: 2022-08-28
 tags: [javascript, react]
 ---
 

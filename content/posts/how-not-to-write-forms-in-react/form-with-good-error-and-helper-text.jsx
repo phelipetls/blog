@@ -16,16 +16,16 @@ function App() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username
+        Username:{' '}
         <input
           type="text"
           id="username"
-          aria-invalid={errorMessage !== '' ? 'true' : 'false'}
-          aria-errormessage="username-errormessage"
-          aria-describedby="username-description"
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          aria-invalid={errorMessage !== '' ? 'true' : 'false'}
+          aria-errormessage="username-errormessage"
+          aria-describedby="username-description"
         />
       </label>
 
@@ -47,7 +47,7 @@ function App() {
           color: 'grey',
         }}
       >
-        Your username should have only alphanumeric characters
+        This is what you'll use to log in
       </div>
 
       <button>Submit</button>

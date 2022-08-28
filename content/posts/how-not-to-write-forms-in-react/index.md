@@ -4,57 +4,76 @@ date: 2022-08-21
 tags: [javascript, react]
 ---
 
-I think forms are easy to get wrong because their goal is to make a network
-request, and we can do that with any arbitrary HTML and JavaScript.
+Forms are easy to get wrong with React because we can achieve their goal, which
+is to make a network request when on submission, with any arbitrary HTML and
+JavaScript.
 
-People often learn React with a strong focus on JavaScript -- HTML and CSS
-being second-class citizens --, so my guess is we're more likely to write
-unidiomatic HTML at the beginning.
+People often learn React with a strong focus on JavaScript -- HTML and CSS are
+often treated as second-class citizens --, so we're more likely to write
+unidiomatic HTML.
 
 Let's look at some examples of bad forms and how to improve them.
 
 # Don't use the `form` HTML element
 
-`form` is an ancient HTML element used to send data to a server, and it doesn't
-need JavaScript at all to do its job: you can configure the network request
-with HTML attributes, `method` and `action`. But we never use it because we're
-building SPA and want to make the request in the background, whereas a plain
-HTML form will navigate to a new page after submitted.
+The `form` HTML is used to send data to a server and it doesn't need any
+JavaScript to do this: you can configure the network request with HTML
+attributes, like `method` and `action`. React developers never use it because
+we're building Single Page Applications and we want to make the network request
+in the background, whereas a plain HTML form will navigate to a new page after
+submitted (that's why we always need to use `(e) => { e.preventDefault() }` in
+the `onSubmit` handler.
 
-Nevertheless, it's still important to use the `form` element, it's a part of
-the web for a long time and users are used to its functionality.
+Nevertheless, it's still important to use the `form` element, because it's a
+part of the web since its inception and users are used to its functionality.
 
-To illustrate this, here's a "form" without any semantic elements:
+For example, here's a "form" that don't use any semantic elements:
 
 {{< react path="bad-form.jsx" >}}
 
-I say this is a "form" because it'll send a request with user data when you
+This is only a "form" in the sense that it'll send a network request when you
 click the submit button.
 
-The first problem is that it's not accessible -- the inputs have no label, so
-visually impaired users will have a hard time to understand what's going on.
+One problem with it is it's not accessible -- the inputs have no label, so
+screen readers won't be able to help visually impaired users to understand the
+form.
 
-Also the user won't be able to submit by pressing enter in the text input,
-which can be frustrating. It's important to make your website behave like most
-other sites, and you can do that by mostly writing idiomatic HTML and the
-browser will do the rest.
+Also, the user won't be able to submit it by pressing <kbd>Enter</kbd> while in
+a text input, which can be frustrating because it's not how most forms on the
+web behave.
 
-Here's what I think to be more appropriate:
+Let's fix it by using proper HTML elements:
 
-{{< react path="good-form.jsx" hl_options="hl_Lines=5-6 11 15-18 21" >}}
+{{< react path="good-form.jsx" hl_options="hl_Lines=3-5 11 15-18 21" >}}
 
-Now the form will be submitted when the user press enter and the inputs are
-more accessible.
+Now we can submit the form by pressing <kbd>Enter</kbd> and the inputs are more
+accessible.
+
+Another difference is that we're using uncontrolled components now -- we're not
+using `useState` to handle the form state, we're letting the browser handle it
+and we just retrieve the input's value during form submission with
+[`form.elements`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/elements).
+
+This is more performant because your component won't re-render at every
+keystroke. But this usually won't be a problem and, in fact, [React
+documentation seems to encourage using controlled components for
+forms](https://reactjs.org/docs/forms.html), which is in contrast to React form
+libraries like Formik and react-hook-form, that embrace uncontrolled
+components.
+
+Controlled components are easier to work with, since it's just another React
+state -- you won't need learn the DOM API needed to get an input's value when
+validating or submitting a form. Using form libraries will abstract that away
+from you, along with many other benefits, so let's look into those.
 
 # Don't use a library to handle form state
 
 React form libraries like Formik and react-hook-form are staples in most React
-apps, but someone may still use plain `useState` to manage form state and get
-away with it during code review. Using `useState` for every input in a form is
-inefficient and difficult to maintain, so it's best to avoid it.
+apps nowadays, because they can help manage form state while abstracting the
+DOM API necessary to do it.
 
-I really like react-hook-form, it gives you a object nicely maps input names to
-their values in the submit handler:
+For example, react-hook-form will give you an object that maps input names to
+their values as an argument to the onSubmit handler:
 
 {{< react path="react-hook-form.jsx" hl_options="hl_Lines=4-7 11 14 23-25" >}}
 
@@ -63,30 +82,30 @@ react-hook-form:
 
 {{< react path="form-without-lib.jsx" hl_options="hl_Lines=2-14" >}}
 
-This particular example might not be convincing, because it's straightforward
-to get the values from text/number inputs, but the point is that a library will
-abstract away from you the DOM API needed to get the value from kind of inputs,
-which is mostly repetitive work.
+Apart from that, it'll help you validate a form, if an input is dirty
+(different than default value) or touched (focused and then blurred) -- which
+are often things we need to provide a better user experience when dealing with
+forms.
 
 # Don't associate the submit button with the form
 
 When a button (or an `<input type="submit">`) is inside a `form` element, it
 gets automatically associated with it, meaning it'll submit the form
-automatically when you click on it (unless it has `type="button"`).
+automatically when you click on it (unless the button has `type="button"`).
 
 But sometimes we want to submit the form by clicking on a button outside of it,
-how can to associate them? We can do this with the [`form`
+how can we associate them in this case? By using the [`form`
 attribute](https://www.w3schools.com/tags/att_form.asp).
 
-We not always have complete control over the HTML though. For instance, I
-recently saw a Modal component, and I wanted to submit the form with its
-"confirm" button, but I couldn't arbitrarily customize it, just its text and
-onClick handler, so there was no way to pass the `form` attribute to it:
+We not always have complete control over the HTML though -- for instance, I
+recently had to use a Modal component whose "confirm" button was not
+arbitrarily customizable, I could just change its text and onClick handler, so
+there was no way to pass the `form` attribute to it:
 
 ```jsx
 <Modal
   title='Title'
-  confirmBtnTitle='Submit'
+  confirmBtnText='Submit'
   onConfirmBtnClick={formik.submitForm}
 >
   <form>
@@ -95,10 +114,10 @@ onClick handler, so there was no way to pass the `form` attribute to it:
 </Modal>
 ```
 
-Of course, being able to customize the `onClick` handler is enough to submit
-the form, so this is kind of a nitpick, but I wanted to point this out anyway
-because as bad component API design. A better approach would be something like
-this:
+Of course, being able to pass a handler to the button's `onClick` event is
+enough to submit the form -- which is what I want. I confess this is kind of a
+nitpick, but I was frustrated by it nonetheless and wanted to point it out as a
+bad component API design. I'd personally prefer to use something like this:
 
 ```jsx {hl_lines=[2,"6-11"]}
 <Modal title='Title'>
@@ -117,21 +136,21 @@ this:
 # Don't make error messages and helper text accessible
 
 When building forms, we often need to show error messages when the user does
-something unexpected or help them understand some input better with helper
-texts.
+something unexpected or help them understand some input better with some
+description.
 
-Here's a silly example to illustrate how to not do this -- a username input
-that only accepts alphanumeric characters, there is both a helper text to
-explain this and an error message in case the user do this anyway:
+Here's an example in which the user must choose a username. The username may
+only have alphanumeric characters and we also give it a short description
+below.
 
 {{< react path="form-with-bad-error-and-helper-text.jsx" hl_options="hl_Lines=29-46" >}}
 
-This is bad because using a `div` has no meaning, so a screen reader will have
-no idea if a particular text is supposed to help or show an error. To fix this,
-we can use
+You'll notice we simply show the error message and helper text in a styled
+`div`, which is not good because a `div` has no meaning -- a screen reader will
+have no idea if what that particular text is supposed to convey, a description
+or an error message. To fix this, we can use the ARIA attributes
 [`aria-errormessage`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-errormessage)
 and
-[`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby)
-attributes:
+[`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby):
 
-{{< react path="form-with-good-error-and-helper-text.jsx" hl_options="hl_Lines=23-25 34 44" >}}
+{{< react path="form-with-good-error-and-helper-text.jsx" hl_options="hl_Lines=26-28 34 44" >}}

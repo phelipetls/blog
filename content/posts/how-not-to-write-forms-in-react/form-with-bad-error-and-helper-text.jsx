@@ -16,7 +16,7 @@ function App() {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username
+        Username:{' '}
         <input
           type="text"
           id="username"
@@ -42,7 +42,7 @@ function App() {
           color: 'grey',
         }}
       >
-        Your username should have only alphanumeric characters
+        This is what you'll use to log in
       </div>
 
       <button>Submit</button>

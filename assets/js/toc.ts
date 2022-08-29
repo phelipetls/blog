@@ -18,8 +18,8 @@ function resetToc(): void {
 function getTocItemByHeading(
   heading: HTMLHeadingElement
 ): HTMLLIElement | null {
-  const anchorHref = heading.querySelector('a')?.getAttribute('href')
-  const tocAnchorElem = toc.querySelector(`li a[href="${anchorHref}"]`)
+  const headingId = heading.getAttribute('id')
+  const tocAnchorElem = toc.querySelector(`li a[href="#${headingId}"]`)
 
   if (!tocAnchorElem) {
     return null

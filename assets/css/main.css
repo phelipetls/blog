@@ -145,25 +145,20 @@ body.dark {
     @apply my-8;
   }
 
-  [data-blog-post] > div pre {
-    @apply my-8;
-  }
-
   [role='tabpanel'] :is(.highlight, figure, blockquote) {
     @apply my-0;
   }
 
   pre {
-    @apply overflow-x-auto rounded-md bg-surface py-page-padding px-8 sm:mx-0;
+    @apply my-8 -mx-page-padding overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
-  [data-blog-post] > div pre,
-  [data-blog-post] > .highlight pre {
-    @apply -mx-page-padding rounded-none;
+  :is(.card, [role='tabpanel']) pre {
+    @apply m-0 rounded-md;
   }
 
-  [role='tabpanel'] pre {
-    @apply mx-0 rounded-md;
+  pre code {
+    @apply float-left min-w-full leading-normal;
   }
 
   :not(pre) > code {
@@ -173,10 +168,6 @@ body.dark {
   :not(pre) > code::before,
   :not(pre) > code::after {
     content: '\`';
-  }
-
-  pre code {
-    @apply float-left min-w-full leading-normal;
   }
 
   ul {

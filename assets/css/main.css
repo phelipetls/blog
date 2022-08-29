@@ -145,10 +145,6 @@ body.dark {
     @apply my-8;
   }
 
-  [role='tabpanel'] :is(.highlight, figure, blockquote) {
-    @apply my-0;
-  }
-
   pre {
     @apply my-8 -mx-page-padding overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }

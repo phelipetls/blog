@@ -263,7 +263,7 @@ body.dark {
   }
 
   .btn-secondary {
-    @apply border-2 border-foreground;
+    @apply border-primary text-primary;
   }
 
   a.btn-primary {

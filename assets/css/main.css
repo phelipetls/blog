@@ -141,16 +141,25 @@ body.dark {
     @apply mt-2 px-page-padding text-center;
   }
 
-  [data-blog-post] > :is(.highlight, pre, figure, blockquote) {
+  [data-blog-post] > :is(.highlight, figure, blockquote) {
     @apply my-8;
   }
 
-  [role='tabpanel'] :is(.highlight, pre, figure, blockquote) {
+  [data-blog-post] > div pre {
+    @apply my-8;
+  }
+
+  [role='tabpanel'] :is(.highlight, figure, blockquote) {
     @apply my-0;
   }
 
   pre {
-    @apply -mx-page-padding overflow-x-auto bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply overflow-x-auto rounded-md bg-surface py-page-padding px-8 sm:mx-0;
+  }
+
+  [data-blog-post] > div pre,
+  [data-blog-post] > .highlight pre {
+    @apply -mx-page-padding rounded-none;
   }
 
   [role='tabpanel'] pre {

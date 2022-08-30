@@ -44,7 +44,7 @@ web behave.
 
 Let's fix it by using proper HTML elements:
 
-{{< react path="good-form.jsx" hl_options="hl_Lines=3-5 11 15-18 21" >}}
+{{< react path="good-form.jsx" hl_options="hl_Lines=3-5 9-16" >}}
 
 Now we can submit the form by pressing <kbd>Enter</kbd> and the inputs are more
 accessible.

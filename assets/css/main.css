@@ -213,7 +213,7 @@ body.dark {
   }
 
   nav[data-toc-mobile] ol {
-    @apply mb-0 list-inside;
+    @apply m-0 list-inside;
   }
 
   nav[data-toc-desktop] ol {

@@ -22,7 +22,7 @@ attributes, like `method` and `action`. React developers never use it because
 we're building Single Page Applications and we want to make the network request
 in the background, whereas a plain HTML form will navigate to a new page after
 submitted (that's why we always need to use `(e) => { e.preventDefault() }` in
-the `onSubmit` handler.
+the `onSubmit` handler).
 
 Nevertheless, it's still important to use the `form` element, because it's a
 part of the web since its inception and users are used to its functionality.

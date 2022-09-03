@@ -80,3 +80,6 @@ other = 'About'
 
 [TableOfContents]
 other = 'Table of Contents'
+
+[RefreshApp]
+other = 'Refresh app'

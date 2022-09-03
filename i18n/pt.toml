@@ -79,3 +79,6 @@ other = 'Sobre'
 
 [TableOfContents]
 other = 'Tabela de conteúdo'
+
+[RefreshApp]
+other = 'Recarregar app'

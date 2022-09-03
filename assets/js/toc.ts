@@ -1,7 +1,7 @@
-const toc = document.querySelector('nav[data-toc]') as HTMLElement
-const container = toc.closest('[data-toc-wrapper]') as HTMLElement
+const toc = document.querySelector('nav[data-toc]') as HTMLElement | null
+const container = (toc?.closest('[data-toc-wrapper]') as HTMLElement) || null
 const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
-const firstTocItem = toc.querySelector('li')
+const firstTocItem = toc?.querySelector('li')
 
 function activate(listItem: HTMLLIElement): void {
   listItem.setAttribute('data-active', '')
@@ -12,14 +12,14 @@ function reset(listItem: HTMLLIElement): void {
 }
 
 function resetToc(): void {
-  toc.querySelectorAll('li').forEach(reset)
+  toc?.querySelectorAll('li').forEach(reset)
 }
 
 function getTocItemByHeading(
   heading: HTMLHeadingElement
 ): HTMLLIElement | null {
   const headingId = heading.getAttribute('id')
-  const tocAnchorElem = toc.querySelector(`li a[href="#${headingId}"]`)
+  const tocAnchorElem = toc?.querySelector(`li a[href="#${headingId}"]`)
 
   if (!tocAnchorElem) {
     return null

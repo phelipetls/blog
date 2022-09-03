@@ -8,32 +8,30 @@ const tooltipArrow = document.querySelector(
   '[data-theme-copy-code-tooltip-arrow]'
 )
 
-const copyCodeButtonClassName = [
-  'btn',
-  'btn-icon',
-  'rounded-md',
-  'p-1',
-  'bg-surface',
-  'text-foreground',
-  'border',
-  'border-divider',
-  'pointer-events-none',
-  'group-hover:pointer-events-auto',
-  'opacity-0',
-  'group-hover:opacity-100',
-  'absolute',
-  'right-0',
-  'sm:right-4',
-  'top-3',
-  'transition',
-  'transition-opacity',
-  'duration-500',
-].join(' ')
-
 function createCopyCodeButton() {
   const button = document.createElement('button')
 
-  button.className = copyCodeButtonClassName
+  button.classList.add(
+    'btn',
+    'btn-icon',
+    'rounded-md',
+    'p-1',
+    'bg-surface',
+    'text-foreground',
+    'border',
+    'border-divider',
+    'pointer-events-none',
+    'group-hover:pointer-events-auto',
+    'opacity-0',
+    'group-hover:opacity-100',
+    'absolute',
+    'right-0',
+    'sm:right-4',
+    'top-3',
+    'transition',
+    'transition-opacity',
+    'duration-500'
+  )
   button.setAttribute('aria-label', params.copyCodeButtonLabel)
 
   button.innerHTML = clipboardIconSvg

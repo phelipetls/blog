@@ -141,12 +141,12 @@ body.dark {
     @apply mt-2 px-page-padding text-center;
   }
 
-  [data-blog-post] > :is(.highlight, figure, blockquote) {
+  [data-blog-post] > :is(pre, .highlight, figure, blockquote) {
     @apply my-8;
   }
 
   pre {
-    @apply my-8 -mx-page-padding h-[var(--code-block-height,_100%)] overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply -mx-page-padding h-[var(--code-block-height,_100%)] overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
   :is(.card, [role='tabpanel']) pre {

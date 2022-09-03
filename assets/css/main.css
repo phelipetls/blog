@@ -145,8 +145,12 @@ body.dark {
     @apply my-8;
   }
 
+  [data-blog-post] > :is(figure, .highlight, pre) {
+    @apply -mx-page-padding;
+  }
+
   pre {
-    @apply -mx-page-padding h-[var(--code-block-height,_100%)] overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply h-[var(--code-block-height,_100%)] overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
   :is(.card, [role='tabpanel']) pre {

@@ -92,10 +92,7 @@ function wrapAroundElement(wrapper, element) {
 
 function isHighlightedCodeBlock(element) {
   const parentElement = element.parentElement
-  return (
-    parentElement instanceof HTMLDivElement &&
-    parentElement.classList.contains('highlight')
-  )
+  return parentElement.classList.contains('highlight')
 }
 
 const codeBlocks = document.querySelectorAll('pre')

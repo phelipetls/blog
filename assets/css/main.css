@@ -153,6 +153,10 @@ body.dark {
     @apply h-[var(--code-block-height,_100%)] overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
+  [react-source] pre {
+    @apply rounded-b-none;
+  }
+
   :is(.card, [role='tabpanel']) pre {
     @apply m-0 rounded-md;
   }
@@ -276,6 +280,10 @@ body.dark {
 
   .btn-icon {
     @apply flex items-center justify-center rounded-full p-2;
+  }
+
+  .btn-icon-action {
+    @apply rounded-md border border-divider bg-surface p-1 text-foreground;
   }
 
   .chip {

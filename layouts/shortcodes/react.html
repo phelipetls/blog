@@ -20,19 +20,19 @@
 }}
 
 
-<div class="card my-8 p-page-padding">
-  <div>
+<div class="my-8">
+  <div react-source class="-mx-page-padding sm:mx-0">
     {{ highlight $sourceCode "jsx" (.Get "hl_options") }}
   </div>
 
   <div
     data-react-iframe-container
-    class="relative mt-4 rounded-md bg-[white] p-8 shadow-md shadow-shadow"
+    class="relative -mx-page-padding rounded-b-md bg-[white] py-8 px-page-padding sm:mx-0 sm:shadow-md sm:shadow-shadow"
   >
     <button
       data-react-iframe-refresh
       aria-label="{{ i18n "RefreshApp" }}"
-      class="btn btn-icon btn-secondary absolute top-0 right-0 shadow-md shadow-shadow"
+      class="btn btn-icon btn-icon-action btn-secondary absolute top-3 right-0 -translate-x-1/2 shadow-md shadow-shadow"
     >
       {{ partial "svgs/refresh-cw.svg" . }}
     </button>

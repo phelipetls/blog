@@ -1,6 +1,8 @@
-for (const reactIframeContainer of document.querySelectorAll(
+const reactIframeContainers = document.querySelectorAll(
   '[data-react-iframe-container]'
-)) {
+)
+
+for (const reactIframeContainer of reactIframeContainers) {
   const refreshButton = reactIframeContainer.querySelector(
     '[data-react-iframe-refresh]'
   )

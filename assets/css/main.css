@@ -221,7 +221,7 @@ body.dark {
   }
 
   nav[data-toc-mobile] ol {
-    @apply m-0 list-inside;
+    @apply m-0 list-outside px-page-padding;
   }
 
   nav[data-toc-desktop] ol {

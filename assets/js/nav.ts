@@ -1,6 +1,5 @@
-const nav = document.querySelector('[data-nav-container]') as HTMLDivElement
-
-const activeNavLink = nav.querySelector('[aria-current=page]')
+const nav = document.querySelector<HTMLDivElement>('[data-nav-container]')
+const activeNavLink = nav?.querySelector('[aria-current=page]')
 
 if (activeNavLink) {
   activeNavLink.scrollIntoView({

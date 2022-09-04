@@ -1,5 +1,5 @@
-const toc = document.querySelector('nav[data-toc]') as HTMLElement | null
-const container = (toc?.closest('[data-toc-wrapper]') as HTMLElement) || null
+const toc = document.querySelector<HTMLElement>('nav[data-toc]')
+const container = toc?.closest<HTMLElement>('[data-toc-wrapper]')
 const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
 const firstTocItem = toc?.querySelector('li')
 
@@ -36,7 +36,7 @@ const observer = new IntersectionObserver(
       if (entry.isIntersecting) {
         const tocItem = getTocItemByHeading(heading as HTMLHeadingElement)
 
-        if (!tocItem) {
+        if (!tocItem || !container) {
           return null
         }
 

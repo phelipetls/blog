@@ -82,3 +82,9 @@ other = 'Tabela de conteúdo'
 
 [RefreshApp]
 other = 'Recarregar app'
+
+[ShowMore]
+other = 'Mostrar mais'
+
+[ShowLess]
+other = 'Mostrar menos'

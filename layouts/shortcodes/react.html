@@ -1,5 +1,6 @@
 {{ $scriptPath := .Get "path" }}
 {{ $sourceCode := (.Page.Resources.Get $scriptPath).Content | safeJS }}
+{{ $linesOfCode := len (findRE "\n" $sourceCode) }}
 
 {{ $appRootId := md5 $sourceCode }}
 
@@ -19,15 +20,38 @@
   | resources.ExecuteAsTemplate (printf "react-iframe-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $builtJs)
 }}
 
+{{ $maxLinesOfCode := 20 }}
+{{ $tooMuchLinesOfCode := gt $linesOfCode $maxLinesOfCode }}
 
-<div class="my-8">
-  <div react-source class="-mx-page-padding sm:mx-0">
+
+<div data-react-shortcode class="my-8 -mx-page-padding sm:mx-0">
+  <div
+    data-react-code-container
+    style="--number-of-lines: {{ $maxLinesOfCode }}"
+    class="{{ if $tooMuchLinesOfCode }}
+      max-h-[calc(1.5em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)]
+    {{ end }} overflow-y-auto sm:rounded-t-md"
+    data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
+  >
     {{ highlight $sourceCode "jsx" (.Get "hl_options") }}
   </div>
 
+  {{ if $tooMuchLinesOfCode }}
+    <button
+      data-react-show-more-code
+      data-expanded-label="{{ i18n "ShowMore" }}"
+      data-collapsed-label="{{ i18n "ShowLess" }}"
+      class="flex w-full items-center justify-center border-t-2 border-b-2 border-divider bg-divider transition-colors duration-500 hover:bg-hover"
+    >
+      {{ i18n "ShowMore" }}
+      {{ partial "svgs/chevron-down.svg" }}
+    </button>
+  {{ end }}
+
+
   <div
     data-react-iframe-container
-    class="relative -mx-page-padding bg-[white] py-8 px-page-padding sm:mx-0 sm:rounded-b-md sm:shadow-md sm:shadow-shadow"
+    class="relative bg-[white] py-8 px-page-padding sm:mx-0 sm:rounded-b-md sm:shadow-md sm:shadow-shadow"
   >
     <button
       data-react-iframe-refresh

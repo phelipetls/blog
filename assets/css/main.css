@@ -153,7 +153,7 @@ body.dark {
     @apply overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
-  [react-source] pre {
+  [data-react-code-container] pre {
     @apply rounded-b-none;
   }
 

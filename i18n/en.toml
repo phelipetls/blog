@@ -83,3 +83,9 @@ other = 'Table of Contents'
 
 [RefreshApp]
 other = 'Refresh app'
+
+[ShowMore]
+other = 'Show more'
+
+[ShowLess]
+other = 'Show less'

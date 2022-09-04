@@ -13,4 +13,50 @@ for (const reactIframeContainer of reactIframeContainers) {
   })
 }
 
+const showMoreCodeButtons = document.querySelectorAll<HTMLElement>(
+  '[data-react-show-more-code]'
+)
+
+for (const showMoreCodeButton of showMoreCodeButtons) {
+  showMoreCodeButton?.addEventListener('click', () => {
+    const codeContainer =
+      showMoreCodeButton.parentElement?.querySelector<HTMLElement>(
+        '[data-react-code-container]'
+      )
+
+    if (!codeContainer) {
+      return
+    }
+
+    const expandedLabel = showMoreCodeButton.dataset.expandedLabel || ''
+    const collapsedLabel = showMoreCodeButton.dataset.collapsedLabel || ''
+
+    const expandCodeBlock = () => {
+      codeContainer.style.height = 'auto'
+      codeContainer.style.maxHeight = 'none'
+      codeContainer.setAttribute('data-is-expanded', 'true')
+
+      showMoreCodeButton.innerHTML =
+        showMoreCodeButton.innerHTML?.replace(expandedLabel, collapsedLabel) ||
+        ''
+    }
+
+    const collapseCodeBlock = () => {
+      codeContainer.style.height = ''
+      codeContainer.style.maxHeight = ''
+      codeContainer.setAttribute('data-is-expanded', 'false')
+
+      showMoreCodeButton.innerHTML =
+        showMoreCodeButton.innerHTML?.replace(collapsedLabel, expandedLabel) ||
+        ''
+    }
+
+    if (codeContainer.getAttribute('data-is-expanded') === 'true') {
+      collapseCodeBlock()
+    } else {
+      expandCodeBlock()
+    }
+  })
+}
+
 export {}

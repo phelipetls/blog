@@ -4,9 +4,9 @@ describe('Table of contents interactive sidebar', () => {
 
     cy.visit('/posts/bash-for-javascript-developers')
 
-    cy.contains('h2', /variables/i).scrollIntoView()
+    cy.contains('h2', 'Quoting and whitespace').scrollIntoView()
 
-    cy.get('nav[data-toc] li a[href="#variables"]')
+    cy.get('nav[data-toc] li a[href="#quoting-and-whitespace"]')
       .closest('li')
       .should('have.attr', 'data-active')
   })
@@ -16,13 +16,21 @@ describe('Table of contents interactive sidebar', () => {
 
     cy.visit('/posts/bash-for-javascript-developers')
 
-    cy.scrollTo('bottom')
-    cy.isInViewport('nav[data-toc] li a[href="#conclusion"]')
+    cy.get('nav[data-toc] a[href="#conclusion"]').should('not.be.inViewport')
+    cy.scrollTo('bottom', { easing: 'linear', duration: 100 })
+    cy.get('nav[data-toc] a[href="#conclusion"]').should('be.inViewport')
 
-    cy.contains('h2', /functions/i).scrollIntoView()
-    cy.isInViewport('nav[data-toc] li a[href="#functions"]')
+    cy.get('nav[data-toc] a[href="#redirections"]').should('not.be.inViewport')
+    cy.contains('h2', 'Redirections').scrollIntoView()
+    cy.get('nav[data-toc] a[href="#redirections"]')
+      .should('be.inViewport')
+      .parent()
+      .should('have.attr', 'data-active')
 
-    cy.scrollTo('top')
-    cy.isInViewport('nav[data-toc] li a[href="#hello-world"]')
+    cy.scrollTo('top', { easing: 'linear', duration: 100 })
+    cy.get('nav[data-toc] a[href="#hello-world"]')
+      .should('be.inViewport')
+      .parent()
+      .should('have.attr', 'data-active')
   })
 })

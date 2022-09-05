@@ -36,6 +36,7 @@ for (const showMoreCodeButton of showMoreCodeButtons) {
       codeContainer.style.maxHeight = 'none'
       codeContainer.setAttribute('data-is-expanded', 'true')
 
+      showMoreCodeButton.querySelector('svg')?.classList.add('rotate-180')
       showMoreCodeButton.innerHTML =
         showMoreCodeButton.innerHTML?.replace(expandedLabel, collapsedLabel) ||
         ''
@@ -46,6 +47,7 @@ for (const showMoreCodeButton of showMoreCodeButtons) {
       codeContainer.style.maxHeight = ''
       codeContainer.setAttribute('data-is-expanded', 'false')
 
+      showMoreCodeButton.querySelector('svg')?.classList.remove('rotate-180')
       showMoreCodeButton.innerHTML =
         showMoreCodeButton.innerHTML?.replace(collapsedLabel, expandedLabel) ||
         ''

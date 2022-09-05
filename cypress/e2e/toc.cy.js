@@ -11,26 +11,32 @@ describe('Table of contents interactive sidebar', () => {
       .should('have.attr', 'data-active')
   })
 
-  it('should scroll to make toc item visible when its corresponding heading comes into view', () => {
-    cy.viewport('macbook-11')
+  it(
+    'should scroll to make toc item visible when its corresponding heading comes into view',
+    { retries: { runMode: 2, openMode: 0 } },
+    () => {
+      cy.viewport('macbook-11')
 
-    cy.visit('/posts/bash-for-javascript-developers')
+      cy.visit('/posts/bash-for-javascript-developers')
 
-    cy.get('nav[data-toc] a[href="#conclusion"]').should('not.be.inViewport')
-    cy.scrollTo('bottom', { easing: 'linear', duration: 100 })
-    cy.get('nav[data-toc] a[href="#conclusion"]').should('be.inViewport')
+      cy.get('nav[data-toc] a[href="#conclusion"]').should('not.be.inViewport')
+      cy.scrollTo('bottom', { easing: 'linear', duration: 100 })
+      cy.get('nav[data-toc] a[href="#conclusion"]').should('be.inViewport')
 
-    cy.get('nav[data-toc] a[href="#redirections"]').should('not.be.inViewport')
-    cy.contains('h2', 'Redirections').scrollIntoView()
-    cy.get('nav[data-toc] a[href="#redirections"]')
-      .should('be.inViewport')
-      .parent()
-      .should('have.attr', 'data-active')
+      cy.get('nav[data-toc] a[href="#redirections"]').should(
+        'not.be.inViewport'
+      )
+      cy.contains('h2', 'Redirections').scrollIntoView()
+      cy.get('nav[data-toc] a[href="#redirections"]')
+        .should('be.inViewport')
+        .parent()
+        .should('have.attr', 'data-active')
 
-    cy.scrollTo('top', { easing: 'linear', duration: 100 })
-    cy.get('nav[data-toc] a[href="#hello-world"]')
-      .should('be.inViewport')
-      .parent()
-      .should('have.attr', 'data-active')
-  })
+      cy.scrollTo('top', { easing: 'linear', duration: 100 })
+      cy.get('nav[data-toc] a[href="#hello-world"]')
+        .should('be.inViewport')
+        .parent()
+        .should('have.attr', 'data-active')
+    }
+  )
 })

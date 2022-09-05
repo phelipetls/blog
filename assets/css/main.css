@@ -240,8 +240,8 @@ body.dark {
     @apply indent-16;
   }
 
-  nav[data-toc-mobile] ol li {
-    @apply leading-relaxed;
+  nav[data-toc-mobile] ol li:not(:first-child) {
+    @apply mt-1;
   }
 
   nav[data-toc-desktop] > ol li {

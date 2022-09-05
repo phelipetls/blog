@@ -141,7 +141,7 @@ body.dark {
     @apply mt-2 px-page-padding text-center;
   }
 
-  [data-blog-post] > :is(pre, .highlight, figure, blockquote) {
+  [data-blog-post] > :is([data-codeblock], figure, blockquote) {
     @apply my-8;
   }
 

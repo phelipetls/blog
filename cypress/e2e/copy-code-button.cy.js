@@ -7,7 +7,7 @@ describe('Copy code button', () => {
 
       cy.contains('Copied').should('not.be.visible')
 
-      cy.contains('pre', 'Hello World')
+      cy.contains('[data-codeblock]', 'Hello World')
         .first()
         .within(() => {
           cy.get('button[aria-label="Copy code"]').focus().click()

@@ -1,0 +1,12 @@
+<div data-codeblock class="group relative">
+  {{ highlight .Inner .Type .Options }}
+
+
+  <button
+    data-copy-code-button
+    class="btn btn-icon btn-icon-action pointer-events-none absolute right-0 top-3 hidden -translate-x-1/2 opacity-0 transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100"
+    aria-label="{{ i18n "CopyCodeButtonLabel" }}"
+  >
+    {{ partial "svgs/clipboard.svg" }}
+  </button>
+</div>

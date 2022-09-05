@@ -33,7 +33,7 @@
     {{ end }} overflow-y-auto sm:rounded-t-md"
     data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
   >
-    {{ highlight $sourceCode "jsx" (.Get "hl_options") }}
+    {{ .Page.RenderString (printf "```jsx {%s}\n%s\n```" (.Get "hl_options") $sourceCode) }}
   </div>
 
   {{ if $tooMuchLinesOfCode }}

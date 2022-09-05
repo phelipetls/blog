@@ -1,36 +1,18 @@
 import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
-import * as params from '@params'
 
-const clipboardIconSvg = params.clipboardIcon
+const copyCodeButtons = document.querySelectorAll('[data-copy-code-button]')
+
+for (const copyCodeButton of copyCodeButtons) {
+  copyCodeButton.classList.remove('hidden')
+  addEventHandlersToCopyCodeButton(copyCodeButton)
+}
 
 const tooltip = document.querySelector('[data-theme-copy-code-tooltip]')
 const tooltipArrow = document.querySelector(
   '[data-theme-copy-code-tooltip-arrow]'
 )
 
-function createCopyCodeButton() {
-  const button = document.createElement('button')
-
-  button.classList.add(
-    'btn',
-    'btn-icon',
-    'btn-icon-action',
-    'pointer-events-none',
-    'group-hover:pointer-events-auto',
-    'opacity-0',
-    'group-hover:opacity-100',
-    'absolute',
-    'right-0',
-    '-translate-x-1/2',
-    'top-3',
-    'transition',
-    'transition-opacity',
-    'duration-500'
-  )
-  button.setAttribute('aria-label', params.copyCodeButtonLabel)
-
-  button.innerHTML = clipboardIconSvg
-
+function addEventHandlersToCopyCodeButton(button) {
   button.addEventListener('focus', function () {
     button.classList.add('opacity-100')
     button.classList.remove('pointer-events-none')
@@ -76,31 +58,4 @@ function createCopyCodeButton() {
       bottom: '-4px',
     })
   })
-
-  return button
-}
-
-function wrapAroundElement(wrapper, element) {
-  element.insertAdjacentElement('afterend', wrapper)
-  wrapper.append(element)
-}
-
-function isHighlightedCodeBlock(element) {
-  const parentElement = element.parentElement
-  return parentElement.classList.contains('highlight')
-}
-
-const codeBlocks = document.querySelectorAll('pre')
-
-for (const codeBlock of codeBlocks) {
-  let codeBlockParent = codeBlock.parentElement
-
-  if (!isHighlightedCodeBlock(codeBlock)) {
-    const wrapper = document.createElement('div')
-    wrapAroundElement(wrapper, codeBlock)
-    codeBlockParent = wrapper
-  }
-
-  codeBlockParent.classList.add('relative', 'group')
-  codeBlock.append(createCopyCodeButton())
 }

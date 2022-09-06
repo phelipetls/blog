@@ -3,7 +3,8 @@
     <h1 class="mb-4 text-center">{{ i18n "Resume" }}</h1>
 
     <div
-      data-resume="{{ .Site.Params.resume }}"
+      data-resume-container
+      data-resume-url="{{ .Site.Params.resume }}"
       class="relative col-full h-96 w-full overflow-y-auto border-y-2 border-divider sm:col-content sm:rounded-md sm:border-2"
     >
       <div

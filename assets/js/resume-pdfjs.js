@@ -3,8 +3,8 @@ import * as params from '@params'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = params.pdfjsWorkerUrl
 
-const resumeContainer = document.querySelector('[data-resume]')
-const resumeUrl = resumeContainer.dataset.resume
+const resumeContainer = document.querySelector('[data-resume-container]')
+const resumeUrl = resumeContainer.dataset.resumeUrl
 const resumeCanvas = document.querySelector('[data-resume-canvas]')
 const resumeLoading = document.querySelector('[data-resume-loading]')
 

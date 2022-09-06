@@ -145,8 +145,8 @@ body.dark {
     @apply my-8;
   }
 
-  [data-blog-post] > :is(figure, .highlight, pre) {
-    @apply -mx-page-padding;
+  [data-blog-post] > :is(figure, [data-codeblock]) {
+    @apply -mx-page-padding sm:mx-0;
   }
 
   pre {

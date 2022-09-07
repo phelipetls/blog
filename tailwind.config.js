@@ -36,6 +36,11 @@ module.exports = {
         full: 'full',
       },
     },
+    fontFamily: {
+      sans: ['Fira Sans', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+      mono: ['Consolas', 'Menlo', 'Monaco', 'Fira Code', 'monospace'],
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',

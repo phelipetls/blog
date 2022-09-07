@@ -1,8 +1,4 @@
 :root {
-  --default-font-family: 'Fira Sans', sans-serif;
-  --heading-font-family: 'Merriweather', serif;
-  --code-font-family: 'Consolas', 'Menlo', 'Monaco', 'Fira Code', monospace;
-
   --page-padding: 1rem;
   --gallery-gap: var(--page-padding);
   --content-max-width: 64rem;
@@ -66,23 +62,14 @@ body.dark {
 @tailwind utilities;
 
 @layer base {
-  :root {
-    @apply text-base sm:text-lg;
-  }
-
-  body {
-    font-family: var(--default-font-family);
-  }
-
   h1,
   h2,
   h3 {
-    font-family: var(--heading-font-family);
-    @apply mb-2 font-bold;
+    @apply mb-2 font-serif font-bold;
   }
 
   code {
-    font-family: var(--code-font-family);
+    @apply font-mono;
   }
 
   h1 {
@@ -107,10 +94,6 @@ body.dark {
 
   article details {
     @apply mb-4;
-  }
-
-  [data-toc-wrapper] details {
-    @apply mb-8;
   }
 
   a {
@@ -200,20 +183,8 @@ body.dark {
     @apply bg-foreground text-background;
   }
 
-  [role='tab'] {
-    @apply rounded-t-md p-2;
-  }
-
   [role='tab'][aria-selected='true'] {
     @apply border-t-2 border-primary bg-surface;
-  }
-
-  [role='tablist'] {
-    @apply ml-page-padding;
-  }
-
-  [role='tabpanel'] {
-    @apply rounded-md bg-surface py-8 px-page-padding shadow-md shadow-shadow;
   }
 
   nav[data-toc] {

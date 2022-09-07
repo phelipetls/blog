@@ -3,7 +3,12 @@
   {{ $tabsId := .Get "id" }}
 
 
-  <div role="tablist" aria-label="Tabs" class="flex gap-1">
+  <div
+    class="ml-page-padding"
+    role="tablist"
+    aria-label="Tabs"
+    class="flex gap-1"
+  >
     {{- range $i, $tab := $tabs -}}
       {{ $isFirstTab := eq $i 0 }}
 
@@ -12,6 +17,7 @@
 
       <button
         role="tab"
+        class="rounded-t-md p-2"
         id="tab-{{ $tabId }}"
         aria-selected="{{ cond $isFirstTab "true" "false" }}"
         {{ if $isFirstTab }}tabindex="-1"{{ end }}

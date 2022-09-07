@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html class="h-full" lang="{{ .Site.Params.htmlLang | default .Lang }}">
+<html
+  class="h-full text-base sm:text-lg"
+  lang="{{ .Site.Params.htmlLang | default .Lang }}"
+>
   <head>
     {{ partialCached "head-common.html" . }}
     {{ partial "head.html" . }}
@@ -17,7 +20,7 @@
 
   <body
     data-preload
-    class="h-full bg-background text-foreground transition-colors duration-500 ease-out"
+    class="h-full bg-background font-sans text-foreground transition-colors duration-500 ease-out"
   >
     {{ block "script-elements" . }}
     {{ end }}

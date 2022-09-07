@@ -84,6 +84,10 @@ body.dark {
     @apply text-lg;
   }
 
+  :is(h1, h2, h3, h4) a {
+    @apply no-underline;
+  }
+
   img {
     @apply max-w-full;
   }
@@ -100,8 +104,30 @@ body.dark {
     @apply border-b-2 border-divider no-underline hover:border-primary;
   }
 
-  :is(h1, h2, h3, h4) a {
-    @apply no-underline;
+  ul {
+    @apply ml-4 mb-4 list-disc;
+  }
+
+  ul li::marker {
+    @apply text-primary;
+  }
+
+  ol {
+    @apply ml-4 mb-4 list-decimal;
+  }
+
+  blockquote {
+    @apply border-l-2 border-divider pl-8;
+  }
+
+  kbd {
+    padding: 2px 4px;
+    box-shadow: 1px 1px 1px rgb(var(--foreground));
+    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
   }
 
   hr {
@@ -155,32 +181,6 @@ body.dark {
   :not(pre) > code::before,
   :not(pre) > code::after {
     content: '\`';
-  }
-
-  ul {
-    @apply ml-4 mb-4 list-disc;
-  }
-
-  ul li::marker {
-    @apply text-primary;
-  }
-
-  ol {
-    @apply ml-4 mb-4 list-decimal;
-  }
-
-  blockquote {
-    @apply border-l-2 border-divider pl-8;
-  }
-
-  kbd {
-    padding: 2px 4px;
-    box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
-  }
-
-  ::selection {
-    @apply bg-foreground text-background;
   }
 
   [role='tab'][aria-selected='true'] {

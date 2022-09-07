@@ -142,10 +142,6 @@ body.dark {
     @apply mx-auto;
   }
 
-  [data-blog-post] figure {
-    @apply -mx-page-padding sm:mx-0;
-  }
-
   [data-blog-post] figure figcaption {
     @apply mt-2 px-page-padding text-center;
   }

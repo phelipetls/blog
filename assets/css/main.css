@@ -96,10 +96,6 @@ body.dark {
     @apply mb-4 leading-relaxed;
   }
 
-  article details {
-    @apply mb-4;
-  }
-
   a {
     @apply border-b-2 border-divider no-underline hover:border-primary;
   }
@@ -136,6 +132,10 @@ body.dark {
 
   [data-blog-post] hr {
     @apply overflow-visible border-0 text-center after:content-['⁂'];
+  }
+
+  [data-blog-post] details {
+    @apply mb-4;
   }
 
   [data-blog-post] img {

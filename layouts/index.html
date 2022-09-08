@@ -59,9 +59,7 @@
         </div>
       </div>
 
-      <div
-        class="gallery-wrapper pretty-scrollbar hidden overflow-x-auto py-4 lg:block"
-      >
+      <div class="gallery-wrapper hidden overflow-x-auto py-4 lg:block">
         {{ partial "post-cards-gallery.html" $latestPosts }}
       </div>
     </div>
@@ -99,7 +97,7 @@
       </div>
     </div>
 
-    <div class="gallery-wrapper pretty-scrollbar mb-8 py-8 sm:mb-16">
+    <div class="gallery-wrapper mb-8 py-8 sm:mb-16">
       <ul class="gallery m-0 list-none">
         {{ range (where $projects "Params.unmaintained" "!=" "true") }}
           <li class="max-w-fit flex-none snap-center">

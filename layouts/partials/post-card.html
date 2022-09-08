@@ -7,7 +7,7 @@
     </h3>
 
     <div
-      class="pretty-scrollbar nowrap -mx-8 mt-4 mb-2 flex snap-x snap-proximity scroll-pl-8 gap-2 overflow-x-auto px-8 pb-2"
+      class="-mx-8 mt-4 mb-2 flex snap-x snap-proximity scroll-pl-8 flex-wrap gap-2 overflow-x-auto px-8 pb-2"
     >
       {{ range (.GetTerms "tags") }}
         <a href="{{ .RelPermalink }}" class="tag snap-start whitespace-nowrap">

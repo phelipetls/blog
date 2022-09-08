@@ -291,15 +291,6 @@ body.dark {
   }
 }
 
-.pretty-scrollbar {
-  scrollbar-color: rgb(var(--divider)) transparent;
-  scrollbar-width: thin;
-}
-
-.pretty-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-}
-
 .no-scrollbar {
   scrollbar-width: none;
 }

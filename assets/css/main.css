@@ -163,7 +163,7 @@ body.dark {
   }
 
   [data-react-code-container][data-is-expanded='false'] pre {
-    @apply max-h-[calc(1.5em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
+    @apply max-h-[calc(theme(codeLineHeight)em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
   }
 
   :is(.card, [role='tabpanel']) pre {
@@ -171,7 +171,7 @@ body.dark {
   }
 
   pre code {
-    @apply float-left min-w-full leading-normal;
+    @apply float-left min-w-full leading-[theme(codeLineHeight)];
   }
 
   :not(pre) > code {

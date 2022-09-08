@@ -74,6 +74,7 @@ module.exports = {
         [700]: withOpacityValue('--beige-700'),
       },
     },
+    codeLineHeight: 1.5,
   },
   plugins: [],
 }

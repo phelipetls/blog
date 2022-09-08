@@ -28,9 +28,7 @@
   <div
     data-react-code-container
     style="--number-of-lines: {{ $maxLinesOfCode }}"
-    class="{{ if $tooMuchLinesOfCode }}
-      max-h-[calc(1.5em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)]
-    {{ end }} overflow-y-auto sm:rounded-t-md"
+    class="sm:rounded-t-md"
     data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
   >
     {{ partial "partials/codeblock.html" (dict "Inner" $sourceCode "Type" "jsx" "Options" (.Get "hl_options")) }}

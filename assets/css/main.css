@@ -155,11 +155,15 @@ body.dark {
   }
 
   pre {
-    @apply overflow-x-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply overflow-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
   }
 
   [data-react-code-container] pre {
     @apply rounded-b-none;
+  }
+
+  [data-react-code-container][data-is-expanded='false'] pre {
+    @apply max-h-[calc(1.5em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
   }
 
   :is(.card, [role='tabpanel']) pre {

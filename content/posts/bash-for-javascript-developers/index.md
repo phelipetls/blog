@@ -390,7 +390,7 @@ short-circuit evaluation, which [relies on the fact that booleans are ignored
 in
 JSX](https://reactjs.org/docs/jsx-in-depth.html#booleans-null-and-undefined-are-ignored):
 
-{{< react path="short-circuit-react.jsx" hl_options=`hl_lines=[11]` >}}
+{{< react path="short-circuit-react.jsx" hl_options=`hl_Lines=[11]` >}}
 
 Similarly in Bash, we can conditionally execute a command if the previous
 command's exit code is `0` by using the same operator `&&`:

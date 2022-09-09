@@ -26,6 +26,10 @@
   --red: hexToRgb(#dd0022);
   --orange: hexToRgb(#f7bd55);
 
+  --code-line-height: 1.5;
+  --code-horizontal-padding: 2rem;
+  --code-highlight-width: 2px;
+
   color-scheme: light dark;
 }
 
@@ -155,7 +159,7 @@ body.dark {
   }
 
   pre {
-    @apply overflow-auto rounded-none bg-surface py-page-padding px-[theme(codeHorizontalPadding)] sm:mx-0 sm:rounded-md;
+    @apply overflow-auto rounded-none bg-surface py-page-padding px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
   }
 
   .highlight pre {
@@ -163,9 +167,9 @@ body.dark {
   }
 
   .chroma .hl {
-    border-left-width: theme(codeHighlightWidth);
-    margin: 0 calc(theme(codeHorizontalPadding) * -1);
-    padding-left: calc(2rem - theme(codeHighlightWidth));
+    border-left-width: var(--code-highlight-width);
+    margin: 0 calc(var(--code-horizontal-padding) * -1);
+    padding-left: calc(2rem - var(--code-highlight-width));
     @apply border-primary !bg-black-400 pr-8;
   }
 
@@ -174,7 +178,7 @@ body.dark {
   }
 
   [data-react-code-container][data-is-expanded='false'] pre {
-    @apply max-h-[calc(theme(codeLineHeight)em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
+    @apply max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
   }
 
   :is(.card, [role='tabpanel']) pre {
@@ -182,7 +186,7 @@ body.dark {
   }
 
   pre code {
-    @apply float-left min-w-full leading-[theme(codeLineHeight)];
+    @apply float-left min-w-full leading-[var(--code-line-height)];
   }
 
   :not(pre) > code {

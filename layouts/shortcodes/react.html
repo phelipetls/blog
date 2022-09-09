@@ -4,21 +4,9 @@
 
 {{ $appRootId := md5 $sourceCode }}
 
-{{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
-{{ $targetPath := printf "js/react-create-root-%s.js" $appRootId }}
-{{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
-
-{{ $reactCreateRootScript :=
-  resources.Get "js/templates/react-create-root.jsx"
-  | resources.ExecuteAsTemplate $targetPath $context
-  | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
-  | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
-  }}
-
-{{ $html :=
-  resources.Get "html/templates/react-app.html"
-  | resources.ExecuteAsTemplate (printf "react-app-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $createCreateRootScript "ReactVersion" (.Get "version"))
-}}
+{{ $reactAppPath := (printf "react-app-%s.html" $appRootId) }}
+{{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}
+{{ $reactAppHtml := resources.Get "html/templates/react-app.html" | resources.ExecuteAsTemplate $reactAppPath $reactAppContext }}
 
 {{ $maxLinesOfCode := 20 }}
 {{ $tooMuchLinesOfCode := gt $linesOfCode $maxLinesOfCode }}
@@ -59,6 +47,6 @@
       {{ partial "svgs/refresh-cw.svg" . }}
     </button>
 
-    <iframe class="max-w-full" src="{{ $html.Permalink }}"> </iframe>
+    <iframe class="max-w-full" src="{{ $reactAppHtml.Permalink }}"> </iframe>
   </div>
 </div>

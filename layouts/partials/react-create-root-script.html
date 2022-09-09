@@ -1,0 +1,14 @@
+{{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
+{{ $targetPath := printf "js/react-create-root-%s.js" .AppRootId }}
+{{ $context := dict "SourceCode" .SourceCode "AppRootId" .AppRootId }}
+
+{{ $reactCreateRootScript :=
+  resources.Get "js/templates/react-create-root.jsx"
+  | resources.ExecuteAsTemplate $targetPath $context
+  | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
+  | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
+  }}
+
+<script type="module">
+  {{ $reactCreateRootScript.Content | safeJS }}
+</script>

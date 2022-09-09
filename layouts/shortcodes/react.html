@@ -1,6 +1,4 @@
-{{ $scriptPath := .Get "path" }}
-{{ $sourceCode := (.Page.Resources.Get $scriptPath).Content | safeJS }}
-{{ $linesOfCode := len (findRE "\n" $sourceCode) }}
+{{ $sourceCode := (.Page.Resources.Get (.Get "path")).Content | safeJS }}
 
 {{ $appRootId := md5 $sourceCode }}
 
@@ -8,6 +6,7 @@
 {{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}
 {{ $reactAppHtml := resources.Get "html/templates/react-app.html" | resources.ExecuteAsTemplate $reactAppPath $reactAppContext }}
 
+{{ $linesOfCode := len (findRE "\n" $sourceCode) }}
 {{ $maxLinesOfCode := 20 }}
 {{ $tooMuchLinesOfCode := gt $linesOfCode $maxLinesOfCode }}
 

@@ -134,7 +134,7 @@ body.dark {
     @apply border-t-2 border-divider;
   }
 
-  [data-blog-post] hr {
+  [data-blog-post] > hr {
     @apply overflow-visible border-0 text-center after:content-['⁂'];
   }
 

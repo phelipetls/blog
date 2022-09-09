@@ -1,7 +1,7 @@
 ---
 title: Bash for JavaScript developers
 date: 2022-07-24
-tags: [javascript, react, bash, shell, linux, unix, node]
+tags: [javascript, bash, unix, node]
 ---
 
 If there is one technology every developer has to deal with, no matter the

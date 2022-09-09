@@ -131,7 +131,7 @@ body.dark {
   }
 
   hr {
-    @apply my-4 border-t-2 border-divider;
+    @apply border-t-2 border-divider;
   }
 
   [data-blog-post] hr {

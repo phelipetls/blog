@@ -31,7 +31,7 @@
     class="sm:rounded-t-md"
     data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
   >
-    {{ partial "partials/codeblock.html" (dict "Inner" $sourceCode "Type" "jsx" "Options" (.Get "hl_options")) }}
+    {{ partial "codeblock.html" (dict "Inner" $sourceCode "Type" "jsx" "Options" (.Get "hl_options")) }}
   </div>
 
   {{ if $tooMuchLinesOfCode }}

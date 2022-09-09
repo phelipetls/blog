@@ -257,7 +257,7 @@ body.dark {
   }
 
   .btn-secondary {
-    @apply border-primary text-primary;
+    @apply bg-surface text-primary;
   }
 
   a.btn-primary {

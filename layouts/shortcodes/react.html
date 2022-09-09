@@ -1,6 +1,6 @@
 {{ $sourceCode := (.Page.Resources.Get (.Get "path")).Content | safeJS }}
 
-{{ $appRootId := md5 $sourceCode }}
+{{ $appRootId := md5 (printf "%s-%s" $sourceCode (.Get "version")) }}
 
 {{ $reactAppPath := (printf "react-app-%s.html" $appRootId) }}
 {{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}

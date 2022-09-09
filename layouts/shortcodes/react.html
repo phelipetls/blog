@@ -17,7 +17,7 @@
 
 {{ $html :=
   resources.Get "html/templates/react-app.html"
-  | resources.ExecuteAsTemplate (printf "react-iframe-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $builtJs)
+  | resources.ExecuteAsTemplate (printf "react-iframe-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $builtJs "ReactVersion" (.Get "version"))
 }}
 
 {{ $maxLinesOfCode := 20 }}

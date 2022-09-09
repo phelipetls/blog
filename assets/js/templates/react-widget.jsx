@@ -1,11 +1,15 @@
 {{ .SourceCode }}
 
-const root = window.ReactDOM.createRoot(
-  document.getElementById("{{ .AppRootId }}")
-)
+const appRoot = document.getElementById("{{ .AppRootId }}")
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
+if ('createRoot' in window.ReactDOM) {
+  const root = window.ReactDOM.createRoot(appRoot)
+
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+} else {
+  window.ReactDOM.render(<App />, appRoot)
+}

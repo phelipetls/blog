@@ -1,10 +1,22 @@
-{{ $defines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
-{{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build (dict "defines" $defines "minify" true) }}
+{{ if .ReactVersion }}
+  {{ $env := cond hugo.IsProduction ".production.min.js" "development.js" }}
+  <script
+    crossorigin
+    src="https://unpkg.com/react@{{ .ReactVersion }}/umd/react.{{ $env }}"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@{{ .ReactVersion }}/umd/react-dom.{{ $env }}"
+  ></script>
+{{ else }}
+  {{ $defines := dict "process.env.NODE_ENV" (cond hugo.IsProduction `"production"` `"development"`) }}
+  {{ $reactBundle := resources.Get "/js/react-bundle.js" | js.Build (dict "defines" $defines "minify" true) }}
 
-{{ if hugo.IsProduction }}
-  {{ $reactBundle := $reactBundle | minify }}
+  {{ if hugo.IsProduction }}
+    {{ $reactBundle := $reactBundle | minify }}
+  {{ end }}
+
+  <script>
+    {{ $reactBundle.Content | safeJS }}
+  </script>
 {{ end }}
-
-<script>
-  {{ $reactBundle.Content | safeJS }}
-</script>

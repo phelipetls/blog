@@ -1,7 +1,7 @@
 ---
 title: "Moving away from tiling window managers"
 date: 2022-05-01
-tags: ["linux", "dwm", "gnome", "ansible", "fedora", "xubuntu"]
+tags: ["linux", "dwm", "gnome", "ansible", "fedora", "ubuntu"]
 ---
 
 This is the story about how I'm moving away from a tiling window manager,

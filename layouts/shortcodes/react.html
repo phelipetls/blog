@@ -5,11 +5,11 @@
 {{ $appRootId := md5 $sourceCode }}
 
 {{ $shims := dict "react" "js/shims/react.js" "react-dom" "js/shims/react-dom.js" }}
-{{ $targetPath := printf "js/react-widget-%s.js" $appRootId }}
+{{ $targetPath := printf "js/react-create-root-%s.js" $appRootId }}
 {{ $context := dict "SourceCode" $sourceCode "AppRootId" $appRootId }}
 
-{{ $builtJs :=
-  resources.Get "js/templates/react-widget.jsx"
+{{ $reactCreateRootScript :=
+  resources.Get "js/templates/react-create-root.jsx"
   | resources.ExecuteAsTemplate $targetPath $context
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
   | js.Build (dict "externals" (slice "react" "react-dom") "format" "esm" "shims" $shims)
@@ -17,7 +17,7 @@
 
 {{ $html :=
   resources.Get "html/templates/react-app.html"
-  | resources.ExecuteAsTemplate (printf "react-iframe-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $builtJs "ReactVersion" (.Get "version"))
+  | resources.ExecuteAsTemplate (printf "react-app-%s.html" $appRootId) (dict "AppRootId" $appRootId "Js" $createCreateRootScript "ReactVersion" (.Get "version"))
 }}
 
 {{ $maxLinesOfCode := 20 }}

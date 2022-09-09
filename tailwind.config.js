@@ -75,6 +75,8 @@ module.exports = {
       },
     },
     codeLineHeight: 1.5,
+    codeHorizontalPadding: '2rem',
+    codeHighlightWidth: '2px',
   },
   plugins: [],
 }

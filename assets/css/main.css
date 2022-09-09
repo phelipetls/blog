@@ -155,7 +155,14 @@ body.dark {
   }
 
   pre {
-    @apply overflow-auto rounded-none bg-surface py-page-padding px-8 sm:mx-0 sm:rounded-md;
+    @apply overflow-auto rounded-none bg-surface py-page-padding px-[theme(codeHorizontalPadding)] sm:mx-0 sm:rounded-md;
+  }
+
+  .chroma .hl {
+    border-left-width: theme(codeHighlightWidth);
+    margin: 0 calc(theme(codeHorizontalPadding) * -1);
+    padding-left: calc(2rem - theme(codeHighlightWidth));
+    @apply border-primary !bg-black-400 pr-8;
   }
 
   [data-react-code-container] pre {
@@ -309,12 +316,6 @@ main + footer {
 
 [data-preload] {
   transition: none !important;
-}
-
-.chroma .hl {
-  /* unmaintainable hack to fix offset due to 4px border */
-  padding-left: calc(2rem - 4px);
-  @apply -mx-8 w-auto border-l-2 border-primary bg-black-400 pr-8 !important;
 }
 
 [data-blog-post] .katex-display {

@@ -158,6 +158,10 @@ body.dark {
     @apply overflow-auto rounded-none bg-surface py-page-padding px-[theme(codeHorizontalPadding)] sm:mx-0 sm:rounded-md;
   }
 
+  .highlight pre {
+    color-scheme: dark;
+  }
+
   .chroma .hl {
     border-left-width: theme(codeHighlightWidth);
     margin: 0 calc(theme(codeHorizontalPadding) * -1);

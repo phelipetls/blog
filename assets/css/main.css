@@ -121,9 +121,7 @@ body.dark {
   }
 
   kbd {
-    padding: 2px 4px;
-    box-shadow: 1px 1px 1px rgb(var(--foreground));
-    @apply mx-[2px] inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] align-text-bottom font-bold leading-none text-foreground;
+    @apply inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] font-bold leading-none text-foreground shadow-sm shadow-foreground;
   }
 
   ::selection {

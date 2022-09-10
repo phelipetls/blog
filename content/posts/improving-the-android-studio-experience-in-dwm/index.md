@@ -344,6 +344,6 @@ around.
 
 Here's a demonstration of the final result:
 
-{{< video src="./demo.mp4" caption="Demo of Android Studio running in dwm" >}}
+{{< video src="./demo.webm" caption="Demo of Android Studio running in dwm" >}}
 
 [^1]: https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html

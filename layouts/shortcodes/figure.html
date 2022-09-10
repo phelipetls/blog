@@ -4,7 +4,7 @@
     {{- end -}}
     <picture>
         {{ if hugo.IsProduction }}
-            {{ with (.Page.Resources.GetMatch (substr (.Get "src") 2)) }}
+            {{ with (.Page.Resources.GetMatch (path.Clean (.Get "src"))) }}
                 {{ if and (eq .MediaType.MainType "image") (ne .MediaType.SubType "gif") }}
                     {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
                         <source srcset="{{ .Permalink }}" type="image/webp">

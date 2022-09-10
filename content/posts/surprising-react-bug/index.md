@@ -64,7 +64,7 @@ Everything is broken.
 The fix is to call `preventDefault` on the `onClick` event handler of the
 `summary` element:
 
-{{< react path="details-summary-react-prevent-default.js" hl_options=`hl_Lines=12-13` version="18.2.0" >}}
+{{< react path="details-summary-react-prevent-default.js" hl_options=`hl_Lines=13` version="18.2.0" >}}
 
 This fixes it because now only React controls the `open` attribute.
 
@@ -109,8 +109,8 @@ Here are links to playgrounds where the issue is reproduced:
 In light of this, **I don't think it's fair to say this is a React bug**.
 
 It sure is an application bug, but it's not React's fault. The problem is that
-there more than a single source of truth controlling the `open` state, which is
-to ask for trouble.
+there are more than a single source of truth controlling the `open` state,
+which is asking for trouble.
 
 In fact, all of this suggested to me that it would still happen in vanilla
 JavaScript. And indeed it does:

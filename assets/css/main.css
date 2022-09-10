@@ -156,6 +156,10 @@ body.dark {
     @apply -mx-page-padding sm:mx-0;
   }
 
+  [data-blog-post] > figure video {
+    @apply min-h-[15em] bg-surface sm:rounded-md;
+  }
+
   pre {
     @apply overflow-auto rounded-none bg-surface py-page-padding px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
   }

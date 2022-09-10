@@ -28,7 +28,7 @@
       data-react-show-more-code
       data-expanded-label="{{ i18n "ShowMore" }}"
       data-collapsed-label="{{ i18n "ShowLess" }}"
-      class="btn-secondary flex w-full items-center justify-center transition-colors duration-500 hover:bg-hover"
+      class="btn btn-secondary flex w-full items-center justify-center rounded-none py-1"
     >
       {{ i18n "ShowMore" }}
       {{ partial "svgs/chevron-down.svg" }}
@@ -45,7 +45,7 @@
     <button
       data-react-iframe-refresh
       aria-label="{{ i18n "RefreshApp" }}"
-      class="btn btn-icon btn-icon-action btn-secondary absolute top-3 right-0 -translate-x-1/2 shadow-md shadow-shadow"
+      class="btn-icon btn-icon-action btn-secondary absolute top-3 right-0 -translate-x-1/2 shadow-md shadow-shadow"
     >
       {{ partial "svgs/refresh-cw.svg" . }}
     </button>

@@ -171,11 +171,11 @@ body.dark {
     @apply border-primary !bg-black-400 pr-8;
   }
 
-  [data-react-code-container] pre {
+  [data-html-preview-codeblock-container] pre {
     @apply rounded-b-none;
   }
 
-  [data-react-code-container][data-is-expanded='false'] pre {
+  [data-html-preview-codeblock-container][data-is-expanded='false'] pre {
     @apply max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
   }
 

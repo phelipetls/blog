@@ -106,13 +106,14 @@
   {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.ts" | js.Build }}
   {{ $tabsJs := resources.Get "/js/tabs.js" }}
   {{ $tocJs := resources.Get "/js/toc.ts" | js.Build }}
-  {{ $reactShortcodeJs := resources.Get "/js/react-shortcode.ts" | js.Build }}
+  {{ $htmlPreviewJs := resources.Get "/js/html-preview.ts" | js.Build }}
+  {{ $htmlPreviewIframeJs := resources.Get "/js/html-preview-iframe.ts" | js.Build }}
   {{ $copyCodeButtonScript :=
     resources.Get "/js/copy-code-button.js"
     | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
   }}
 
-  {{ $bundle := slice $reactShortcodeJs $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $tocJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
+  {{ $bundle := slice $htmlPreviewJs $htmlPreviewIframeJs $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $tocJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
 
   {{ if hugo.IsProduction }}
     {{ $bundle = $bundle | minify }}

@@ -1,0 +1,34 @@
+{{ $linesOfCode := len (findRE "\n" .SourceCode) }}
+{{ $maxLinesOfCode := 20 }}
+{{ $tooMuchLinesOfCode := gt $linesOfCode $maxLinesOfCode }}
+
+
+<div data-html-preview class="my-8 -mx-page-padding sm:mx-0">
+  <div
+    data-html-preview-codeblock-container
+    style="--number-of-lines: {{ $maxLinesOfCode }};"
+    class="sm:rounded-t-md"
+    data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
+  >
+    {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}
+  </div>
+
+  {{ if $tooMuchLinesOfCode }}
+    <hr />
+
+    <button
+      data-html-preview-expand-codeblock
+      data-expanded-label="{{ i18n "ShowMore" }}"
+      data-collapsed-label="{{ i18n "ShowLess" }}"
+      class="btn btn-secondary flex w-full items-center justify-center rounded-none py-1"
+    >
+      {{ i18n "ShowMore" }}
+      {{ partial "svgs/chevron-down.svg" }}
+    </button>
+  {{ end }}
+
+
+  <hr />
+
+  {{ partial "html-preview-iframe.html" (dict "Resource" .IframeResource) }}
+</div>

@@ -1,0 +1,14 @@
+<div
+  data-html-preview-iframe-container
+  class="relative bg-[white] py-8 px-page-padding sm:mx-0 sm:rounded-b-md sm:shadow-md sm:shadow-shadow"
+>
+  <button
+    data-html-preview-iframe-refresh
+    aria-label="{{ i18n "RefreshApp" }}"
+    class="btn-icon btn-icon-action btn-secondary absolute top-3 right-0 -translate-x-1/2 shadow-md shadow-shadow"
+  >
+    {{ partial "svgs/refresh-cw.svg" . }}
+  </button>
+
+  <iframe class="max-w-full" src="{{ .Resource.Permalink }}"> </iframe>
+</div>

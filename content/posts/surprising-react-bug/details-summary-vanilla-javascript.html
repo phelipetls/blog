@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <span>State: closed</span>
+
+    <details>
+      <summary>Summary</summary>
+      Details
+    </details>
+
+    <script>
+      const span = document.querySelector('span')
+      const details = document.querySelector('details')
+      const summary = document.querySelector('summary')
+
+      let isOpen = false
+
+      summary.addEventListener('click', () => {
+        if (isOpen) {
+          isOpen = false
+          span.textContent = 'State: closed'
+          details.removeAttribute('open')
+          return
+        }
+
+        isOpen = true
+        span.textContent = 'State: open'
+        details.setAttribute('open', '')
+      })
+    </script>
+  </body>
+</html>

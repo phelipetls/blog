@@ -1,12 +1,11 @@
 {{ if (or (hugo.IsProduction) (.ReactVersion)) }}
-  {{ $env := cond hugo.IsProduction ".production.min.js" "development.js" }}
   <script
     crossorigin
-    src="https://unpkg.com/react@{{ .ReactVersion | default "18" }}/umd/react.{{ $env }}"
+    src="https://unpkg.com/react@{{ .ReactVersion | default "18" }}/umd/react.production.min.js"
   ></script>
   <script
     crossorigin
-    src="https://unpkg.com/react-dom@{{ .ReactVersion | default "18" }}/umd/react-dom.{{ $env }}"
+    src="https://unpkg.com/react-dom@{{ .ReactVersion | default "18" }}/umd/react-dom.production.min.js"
   ></script>
 {{ else }}
   {{ $defines := dict "process.env.NODE_ENV" `"development"` }}

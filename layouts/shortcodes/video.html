@@ -1,5 +1,8 @@
+{{ $video := .Page.Resources.GetMatch (path.Clean (.Get "src")) }}
+
+
 <figure>
-  <video class="mx-auto" controls src="{{ .Get "src" }}"></video>
+  <video class="mx-auto" controls src="{{ $video.Permalink }}"></video>
 
   {{ with .Get "caption" }}
     <figcaption class="mt-2 text-center">

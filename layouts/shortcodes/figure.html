@@ -13,7 +13,8 @@
             {{ end }}
         {{ end }}
 
-        <img src="{{ .Get "src" }}"
+        {{ $image := .Page.Resources.GetMatch (path.Clean (.Get "src")) }}
+        <img src="{{ $image.Permalink }}"
              {{- if or (.Get "alt") (.Get "caption") }}
              alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
              {{- end -}}

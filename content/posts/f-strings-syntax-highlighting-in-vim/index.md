@@ -2,6 +2,7 @@
 title: "Python f-strings syntax highlighting in Vim"
 date: 2020-10-28
 tags: ["vim", "python"]
+scripts: [cocoen.min.js, script.js]
 ---
 
 **UPDATE 2020-10-30**: First iteration of this post was very naive, supporting

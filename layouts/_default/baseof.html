@@ -45,8 +45,8 @@
       {{ partial "footer.html" . }}
     </div>
 
-    {{ range (.Resources.Match "*.js") }}
-      <script type="module" defer src="{{ .RelPermalink }}"></script>
+    {{ range (.Params.scripts) }}
+      <script type="module" defer src="{{ $.Resources.Get . }}"></script>
     {{ end }}
 
     {{ block "scripts" . }}

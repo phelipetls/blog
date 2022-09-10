@@ -1,6 +1,33 @@
 export type Theme = 'dark' | 'light'
 export type ThemeChoice = 'dark' | 'light' | 'auto'
 
+window.__setTheme = setTheme
+
+const storedThemeChoice: ThemeChoice = getStoredThemeChoice()
+window.__setTheme(storedThemeChoice)
+
+window.addEventListener('load', function () {
+  document.body.removeAttribute('data-preload')
+  dispatchNewThemeEvent(storedThemeChoice)
+})
+
+window.addEventListener('storage', function (e) {
+  const newTheme = e.newValue
+  if (e.key === '__theme') {
+    window.__setTheme(newTheme as ThemeChoice)
+  }
+})
+
+function setTheme(themeChoice: ThemeChoice | null): void {
+  if (!themeChoice) {
+    return
+  }
+
+  changeBodyClass(themeChoice)
+  storeThemeChoice(themeChoice)
+  dispatchNewThemeEvent(themeChoice)
+}
+
 function storeThemeChoice(themeChoice: ThemeChoice): void {
   localStorage.setItem('__theme', themeChoice)
 }
@@ -9,7 +36,7 @@ function getStoredThemeChoice() {
   return (localStorage.getItem('__theme') || 'auto') as ThemeChoice
 }
 
-function getSystemTheme(): Theme {
+function getAutoTheme(): Theme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light'
@@ -17,12 +44,12 @@ function getSystemTheme(): Theme {
 
 function getThemeFromChoice(themeChoice: ThemeChoice): Theme {
   if (themeChoice === 'auto') {
-    return getSystemTheme()
+    return getAutoTheme()
   }
   return themeChoice
 }
 
-function setTheme(themeChoice: ThemeChoice): void {
+function changeBodyClass(themeChoice: ThemeChoice): void {
   const theme = getThemeFromChoice(themeChoice)
   document.body.classList.toggle('dark', theme === 'dark')
 }
@@ -44,28 +71,3 @@ function createNewThemeEvent(themeChoice: ThemeChoice): NewThemeEvent {
 function dispatchNewThemeEvent(themeChoice: ThemeChoice): void {
   document.body.dispatchEvent(createNewThemeEvent(themeChoice))
 }
-
-window.__setTheme = function (themeChoice: ThemeChoice | null): void {
-  if (!themeChoice) {
-    return
-  }
-
-  setTheme(themeChoice)
-  storeThemeChoice(themeChoice)
-  dispatchNewThemeEvent(themeChoice)
-}
-
-const storedThemeChoice: ThemeChoice = getStoredThemeChoice()
-window.__setTheme(storedThemeChoice)
-
-window.addEventListener('load', function () {
-  document.body.removeAttribute('data-preload')
-  dispatchNewThemeEvent(storedThemeChoice)
-})
-
-window.addEventListener('storage', function (e) {
-  const newTheme = e.newValue
-  if (e.key === '__theme') {
-    window.__setTheme(newTheme as ThemeChoice)
-  }
-})

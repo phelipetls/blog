@@ -13,14 +13,13 @@ Here it is:
 
 {{< react path="details-summary-react-bug.js" version="18.2.0" >}}
 
-A video showing the issue next Firefox developer tools might help understand
-the issue:
+Here's a video showing it next to an HTML inspector:
 
 {{< video src="details-summary-react-bug.webm" caption="The details HTML element open attribute is not synchronized with React's state" >}}
 
 The `isOpen` state changes as expected, but the `<details>` element's `open`
-attribute is not synchronized with it -- or rather, it's as if we're passing
-`open={!isOpen}`.
+attribute is not synchronized with it -- or rather, it's in a negative way, as
+if we're passing `open={!isOpen}`.
 
 # Why?
 
@@ -99,8 +98,7 @@ using their "playgrounds" web apps.
 
 Surprisingly (to me), **they all have the same issue**!
 
-Here are links to playground where the issue can be reproduced, at least at
-time of writing:
+Here are links to playgrounds where the issue is reproduced:
 
 - [Vue][vue-playground-url]
 - [Solid][solid-playground-url]
@@ -114,7 +112,7 @@ It sure is an application bug, but it's not React's fault. The problem is that
 there more than a single source of truth controlling the `open` state, which is
 to ask for trouble.
 
-In fact, all of this suggested to me that it'd still happen in vanilla
+In fact, all of this suggested to me that it would still happen in vanilla
 JavaScript. And indeed it does:
 
 {{< html path="details-summary-vanilla-javascript.html" hl_options=`hl_lines=10-29` >}}

@@ -212,6 +212,10 @@ body.dark {
     @apply m-0 list-outside px-page-padding;
   }
 
+  nav[data-toc-mobile] ol li:not(:first-child) {
+    @apply mt-1;
+  }
+
   nav[data-toc-desktop] ol {
     @apply m-0 list-none indent-4;
   }
@@ -228,10 +232,6 @@ body.dark {
     @apply indent-16;
   }
 
-  nav[data-toc-mobile] ol li:not(:first-child) {
-    @apply mt-1;
-  }
-
   nav[data-toc-desktop] > ol li {
     @apply relative before:absolute before:top-0 before:left-0 before:h-full before:w-[2px] before:bg-divider before:content-[''];
   }
@@ -240,12 +240,12 @@ body.dark {
     @apply before:bg-primary;
   }
 
-  nav[data-toc-desktop] > ol li[data-active] > a {
-    @apply text-primary;
-  }
-
   nav[data-toc-desktop] > ol li a {
     @apply block w-full whitespace-nowrap border-b-0 transition-colors duration-500 hover:bg-hover;
+  }
+
+  nav[data-toc-desktop] > ol li[data-active] > a {
+    @apply text-primary;
   }
 }
 

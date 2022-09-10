@@ -232,6 +232,10 @@ body.dark {
     @apply indent-16;
   }
 
+  nav[data-toc-desktop] a * {
+    @apply indent-0;
+  }
+
   nav[data-toc-desktop] > ol li {
     @apply relative before:absolute before:top-0 before:left-0 before:h-full before:w-[2px] before:bg-divider before:content-[''];
   }

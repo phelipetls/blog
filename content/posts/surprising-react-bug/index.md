@@ -115,7 +115,7 @@ which is asking for trouble.
 In fact, all of this suggested to me that it would still happen in vanilla
 JavaScript. And indeed it does:
 
-{{< html path="details-summary-vanilla-javascript.html" hl_options=`hl_lines=10-29` >}}
+{{< html path="details-summary-vanilla-javascript.html" hl_options=`hl_lines=11-30` >}}
 
 # Closing thoughts
 

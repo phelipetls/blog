@@ -265,7 +265,7 @@ body.dark {
   }
 
   .btn-icon {
-    @apply flex items-center justify-center rounded-full p-1;
+    @apply flex items-center justify-center rounded-full bg-surface p-2 text-foreground shadow-md shadow-shadow transition-colors duration-500 hover:bg-hover;
   }
 
   .btn-icon-action {

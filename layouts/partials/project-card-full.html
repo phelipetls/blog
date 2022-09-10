@@ -35,11 +35,7 @@
         </h2>
 
         {{ with .Params.github }}
-          <a
-            class="btn btn-icon border-0 text-xl"
-            href="{{ . }}"
-            aria-label="GitHub"
-          >
+          <a class="border-0 text-xl" href="{{ . }}" aria-label="GitHub">
             {{ partial "svgs/github.svg" }}
           </a>
         {{ end }}

@@ -3,9 +3,9 @@
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
     {{- end -}}
     <picture>
-        {{ with (.Page.Resources.GetMatch (substr (.Get "src") 2)) }}
-            {{ if and (eq .MediaType.MainType "image") (ne .MediaType.SubType "gif") }}
-                {{ if hugo.IsProduction }}
+        {{ if hugo.IsProduction }}
+            {{ with (.Page.Resources.GetMatch (substr (.Get "src") 2)) }}
+                {{ if and (eq .MediaType.MainType "image") (ne .MediaType.SubType "gif") }}
                     {{ with .Resize (printf "%dx%d webp" .Width .Height) }}
                         <source srcset="{{ .Permalink }}" type="image/webp">
                     {{ end }}

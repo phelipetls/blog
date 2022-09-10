@@ -1,14 +1,14 @@
-const reactIframeContainers = document.querySelectorAll(
+const htmlPreviewIframeContainers = document.querySelectorAll(
   '[data-html-preview-iframe-container]'
 )
 
-for (const reactIframeContainer of reactIframeContainers) {
-  const refreshButton = reactIframeContainer.querySelector(
+for (const htmlPreviewIframe of htmlPreviewIframeContainers) {
+  const refreshButton = htmlPreviewIframe.querySelector(
     '[data-html-preview-iframe-refresh]'
   )
 
   refreshButton?.addEventListener('click', () => {
-    const iframe = reactIframeContainer.querySelector('iframe')
+    const iframe = htmlPreviewIframe.querySelector('iframe')
     iframe?.contentWindow?.location.reload()
   })
 }

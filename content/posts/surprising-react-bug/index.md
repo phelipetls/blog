@@ -1,15 +1,17 @@
 ---
-title: A surprising React bug
+title: An apparent React bug
 date: 2022-09-10
 tags: [react, javascript, html]
 ---
 
-The `details` HTML element doesn't work well when we use it as a controlled
-component in React. I like using plain HTML elements whenever I can, but this
-time I got bitten by this issue, [which is still open on
-GitHub](https://github.com/facebook/react/issues/15486).
+The `details` HTML element doesn't seem to work well when used as a controlled
+component in React, as pointed out in [this open GitHub
+issue](https://github.com/facebook/react/issues/15486). At first, I thought it
+was a React bug, but at the end of my investigation while writing this, I
+concluded it's simply a mistake -- not having a single source of truth for
+state.
 
-Here it is:
+Let's begin by understand the "bug" itself. Here it is:
 
 {{< react path="details-summary-react-bug.js" version="18.2.0" >}}
 
@@ -23,16 +25,15 @@ if we're passing `open={!isOpen}`.
 
 # Why?
 
-It turns out React is "doing the right thing", but in the end things break
-because the `details` element has state of its own that React doesn't know
-about.
+It seems React is "doing the right thing", but in the end things break because
+the `details` element has state of its own that React doesn't know about.
 
 In short, the issue is that there are two sources of truth for the `open`
 attribute -- React and the browser.
 
 [This was masterfully explained in this GitHub
 comment](https://github.com/facebook/react/issues/15486#issuecomment-873516817).
-The user begins by explaining what happens the first time we click the button:
+It begins by explaining what happens when we click the button the first time:
 
 1. The `onClick` event handler of the `summary` element is triggered, which
    changes `isOpen` from `false` to `true`.
@@ -96,7 +97,7 @@ I later wondered if other JavaScript frameworks -- specifically Solid, Svelte
 and Vue -- could handle this any better, so I tried to reproduce the issue
 using their "playgrounds" web apps.
 
-Surprisingly (to me), **they all have the same issue**!
+Surprisingly, **they all have the same issue**!
 
 Here are links to playgrounds where the issue is reproduced:
 
@@ -106,7 +107,7 @@ Here are links to playgrounds where the issue is reproduced:
 
 # Not a React bug?
 
-In light of this, **I don't think it's fair to say this is a React bug**.
+In light of this, **I don't think this is an issue with React**.
 
 It sure is an application bug, but it's not React's fault. The problem is that
 there are more than a single source of truth controlling the `open` state,

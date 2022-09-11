@@ -251,6 +251,10 @@ body.dark {
   nav[data-toc-desktop] > ol li[data-active] > a {
     @apply text-primary;
   }
+
+  .footnotes hr {
+    @apply mb-4;
+  }
 }
 
 @layer components {

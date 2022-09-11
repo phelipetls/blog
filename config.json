@@ -23,7 +23,7 @@
       "languageName": "Português",
       "weight": 2,
       "params": {
-        "description": "Um blog para compartilhar meus interesses em programação, estatística e mais",
+        "description": "Desenvolvedor web front-end que escreve sobre a prática da programação e suas ferramentas",
         "htmlLang": "pt-BR",
         "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-ptbr.pdf"
       }
@@ -42,7 +42,7 @@
   },
   "params": {
     "author": "Phelipe Teles",
-    "description": "A blog to share my interests (mostly programming)",
+    "description": "Front-end web developer that writes about the programming craft and its tools",
     "email": "phelipe_teles@hotmail.com",
     "github": "https://github.com/phelipetls",
     "linkedin": "https://linkedin.com/in/phelipeteles",

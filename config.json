@@ -16,7 +16,8 @@
       "languageName": "English",
       "weight": 1,
       "params": {
-        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-en.pdf"
+        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-en.pdf",
+        "images": ["thumbnail.png"]
       }
     },
     "pt": {
@@ -25,7 +26,8 @@
       "params": {
         "description": "Desenvolvedor web front-end que escreve sobre a prática da programação e suas ferramentas",
         "htmlLang": "pt-BR",
-        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-ptbr.pdf"
+        "resume": "https://phelipetls.github.io/latex-resume/phelipe-teles-resume-ptbr.pdf",
+        "images": ["thumbnail.pt.png"]
       }
     }
   },

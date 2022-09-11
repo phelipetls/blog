@@ -3,11 +3,18 @@ const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
 const puppeteer = require('puppeteer')
+const hugoConfig = require('../config.json')
 
-generateThumbnails('http://localhost:1313/posts/thumbnails.json')
-generateThumbnails('http://localhost:1313/pt/posts/thumbnails.json')
+generateThumbnails(
+  'http://localhost:1313/posts/thumbnails.json',
+  hugoConfig.languages.en.images[0]
+)
+generateThumbnails(
+  'http://localhost:1313/pt/posts/thumbnails.json',
+  hugoConfig.languages.pt.images[0]
+)
 
-async function generateThumbnails(thumbnailsUrl) {
+async function generateThumbnails(thumbnailsUrl, screenshotFilename) {
   const response = await fetch(thumbnailsUrl)
   const thumbnails = await response.json()
 
@@ -32,7 +39,7 @@ async function generateThumbnails(thumbnailsUrl) {
         '..',
         'content',
         path.join(thumbnail.dir),
-        'thumbnail.png'
+        screenshotFilename
       )
     } else {
       // In development, save them all in the same folder so we can easily see

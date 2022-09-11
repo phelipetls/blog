@@ -34,30 +34,30 @@
 }
 
 body {
-  --primary: var(--blue);
-  --primary-fg: var(--beige-100);
-  --foreground: var(--black-200);
-  --background: var(--beige-400);
-  --surface: var(--beige-200);
-  --hover: var(--beige-100);
-  --divider: var(--beige-700);
-  --shadow: var(--beige-700);
-  --note: var(--blue);
-  --warn: var(--red);
-  color-scheme: light;
+  --primary: theme(colors.light.primary);
+  --primary-fg: theme(colors.light.primary-fg);
+  --foreground: theme(colors.light.foreground);
+  --background: theme(colors.light.background);
+  --surface: theme(colors.light.surface);
+  --hover: theme(colors.light.hover);
+  --divider: theme(colors.light.divider);
+  --shadow: theme(colors.light.shadow);
+  --note: theme(colors.light.note);
+  --warn: theme(colors.light.warn);
+  color-scheme: theme;
 }
 
 body.dark {
-  --primary: var(--orange);
-  --primary-fg: var(--black-600);
-  --foreground: var(--beige-300);
-  --background: var(--black-500);
-  --surface: var(--black-400);
-  --hover: var(--black-300);
-  --divider: var(--black-100);
-  --shadow: var(--black-600);
-  --note: var(--blue);
-  --warn: var(--red);
+  --primary: theme(colors.dark.primary);
+  --primary-fg: theme(colors.dark.primary-fg);
+  --foreground: theme(colors.dark.foreground);
+  --background: theme(colors.dark.background);
+  --surface: theme(colors.dark.surface);
+  --hover: theme(colors.dark.hover);
+  --divider: theme(colors.dark.divider);
+  --shadow: theme(colors.dark.shadow);
+  --note: theme(colors.dark.note);
+  --warn: theme(colors.dark.warn);
   color-scheme: dark;
 }
 

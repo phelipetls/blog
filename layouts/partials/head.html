@@ -27,6 +27,12 @@
   {{ partial "math.html" . }}
 {{ end }}
 
+{{ with .Resources.GetMatch .Site.Params.postImagePath }}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ .Permalink }}" />
+  <meta property="og:image" content="{{ .Permalink }}" />
+{{ end }}
+
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
 

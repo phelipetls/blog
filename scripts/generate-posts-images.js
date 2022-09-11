@@ -5,26 +5,27 @@ const fetch = require('node-fetch')
 const puppeteer = require('puppeteer')
 const hugoConfig = require('../config.json')
 
-generateThumbnails(
-  'http://localhost:1313/posts/thumbnails.json',
-  hugoConfig.languages.en.images[0]
-)
-generateThumbnails(
-  'http://localhost:1313/pt/posts/thumbnails.json',
-  hugoConfig.languages.pt.images[0]
-)
+generatePostsImages({
+  postsImagesUrl: 'http://localhost:1313/posts/images.json',
+  screenshotFilename: hugoConfig.languages.en.params.postImagePath,
+})
 
-async function generateThumbnails(thumbnailsUrl, screenshotFilename) {
-  const response = await fetch(thumbnailsUrl)
-  const thumbnails = await response.json()
+generatePostsImages({
+  postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
+  screenshotFilename: hugoConfig.languages.pt.params.postImagePath,
+})
+
+async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
+  const response = await fetch(postsImagesUrl)
+  const postsImages = await response.json()
 
   const browser = await puppeteer.launch({
     headless: true,
   })
   const page = await browser.newPage()
 
-  for (const thumbnail of thumbnails) {
-    await page.goto(thumbnail.url, {
+  for (const postImage of postsImages) {
+    await page.goto(postImage.url, {
       waitUntil: 'networkidle2',
     })
 
@@ -38,13 +39,13 @@ async function generateThumbnails(thumbnailsUrl, screenshotFilename) {
         __dirname,
         '..',
         'content',
-        path.join(thumbnail.dir),
+        postImage.dir,
         screenshotFilename
       )
     } else {
       // In development, save them all in the same folder so we can easily see
       // how all of them look at once
-      const SCREENSHOTS_DIRECTORY_DEV = 'thumbnail-screenshots'
+      const SCREENSHOTS_DIRECTORY_DEV = 'post-images-screenshots'
 
       if (!fs.existsSync(SCREENSHOTS_DIRECTORY_DEV)) {
         fs.mkdirSync(SCREENSHOTS_DIRECTORY_DEV)
@@ -52,7 +53,7 @@ async function generateThumbnails(thumbnailsUrl, screenshotFilename) {
 
       screenshotPath = path.join(
         SCREENSHOTS_DIRECTORY_DEV,
-        `${path.basename(thumbnail.dir)}.png`
+        `${path.basename(postImage.dir)}.png`
       )
     }
 
@@ -68,7 +69,7 @@ async function generateThumbnails(thumbnailsUrl, screenshotFilename) {
 
     console.log(
       'Saved screenshot for %s in %s',
-      new URL(thumbnail.url).pathname,
+      new URL(postImage.url).pathname,
       screenshotPath.replace(path.join(__dirname, '..'), '')
     )
   }

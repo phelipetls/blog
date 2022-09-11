@@ -2,7 +2,7 @@
   {{- range $i, $page := .Pages -}}
     {{- if $i -}},{{- end -}}
     {
-      "url": "{{ ($page.OutputFormats.Get "thumbnail").Permalink | safeURL }}",
+      "url": "{{ ($page.OutputFormats.Get "image").Permalink | safeURL }}",
       "dir": "{{ .File.Dir }}"
     }
   {{- end -}}

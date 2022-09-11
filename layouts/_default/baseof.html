@@ -6,15 +6,9 @@
   <head>
     {{ partialCached "head-common.html" . }}
     {{ partial "head.html" . }}
-    {{ partial "tailwindcss.html" . }}
+    {{ partial "css-global.html" }}
 
     {{ block "head" . }}
-    {{ end }}
-
-    {{ block "css" . }}
-      {{ range (.Resources.Match "*.css") }}
-        <link href="{{ .RelPermalink }}" rel="stylesheet" />
-      {{ end }}
     {{ end }}
   </head>
 

@@ -51,6 +51,7 @@ async function generateThumbnails(thumbnailsUrl) {
 
     await page.screenshot({
       path: screenshotPath,
+      fullPage: true,
     })
 
     console.log(

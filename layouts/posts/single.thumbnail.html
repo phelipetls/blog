@@ -6,8 +6,10 @@
     {{ partial "css-global.html" . }}
   </head>
 
-  <body class="h-full bg-background px-4 py-16 font-sans text-foreground">
-    <div class="flex h-full flex-col">
+  <body class="h-full bg-background px-4 font-sans text-foreground">
+    <div class="flex h-full flex-col justify-center">
+      <div class="flex-1"></div>
+
       <div class="mx-auto mb-6">
         <h1 class="m-0 text-center text-4xl">
           {{ .Title }}
@@ -22,7 +24,7 @@
       <div class="flex-1"></div>
 
       <div class="flex flex-row items-center justify-center gap-6">
-        <div class="">
+        <div class="flex-shrink-0">
           <img
             class="rounded-full border-2 border-divider"
             src="{{ printf "https://www.gravatar.com/avatar/%v?s=%v" (md5 .Site.Params.email) 150 }}"
@@ -34,11 +36,13 @@
             {{ .Site.Params.author }}
           </h2>
 
-          <span>
+          <span class="max-w-sm">
             {{ .Site.Params.Description }}
           </span>
         </div>
       </div>
+
+      <div class="flex-1"></div>
     </div>
   </body>
 </html>

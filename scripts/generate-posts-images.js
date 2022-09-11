@@ -58,7 +58,7 @@ async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
     }
 
     if (fs.existsSync(screenshotPath)) {
-      console.log('Skipping overwriting thumbnail %s', screenshotPath)
+      console.log('Screenshot %s already exists. Skipping...', screenshotPath)
       continue
     }
 

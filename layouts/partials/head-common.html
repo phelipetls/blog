@@ -1,7 +1,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="deploy-date" content="{{ now.Format "2006-01-02" }}" />
-<meta name="author" content="{{ site.Author.name }}" />
+<meta name="author" content="{{ .Site.Params.author }}" />
 <meta name="color-scheme" content="dark light" />
 
 {{ partial "css-fonts.html" }}

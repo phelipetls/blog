@@ -60,9 +60,9 @@ async function generateThumbnails(thumbnailsUrl) {
     })
 
     console.log(
-      'Saved screenshot for page %s in %s',
-      thumbnail.url,
-      screenshotPath
+      'Saved screenshot for %s in %s',
+      new URL(thumbnail.url).pathname,
+      screenshotPath.replace(path.join(__dirname, '..'), '')
     )
   }
 

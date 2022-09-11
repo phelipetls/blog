@@ -50,5 +50,28 @@
   },
   "taxonomies": {
     "tag": "tags"
-  }
+  },
+  "outputFormats": {
+    "thumbnail": {
+      "name": "thumbnail",
+      "basename": "thumbnail",
+      "mediaType": "text/html",
+      "isHTML": "true"
+    },
+    "thumbnails": {
+      "name": "thumbnails",
+      "basename": "thumbnails",
+      "mediaType": "application/json"
+    }
+  },
+  "outputs": {
+    "page": [
+      "html",
+      "thumbnail"
+    ],
+    "section": [
+      "html",
+      "thumbnails"
+    ]
+   }
 }

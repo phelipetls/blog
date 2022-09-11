@@ -6,3 +6,5 @@ tailwind.dev*.css
 .hugo_build.lock
 cypress/screenshots
 cypress/videos
+thumbnail-screenshots
+content/posts/**/thumbnail.png

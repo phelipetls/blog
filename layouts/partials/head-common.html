@@ -4,15 +4,9 @@
 <meta name="author" content="{{ site.Author.name }}" />
 <meta name="color-scheme" content="dark light" />
 
-{{ $fontsCss := resources.Get "css/fonts.css" }}
+{{ partial "css-fonts.html" }}
 
 {{ if hugo.IsProduction }}
-  {{ $fontsCss = $fontsCss | minify }}
-{{ end }}
-
-<style>
-  {{ $fontsCss.Content | safeCSS }}
-</style> {{ if hugo.IsProduction }}
   <script
     async
     defer

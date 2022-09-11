@@ -1,0 +1,9 @@
+{{ $fontsCss := resources.Get "css/fonts.css" }}
+
+{{ if hugo.IsProduction }}
+  {{ $fontsCss = $fontsCss | minify }}
+{{ end }}
+
+<style>
+  {{ $fontsCss.Content | safeCSS }}
+</style>

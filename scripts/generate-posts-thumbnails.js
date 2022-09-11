@@ -49,6 +49,11 @@ async function generateThumbnails(thumbnailsUrl) {
       )
     }
 
+    if (fs.existsSync(screenshotPath)) {
+      console.log('Skipping overwriting thumbnail %s', screenshotPath)
+      continue
+    }
+
     await page.screenshot({
       path: screenshotPath,
       fullPage: true,

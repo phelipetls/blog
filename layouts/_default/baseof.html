@@ -6,7 +6,7 @@
   <head>
     {{ partialCached "head-common.html" . }}
     {{ partial "head.html" . }}
-    {{ partial "css-global.html" }}
+    {{ partial "css-global.html" . }}
 
     {{ block "head" . }}
     {{ end }}

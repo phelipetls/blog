@@ -24,6 +24,11 @@ async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
   })
   const page = await browser.newPage()
 
+  page.setViewport({
+    width: 1200,
+    height: 630,
+  })
+
   for (const postImage of postsImages) {
     await page.goto(postImage.url, {
       waitUntil: 'networkidle2',

@@ -1,7 +1,5 @@
 {{ partial "tailwindcss.html" . }}
 
-{{ block "css" . }}
-  {{ range (.Resources.Match "*.css") }}
-    <link href="{{ .RelPermalink }}" rel="stylesheet" />
-  {{ end }}
+{{ range (.Resources.Match "*.css") }}
+  <link href="{{ .RelPermalink }}" rel="stylesheet" />
 {{ end }}

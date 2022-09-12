@@ -1,19 +1,30 @@
-import type { NewThemeEvent } from './theme'
+import type { NewThemeEvent, Theme } from './theme'
 
-document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
-  const iframe = document.querySelector<HTMLIFrameElement>('.utterances-frame')
+document
+  .querySelector('[data-utterances-client-script]')
+  ?.addEventListener('load', () => {
+    const iframe =
+      document.querySelector<HTMLIFrameElement>('.utterances-frame')
 
-  if (!iframe) {
-    return
-  }
+    function changeUtterancesTheme(theme: Theme) {
+      iframe?.contentWindow?.postMessage(
+        {
+          type: 'set-theme',
+          theme: theme === 'dark' ? 'github-dark' : 'github-light',
+        },
+        'https://utteranc.es'
+      )
+    }
 
-  iframe.contentWindow?.postMessage(
-    {
-      type: 'set-theme',
-      theme: e.detail.theme === 'dark' ? 'github-dark' : 'github-light',
-    },
-    'https://utteranc.es'
-  )
-} as EventListener)
+    iframe?.addEventListener('load', () => {
+      changeUtterancesTheme(
+        document.body.classList.contains('dark') ? 'dark' : 'light'
+      )
+
+      document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
+        changeUtterancesTheme(e.detail.theme)
+      } as EventListener)
+    })
+  })
 
 export {}

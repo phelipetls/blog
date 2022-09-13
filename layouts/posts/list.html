@@ -11,13 +11,15 @@
         {{ $year := $pagesByYear.Key }}
 
 
-        <div class="mt-16 mb-8 first:mt-0">
+        <div class="mx-auto mt-16 mb-8 w-full max-w-prose first:mt-0">
           <h2 class="mb-0 text-2xl">
             <time datetime="{{ $year }}-01-01">{{ $year }}</time>
           </h2>
         </div>
 
-        <ul class="m-0 grid list-none grid-cols-1 gap-4 sm:grid-cols-2">
+        <ul
+          class="m-0 mx-auto grid w-full max-w-2xl list-none grid-cols-1 gap-4"
+        >
           {{ range .Pages }}
             <li class="h-full">
               {{ partial "post-card.html" . }}

@@ -5,12 +5,14 @@
         {{ partial "gravatar.html" . }}
 
 
-        <article class="max-w-prose text-lg">
+        <article class="text-lg">
           <header>
             <h1 class="mb-4">{{ i18n "About" }}</h1>
           </header>
 
-          {{ .Content }}
+          <div class="max-w-md">
+            {{ .Content }}
+          </div>
         </article>
       </div>
     </div>

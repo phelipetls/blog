@@ -45,6 +45,7 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       primary: withOpacityValue('--primary'),
+      'primary-hover': withOpacityValue('--primary-hover'),
       'primary-fg': withOpacityValue('--primary-fg'),
       divider: withOpacityValue('--divider'),
       shadow: withOpacityValue('--shadow'),
@@ -75,6 +76,7 @@ module.exports = {
       },
       light: {
         primary: 'var(--blue)',
+        'primary-hover': 'var(--blue-accent)',
         'primary-fg': 'var(--beige-100)',
         foreground: 'var(--black-200)',
         background: 'var(--beige-400)',
@@ -87,6 +89,7 @@ module.exports = {
       },
       dark: {
         primary: 'var(--orange)',
+        'primary-hover': 'var(--orange-accent)',
         'primary-fg': 'var(--black-600)',
         foreground: 'var(--beige-300)',
         background: 'var(--black-500)',

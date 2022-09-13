@@ -22,9 +22,11 @@
   --black-600: hexToRgb(#1a1a1a);
   --black-700: hexToRgb(#151515);
 
-  --blue: hexToRgb(#6179c1);
+  --blue: hexToRgb(#5573cd);
+  --blue-accent: hexToRgb(#4169e1);
   --red: hexToRgb(#dd0022);
-  --orange: hexToRgb(#f7bd55);
+  --orange: hexToRgb(#eeba5e);
+  --orange-accent: hexToRgb(#f7bd55);
 
   --code-line-height: 1.5;
   --code-horizontal-padding: 2rem;
@@ -35,6 +37,7 @@
 
 body {
   --primary: theme(colors.light.primary);
+  --primary-hover: theme(colors.light.primary-hover);
   --primary-fg: theme(colors.light.primary-fg);
   --foreground: theme(colors.light.foreground);
   --background: theme(colors.light.background);
@@ -49,6 +52,7 @@ body {
 
 body.dark {
   --primary: theme(colors.dark.primary);
+  --primary-hover: theme(colors.dark.primary-hover);
   --primary-fg: theme(colors.dark.primary-fg);
   --foreground: theme(colors.dark.foreground);
   --background: theme(colors.dark.background);
@@ -286,16 +290,12 @@ body.dark {
 }
 
 @layer components {
-  .btn {
-    @apply rounded-md px-4 py-2;
-  }
-
   .btn-primary {
-    @apply bg-primary text-primary-fg;
+    @apply rounded-full bg-primary px-4 py-2 text-primary-fg transition-colors duration-500 hover:bg-primary-hover;
   }
 
   .btn-secondary {
-    @apply bg-surface text-primary;
+    @apply rounded-full bg-surface px-4 py-2 text-primary transition-colors duration-500 hover:bg-hover;
   }
 
   a.btn-primary {

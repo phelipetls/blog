@@ -11,7 +11,7 @@
   data-theme-listbox
   id="theme-listbox"
   class="card absolute top-0 left-0 z-50 m-0 flex list-none flex-col border border-divider text-lg"
-  style="visibility: hidden; opacity: 0; pointer-events: none; --icon-size: 24px"
+  style="visibility: hidden; opacity: 0; pointer-events: none;"
   role="listbox"
   aria-orientation="vertical"
   aria-activedescendant="theme-option-auto"
@@ -26,7 +26,10 @@
       role="option"
       tabindex="-1"
     >
-      {{ partial (printf "svgs/%s.svg" .IconName) }}
+      <span class="text-sm">
+        {{ partial (printf "svgs/%s.svg" .IconName) }}
+      </span>
+
       {{ .Name }}
     </li>
   {{ end }}

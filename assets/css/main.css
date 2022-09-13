@@ -31,9 +31,7 @@
   --code-highlight-width: 2px;
 
   color-scheme: light dark;
-}
 
-body {
   --primary: var(--blue);
   --primary-hover: var(--blue-accent);
   --primary-fg: var(--beige-100);
@@ -48,7 +46,7 @@ body {
   color-scheme: light;
 }
 
-body.dark {
+.dark {
   --primary: var(--orange);
   --primary-hover: var(--orange-accent);
   --primary-fg: var(--black-600);

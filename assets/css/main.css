@@ -4,8 +4,6 @@
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
-  --icon-size: 1.5rem;
-
   --beige-100: hexToRgb(#fffff5);
   --beige-200: hexToRgb(#f6f6e4);
   --beige-300: hexToRgb(#eeeed3);
@@ -353,7 +351,7 @@ body.dark {
 }
 
 svg.feather {
-  @apply h-[var(--icon-size)] w-[var(--icon-size)];
+  @apply h-[1.5em] w-[1.5em];
 }
 
 .utterances {

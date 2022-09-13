@@ -368,11 +368,6 @@ svg.feather {
   animation-duration: 1.5s;
 }
 
-details[data-toc-details-wrapper] summary::marker,
-details[data-toc-details-wrapper] summary::-webkit-details-marker {
-  display: none;
-}
-
 @keyframes tooltip-animation {
   0% {
     opacity: 0;

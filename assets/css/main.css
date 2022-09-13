@@ -136,6 +136,10 @@ body.dark {
     @apply overflow-visible border-0 text-center after:content-['⁂'];
   }
 
+  a[rel='external'] svg {
+    @apply ml-1 inline-block h-[1em] w-[1em] align-text-top;
+  }
+
   [data-blog-post] details {
     @apply mb-4;
   }

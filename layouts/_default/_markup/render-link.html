@@ -1,0 +1,12 @@
+{{ $external := not (hasPrefix (.Destination | safeURL) .Page.Site.BaseURL) }}
+
+
+<a
+  href="{{ .Destination | safeURL }}"
+  {{ if $external }}rel="external"{{ end }}
+>
+  {{- .Text | safeHTML -}}
+  {{- if $external -}}
+    {{ partial "svgs/external-link.svg" . }}
+  {{- end -}}
+</a>

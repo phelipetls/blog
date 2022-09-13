@@ -1,19 +1,19 @@
 <div
   data-nav-container
-  class="absolute top-0 z-0 h-nav-height w-full bg-background py-2"
+  class="absolute top-0 z-0 h-nav-height w-full bg-background"
 >
   <div
     class="mx-auto flex h-full max-w-content items-center justify-between pr-page-padding"
   >
     <nav
-      class="no-scrollbar flex h-full items-center overflow-x-scroll py-1 px-page-padding"
+      class="flex h-full items-center overflow-x-auto px-page-padding"
       aria-label="{{ i18n "MainNavigation" }}"
     >
       {{ $currentPage := . }}
 
 
       <ul
-        class="m-0 flex h-full list-none flex-row flex-nowrap items-center gap-2"
+        class="m-0 flex h-full list-none flex-row flex-nowrap items-center gap-2 py-3"
       >
         {{- range .Site.Menus.main -}}
           {{ $isActive := eq $currentPage.Section .Page.Section }}
@@ -52,7 +52,7 @@
       </ul>
     </nav>
 
-    <div class="h-full py-1">
+    <div class="h-full py-3">
       <div class="flex h-full items-center gap-2 px-2">
         {{ if .IsTranslated }}
           {{ partial "language-button.html" . }}

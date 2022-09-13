@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Olá 👋, sou um desenvolvedor front-end do Rio.
+Olá 👋, sou um desenvolvedor web front-end.
 
-Atualmente trabalho construíndo aplicações mobile e web com React, React Native
-e TypeScript.
+Eu gosto de escrever sobre desenvolvimento web, Linux, Neovim, terminals --
+programação em geral e as ferramentas que uso para ser melhor nisso.

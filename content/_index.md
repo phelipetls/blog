@@ -8,7 +8,7 @@ menu:
     weight: 1
 ---
 
-Hi 👋, I'm a front-end developer from Rio, Brazil.
+Hi 👋, I'm a front-end web developer.
 
-I currently work building web and mobile apps with React, React Native and
-TypeScript.
+I enjoy writing about web development, Linux, Neovim, terminals -- about
+programming in general and the tools I use to be better at it.

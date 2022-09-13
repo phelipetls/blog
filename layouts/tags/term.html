@@ -1,14 +1,18 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
     <div>
-      <div
-        class="mx-auto mb-4 flex w-full max-w-prose items-center justify-center gap-2"
-      >
-        <h1 class="m-0">
-          {{ .Name | title }}
-        </h1>
+      <div class="mx-auto mb-4 flex w-full max-w-prose justify-between">
+        <div class="flex flex-row-reverse items-center justify-center gap-2">
+          <h1 class="m-0">
+            {{ .Name | title }}
+          </h1>
 
-        {{ partial "svgs/tag.svg" }}
+          {{ partial "svgs/tag.svg" }}
+        </div>
+
+        <a class="btn-primary" href="{{ .Parent.Permalink }}">
+          {{ i18n "MoreTags" }}
+        </a>
       </div>
 
       <ul
@@ -20,12 +24,6 @@
           </li>
         {{ end }}
       </ul>
-
-      <div class="mt-8 flex justify-center">
-        <a class="btn btn-primary rounded-md" href="{{ .Parent.Permalink }}">
-          {{ i18n "MoreTags" }}
-        </a>
-      </div>
     </div>
   </main>
 {{ end }}

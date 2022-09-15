@@ -1,6 +1,5 @@
 :root {
   --page-padding: 1rem;
-  --gallery-gap: var(--page-padding);
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
@@ -325,23 +324,6 @@
   .grid-cols-layout > * {
     @apply col-content;
   }
-
-  .gallery-wrapper {
-    @apply col-full grid snap-x snap-proximity grid-cols-[inherit] overflow-x-scroll;
-  }
-
-  .gallery-wrapper .gallery {
-    @apply col-content flex gap-[var(--gallery-gap)];
-  }
-
-  .gallery-wrapper .gallery::after {
-    content: '';
-    align-self: stretch;
-    padding-inline-end: max(
-      var(--gallery-gap),
-      (100vw - var(--content-max-width)) / 2 - var(--gallery-gap)
-    );
-  }
 }
 
 [data-preload] {
@@ -371,15 +353,5 @@ svg.feather {
   100% {
     opacity: 0;
     transform: translateY(-100%);
-  }
-}
-
-@keyframes marquee-skill-icons {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(var(--marquee-reset, 0%));
   }
 }

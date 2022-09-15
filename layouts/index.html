@@ -1,124 +1,18 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="my-10">
-      <div class="flex flex-col items-center justify-center sm:flex-row">
-        {{ partial "gravatar.html" . }}
+    <div class="my-8 flex flex-col items-center justify-center sm:flex-row">
+      {{ partial "gravatar.html" . }}
 
 
-        <article class="text-lg">
-          <header>
-            <h1 class="mb-4">{{ i18n "About" }}</h1>
-          </header>
+      <article class="text-lg">
+        <header>
+          <h1 class="mb-4">{{ i18n "About" }}</h1>
+        </header>
 
-          <div class="max-w-prose">
-            {{ .Content }}
-          </div>
-        </article>
-      </div>
-    </div>
-
-    {{ $posts := .Site.GetPage "/posts" }}
-    {{ $allPosts := $posts.Pages }}
-    {{ $latestPosts := first 5 $allPosts }}
-
-
-    <div
-      class="my-12 flex flex-col gap-16 overflow-x-hidden lg:col-start-[content-start] lg:col-end-[full-end] lg:flex-row"
-    >
-      <div class="flex flex-col justify-around gap-8 py-4">
-        <div class="flex items-center justify-between">
-          <h2 class="m-0 text-2xl">
-            <a href="{{ $posts.Permalink }}">Blog</a>
-          </h2>
-
-          {{ partial "rss-button.html" . }}
+        <div class="max-w-prose">
+          {{ .Content }}
         </div>
-
-        <div class="flex flex-col justify-between gap-2">
-          <div class="flex items-center gap-2">
-            {{ partial "svgs/edit-2.svg" . }}
-
-
-            <div>{{ len $allPosts }} posts</div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            {{ partial "svgs/book-open.svg" . }}
-
-            {{ $averageReadingTime := partial "get-reading-time.html" . }}
-            <div>{{ $averageReadingTime }} min. avg.</div>
-          </div>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          {{ range first 10 (.Site.Taxonomies.tags.ByCount) }}
-            <a href="{{ .Page.RelPermalink }}" class="tag whitespace-nowrap">
-              {{- .Term -}}
-            </a>
-          {{ end }}
-
-          {{ partial "all-tags-button.html" . }}
-        </div>
-      </div>
-
-      <div class="gallery-wrapper hidden overflow-x-auto py-4 lg:block">
-        {{ partial "post-cards-gallery.html" $latestPosts }}
-      </div>
-    </div>
-
-    <div class="gallery-wrapper overflow-x-auto py-8 lg:hidden">
-      {{ partial "post-cards-gallery.html" $latestPosts }}
-    </div>
-
-    {{ $projects := (.Site.GetPage "/projects").Pages }}
-
-    {{ $scratch := newScratch }}
-    {{ range $projects }}
-      {{ $scratch.Add "projectIcons" .Params.icons }}
-    {{ end }}
-
-    {{ $uniqProjectIcons := uniq ($scratch.Get "projectIcons") }}
-    {{ $projectIconsUrl := printf "https://skillicons.dev/icons?i=%s&theme=light&perline=%d" (delimit $uniqProjectIcons ",") (len $uniqProjectIcons) }}
-    {{ $projectIconsAltText := printf "%s: %s" (i18n "Tech") (delimit $uniqProjectIcons ", " (printf " %s " (i18n "And"))) }}
-
-
-    <h2 class="mt-8 text-2xl sm:mt-16">
-      <a href="{{ (.Site.GetPage "projects").Permalink }}">
-        {{ i18n "Projects" }}
-      </a>
-    </h2>
-
-    <div class="col-full mt-8 h-12 w-full overflow-x-hidden">
-      <div data-skill-icons-marquee class="flex h-full justify-center">
-        <img
-          data-skill-icons
-          class="min-h-full max-w-none flex-none object-cover object-left-top"
-          src="{{ $projectIconsUrl }}"
-          alt="{{ $projectIconsAltText }}"
-        />
-      </div>
-    </div>
-
-    <div class="gallery-wrapper mb-8 py-8 sm:mb-16">
-      <ul class="gallery m-0 list-none">
-        {{ range (where $projects "Params.unmaintained" "!=" "true") }}
-          <li class="max-w-fit flex-none snap-center">
-            {{ partial "project-card-simple" . }}
-          </li>
-        {{ end }}
-      </ul>
+      </article>
     </div>
   </main>
-{{ end }}
-
-{{ define "scripts" }}
-  {{ $marqueeSkillIcons := resources.Get "/js/marquee-skill-icons.ts" | js.Build }}
-
-  {{ if hugo.IsProduction }}
-    {{ $marqueeSkillIcons = $marqueeSkillIcons | minify }}
-  {{ end }}
-
-  <script>
-    {{ $marqueeSkillIcons.Content | safeJS }}
-  </script>
 {{ end }}

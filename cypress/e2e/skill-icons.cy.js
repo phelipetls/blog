@@ -1,5 +1,5 @@
 describe('Skill icons', () => {
-  ;['/', '/projects'].forEach((pageUrl) => {
+  ;['/projects'].forEach((pageUrl) => {
     describe(`page: ${pageUrl}`, () => {
       it('should change skill icons URL when theme changes', () => {
         cy.visit(pageUrl, {

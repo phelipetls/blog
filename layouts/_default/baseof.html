@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-  class="h-full text-base sm:text-lg"
+  class="text-base sm:text-lg"
   lang="{{ .Site.Params.htmlLang | default .Lang }}"
 >
   <head>
@@ -14,7 +14,7 @@
 
   <body
     data-preload
-    class="h-full bg-background font-sans text-foreground transition-colors duration-500 ease-out"
+    class="bg-background font-sans text-foreground transition-colors duration-500 ease-out"
   >
     {{ block "script-elements" . }}
     {{ end }}

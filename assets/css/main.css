@@ -29,8 +29,6 @@
   --code-horizontal-padding: 2rem;
   --code-highlight-width: 2px;
 
-  color-scheme: light dark;
-
   --primary: var(--blue);
   --primary-hover: var(--blue-accent);
   --primary-fg: var(--beige-100);

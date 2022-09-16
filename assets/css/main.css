@@ -121,10 +121,6 @@
     @apply inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] font-bold leading-none text-foreground shadow-sm shadow-foreground;
   }
 
-  ::selection {
-    @apply bg-foreground text-background;
-  }
-
   hr {
     @apply border-t-2 border-divider;
   }

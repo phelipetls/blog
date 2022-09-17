@@ -3,58 +3,36 @@
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
-  --beige-100: hexToRgb(#fffff5);
-  --beige-200: hexToRgb(#f6f6e4);
-  --beige-300: hexToRgb(#eeeed3);
-  --beige-400: hexToRgb(#e5e5c2);
-  --beige-500: hexToRgb(#dddcb2);
-  --beige-600: hexToRgb(#d4d4a1);
-  --beige-700: hexToRgb(#cccb91);
-
-  --black-100: hexToRgb(#595959);
-  --black-200: hexToRgb(#4c4c4c);
-  --black-300: hexToRgb(#3e3e3e);
-  --black-400: hexToRgb(#323232);
-  --black-500: hexToRgb(#262626);
-  --black-600: hexToRgb(#1a1a1a);
-  --black-700: hexToRgb(#151515);
-
-  --blue: hexToRgb(#5573cd);
-  --blue-accent: hexToRgb(#4169e1);
-  --red: hexToRgb(#dd0022);
-  --orange: hexToRgb(#eeba5e);
-  --orange-accent: hexToRgb(#f7bd55);
-
   --code-line-height: 1.5;
   --code-horizontal-padding: 2rem;
   --code-highlight-width: 2px;
 
-  --primary: var(--blue);
-  --primary-hover: var(--blue-accent);
-  --primary-fg: var(--beige-100);
-  --foreground: var(--black-200);
-  --background: var(--beige-400);
-  --surface: var(--beige-200);
-  --hover: var(--beige-100);
-  --divider: var(--beige-700);
-  --shadow: var(--beige-700);
-  --note: var(--blue);
-  --warn: var(--red);
+  --primary: hexToRgb(theme(colors.blue.DEFAULT));
+  --primary-hover: hexToRgb(theme(colors.blue.accent));
+  --primary-fg: hexToRgb(theme(colors.beige.100));
+  --foreground: hexToRgb(theme(colors.black.200));
+  --background: hexToRgb(theme(colors.beige.400));
+  --surface: hexToRgb(theme(colors.beige.200));
+  --hover: hexToRgb(theme(colors.beige.100));
+  --divider: hexToRgb(theme(colors.beige.700));
+  --shadow: hexToRgb(theme(colors.beige.700));
+  --note: hexToRgb(theme(colors.blue.DEFAULT));
+  --warn: hexToRgb(theme(colors.red));
   color-scheme: light;
 }
 
 .dark {
-  --primary: var(--orange);
-  --primary-hover: var(--orange-accent);
-  --primary-fg: var(--black-600);
-  --foreground: var(--beige-300);
-  --background: var(--black-500);
-  --surface: var(--black-400);
-  --hover: var(--black-300);
-  --divider: var(--black-100);
-  --shadow: var(--black-600);
-  --note: var(--blue);
-  --warn: var(--red);
+  --primary: hexToRgb(theme(colors.orange.DEFAULT));
+  --primary-hover: hexToRgb(theme(colors.orange.accent));
+  --primary-fg: hexToRgb(theme(colors.black.600));
+  --foreground: hexToRgb(theme(colors.beige.300));
+  --background: hexToRgb(theme(colors.black.500));
+  --surface: hexToRgb(theme(colors.black.400));
+  --hover: hexToRgb(theme(colors.black.300));
+  --divider: hexToRgb(theme(colors.black.100));
+  --shadow: hexToRgb(theme(colors.black.600));
+  --note: hexToRgb(theme(colors.blue.DEFAULT));
+  --warn: hexToRgb(theme(colors.red));
   color-scheme: dark;
 }
 

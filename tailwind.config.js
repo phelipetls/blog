@@ -1,10 +1,5 @@
 function withOpacityValue(variable) {
-  return ({ opacityValue }) => {
-    if (opacityValue === undefined) {
-      return `rgb(var(${variable}))`
-    }
-    return `rgb(var(${variable}), ${opacityValue})`
-  }
+  return `rgb(var(${variable}) / <alpha-value>)`
 }
 
 /** @type {import('tailwindcss').Config} */
@@ -44,9 +39,38 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: withOpacityValue('--primary'),
-      'primary-hover': withOpacityValue('--primary-hover'),
-      'primary-fg': withOpacityValue('--primary-fg'),
+      beige: {
+        [100]: '#fffff5',
+        [200]: '#f6f6e4',
+        [300]: '#eeeed3',
+        [400]: '#e5e5c2',
+        [500]: '#dddcb2',
+        [600]: '#d4d4a1',
+        [700]: '#cccb91',
+      },
+      black: {
+        [100]: '#595959',
+        [200]: '#4c4c4c',
+        [300]: '#3e3e3e',
+        [400]: '#323232',
+        [500]: '#262626',
+        [600]: '#1a1a1a',
+        [700]: '#151515',
+      },
+      red: '#dd0022',
+      blue: {
+        DEFAULT: '#5573cd',
+        accent: '#4169e1',
+      },
+      orange: {
+        DEFAULT: '#eeba5e',
+        accent: '#f7bd55',
+      },
+      primary: {
+        DEFAULT: withOpacityValue('--primary'),
+        hover: withOpacityValue('--primary-hover'),
+        fg: withOpacityValue('--primary-fg'),
+      },
       divider: withOpacityValue('--divider'),
       shadow: withOpacityValue('--shadow'),
       foreground: withOpacityValue('--foreground'),
@@ -55,24 +79,6 @@ module.exports = {
       hover: withOpacityValue('--hover'),
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),
-      black: {
-        [100]: withOpacityValue('--black-100'),
-        [200]: withOpacityValue('--black-200'),
-        [300]: withOpacityValue('--black-300'),
-        [400]: withOpacityValue('--black-400'),
-        [500]: withOpacityValue('--black-500'),
-        [600]: withOpacityValue('--black-600'),
-        [700]: withOpacityValue('--black-700'),
-      },
-      beige: {
-        [100]: withOpacityValue('--beige-100'),
-        [200]: withOpacityValue('--beige-200'),
-        [300]: withOpacityValue('--beige-300'),
-        [400]: withOpacityValue('--beige-400'),
-        [500]: withOpacityValue('--beige-500'),
-        [600]: withOpacityValue('--beige-600'),
-        [700]: withOpacityValue('--beige-700'),
-      },
     },
   },
   plugins: [],

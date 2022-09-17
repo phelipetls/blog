@@ -1,20 +1,18 @@
-const toggleExpandedCodeBlockButtons = document.querySelectorAll<HTMLElement>(
-  '[data-html-preview-toggle-expanded-codeblock]'
+const expandCollapseButtons = document.querySelectorAll<HTMLElement>(
+  '[data-html-expand-collapse-button]'
 )
 
-for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
-  toggleExpandedCodeBlockButton?.addEventListener('click', () => {
+for (const expandCollapseButton of expandCollapseButtons) {
+  expandCollapseButton?.addEventListener('click', () => {
     const codeBlockContainer =
-      toggleExpandedCodeBlockButton.parentElement?.querySelector<HTMLElement>(
+      expandCollapseButton.parentElement?.querySelector<HTMLElement>(
         '[data-html-preview-codeblock-container]'
       )
-
     if (!codeBlockContainer) {
       return
     }
 
-    const chevronIcon = toggleExpandedCodeBlockButton.querySelector('svg')
-
+    const chevronIcon = expandCollapseButton.querySelector('svg')
     if (!chevronIcon) {
       return
     }
@@ -24,17 +22,13 @@ for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
       'duration-500',
       'ease-in-out'
     )
-    chevronIcon.style.transform = 'rotate(0deg)'
 
-    const expandedLabel =
-      toggleExpandedCodeBlockButton.dataset.expandedLabel || ''
+    const expandedLabel = expandCollapseButton.dataset.expandedLabel || ''
 
-    const collapsedLabel =
-      toggleExpandedCodeBlockButton.dataset.collapsedLabel || ''
+    const collapsedLabel = expandCollapseButton.dataset.collapsedLabel || ''
 
     const changeButtonText = (text: string) => {
-      const textContainer =
-        toggleExpandedCodeBlockButton.querySelector('[data-text]')
+      const textContainer = expandCollapseButton.querySelector('[data-text]')
 
       if (textContainer) {
         textContainer.textContent = text
@@ -43,13 +37,13 @@ for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
 
     const expandCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'true')
-      chevronIcon.style.transform = 'rotate(180deg)'
+      chevronIcon.classList.add('rotate-180')
       changeButtonText(collapsedLabel)
     }
 
     const collapseCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'false')
-      chevronIcon.style.transform = 'rotate(0deg)'
+      chevronIcon.classList.remove('rotate-180')
       changeButtonText(expandedLabel)
     }
 

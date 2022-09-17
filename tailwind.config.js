@@ -77,6 +77,10 @@ module.exports = {
       background: withOpacityValue('--background'),
       surface: withOpacityValue('--surface'),
       hover: withOpacityValue('--hover'),
+      disabled: {
+        DEFAULT: withOpacityValue('--disabled'),
+        fg: withOpacityValue('--disabled-fg'),
+      },
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),
     },

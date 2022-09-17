@@ -15,6 +15,8 @@
   --background: hexToRgb(theme(colors.beige.400));
   --surface: hexToRgb(theme(colors.beige.200));
   --hover: hexToRgb(theme(colors.beige.100));
+  --disabled: hexToRgb(theme(colors.beige.500));
+  --disabled-fg: hexToRgb(theme(colors.black.400));
   --divider: hexToRgb(theme(colors.beige.700));
   --shadow: hexToRgb(theme(colors.beige.700));
   --note: hexToRgb(theme(colors.blue.DEFAULT));
@@ -30,6 +32,8 @@
   --background: hexToRgb(theme(colors.black.500));
   --surface: hexToRgb(theme(colors.black.400));
   --hover: hexToRgb(theme(colors.black.300));
+  --disabled: hexToRgb(theme(colors.black.100));
+  --disabled-fg: hexToRgb(theme(colors.beige.200));
   --divider: hexToRgb(theme(colors.black.100));
   --shadow: hexToRgb(theme(colors.black.600));
   --note: hexToRgb(theme(colors.blue.DEFAULT));
@@ -262,6 +266,10 @@
 }
 
 @layer components {
+  .btn {
+    @apply disabled:bg-disabled disabled:text-disabled-fg disabled:hover:cursor-not-allowed disabled:hover:bg-disabled;
+  }
+
   .btn-primary {
     @apply rounded-full bg-primary px-4 py-2 text-primary-fg transition-colors duration-500 hover:bg-primary-hover;
   }

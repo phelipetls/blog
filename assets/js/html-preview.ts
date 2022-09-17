@@ -1,3 +1,6 @@
+// @ts-expect-error don't know how to declare types for this module
+import * as params from '@params'
+
 const expandCollapseButtons = document.querySelectorAll<HTMLElement>(
   '[data-html-expand-collapse-button]'
 )
@@ -23,10 +26,6 @@ for (const expandCollapseButton of expandCollapseButtons) {
       'ease-in-out'
     )
 
-    const expandedLabel = expandCollapseButton.dataset.expandedLabel || ''
-
-    const collapsedLabel = expandCollapseButton.dataset.collapsedLabel || ''
-
     const changeButtonText = (text: string) => {
       const textContainer = expandCollapseButton.querySelector('[data-text]')
 
@@ -38,13 +37,13 @@ for (const expandCollapseButton of expandCollapseButtons) {
     const expandCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'true')
       chevronIcon.classList.add('rotate-180')
-      changeButtonText(collapsedLabel)
+      changeButtonText(params.showLess)
     }
 
     const collapseCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'false')
       chevronIcon.classList.remove('rotate-180')
-      changeButtonText(expandedLabel)
+      changeButtonText(params.showMore)
     }
 
     if (codeBlockContainer.getAttribute('data-is-expanded') === 'true') {

@@ -13,8 +13,11 @@ for (const htmlPreviewIframe of htmlPreviewIframeContainers) {
     const iframe = htmlPreviewIframe.querySelector('iframe')
     iframe?.contentWindow?.location.reload()
 
+    refreshButton?.setAttribute('disabled', '')
     refreshIcon?.classList.add('animate-spin')
+
     iframe?.addEventListener('load', () => {
+      refreshButton?.removeAttribute('disabled')
       refreshIcon?.classList.remove('animate-spin')
     })
   })

@@ -19,8 +19,6 @@ for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
       toggleExpandedCodeBlockButton.dataset.collapsedLabel || ''
 
     const expandCodeBlock = () => {
-      codeBlockContainer.style.height = 'auto'
-      codeBlockContainer.style.maxHeight = 'none'
       codeBlockContainer.setAttribute('data-is-expanded', 'true')
 
       toggleExpandedCodeBlockButton
@@ -34,8 +32,6 @@ for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
     }
 
     const collapseCodeBlock = () => {
-      codeBlockContainer.style.height = ''
-      codeBlockContainer.style.maxHeight = ''
       codeBlockContainer.setAttribute('data-is-expanded', 'false')
 
       toggleExpandedCodeBlockButton

@@ -13,35 +13,44 @@ for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
       return
     }
 
+    const chevronIcon = toggleExpandedCodeBlockButton.querySelector('svg')
+
+    if (!chevronIcon) {
+      return
+    }
+
+    chevronIcon.classList.add(
+      'transition-transform',
+      'duration-500',
+      'ease-in-out'
+    )
+    chevronIcon.style.transform = 'rotate(0deg)'
+
     const expandedLabel =
       toggleExpandedCodeBlockButton.dataset.expandedLabel || ''
+
     const collapsedLabel =
       toggleExpandedCodeBlockButton.dataset.collapsedLabel || ''
 
+    const changeButtonText = (text: string) => {
+      const textContainer =
+        toggleExpandedCodeBlockButton.querySelector('[data-text]')
+
+      if (textContainer) {
+        textContainer.textContent = text
+      }
+    }
+
     const expandCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'true')
-
-      toggleExpandedCodeBlockButton
-        .querySelector('svg')
-        ?.classList.add('rotate-180')
-      toggleExpandedCodeBlockButton.innerHTML =
-        toggleExpandedCodeBlockButton.innerHTML?.replace(
-          expandedLabel,
-          collapsedLabel
-        ) || ''
+      chevronIcon.style.transform = 'rotate(180deg)'
+      changeButtonText(collapsedLabel)
     }
 
     const collapseCodeBlock = () => {
       codeBlockContainer.setAttribute('data-is-expanded', 'false')
-
-      toggleExpandedCodeBlockButton
-        .querySelector('svg')
-        ?.classList.remove('rotate-180')
-      toggleExpandedCodeBlockButton.innerHTML =
-        toggleExpandedCodeBlockButton.innerHTML?.replace(
-          collapsedLabel,
-          expandedLabel
-        ) || ''
+      chevronIcon.style.transform = 'rotate(0deg)'
+      changeButtonText(expandedLabel)
     }
 
     if (codeBlockContainer.getAttribute('data-is-expanded') === 'true') {

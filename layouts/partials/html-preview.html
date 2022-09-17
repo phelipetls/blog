@@ -22,7 +22,10 @@
       data-collapsed-label="{{ i18n "ShowLess" }}"
       class="btn-secondary flex w-full items-center justify-center rounded-none py-1"
     >
-      {{ i18n "ShowMore" }}
+      <span data-text>
+        {{ i18n "ShowMore" }}
+      </span>
+
       {{ partial "svgs/chevron-down.svg" }}
     </button>
   {{ end }}

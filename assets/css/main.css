@@ -5,6 +5,7 @@
 
   --code-line-height: 1.5;
   --code-horizontal-padding: 2rem;
+  --code-vertical-padding: var(--page-padding);
   --code-highlight-width: 2px;
 
   --primary: hexToRgb(theme(colors.blue.DEFAULT));
@@ -140,7 +141,7 @@
   }
 
   pre {
-    @apply overflow-auto rounded-none bg-surface py-page-padding px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
+    @apply overflow-auto rounded-none bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
   }
 
   .highlight pre {
@@ -159,7 +160,11 @@
   }
 
   [data-html-preview-codeblock-container][data-is-expanded='false'] pre {
-    @apply max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_-_var(--page-padding)_*_2)];
+    @apply max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding))];
+  }
+
+  [data-html-preview-codeblock-container][data-is-expanded='true'] pre {
+    @apply max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding)_*_2)];
   }
 
   :is(.card, [role='tabpanel']) pre {

@@ -1,11 +1,11 @@
-const expandCodeBlockButtons = document.querySelectorAll<HTMLElement>(
-  '[data-html-preview-expand-codeblock]'
+const toggleExpandedCodeBlockButtons = document.querySelectorAll<HTMLElement>(
+  '[data-html-preview-toggle-expanded-codeblock]'
 )
 
-for (const expandCodeBlockButton of expandCodeBlockButtons) {
-  expandCodeBlockButton?.addEventListener('click', () => {
+for (const toggleExpandedCodeBlockButton of toggleExpandedCodeBlockButtons) {
+  toggleExpandedCodeBlockButton?.addEventListener('click', () => {
     const codeBlockContainer =
-      expandCodeBlockButton.parentElement?.querySelector<HTMLElement>(
+      toggleExpandedCodeBlockButton.parentElement?.querySelector<HTMLElement>(
         '[data-html-preview-codeblock-container]'
       )
 
@@ -13,17 +13,21 @@ for (const expandCodeBlockButton of expandCodeBlockButtons) {
       return
     }
 
-    const expandedLabel = expandCodeBlockButton.dataset.expandedLabel || ''
-    const collapsedLabel = expandCodeBlockButton.dataset.collapsedLabel || ''
+    const expandedLabel =
+      toggleExpandedCodeBlockButton.dataset.expandedLabel || ''
+    const collapsedLabel =
+      toggleExpandedCodeBlockButton.dataset.collapsedLabel || ''
 
     const expandCodeBlock = () => {
       codeBlockContainer.style.height = 'auto'
       codeBlockContainer.style.maxHeight = 'none'
       codeBlockContainer.setAttribute('data-is-expanded', 'true')
 
-      expandCodeBlockButton.querySelector('svg')?.classList.add('rotate-180')
-      expandCodeBlockButton.innerHTML =
-        expandCodeBlockButton.innerHTML?.replace(
+      toggleExpandedCodeBlockButton
+        .querySelector('svg')
+        ?.classList.add('rotate-180')
+      toggleExpandedCodeBlockButton.innerHTML =
+        toggleExpandedCodeBlockButton.innerHTML?.replace(
           expandedLabel,
           collapsedLabel
         ) || ''
@@ -34,9 +38,11 @@ for (const expandCodeBlockButton of expandCodeBlockButtons) {
       codeBlockContainer.style.maxHeight = ''
       codeBlockContainer.setAttribute('data-is-expanded', 'false')
 
-      expandCodeBlockButton.querySelector('svg')?.classList.remove('rotate-180')
-      expandCodeBlockButton.innerHTML =
-        expandCodeBlockButton.innerHTML?.replace(
+      toggleExpandedCodeBlockButton
+        .querySelector('svg')
+        ?.classList.remove('rotate-180')
+      toggleExpandedCodeBlockButton.innerHTML =
+        toggleExpandedCodeBlockButton.innerHTML?.replace(
           collapsedLabel,
           expandedLabel
         ) || ''

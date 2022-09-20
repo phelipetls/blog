@@ -25,6 +25,7 @@
   "dependencies": {
     "@floating-ui/dom": "^0.2.0",
     "@testing-library/cypress": "^8.0.3",
+    "@types/pdfobject": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "autoprefixer": "^10.4.8",

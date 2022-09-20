@@ -50,12 +50,12 @@
     {{ $pdfjsWorker = $pdfjsWorker | minify }}
   {{ end }}
 
-  {{ $pdfjs := resources.Get "js/resume-pdfjs.js" | js.Build (dict "params" (dict "pdfjsWorkerUrl" $pdfjsWorker.Permalink "minify" true)) }}
+  {{ $pdfjs := resources.Get "js/resume-pdfjs.ts" | js.Build (dict "params" (dict "pdfjsWorkerUrl" $pdfjsWorker.Permalink "minify" true)) }}
   {{ if hugo.IsProduction }}
     {{ $pdfjs = $pdfjs | minify }}
   {{ end }}
 
-  {{ $resumeScript := resources.Get "js/resume.js" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink "pdfjsWorkerUrl" $pdfjsWorker.Permalink)) }}
+  {{ $resumeScript := resources.Get "js/resume.ts" | js.Build (dict "params" (dict "resumePdfjsUrl" $pdfjs.Permalink "pdfjsWorkerUrl" $pdfjsWorker.Permalink)) }}
   {{ if hugo.IsProduction }}
     {{ $resumeScript = $resumeScript | minify }}
   {{ end }}

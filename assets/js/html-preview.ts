@@ -1,5 +1,9 @@
-// @ts-expect-error don't know how to declare types for this module
 import * as params from '@params'
+
+declare module '@params' {
+  export const showLess: string
+  export const showMore: string
+}
 
 const expandCollapseButtons = document.querySelectorAll<HTMLElement>(
   '[data-html-expand-collapse-button]'

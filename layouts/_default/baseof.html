@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-  class="text-base selection:bg-foreground selection:text-background sm:text-lg"
+  class="h-full text-base selection:bg-foreground selection:text-background sm:text-lg"
   lang="{{ .Site.Params.htmlLang | default .Lang }}"
 >
   <head>
@@ -14,7 +14,7 @@
 
   <body
     data-preload
-    class="bg-background font-sans text-foreground transition-colors duration-500 ease-out"
+    class="h-full bg-background font-sans text-foreground transition-colors duration-500 ease-out"
   >
     {{ block "script-elements" . }}
     {{ end }}
@@ -27,11 +27,11 @@
 
     <script>{{ $themeScript.Content | safeJS }}</script>
 
-    <div>
+    <div class="flex h-full flex-col">
       {{ partial "nav.html" . }}
 
       {{ block "main" . }}
-        <main class="grid grid-cols-layout">
+        <main class="grid flex-1 grid-cols-layout">
           {{ .Content }}
         </main>
       {{ end }}

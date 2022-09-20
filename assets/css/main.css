@@ -192,14 +192,6 @@
     @apply border-t-2 border-primary bg-surface;
   }
 
-  main + footer {
-    @apply mt-8;
-  }
-
-  [data-nav-container] + main {
-    @apply mt-24;
-  }
-
   [data-nav-container] [role='listbox'] [role='option'] {
     @apply hover:bg-hover;
   }

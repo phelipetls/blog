@@ -46,8 +46,6 @@
     "prettier": "^2.7.1",
     "prettier-plugin-go-template": "0.0.13",
     "puppeteer": "^17.1.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-hook-form": "^7.34.2",
     "simple-git-hooks": "^2.8.0",
     "start-server-and-test": "^1.14.0",

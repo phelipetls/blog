@@ -45,7 +45,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $pdfjsWorker := resources.Get "js/pdf.worker.js" | js.Build (dict "minify" true) }}
+  {{ $pdfjsWorker := resources.Get "js/vendor/pdf.worker.js" | js.Build (dict "minify" true) }}
   {{ if hugo.IsProduction }}
     {{ $pdfjsWorker = $pdfjsWorker | minify }}
   {{ end }}

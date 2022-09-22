@@ -89,7 +89,7 @@
   </style>
 
   {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
-  {{ $liteYoutubeEmbedCss := resources.Get "css/lite-yt-embed.css" | postCSS }}
+  {{ $liteYoutubeEmbedCss := resources.Get "css/vendor/lite-yt-embed.css" | postCSS }}
 
   {{ if hugo.IsProduction }}
     {{ $darkSyntaxHighlight = $darkSyntaxHighlight | minify }}
@@ -102,7 +102,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
+  {{ $liteYoutubeEmbedJs := resources.Get "/js/vendor/lite-yt-embed.js" | js.Build }}
   {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.ts" | js.Build }}
   {{ $tabsJs := resources.Get "/js/tabs.js" }}
   {{ $tocJs := resources.Get "/js/toc.ts" | js.Build }}

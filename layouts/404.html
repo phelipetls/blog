@@ -7,7 +7,7 @@
 {{ end }}
 
 {{ define "head" }}
-  {{ $liteYoutubeEmbedCss := resources.Get "/css/lite-yt-embed.css" | postCSS }}
+  {{ $liteYoutubeEmbedCss := resources.Get "/css/vendor/lite-yt-embed.css" | postCSS }}
 
   {{ if hugo.IsProduction }}
     {{ $liteYoutubeEmbedCss = $liteYoutubeEmbedCss | minify }}
@@ -18,7 +18,7 @@
 {{ end }}
 
 {{ define "scripts" }}
-  {{ $liteYoutubeEmbedJs := resources.Get "/js/lite-yt-embed.js" | js.Build }}
+  {{ $liteYoutubeEmbedJs := resources.Get "/js/vendor/lite-yt-embed.js" | js.Build }}
 
   {{ if hugo.IsProduction }}
     {{ $liteYoutubeEmbedJs = $liteYoutubeEmbedJs | minify }}

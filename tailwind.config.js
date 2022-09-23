@@ -68,8 +68,8 @@ module.exports = {
       primary: {
         DEFAULT: withOpacityValue('--primary'),
         hover: withOpacityValue('--primary-hover'),
-        fg: withOpacityValue('--primary-fg'),
       },
+      'on-primary': withOpacityValue('--on-primary'),
       divider: withOpacityValue('--divider'),
       shadow: withOpacityValue('--shadow'),
       foreground: withOpacityValue('--foreground'),
@@ -78,8 +78,8 @@ module.exports = {
       hover: withOpacityValue('--hover'),
       disabled: {
         DEFAULT: withOpacityValue('--disabled'),
-        fg: withOpacityValue('--disabled-fg'),
       },
+      'on-disabled': withOpacityValue('--on-disabled'),
       note: withOpacityValue('--note'),
       warn: withOpacityValue('--warn'),
     },

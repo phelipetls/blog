@@ -9,6 +9,8 @@ gf`](http://vimdoc.sourceforge.net/htmldoc/editing.html#gf). [This article
 explains well how this
 works](https://vim.fandom.com/wiki/Open_file_under_cursor).
 
+<!--more-->
+
 Things work out of the box with full paths with no special characters, like
 `/home/phelipe/script.js`, but it also expands `~` and environment variables,
 like `$HOME/script.js` or `~/script.js`.

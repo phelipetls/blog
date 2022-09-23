@@ -12,6 +12,8 @@ right. Until then, I'm sure it will frustrate me more than once. It's very
 awkward to write one if the program's output you're trying to capture is not
 trivial (e.g., `LaTeX`).
 
+<!--more-->
+
 Recently, I committed to get it right for `pytest`. The cli allows customizing
 how tracebacks are shown with the `--tb` option, e.g., `pytest --tb=short`, and
 to control verbosity level with `-v`, `-vv` and `-q`. I went with

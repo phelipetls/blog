@@ -49,7 +49,7 @@ module.exports = {
         'on-primary': withOpacityValue('--on-primary'),
         divider: withOpacityValue('--divider'),
         shadow: withOpacityValue('--shadow'),
-        foreground: withOpacityValue('--foreground'),
+        'on-background': withOpacityValue('--on-background'),
         background: withOpacityValue('--background'),
         surface: withOpacityValue('--surface'),
         hover: withOpacityValue('--hover'),

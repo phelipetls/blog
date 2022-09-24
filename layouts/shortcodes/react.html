@@ -6,4 +6,4 @@
 {{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}
 {{ $reactAppHtml := resources.Get "html/templates/react-app.html" | resources.ExecuteAsTemplate $reactAppPath $reactAppContext }}
 
-{{ partial "html-preview" (dict "SourceCode" $sourceCode "Language" "jsx" "HighlightOptions" (.Get "hl_options") "IframeResource" $reactAppHtml ) }}
+{{ partial "html-preview" (dict "SourceCode" $sourceCode "Language" "jsx" "HighlightOptions" (.Get "hl_options") "IframeResource" $reactAppHtml "Title" (.Get "title")) }}

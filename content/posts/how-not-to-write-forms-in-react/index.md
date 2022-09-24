@@ -29,7 +29,7 @@ part of the web since its inception and users are used to its functionality.
 
 For example, here's a "form" that don't use any semantic elements:
 
-{{< react path="bad-form.jsx" >}}
+{{< react path="bad-form.jsx" title="Example of a bad, inaccessible, form" >}}
 
 This is only a "form" in the sense that it'll send a network request when you
 click the submit button.
@@ -44,7 +44,7 @@ web behave.
 
 Let's fix it by using proper HTML elements:
 
-{{< react path="good-form.jsx" hl_options=`hl_Lines=3-5 9-16` >}}
+{{< react path="good-form.jsx" hl_options=`hl_Lines=3-5 9-16` title="Example of a good, accessible, form" >}}
 
 Now we can submit the form by pressing <kbd>Enter</kbd> and the inputs are more
 accessible.
@@ -75,12 +75,12 @@ DOM API necessary to do it.
 For example, react-hook-form will give you an object that maps input names to
 their values as an argument to the onSubmit handler:
 
-{{< react path="react-hook-form.jsx" hl_options=`hl_Lines=4-7 11 14 23-25` >}}
+{{< react path="react-hook-form.jsx" hl_options=`hl_Lines=4-7 11 14 23-25` title="Example of a form using react-hook-form" >}}
 
 Here's the equivalent JavaScript code we'd need if we chose not to use
 react-hook-form:
 
-{{< react path="form-without-lib.jsx" hl_options=`hl_Lines=2-14` >}}
+{{< react path="form-without-lib.jsx" hl_options=`hl_Lines=2-14` title="Example of a form without using any dependencies" >}}
 
 Apart from that, it'll help you validate a form, if an input is dirty
 (different than default value) or touched (focused and then blurred) -- which
@@ -143,7 +143,7 @@ Here's an example in which the user must choose a username. The username may
 only have alphanumeric characters and we also give it a short description
 below.
 
-{{< react path="form-with-bad-error-and-helper-text.jsx" hl_options=`hl_Lines=29-46` >}}
+{{< react path="form-with-bad-error-and-helper-text.jsx" hl_options=`hl_Lines=29-46` title="Example of a form with inaccessible error messages and helper texts" >}}
 
 You'll notice we simply show the error message and helper text in a styled
 `div`, which is not good because a `div` has no meaning -- a screen reader will
@@ -153,4 +153,4 @@ or an error message. To fix this, we can use the ARIA attributes
 and
 [`aria-describedby`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby):
 
-{{< react path="form-with-good-error-and-helper-text.jsx" hl_options=`hl_Lines=26-28 34 44` >}}
+{{< react path="form-with-good-error-and-helper-text.jsx" hl_options=`hl_Lines=26-28 34 44` title="Example of a form with accessible error messages and helper texts"  >}}

@@ -10,5 +10,10 @@
     {{ partial "svgs/refresh-cw.svg" . }}
   </button>
 
-  <iframe class="max-w-full" src="{{ .Resource.Permalink }}"> </iframe>
+  <iframe
+    class="max-w-full"
+    src="{{ .Resource.Permalink }}"
+    title="{{ .Title }}"
+  >
+  </iframe>
 </div>

@@ -13,7 +13,7 @@ state.
 
 Let's begin by understand the "bug" itself. Here it is:
 
-{{< react path="details-summary-react-bug.js" version="18.2.0" >}}
+{{< react path="details-summary-react-bug.js" version="18.2.0" title="Bug when using details element with React" >}}
 
 Here's a video showing it next to an HTML inspector:
 
@@ -65,7 +65,7 @@ Everything is broken.
 The fix is to call `preventDefault` on the `onClick` event handler of the
 `summary` element:
 
-{{< react path="details-summary-react-prevent-default.js" hl_options=`hl_Lines=13` version="18.2.0" >}}
+{{< react path="details-summary-react-prevent-default.js" hl_options=`hl_Lines=13` version="18.2.0" title="Fixed bug when using details element with React, using preventDefault" >}}
 
 This fixes it because now only React controls the `open` attribute.
 
@@ -74,13 +74,13 @@ This fixes it because now only React controls the `open` attribute.
 Another way is to listen to the `toggle` event handler, which I learned about
 thanks to this bug:
 
-{{< react path="details-summary-react-toggle.js" hl_options=`hl_Lines=10-15` version="18.2.0" >}}
+{{< react path="details-summary-react-toggle.js" hl_options=`hl_Lines=10-15` version="18.2.0" title="Fixed bug when using details element with React, using toggle event" >}}
 
 But unfortunately, this may still cause trouble. For instance, a button that
 toggles `isOpen` on click, like the "Toggle details" button below, will cause
 an infinite loop:
 
-{{< react path="details-summary-react-toggle-infinite-loop.js" hl_options=`hl_Lines=20` version="18.2.0" >}}
+{{< react path="details-summary-react-toggle-infinite-loop.js" hl_options=`hl_Lines=20` version="18.2.0" title="Infinite loop when using details toggle event" >}}
 
 Here's how this happens:
 
@@ -116,7 +116,7 @@ which is asking for trouble.
 In fact, all of this suggested to me that it would still happen in vanilla
 JavaScript. And indeed it does:
 
-{{< html path="details-summary-vanilla-javascript.html" hl_options=`hl_lines=11-30` >}}
+{{< html path="details-summary-vanilla-javascript.html" hl_options=`hl_lines=11-30` title="The same bug observed when using details element can be reproduced with vanilla JavaScript" >}}
 
 # Closing thoughts
 

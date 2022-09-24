@@ -1,10 +1,9 @@
-<nav
-  class="grid grid-cols-1 gap-2 sm:grid-cols-2"
-  aria-label="{{ i18n "PostsNavigation" }}"
->
+<hr />
+
+<nav class="flex items-stretch" aria-label="{{ i18n "PostsNavigation" }}">
   {{ with .PrevInSection }}
     <a
-      class="flex h-full items-center gap-2 rounded-md border-0 p-2 transition-colors duration-500 hover:bg-hover"
+      class="flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-page-padding transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -14,14 +13,15 @@
       {{ .Title }}
     </a>
   {{ else }}
-    <!-- spacer element to keep next link to the right, when there is no
-      previous post -->
-    <div></div>
+    <div class="flex-grow"></div>
   {{ end }}
+
+
+  <div class="border-l-2 border-divider"></div>
 
   {{ with .NextInSection }}
     <a
-      class="flex h-full items-center justify-end gap-2 self-end rounded-md border-0 p-2 text-right transition-colors duration-500 hover:bg-hover"
+      class="flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-page-padding text-right transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}
@@ -31,7 +31,7 @@
         {{ partial "svgs/arrow-right.svg" }}
       </span>
     </a>
-  {{ else }}
-    <div></div>
   {{ end }}
 </nav>
+
+<hr />

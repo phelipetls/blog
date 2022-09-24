@@ -2,7 +2,7 @@
 
 {{ $appRootId := md5 (printf "%s-%s" $sourceCode (.Get "version")) }}
 
-{{ $reactAppPath := (printf "%s/react-app-%s.html" .Page.Permalink $appRootId) }}
+{{ $reactAppPath := (printf "%s/react-app-%s.html" .Page.RelPermalink $appRootId) }}
 {{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}
 {{ $reactAppHtml := resources.Get "html/templates/react-app.html" | resources.ExecuteAsTemplate $reactAppPath $reactAppContext }}
 

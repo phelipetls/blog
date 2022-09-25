@@ -11,6 +11,8 @@ was a React bug, but at the end of my investigation while writing this, I
 concluded it's simply a mistake -- not having a single source of truth for
 state.
 
+<!--more-->
+
 Let's begin by understand the "bug" itself. Here it is:
 
 {{< react path="details-summary-react-bug.js" version="18.2.0" title="Bug when using details element with React" >}}

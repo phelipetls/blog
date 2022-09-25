@@ -34,8 +34,8 @@ other = 'Contato'
 [Subscribe]
 other = 'Assine'
 
-[MoreTags]
-other = 'Mais tags'
+[AllTags]
+other = 'Todas as tags'
 
 [Light]
 other = 'Claro'

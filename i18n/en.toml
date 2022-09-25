@@ -35,8 +35,8 @@ other = 'Contact'
 [Subscribe]
 other = 'Subscribe'
 
-[MoreTags]
-other = 'More tags'
+[AllTags]
+other = 'All tags'
 
 [Light]
 other = 'Light'

@@ -17,6 +17,7 @@ module.exports = {
       },
       spacing: {
         'page-padding': 'var(--page-padding)',
+        'nav-height': 'var(--nav-height)',
       },
       gridTemplateColumns: {
         layout: `

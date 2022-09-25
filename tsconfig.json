@@ -6,6 +6,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
     "target": "esnext",
     "baseUrl": ".",
     "paths": {

@@ -1,12 +1,12 @@
 {{ define "main" }}
   <main class="grid flex-1 grid-cols-layout">
-    <div class="my-8 flex flex-col items-center justify-center sm:flex-row">
+    <div class="flex flex-col items-center justify-center sm:flex-row">
       {{ partial "gravatar.html" . }}
 
 
       <article class="">
         <header>
-          <h1 class="mb-4">{{ i18n "About" }}</h1>
+          <h1 class="mb-4 hidden sm:block">{{ i18n "About" }}</h1>
         </header>
 
         <div class="max-w-prose">

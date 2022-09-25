@@ -1,26 +1,32 @@
+const viewports = ['iphone-6']
+
 describe('Multi-language listbox', () => {
-  it('should be able to select multiple languages', () => {
-    cy.visit('/')
+  viewports.forEach((viewport) => {
+    it(`should be able to select multiple languages in ${viewport}`, () => {
+      cy.viewport(viewport)
 
-    cy.get(':root').should('have.attr', 'lang', 'en')
+      cy.visit('/')
 
-    cy.findByRole('listbox', { name: /translations/i }).should('not.exist')
-    cy.findByRole('button', {
-      name: /click to read in another language/i,
-    }).click()
-    cy.findByRole('listbox', { name: /translations/i }).should('be.visible')
-    cy.findByRole('option', { name: /Português/i }).click()
+      cy.get(':root').should('have.attr', 'lang', 'en')
 
-    cy.url().should('contain', 'pt')
-    cy.get(':root').should('have.attr', 'lang', 'pt-BR')
+      if (viewport === 'iphone-6') {
+        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
+      }
+      cy.findByRole('link', { name: /ler em português/i }).click()
 
-    cy.findByRole('button', {
-      name: /clique para ler em outra linguagem/i,
-    }).click()
-    cy.findByRole('option', { name: /English/i }).click()
+      cy.url().should('contain', 'pt')
+      cy.get(':root').should('have.attr', 'lang', 'pt-BR')
 
-    cy.url().should('not.contain', 'pt')
-    cy.get(':root').should('have.attr', 'lang', 'en')
+      if (viewport === 'iphone-6') {
+        cy.findByRole('button', {
+          name: /abrir barra de navegação lateral/i,
+        }).click()
+      }
+      cy.findByRole('link', { name: /read in english/i }).click()
+
+      cy.url().should('not.contain', 'pt')
+      cy.get(':root').should('have.attr', 'lang', 'en')
+    })
   })
 
   const pagesWithTranslations = [
@@ -32,10 +38,11 @@ describe('Multi-language listbox', () => {
   ]
 
   pagesWithTranslations.forEach((pageUrl) => {
-    it.only(`should have language button in page ${pageUrl}`, () => {
+    it(`should have language link in page ${pageUrl}`, () => {
       cy.visit(pageUrl)
-      cy.findByRole('button', {
-        name: /click to read in another language/i,
+
+      cy.findByRole('link', {
+        name: /ler em português/i,
       }).should('exist')
     })
   })

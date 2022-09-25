@@ -1,0 +1,34 @@
+<div class="relative flex h-full flex-row items-center">
+  <span
+    class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <svg class="feather" viewBox="0 0 24 24" width="24" height="24">
+      <title>{{ i18n "ThemeIcon" }}</title>
+
+      <defs>
+        {{ partial "svgs/moon-with-id.svg" }}
+        {{ partial "svgs/sun-with-id.svg" }}
+        {{ partial "svgs/monitor-with-id.svg" }}
+      </defs>
+
+      <use data-theme-select-icon href="#monitor"></use>
+    </svg>
+  </span>
+
+  <select
+    class="card h-full appearance-none bg-surface py-1 px-8 text-center"
+    data-theme-select
+    id="theme-select"
+    aria-label="{{ i18n "ChooseATheme" }}"
+  >
+    <option value="light">{{ i18n "Light" }}</option>
+    <option value="dark">{{ i18n "Dark" }}</option>
+    <option value="auto">{{ i18n "System" }}</option>
+  </select>
+
+  <span
+    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    {{ partial "svgs/chevron-down.svg" }}
+  </span>
+</div>

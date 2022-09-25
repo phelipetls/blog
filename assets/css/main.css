@@ -1,6 +1,7 @@
 :root {
   --page-padding: 1rem;
   --content-max-width: 64rem;
+  --nav-height: 4rem;
 
   --code-line-height: 1.5;
   --code-horizontal-padding: 2rem;
@@ -258,15 +259,15 @@
 
 @layer components {
   .btn {
-    @apply disabled:bg-disabled disabled:text-on-disabled disabled:hover:cursor-not-allowed disabled:hover:bg-disabled;
+    @apply transition-colors duration-500 hover:bg-hover disabled:bg-disabled disabled:text-on-disabled disabled:hover:cursor-not-allowed disabled:hover:bg-disabled;
   }
 
   .btn-primary {
-    @apply rounded-full bg-primary px-4 py-2 text-on-primary transition-colors duration-500 hover:bg-primary-hover;
+    @apply rounded-full bg-primary px-4 py-2 text-on-primary hover:bg-primary-hover;
   }
 
   .btn-secondary {
-    @apply rounded-full bg-surface px-4 py-2 text-primary transition-colors duration-500 hover:bg-hover;
+    @apply rounded-full bg-surface px-4 py-2 text-on-background hover:bg-hover;
   }
 
   a.btn-primary {
@@ -274,11 +275,11 @@
   }
 
   .btn-icon {
-    @apply flex items-center justify-center rounded-full bg-surface p-2 text-on-background shadow-md shadow-shadow transition-colors duration-500 hover:bg-hover;
+    @apply flex items-center justify-center rounded-md p-1 text-on-background;
   }
 
   .btn-icon-action {
-    @apply rounded-md border border-divider p-1;
+    @apply border border-divider shadow-md shadow-shadow;
   }
 
   .chip {

@@ -23,11 +23,12 @@
   },
   "homepage": "https://github.com/phelipetls/blog#readme",
   "dependencies": {
-    "@floating-ui/dom": "^0.2.0",
+    "@floating-ui/dom": "^1.0.2",
     "@testing-library/cypress": "^8.0.3",
     "@types/pdfobject": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
+    "a11y-dialog": "^7.5.2",
     "autoprefixer": "^10.4.8",
     "cypress": "^10.6.0",
     "eslint": "^8.21.0",

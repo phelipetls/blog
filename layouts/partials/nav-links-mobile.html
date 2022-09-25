@@ -1,0 +1,25 @@
+<nav
+  class="card fixed top-0 left-0 z-30 flex w-screen justify-between rounded-none py-4 px-page-padding"
+  aria-label="{{ i18n "MainNavigation" }}"
+>
+  <div class="flex flex-row items-center gap-2">
+    {{ with .Parent }}
+      <a class="border-0" href="{{ .Permalink }}">
+        {{ partial "svgs/chevron-left.svg" }}
+      </a>
+    {{ end }}
+
+
+    <h2 class="m-0 font-sans font-normal">
+      {{ .Title }}
+    </h2>
+  </div>
+
+  <button
+    data-a11y-dialog-show="sidenav"
+    class="btn btn-icon"
+    aria-label="{{ i18n "OpenSidenav" }}"
+  >
+    {{ partial "svgs/menu.svg" }}
+  </button>
+</nav>

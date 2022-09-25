@@ -44,8 +44,8 @@ other = 'Light'
 [Dark]
 other = 'Dark'
 
-[ThemeOptions]
-other = 'Theme options'
+[ChooseATheme]
+other = 'Choose a theme'
 
 [System]
 other = 'System'
@@ -89,3 +89,6 @@ other = 'Show more'
 
 [ShowLess]
 other = 'Show less'
+
+[OpenSidenav]
+other = 'Open navigation sidebar'

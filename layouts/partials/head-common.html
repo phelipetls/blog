@@ -15,10 +15,9 @@
   ></script>
 {{ end }}
 
-{{ $themeButtonScript := resources.Get "js/theme-button.ts" | js.Build }}
-{{ $languageButtonScript := resources.Get "js/language-button.ts" | js.Build }}
-
-{{ $bundle := slice $themeButtonScript $languageButtonScript | resources.Concat "js/bundle.js" }}
+{{ $themeSelectScript := resources.Get "js/theme-select.ts" | js.Build }}
+{{ $sidenavScript := resources.Get "js/sidenav.ts" | js.Build }}
+{{ $bundle := slice $sidenavScript $themeSelectScript | resources.Concat "js/bundle.js" }}
 
 {{ if hugo.IsProduction }}
   {{ $bundle = $bundle | minify }}

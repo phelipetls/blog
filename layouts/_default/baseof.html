@@ -27,8 +27,9 @@
 
     <script>{{ $themeScript.Content | safeJS }}</script>
 
-    <div class="flex h-full flex-col">
+    <div class="relative flex h-full flex-col">
       {{ partial "nav.html" . }}
+      {{ partial "sidenav.html" . }}
 
       {{ block "main" . }}
         <main class="grid flex-1 grid-cols-layout">

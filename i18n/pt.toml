@@ -43,8 +43,8 @@ other = 'Claro'
 [Dark]
 other = 'Escuro'
 
-[ThemeOptions]
-other = 'Opções de tema'
+[ChooseATheme]
+other = 'Escolha um tema'
 
 [System]
 other = 'Sistema'
@@ -88,3 +88,6 @@ other = 'Mostrar mais'
 
 [ShowLess]
 other = 'Mostrar menos'
+
+[OpenSidenav]
+other = 'Abrir barra de navegação lateral'

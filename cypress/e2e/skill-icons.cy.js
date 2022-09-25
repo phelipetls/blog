@@ -1,23 +1,20 @@
 describe('Skill icons', () => {
   ;['/projects'].forEach((pageUrl) => {
-    describe(`page: ${pageUrl}`, () => {
-      it('should change skill icons URL when theme changes', () => {
-        cy.visit(pageUrl, {
-          onBeforeLoad(win) {
-            win.localStorage.setItem('__theme', 'light')
-          },
-        })
+    it(`should change skill icons URL when theme changes in ${pageUrl} page`, () => {
+      cy.visit(pageUrl, {
+        onBeforeLoad(win) {
+          win.localStorage.setItem('__theme', 'light')
+        },
+      })
 
-        cy.get('img[src*=skillicons]').each(($img) => {
-          expect($img.attr('src')).to.match(/theme=light/)
-        })
+      cy.get('img[src*=skillicons]').each(($img) => {
+        expect($img.attr('src')).to.match(/theme=light/)
+      })
 
-        cy.findByRole('button', { name: /change theme/i }).click()
-        cy.findByRole('option', { name: /dark/i }).click()
+      cy.findByRole('combobox', { name: /choose a theme/i }).select('dark')
 
-        cy.get('img[src*=skillicons]').each(($img) => {
-          expect($img.attr('src')).to.match(/theme=dark/)
-        })
+      cy.get('img[src*=skillicons]').each(($img) => {
+        expect($img.attr('src')).to.match(/theme=dark/)
       })
     })
   })

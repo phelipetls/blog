@@ -1,13 +1,12 @@
-<footer
-  class="mx-auto mt-8 flex w-full max-w-content flex-col gap-4 px-page-padding py-4 sm:flex-row sm:justify-between"
->
-  <div class="flex flex-wrap justify-center sm:order-last sm:justify-end">
-    <nav aria-label="Links">
-      {{ partial "contact.html" . }}
-    </nav>
-  </div>
+<footer class="mt-8">
+  <div
+    class="mx-auto flex w-full max-w-content flex-col items-center gap-4 py-4 px-page-padding sm:justify-between"
+  >
+    {{ partial "contact.html" . }}
 
-  <p class="flex-1 text-center sm:text-left">
-    {{ i18n "License" | safeHTML }}
-  </p>
+
+    <span class="text-center">
+      {{ i18n "License" | safeHTML }}
+    </span>
+  </div>
 </footer>

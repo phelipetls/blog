@@ -1,6 +1,6 @@
 {{ define "main" }}
   <main class="grid grid-cols-layout">
-    <div class="mb-4 flex flex-row items-center justify-center gap-2">
+    <div class="mb-4 hidden flex-row items-center justify-center gap-2 sm:flex">
       <h1 class="m-0">Posts</h1>
 
       {{ partial "rss-button.html" . }}
@@ -29,4 +29,18 @@
       {{ end }}
     </div>
   </main>
+{{ end }}
+
+{{ define "partials/post-navbar-title" }}
+  <div class="flex flex-row items-center gap-2">
+    Posts
+
+    <span class="text-sm">
+      {{ partial "rss-button.html" . }}
+    </span>
+  </div>
+{{ end }}
+
+{{ define "navbar-title" }}
+  {{ .Scratch.Set "navbarTitle" "partials/post-navbar-title" }}
 {{ end }}

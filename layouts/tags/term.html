@@ -1,3 +1,7 @@
+{{ define "navbar-title" }}
+  {{ .Scratch.Set "navbarTitle" (.Name | title) }}
+{{ end }}
+
 {{ define "main" }}
   <main class="grid grid-cols-layout">
     <div>

@@ -11,7 +11,13 @@
 
 
     <h2 class="m-0 font-sans font-normal">
-      {{ .Title }}
+      {{ $navbarTitle := .Scratch.Get "navbarTitle" }}
+
+      {{ if hasPrefix $navbarTitle "partials/" }}
+        {{ partial $navbarTitle }}
+      {{ else }}
+        {{ $navbarTitle }}
+      {{ end }}
     </h2>
   </div>
 

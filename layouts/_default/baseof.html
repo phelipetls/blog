@@ -6,6 +6,10 @@
   <head>
     {{ partialCached "head-common.html" . }}
 
+    {{ block "navbar-title" . }}
+      {{ .Scratch.Set "navbarTitle" .Title }}
+    {{ end }}
+
     {{ partial "head.html" . }}
     {{ partial "css-global.html" . }}
 

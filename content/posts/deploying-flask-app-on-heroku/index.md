@@ -31,28 +31,32 @@ so with `heroku restart`.
 
 From the `heroku logs`:
 
-    2020-08-27T19:21:21.060020+00:00 heroku[web.1]: State changed from down to starting
-    2020-08-27T19:21:26.527757+00:00 heroku[web.1]: Starting process with command `gunicorn "app:create_app()"`
-    2020-08-27T19:21:34.069516+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Starting gunicorn 20.0.4
-    2020-08-27T19:21:34.087317+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Listening at: http://0.0.0.0:3906 (4)
-    2020-08-27T19:21:34.092921+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Using worker: sync
-    2020-08-27T19:21:34.131957+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [10] [INFO] Booting worker with pid: 10
-    2020-08-27T19:21:34.201582+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [11] [INFO] Booting worker with pid: 11
-    2020-08-27T19:21:34.560508+00:00 heroku[web.1]: State changed from starting to up
-    2020-08-27T19:54:54.137845+00:00 heroku[web.1]: Idling
-    2020-08-27T19:54:54.139855+00:00 heroku[web.1]: State changed from up to down
-    2020-08-27T19:54:59.841651+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-    2020-08-27T19:54:59.908237+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [11] [INFO] Worker exiting (pid: 11)
-    2020-08-27T19:54:59.910662+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [4] [INFO] Handling signal: term
-    2020-08-27T19:54:59.919059+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [10] [INFO] Worker exiting (pid: 10)
-    2020-08-27T19:55:00.122579+00:00 app[web.1]: [2020-08-27 19:55:00 +0000] [4] [INFO] Shutting down: Master
-    2020-08-27T19:55:00.223868+00:00 heroku[web.1]: Process exited with status 0
+```
+2020-08-27T19:21:21.060020+00:00 heroku[web.1]: State changed from down to starting
+2020-08-27T19:21:26.527757+00:00 heroku[web.1]: Starting process with command `gunicorn "app:create_app()"`
+2020-08-27T19:21:34.069516+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Starting gunicorn 20.0.4
+2020-08-27T19:21:34.087317+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Listening at: http://0.0.0.0:3906 (4)
+2020-08-27T19:21:34.092921+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [4] [INFO] Using worker: sync
+2020-08-27T19:21:34.131957+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [10] [INFO] Booting worker with pid: 10
+2020-08-27T19:21:34.201582+00:00 app[web.1]: [2020-08-27 19:21:34 +0000] [11] [INFO] Booting worker with pid: 11
+2020-08-27T19:21:34.560508+00:00 heroku[web.1]: State changed from starting to up
+2020-08-27T19:54:54.137845+00:00 heroku[web.1]: Idling
+2020-08-27T19:54:54.139855+00:00 heroku[web.1]: State changed from up to down
+2020-08-27T19:54:59.841651+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2020-08-27T19:54:59.908237+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [11] [INFO] Worker exiting (pid: 11)
+2020-08-27T19:54:59.910662+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [4] [INFO] Handling signal: term
+2020-08-27T19:54:59.919059+00:00 app[web.1]: [2020-08-27 19:54:59 +0000] [10] [INFO] Worker exiting (pid: 10)
+2020-08-27T19:55:00.122579+00:00 app[web.1]: [2020-08-27 19:55:00 +0000] [4] [INFO] Shutting down: Master
+2020-08-27T19:55:00.223868+00:00 heroku[web.1]: Process exited with status 0
+```
 
 Every request would then be met with a Heroku `H10` error and 503 HTTP error.
 
 I simply had this in my `Procfile`:
 
-    web: gunicorn "app:create_app()"
+```
+web: gunicorn "app:create_app()"
+```
 
 I don't know if there's anything wrong with it or if I could have done something
 to make it restart when unidling. Please let me know if that's the case.
@@ -73,7 +77,9 @@ and recommending
 The mentioned blog post author's reasons are much more technical than mine, I
 just wanted the application to not crash. So I changed the Procfile to:
 
-    web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
+```
+web: waitress-serve --port=$PORT --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'
+```
 
 As was suggested by the
 [Flask](https://flask.palletsprojects.com/en/1.1.x/tutorial/deploy/#run-with-a-production-server)
@@ -82,10 +88,12 @@ and
 
 Now the application restarts when unidling:
 
-    2020-10-09T02:02:24.121855+00:00 heroku[web.1]: Idling
-    2020-10-09T02:02:24.123702+00:00 heroku[web.1]: State changed from up to down
-    2020-10-09T02:02:25.226026+00:00 heroku[web.1]: Stopping all processes with SIGTERM
-    2020-10-09T02:02:25.317332+00:00 heroku[web.1]: Process exited with status 143
-    2020-10-09T13:22:44.966887+00:00 heroku[web.1]: Unidling
-    2020-10-09T13:22:44.969344+00:00 heroku[web.1]: State changed from down to starting
-    2020-10-09T13:22:49.127433+00:00 heroku[web.1]: Starting process with command `waitress-serve --port=55574 --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'`
+```
+2020-10-09T02:02:24.121855+00:00 heroku[web.1]: Idling
+2020-10-09T02:02:24.123702+00:00 heroku[web.1]: State changed from up to down
+2020-10-09T02:02:25.226026+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2020-10-09T02:02:25.317332+00:00 heroku[web.1]: Process exited with status 143
+2020-10-09T13:22:44.966887+00:00 heroku[web.1]: Unidling
+2020-10-09T13:22:44.969344+00:00 heroku[web.1]: State changed from down to starting
+2020-10-09T13:22:49.127433+00:00 heroku[web.1]: Starting process with command `waitress-serve --port=55574 --threads=${WEB_CONCURRENCY:-2} --call 'app:create_app'`
+```

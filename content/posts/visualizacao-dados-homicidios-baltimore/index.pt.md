@@ -26,15 +26,17 @@ df <- read_csv("https://raw.githubusercontent.com/phelipetls/phelipetls.github.i
 df %>% head()
 ```
 
-    ## # A tibble: 6 x 8
-    ##   causas         lon   lat raca  genero idade data       endereco
-    ##   <chr>        <dbl> <dbl> <chr> <chr>  <dbl> <date>     <chr>
-    ## 1 Shooting     -76.7  39.3 Black Male      17 2007-01-01 3400 Clifton Ave.
-    ## 2 Shooting     -76.7  39.3 Black Male      26 2007-01-02 4900 Challedon Ro~
-    ## 3 Blunt Force  -76.6  39.3 Black Female    44 2007-01-02 2000 West North A~
-    ## 4 Asphyxiation -76.6  39.4 Black Male      21 2007-01-03 5900 Northwood Dr~
-    ## 5 Blunt Force  -76.6  39.2 White Male      61 2007-01-05 500 Maude Ave.
-    ## 6 Shooting     -76.6  39.4 Black Male      46 2007-01-05 5200 Ready Ave.
+```
+## # A tibble: 6 x 8
+##   causas         lon   lat raca  genero idade data       endereco
+##   <chr>        <dbl> <dbl> <chr> <chr>  <dbl> <date>     <chr>
+## 1 Shooting     -76.7  39.3 Black Male      17 2007-01-01 3400 Clifton Ave.
+## 2 Shooting     -76.7  39.3 Black Male      26 2007-01-02 4900 Challedon Ro~
+## 3 Blunt Force  -76.6  39.3 Black Female    44 2007-01-02 2000 West North A~
+## 4 Asphyxiation -76.6  39.4 Black Male      21 2007-01-03 5900 Northwood Dr~
+## 5 Blunt Force  -76.6  39.2 White Male      61 2007-01-05 500 Maude Ave.
+## 6 Shooting     -76.6  39.4 Black Male      46 2007-01-05 5200 Ready Ave.
+```
 
 Há diversas questões a serem exploradas aqui, a primeira e mais sensível que vem
 a mente é a racial: quais raças costumam ser vítimas de homicídio? Vamos,

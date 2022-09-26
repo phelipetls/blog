@@ -27,16 +27,10 @@ describe('Table of contents interactive sidebar', () => {
         'not.be.inViewport'
       )
       cy.contains('h2', 'Redirections').scrollIntoView()
-      cy.get('nav[data-toc] a[href="#redirections"]')
-        .should('be.inViewport')
-        .parent()
-        .should('have.attr', 'data-active')
+      cy.get('nav[data-toc] a[href="#redirections"]').should('be.inViewport')
 
       cy.scrollTo('top', { easing: 'linear', duration: 100 })
-      cy.get('nav[data-toc] a[href="#hello-world"]')
-        .should('be.inViewport')
-        .parent()
-        .should('have.attr', 'data-active')
+      cy.get('nav[data-toc] a[href="#hello-world"]').should('be.inViewport')
     }
   )
 })

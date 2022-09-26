@@ -59,7 +59,11 @@
       </nav>
 
       <div
-        class="mb-4 flex h-12 flex-row items-center justify-between px-page-padding"
+        class="{{ if .IsTranslated }}
+          justify-between
+        {{ else }}
+          justify-center
+        {{ end }} mb-4 flex h-12 flex-row items-center px-page-padding"
       >
         {{ partial "theme-select.html" . }}
 

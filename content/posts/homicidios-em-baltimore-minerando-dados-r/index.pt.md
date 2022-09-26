@@ -26,11 +26,9 @@ homicides <- read_lines("https://raw.githubusercontent.com/hadv/PAR/master/homic
 homicides %>% head(3)
 ```
 
-```
-## [1] "39.311024, -76.674227, iconHomicideShooting, 'p2', '<dl><dt>Leon Nelson</dt><dd class=\"address\">3400 Clifton Ave.<br />Baltimore, MD 21216</dd><dd>black male, 17 years old</dd><dd>Found on January 1, 2007</dd><dd>Victim died at Shock Trauma</dd><dd>Cause: shooting</dd></dl>'"
-## [2] "39.312641, -76.698948, iconHomicideShooting, 'p3', '<dl><dt>Eddie Golf</dt><dd class=\"address\">4900 Challedon Road<br />Baltimore, MD 21207</dd><dd>black male, 26 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: shooting</dd></dl>'"
-## [3] "39.309781, -76.649882, iconHomicideBluntForce, 'p4', '<dl><dt>Nelsene Burnette</dt><dd class=\"address\">2000 West North Ave<br />Baltimore, MD 21217</dd><dd>black female, 44 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: blunt force</dd></dl>'"
-```
+    ## [1] "39.311024, -76.674227, iconHomicideShooting, 'p2', '<dl><dt>Leon Nelson</dt><dd class=\"address\">3400 Clifton Ave.<br />Baltimore, MD 21216</dd><dd>black male, 17 years old</dd><dd>Found on January 1, 2007</dd><dd>Victim died at Shock Trauma</dd><dd>Cause: shooting</dd></dl>'"
+    ## [2] "39.312641, -76.698948, iconHomicideShooting, 'p3', '<dl><dt>Eddie Golf</dt><dd class=\"address\">4900 Challedon Road<br />Baltimore, MD 21207</dd><dd>black male, 26 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: shooting</dd></dl>'"
+    ## [3] "39.309781, -76.649882, iconHomicideBluntForce, 'p4', '<dl><dt>Nelsene Burnette</dt><dd class=\"address\">2000 West North Ave<br />Baltimore, MD 21217</dd><dd>black female, 44 years old</dd><dd>Found on January 2, 2007</dd><dd>Victim died at scene</dd><dd>Cause: blunt force</dd></dl>'"
 
 Como podemos ver, a base está de fato bastante suja. Quer dizer, é somente
 texto, nada está estruturado. O objetivo aqui é extrair o máximo de informações
@@ -96,15 +94,13 @@ causes <- str_match(
 causes %>% head()
 ```
 
-```
-##      [,1]                  [,2]
-## [1,] "Cause: shooting"     "shooting"
-## [2,] "Cause: shooting"     "shooting"
-## [3,] "Cause: blunt force"  "blunt force"
-## [4,] "Cause: asphyxiation" "asphyxiation"
-## [5,] "Cause: blunt force"  "blunt force"
-## [6,] "Cause: shooting"     "shooting"
-```
+    ##      [,1]                  [,2]
+    ## [1,] "Cause: shooting"     "shooting"
+    ## [2,] "Cause: shooting"     "shooting"
+    ## [3,] "Cause: blunt force"  "blunt force"
+    ## [4,] "Cause: asphyxiation" "asphyxiation"
+    ## [5,] "Cause: blunt force"  "blunt force"
+    ## [6,] "Cause: shooting"     "shooting"
 
 # Latitude e Longitude
 
@@ -122,15 +118,13 @@ lat_long <- str_match(
 lat_long %>% head()
 ```
 
-```
-##      [,1]                    [,2]        [,3]
-## [1,] "39.311024, -76.674227" "39.311024" "-76.674227"
-## [2,] "39.312641, -76.698948" "39.312641" "-76.698948"
-## [3,] "39.309781, -76.649882" "39.309781" "-76.649882"
-## [4,] "39.363925, -76.598772" "39.363925" "-76.598772"
-## [5,] "39.238928, -76.602718" "39.238928" "-76.602718"
-## [6,] "39.352676, -76.607979" "39.352676" "-76.607979"
-```
+    ##      [,1]                    [,2]        [,3]
+    ## [1,] "39.311024, -76.674227" "39.311024" "-76.674227"
+    ## [2,] "39.312641, -76.698948" "39.312641" "-76.698948"
+    ## [3,] "39.309781, -76.649882" "39.309781" "-76.649882"
+    ## [4,] "39.363925, -76.598772" "39.363925" "-76.598772"
+    ## [5,] "39.238928, -76.602718" "39.238928" "-76.602718"
+    ## [6,] "39.352676, -76.607979" "39.352676" "-76.607979"
 
 # Raça
 
@@ -151,29 +145,25 @@ raca <- str_match(
 raca %>% head()
 ```
 
-```
-##      [,1]               [,2]    [,3] [,4]
-## [1,] "<dd>black male"   "black" NA   NA
-## [2,] "<dd>black male"   "black" NA   NA
-## [3,] "<dd>black female" "black" "fe" NA
-## [4,] "<dd>black male"   "black" NA   NA
-## [5,] "<dd>white male"   "white" NA   NA
-## [6,] "<dd>black male"   "black" NA   NA
-```
+    ##      [,1]               [,2]    [,3] [,4]
+    ## [1,] "<dd>black male"   "black" NA   NA
+    ## [2,] "<dd>black male"   "black" NA   NA
+    ## [3,] "<dd>black female" "black" "fe" NA
+    ## [4,] "<dd>black male"   "black" NA   NA
+    ## [5,] "<dd>white male"   "white" NA   NA
+    ## [6,] "<dd>black male"   "black" NA   NA
 
 ```r
 raca %>% tail()
 ```
 
-```
-##         [,1]          [,2] [,3] [,4]
-## [1245,] "Race: Black" NA   NA   "Black"
-## [1246,] "Race: Black" NA   NA   "Black"
-## [1247,] "Race: Black" NA   NA   "Black"
-## [1248,] "Race: Black" NA   NA   "Black"
-## [1249,] "Race: Black" NA   NA   "Black"
-## [1250,] "Race: Black" NA   NA   "Black"
-```
+    ##         [,1]          [,2] [,3] [,4]
+    ## [1245,] "Race: Black" NA   NA   "Black"
+    ## [1246,] "Race: Black" NA   NA   "Black"
+    ## [1247,] "Race: Black" NA   NA   "Black"
+    ## [1248,] "Race: Black" NA   NA   "Black"
+    ## [1249,] "Race: Black" NA   NA   "Black"
+    ## [1250,] "Race: Black" NA   NA   "Black"
 
 Veja que, inseri um grupo a mais para indicar que é opcional todo o grupo “fe”
 em sexo, ele pode ou não ocorrer. Daí que o uso de grupos pode não ser somente
@@ -192,29 +182,25 @@ genero <- str_match(
 genero %>% head()
 ```
 
-```
-##      [,1]                [,2]     [,3]
-## [1,] "<dd>black male,"   "male"   NA
-## [2,] "<dd>black male,"   "male"   NA
-## [3,] "<dd>black female," "female" NA
-## [4,] "<dd>black male,"   "male"   NA
-## [5,] "<dd>white male,"   "male"   NA
-## [6,] "<dd>black male,"   "male"   NA
-```
+    ##      [,1]                [,2]     [,3]
+    ## [1,] "<dd>black male,"   "male"   NA
+    ## [2,] "<dd>black male,"   "male"   NA
+    ## [3,] "<dd>black female," "female" NA
+    ## [4,] "<dd>black male,"   "male"   NA
+    ## [5,] "<dd>white male,"   "male"   NA
+    ## [6,] "<dd>black male,"   "male"   NA
 
 ```r
 genero %>% tail()
 ```
 
-```
-##         [,1]             [,2] [,3]
-## [1245,] "Gender: male"   NA   "male"
-## [1246,] "Gender: male"   NA   "male"
-## [1247,] "Gender: male"   NA   "male"
-## [1248,] "Gender: female" NA   "female"
-## [1249,] "Gender: male"   NA   "male"
-## [1250,] "Gender: male"   NA   "male"
-```
+    ##         [,1]             [,2] [,3]
+    ## [1245,] "Gender: male"   NA   "male"
+    ## [1246,] "Gender: male"   NA   "male"
+    ## [1247,] "Gender: male"   NA   "male"
+    ## [1248,] "Gender: female" NA   "female"
+    ## [1249,] "Gender: male"   NA   "male"
+    ## [1250,] "Gender: male"   NA   "male"
 
 # Idade
 
@@ -227,29 +213,25 @@ idade <- str_match(
 idade %>% head()
 ```
 
-```
-##      [,1]           [,2] [,3]
-## [1,] "17 years old" "17" NA
-## [2,] "26 years old" "26" NA
-## [3,] "44 years old" "44" NA
-## [4,] "21 years old" "21" NA
-## [5,] "61 years old" "61" NA
-## [6,] "46 years old" "46" NA
-```
+    ##      [,1]           [,2] [,3]
+    ## [1,] "17 years old" "17" NA
+    ## [2,] "26 years old" "26" NA
+    ## [3,] "44 years old" "44" NA
+    ## [4,] "21 years old" "21" NA
+    ## [5,] "61 years old" "61" NA
+    ## [6,] "46 years old" "46" NA
 
 ```r
 idade %>% tail()
 ```
 
-```
-##         [,1]      [,2] [,3]
-## [1245,] "Age: 30" NA   "30"
-## [1246,] "Age: 35" NA   "35"
-## [1247,] "Age: 27" NA   "27"
-## [1248,] "Age: 84" NA   "84"
-## [1249,] "Age: 62" NA   "62"
-## [1250,] "Age: 65" NA   "65"
-```
+    ##         [,1]      [,2] [,3]
+    ## [1245,] "Age: 30" NA   "30"
+    ## [1246,] "Age: 35" NA   "35"
+    ## [1247,] "Age: 27" NA   "27"
+    ## [1248,] "Age: 84" NA   "84"
+    ## [1249,] "Age: 62" NA   "62"
+    ## [1250,] "Age: 65" NA   "65"
 
 # Data
 
@@ -274,15 +256,13 @@ data <- str_match(
 data %>% head()
 ```
 
-```
-##      [,1]                       [,2]
-## [1,] "Found on January 1, 2007" "January 1, 2007"
-## [2,] "Found on January 2, 2007" "January 2, 2007"
-## [3,] "Found on January 2, 2007" "January 2, 2007"
-## [4,] "Found on January 3, 2007" "January 3, 2007"
-## [5,] "Found on January 5, 2007" "January 5, 2007"
-## [6,] "Found on January 5, 2007" "January 5, 2007"
-```
+    ##      [,1]                       [,2]
+    ## [1,] "Found on January 1, 2007" "January 1, 2007"
+    ## [2,] "Found on January 2, 2007" "January 2, 2007"
+    ## [3,] "Found on January 2, 2007" "January 2, 2007"
+    ## [4,] "Found on January 3, 2007" "January 3, 2007"
+    ## [5,] "Found on January 5, 2007" "January 5, 2007"
+    ## [6,] "Found on January 5, 2007" "January 5, 2007"
 
 # Endereço
 
@@ -297,15 +277,13 @@ endereco <- str_match(
 endereco %>% head()
 ```
 
-```
-##      [,1]                          [,2]
-## [1,] ">3400 Clifton Ave.<br />"    "3400 Clifton Ave."
-## [2,] ">4900 Challedon Road<br />"  "4900 Challedon Road"
-## [3,] ">2000 West North Ave<br />"  "2000 West North Ave"
-## [4,] ">5900 Northwood Drive<br />" "5900 Northwood Drive"
-## [5,] ">500 Maude Ave.<br />"       "500 Maude Ave."
-## [6,] ">5200 Ready Ave.<br />"      "5200 Ready Ave."
-```
+    ##      [,1]                          [,2]
+    ## [1,] ">3400 Clifton Ave.<br />"    "3400 Clifton Ave."
+    ## [2,] ">4900 Challedon Road<br />"  "4900 Challedon Road"
+    ## [3,] ">2000 West North Ave<br />"  "2000 West North Ave"
+    ## [4,] ">5900 Northwood Drive<br />" "5900 Northwood Drive"
+    ## [5,] ">500 Maude Ave.<br />"       "500 Maude Ave."
+    ## [6,] ">5200 Ready Ave.<br />"      "5200 Ready Ave."
 
 # Agregando tudo em um data.frame
 
@@ -337,17 +315,15 @@ homicides_df <- tibble(
 homicides_df %>% head()
 ```
 
-```
-## # A tibble: 6 x 8
-##   causas     lon      lat      raca  genero idade data       endereco
-##   <chr>      <chr>    <chr>    <chr> <chr>  <chr> <chr>      <chr>
-## 1 shooting   -76.674~ 39.3110~ black male   17    January 1~ 3400 Clifton ~
-## 2 shooting   -76.698~ 39.3126~ black male   26    January 2~ 4900 Challedo~
-## 3 blunt for~ -76.649~ 39.3097~ black female 44    January 2~ 2000 West Nor~
-## 4 asphyxiat~ -76.598~ 39.3639~ black male   21    January 3~ 5900 Northwoo~
-## 5 blunt for~ -76.602~ 39.2389~ white male   61    January 5~ 500 Maude Ave.
-## 6 shooting   -76.607~ 39.3526~ black male   46    January 5~ 5200 Ready Av~
-```
+    ## # A tibble: 6 x 8
+    ##   causas     lon      lat      raca  genero idade data       endereco
+    ##   <chr>      <chr>    <chr>    <chr> <chr>  <chr> <chr>      <chr>
+    ## 1 shooting   -76.674~ 39.3110~ black male   17    January 1~ 3400 Clifton ~
+    ## 2 shooting   -76.698~ 39.3126~ black male   26    January 2~ 4900 Challedo~
+    ## 3 blunt for~ -76.649~ 39.3097~ black female 44    January 2~ 2000 West Nor~
+    ## 4 asphyxiat~ -76.598~ 39.3639~ black male   21    January 3~ 5900 Northwoo~
+    ## 5 blunt for~ -76.602~ 39.2389~ white male   61    January 5~ 500 Maude Ave.
+    ## 6 shooting   -76.607~ 39.3526~ black male   46    January 5~ 5200 Ready Av~
 
 E terminamos nossa limpeza dos dados. Na verdade, seria bom fazer algumas
 coisinhas antes, do tipo, uniformizar os valores das variáveis (alguns estão
@@ -369,16 +345,14 @@ homicides_df <- homicides_df %>%
 homicides_df %>% head()
 ```
 
-```
-## # A tibble: 6 x 8
-##   causas         lon   lat raca  genero idade data       endereco
-##   <chr>        <dbl> <dbl> <chr> <chr>  <chr> <date>     <chr>
-## 1 Shooting     -76.7  39.3 Black Male   17    2007-01-01 3400 Clifton Ave.
-## 2 Shooting     -76.7  39.3 Black Male   26    2007-01-02 4900 Challedon Ro~
-## 3 Blunt Force  -76.6  39.3 Black Female 44    2007-01-02 2000 West North A~
-## 4 Asphyxiation -76.6  39.4 Black Male   21    2007-01-03 5900 Northwood Dr~
-## 5 Blunt Force  -76.6  39.2 White Male   61    2007-01-05 500 Maude Ave.
-## 6 Shooting     -76.6  39.4 Black Male   46    2007-01-05 5200 Ready Ave.
-```
+    ## # A tibble: 6 x 8
+    ##   causas         lon   lat raca  genero idade data       endereco
+    ##   <chr>        <dbl> <dbl> <chr> <chr>  <chr> <date>     <chr>
+    ## 1 Shooting     -76.7  39.3 Black Male   17    2007-01-01 3400 Clifton Ave.
+    ## 2 Shooting     -76.7  39.3 Black Male   26    2007-01-02 4900 Challedon Ro~
+    ## 3 Blunt Force  -76.6  39.3 Black Female 44    2007-01-02 2000 West North A~
+    ## 4 Asphyxiation -76.6  39.4 Black Male   21    2007-01-03 5900 Northwood Dr~
+    ## 5 Blunt Force  -76.6  39.2 White Male   61    2007-01-05 500 Maude Ave.
+    ## 6 Shooting     -76.6  39.4 Black Male   46    2007-01-05 5200 Ready Ave.
 
 Em um próximo post, pretendo visualizar esses dados com ggplot2 e gganimate.

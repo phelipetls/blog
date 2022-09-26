@@ -48,9 +48,6 @@
   {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%v?s=%v" (md5 .Site.Params.email) 150 }}
 
   {{ with resources.GetRemote $gravatarUrl }}
-    <img
-      class="rounded-full border-2 border-divider"
-      src="{{ $gravatarUrl }}"
-    />
+    <img class="rounded-full border border-divider" src="{{ $gravatarUrl }}" />
   {{ end }}
 {{ end }}

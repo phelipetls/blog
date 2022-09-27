@@ -16,10 +16,12 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "no-only-tests"
   ],
   "rules": {
-    "@typescript-eslint/no-extra-semi": "off"
+    "@typescript-eslint/no-extra-semi": "off",
+    "no-only-tests/no-only-tests": "error"
   },
   "ignorePatterns": [
     "public",

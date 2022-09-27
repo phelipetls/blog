@@ -1,32 +1,36 @@
-const viewports = ['macbook-11', 'iphone-6']
-
 describe('Multi-language', () => {
-  viewports.forEach((viewport) => {
-    it(`should be able to select multiple languages in ${viewport}`, () => {
-      cy.viewport(viewport)
+  it('should be able to select multiple languages in desktop', () => {
+    cy.viewport('macbook-11')
+    cy.visit('/')
 
-      cy.visit('/')
+    cy.get(':root').should('have.attr', 'lang', 'en')
 
-      cy.get(':root').should('have.attr', 'lang', 'en')
+    cy.findByRole('link', { name: /ler em português/i }).click()
+    cy.url().should('contain', 'pt')
+    cy.get(':root').should('have.attr', 'lang', 'pt-BR')
 
-      if (viewport === 'iphone-6') {
-        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
-      }
-      cy.findByRole('link', { name: /ler em português/i }).click()
+    cy.findByRole('link', { name: /read in english/i }).click()
+    cy.url().should('not.contain', 'pt')
+    cy.get(':root').should('have.attr', 'lang', 'en')
+  })
 
-      cy.url().should('contain', 'pt')
-      cy.get(':root').should('have.attr', 'lang', 'pt-BR')
+  it('should be able to select multiple languages in mobile', () => {
+    cy.viewport('iphone-6')
+    cy.visit('/')
 
-      if (viewport === 'iphone-6') {
-        cy.findByRole('button', {
-          name: /abrir barra de navegação lateral/i,
-        }).click()
-      }
-      cy.findByRole('link', { name: /read in english/i }).click()
+    cy.get(':root').should('have.attr', 'lang', 'en')
 
-      cy.url().should('not.contain', 'pt')
-      cy.get(':root').should('have.attr', 'lang', 'en')
-    })
+    cy.findByRole('button', { name: /open navigation sidebar/i }).click()
+    cy.findByRole('link', { name: /ler em português/i }).click()
+    cy.url().should('contain', 'pt')
+    cy.get(':root').should('have.attr', 'lang', 'pt-BR')
+
+    cy.findByRole('button', {
+      name: /abrir barra de navegação lateral/i,
+    }).click()
+    cy.findByRole('link', { name: /read in english/i }).click()
+    cy.url().should('not.contain', 'pt')
+    cy.get(':root').should('have.attr', 'lang', 'en')
   })
 
   const pagesWithTranslations = [

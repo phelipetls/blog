@@ -15,26 +15,31 @@ const visit = (url, { prefersDarkColorScheme = false, ...visitOptions }) =>
   })
 
 describe('Dark, light and system theme', () => {
-  const viewports = ['iphone-6', 'macbook-11']
+  it(`should be able to switch from light to dark theme in desktop`, () => {
+    cy.viewport('macbook-11')
+    visit('/', { prefersDarkColorScheme: false })
 
-  viewports.forEach((viewport) => {
-    it(`should be able to switch from light to dark theme in ${viewport}`, () => {
-      cy.viewport(viewport)
+    cy.get('body').should('not.have.class', 'dark')
 
-      visit('/', { prefersDarkColorScheme: false })
+    cy.findByRole('combobox', { name: /choose a theme/i })
+      .should('be.visible')
+      .select('dark')
 
-      cy.get('body').should('not.have.class', 'dark')
+    cy.get('body').should('have.class', 'dark')
+  })
 
-      if (viewport === 'iphone-6') {
-        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
-      }
+  it('should be able to switch from light to dark theme in mobile', () => {
+    cy.viewport('iphone-6')
+    visit('/', { prefersDarkColorScheme: false })
 
-      cy.findByRole('combobox', { name: /choose a theme/i })
-        .should('be.visible')
-        .select('dark')
+    cy.get('body').should('not.have.class', 'dark')
 
-      cy.get('body').should('have.class', 'dark')
-    })
+    cy.findByRole('button', { name: /open navigation sidebar/i }).click()
+    cy.findByRole('combobox', { name: /choose a theme/i })
+      .should('be.visible')
+      .select('dark')
+
+    cy.get('body').should('have.class', 'dark')
   })
 
   it('should set theme from local storage', () => {
@@ -64,25 +69,18 @@ describe('Dark, light and system theme', () => {
     cy.get('body').should('have.class', 'dark')
   })
 
-  viewports.forEach((viewport) => {
-    it(`should be able to switch to system preferred theme in ${viewport}`, () => {
-      cy.viewport(viewport)
-
-      visit('/', {
-        prefersDarkColorScheme: true,
-        onBeforeLoad: (win) => {
-          win.localStorage.setItem('__theme', 'light')
-        },
-      })
-
-      cy.get('body').should('not.have.class', 'dark')
-
-      if (viewport === 'iphone-6') {
-        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
-      }
-      cy.findByRole('combobox', { name: /choose a theme/i }).select('auto')
-
-      cy.get('body').should('have.class', 'dark')
+  it('should be able to switch to system preferred theme', () => {
+    visit('/', {
+      prefersDarkColorScheme: true,
+      onBeforeLoad: (win) => {
+        win.localStorage.setItem('__theme', 'light')
+      },
     })
+
+    cy.get('body').should('not.have.class', 'dark')
+
+    cy.findByRole('combobox', { name: /choose a theme/i }).select('auto')
+
+    cy.get('body').should('have.class', 'dark')
   })
 })

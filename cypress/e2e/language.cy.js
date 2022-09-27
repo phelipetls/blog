@@ -1,4 +1,4 @@
-const viewports = ['iphone-6']
+const viewports = ['macbook-11', 'iphone-6']
 
 describe('Multi-language listbox', () => {
   viewports.forEach((viewport) => {

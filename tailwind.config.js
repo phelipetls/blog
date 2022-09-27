@@ -15,9 +15,6 @@ module.exports = {
       zIndex: {
         '-1': '-1',
       },
-      sepia: {
-        75: '0.75',
-      },
       spacing: {
         'page-padding': 'var(--page-padding)',
         'nav-height': 'var(--nav-height)',

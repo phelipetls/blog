@@ -26,7 +26,7 @@ describe('Dark, light and system theme', () => {
       cy.get('body').should('not.have.class', 'dark')
 
       if (viewport === 'iphone-6') {
-        cy.get('button[aria-label="open navigation sidebar" i]').click()
+        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
       }
 
       cy.findByRole('combobox', { name: /choose a theme/i })
@@ -78,7 +78,7 @@ describe('Dark, light and system theme', () => {
       cy.get('body').should('not.have.class', 'dark')
 
       if (viewport === 'iphone-6') {
-        cy.get('button[aria-label="open navigation sidebar" i]').click()
+        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
       }
       cy.findByRole('combobox', { name: /choose a theme/i }).select('auto')
 

@@ -10,7 +10,7 @@ describe('Multi-language', () => {
       cy.get(':root').should('have.attr', 'lang', 'en')
 
       if (viewport === 'iphone-6') {
-        cy.get('button[aria-label="open navigation sidebar" i]').click()
+        cy.findByRole('button', { name: /open navigation sidebar/i }).click()
       }
       cy.findByRole('link', { name: /ler em português/i }).click()
 

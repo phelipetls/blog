@@ -13,7 +13,7 @@ describe('Table of contents interactive sidebar', () => {
 
   it(
     'should scroll to make toc item visible when its corresponding heading comes into view',
-    { retries: { runMode: 2, openMode: 0 } },
+    { retries: { runMode: 5, openMode: 0 } },
     () => {
       cy.viewport('macbook-11')
 

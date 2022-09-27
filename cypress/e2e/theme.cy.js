@@ -28,19 +28,23 @@ describe('Dark, light and system theme', () => {
     cy.get('body').should('have.class', 'dark')
   })
 
-  it('should be able to switch from light to dark theme in mobile', () => {
-    cy.viewport('iphone-6')
-    visit('/', { prefersDarkColorScheme: false })
+  it(
+    'should be able to switch from light to dark theme in mobile',
+    { retries: { runMode: 5, openMode: 0 } },
+    () => {
+      cy.viewport('iphone-6')
+      visit('/', { prefersDarkColorScheme: false })
 
-    cy.get('body').should('not.have.class', 'dark')
+      cy.get('body').should('not.have.class', 'dark')
 
-    cy.findByRole('button', { name: /open navigation sidebar/i }).click()
-    cy.findByRole('combobox', { name: /choose a theme/i })
-      .should('be.visible')
-      .select('dark')
+      cy.findByRole('button', { name: /open navigation sidebar/i }).click()
+      cy.findByRole('combobox', { name: /choose a theme/i })
+        .should('be.visible')
+        .select('dark')
 
-    cy.get('body').should('have.class', 'dark')
-  })
+      cy.get('body').should('have.class', 'dark')
+    }
+  )
 
   it('should set theme from local storage', () => {
     visit('/', {

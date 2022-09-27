@@ -30,7 +30,7 @@
     "@typescript-eslint/parser": "^5.33.0",
     "a11y-dialog": "^7.5.2",
     "autoprefixer": "^10.4.8",
-    "cypress": "^10.6.0",
+    "cypress": "^10.8.0",
     "eslint": "^8.21.0",
     "eslint-plugin-cypress": "^2.12.1",
     "lint-staged": "^12.5.0",

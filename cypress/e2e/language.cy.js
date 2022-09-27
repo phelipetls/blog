@@ -1,6 +1,6 @@
 const viewports = ['macbook-11', 'iphone-6']
 
-describe('Multi-language listbox', () => {
+describe('Multi-language', () => {
   viewports.forEach((viewport) => {
     it(`should be able to select multiple languages in ${viewport}`, () => {
       cy.viewport(viewport)

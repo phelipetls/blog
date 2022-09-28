@@ -32,6 +32,8 @@ const maxAnimationDuration = Math.max(
     content.style.transform = 'translateX(100%)'
     backdrop.style.opacity = '0'
     dialogElement.style.visibility = 'hidden'
+
+    document.body.style.overflowY = 'visible'
   }
 
   const showSidenav = () => {
@@ -46,6 +48,8 @@ const maxAnimationDuration = Math.max(
     dialogElement
       .querySelector<HTMLElement>('button[data-a11y-dialog-hide]')
       ?.focus()
+
+    document.body.style.overflowY = 'hidden'
   }
 
   hideSidenav()

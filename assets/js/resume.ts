@@ -20,7 +20,7 @@ if (PDFObject.supportsPDFs) {
   PDFObject.embed(resumeUrl, resumeContainer)
 } else {
   resumeLoading?.classList.replace('hidden', 'flex')
-  resumeDownloadButton?.classList.replace('hidden', 'flex')
+  resumeDownloadButton?.classList.remove('hidden')
 
   const pdfWorkerScript = document.createElement('script')
   pdfWorkerScript.src = params.pdfjsWorkerUrl

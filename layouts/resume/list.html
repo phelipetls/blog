@@ -1,12 +1,14 @@
 {{ define "main" }}
   <main class="grid flex-1 grid-cols-layout">
-    <div class="col-full grid flex-1 grid-cols-layout grid-rows-[auto,1fr]">
+    <div
+      class="col-full flex flex-1 flex-shrink-0 flex-col sm:grid sm:grid-cols-layout sm:grid-rows-[auto,1fr]"
+    >
       <h1 class="mb-4 hidden text-center sm:block">{{ i18n "Resume" }}</h1>
 
       <div
         data-resume-container
         data-resume-url="{{ .Site.Params.resume }}"
-        class="relative col-full w-full overflow-y-auto border-y border-divider sm:col-content sm:rounded-md sm:border"
+        class="relative col-full h-full w-full overflow-y-auto border-y border-divider sm:col-content sm:rounded-md sm:border"
       >
         <div
           data-resume-loading
@@ -27,10 +29,7 @@
         </noscript>
       </div>
 
-      <div
-        data-resume-download-button
-        class="hidden flex-1 flex-col items-center justify-center"
-      >
+      <div data-resume-download-button class="mx-auto hidden">
         <a
           class="btn btn-primary mt-4 flex gap-2"
           style="--icon-size: 1.5rem;"

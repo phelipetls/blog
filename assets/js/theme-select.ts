@@ -14,22 +14,21 @@ themeSelects?.forEach((themeSelect) =>
 )
 
 document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
-  function changeThemeSelectIcon(theme: ThemeChoice) {
+  const themeChoice = e.detail.themeChoice
+
+  function changeThemeSelectIcon(themeChoice: ThemeChoice) {
     const icon = {
       dark: '#moon',
       light: '#sun',
       auto: '#monitor',
-    }[theme]
+    }[themeChoice]
 
-    const themeSelectIcons = document.querySelectorAll<HTMLElement>(
-      '[data-theme-select-icon]'
-    )
-
-    themeSelectIcons?.forEach((themeSelectIcon) =>
-      themeSelectIcon.setAttribute('href', icon)
-    )
+    themeSelects.forEach((themeSelect) => {
+      themeSelect
+        .querySelector<HTMLElement>('[data-theme-select-icon]')
+        ?.setAttribute('href', icon)
+    })
   }
 
-  const themeChoice = e.detail.themeChoice
   changeThemeSelectIcon(themeChoice)
 } as EventListener)

@@ -1,8 +1,19 @@
 import type { ThemeChoice, NewThemeEvent } from './theme'
+import { getStoredThemeChoice } from './theme'
 
-const themeSelects = document.querySelectorAll('[data-theme-select]')
+const themeSelects = document.querySelectorAll<HTMLSelectElement>(
+  '[data-theme-select]'
+)
 
-themeSelects?.forEach((themeSelect) =>
+themeSelects?.forEach((themeSelect) => {
+  const storedThemeChoice: ThemeChoice = getStoredThemeChoice()
+  const themeChoiceOption = Array.from(themeSelect.options).find(
+    (option) => option.value === storedThemeChoice
+  )
+  if (themeChoiceOption) {
+    themeChoiceOption.setAttribute('selected', '')
+  }
+
   themeSelect.addEventListener('change', function (e) {
     if (!e.target) {
       return
@@ -11,7 +22,7 @@ themeSelects?.forEach((themeSelect) =>
     const selectedOption = (e.target as HTMLSelectElement).selectedOptions[0]
     window.__setTheme(selectedOption.value as ThemeChoice)
   })
-)
+})
 
 document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
   const themeChoice = e.detail.themeChoice

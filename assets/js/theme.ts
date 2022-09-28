@@ -32,7 +32,7 @@ function storeThemeChoice(themeChoice: ThemeChoice): void {
   localStorage.setItem('__theme', themeChoice)
 }
 
-function getStoredThemeChoice() {
+export function getStoredThemeChoice() {
   return (localStorage.getItem('__theme') || 'auto') as ThemeChoice
 }
 

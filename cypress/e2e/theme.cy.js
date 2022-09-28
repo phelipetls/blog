@@ -87,4 +87,24 @@ describe('Dark, light and system theme', () => {
 
     cy.get('body').should('have.class', 'dark')
   })
+
+  it('should show system theme as selected if there is no stored theme', () => {
+    cy.visit('/')
+
+    cy.findByRole('combobox', { name: /choose a theme/i })
+      .findByRole('option', { name: /system/i })
+      .should('be.selected')
+  })
+
+  it('should show stored theme as selected', () => {
+    visit('/', {
+      onBeforeLoad: (win) => {
+        win.localStorage.setItem('__theme', 'dark')
+      },
+    })
+
+    cy.findByRole('combobox', { name: /choose a theme/i })
+      .findByRole('option', { name: /dark/i })
+      .should('be.selected')
+  })
 })

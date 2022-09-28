@@ -27,14 +27,14 @@
 .dark {
   --primary: hexToRgb(theme(colors.amber.300));
   --primary-hover: hexToRgb(theme(colors.amber.400));
-  --on-primary: hexToRgb(theme(colors.stone.800));
-  --background: hexToRgb(theme(colors.stone.900));
+  --on-primary: hexToRgb(theme(colors.neutral.800));
+  --background: hexToRgb(theme(colors.neutral.900));
   --on-background: hexToRgb(theme(colors.beige.200));
-  --surface: hexToRgb(theme(colors.stone.800));
-  --hover: hexToRgb(theme(colors.stone.700));
-  --disabled: hexToRgb(theme(colors.stone.500));
+  --surface: hexToRgb(theme(colors.neutral.800));
+  --hover: hexToRgb(theme(colors.neutral.700));
+  --disabled: hexToRgb(theme(colors.neutral.500));
   --on-disabled: hexToRgb(theme(colors.beige.100));
-  --divider: hexToRgb(theme(colors.stone.500));
+  --divider: hexToRgb(theme(colors.neutral.500));
   --shadow: hexToRgb(theme(colors.neutral.900));
   --note: hexToRgb(theme(colors.blue.500));
   --warn: hexToRgb(theme(colors.red.500));

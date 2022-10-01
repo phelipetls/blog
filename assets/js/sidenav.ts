@@ -27,7 +27,7 @@ const maxAnimationDuration = Math.max(
   const hideSidenav = () => {
     backdrop.style.transition = `opacity ${DIALOG_BACKDROP_ANIMATION_DURATION}ms ease`
     content.style.transition = `transform ${DIALOG_CONTENT_ANIMATION_DURATION}ms ease`
-    dialogElement.style.transition = `visibility 0ms ${maxAnimationDuration}ms`
+    dialogElement.style.transition = `visibility 0ms ${maxAnimationDuration}ms ease`
 
     content.style.transform = 'translateX(100%)'
     backdrop.style.opacity = '0'

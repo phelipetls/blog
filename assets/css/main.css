@@ -18,7 +18,7 @@
   --disabled: hexToRgb(theme(colors.beige.400));
   --on-disabled: hexToRgb(theme(colors.neutral.400));
   --divider: hexToRgb(theme(colors.beige.600));
-  --shadow: hexToRgb(theme(colors.beige.500));
+  --shadow: hexToRgb(theme(colors.stone.400));
   --note: hexToRgb(theme(colors.blue.600));
   --warn: hexToRgb(theme(colors.red.600));
   color-scheme: light;

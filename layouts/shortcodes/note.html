@@ -4,6 +4,6 @@
   </div>
 
   <div class="overflow-x-hidden">
-    {{ .Inner | markdownify }}
+    {{ .Page.RenderString .Inner }}
   </div>
 </div>

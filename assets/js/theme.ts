@@ -1,5 +1,5 @@
 export type Theme = 'dark' | 'light'
-export type ThemeChoice = 'dark' | 'light' | 'auto'
+export type ThemeChoice = 'dark' | 'light' | 'system'
 
 window.__setTheme = setTheme
 
@@ -32,8 +32,8 @@ function storeThemeChoice(themeChoice: ThemeChoice): void {
   localStorage.setItem('__theme', themeChoice)
 }
 
-export function getStoredThemeChoice() {
-  return (localStorage.getItem('__theme') || 'auto') as ThemeChoice
+export function getStoredThemeChoice(): ThemeChoice {
+  return (localStorage.getItem('__theme') as ThemeChoice | null) || 'system'
 }
 
 function getAutoTheme(): Theme {
@@ -43,7 +43,7 @@ function getAutoTheme(): Theme {
 }
 
 function getThemeFromChoice(themeChoice: ThemeChoice): Theme {
-  if (themeChoice === 'auto') {
+  if (themeChoice === 'system') {
     return getAutoTheme()
   }
   return themeChoice

@@ -31,7 +31,7 @@ document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     const icon = {
       dark: '#moon',
       light: '#sun',
-      auto: '#monitor',
+      system: '#monitor',
     }[themeChoice]
 
     themeSelects.forEach((themeSelect) => {

@@ -66,7 +66,7 @@ describe('Dark, light and system theme', () => {
     visit('/', {
       prefersDarkColorScheme: true,
       onBeforeLoad: (win) => {
-        win.localStorage.setItem('__theme', 'auto')
+        win.localStorage.setItem('__theme', 'system')
       },
     })
 
@@ -83,7 +83,7 @@ describe('Dark, light and system theme', () => {
 
     cy.get('body').should('not.have.class', 'dark')
 
-    cy.findByRole('combobox', { name: /choose a theme/i }).select('auto')
+    cy.findByRole('combobox', { name: /choose a theme/i }).select('system')
 
     cy.get('body').should('have.class', 'dark')
   })

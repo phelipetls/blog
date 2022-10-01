@@ -12,6 +12,9 @@ module.exports = {
         '1/2': '50%',
         content: 'var(--content-max-width)',
       },
+      boxShadow: {
+        t: '0 -1px 3px rgba(0, 0, 0, 0.5)',
+      },
       zIndex: {
         '-1': '-1',
       },

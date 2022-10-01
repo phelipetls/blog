@@ -19,22 +19,31 @@
   ></div>
 
   <picture>
-    {{ if hugo.IsProduction }}
-      {{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
-      {{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
-      {{ $gravatarUrl3xWebp := $gravatar3x.Resize (printf "%dx%d webp picture" $gravatar3x.Width $gravatar3x.Height) }}
+    {{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
+    {{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
+    {{ $gravatarUrl3xWebp := $gravatar3x.Resize (printf "%dx%d webp picture" $gravatar3x.Width $gravatar3x.Height) }}
 
 
-      <source
-        srcset="
-          {{ $gravatarUrlWebp.Permalink }} 1x,
-          {{ $gravatarUrl2xWebp.Permalink }} 2x,
-          {{ $gravatarUrl3xWebp.Permalink }} 3x
-        "
-        type="image/webp"
-      />
-    {{ end }}
+    <source
+      srcset="{{ $gravatarUrl3xWebp.Permalink }}"
+      media="(min-width: 1024px)"
+      type="image/webp"
+    />
 
+    <source
+      srcset="{{ $gravatarUrl3x }}"
+      media="(min-width: 1024px)"
+      type="image/png"
+    />
+
+    <source
+      srcset="
+        {{ $gravatarUrlWebp.Permalink }} 1x,
+        {{ $gravatarUrl2xWebp.Permalink }} 2x,
+        {{ $gravatarUrl3xWebp.Permalink }} 3x
+      "
+      type="image/webp"
+    />
 
     <img
       id="gravatar"

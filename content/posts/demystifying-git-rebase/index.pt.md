@@ -175,13 +175,13 @@ cujo valor padrão é o valor das variáveis de ambiente (normalmente `vim` ou
 
 Você pode mudar isso em configuração do git em `~/.gitconfig` ou com a CLI:
 
-```shell-sesson
+```shell-session
 $ git config --global core.editor emacs
 ```
 
 Por exemplo, caso você use o VS Code:
 
-```shell-sesson
+```shell-session
 $ git config --global core.editor 'code --wait'
 ```
 
@@ -361,7 +361,7 @@ Para separar um commit, eu normalmente primeiro desfaço o commit com `git
 reset HEAD^`, e então vou adicionando e commitando as changes de novo de forma
 diferente.
 
-```shell-sesson
+```shell-session
 $ # undo the commit, but keep its changes in the working tree
 $ git reset HEAD^
 $ git add foo
@@ -379,7 +379,7 @@ Mas agora, é mais conveniente usar o `git reset --soft` para desfazer o commit,
 porque as mudanças daquele commit vão permanecer na staging area, e então basta
 remover o arquivo da staging area e commitar de novo:
 
-```shell-sesson
+```shell-session
 $ # undo the commit, but keep its changes in the staging area
 $ git reset --soft HEAD^
 $ # remove the file from the staging area

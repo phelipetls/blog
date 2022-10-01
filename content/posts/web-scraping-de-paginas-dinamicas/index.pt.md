@@ -23,7 +23,7 @@ facilite a extração dos elementos, como a `BeautifulSoup`.
 
 Utilizo essas duas bibliotecas no script abaixo. E podemos instalá-las com:
 
-```shell-sesson
+```shell-session
 $ pip3 instal selenium bs4
 ```
 

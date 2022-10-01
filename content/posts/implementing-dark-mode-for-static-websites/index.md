@@ -224,7 +224,7 @@ Also, to change syntax highlighting colorscheme, we need to add
 Then, we need to generate stylesheets for each different colorscheme and move
 them to our assets folder.
 
-```shell-sesson
+```shell-session
 $ hugo gen chromastyles --style=monokai > dark-syntax-highlight.css
 $ hugo gen chromastyles --style=lovelace > light-syntax-highlight.css
 ```

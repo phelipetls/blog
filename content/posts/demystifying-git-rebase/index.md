@@ -352,7 +352,7 @@ done editing, run `git rebase --continue`.
 To split a commit, you can first "undo" it with `git reset`, then just add
 changes and commit them differently.
 
-```shell-sesson
+```shell-session
 $ # undo the commit, but keep its changes in the working tree
 $ git reset HEAD^
 $ git add foo
@@ -370,7 +370,7 @@ But now, it's more convenient to use `git reset --soft` to "undo" the commit,
 because it'll keep the changes in the staging area. Now all you need to do is
 unstage the file you want to remove and commit again.
 
-```shell-sesson
+```shell-session
 $ # undo the commit, but keep its changes in the staging area
 $ git reset --soft HEAD^
 $ # remove the file from the staging area

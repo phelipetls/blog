@@ -23,7 +23,7 @@ is convenient.
 [You can download Tailscale here](https://tailscale.com/download/). A shell
 script is provided for Linux:
 
-```shell-sesson
+```shell-session
 $ curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
@@ -34,13 +34,13 @@ it in Linux.
 
 You just need to run one command to start Tailscale and authenticate:
 
-```shell-sesson
+```shell-session
 $ tailscale up
 ```
 
 To check your connected devices and their IP addresses, 
 
-```shell-sesson
+```shell-session
 $ tailscale status
 100.x.y.z   fedora               phelipetls@  linux   -
 ```
@@ -48,7 +48,7 @@ $ tailscale status
 Now try downloading the mobile app and activate it there, and your mobile
 device should be listed in there as well:
 
-```shell-sesson
+```shell-session
 $ tailscale status
 100.x.y.z   fedora               phelipetls@  linux   -
 100.x.y.z   s20-fe-de-phelipe    phelipetls@  android idle, tx 6685800 rx 260204
@@ -77,7 +77,7 @@ help](https://www.reddit.com/r/Tailscale/comments/ukittc/how_to_access_a_web_ser
 to find out how to make Hugo's development server, running in my laptop,
 available to my mobile device. Eventually I found this does the trick:
 
-```shell-sesson
+```shell-session
 $ hugo serve --bind 100.x.y.z --baseUrl 100.x.y.z
 ```
 
@@ -95,13 +95,13 @@ the `public` directory and check it out in your phone.
 
 You can use Python's `http.server` module:
 
-```shell-sesson
+```shell-session
 $ python3 -m http.server --bind $(tailscale ip -4) --directory public
 ```
 
 Or Vercel's [`serve`](https://github.com/vercel/serve):
 
-```shell-sesson
+```shell-session
 $ npx serve --listen $(tailscale ip -4) public
 ```
 
@@ -120,6 +120,6 @@ laptop with `sudo tailscale file get .`.
 
 Alternatively, you can send files from your laptop to your mobile device with:
 
-```shell-sesson
+```shell-session
 $ sudo tailscale file cp $file $mobile_device_tailscale_ip_address:
 ```

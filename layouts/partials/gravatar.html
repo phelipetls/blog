@@ -9,7 +9,7 @@
 
 
 <div
-  class="relative z-0 mb-8 shrink-0 overflow-hidden rounded-full border-2 border-divider sm:mr-8 sm:mb-0"
+  class="relative z-0 shrink-0 overflow-hidden rounded-full border-2 border-divider"
   style="width: {{ $gravatar.Width }}px; height: {{ $gravatar.Height }}px;"
 >
   {{ $blurred := $gravatar.Filter (images.GaussianBlur 6) }}

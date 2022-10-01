@@ -101,7 +101,7 @@
   }
 
   kbd {
-    @apply inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] font-bold leading-none text-on-background shadow-sm shadow-on-background;
+    @apply inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] font-bold leading-none text-on-background shadow shadow-shadow;
   }
 
   hr {
@@ -294,7 +294,7 @@
   }
 
   .btn-icon-action {
-    @apply border border-divider shadow-md shadow-shadow;
+    @apply border border-divider shadow shadow-shadow;
   }
 
   .chip {
@@ -302,15 +302,15 @@
   }
 
   .tag {
-    @apply chip no-underline shadow-sm shadow-shadow transition-colors duration-500 hover:border-divider hover:bg-hover;
+    @apply chip no-underline shadow shadow-shadow transition-colors duration-500 hover:border-divider hover:bg-hover;
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l bg-surface px-page-padding py-4 shadow-md shadow-shadow sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-l bg-surface px-page-padding py-4 shadow shadow-shadow sm:mx-0;
   }
 
   .card {
-    @apply rounded-md bg-surface shadow-md shadow-shadow;
+    @apply rounded-md bg-surface shadow shadow-shadow;
   }
 
   .grid-cols-layout > * {

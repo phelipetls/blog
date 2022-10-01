@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html
-  class="h-full text-base selection:bg-on-background selection:text-background sm:text-lg"
+  class="{{ block "rootClass" . }}
+  {{ end }} h-full text-base selection:bg-on-background selection:text-background sm:text-lg"
   lang="{{ .Site.Params.htmlLang | default .Lang }}"
 >
   <head>

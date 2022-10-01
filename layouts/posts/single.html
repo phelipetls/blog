@@ -81,13 +81,11 @@
   </main>
 {{ end }}
 
-{{ define "head" }}
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+{{ define "rootClass" }}
+  scroll-smooth
+{{ end }}
 
+{{ define "head" }}
   {{ $darkSyntaxHighlight := resources.Get "css/dark-syntax-highlight.css" }}
   {{ $liteYoutubeEmbedCss := resources.Get "css/vendor/lite-yt-embed.css" | postCSS }}
 

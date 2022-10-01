@@ -137,8 +137,12 @@
     @apply -mx-page-padding sm:mx-0;
   }
 
+  [data-blog-post] > figure :is(video, img) {
+    @apply bg-surface sm:rounded-md;
+  }
+
   [data-blog-post] > figure video {
-    @apply min-h-[15em] bg-surface sm:rounded-md;
+    @apply min-h-[15em];
   }
 
   [data-blog-post] .katex-display {

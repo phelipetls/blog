@@ -128,7 +128,13 @@
     @apply mt-2 px-page-padding text-center;
   }
 
-  [data-blog-post]
+  :is([data-blog-post])
+    > :is([data-codeblock], :not([data-codeblock]) pre, figure, blockquote) {
+    @apply my-8;
+  }
+
+  [data-alert]
+    [data-alert-content]
     > :is([data-codeblock], :not([data-codeblock]) pre, figure, blockquote) {
     @apply my-8;
   }

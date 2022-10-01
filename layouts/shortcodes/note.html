@@ -1,9 +1,9 @@
-<div data-note class="alert border-note">
+<div data-alert data-note class="alert border-note">
   <div class="hidden text-note sm:block">
     {{ partial "svgs/info.svg" }}
   </div>
 
-  <div class="overflow-x-hidden">
+  <div data-alert-content class="overflow-x-hidden">
     {{ .Page.RenderString .Inner }}
   </div>
 </div>

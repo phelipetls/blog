@@ -1,9 +1,9 @@
-<div data-warn class="alert border-warn">
+<div data-alert data-warn class="alert border-warn">
   <div class="hidden text-warn sm:block">
     {{ partial "svgs/x-octagon.svg" }}
   </div>
 
-  <div class="overflow-x-hidden">
+  <div data-alert-content class="overflow-x-hidden">
     {{ .Page.RenderString .Inner }}
   </div>
 </div>

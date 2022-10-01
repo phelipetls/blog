@@ -35,7 +35,7 @@
   --disabled: hexToRgb(theme(colors.neutral.400));
   --on-disabled: hexToRgb(theme(colors.beige.100));
   --divider: hexToRgb(theme(colors.neutral.400));
-  --shadow: hexToRgb(theme(colors.neutral.800));
+  --shadow: hexToRgb(theme(colors.neutral.900));
   --note: hexToRgb(theme(colors.blue.500));
   --warn: hexToRgb(theme(colors.red.500));
   color-scheme: dark;

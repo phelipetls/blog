@@ -62,6 +62,10 @@
         <hr class="my-8" />
 
         <div class="grid place-items-center">
+          <div data-utterances-loading>
+            {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+          </div>
+
           <script
             data-utterances-client-script
             src="https://utteranc.es/client.js"

@@ -17,6 +17,8 @@ document
     }
 
     iframe?.addEventListener('load', () => {
+      document.querySelector('[data-utterances-loading]')?.remove()
+
       changeUtterancesTheme(
         document.body.classList.contains('dark') ? 'dark' : 'light'
       )

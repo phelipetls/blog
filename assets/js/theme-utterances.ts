@@ -1,13 +1,27 @@
 import type { NewThemeEvent, Theme } from './theme'
+;(() => {
+  const utterancesScript = document.querySelector(
+    '[data-utterances-client-script]'
+  )
 
-document
-  .querySelector('[data-utterances-client-script]')
-  ?.addEventListener('load', () => {
+  if (!utterancesScript) {
+    return
+  }
+
+  const removeLoading = () => {
+    document.querySelector('[data-utterances-loading]')?.remove()
+  }
+
+  utterancesScript.addEventListener('load', () => {
     const iframe =
       document.querySelector<HTMLIFrameElement>('.utterances-frame')
 
-    function changeUtterancesTheme(theme: Theme) {
-      iframe?.contentWindow?.postMessage(
+    if (!iframe) {
+      return
+    }
+
+    const changeUtterancesTheme = (theme: Theme) => {
+      iframe.contentWindow?.postMessage(
         {
           type: 'set-theme',
           theme: theme === 'dark' ? 'github-dark' : 'github-light',
@@ -16,8 +30,8 @@ document
       )
     }
 
-    iframe?.addEventListener('load', () => {
-      document.querySelector('[data-utterances-loading]')?.remove()
+    iframe.addEventListener('load', () => {
+      removeLoading()
 
       changeUtterancesTheme(
         document.body.classList.contains('dark') ? 'dark' : 'light'
@@ -27,6 +41,15 @@ document
         changeUtterancesTheme(e.detail.theme)
       } as EventListener)
     })
+
+    iframe.addEventListener('error', () => {
+      removeLoading()
+    })
   })
+
+  utterancesScript.addEventListener('error', () => {
+    removeLoading()
+  })
+})()
 
 export {}

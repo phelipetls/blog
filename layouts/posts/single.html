@@ -58,26 +58,23 @@
         ></div>
       </div>
 
-      {{ if hugo.IsProduction }}
-        <hr class="my-8" />
+      <hr class="my-8" />
 
-        <div class="grid place-items-center">
-          <div data-utterances-loading>
-            {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
-          </div>
-
-          <script
-            data-utterances-client-script
-            src="https://utteranc.es/client.js"
-            repo="phelipetls/phelipetls.github.io"
-            issue-term="pathname"
-            crossorigin="anonymous"
-            theme="github-light"
-            async
-          ></script>
+      <div class="grid place-items-center">
+        <div data-utterances-loading>
+          {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
         </div>
-      {{ end }}
 
+        <script
+          data-utterances-client-script
+          src="https://utteranc.es/client.js"
+          repo="phelipetls/phelipetls.github.io"
+          issue-term="pathname"
+          crossorigin="anonymous"
+          theme="github-light"
+          async
+        ></script>
+      </div>
 
       <div class="-mx-page-padding mt-8 sm:mx-0">
         {{ partial "post-nav.html" . }}

@@ -9,12 +9,12 @@ const hugoConfig = require('../config.json')
   try {
     await generatePostsImages({
       postsImagesUrl: 'http://localhost:1313/posts/images.json',
-      screenshotFilename: hugoConfig.languages.en.params.postImageFilename,
+      screenshotFilename: hugoConfig.languages.en.params.images[0],
     })
 
     await generatePostsImages({
       postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
-      screenshotFilename: hugoConfig.languages.pt.params.postImageFilename,
+      screenshotFilename: hugoConfig.languages.pt.params.images[0],
     })
 
     process.exit(0)

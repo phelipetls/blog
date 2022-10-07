@@ -7,12 +7,12 @@ const hugoConfig = require('../config.json')
 
 generatePostsImages({
   postsImagesUrl: 'http://localhost:1313/posts/images.json',
-  screenshotFilename: hugoConfig.languages.en.params.postImagePath,
+  screenshotFilename: hugoConfig.languages.en.params.postImageFilename,
 })
 
 generatePostsImages({
   postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
-  screenshotFilename: hugoConfig.languages.pt.params.postImagePath,
+  screenshotFilename: hugoConfig.languages.pt.params.postImageFilename,
 })
 
 async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {

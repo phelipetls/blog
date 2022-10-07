@@ -26,7 +26,7 @@
   {{ partial "math.html" . }}
 {{ end }}
 
-{{ with .Resources.GetMatch .Site.Params.postImagePath }}
+{{ with .Resources.GetMatch .Site.Params.postImageFilename }}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="{{ .Permalink }}" />
   <meta property="og:image" content="{{ .Permalink }}" />

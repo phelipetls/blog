@@ -139,6 +139,12 @@
     @apply my-8;
   }
 
+  [data-blog-post]
+    details
+    > :is([data-codeblock], :not([data-codeblock]) pre, figure, blockquote) {
+    @apply my-8;
+  }
+
   [data-alert] [data-alert-content] h2:first-of-type {
     @apply mt-0 pt-0;
   }

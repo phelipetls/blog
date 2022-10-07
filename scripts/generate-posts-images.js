@@ -5,17 +5,30 @@ const fetch = require('node-fetch')
 const puppeteer = require('puppeteer')
 const hugoConfig = require('../config.json')
 
-generatePostsImages({
-  postsImagesUrl: 'http://localhost:1313/posts/images.json',
-  screenshotFilename: hugoConfig.languages.en.params.postImageFilename,
-})
+;(async () => {
+  try {
+    await generatePostsImages({
+      postsImagesUrl: 'http://localhost:1313/posts/images.json',
+      screenshotFilename: hugoConfig.languages.en.params.postImageFilename,
+    })
 
-generatePostsImages({
-  postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
-  screenshotFilename: hugoConfig.languages.pt.params.postImageFilename,
-})
+    await generatePostsImages({
+      postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
+      screenshotFilename: hugoConfig.languages.pt.params.postImageFilename,
+    })
+
+    process.exit(0)
+  } catch (err) {
+    console.error(err.message)
+    process.exit(1)
+  }
+})()
 
 async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
+  if (!screenshotFilename) {
+    throw new Error('No filename for screenshot defined')
+  }
+
   const response = await fetch(postsImagesUrl)
   const postsImages = await response.json()
 

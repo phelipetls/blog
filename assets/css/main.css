@@ -84,11 +84,13 @@
     @apply border-b border-divider no-underline hover:border-primary;
   }
 
-  ul {
+  ul,
+  ol {
     @apply ml-4 mb-4 list-disc;
   }
 
-  ul li::marker {
+  ul li::marker,
+  ol li::marker {
     @apply text-primary;
   }
 

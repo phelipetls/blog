@@ -1,4 +1,25 @@
-<div data-codeblock class="group relative my-8">
+<div
+  data-codeblock
+  class="{{ if .Attributes.filename }}mt-16{{ end }} group relative my-8"
+>
+  {{ with .Attributes.filename }}
+    <div
+      class="absolute top-0 left-page-padding mx-auto max-w-[calc(100%-var(--page-padding)*2)] -translate-y-full overflow-hidden"
+    >
+      <span
+        class="chroma flex gap-2 overflow-hidden whitespace-nowrap rounded-t px-4 py-1"
+      >
+        <span class="shrink-0">
+          {{ partial "svgs/file-text.svg" . }}
+        </span>
+
+        <span class="overflow-hidden text-ellipsis">
+          {{ . }}
+        </span>
+      </span>
+    </div>
+  {{ end }}
+
   {{ highlight .Inner .Type .Options }}
 
 

@@ -215,18 +215,6 @@
     @apply border-t border-primary bg-surface;
   }
 
-  [data-nav-container] [role='listbox'] [role='option'] {
-    @apply hover:bg-hover;
-  }
-
-  [data-nav-container] [role='listbox'] [role='option']:first-child {
-    @apply rounded-t-md;
-  }
-
-  [data-nav-container] [role='listbox'] [role='option']:last-child {
-    @apply rounded-b-md;
-  }
-
   nav[data-toc] {
     @apply mt-4;
   }

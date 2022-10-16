@@ -69,9 +69,9 @@ chose](https://github.com/tree-sitter/tree-sitter-javascript/blob/936d976a782e75
 (thanks!).
 
 But sometimes the name of the node you're interested in might not be so
-obvious. It helps to inspect the syntax tree with the
-[playground](https://github.com/nvim-treesitter/playground) plugin with the
-`:TSPlaygroundToggle` command.
+obvious. It helps to inspect the syntax tree with the `:TSPlaygroundToggle`
+command of the [playground](https://github.com/nvim-treesitter/playground)
+plugin.
 
 {{< figure src="./playground-demo.png" alt=`A screenshot of neovim showing a
 syntax tree representation of a JavaScript program, as implemented in
@@ -86,6 +86,7 @@ text, then use Lua's `string.match` to check if the text contains `${`:
 ```lua
 M.convert = function()
   --- ...
+
   local has_interpolation = false
 
   for child in node:iter_children() do
@@ -107,7 +108,7 @@ end
 {{< warn >}}
 
 Notice that `vim.treesitter.get_node_text` takes a mandatory second argument,
-which is the buffer number. It's easy to forget this, so I'm mentioning it.
+which is the buffer number (we use `0` for current buffer).
 
 {{< /warn >}}
 

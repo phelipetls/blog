@@ -69,8 +69,22 @@ which is impressive.
 
 # Windows Terminal
 
-I didn't have such a good experience with Windows Terminal as I had with WSL2,
-unfortunately.
+Since [Windows Terminal
+1.16](https://devblogs.microsoft.com/commandline/windows-terminal-preview-1-16-release/#new-text-rendering-engine),
+I didn't experience any glitches while working, it working wonderfully well now.
+
+I don't know what exactly contributed to this, but I'd guess it's the [new
+rendering
+engine](https://devblogs.microsoft.com/commandline/windows-terminal-preview-1-16-release/#new-text-rendering-engine)
+now enabled by default.
+
+{{< details `Previously, I had wrote about how my experience with Windows
+Terminal wasn't great, because I'd often encounter glitches while using my
+terminal apps, particularly neovim. Fortunately, they seem to be fixed now.`
+>}}
+
+I didn't have such a good experience with Windows Terminal as I had with
+WSL2, unfortunately.
 
 I was excited about Windows Terminal when [it was announced in 2019, with the
 most impressive marketing video](https://www.youtube.com/watch?v=8gw0rXPMMPE),
@@ -89,11 +103,13 @@ this issue, which totally breaks my workflow, the user experience is an
 undeniable improvement.
 
 Meanwhile, I had to use the Ubuntu terminal, which does not have these issues,
-but it's awkward to configure.
+  but it's awkward to configure.
 
-I'm also considering moving to [wezterm](https://wezfurlong.org/wezterm/).
-There is also [Alacritty](https://github.com/alacritty/alacritty), but this is
-not an option for me because it looks so ugly in GNOME.
+  I'm also considering moving to [wezterm](https://wezfurlong.org/wezterm/).
+  There is also [Alacritty](https://github.com/alacritty/alacritty), but this is
+  not an option for me because it looks so ugly in GNOME.
+
+{{< /details >}}
 
 # Windows clipboard integration
 

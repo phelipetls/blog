@@ -126,18 +126,17 @@
     @apply mt-2 px-page-padding text-center;
   }
 
-  :is([data-blog-post]) > :is(:not([data-codeblock]) pre, figure, blockquote) {
+  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
+    > [data-codeblock] {
     @apply my-8;
   }
 
-  [data-alert]
-    [data-alert-content]
-    > :is(:not([data-codeblock]) pre, figure, blockquote) {
-    @apply my-8;
+  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
+    > [data-codeblock-with-filename] {
+    @apply mt-16;
   }
 
-  [data-blog-post]
-    details
+  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
     > :is(:not([data-codeblock]) pre, figure, blockquote) {
     @apply my-8;
   }

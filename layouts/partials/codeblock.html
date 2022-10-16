@@ -1,6 +1,7 @@
 <div
   data-codeblock
-  class="{{ if .Attributes.filename }}mt-16{{ end }} group relative my-8"
+  {{ if .Attributes.filename }}data-codeblock-with-filename{{ end }}
+  class="group relative"
 >
   {{ with .Attributes.filename }}
     <div

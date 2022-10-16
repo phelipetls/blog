@@ -26,8 +26,8 @@
   {{ partial "math.html" . }}
 {{ end }}
 
-{{ template "_internal/opengraph.html" . }}
-{{ template "_internal/twitter_cards.html" . }}
+{{ partial "opengraph.html" . }}
+{{ partial "twitter-cards.html" . }}
 
 {{ range .AlternativeOutputFormats -}}
   {{ if (and (eq .Name "RSS") hugo.IsProduction) }}

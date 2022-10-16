@@ -18,3 +18,7 @@ content/**/*.md
 public
 resources
 hugo_stats.json
+
+# forked templates
+layouts/partials/opengraph.html
+layouts/partials/twitter-cards.html

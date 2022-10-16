@@ -10,7 +10,9 @@
     "cy:open": "cypress run",
     "cy:run": "cypress run",
     "test": "start-server-and-test dev 1313 cy:run",
-    "generate-posts-images": "node ./scripts/generate-posts-images.js"
+    "generate-posts-images": "node ./scripts/generate-posts-images.js",
+    "tsc": "tsc",
+    "pre-push": "run-s tsc test"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.0.2",
     "@testing-library/cypress": "^8.0.3",
+    "@types/node-fetch": "^2.6.2",
     "@types/pdfobject": "^2.2.3",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
@@ -56,7 +59,7 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "pre-push": "npm run test"
+    "pre-push": "npm run pre-push"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

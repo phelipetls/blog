@@ -5,6 +5,7 @@
     "strict": true,
     "module": "es6",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "target": "esnext",
@@ -14,7 +15,8 @@
     }
   },
   "include": [
-    "assets/js/**/*"
+    "assets/js/**/*",
+    "scripts/*"
   ],
   "exclude": [
     "assets/js/templates"

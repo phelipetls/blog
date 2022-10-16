@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const path = require('path')
@@ -19,17 +20,27 @@ const hugoConfig = require('../config.json')
 
     process.exit(0)
   } catch (err) {
-    console.error(err.message)
+    if (err instanceof Error) {
+      console.error(err.message)
+    }
     process.exit(1)
   }
 })()
 
+/** @typedef Options
+ * @property {string} postsImagesUrl
+ * @property {string} screenshotFilename
+ */
+
+/**
+ * @type {(options: Options) => Promise<void>}
+ */
 async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
   if (!screenshotFilename) {
     throw new Error('No filename for screenshot defined')
   }
 
-  const response = await fetch(postsImagesUrl)
+  const response = await fetch.default(postsImagesUrl)
   const postsImages = await response.json()
 
   const browser = await puppeteer.launch({

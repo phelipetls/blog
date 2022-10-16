@@ -118,14 +118,6 @@
     @apply ml-1 inline-block h-[1em] w-[1em] align-text-top;
   }
 
-  [data-blog-post] details {
-    @apply mb-4;
-  }
-
-  [data-blog-post] details summary {
-    @apply mb-4;
-  }
-
   [data-blog-post] img {
     @apply mx-auto;
   }

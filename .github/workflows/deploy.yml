@@ -28,6 +28,12 @@ jobs:
 
       - run: npm ci
 
+      - name: Generate posts images to use as Open Graph images
+        run: npx start-server-and-test 'hugo serve --watch=false' 1313 generate-posts-images
+        env:
+          HUGO_ENV: production
+          NODE_ENV: production
+
       - name: Run tests
         run: npm run test
         env:
@@ -40,12 +46,6 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-
-      - name: Generate posts images to use as Open Graph images
-        run: npx start-server-and-test 'hugo serve --watch=false' 1313 generate-posts-images
-        env:
-          HUGO_ENV: production
-          NODE_ENV: production
 
       - run: hugo --minify
 

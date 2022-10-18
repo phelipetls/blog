@@ -308,6 +308,12 @@
   }
 }
 
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+}
+
 [data-preload] {
   transition: none !important;
 }

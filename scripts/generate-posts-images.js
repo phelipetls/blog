@@ -27,7 +27,8 @@ const hugoConfig = require('../config.json')
   }
 })()
 
-/** @typedef Options
+/**
+ * @typedef Options
  * @property {string} postsImagesUrl
  * @property {string} screenshotFilename
  */

@@ -1,60 +1,30 @@
 {{ $gravatarUrl := printf "https://www.gravatar.com/avatar/%s?s=200" (md5 .Site.Params.email) }}
-{{ $gravatar := resources.GetRemote $gravatarUrl }}
-
 {{ $gravatarUrl2x := printf "https://www.gravatar.com/avatar/%s?s=400" (md5 .Site.Params.email) }}
-{{ $gravatar2x := resources.GetRemote $gravatarUrl2x }}
-
 {{ $gravatarUrl3x := printf "https://www.gravatar.com/avatar/%s?s=600" (md5 .Site.Params.email) }}
-{{ $gravatar3x := resources.GetRemote $gravatarUrl3x }}
+
+{{ $gravatar := resources.GetRemote $gravatarUrl }}
 
 
 <div
   class="relative z-0 shrink-0 overflow-hidden rounded-full border-2 border-divider"
-  style="width: {{ $gravatar.Width }}px; height: {{ $gravatar.Height }}px;"
 >
   {{ $blurred := $gravatar.Filter (images.GaussianBlur 6) }}
+
+
   <div
     class="absolute inset-0 -z-1 h-full w-full"
     style="background: url('data:image/png;base64,{{ $blurred.Content | base64Encode }}') no-repeat;"
   ></div>
 
-  <picture>
-    {{ $gravatarUrlWebp := $gravatar.Resize (printf "%dx%d webp picture" $gravatar.Width $gravatar.Height) }}
-    {{ $gravatarUrl2xWebp := $gravatar2x.Resize (printf "%dx%d webp picture" $gravatar2x.Width $gravatar2x.Height) }}
-    {{ $gravatarUrl3xWebp := $gravatar3x.Resize (printf "%dx%d webp picture" $gravatar3x.Width $gravatar3x.Height) }}
-
-
-    <source
-      srcset="{{ $gravatarUrl3xWebp.Permalink }}"
-      media="(min-width: 1024px)"
-      type="image/webp"
-    />
-
-    <source
-      srcset="{{ $gravatarUrl3x }}"
-      media="(min-width: 1024px)"
-      type="image/png"
-    />
-
-    <source
-      srcset="
-        {{ $gravatarUrlWebp.Permalink }} 1x,
-        {{ $gravatarUrl2xWebp.Permalink }} 2x,
-        {{ $gravatarUrl3xWebp.Permalink }} 3x
-      "
-      type="image/webp"
-    />
-
-    <img
-      id="gravatar"
-      srcset="
-        {{ $gravatarUrl }} 1x,
-        {{ $gravatarUrl2x }} 2x,
-        {{ $gravatarUrl3x }} 3x
-      "
-      alt="{{ i18n "GravatarAltText" }}"
-      width="{{ $gravatar.Width }}"
-      height="{{ $gravatar.Height }}"
-    />
-  </picture>
+  <img
+    id="gravatar"
+    srcset="
+      {{ $gravatarUrl }} 1x,
+      {{ $gravatarUrl2x }} 2x,
+      {{ $gravatarUrl3x }} 3x
+    "
+    alt="{{ i18n "GravatarAltText" }}"
+    width="{{ $gravatar.Width }}"
+    height="{{ $gravatar.Height }}"
+  />
 </div>

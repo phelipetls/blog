@@ -19,13 +19,13 @@ module.exports = {
         '-1': '-1',
       },
       spacing: {
-        'page-padding': 'var(--page-padding)',
+        'horizontal-padding': 'var(--horizontal-padding)',
         'nav-height': 'var(--nav-height)',
       },
       gridTemplateColumns: {
         layout: `
           [full-start] 1fr
-          [content-start] calc(min(var(--content-max-width), 100%) - var(--page-padding) * 2) [content-end]
+          [content-start] calc(min(var(--content-max-width), 100%) - var(--horizontal-padding) * 2) [content-end]
           1fr [full-end]
         `,
       },

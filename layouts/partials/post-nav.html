@@ -3,7 +3,7 @@
 <nav class="flex items-stretch" aria-label="{{ i18n "PostsNavigation" }}">
   {{ with .PrevInSection }}
     <a
-      class="flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-page-padding transition-colors duration-500 hover:bg-hover"
+      class="flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -21,7 +21,7 @@
 
   {{ with .NextInSection }}
     <a
-      class="flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-page-padding text-right transition-colors duration-500 hover:bg-hover"
+      class="flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}

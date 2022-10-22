@@ -15,7 +15,7 @@
   >
     <div class="flex h-full flex-col justify-between">
       <div
-        class="mb-2 flex h-nav-height items-center justify-end px-page-padding"
+        class="mb-2 flex h-nav-height items-center justify-end px-horizontal-padding"
       >
         <button data-a11y-dialog-hide class="btn btn-icon" aria-label="Close">
           {{ partial "svgs/x.svg" . }}
@@ -24,7 +24,7 @@
 
       <nav class="flex flex-1 flex-col">
         <ul
-          class="m-0 flex list-none flex-col items-center justify-center gap-4 px-page-padding"
+          class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
         >
           {{- range .Site.Menus.main -}}
             {{ $isActive := eq $.Section .Page.Section }}
@@ -63,7 +63,7 @@
           justify-between
         {{ else }}
           justify-center
-        {{ end }} mb-4 flex h-12 flex-row items-center px-page-padding"
+        {{ end }} mb-4 flex h-12 flex-row items-center px-horizontal-padding"
       >
         {{ partial "theme-select.html" . }}
 

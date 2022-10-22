@@ -1,11 +1,11 @@
 :root {
-  --page-padding: 1rem;
+  --horizontal-padding: 1rem;
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
   --code-line-height: 1.5;
   --code-horizontal-padding: 2rem;
-  --code-vertical-padding: var(--page-padding);
+  --code-vertical-padding: var(--horizontal-padding);
   --code-highlight-width: 2px;
 
   --primary: hexToRgb(theme(colors.blue.600));
@@ -123,7 +123,7 @@
   }
 
   [data-blog-post] figure figcaption {
-    @apply mt-2 px-page-padding text-center;
+    @apply mt-2 px-horizontal-padding text-center;
   }
 
   :is([data-blog-post], [data-alert-content], [data-blog-post] details)
@@ -146,7 +146,7 @@
   }
 
   [data-blog-post] > :is(figure, :not([data-codeblock]) pre, [data-codeblock]) {
-    @apply -mx-page-padding sm:mx-0;
+    @apply -mx-horizontal-padding sm:mx-0;
   }
 
   [data-blog-post] > figure :is(video, img) {
@@ -214,7 +214,7 @@
   }
 
   nav[data-toc-mobile] ol {
-    @apply m-0 list-outside px-page-padding;
+    @apply m-0 list-outside px-horizontal-padding;
   }
 
   nav[data-toc-mobile] ol li:not(:first-child) {
@@ -296,7 +296,7 @@
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l bg-surface px-page-padding py-4 shadow shadow-shadow sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded-md border-l bg-surface px-horizontal-padding py-4 shadow shadow-shadow sm:mx-0;
   }
 
   .card {

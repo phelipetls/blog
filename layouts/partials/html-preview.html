@@ -8,8 +8,13 @@
     data-html-preview-codeblock-container
     data-max-lines-of-code="{{ $maxLinesOfCode }}"
     style="--number-of-lines: {{ $maxLinesOfCode }};"
-    class="sm:rounded-t-md"
     data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
+    class="
+      sm:rounded-t-md
+      [&_pre]:rounded-b-none
+      [&[data-is-expanded=false]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding))]
+      [&[data-is-expanded=true]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding)_*_2)]
+    "
   >
     {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}
   </div>

@@ -23,13 +23,45 @@
     data-toc-wrapper
     class="w-full overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
   >
-    {{ $tableOfContentsDesktop := replace .TableOfContents `id="TableOfContents"` `data-toc data-toc-desktop` | safeHTML }}
-    {{ $tableOfContentsMobile := replace .TableOfContents `id="TableOfContents"` `data-toc data-toc-mobile` | safeHTML }}
+    {{ $tableOfContentsDesktop := replace .TableOfContents `id="TableOfContents"` `data-toc` | safeHTML }}
+    {{ $tableOfContentsMobile := replace .TableOfContents `id="TableOfContents"` `data-toc` | safeHTML }}
 
 
     <div class="hidden lg:block">
       {{ partial "partials/toc-title.html" . }}
-      {{ $tableOfContentsDesktop }}
+
+
+      <div
+        class="
+          mt-4
+          [&_a_*]:indent-0
+          [&_nav_ol]:m-0
+          [&_nav_ol]:list-none
+          [&_nav_ol]:indent-4
+          [&_nav_ol_ol]:indent-8
+          [&_nav_ol_ol_ol]:indent-12
+          [&_nav_ol_ol_ol_ol]:indent-16
+          [&_nav>ol_li]:relative
+          [&_nav>ol_li]:before:absolute
+          [&_nav>ol_li]:before:top-0
+          [&_nav>ol_li]:before:left-0
+          [&_nav>ol_li]:before:h-full
+          [&_nav>ol_li]:before:w-[1px]
+          [&_nav>ol_li]:before:bg-divider
+          [&_nav>ol_li]:before:content-['']
+          [&_nav>ol_li_a]:block
+          [&_nav>ol_li_a]:w-full
+          [&_nav>ol_li_a]:whitespace-nowrap
+          [&_nav>ol_li_a]:border-b-0
+          [&_nav>ol_li_a]:transition-colors
+          [&_nav>ol_li_a]:duration-500
+          [&_nav>ol_li_a:hover]:bg-hover
+          [&_nav>ol_li[data-active]]:before:bg-primary
+          [&_nav>ol_li[data-active]>a]:text-primary
+       "
+      >
+        {{ $tableOfContentsDesktop }}
+      </div>
     </div>
 
     <details
@@ -40,7 +72,17 @@
         {{ partial "partials/toc-title.html" . }}
       </summary>
 
-      {{ $tableOfContentsMobile }}
+      <div
+        class="
+          mt-4
+          [&_ol]:m-0
+          [&_ol]:list-outside
+          [&_ol]:px-horizontal-padding
+          [&_ol_li:not(:first-child)]:mt-1
+        "
+      >
+        {{ $tableOfContentsMobile }}
+      </div>
     </details>
   </div>
 {{ end }}

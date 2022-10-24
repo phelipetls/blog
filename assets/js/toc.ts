@@ -1,5 +1,5 @@
 const toc = document.querySelector<HTMLElement>('nav[data-toc]')
-const container = toc?.closest<HTMLElement>('[data-toc-wrapper]')
+const tocContainer = toc?.closest<HTMLElement>('[data-toc-wrapper]')
 const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
 const firstTocItem = toc?.querySelector('li')
 
@@ -31,35 +31,40 @@ function getTocItemByHeading(
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
+      if (!tocContainer) {
+        return null
+      }
+
       const heading = entry.target
 
       if (entry.isIntersecting) {
         const tocItem = getTocItemByHeading(heading as HTMLHeadingElement)
 
-        if (!tocItem || !container) {
+        if (!tocItem) {
           return null
         }
 
         resetToc()
         activate(tocItem)
 
-        const containerCoords = container.getBoundingClientRect()
+        const tocContainerCoords = tocContainer.getBoundingClientRect()
         const tocItemCoords = tocItem.getBoundingClientRect()
 
         if (tocItem === firstTocItem) {
-          container.scrollTop = 0
+          tocContainer.scrollTop = 0
           return
         }
 
         // Is the item not visible because it's above the scrollable area? Then
         // make it visible by scrolling up.
-        if (containerCoords.top > tocItemCoords.top) {
-          container.scrollTop -= containerCoords.top - tocItemCoords.top
+        if (tocContainerCoords.top > tocItemCoords.top) {
+          tocContainer.scrollTop -= tocContainerCoords.top - tocItemCoords.top
           return
         }
 
-        if (tocItemCoords.bottom > containerCoords.bottom) {
-          container.scrollTop += tocItemCoords.bottom - containerCoords.bottom
+        if (tocItemCoords.bottom > tocContainerCoords.bottom) {
+          tocContainer.scrollTop +=
+            tocItemCoords.bottom - tocContainerCoords.bottom
         }
       }
     })

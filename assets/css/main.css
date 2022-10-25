@@ -110,43 +110,8 @@
     @apply border-t border-divider;
   }
 
-  [data-blog-post] > hr {
-    @apply overflow-visible border-0 text-center after:content-['⁂'];
-  }
-
-  [data-blog-post] img {
-    @apply mx-auto;
-  }
-
-  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
-    > [data-codeblock] {
-    @apply my-8;
-  }
-
-  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
-    > [data-codeblock-with-filename] {
-    @apply mt-16;
-  }
-
-  :is([data-blog-post], [data-alert-content], [data-blog-post] details)
-    > :is(:not([data-codeblock]) pre, figure, blockquote) {
-    @apply my-8;
-  }
-
-  [data-blog-post] > :is(figure, :not([data-codeblock]) pre, [data-codeblock]) {
+  [data-blog-post] > :is(figure, :not([data-codeblock]) pre) {
     @apply -mx-horizontal-padding sm:mx-0;
-  }
-
-  [data-blog-post] > figure :is(video, img) {
-    @apply bg-surface sm:rounded-md;
-  }
-
-  [data-blog-post] > figure video {
-    @apply min-h-[15em];
-  }
-
-  [data-blog-post] .katex-display {
-    @apply overflow-x-auto overflow-y-hidden;
   }
 
   pre {

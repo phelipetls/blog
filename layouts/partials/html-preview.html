@@ -12,6 +12,7 @@
     class="
       sm:rounded-t-md
       [&_pre]:rounded-b-none
+      [&_[data-codeblock]]:my-0
       [&[data-is-expanded=false]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding))]
       [&[data-is-expanded=true]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding)_*_2)]
     "

@@ -1,7 +1,11 @@
 <div
   data-codeblock
   {{ if .Attributes.filename }}data-codeblock-with-filename{{ end }}
-  class="group relative"
+  class="{{ if .Attributes.filename }}
+    my-16
+  {{ else }}
+    my-8
+  {{ end }} group relative -mx-horizontal-padding sm:mx-0"
 >
   {{ with .Attributes.filename }}
     <div

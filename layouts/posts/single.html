@@ -33,7 +33,26 @@
         <hr class="my-8" />
 
         <div class="flex flex-col-reverse lg:flex-row">
-          <div data-blog-post class="max-w-prose">
+          <div
+            data-blog-post
+            class="
+              max-w-prose
+              [&_img]:mx-auto
+              [&>hr]:border-0
+              [&>hr]:text-center
+              [&>hr]:after:content-['⁂']
+              [&>pre]:my-8
+              [&>figure]:my-8
+              [&>blockquote]:my-8
+              [&>figure_img]:bg-surface
+              [&>figure_img]:sm:rounded-md
+              [&>figure_video]:min-h-[15em]
+              [&>figure_video]:bg-surface
+              [&>figure_video]:sm:rounded-md
+              [&_.katex-display]:overflow-x-auto
+              [&_.katex-display]:overflow-y-hidden
+            "
+          >
             {{ .Content }}
           </div>
 

@@ -118,10 +118,6 @@
     @apply mx-auto;
   }
 
-  [data-blog-post] figure figcaption {
-    @apply mt-2 px-horizontal-padding text-center;
-  }
-
   :is([data-blog-post], [data-alert-content], [data-blog-post] details)
     > [data-codeblock] {
     @apply my-8;

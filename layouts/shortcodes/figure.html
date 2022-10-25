@@ -23,7 +23,7 @@
     </picture>
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
-        <figcaption>
+        <figcaption class="mt-2 px-horizontal-padding text-center">
             {{ with (.Get "title") -}}
                 <span class="">{{ . }}</span>
             {{- end -}}

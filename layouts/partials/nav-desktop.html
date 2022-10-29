@@ -42,12 +42,12 @@
   </nav>
 
   <div class="h-full py-3">
-    <div class="flex h-full flex-row-reverse items-stretch gap-2 pl-2">
-      {{ partial "theme-select.html" . }}
-
+    <div class="flex h-full flex-row items-stretch gap-2 pl-2">
       {{ if .IsTranslated }}
         {{ partial "language-links.html" . }}
       {{ end }}
+
+      {{ partial "theme-select.html" . }}
     </div>
   </div>
 </div>

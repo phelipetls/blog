@@ -39,33 +39,35 @@ for (const expandCollapseButton of expandCollapseButtons) {
       }
     }
 
-    const maxLinesOfCode =
-      Number(codeBlockContainer.dataset.maxLinesOfCode) || 20
+    const maxLinesOfCode = Number(codeBlockContainer.dataset.maxLinesOfCode)
 
     const linesCount =
       codeBlock?.querySelectorAll('.line').length || maxLinesOfCode
 
+    const isExpanded =
+      Number(codeBlockContainer.style.getPropertyValue('--is-expanded')) === 1
+
     const expandCodeBlock = () => {
-      codeBlockContainer.setAttribute('data-is-expanded', 'true')
       codeBlockContainer.style.setProperty(
-        '--number-of-lines',
+        '--lines-of-code',
         String(linesCount)
       )
+      codeBlockContainer.style.setProperty('--is-expanded', '1')
       chevronIcon.classList.add('rotate-180')
       changeButtonText(params.showLess)
     }
 
     const collapseCodeBlock = () => {
-      codeBlockContainer.setAttribute('data-is-expanded', 'false')
+      codeBlockContainer.style.setProperty('--is-expanded', '0')
       codeBlockContainer.style.setProperty(
-        '--number-of-lines',
+        '--lines-of-code',
         String(maxLinesOfCode)
       )
       chevronIcon.classList.remove('rotate-180')
       changeButtonText(params.showMore)
     }
 
-    if (codeBlockContainer.getAttribute('data-is-expanded') === 'true') {
+    if (isExpanded) {
       collapseCodeBlock()
     } else {
       expandCodeBlock()

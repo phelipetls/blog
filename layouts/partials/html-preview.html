@@ -7,14 +7,17 @@
   <div
     data-html-preview-codeblock-container
     data-max-lines-of-code="{{ $maxLinesOfCode }}"
-    style="--number-of-lines: {{ $maxLinesOfCode }};"
-    data-is-expanded="{{ cond $tooMuchLinesOfCode "false" "true" }}"
+    style="
+      --lines-of-code: {{ $maxLinesOfCode }};
+      --is-expanded: {{ cond $tooMuchLinesOfCode "0" "1" }};
+      --vertical-padding: calc(var(--code-vertical-padding) * (var(--is-expanded) + 1));
+      --max-height: calc(var(--code-line-height) * 1em * var(--lines-of-code) + var(--vertical-padding));
+    "
     class="
       sm:rounded-t-md
+      [&_pre]:max-h-[var(--max-height)]
       [&_pre]:rounded-b-none
       [&_[data-codeblock]]:my-0
-      [&[data-is-expanded=false]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding))]
-      [&[data-is-expanded=true]_pre]:max-h-[calc(var(--code-line-height)_*_1em_*_var(--number-of-lines)_+_var(--code-vertical-padding)_*_2)]
     "
   >
     {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}

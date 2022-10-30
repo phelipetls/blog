@@ -1,27 +1,48 @@
+{{ $devicon := partial "partials/devicon.html" . }}
+
+{{ $hasDevicon := ne $devicon.Icon "" }}
+{{ $hasFilename := false }}
+{{ with .Attributes.filename }}
+  {{ $hasFilename = true }}
+{{ end }}
+{{ $hasHeader := or $hasDevicon $hasFilename }}
+
+
 <div
   data-codeblock
-  {{ if .Attributes.filename }}data-codeblock-with-filename{{ end }}
-  class="{{ if .Attributes.filename }}
-    my-16
+  class="{{ if $hasHeader }}
+    mt-16
   {{ else }}
-    my-8
-  {{ end }} group relative -mx-horizontal-padding sm:mx-0"
+    mt-8
+  {{ end }} group relative -mx-horizontal-padding mb-8 sm:mx-0"
 >
-  {{ with .Attributes.filename }}
+  {{ if $hasHeader }}
     <div
       class="absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-full overflow-hidden"
     >
-      <span class="chroma flex gap-2 rounded-t px-4 py-1">
-        <span class="shrink-0">
-          {{ partial "svgs/file-text.svg" . }}
-        </span>
+      <div class="chroma flex items-center gap-2 rounded-t px-2 py-1">
+        <div class="shrink-0">
+          {{ if $hasDevicon }}
+            <div class="h-[24px] w-[24px] [&>svg_*]:fill-current">
+              {{ $devicon.Icon }}
+            </div>
+          {{ else }}
+            {{ partial "svgs/file-text.svg" . }}
+          {{ end }}
+        </div>
 
-        <span class="rtl truncate text-right">
-          <bdi>
-            {{- . -}}
-          </bdi>
-        </span>
-      </span>
+        {{ with .Attributes.filename }}
+          <div class="rtl truncate text-right">
+            <bdi>
+              {{- . -}}
+            </bdi>
+          </div>
+        {{ else }}
+          <div>
+            {{ $devicon.Type | title }}
+          </div>
+        {{ end }}
+      </div>
     </div>
   {{ end }}
 

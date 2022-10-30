@@ -18,6 +18,7 @@
 {{ end }}
 
 {{ $tocIsEmpty := eq .TableOfContents `<nav id="TableOfContents"></nav>` }}
+
 {{ if not $tocIsEmpty }}
   <div
     data-toc-wrapper

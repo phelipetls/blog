@@ -79,23 +79,24 @@
         ></div>
       </div>
 
-      <hr class="my-8" />
+      <template data-utterances-template>
+        <hr class="my-8" />
 
-      <div class="grid place-items-center">
-        <div data-utterances-loading>
-          {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+        <div class="grid place-items-center">
+          <div data-utterances-loading>
+            {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+          </div>
+
+          <script
+            src="https://utteranc.es/client.js"
+            data-repo="phelipetls/phelipetls.github.io"
+            data-issue-term="pathname"
+            crossorigin="anonymous"
+            data-theme="github-light"
+            async
+          ></script>
         </div>
-
-        <script
-          data-utterances-client-script
-          src="https://utteranc.es/client.js"
-          data-repo="phelipetls/phelipetls.github.io"
-          data-issue-term="pathname"
-          crossorigin="anonymous"
-          data-theme="github-light"
-          async
-        ></script>
-      </div>
+      </template>
 
       <div class="-mx-horizontal-padding mt-8 sm:mx-0">
         {{ partial "post-nav.html" . }}

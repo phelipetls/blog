@@ -1,15 +1,23 @@
 import type { NewThemeEvent, Theme } from './theme'
 ;(() => {
-  const utterancesScript = document.querySelector(
-    '[data-utterances-client-script]'
+  const utterancesTemplate = document.querySelector<HTMLTemplateElement>(
+    '[data-utterances-template]'
   )
 
-  if (!utterancesScript) {
+  if (!utterancesTemplate || !utterancesTemplate.content) {
     return
   }
 
-  const removeLoading = () => {
-    document.querySelector('[data-utterances-loading]')?.remove()
+  const content = utterancesTemplate.content.cloneNode(true)
+  const utterancesScript = (content as HTMLElement).querySelector('script')
+  const utterancesLoading = (content as HTMLElement).querySelector(
+    '[data-utterances-loading]'
+  )
+
+  utterancesTemplate?.parentElement?.insertBefore(content, utterancesTemplate)
+
+  if (!utterancesScript) {
+    return
   }
 
   utterancesScript.addEventListener('load', () => {
@@ -31,7 +39,7 @@ import type { NewThemeEvent, Theme } from './theme'
     }
 
     iframe.addEventListener('load', () => {
-      removeLoading()
+      utterancesLoading?.remove()
 
       changeUtterancesTheme(
         document.body.classList.contains('dark') ? 'dark' : 'light'
@@ -43,12 +51,12 @@ import type { NewThemeEvent, Theme } from './theme'
     })
 
     iframe.addEventListener('error', () => {
-      removeLoading()
+      utterancesLoading?.remove()
     })
   })
 
   utterancesScript.addEventListener('error', () => {
-    removeLoading()
+    utterancesLoading?.remove()
   })
 })()
 

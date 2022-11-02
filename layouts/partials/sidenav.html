@@ -28,7 +28,7 @@
         >
           {{- range .Site.Menus.main -}}
             {{ $isActive := eq $.Section .Page.Section }}
-            {{ $styles := cond $isActive `card hover:bg-hover` `hover:bg-surface` }}
+            {{ $styles := cond $isActive `card bg-primary text-on-primary hover:bg-primary-hover` `hover:bg-hover` }}
 
 
             <li class="w-full">

@@ -19,24 +19,28 @@
                 aria-current="page"
               {{ end }}
               class="
+                 {{ if $isActive }}
+                bg-primary card hover:bg-primary-hover
+              {{ else }}
+                hover:bg-hover
+              {{ end }}
                  relative
                  flex
                  items-center
                  justify-center
                  rounded-md
                  border-0
-                 p-2
+                 py-1
+                 px-2
                  transition-colors
                  duration-300
-                 hover:bg-hover
                "
             >
               <span
                 class="{{ if $isActive }}
-                  border-primary
+                  text-on-primary
                 {{ else }}
-                  border-divider
-                {{ end }} border-b"
+                {{ end }}"
               >
                 {{ i18n .Name | default .Name }}
               </span>

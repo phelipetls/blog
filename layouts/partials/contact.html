@@ -1,7 +1,10 @@
-<nav aria-label="{{ i18n "Contacts" }}" class="flex gap-4">
+<nav aria-label="{{ i18n "Contacts" }}" class="flex gap-2">
+  {{ $styles := "rounded-full hover:bg-hover p-2 [&_svg]:hover:scale-105 [&_svg]:transition-[transform,colors] [&_svg]:duration-500 hover:text-primary" }}
+
+
   <a
     id="contact-email"
-    class="border-0"
+    class="{{ $styles }} border-0"
     href="mailto:{{ .Site.Params.email }}"
     aria-label="E-mail"
   >
@@ -10,7 +13,7 @@
 
   <a
     id="contact-linkedin"
-    class="border-0"
+    class="{{ $styles }} border-0"
     href="{{ .Site.Params.linkedin }}"
     aria-label="LinkedIn"
   >
@@ -19,7 +22,7 @@
 
   <a
     id="contact-github"
-    class="border-0"
+    class="{{ $styles }} border-0"
     href="{{ .Site.Params.github }}"
     aria-label="GitHub"
   >

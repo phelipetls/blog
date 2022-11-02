@@ -59,17 +59,9 @@
       </nav>
 
       <div
-        class="{{ if .IsTranslated }}
-          justify-between
-        {{ else }}
-          justify-center
-        {{ end }} mb-4 flex h-12 flex-row items-center px-horizontal-padding"
+        class="mb-4 flex h-12 flex-row items-center justify-center px-horizontal-padding"
       >
         {{ partial "theme-select.html" . }}
-
-        {{ if .IsTranslated }}
-          {{ partial "language-links.html" . }}
-        {{ end }}
       </div>
     </div>
   </div>

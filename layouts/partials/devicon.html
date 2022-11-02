@@ -31,7 +31,8 @@
     {{ with .Err }}
       {{ warnf "failed to fetch url %s: %s" . $url }}
     {{ else }}
-      {{ $fileIcon = .Content | safeHTML }}
+      {{ $svgWithDimensions := replace .Content `svg` `svg width="24" height="24"` }}
+      {{ $fileIcon = $svgWithDimensions | safeHTML }}
     {{ end }}
   {{ end }}
 {{ end }}

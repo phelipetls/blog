@@ -81,7 +81,7 @@
   }
 
   a {
-    @apply border-b border-divider no-underline hover:border-primary;
+    @apply border-b border-primary no-underline hover:border-primary-hover;
   }
 
   ul,

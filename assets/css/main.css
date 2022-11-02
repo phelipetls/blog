@@ -8,32 +8,32 @@
   --code-vertical-padding: var(--horizontal-padding);
   --code-highlight-width: 2px;
 
-  --primary: hexToRgb(theme(colors.blue.600));
-  --primary-hover: hexToRgb(theme(colors.blue.700));
-  --on-primary: hexToRgb(theme(colors.beige.100));
-  --background: hexToRgb(theme(colors.beige.400));
-  --on-background: hexToRgb(theme(colors.neutral.700));
-  --surface: hexToRgb(theme(colors.beige.200));
-  --hover: hexToRgb(theme(colors.beige.100));
-  --disabled: hexToRgb(theme(colors.beige.400));
-  --on-disabled: hexToRgb(theme(colors.neutral.400));
-  --divider: hexToRgb(theme(colors.beige.600));
-  --shadow: hexToRgb(theme(colors.stone.400));
+  --primary: hexToRgb(theme(colors.red.600));
+  --primary-hover: hexToRgb(theme(colors.red.700));
+  --on-primary: hexToRgb(theme(colors.stone.100));
+  --background: hexToRgb(theme(colors.stone.50));
+  --on-background: hexToRgb(theme(colors.stone.700));
+  --surface: hexToRgb(theme(colors.stone.100));
+  --hover: hexToRgb(theme(colors.stone.200));
+  --disabled: hexToRgb(theme(colors.stone.500));
+  --on-disabled: hexToRgb(theme(colors.stone.300));
+  --divider: hexToRgb(theme(colors.stone.400));
+  --shadow: hexToRgb(theme(colors.stone.500));
   --note: hexToRgb(theme(colors.blue.600));
   --warn: hexToRgb(theme(colors.red.600));
   color-scheme: light;
 }
 
 .dark {
-  --primary: hexToRgb(theme(colors.amber.300));
-  --primary-hover: hexToRgb(theme(colors.amber.400));
+  --primary: hexToRgb(theme(colors.indigo.200));
+  --primary-hover: hexToRgb(theme(colors.indigo.300));
   --on-primary: hexToRgb(theme(colors.neutral.800));
   --background: hexToRgb(theme(colors.neutral.800));
-  --on-background: hexToRgb(theme(colors.beige.200));
+  --on-background: hexToRgb(theme(colors.stone.200));
   --surface: hexToRgb(theme(colors.neutral.700));
   --hover: hexToRgb(theme(colors.neutral.600));
   --disabled: hexToRgb(theme(colors.neutral.400));
-  --on-disabled: hexToRgb(theme(colors.beige.100));
+  --on-disabled: hexToRgb(theme(colors.stone.100));
   --divider: hexToRgb(theme(colors.neutral.400));
   --shadow: hexToRgb(theme(colors.neutral.900));
   --note: hexToRgb(theme(colors.blue.500));

@@ -34,18 +34,6 @@ module.exports = {
         full: 'full',
       },
       colors: {
-        beige: {
-          50: '#FAFAF5',
-          100: '#F5F5EA',
-          200: '#EAEAD2',
-          300: '#E0E0BD',
-          400: '#D7D6A8',
-          500: '#CCCB91',
-          600: '#B6B562',
-          700: '#8F8E42',
-          800: '#5E5D2C',
-          900: '#313017',
-        },
         primary: {
           DEFAULT: withOpacityValue('--primary'),
           hover: withOpacityValue('--primary-hover'),

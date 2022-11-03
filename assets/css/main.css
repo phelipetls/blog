@@ -138,7 +138,7 @@
   }
 
   :not(pre) > code {
-    @apply break-words font-bold;
+    @apply break-words font-bold text-primary;
   }
 
   :not(pre) > code::before,

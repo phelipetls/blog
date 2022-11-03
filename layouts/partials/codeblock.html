@@ -11,11 +11,9 @@
 <div
   data-codeblock
   class="{{ if $hasHeader }}
-    mt-16
+    mt-16 [&_pre]:rounded-tl-none
   {{ else }}
     mt-8
-  {{ end }} {{ if $hasHeader }}
-    [&_pre]:rounded-tl-none
   {{ end }} group relative -mx-horizontal-padding mb-8 sm:mx-0 [&_pre]:shadow [&_pre]:shadow-shadow"
 >
   {{ if $hasHeader }}

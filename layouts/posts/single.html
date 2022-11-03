@@ -79,9 +79,15 @@
         ></div>
       </div>
 
-      <template data-utterances-template>
-        <hr class="my-8 -mx-horizontal-padding sm:mx-0" />
+      <hr class="-mx-horizontal-padding mt-8 sm:mx-0" />
 
+      <div class="-mx-horizontal-padding sm:my-8 sm:mx-0">
+        {{ partial "post-nav.html" . }}
+      </div>
+
+      <hr class="-mx-horizontal-padding mb-8 sm:mx-0" />
+
+      <template data-utterances-template>
         <div class="grid place-items-center">
           <div data-utterances-loading>
             {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
@@ -96,11 +102,9 @@
             async
           ></script>
         </div>
-      </template>
 
-      <div class="-mx-horizontal-padding mt-8 sm:mx-0">
-        {{ partial "post-nav.html" . }}
-      </div>
+        <hr class="mt-8 hidden sm:block" />
+      </template>
     </div>
   </main>
 {{ end }}

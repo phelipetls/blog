@@ -1,9 +1,10 @@
-<hr />
-
-<nav class="flex items-stretch" aria-label="{{ i18n "PostsNavigation" }}">
+<nav
+  class="flex items-stretch sm:gap-4"
+  aria-label="{{ i18n "PostsNavigation" }}"
+>
   {{ with .PrevInSection }}
     <a
-      class="flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-500 hover:bg-hover"
+      class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       <span class="text-primary">
@@ -12,16 +13,14 @@
 
       {{ .Title }}
     </a>
-  {{ else }}
-    <div class="flex-grow"></div>
   {{ end }}
 
 
-  <div class="border-l border-divider"></div>
+  <div class="border-l border-divider sm:hidden"></div>
 
   {{ with .NextInSection }}
     <a
-      class="flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-500 hover:bg-hover"
+      class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-500 hover:bg-hover"
       href="{{ .RelPermalink }}"
     >
       {{ .Title }}
@@ -33,5 +32,3 @@
     </a>
   {{ end }}
 </nav>
-
-<hr />

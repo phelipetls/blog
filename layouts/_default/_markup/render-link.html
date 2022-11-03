@@ -4,13 +4,13 @@
 <a
   href="{{ .Destination | safeURL }}"
   {{ if $external }}rel="external"{{ end }}
-  class="{{ if $external }}
-    [&_svg]:ml-1 [&_svg]:inline-block [&_svg]:h-[1em] [&_svg]:w-[1em]
-    [&_svg]:align-text-top
-  {{ end }}"
 >
   {{- .Text | safeHTML -}}
   {{- if $external -}}
-    {{ partial "svgs/external-link.svg" . }}
+    <span
+      class="ml-1 [&_svg]:inline-block [&_svg]:h-[1em] [&_svg]:w-[1em] [&_svg]:align-text-top"
+    >
+      {{ partial "svgs/external-link.svg" . }}
+    </span>
   {{- end -}}
 </a>

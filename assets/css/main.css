@@ -8,8 +8,8 @@
   --code-vertical-padding: var(--horizontal-padding);
   --code-highlight-width: 2px;
 
-  --primary: hexToRgb(theme(colors.red.600));
-  --primary-hover: hexToRgb(theme(colors.red.700));
+  --primary: hexToRgb(theme(colors.fuchsia.600));
+  --primary-hover: hexToRgb(theme(colors.fuchsia.700));
   --on-primary: hexToRgb(theme(colors.stone.100));
   --background: hexToRgb(theme(colors.stone.50));
   --on-background: hexToRgb(theme(colors.stone.700));
@@ -25,8 +25,8 @@
 }
 
 .dark {
-  --primary: hexToRgb(theme(colors.indigo.200));
-  --primary-hover: hexToRgb(theme(colors.indigo.300));
+  --primary: hexToRgb(theme(colors.green.200));
+  --primary-hover: hexToRgb(theme(colors.green.300));
   --on-primary: hexToRgb(theme(colors.neutral.800));
   --background: hexToRgb(theme(colors.neutral.800));
   --on-background: hexToRgb(theme(colors.stone.200));

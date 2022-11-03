@@ -1,4 +1,6 @@
 layouts/posts/_markup/render-heading.html
+layouts/_default/_markup/render-link.html
+layouts/partials/svgs/*
 layouts/shortcodes/figure.html
 
 # syntax error because it's a Hugo template

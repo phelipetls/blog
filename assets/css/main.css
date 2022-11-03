@@ -25,8 +25,8 @@
 }
 
 .dark {
-  --primary: hexToRgb(theme(colors.green.200));
-  --primary-hover: hexToRgb(theme(colors.green.300));
+  --primary: hexToRgb(theme(colors.fuchsia.300));
+  --primary-hover: hexToRgb(theme(colors.fuchsia.400));
   --on-primary: hexToRgb(theme(colors.neutral.800));
   --background: hexToRgb(theme(colors.neutral.800));
   --on-background: hexToRgb(theme(colors.stone.200));

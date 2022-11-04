@@ -38,25 +38,22 @@
           <div
             data-blog-post
             class="
+              [&>pre]:full-width-on-mobile
+              [&>figure]:full-width-on-mobile
+              [&>[data-codeblock]]:full-width-on-mobile
               max-w-prose
               [&_img]:mx-auto
               [&>hr]:border-0
               [&>hr]:text-center
               [&>hr]:after:content-['⁂']
               [&>pre]:my-8
-              [&>pre]:-mx-horizontal-padding
-              [&>pre]:sm:mx-0
               [&>figure]:my-8
-              [&>figure]:-mx-horizontal-padding
-              [&>figure]:sm:mx-0
               [&>blockquote]:my-8
               [&>figure_img]:bg-surface
               [&>figure_img]:sm:rounded-md
               [&>figure_video]:min-h-[15em]
               [&>figure_video]:bg-surface
               [&>figure_video]:sm:rounded-md
-              [&>[data-codeblock]]:-mx-horizontal-padding
-              [&>[data-codeblock]]:sm:mx-0
               [&_.katex-display]:overflow-x-auto
               [&_.katex-display]:overflow-y-hidden
             "
@@ -85,13 +82,13 @@
         ></div>
       </div>
 
-      <hr class="-mx-horizontal-padding mt-8 sm:mx-0" />
+      <hr class="full-width-on-mobile mt-8" />
 
-      <div class="-mx-horizontal-padding sm:my-8 sm:mx-0">
+      <div class="full-width-on-mobile sm:my-8">
         {{ partial "post-nav.html" . }}
       </div>
 
-      <hr class="-mx-horizontal-padding mb-8 sm:mx-0" />
+      <hr class="full-width-on-mobile mb-8" />
 
       <template data-utterances-template>
         <div class="grid place-items-center">

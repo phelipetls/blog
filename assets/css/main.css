@@ -197,6 +197,10 @@
   .rtl {
     direction: rtl;
   }
+
+  .full-width-on-mobile {
+    @apply -mx-horizontal-padding sm:mx-0;
+  }
 }
 
 [data-preload] {

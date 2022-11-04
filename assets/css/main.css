@@ -111,7 +111,7 @@
   }
 
   pre {
-    @apply overflow-auto rounded-none bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
+    @apply overflow-auto rounded-md bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0;
   }
 
   .chroma .hl {

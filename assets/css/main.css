@@ -118,10 +118,6 @@
     @apply overflow-auto rounded-none bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
   }
 
-  .highlight pre {
-    color-scheme: dark;
-  }
-
   .chroma .hl {
     border-left-width: var(--code-highlight-width);
     margin: 0 calc(var(--code-horizontal-padding) * -1);

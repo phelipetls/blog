@@ -36,12 +36,7 @@
                  duration-300
                "
             >
-              <span
-                class="{{ if $isActive }}
-                  text-on-primary
-                {{ else }}
-                {{ end }}"
-              >
+              <span class="{{ if $isActive }}text-on-primary{{ end }}">
                 {{ i18n .Name | default .Name }}
               </span>
             </a>

@@ -110,10 +110,6 @@
     @apply border-t border-divider;
   }
 
-  [data-blog-post] > :is(figure, :not([data-codeblock]) pre) {
-    @apply -mx-horizontal-padding sm:mx-0;
-  }
-
   pre {
     @apply overflow-auto rounded-none bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0 sm:rounded-md;
   }

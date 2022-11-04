@@ -138,10 +138,6 @@
     content: '\`';
   }
 
-  [role='tab'][aria-selected='true'] {
-    @apply border-t border-primary bg-surface;
-  }
-
   .footnotes hr {
     @apply mb-4;
   }

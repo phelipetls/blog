@@ -89,11 +89,6 @@
     @apply ml-4 mb-4 list-disc;
   }
 
-  ul li::marker,
-  ol li::marker {
-    @apply text-primary;
-  }
-
   ol {
     @apply ml-4 mb-4 list-decimal;
   }

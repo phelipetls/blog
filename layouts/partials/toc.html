@@ -22,7 +22,7 @@
 {{ if not $tocIsEmpty }}
   <div
     data-toc-wrapper
-    class="w-full overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
+    class="w-full sm:overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
   >
     {{ $tableOfContents := replace .TableOfContents `id="TableOfContents"` `data-toc` | safeHTML }}
 

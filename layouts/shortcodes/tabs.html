@@ -1,6 +1,6 @@
 <div class="my-8">
-  {{ $tabs := split (.Get "tabs") " " }}
-  {{ $tabsId := .Get "id" }}
+  {{- $tabs := split (.Get "tabs") " " -}}
+  {{- $tabsId := .Get "id" -}}
 
 
   <div
@@ -10,9 +10,9 @@
     class="flex gap-1"
   >
     {{- range $i, $tab := $tabs -}}
-      {{ $isFirstTab := eq $i 0 }}
+      {{- $isFirstTab := eq $i 0 -}}
 
-      {{ $tabId := printf "%s-%s" $tabsId ($tab | lower) }}
+      {{- $tabId := printf "%s-%s" $tabsId ($tab | lower) -}}
 
 
       <button
@@ -28,5 +28,5 @@
     {{- end -}}
   </div>
 
-  {{ .Inner }}
+  {{- .Inner -}}
 </div>

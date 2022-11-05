@@ -103,7 +103,7 @@
   }
 
   kbd {
-    @apply inline-block whitespace-nowrap rounded bg-surface py-[2px] px-[6px] font-bold leading-none text-on-background shadow shadow-shadow;
+    @apply inline-block whitespace-nowrap rounded bg-surface py-1 px-2 font-bold leading-none text-on-background shadow shadow-shadow;
   }
 
   hr {

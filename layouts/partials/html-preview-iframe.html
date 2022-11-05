@@ -10,10 +10,19 @@
     {{ partial "svgs/refresh-cw.svg" . }}
   </button>
 
+  <div
+    data-html-preview-iframe-loading
+    role="progressbar"
+    class="flex justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
+  >
+    {{ partial "svgs/loader.svg" . }}
+  </div>
+
   <iframe
     class="max-w-full"
     src="{{ .Resource.Permalink }}"
     title="{{ .Title }}"
+    onload="this.parentElement.querySelector('[data-html-preview-iframe-loading]').remove()"
   >
   </iframe>
 </div>

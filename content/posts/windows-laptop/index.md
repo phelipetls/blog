@@ -78,7 +78,7 @@ rendering
 engine](https://devblogs.microsoft.com/commandline/windows-terminal-preview-1-16-release/#new-text-rendering-engine)
 now enabled by default.
 
-{{< details `Previously, I had wrote about how my experience with Windows
+{{< details `Previously, I wrote about how my experience with Windows
 Terminal wasn't great, because I'd often encounter glitches while using my
 terminal apps, particularly neovim. Fortunately, they seem to be fixed now.`
 >}}

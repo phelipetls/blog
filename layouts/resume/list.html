@@ -13,9 +13,9 @@
         <div
           data-resume-loading
           role="progressbar"
-          class="absolute inset-0 hidden h-full items-center justify-center"
+          class="absolute inset-0 hidden h-full items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
         >
-          {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+          {{ partial "svgs/loader.svg" }}
         </div>
 
         <canvas class="hidden" data-resume-canvas></canvas>

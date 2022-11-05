@@ -94,8 +94,11 @@
 
       <template data-utterances-template>
         <div class="grid place-items-center">
-          <div data-utterances-loading>
-            {{ partial "svgs/loader.svg" (dict "Class" "animate-spin") }}
+          <div
+            data-utterances-loading
+            class="[&_svg]:animate-spin [&_svg]:duration-[1500ms]"
+          >
+            {{ partial "svgs/loader.svg" }}
           </div>
 
           <script

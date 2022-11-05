@@ -3,12 +3,14 @@
   data-note
   class="
     alert
+    flex-col
     border-note
+    sm:flex-row
     [&_h2]:first-of-type:mt-0
     [&_h2]:first-of-type:pt-0
   "
 >
-  <div class="hidden text-note sm:block">
+  <div class="text-note sm:block">
     {{ partial "svgs/info.svg" }}
   </div>
 

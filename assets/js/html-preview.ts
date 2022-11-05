@@ -11,10 +11,9 @@ const expandCollapseButtons = document.querySelectorAll<HTMLElement>(
 
 for (const expandCollapseButton of expandCollapseButtons) {
   expandCollapseButton?.addEventListener('click', () => {
-    const codeBlockContainer =
-      expandCollapseButton.parentElement?.querySelector<HTMLElement>(
-        '[data-html-preview-codeblock-container]'
-      )
+    const codeBlockContainer = expandCollapseButton
+      .closest('[data-html-preview]')
+      ?.querySelector<HTMLElement>('[data-html-preview-codeblock-container]')
     if (!codeBlockContainer) {
       return
     }

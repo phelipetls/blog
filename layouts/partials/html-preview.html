@@ -23,23 +23,25 @@
     {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}
   </div>
 
-  {{ if $tooMuchLinesOfCode }}
+  <div class="shadow shadow-shadow sm:rounded-b-md">
+    {{ if $tooMuchLinesOfCode }}
+      <hr />
+
+      <button
+        data-html-expand-collapse-button
+        class="btn btn-secondary flex w-full items-center justify-center rounded-none py-1"
+      >
+        <span data-text>
+          {{ i18n "ShowMore" }}
+        </span>
+
+        {{ partial "svgs/chevron-down.svg" }}
+      </button>
+    {{ end }}
+
+
     <hr />
 
-    <button
-      data-html-expand-collapse-button
-      class="btn btn-secondary flex w-full items-center justify-center rounded-none py-1"
-    >
-      <span data-text>
-        {{ i18n "ShowMore" }}
-      </span>
-
-      {{ partial "svgs/chevron-down.svg" }}
-    </button>
-  {{ end }}
-
-
-  <hr />
-
-  {{ partial "html-preview-iframe.html" (dict "Resource" .IframeResource "Title" (.Title)) }}
+    {{ partial "html-preview-iframe.html" (dict "Resource" .IframeResource "Title" (.Title)) }}
+  </div>
 </div>

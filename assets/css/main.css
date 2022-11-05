@@ -8,8 +8,8 @@
   --code-vertical-padding: var(--horizontal-padding);
   --code-highlight-width: 2px;
 
-  --primary: hexToRgb(theme(colors.fuchsia.600));
-  --primary-hover: hexToRgb(theme(colors.fuchsia.700));
+  --primary: hexToRgb(theme(colors.fuchsia.500));
+  --primary-hover: hexToRgb(theme(colors.fuchsia.600));
   --on-primary: hexToRgb(theme(colors.stone.100));
   --background: hexToRgb(theme(colors.stone.50));
   --on-background: hexToRgb(theme(colors.stone.700));

@@ -14,7 +14,7 @@
       --max-height: calc(var(--code-line-height) * 1em * var(--lines-of-code) + var(--vertical-padding));
     "
     class="
-      sm:rounded-t-md
+      sm:rounded-t
       [&_pre]:max-h-[var(--max-height)]
       [&_pre]:rounded-b-none
       [&_[data-codeblock]]:my-0
@@ -23,7 +23,7 @@
     {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}
   </div>
 
-  <div class="shadow shadow-shadow sm:rounded-b-md">
+  <div class="shadow shadow-shadow sm:rounded-b">
     {{ if $tooMuchLinesOfCode }}
       <hr />
 

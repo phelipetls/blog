@@ -103,7 +103,7 @@
   }
 
   kbd {
-    @apply inline-block whitespace-nowrap rounded-md bg-surface py-[2px] px-[6px] font-bold leading-none text-on-background shadow shadow-shadow;
+    @apply inline-block whitespace-nowrap rounded bg-surface py-[2px] px-[6px] font-bold leading-none text-on-background shadow shadow-shadow;
   }
 
   hr {
@@ -111,7 +111,7 @@
   }
 
   pre {
-    @apply overflow-auto rounded-md bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0;
+    @apply overflow-auto rounded bg-surface py-[var(--code-vertical-padding)] px-[var(--code-horizontal-padding)] sm:mx-0;
   }
 
   .chroma .hl {
@@ -122,7 +122,7 @@
   }
 
   :is(.card, [role='tabpanel']) pre {
-    @apply m-0 rounded-md;
+    @apply m-0 rounded;
   }
 
   pre code {
@@ -161,7 +161,7 @@
   }
 
   .btn-icon {
-    @apply flex items-center justify-center rounded-md p-1 text-on-background;
+    @apply flex items-center justify-center rounded p-1 text-on-background;
   }
 
   .btn-icon-action {
@@ -177,11 +177,11 @@
   }
 
   .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded-md border-l bg-surface px-horizontal-padding py-4 shadow shadow-shadow sm:mx-0;
+    @apply my-8 flex max-w-prose gap-4 rounded border-l bg-surface px-horizontal-padding py-4 shadow shadow-shadow sm:mx-0;
   }
 
   .card {
-    @apply rounded-md bg-surface shadow shadow-shadow;
+    @apply rounded bg-surface shadow shadow-shadow;
   }
 
   .grid-cols-layout > * {

@@ -1,7 +1,7 @@
 {{ $screenshot := .Resources.GetMatch "screenshot.png" }}
 
 
-<article class="card grid grid-cols-1 rounded-md sm:grid-cols-[40%_60%]">
+<article class="card grid grid-cols-1 rounded sm:grid-cols-[40%_60%]">
   <div class="relative z-0">
     <picture>
       {{ if hugo.IsProduction }}
@@ -12,7 +12,7 @@
 
 
       <img
-        class="h-full rounded-t-md object-cover object-left-top sm:rounded-l-md sm:rounded-tr-none"
+        class="h-full rounded-t object-cover object-left-top sm:rounded-l sm:rounded-tr-none"
         src="{{ $screenshot.Permalink }}"
         alt=""
         width="{{ $screenshot.Width }}"

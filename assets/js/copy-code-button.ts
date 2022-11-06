@@ -26,37 +26,29 @@ function addEventHandlersToCopyCodeButton(button: HTMLElement) {
 
   button.addEventListener('click', async function () {
     const codeBlock = button.parentElement?.querySelector('pre code')
-
     if (!codeBlock) {
       return
     }
 
     const codeBlockTextContent = codeBlock.textContent
-
-    if (!codeBlockTextContent) {
+    if (codeBlockTextContent) {
+      await navigator.clipboard.writeText(codeBlockTextContent.trimEnd())
+    } else {
       return
     }
 
-    await navigator.clipboard.writeText(codeBlockTextContent.trimEnd())
-
-    if (!tooltipTemplate) {
+    if (tooltipTemplate?.content) {
+      const tooltipContent = tooltipTemplate.content.cloneNode(true)
+      document.body.append(tooltipContent)
+    } else {
       return
     }
-
-    const tooltipContent = tooltipTemplate.content.cloneNode(true)
-    document.body.append(tooltipContent)
 
     const tooltip = document.body.querySelector<HTMLElement>(
       '[data-theme-copy-code-tooltip]'
     )
-
-    if (!tooltip) {
-      return
-    }
-
-    const tooltipArrow = tooltip.querySelector<HTMLElement>('[data-arrow]')
-
-    if (!tooltipArrow) {
+    const tooltipArrow = tooltip?.querySelector<HTMLElement>('[data-arrow]')
+    if (!tooltip || !tooltipArrow) {
       return
     }
 

@@ -34,10 +34,8 @@ module.exports = {
         full: 'full',
       },
       colors: {
-        primary: {
-          DEFAULT: withOpacityValue('--primary'),
-          hover: withOpacityValue('--primary-hover'),
-        },
+        primary: withOpacityValue('--primary'),
+        'primary-hover': withOpacityValue('--primary-hover'),
         'on-primary': withOpacityValue('--on-primary'),
         divider: withOpacityValue('--divider'),
         shadow: withOpacityValue('--shadow'),
@@ -45,9 +43,7 @@ module.exports = {
         background: withOpacityValue('--background'),
         surface: withOpacityValue('--surface'),
         hover: withOpacityValue('--hover'),
-        disabled: {
-          DEFAULT: withOpacityValue('--disabled'),
-        },
+        disabled: withOpacityValue('--disabled'),
         'on-disabled': withOpacityValue('--on-disabled'),
         note: withOpacityValue('--note'),
         warn: withOpacityValue('--warn'),

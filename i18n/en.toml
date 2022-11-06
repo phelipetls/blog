@@ -92,3 +92,6 @@ other = 'Show less'
 
 [OpenSidenav]
 other = 'Open navigation sidebar'
+
+[Tabs]
+other = 'Tabs'

@@ -91,3 +91,6 @@ other = 'Mostrar menos'
 
 [OpenSidenav]
 other = 'Abrir barra de navegação lateral'
+
+[Tabs]
+other = 'Abas'

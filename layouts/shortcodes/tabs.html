@@ -4,10 +4,10 @@
 
 
   <div
-    class="ml-horizontal-padding"
+    class=""
     role="tablist"
     aria-label="{{ i18n "Tabs" }}"
-    class="flex gap-1"
+    class="flex gap-2"
   >
     {{- range $i, $tab := $tabs -}}
       {{- $isFirstTab := eq $i 0 -}}
@@ -21,9 +21,13 @@
         class="
           rounded-t
           p-2
-          [&[aria-selected=true]]:border-t
+          transition-colors
+          duration-200
+          hover:bg-hover
+          [&[aria-selected=true]]:border-b
           [&[aria-selected=true]]:border-primary
-          [&[aria-selected=true]]:bg-surface
+          [&[aria-selected=true]]:font-bold
+          [&[aria-selected=true]]:hover:bg-hover
         "
         aria-selected="{{ cond $isFirstTab "true" "false" }}"
         {{ if $isFirstTab }}tabindex="-1"{{ end }}

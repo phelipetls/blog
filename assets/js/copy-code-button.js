@@ -7,9 +7,8 @@ for (const copyCodeButton of copyCodeButtons) {
   addEventHandlersToCopyCodeButton(copyCodeButton)
 }
 
-const tooltip = document.querySelector('[data-theme-copy-code-tooltip]')
-const tooltipArrow = document.querySelector(
-  '[data-theme-copy-code-tooltip-arrow]'
+const tooltipTemplate = document.querySelector(
+  '[data-theme-copy-code-tooltip-template]'
 )
 
 function addEventHandlersToCopyCodeButton(button) {
@@ -27,6 +26,15 @@ function addEventHandlersToCopyCodeButton(button) {
     const codeBlock = button.parentElement.querySelector('pre code')
     await navigator.clipboard.writeText(codeBlock.textContent.trimEnd())
 
+    const tooltipContent = tooltipTemplate.content.cloneNode(true)
+    document.body.append(tooltipContent)
+
+    const tooltip = document.body.querySelector(
+      '[data-theme-copy-code-tooltip]'
+    )
+
+    const tooltipArrow = tooltip.querySelector('[data-arrow]')
+
     const { x, y, middlewareData } = await computePosition(button, tooltip, {
       placement: 'top',
       middleware: [
@@ -43,11 +51,7 @@ function addEventHandlersToCopyCodeButton(button) {
     })
 
     setTimeout(() => {
-      Object.assign(tooltip.style, {
-        left: '0px',
-        top: '0px',
-        animation: '',
-      })
+      tooltip.remove()
     }, 1000)
 
     const { x: arrowX, y: arrowY } = middlewareData.arrow

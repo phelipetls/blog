@@ -5,7 +5,7 @@ describe('Copy code button', () => {
     () => {
       cy.visit('/posts/bash-for-javascript-developers')
 
-      cy.contains('Copied').should('not.be.visible')
+      cy.contains('Copied').should('not.exist')
 
       cy.contains('[data-codeblock]', 'Hello World')
         .first()
@@ -13,14 +13,14 @@ describe('Copy code button', () => {
           cy.get('button[aria-label="Copy code"]').focus().click()
         })
 
-      cy.contains('Copied').should('be.visible')
+      cy.contains('Copied').should('exist')
 
       cy.window()
         .its('navigator.clipboard')
         .invoke('readText')
         .should('equal', 'echo Hello World')
 
-      cy.contains('Copied').should('not.be.visible')
+      cy.contains('Copied').should('not.exist')
     }
   )
 })

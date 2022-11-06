@@ -69,20 +69,22 @@
         </div>
       </article>
 
-      <div
-        data-theme-copy-code-tooltip
-        role="tooltip"
-        class="pointer-events-none absolute rounded border border-divider bg-surface px-2"
-        style="opacity: 0"
-      >
-        {{ i18n "Copied" }}
-
-
+      <template data-theme-copy-code-tooltip-template>
         <div
-          data-theme-copy-code-tooltip-arrow
-          class="absolute h-[8px] w-[8px] rotate-45 border-r border-b border-divider bg-surface"
-        ></div>
-      </div>
+          data-theme-copy-code-tooltip
+          role="tooltip"
+          class="pointer-events-none absolute rounded border border-divider bg-surface px-2"
+          style="opacity: 0"
+        >
+          {{ i18n "Copied" }}
+
+
+          <div
+            data-arrow
+            class="absolute h-[8px] w-[8px] rotate-45 border-r border-b border-divider bg-surface"
+          ></div>
+        </div>
+      </template>
 
       <hr class="full-width-on-mobile mt-8" />
 

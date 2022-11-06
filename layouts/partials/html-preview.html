@@ -14,8 +14,11 @@
       [&_pre]:transition-duration-300
       [&_pre]:transition-ease
       group
-      sm:rounded-t
+      rounded-b
+      shadow
+      shadow-shadow
       [&_pre]:rounded-b-none
+      [&_pre]:shadow-none
       [&_pre]:transition-[max-height]
       [&[data-is-collapsed=true]_pre]:max-h-[var(--collapsed-height)]
       [&_[data-codeblock]]:my-0
@@ -24,7 +27,7 @@
     {{ partial "codeblock.html" (dict "Inner" .SourceCode "Type" .Language "Options" .HighlightOptions) }}
 
 
-    <div class="rounded-b shadow shadow-shadow">
+    <div class="rounded-b">
       {{ if $tooMuchLinesOfCode }}
         <hr />
 

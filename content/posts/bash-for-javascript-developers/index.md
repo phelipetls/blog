@@ -89,9 +89,9 @@ Each argument is delimited by whitespace (spaces and tabs), no matter how many
 whitespace between them:
 
 ```bash
-% echo Hello World
+$ echo Hello World
 Hello World
-% echo Hello          World
+$ echo Hello          World
 Hello World
 ```
 
@@ -100,11 +100,11 @@ If we want to print the extra whitespace between arguments, we need to
 argument-delimiter. Here are two ways to do this, with backslash and quotes:
 
 ```bash
-% echo Hello\ \ \ \ \ \ \ \ \ \ World
+$ echo Hello\ \ \ \ \ \ \ \ \ \ World
 Hello          World
-% echo "Hello          World"
+$ echo "Hello          World"
 Hello          World
-% echo 'Hello          World'
+$ echo 'Hello          World'
 Hello          World
 ```
 
@@ -1037,10 +1037,10 @@ Now, it doesn't matter if I'm using zsh or bash, the OS will use the program
 `/bin/bash` to interpret the code.
 
 ```shell-session
-% zsh
-% ./my-script
+$ zsh
+$ ./my-script
 Hello World from Bash 5.1.16(1)-release
-% bash
+$ bash
 $ ./my-script
 Hello World from Bash 5.1.16(1)-release
 ```

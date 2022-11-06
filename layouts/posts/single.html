@@ -144,8 +144,8 @@
 
 {{ define "scripts" }}
   {{ $liteYoutubeEmbedJs := resources.Get "/js/vendor/lite-yt-embed.js" | js.Build }}
+  {{ $tabsJs := resources.Get "/js/vendor/tabs.js" }}
   {{ $themeUtterancesJs := resources.Get "/js/theme-utterances.ts" | js.Build }}
-  {{ $tabsJs := resources.Get "/js/tabs.js" }}
   {{ $tocJs := resources.Get "/js/toc.ts" | js.Build }}
   {{ $htmlPreviewJs := resources.Get "/js/html-preview.ts" | js.Build }}
   {{ $htmlPreviewIframeJs := resources.Get "/js/html-preview-iframe.ts" | js.Build }}

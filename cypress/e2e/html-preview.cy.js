@@ -7,8 +7,14 @@ describe('HTML preview', () => {
 
     cy.get('@expandCollapseButton').click()
     cy.get('@expandCollapseButton').contains('Show less')
+    cy.get('@codeBlock').should(([codeBlock]) => {
+      expect(codeBlock.clientHeight).to.be.equal(codeBlock.scrollHeight)
+    })
 
     cy.get('@expandCollapseButton').click()
     cy.get('@expandCollapseButton').contains('Show more')
+    cy.get('@codeBlock').should(([codeBlock]) => {
+      expect(codeBlock.clientHeight).to.be.lessThan(codeBlock.scrollHeight)
+    })
   })
 })

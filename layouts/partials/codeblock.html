@@ -10,11 +10,7 @@
 
 <div
   data-codeblock
-  class="{{ if $hasHeader }}
-    mt-16 [&_pre]:sm:rounded-tl-none
-  {{ else }}
-    mt-8
-  {{ end }} group relative mb-8 [&_pre]:shadow [&_pre]:shadow-shadow [&_.highlight_pre]:[color-scheme:_dark]"
+  class="{{ cond $hasHeader "mt-16 [&_pre]:sm:rounded-tl-none" "mt-8" }} group relative mb-8 [&_pre]:shadow [&_pre]:shadow-shadow [&_.highlight_pre]:[color-scheme:_dark]"
 >
   {{ if $hasHeader }}
     <div
@@ -54,9 +50,7 @@
 
   <button
     data-copy-code-button
-    class="{{ if .Type }}
-      dark
-    {{ end }} btn btn-icon btn-icon-action pointer-events-none absolute right-0 top-3 hidden -translate-x-1/2 bg-surface opacity-0 transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100"
+    class="{{ cond .Type "dark" "" }} btn btn-icon btn-icon-action pointer-events-none absolute right-0 top-3 hidden -translate-x-1/2 bg-surface opacity-0 transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100"
     aria-label="{{ i18n "CopyCodeButtonLabel" }}"
   >
     {{ partial "svgs/clipboard.svg" }}

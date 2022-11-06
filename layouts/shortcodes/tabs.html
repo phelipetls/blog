@@ -3,12 +3,7 @@
   {{- $tabsId := .Get "id" -}}
 
 
-  <div
-    class=""
-    role="tablist"
-    aria-label="{{ i18n "Tabs" }}"
-    class="flex gap-2"
-  >
+  <div role="tablist" aria-label="{{ i18n "Tabs" }}" class="space-x-2">
     {{- range $i, $tab := $tabs -}}
       {{- $isFirstTab := eq $i 0 -}}
 

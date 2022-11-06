@@ -7,6 +7,8 @@ tags: [nvim, lua, treesitter, javascript]
 In this blog post, we'll see how to use treesitter in neovim to automatically
 convert a JavaScript string into a template string if it contains `${`.
 
+<!--more-->
+
 This is similar to the [Template String
 Converter](https://marketplace.visualstudio.com/items?itemName=meganrogge.template-string-converter)
 VS Code extension.

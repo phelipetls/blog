@@ -60,6 +60,8 @@ function addEventHandlersToCopyCodeButton(button: HTMLElement) {
       return
     }
 
+    button.setAttribute('data-user-copied', 'true')
+
     const { x, y, middlewareData } = await computePosition(button, tooltip, {
       placement: 'top',
       middleware: [
@@ -76,6 +78,7 @@ function addEventHandlersToCopyCodeButton(button: HTMLElement) {
     })
 
     setTimeout(() => {
+      button.setAttribute('data-user-copied', 'false')
       tooltip.remove()
     }, 1000)
 

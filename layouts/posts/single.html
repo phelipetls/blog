@@ -148,10 +148,7 @@
     | js.Build (dict "params" (dict "showMore" (i18n "ShowMore") "showLess" (i18n "ShowLess")))
   }}
   {{ $htmlPreviewIframeJs := resources.Get "/js/html-preview-iframe.ts" | js.Build }}
-  {{ $copyCodeButtonScript :=
-    resources.Get "/js/copy-code-button.js"
-    | js.Build (dict "params" (dict "clipboardIcon" (partial "svgs/clipboard.svg") "copyCodeButtonLabel" (i18n "CopyCodeButtonLabel")))
-  }}
+  {{ $copyCodeButtonScript := resources.Get "/js/copy-code-button.ts" | js.Build }}
 
   {{ $bundle := slice $htmlPreviewJs $htmlPreviewIframeJs $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $tocJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
 

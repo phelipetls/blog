@@ -1,17 +1,19 @@
 import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
 
-const copyCodeButtons = document.querySelectorAll('[data-copy-code-button]')
+const copyCodeButtons = document.querySelectorAll<HTMLElement>(
+  '[data-copy-code-button]'
+)
 
 for (const copyCodeButton of copyCodeButtons) {
   copyCodeButton.classList.remove('hidden')
   addEventHandlersToCopyCodeButton(copyCodeButton)
 }
 
-const tooltipTemplate = document.querySelector(
+const tooltipTemplate = document.querySelector<HTMLTemplateElement>(
   '[data-theme-copy-code-tooltip-template]'
 )
 
-function addEventHandlersToCopyCodeButton(button) {
+function addEventHandlersToCopyCodeButton(button: HTMLElement) {
   button.addEventListener('focus', function () {
     button.classList.add('opacity-100')
     button.classList.remove('pointer-events-none')
@@ -23,17 +25,40 @@ function addEventHandlersToCopyCodeButton(button) {
   })
 
   button.addEventListener('click', async function () {
-    const codeBlock = button.parentElement.querySelector('pre code')
-    await navigator.clipboard.writeText(codeBlock.textContent.trimEnd())
+    const codeBlock = button.parentElement?.querySelector('pre code')
+
+    if (!codeBlock) {
+      return
+    }
+
+    const codeBlockTextContent = codeBlock.textContent
+
+    if (!codeBlockTextContent) {
+      return
+    }
+
+    await navigator.clipboard.writeText(codeBlockTextContent.trimEnd())
+
+    if (!tooltipTemplate) {
+      return
+    }
 
     const tooltipContent = tooltipTemplate.content.cloneNode(true)
     document.body.append(tooltipContent)
 
-    const tooltip = document.body.querySelector(
+    const tooltip = document.body.querySelector<HTMLElement>(
       '[data-theme-copy-code-tooltip]'
     )
 
-    const tooltipArrow = tooltip.querySelector('[data-arrow]')
+    if (!tooltip) {
+      return
+    }
+
+    const tooltipArrow = tooltip.querySelector<HTMLElement>('[data-arrow]')
+
+    if (!tooltipArrow) {
+      return
+    }
 
     const { x, y, middlewareData } = await computePosition(button, tooltip, {
       placement: 'top',
@@ -54,11 +79,12 @@ function addEventHandlersToCopyCodeButton(button) {
       tooltip.remove()
     }, 1000)
 
-    const { x: arrowX, y: arrowY } = middlewareData.arrow
+    const arrowX = middlewareData.arrow?.x
+    const arrowY = middlewareData.arrow?.y
 
     Object.assign(tooltipArrow.style, {
-      left: arrowX != null ? `${arrowX}px` : '',
-      top: arrowY != null ? `${arrowY}px` : '',
+      left: arrowX ? `${arrowX}px` : '',
+      top: arrowY ? `${arrowY}px` : '',
       bottom: '-4px',
     })
   })

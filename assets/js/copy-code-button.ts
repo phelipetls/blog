@@ -72,7 +72,7 @@ function addEventHandlersToCopyCodeButton(button: HTMLElement) {
     setTimeout(() => {
       button.setAttribute('data-user-copied', 'false')
       tooltip.remove()
-    }, 1000)
+    }, 1500)
 
     const arrowX = middlewareData.arrow?.x
     const arrowY = middlewareData.arrow?.y

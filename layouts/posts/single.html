@@ -152,7 +152,6 @@
   {{ $copyCodeButtonScript := resources.Get "/js/copy-code-button.ts" | js.Build }}
 
   {{ $bundle := slice $htmlPreviewJs $htmlPreviewIframeJs $liteYoutubeEmbedJs $themeUtterancesJs $tabsJs $tocJs $copyCodeButtonScript | resources.Concat "js/post-bundle.js" }}
-
   {{ if hugo.IsProduction }}
     {{ $bundle = $bundle | minify }}
   {{ end }}

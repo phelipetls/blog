@@ -1,0 +1,86 @@
+---
+import { useTranslate } from '@utils/i18n'
+import { ChevronDown, Moon, Sun, Monitor } from 'lucide-react'
+
+const t = useTranslate(Astro)
+---
+
+<div class="relative flex h-full flex-row items-center">
+  <span
+    class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <svg class="feather" viewBox="0 0 24 24" width="24" height="24">
+      <title>{t('ThemeIcon')}</title>
+
+      <defs>
+        <Moon id="moon" />
+        <Sun id="sun" />
+        <Monitor id="monitor" />
+      </defs>
+
+      <use data-theme-select-icon href="#monitor"></use>
+    </svg>
+  </span>
+
+  <select
+    class="card h-full appearance-none bg-surface py-1 px-8 text-center"
+    data-theme-select
+    aria-label={t('ChooseATheme')}
+  >
+    <option value="light">{t('Light')}</option>
+    <option value="dark">{t('Dark')}</option>
+    <option value="system">{t('System')}</option>
+  </select>
+
+  <span
+    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <ChevronDown />
+  </span>
+</div>
+
+<script>
+  const themeSelects = document.querySelectorAll<HTMLSelectElement>(
+    '[data-theme-select]'
+  )
+
+  themeSelects?.forEach((themeSelect) => {
+    const storedThemeChoice = window.localStorage.getItem('__theme') ?? 'system'
+
+    const themeChoiceOption = Array.from(themeSelect.options).find(
+      (option) => option.value === storedThemeChoice
+    )
+    if (themeChoiceOption) {
+      themeChoiceOption.setAttribute('selected', '')
+    }
+
+    themeSelect.addEventListener('change', function (e) {
+      if (!e.target) {
+        return
+      }
+
+      const selectedOption = (e.target as HTMLSelectElement).selectedOptions[0]
+      window.__setTheme(selectedOption.value as ThemeChoice)
+    })
+  })
+
+  document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
+    const themeChoice = e.detail.themeChoice
+
+    function changeThemeSelectIcon(themeChoice: ThemeChoice) {
+      const icon = {
+        dark: '#moon',
+        light: '#sun',
+        system: '#monitor',
+      }[themeChoice]
+
+      themeSelects.forEach((themeSelect) => {
+        themeSelect
+          .querySelector<HTMLElement>('[data-theme-select-icon]')
+          ?.setAttribute('href', icon)
+      })
+    }
+
+    changeThemeSelectIcon(themeChoice)
+  } as EventListener)
+</script>

@@ -1,0 +1,46 @@
+<script is:inline>
+  // @ts-check
+  const storedThemeChoice = window.localStorage.getItem('__theme') ?? 'system'
+
+  window.__setTheme = setTheme
+  // prettier-ignore
+  window.__setTheme(/** @type {ThemeChoice} */ (storedThemeChoice))
+
+  /**
+   * @type {(themeChoice: ThemeChoice) => void}
+   */
+  function setTheme(themeChoice) {
+    let theme = themeChoice
+
+    if (themeChoice === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    }
+
+    document.body.classList.toggle('dark', theme === 'dark')
+
+    window.localStorage.setItem('__theme', themeChoice)
+
+    document.body.dispatchEvent(
+      new CustomEvent('newTheme', {
+        detail: {
+          themeChoice,
+          theme,
+        },
+      })
+    )
+  }
+
+  window.addEventListener('storage', function (e) {
+    const newTheme = e.newValue
+    if (newTheme && newTheme && e.key === '__theme') {
+      // prettier-ignore
+      window.__setTheme(/** @type {ThemeChoice} */ (newTheme))
+    }
+  })
+
+  window.addEventListener('load', function () {
+    document.body.removeAttribute('data-preload')
+  })
+</script>

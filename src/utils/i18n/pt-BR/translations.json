@@ -1,0 +1,120 @@
+{
+  "About": {
+    "one": "Sobre"
+  },
+  "AllTags": {
+    "one": "Todas as tags"
+  },
+  "And": {
+    "one": "e"
+  },
+  "ChooseATheme": {
+    "one": "Escolha um tema"
+  },
+  "Contact": {
+    "one": "Contato"
+  },
+  "Contacts": {
+    "one": "Contatos"
+  },
+  "Copied": {
+    "one": "Copiado"
+  },
+  "CopyCodeButtonLabel": {
+    "one": "Copiar código"
+  },
+  "Dark": {
+    "one": "Escuro"
+  },
+  "GravatarAltText": {
+    "one": "Foto minha"
+  },
+  "LanguageButton": {
+    "one": "Clique para ler em outra linguagem"
+  },
+  "LanguageOptions": {
+    "one": "Traduções"
+  },
+  "License": {
+    "one": "Todo conteúdo está sob a licença\n<a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0</a>.\n"
+  },
+  "Light": {
+    "one": "Claro"
+  },
+  "MainNavigation": {
+    "one": "Navegação principal"
+  },
+  "OpenSidenav": {
+    "one": "Abrir barra de navegação lateral"
+  },
+  "PostsListDescription": {
+    "one": "Listagem de todos os blog posts"
+  },
+  "PostsNavigation": {
+    "one": "Navegação entre posts"
+  },
+  "Projects": {
+    "one": "Projetos"
+  },
+  "ProjectsListDescription": {
+    "one": "Listagem dos meus projetos paralelos"
+  },
+  "RefreshApp": {
+    "one": "Recarregar app"
+  },
+  "Resume": {
+    "one": "Currículo"
+  },
+  "Résumé": {
+    "one": "Currículo"
+  },
+  "RésuméDescription": {
+    "one": "Meu currículo em PDF"
+  },
+  "ShowLess": {
+    "one": "Mostrar menos"
+  },
+  "ShowMore": {
+    "one": "Mostrar mais"
+  },
+  "SiteDescription": {
+    "one": "Desenvolvedor web front-end que escreve sobre a prática da programação e suas ferramentas"
+  },
+  "SiteTitle": {
+    "one": "Posts sobre programação - Phelipe Teles"
+  },
+  "Subscribe": {
+    "one": "Assine"
+  },
+  "System": {
+    "one": "Sistema"
+  },
+  "TableOfContents": {
+    "one": "Tabela de conteúdo"
+  },
+  "Tabs": {
+    "one": "Abas"
+  },
+  "TagDescription": {
+    "one": "{{count}} post com a tag {{tag}}",
+    "other": "{{count}} posts com a tag {{tag}}"
+  },
+  "TagsDescription": {
+    "one": "Listagem de todas as tags dos blog posts"
+  },
+  "Tech": {
+    "one": "Tecnologias"
+  },
+  "ThemeButton": {
+    "one": "Mudar tema"
+  },
+  "ThemeIcon": {
+    "one": "Ícone do tema"
+  },
+  "en": {
+    "one": "Read in English"
+  },
+  "404Title": {
+    "one": "Página não encontrada"
+  }
+}

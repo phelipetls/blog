@@ -1,9 +1,0 @@
-{{ $sourceCode := (.Page.Resources.Get (.Get "path")).Content | safeJS }}
-
-{{ $appRootId := md5 (printf "%s-%s" $sourceCode (.Get "version")) }}
-
-{{ $reactAppPath := (printf "%s/react-app-%s.html" .Page.RelPermalink $appRootId) }}
-{{ $reactAppContext := (dict "SourceCode" $sourceCode "AppRootId" $appRootId "ReactVersion" (.Get "version")) }}
-{{ $reactAppHtml := resources.Get "html/templates/react-app.html" | resources.ExecuteAsTemplate $reactAppPath $reactAppContext }}
-
-{{ partial "html-preview" (dict "SourceCode" $sourceCode "Language" "jsx" "HighlightOptions" (.Get "hl_options") "IframeResource" $reactAppHtml "Title" (.Get "title")) }}

@@ -1,0 +1,101 @@
+---
+import Site from '@layouts/Site.astro'
+import { useTranslate } from '@utils/i18n'
+import { getBlogPostTags } from '@utils/posts'
+import { ChevronRight } from 'lucide-react'
+import type { MDXInstance } from 'astro'
+import BlogPostCard from '@components/BlogPostCard.astro'
+
+export async function getStaticPaths() {
+  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.mdx'
+  )
+
+  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.pt.mdx'
+  )
+
+  return [
+    getBlogPostTags(englishBlogPosts).map((tag) => {
+      const blogPosts = englishBlogPosts.filter((blogPost) =>
+        blogPost.frontmatter.tags?.includes(tag)
+      )
+
+      return {
+        params: { lang: undefined, id: tag },
+        props: {
+          blogPosts,
+          tag,
+        },
+      }
+    }),
+    getBlogPostTags(portugueseBlogPosts).map((tag) => {
+      const blogPosts = portugueseBlogPosts.filter((blogPost) =>
+        blogPost.frontmatter.tags?.includes(tag)
+      )
+
+      return {
+        params: { lang: 'pt', id: tag },
+        props: {
+          blogPosts,
+          tag,
+        },
+      }
+    }),
+  ]
+}
+
+const t = useTranslate(Astro)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  blogPosts: MDXInstance<BlogPostFrontmatter>[]
+  tag: string
+}
+
+const { tag, blogPosts } = Astro.props
+---
+
+<Site
+  title={`Tag: ${tag}`}
+  description={t('TagDescription', {
+    n: blogPosts.length,
+    vars: { count: blogPosts.length, tag },
+  })}
+>
+  <main class="grid grid-cols-layout">
+    <div>
+      <div
+        class="mx-auto mb-4 flex w-full max-w-prose items-center justify-between"
+      >
+        <div
+          class="hidden flex-row items-center justify-center gap-2 text-2xl sm:flex"
+        >
+          <a href="{{ .Parent.Permalink }}">Tags</a>
+
+          <span class="text-sm">
+            <ChevronRight />
+          </span>
+
+          <h1 class="m-0 capitalize">
+            {tag}
+          </h1>
+        </div>
+      </div>
+
+      <ul
+        class="m-0 mx-auto grid w-full max-w-2xl flex-1 list-none grid-cols-1 gap-4"
+      >
+        {
+          blogPosts.map((blogPost) => {
+            return (
+              <li class="h-full">
+                <BlogPostCard blogPost={blogPost} />
+              </li>
+            )
+          })
+        }
+      </ul>
+    </div>
+  </main>
+</Site>

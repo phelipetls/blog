@@ -7,9 +7,3 @@ insert_final_newline = true
 [*.{js,ts,jsx,tsx,html,css,json,yml}]
 indent_style = space
 indent_size = 2
-
-[layouts/partials/svgs/*]
-insert_final_newline = false
-
-[layouts/_default/_markup/render-link.html]
-insert_final_newline = false

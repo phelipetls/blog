@@ -4,24 +4,42 @@ const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
 const puppeteer = require('puppeteer')
-const hugoConfig = require('../config.json')
 
 ;(async () => {
   try {
+    /**
+     * @type {(...args: string[]) => string}
+     */
+    const createPath = (...args) => {
+      return path.join(__dirname, '..', ...args)
+    }
+
     await generatePostsImages({
-      postsImagesUrl: 'http://localhost:1313/posts/images.json',
-      screenshotFilename: hugoConfig.languages.en.params.postImageFilename,
+      postsImagesUrl: 'http://localhost:3000/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (process.env.NODE_ENV === 'development') {
+          return createPath('screenshots', `${image}.png`)
+        }
+
+        return createPath('public', 'posts', image, 'image.png')
+      },
     })
 
     await generatePostsImages({
-      postsImagesUrl: 'http://localhost:1313/pt/posts/images.json',
-      screenshotFilename: hugoConfig.languages.pt.params.postImageFilename,
+      postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (process.env.NODE_ENV === 'development') {
+          return createPath('screenshots', `${image}.pt.png`)
+        }
+
+        return createPath('public', 'pt', 'posts', image, 'image.png')
+      },
     })
 
     process.exit(0)
   } catch (err) {
     if (err instanceof Error) {
-      console.error(err.message)
+      console.error(err)
     }
     process.exit(1)
   }
@@ -30,17 +48,13 @@ const hugoConfig = require('../config.json')
 /**
  * @typedef Options
  * @property {string} postsImagesUrl
- * @property {string} screenshotFilename
+ * @property {(name: string) => string} getScreenshotPath
  */
 
 /**
  * @type {(options: Options) => Promise<void>}
  */
-async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
-  if (!screenshotFilename) {
-    throw new Error('No filename for screenshot defined')
-  }
-
+async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   const response = await fetch.default(postsImagesUrl)
   const postsImages = await response.json()
 
@@ -48,6 +62,14 @@ async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
     headless: true,
   })
   const page = await browser.newPage()
+
+  page.on('requestfailed', (request) => {
+    throw new Error(
+      `Failed to generate post image due to request failure: ${
+        request.failure().errorText
+      }`
+    )
+  })
 
   page.setViewport({
     width: 1200,
@@ -59,37 +81,18 @@ async function generatePostsImages({ postsImagesUrl, screenshotFilename }) {
       waitUntil: 'networkidle2',
     })
 
-    let screenshotPath
-
-    // In production, save screenshots in page bundles, with thumbnail in its
-    // name, to make Hugo's internal templates for Open Graph and Twitter Cards
-    // use it.
-    if (process.env.NODE_ENV === 'production') {
-      screenshotPath = path.join(
-        __dirname,
-        '..',
-        'content',
-        postImage.dir,
-        screenshotFilename
-      )
-    } else {
-      // In development, save them all in the same folder so we can easily see
-      // how all of them look at once
-      const SCREENSHOTS_DIRECTORY_DEV = 'post-images-screenshots'
-
-      if (!fs.existsSync(SCREENSHOTS_DIRECTORY_DEV)) {
-        fs.mkdirSync(SCREENSHOTS_DIRECTORY_DEV)
-      }
-
-      screenshotPath = path.join(
-        SCREENSHOTS_DIRECTORY_DEV,
-        `${path.basename(postImage.dir)}.png`
-      )
-    }
+    const screenshotPath = getScreenshotPath(postImage.name)
 
     if (fs.existsSync(screenshotPath)) {
-      console.log('Screenshot %s already exists. Skipping...', screenshotPath)
+      console.log(
+        'Skipping %s because screenshot already exists...',
+        screenshotPath
+      )
       continue
+    }
+
+    if (!fs.existsSync(path.dirname(screenshotPath))) {
+      fs.mkdirSync(path.dirname(screenshotPath), { recursive: true })
     }
 
     await page.screenshot({

@@ -1,0 +1,55 @@
+---
+import BlogPostReadingTime from './BlogPostReadingTime.astro'
+import BlogPostDate from './BlogPostDate.astro'
+import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
+import type { MDXInstance } from 'astro'
+import { getDirectoryName } from '@utils/path'
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  blogPost: MDXInstance<BlogPostFrontmatter>
+}
+
+const { blogPost } = Astro.props
+const { file, frontmatter } = blogPost
+const { title, tags, summary, date, readingTime } = frontmatter
+---
+
+<article class="card flex h-full flex-col justify-between p-8">
+  <div>
+    <h3 class="text-2xl">
+      <a href={localizeUrl(`/posts/${getDirectoryName(file)}`, language)}>
+        {title}
+      </a>
+    </h3>
+
+    {
+      tags && (
+        <div class="-mx-8 mt-4 mb-2 flex snap-x snap-proximity scroll-pl-8 flex-wrap gap-2 overflow-x-auto px-8 pt-1 pb-1">
+          {tags.map((tag) => {
+            return (
+              <a
+                href={localizeUrl(`/tags/${tag}`, language)}
+                class="tag snap-start whitespace-nowrap"
+              >
+                {tag}
+              </a>
+            )
+          })}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="max-w-prose">
+    {summary}
+  </div>
+
+  <div class="mt-4 flex gap-2 whitespace-nowrap">
+    <BlogPostReadingTime readingTime={readingTime} />
+
+    <BlogPostDate date={date} />
+  </div>
+</article>

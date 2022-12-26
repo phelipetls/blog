@@ -1,31 +1,81 @@
 {
   "root": true,
-  "extends": [
-    "eslint:recommended",
-    "plugin:cypress/recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  "ignorePatterns": ["public", "dist", "src/components/devicons", "*.min.js"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "no-only-tests"
-  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "rules": {
+    "no-undef": "off",
     "@typescript-eslint/no-extra-semi": "off",
-    "no-only-tests/no-only-tests": "error"
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   },
-  "ignorePatterns": [
-    "public",
-    "assets/js/templates",
-    "*.min.js"
+  "overrides": [
+    {
+      "files": ["*.astro"],
+      "extends": [
+        "plugin:astro/recommended",
+        "plugin:astro/jsx-a11y-recommended"
+      ],
+      "parser": "astro-eslint-parser",
+      "env": {
+        "node": true,
+        "astro/astro": true,
+        "es2020": true
+      },
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"],
+        "sourceType": "module"
+      }
+    },
+    {
+      "files": ["cypress/**/*"],
+      "extends": ["plugin:cypress/recommended"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["no-only-tests"],
+      "rules": {
+        "no-only-tests/no-only-tests": "error"
+      }
+    },
+    {
+      "files": ["*.mdx"],
+      "settings": {
+        "mdx/code-blocks": false
+      },
+      "parserOptions": {
+        "ignoreRemarkConfig": false
+      },
+      "extends": "plugin:mdx/recommended",
+      "globals": {
+        "Fragment": "readonly"
+      },
+      "rules": {
+        "no-mixed-spaces-and-tabs": "off"
+      }
+    },
+    {
+      "files": ["*.mdx", "*.tsx"],
+      "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime"],
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      }
+    }
   ]
 }

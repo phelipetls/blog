@@ -1,0 +1,16 @@
+---
+const { src, caption } = Astro.props
+---
+
+<figure>
+  {/* eslint-disable-next-line astro/jsx-a11y/media-has-caption */}
+  <video class="mx-auto" controls src={src}></video>
+
+  {
+    caption && (
+      <figcaption class="mt-2 px-horizontal-padding text-center">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>

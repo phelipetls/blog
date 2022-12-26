@@ -1,0 +1,120 @@
+{
+  "About": {
+    "one": "About"
+  },
+  "AllTags": {
+    "one": "All tags"
+  },
+  "And": {
+    "one": "and"
+  },
+  "ChooseATheme": {
+    "one": "Choose a theme"
+  },
+  "Contact": {
+    "one": "Contact"
+  },
+  "Contacts": {
+    "one": "Contacts"
+  },
+  "Copied": {
+    "one": "Copied"
+  },
+  "CopyCodeButtonLabel": {
+    "one": "Copy code"
+  },
+  "Dark": {
+    "one": "Dark"
+  },
+  "GravatarAltText": {
+    "one": "A photo of me"
+  },
+  "LanguageButton": {
+    "one": "Click to read in another language"
+  },
+  "LanguageOptions": {
+    "one": "Translations"
+  },
+  "License": {
+    "one": "All content is under a\n<a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0</a>\nlicense.\n"
+  },
+  "Light": {
+    "one": "Light"
+  },
+  "MainNavigation": {
+    "one": "Main navigation"
+  },
+  "OpenSidenav": {
+    "one": "Open navigation sidebar"
+  },
+  "PostsListDescription": {
+    "one": "List of all blog posts"
+  },
+  "PostsNavigation": {
+    "one": "Posts navigation"
+  },
+  "Projects": {
+    "one": "Projects"
+  },
+  "ProjectsListDescription": {
+    "one": "List of my side projects"
+  },
+  "RefreshApp": {
+    "one": "Refresh app"
+  },
+  "Resume": {
+    "one": "Résumé"
+  },
+  "Résumé": {
+    "one": "Résumé"
+  },
+  "RésuméDescription": {
+    "one": "My Résumé in PDF"
+  },
+  "ShowLess": {
+    "one": "Show less"
+  },
+  "ShowMore": {
+    "one": "Show more"
+  },
+  "SiteDescription": {
+    "one": "Front-end web developer that writes about the programming craft and its tools"
+  },
+  "SiteTitle": {
+    "one": "Posts about programming - Phelipe Teles"
+  },
+  "Subscribe": {
+    "one": "Subscribe"
+  },
+  "System": {
+    "one": "System"
+  },
+  "TableOfContents": {
+    "one": "Table of Contents"
+  },
+  "Tabs": {
+    "one": "Tabs"
+  },
+  "TagDescription": {
+    "one": "{{count}} post tagged with {{tag}}",
+    "other": "{{count}} posts tagged with {{tag}}"
+  },
+  "TagsDescription": {
+    "one": "List of all blog posts tags"
+  },
+  "Tech": {
+    "one": "Technologies"
+  },
+  "ThemeButton": {
+    "one": "Change theme"
+  },
+  "ThemeIcon": {
+    "one": "Theme icon"
+  },
+  "pt": {
+    "one": "Leia em Português"
+  },
+  "404Title": {
+    "one": "Page not found"
+  }
+}

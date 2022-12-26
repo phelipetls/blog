@@ -1,0 +1,110 @@
+---
+import '@assets/css/main.css'
+import Nav from '@components/Nav.astro'
+import SideNav from '@components/SideNav.astro'
+import Fonts from '@components/Fonts.astro'
+import { format } from 'date-fns'
+import Footer from '@components/Footer.astro'
+import ThemeScript from '@components/ThemeScript.astro'
+import { SEO } from 'astro-seo'
+import type { Props as SEOProps } from 'astro-seo'
+import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+const t = useTranslate(Astro)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  title: string
+  description?: string
+  htmlClass?: string
+  seo?: Partial<SEOProps>
+}
+
+const { description = t('SiteDescription'), seo } = Astro.props
+
+let mobileNavTitle
+if (Astro.slots.has('mobile-nav-title')) {
+  mobileNavTitle = await Astro.slots.render('mobile-nav-title')
+}
+
+const title = `${Astro.props.title} | Phelipe Teles`
+---
+
+<!DOCTYPE html>
+<html
+  class:list={[
+    'h-full text-lg selection:bg-primary selection:text-on-primary',
+    Astro.props.htmlClass,
+  ]}
+  lang={language}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="deploy-date" content={format(new Date(), 'yyyy-MM-dd')} />
+    <meta name="author" content="Phelipe Teles" />
+    <meta name="color-scheme" content="dark light" />
+
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title: Astro.props.title,
+          // FIXME: provide a valid URL for a default OG image
+          image: '',
+          type: 'website',
+          ...seo?.openGraph?.basic,
+        },
+        optional: {
+          locale: language === 'pt' ? 'pt_BR' : 'en_US',
+          localeAlternate: language === 'pt' ? ['en_US'] : ['pt_BR'],
+          ...seo?.openGraph?.optional,
+        },
+      }}
+      twitter={{
+        card: 'summary',
+        creator: '@pheteles',
+        ...seo?.twitter,
+      }}
+      extend={{
+        ...seo?.extend,
+        meta: [
+          {
+            name: 'twitter:title',
+            content: title,
+          },
+          {
+            name: 'twitter:description',
+            content: description,
+          },
+          ...(seo?.extend?.meta ?? []),
+        ],
+        // FIXME: add last-modified-date meta tags
+      }}
+      {...seo}
+    />
+
+    <Fonts />
+
+    <slot name="head" />
+  </head>
+
+  <body
+    data-preload
+    class="ease h-full bg-background font-sans text-on-background transition-colors duration-500"
+  >
+    <ThemeScript />
+
+    <div class="relative flex h-full flex-col">
+      <Nav title={Astro.props.title} mobileNavTitle={mobileNavTitle} />
+      <SideNav />
+
+      <slot />
+
+      <Footer />
+    </div>
+  </body>
+</html>

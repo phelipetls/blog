@@ -1,0 +1,113 @@
+---
+import Site from '@layouts/Site.astro'
+import BlogPostCard from '@components/BlogPostCard.astro'
+import RssButton from '@components/RssButton.astro'
+import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import type { MDXInstance } from 'astro'
+import { format } from 'date-fns'
+import _ from 'lodash'
+
+export async function getStaticPaths() {
+  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.mdx'
+  )
+
+  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.pt.mdx'
+  )
+
+  return [
+    {
+      params: { lang: undefined },
+      props: { blogPosts: englishBlogPosts },
+    },
+    {
+      params: { lang: 'pt' },
+      props: { blogPosts: portugueseBlogPosts },
+    },
+  ]
+}
+
+const t = useTranslate(Astro)
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  blogPosts: MDXInstance<BlogPostFrontmatter>[]
+}
+
+const blogPosts = Astro.props.blogPosts
+
+const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
+  return format(new Date(blogPost.frontmatter.date), 'yyyy')
+})
+
+const rssUrl = localizeUrl('/posts/index.xml', language)
+---
+
+<Site
+  title="Posts"
+  description={t('PostsListDescription')}
+  seo={{
+    extend: {
+      link: [
+        {
+          rel: 'alternate',
+          type: 'application/rss+xml',
+          href: rssUrl,
+        },
+      ],
+    },
+  }}
+>
+  <main class="grid grid-cols-layout">
+    <div class="mb-4 hidden flex-row items-center justify-center gap-2 sm:flex">
+      <h1 class="m-0">Posts</h1>
+
+      <RssButton />
+    </div>
+
+    <div>
+      {
+        Object.entries(blogPostsGroupedByYear)
+          .sort(([yearA], [yearB]) => {
+            return Number(yearB) - Number(yearA)
+          })
+          .map(([year, blogPosts]) => {
+            return (
+              <>
+                <div class="mx-auto mt-16 mb-8 w-full max-w-prose first:mt-0">
+                  <h2 class="mb-0 text-2xl">
+                    <time datetime={`${year}-01-01`}>{year}</time>
+                  </h2>
+                </div>
+
+                <ul class="m-0 mx-auto grid w-full max-w-2xl list-none grid-cols-1 gap-4">
+                  {blogPosts
+                    .sort((blogPostA, blogPostB) => {
+                      return (
+                        new Date(blogPostB.frontmatter.date).getTime() -
+                        new Date(blogPostA.frontmatter.date).getTime()
+                      )
+                    })
+                    .map((blogPost) => {
+                      return (
+                        <li class="h-full">
+                          <BlogPostCard blogPost={blogPost} />
+                        </li>
+                      )
+                    })}
+                </ul>
+              </>
+            )
+          })
+      }
+    </div>
+  </main>
+
+  <div slot="mobile-nav-title" class="flex flex-row items-center gap-2">
+    Posts
+
+    <RssButton />
+  </div>
+</Site>

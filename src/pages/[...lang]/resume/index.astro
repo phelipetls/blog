@@ -1,0 +1,141 @@
+---
+import Site from '@layouts/Site.astro'
+import Button from '@components/Button'
+import { Loader, Download } from 'lucide-react'
+import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { lang: undefined },
+    },
+    {
+      params: { lang: 'pt' },
+    },
+  ]
+}
+
+const t = useTranslate(Astro)
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+const resumeUrl =
+  language === 'en'
+    ? 'https://phelipetls.github.io/latex-resume/phelipe-teles-resume-en.pdf'
+    : 'https://phelipetls.github.io/latex-resume/phelipe-teles-resume-ptbr.pdf'
+---
+
+<Site title={t('Résumé')} description={t('RésuméDescription')}>
+  <main class="grid flex-1 grid-cols-layout">
+    <div
+      class="col-full flex flex-1 flex-shrink-0 flex-col sm:grid sm:grid-cols-layout sm:grid-rows-[auto,1fr]"
+    >
+      <h1 class="mb-4 hidden text-center sm:block">{t('Résumé')}</h1>
+
+      <div
+        data-resume-container
+        data-resume-url={resumeUrl}
+        class="relative col-full h-full w-full overflow-y-auto border-y border-divider sm:col-content sm:rounded sm:border"
+      >
+        <div
+          data-resume-loading
+          role="progressbar"
+          class="absolute inset-0 hidden h-full items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
+        >
+          <Loader />
+        </div>
+
+        <canvas class="hidden" data-resume-canvas></canvas>
+
+        <noscript>
+          <embed class="h-full w-full" type="application/pdf" src={resumeUrl} />
+        </noscript>
+      </div>
+
+      <div data-resume-download-button class="mx-auto hidden">
+        <Button
+          className="btn btn-primary mt-4 flex gap-2"
+          href={resumeUrl}
+          download
+        >
+          <Download /> Download
+        </Button>
+      </div>
+    </div>
+  </main>
+</Site>
+
+<script>
+  import * as PDFObject from 'pdfobject'
+  import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js'
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/resume/pdf.worker.js'
+
+  const resumeLoading = document.querySelector('[data-resume-loading]')
+  const resumeContainer = document.querySelector<HTMLElement>(
+    '[data-resume-container]'
+  )
+  const resumeDownloadButton = document.querySelector(
+    '[data-resume-download-button]'
+  )
+  const resumeCanvas = document.querySelector<HTMLCanvasElement>(
+    '[data-resume-canvas]'
+  )
+
+  ;(async () => {
+    const resumeUrl = resumeContainer?.dataset.resumeUrl
+
+    if (!resumeUrl) {
+      return
+    }
+
+    if (PDFObject.supportsPDFs) {
+      PDFObject.embed(resumeUrl, resumeContainer)
+      return
+    }
+
+    if (!resumeCanvas) {
+      return
+    }
+
+    resumeLoading?.classList.replace('hidden', 'flex')
+    resumeDownloadButton?.classList.remove('hidden')
+
+    try {
+      const document = await pdfjsLib.getDocument(resumeUrl).promise
+
+      document.getPage(1).then(function (page) {
+        const scale =
+          resumeContainer.clientWidth / page.getViewport({ scale: 1 }).width
+        const viewport = page.getViewport({ scale })
+        const outputScale = window.devicePixelRatio || 1
+
+        const context = resumeCanvas.getContext('2d')
+
+        if (!context) {
+          return
+        }
+
+        resumeCanvas.width = Math.floor(viewport.width * outputScale)
+        resumeCanvas.height = Math.floor(viewport.height * outputScale)
+        resumeCanvas.style.width = Math.floor(viewport.width) + 'px'
+        resumeCanvas.style.height = Math.floor(viewport.height) + 'px'
+
+        const transform = [outputScale, 0, 0, outputScale, 0, 0]
+
+        const renderTask = page.render({
+          canvasContext: context,
+          transform: transform,
+          viewport: viewport,
+        })
+        return renderTask.promise
+      })
+
+      resumeCanvas.classList.remove('hidden')
+      resumeLoading?.classList.add('hidden')
+    } catch (err) {
+      resumeContainer.classList.add('hidden')
+      throw err
+    }
+  })()
+</script>

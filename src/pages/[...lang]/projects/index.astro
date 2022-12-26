@@ -1,0 +1,147 @@
+---
+import Site from '@layouts/Site.astro'
+import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+import type { MarkdownInstance } from 'astro'
+import { Github } from 'lucide-react'
+import path from 'node:path'
+
+export async function getStaticPaths() {
+  const englishProjects = await Astro.glob<
+    MarkdownInstance<ProjectFrontmatter>
+  >('../../../content/projects/*/index.md')
+
+  const portugueseProjects = await Astro.glob<
+    MarkdownInstance<ProjectFrontmatter>
+  >('../../../content/projects/*/index.pt.md')
+
+  return [
+    {
+      params: { lang: undefined },
+      props: { projects: englishProjects },
+    },
+    {
+      params: { lang: 'pt' },
+      props: { projects: portugueseProjects },
+    },
+  ]
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  projects: MarkdownInstance<ProjectFrontmatter>[]
+}
+
+const { projects } = Astro.props
+
+const t = useTranslate(Astro)
+
+const getSkillIconsUrl = (icons: string[]) => {
+  return `https://skillicons.dev/icons?i=${icons.join(',')}&theme=light`
+}
+
+const getSkillIconsAltText = (icons: string[]) => {
+  const language = getLanguageFromUrl(Astro.url.pathname)
+
+  const listFormatter = new Intl.ListFormat(language, {
+    style: 'long',
+    type: 'conjunction',
+  })
+
+  return `${t('Tech')}: ${listFormatter.format(icons)}`
+}
+---
+
+<Site title={t('Projects')} description={t('ProjectsListDescription')}>
+  <main class="grid grid-cols-layout">
+    <h1 class="mb-4 hidden text-center sm:block">{t('Projects')}</h1>
+
+    <ul class="m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-8">
+      {
+        projects.map(async (project) => {
+          const { Content, frontmatter } = project
+          const { website, title, icons } = frontmatter
+
+          const screenshot = (
+            await import(
+              `../../../content/projects/${path.basename(
+                path.dirname(project.file)
+              )}/screenshot.png`
+            )
+          ).default
+
+          return (
+            <li>
+              <article class="card grid grid-cols-1 rounded sm:grid-cols-[40%_60%]">
+                <div class="relative z-0">
+                  <picture>
+                    <img
+                      class="h-full rounded-t object-cover object-left-top sm:rounded-l sm:rounded-tr-none"
+                      src={screenshot}
+                      alt=""
+                    />
+                  </picture>
+                </div>
+
+                <div class="flex-1 p-4 sm:flex sm:flex-col sm:justify-between">
+                  <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                      <h2 class="m-0 inline-block">
+                        {website ? (
+                          <a class="flex items-center gap-2" href={website}>
+                            {title}
+                          </a>
+                        ) : (
+                          project.frontmatter.title
+                        )}
+                      </h2>
+
+                      {project.frontmatter.github && (
+                        <a
+                          class="border-0"
+                          href={project.frontmatter.github}
+                          aria-label="GitHub"
+                        >
+                          <Github />
+                        </a>
+                      )}
+                    </div>
+
+                    <Content />
+                  </div>
+
+                  <div class="mt-8">
+                    <img
+                      src={getSkillIconsUrl(icons)}
+                      alt={getSkillIconsAltText(icons)}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </article>
+            </li>
+          )
+        })
+      }
+    </ul>
+  </main>
+</Site>
+
+<script>
+  export function changeUrlTheme(rawUrl: string, theme: Theme) {
+    const url = new URL(rawUrl)
+    url.searchParams.set('theme', theme)
+    return url.toString()
+  }
+
+  document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
+    document.querySelectorAll('img[src*=skillicons]').forEach(function (img) {
+      const url = img.getAttribute('src')
+
+      if (!url) {
+        return
+      }
+
+      img.setAttribute('src', changeUrlTheme(url, e.detail.theme))
+    })
+  } as EventListener)
+</script>

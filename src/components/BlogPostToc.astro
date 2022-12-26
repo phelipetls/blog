@@ -1,0 +1,184 @@
+---
+import type { MarkdownHeading } from 'astro'
+import { useTranslate } from '@utils/i18n'
+import { List, ChevronDown } from 'lucide-react'
+import Toc from '@components/Toc.astro'
+
+const t = useTranslate(Astro)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+{
+  headings.length > 0 && (
+    <div
+      data-toc-wrapper
+      class="w-full sm:overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
+    >
+      <div class="hidden lg:block">
+        <div class="flex justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <List />
+
+            <h2 class="m-0">{t('TableOfContents')}</h2>
+          </div>
+
+          <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">
+            <ChevronDown />
+          </div>
+        </div>
+
+        <div
+          class="
+          mt-4
+          [&_a_*]:indent-0
+          [&_nav_ol]:m-0
+          [&_nav_ol]:list-none
+          [&_nav_ol]:indent-4
+          [&_nav_ol_ol]:indent-8
+          [&_nav_ol_ol_ol]:indent-12
+          [&_nav_ol_ol_ol_ol]:indent-16
+          [&_nav_ol_li]:relative
+          [&_nav_ol_li]:before:absolute
+          [&_nav_ol_li]:before:top-0
+          [&_nav_ol_li]:before:left-0
+          [&_nav_ol_li]:before:h-full
+          [&_nav_ol_li]:before:w-[1px]
+          [&_nav_ol_li]:before:bg-divider
+          [&_nav_ol_li]:before:content-['']
+          [&_nav_ol_li_a]:block
+          [&_nav_ol_li_a]:truncate
+          [&_nav_ol_li_a]:border-b-0
+          [&_nav_ol_li_a]:transition-colors
+          [&_nav_ol_li_a]:duration-500
+          [&_nav_ol_li_a:hover]:bg-hover
+          [&_nav_ol_li[data-active]]:before:bg-primary
+          [&_nav_ol_li[data-active]>a]:text-primary
+       "
+        >
+          <Toc headings={headings} data-toc />
+        </div>
+      </div>
+
+      <details
+        class="card group mb-8 max-w-prose px-horizontal-padding py-4 lg:hidden"
+        aria-label={t('TableOfContents')}
+      >
+        <summary class="list-none">
+          <div class="flex justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <List />
+
+              <h2 class="m-0">{t('TableOfContents')}</h2>
+            </div>
+
+            <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">
+              <ChevronDown />
+            </div>
+          </div>
+        </summary>
+
+        <div
+          class="
+          mt-4
+          [&_ol]:m-0
+          [&_ol]:list-outside
+          [&_ol]:px-horizontal-padding
+          [&_ol_li:not(:first-child)]:mt-1
+        "
+        >
+          <Toc headings={headings} data-toc />
+        </div>
+      </details>
+    </div>
+  )
+}
+
+<script>
+  const toc = document.querySelector<HTMLElement>('nav[data-toc]')
+  const tocContainer = toc?.closest<HTMLElement>('[data-toc-wrapper]')
+  const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
+  const firstTocItem = toc?.querySelector('li')
+
+  function activate(listItem: HTMLLIElement): void {
+    listItem.setAttribute('data-active', '')
+  }
+
+  function reset(listItem: HTMLLIElement): void {
+    listItem.removeAttribute('data-active')
+  }
+
+  function resetToc(): void {
+    toc?.querySelectorAll('li').forEach(reset)
+  }
+
+  function getTocItemByHeading(
+    heading: HTMLHeadingElement
+  ): HTMLLIElement | null {
+    const headingId = heading.getAttribute('id')
+    const tocAnchorElem = toc?.querySelector(`li a[href="#${headingId}"]`)
+
+    if (!tocAnchorElem) {
+      return null
+    }
+
+    return tocAnchorElem.closest('li')
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!tocContainer) {
+          return null
+        }
+
+        const heading = entry.target
+
+        if (entry.isIntersecting) {
+          const tocItem = getTocItemByHeading(heading as HTMLHeadingElement)
+
+          if (!tocItem) {
+            return null
+          }
+
+          resetToc()
+          activate(tocItem)
+
+          const tocContainerCoords = tocContainer.getBoundingClientRect()
+          const tocItemCoords = tocItem.getBoundingClientRect()
+
+          if (tocItem === firstTocItem) {
+            tocContainer.scrollTop = 0
+            return
+          }
+
+          // Is the item not visible because it's above the scrollable area? Then
+          // make it visible by scrolling up.
+          if (tocContainerCoords.top > tocItemCoords.top) {
+            tocContainer.scrollTop -= tocContainerCoords.top - tocItemCoords.top
+            return
+          }
+
+          if (tocItemCoords.bottom > tocContainerCoords.bottom) {
+            tocContainer.scrollTop +=
+              tocItemCoords.bottom - tocContainerCoords.bottom
+          }
+        }
+      })
+    },
+    {
+      threshold: 1,
+    }
+  )
+
+  const headingsInBlogPost = blogPost.querySelectorAll('h2, h3, h4, h4, h6')
+
+  for (const headingInBlogPost of headingsInBlogPost) {
+    observer.observe(headingInBlogPost)
+  }
+</script>

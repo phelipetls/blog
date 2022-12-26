@@ -1,0 +1,29 @@
+<aside
+  class:list={[
+    'my-8',
+    'flex',
+    'max-w-prose',
+    'gap-4',
+    'rounded',
+    'border-l',
+    'bg-surface',
+    'px-horizontal-padding',
+    'py-4',
+    'shadow',
+    'shadow-shadow',
+    'sm:mx-0',
+    'flex-col',
+    'sm:flex-row',
+    Astro.props.class,
+  ]}
+>
+  <div class="hidden sm:block">
+    <slot name="icon" />
+  </div>
+
+  <article
+    class="overflow-x-hidden [&_h2]:first-of-type:mt-0 [&_h2]:first-of-type:pt-0"
+  >
+    <slot />
+  </article>
+</aside>

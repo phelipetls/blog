@@ -1,24 +1,21 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "noEmit": true,
-    "allowJs": true,
     "strict": true,
-    "module": "es6",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "target": "esnext",
     "baseUrl": ".",
+    "skipLibCheck": true,
     "paths": {
-      "*": ["assets/*"]
-    }
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"]
+    },
+    "types": ["astro/client"],
+    "jsx": "react-jsx"
   },
-  "include": [
-    "assets/js/**/*",
-    "scripts/*"
-  ],
-  "exclude": [
-    "assets/js/templates"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["src/components/devicons"]
 }

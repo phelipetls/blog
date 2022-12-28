@@ -11,7 +11,7 @@ import {
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'
 import Tabs from './Tabs'
-import Button from './Button'
+import IconButton from './IconButton'
 import { Codesandbox, RefreshCw } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -129,27 +129,23 @@ function CustomSandpack(props: CustomSandpackProps) {
           />
 
           <div className="absolute top-3 right-horizontal-padding flex space-x-2">
-            <Button
-              variant="secondary"
-              icon
-              iconAction
+            <IconButton
+              variant="rounded"
               onClick={createAndNavigateToCodesandbox}
               className="shadow shadow-shadow"
               aria-label="Open on Codesandbox"
             >
               <Codesandbox />
-            </Button>
+            </IconButton>
 
-            <Button
-              variant="secondary"
-              icon
-              iconAction
+            <IconButton
+              variant="rounded"
               onClick={refresh}
               className="shadow shadow-shadow"
               aria-label="Refresh"
             >
               <RefreshCw />
-            </Button>
+            </IconButton>
           </div>
         </div>
       </div>

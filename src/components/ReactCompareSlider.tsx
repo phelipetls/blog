@@ -1,4 +1,4 @@
-import Button from '@components/Button'
+import IconButton from '@components/IconButton'
 import {
   ReactCompareSlider as OriginalReactCompareSlider,
   ReactCompareSliderProps,
@@ -16,13 +16,10 @@ export function ReactCompareSlider(props: ReactCompareSliderProps) {
           <div className="relative h-10 w-10 rounded-full border-2 border-divider">
             <div className="pointer-events-none absolute inset-0 h-full w-full rounded-full backdrop-blur-sm" />
 
-            <Button
-              icon
-              className="dark h-full w-full cursor-move rounded-full border-0 backdrop-blur-none"
-            >
+            <IconButton className="dark h-full w-full cursor-move rounded-full border-0 backdrop-blur-none">
               {/* FIXME: use MoveVertical icon if portrait prop is false */}
               <MoveHorizontal className="dark" />
-            </Button>
+            </IconButton>
           </div>
 
           <div className="flex-1 border-l-2 border-divider" />

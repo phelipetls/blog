@@ -1,9 +1,8 @@
 import clsx from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 type CommonButtonProps = {
-  variant?: 'primary' | 'secondary'
-  icon?: boolean
-  iconAction?: boolean
+  color?: 'primary' | 'secondary'
   children: React.ReactNode
 }
 
@@ -17,36 +16,46 @@ type ButtonButtonProps = CommonButtonProps &
     href?: never
   }
 
-type ButtonProps = ButtonLinkProps | ButtonButtonProps
+export type ButtonProps = ButtonLinkProps | ButtonButtonProps
 
-function getButtonClassName(props: ButtonProps) {
-  const { variant, icon, iconAction, className } = props
+function getButtonClassName(props: Pick<ButtonProps, 'color' | 'className'>) {
+  const { color, className } = props
 
-  return clsx(
-    'transition-colors',
-    'duration-500',
-    'hover:bg-hover',
-    'disabled:bg-disabled',
-    'disabled:text-on-disabled',
-    'disabled:hover:cursor-not-allowed',
-    'disabled:hover:bg-disabled',
-    {
-      ['rounded-full px-4 py-2']: icon === false,
-      ['bg-primary text-on-primary hover:bg-primary-hover']:
-        variant === 'primary',
-      ['bg-surface text-on-background']: variant === 'secondary',
-      ['flex items-center justify-center rounded p-1 text-on-background']:
-        icon === true,
-      ['border border-divider shadow shadow-shadow']: iconAction === true,
-    },
-    className
+  const merged = twMerge(
+    clsx(
+      'flex',
+      'items-center',
+      'justify-center',
+      'flex-row',
+      'gap-2',
+      'transition-colors',
+      'duration-500',
+      'hover:bg-hover',
+      'disabled:bg-disabled',
+      'disabled:text-on-disabled',
+      'disabled:hover:cursor-not-allowed',
+      'disabled:hover:bg-disabled',
+      'rounded-full px-4 py-2',
+      {
+        ['bg-primary text-on-primary hover:bg-primary-hover']:
+          color === 'primary',
+        ['bg-surface text-on-background']: color === 'secondary',
+      },
+      className
+    )
   )
+
+  return merged
 }
 
 export default function Button(props: ButtonProps) {
   if (props.href !== undefined) {
-    return <a {...props} className={getButtonClassName(props)} />
+    const { color, className, ...rest } = props
+    return <a className={getButtonClassName({ color, className })} {...rest} />
   }
 
-  return <button {...props} className={getButtonClassName(props)} />
+  const { color, className, ...rest } = props
+  return (
+    <button className={getButtonClassName({ color, className })} {...rest} />
+  )
 }

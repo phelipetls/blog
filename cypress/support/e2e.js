@@ -19,6 +19,8 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+import 'cypress-real-events'
+
 const isInViewport = (_chai) => {
   function assertIsInViewport() {
     const subject = this._obj

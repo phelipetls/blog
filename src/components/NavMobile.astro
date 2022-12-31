@@ -10,9 +10,8 @@ const { title, mobileNavTitle } = Astro.props
 const t = useTranslate(Astro)
 ---
 
-<nav
+<div
   class="fixed top-0 left-0 z-30 flex w-screen justify-between rounded-none border-b border-divider bg-background/90 py-4 px-horizontal-padding backdrop-blur"
-  aria-label={t('MainNavigation')}
 >
   <div class="flex flex-row items-center gap-2 overflow-hidden">
     {
@@ -42,4 +41,4 @@ const t = useTranslate(Astro)
   >
     <Menu />
   </button>
-</nav>
+</div>

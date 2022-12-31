@@ -2,10 +2,12 @@
 import ThemeSelect from '@components/ThemeSelect.astro'
 import { X } from 'lucide-react'
 import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
-import { getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 
 const language = getLanguageFromUrl(Astro.url.pathname)
 const mainMenuItems = getMainMenuItems(language)
+
+const t = useTranslate(Astro)
 ---
 
 <aside
@@ -33,7 +35,7 @@ const mainMenuItems = getMainMenuItems(language)
         </button>
       </div>
 
-      <nav class="flex flex-1 flex-col">
+      <nav class="flex flex-1 flex-col" aria-label={t('MainNavigation')}>
         <ul
           class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
         >

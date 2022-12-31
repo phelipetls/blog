@@ -66,6 +66,7 @@ const t = useTranslate(Astro)
                       'transition-colors',
                       'duration-300',
                     ]}
+                    {...(isActive && { 'aria-current': 'page' })}
                   >
                     {item.name}
                   </a>

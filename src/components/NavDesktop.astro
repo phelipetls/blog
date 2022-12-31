@@ -30,7 +30,7 @@ const mainMenuItems = getMainMenuItems(language)
               <li>
                 <a
                   id={item.identifier}
-                  href={new URL(item.pathname, Astro.url)}
+                  href={item.pathname}
                   class:list={[
                     isActive
                       ? 'bg-primary text-on-primary card hover:bg-primary-hover'

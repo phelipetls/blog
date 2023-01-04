@@ -4,7 +4,7 @@
   "description": "A blog to share stuff I find interesting or helpful and experiment with web technologies.",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npx simple-git-hooks && npx patch-package",
+    "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons",
     "dev": "astro dev",
     "start": "astro dev",
     "check": "astro check && tsc --noEmit",

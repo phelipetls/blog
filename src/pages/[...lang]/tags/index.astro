@@ -1,0 +1,68 @@
+---
+import Site from '@layouts/Site.astro'
+import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import _ from 'lodash'
+import { getBlogPostTags } from '@utils/posts'
+
+export async function getStaticPaths() {
+  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.mdx'
+  )
+
+  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.pt.mdx'
+  )
+
+  return [
+    {
+      params: { lang: undefined },
+      props: {
+        tags: getBlogPostTags(englishBlogPosts),
+      },
+    },
+    {
+      params: { lang: 'pt' },
+      props: {
+        tags: getBlogPostTags(portugueseBlogPosts),
+      },
+    },
+  ]
+}
+
+const t = useTranslate(Astro)
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  tags: string[]
+}
+
+const { tags } = Astro.props
+
+const tagsByCount = _.countBy(tags)
+---
+
+<Site title="Tags" description={t('TagsDescription')}>
+  <main class="grid grid-cols-layout">
+    <div>
+      <h1 class="mb-4 hidden text-center sm:block">Tags</h1>
+
+      <ul>
+        {
+          Object.entries(tagsByCount)
+            .sort(([_, countA], [__, countB]) => {
+              return countA - countB
+            })
+            .map(([tag, count]) => {
+              return (
+                <li>
+                  <a href={localizeUrl(`/tags/${tag}`, language)}>{tag}</a>{' '}
+                  {`(${count})`}
+                </li>
+              )
+            })
+        }
+      </ul>
+    </div>
+  </main>
+</Site>

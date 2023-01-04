@@ -4,7 +4,7 @@ function withOpacityValue(variable) {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./layouts/**/*.html', './assets/js/**'],
+  content: ['./src/{components,layouts,pages}/**/*.{astro,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {

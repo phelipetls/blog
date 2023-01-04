@@ -1,0 +1,16 @@
+---
+import NavMobile from './NavMobile.astro'
+import NavDesktop from './NavDesktop.astro'
+
+const { title, mobileNavTitle } = Astro.props
+---
+
+<div data-nav-container class="mb-8 w-full">
+  <div class="pt-nav-height sm:hidden">
+    <NavMobile title={title} mobileNavTitle={mobileNavTitle} />
+  </div>
+
+  <div class="hidden h-full w-full sm:block">
+    <NavDesktop />
+  </div>
+</div>

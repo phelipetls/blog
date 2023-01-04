@@ -1,0 +1,41 @@
+---
+import { useTranslate } from '@utils/i18n/useTranslate'
+import { ChevronLeft, Menu } from 'lucide-react'
+
+const currentUrl = Astro.request.url
+const parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'))
+
+const { title, mobileNavTitle } = Astro.props
+
+const t = useTranslate(Astro)
+---
+
+<nav
+  class="fixed top-0 left-0 z-30 flex w-screen justify-between rounded-none border-b border-divider bg-background/90 py-4 px-horizontal-padding backdrop-blur"
+  aria-label={t('MainNavigation')}
+>
+  <div class="flex flex-row items-center gap-2 overflow-hidden">
+    <a class="border-0" href={parentUrl}>
+      <ChevronLeft />
+    </a>
+
+    {
+      mobileNavTitle ? (
+        <h2
+          class="m-0 truncate font-sans font-normal"
+          set:html={mobileNavTitle}
+        />
+      ) : (
+        <h2 class="m-0 truncate font-sans font-normal">{title}</h2>
+      )
+    }
+  </div>
+
+  <button
+    data-a11y-dialog-show="sidenav"
+    class="btn btn-icon"
+    aria-label={t('OpenSidenav')}
+  >
+    <Menu />
+  </button>
+</nav>

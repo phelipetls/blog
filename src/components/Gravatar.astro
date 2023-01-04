@@ -1,0 +1,27 @@
+---
+import md5 from 'md5'
+import { useTranslate } from '@utils/i18n'
+
+const t = useTranslate(Astro)
+
+const email = 'phelipe_teles@hotmail.com'
+
+const generateGravatarUrl = (width: number) =>
+  `https://www.gravatar.com/avatar/${md5(email)}?s=${width}`
+---
+
+<div
+  class="relative z-0 shrink-0 overflow-hidden rounded-full border-2 border-divider"
+>
+  <img
+    id="gravatar"
+    srcset={`
+      ${generateGravatarUrl(200)} 1x,
+      ${generateGravatarUrl(400)} 2x,
+      ${generateGravatarUrl(600)} 3x
+    `}
+    alt={t('GravatarAltText')}
+    width="200"
+    height="200"
+  />
+</div>

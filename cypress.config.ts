@@ -2,7 +2,7 @@ import { defineConfig } from 'cypress'
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'http://localhost:1313',
+    baseUrl: 'http://localhost:3000',
     supportFile: 'cypress/support/e2e.js',
   },
 })

@@ -1,0 +1,15 @@
+---
+import Site from '@layouts/Site.astro'
+import { YouTube } from '@astro-community/astro-embed-youtube'
+import { useTranslate } from '@utils/i18n'
+
+const t = useTranslate(Astro)
+---
+
+<Site title={t('404Title')}>
+  <main class="grid grid-cols-layout">
+    <div class="col-full grid place-items-center sm:col-content">
+      <YouTube id="-RFunvF0mDw" class="w-full" />
+    </div>
+  </main>
+</Site>

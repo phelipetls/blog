@@ -1,0 +1,49 @@
+---
+import type { MarkdownHeading } from 'astro'
+import TocList from '@components/TocList.astro'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  headings: MarkdownHeading[]
+}
+
+const { headings, ...rest } = Astro.props
+
+type TocItem = MarkdownHeading & { children: TocItem[] }
+
+const tocItems = headings.reduce<TocItem[]>((tocItems, heading) => {
+  if (heading.depth === 1) {
+    tocItems.push({
+      ...heading,
+      children: [],
+    })
+
+    return tocItems
+  }
+
+  let parentTocItem: TocItem | undefined
+
+  if (heading.depth === 2) {
+    parentTocItem = tocItems.at(-1)
+  }
+
+  if (heading.depth === 3) {
+    parentTocItem = tocItems.at(-1)?.children.at(-1)
+  }
+
+  if (heading.depth === 4) {
+    parentTocItem = tocItems.at(-1)?.children.at(-1)?.children.at(-1)
+  }
+
+  parentTocItem?.children.push({
+    ...heading,
+    children: [],
+  })
+
+  return tocItems
+}, [])
+---
+
+<nav {...rest}>
+  <TocList items={tocItems} />
+</nav>

@@ -1,0 +1,12 @@
+---
+import BlogPostAside from './BlogPostAside.astro'
+import { XOctagon } from 'lucide-react'
+---
+
+<BlogPostAside class="border-warn">
+  <div slot="icon">
+    <XOctagon />
+  </div>
+
+  <slot />
+</BlogPostAside>

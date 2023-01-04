@@ -1,0 +1,100 @@
+---
+import '@assets/css/main.css'
+import { Language, useTranslate } from '@utils/i18n'
+import { getDirectoryName } from '@utils/path'
+import Fonts from '@components/Fonts.astro'
+import BlogPostDate from '@components/BlogPostDate.astro'
+import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
+import md5 from 'md5'
+import type { MDXInstance } from 'astro'
+
+export async function getStaticPaths() {
+  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../../content/posts/*/index.mdx'
+  )
+
+  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../../content/posts/*/index.pt.mdx'
+  )
+
+  return [
+    ...englishBlogPosts.map((blogPost) => {
+      return {
+        params: { lang: undefined, id: getDirectoryName(blogPost.file) },
+        props: { language: 'en', blogPost },
+      }
+    }),
+    ...portugueseBlogPosts.map((blogPost) => {
+      return {
+        params: { lang: 'pt', id: getDirectoryName(blogPost.file) },
+        props: { language: 'pt', blogPost },
+      }
+    }),
+  ]
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  blogPost: MDXInstance<BlogPostFrontmatter>
+  language: Language
+}
+
+const { language, blogPost } = Astro.props
+const { frontmatter } = blogPost
+const { title, date, readingTime } = frontmatter
+
+const email = 'phelipe_teles@hotmail.com'
+const gravatarUrl = `https://www.gravatar.com/avatar/${md5(email)}?s=200`
+
+const t = useTranslate(Astro)
+---
+
+<!DOCTYPE html>
+<html lang={language === 'pt' ? 'pt-BR' : 'en-US'} class="h-full text-2xl">
+  <head>
+    <meta charset="UTF-8" />
+    <Fonts />
+  </head>
+
+  <body
+    class="h-full border-b-[8px] border-primary bg-background px-4 font-sans text-on-background"
+  >
+    <div class="flex h-full flex-col justify-center">
+      <div class="flex-1"></div>
+
+      <div class="mx-auto mb-6">
+        <h1 class="m-0 text-center text-4xl">
+          {title}
+        </h1>
+      </div>
+
+      <div class="mx-auto flex gap-2 text-xl">
+        <BlogPostDate date={date} />
+
+        <BlogPostReadingTime readingTime={readingTime} />
+      </div>
+
+      <div class="flex-1"></div>
+
+      <div class="flex flex-row items-center justify-center gap-6">
+        <div class="flex-shrink-0">
+          <img
+            class="rounded-full border border-divider"
+            src={gravatarUrl}
+            alt=""
+          />
+        </div>
+
+        <div class="flex flex-col">
+          <h2 class="m-0">Phelipe Teles</h2>
+
+          <span class="max-w-sm">
+            {t('SiteDescription')}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-1"></div>
+    </div>
+  </body>
+</html>

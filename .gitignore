@@ -1,11 +1,9 @@
-resources
-public
+dist
 node_modules
-hugo_stats.json
-tailwind.dev*.css
-.hugo_build.lock
 cypress/screenshots
 cypress/videos
-post-images-screenshots
-content/posts/**/post-image.png
-content/posts/**/post-image.pt.png
+screenshots/**/*.png
+public/posts/**/post-image.png
+public/posts/**/post-image.pt.png
+src/components/devicons/*.ts
+src/components/devicons/*.tsx

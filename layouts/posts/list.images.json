@@ -1,9 +1,0 @@
-[
-  {{- range $i, $page := .Pages -}}
-    {{- if $i -}},{{- end -}}
-    {
-      "url": "{{ ($page.OutputFormats.Get "image").Permalink | safeURL }}",
-      "dir": "{{ .File.Dir }}"
-    }
-  {{- end -}}
-]

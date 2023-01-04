@@ -1,0 +1,79 @@
+---
+import type { MDXInstance } from 'astro'
+import BlogPost from '@layouts/BlogPost.astro'
+import CodeBlock from '@components/CodeBlock.astro'
+import { getDirectoryName } from '@utils/path'
+
+export async function getStaticPaths() {
+  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.mdx'
+  )
+
+  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
+    '../../../content/posts/*/index.pt.mdx'
+  )
+
+  const sortByDateInAscendingOrder = (
+    blogPosts: MDXInstance<BlogPostFrontmatter>[]
+  ) => {
+    return blogPosts.sort((blogPostA, blogPostB) => {
+      return (
+        new Date(blogPostA.frontmatter.date).getTime() -
+        new Date(blogPostB.frontmatter.date).getTime()
+      )
+    })
+  }
+
+  return [
+    ...sortByDateInAscendingOrder(englishBlogPosts).map(
+      (blogPost, index, blogPosts) => {
+        const nextBlogPost = blogPosts[index + 1]
+        const prevBlogPost = blogPosts[index - 1]
+
+        return {
+          params: { lang: undefined, id: getDirectoryName(blogPost.file) },
+          props: { blogPost, nextBlogPost, prevBlogPost },
+        }
+      }
+    ),
+    ...sortByDateInAscendingOrder(portugueseBlogPosts).map(
+      (blogPost, index, blogPosts) => {
+        const nextBlogPost = blogPosts[index + 1]
+        const prevBlogPost = blogPosts[index - 1]
+
+        return {
+          params: { lang: 'pt', id: getDirectoryName(blogPost.file) },
+          props: { blogPost, nextBlogPost, prevBlogPost },
+        }
+      }
+    ),
+  ]
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  blogPost: MDXInstance<BlogPostFrontmatter>
+  nextBlogPost?: MDXInstance<BlogPostFrontmatter>
+  prevBlogPost?: MDXInstance<BlogPostFrontmatter>
+}
+
+const { blogPost } = Astro.props
+const { Content } = blogPost
+
+const components = {
+  pre: CodeBlock,
+  h1: 'h2',
+  h3: 'h4',
+  h4: 'h5',
+  h5: 'h6',
+}
+---
+
+<BlogPost
+  file={blogPost.file}
+  frontmatter={blogPost.frontmatter}
+  headings={blogPost.getHeadings()}
+  {...Astro.props}
+>
+  <Content components={{ ...components, Fragment }} />
+</BlogPost>

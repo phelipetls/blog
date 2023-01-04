@@ -1,0 +1,12 @@
+---
+import BlogPostAside from './BlogPostAside.astro'
+import { Info } from 'lucide-react'
+---
+
+<BlogPostAside class="border-note">
+  <div slot="icon">
+    <Info />
+  </div>
+
+  <slot />
+</BlogPostAside>

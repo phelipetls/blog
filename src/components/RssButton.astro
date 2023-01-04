@@ -1,0 +1,11 @@
+---
+import { getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { Rss } from 'lucide-react'
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+const rssUrl = localizeUrl('/posts/index.xml', language)
+---
+
+<a href={rssUrl} class="text-sm border-0" aria-label="RSS Feed">
+  <Rss />
+</a>

@@ -1,7 +1,0 @@
-{{ if len .Params | eq 2 }}
-  {{ $context := (dict "Inner" (trim .InnerDeindent "\n\r") "Type" (.Get 0) "Options" (.Get 1)) }}
-  {{ partial "codeblock.html" $context }}
-{{ else }}
-  {{ $context := (dict "Inner" (trim .InnerDeindent "\n\r") "Type" (.Get 0) "Options" "") }}
-  {{ partial "codeblock.html" $context }}
-{{ end }}

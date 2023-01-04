@@ -1,0 +1,60 @@
+---
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { getDirectoryName } from '@utils/path'
+import type { MDXInstance } from 'astro'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = {
+  prevBlogPost?: MDXInstance<BlogPostFrontmatter>
+  nextBlogPost?: MDXInstance<BlogPostFrontmatter>
+}
+
+const t = useTranslate(Astro)
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+const createPostUrl = (filename: string) => {
+  return new URL(
+    localizeUrl('/posts/' + getDirectoryName(filename), language),
+    Astro.url
+  )
+}
+
+const { prevBlogPost, nextBlogPost } = Astro.props
+---
+
+<nav class="flex items-stretch sm:gap-4" aria-label={t('PostsNavigation')}>
+  {
+    prevBlogPost ? (
+      <a
+        class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-500 hover:bg-hover"
+        href={createPostUrl(prevBlogPost.file)}
+      >
+        <span class="text-primary">
+          <ArrowLeft />
+        </span>
+
+        {prevBlogPost.frontmatter.title}
+      </a>
+    ) : (
+      <div class="flex-1" />
+    )
+  }
+
+  <div class="border-l border-divider sm:hidden"></div>
+
+  {
+    nextBlogPost && (
+      <a
+        class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-500 hover:bg-hover"
+        href={createPostUrl(nextBlogPost.file)}
+      >
+        {nextBlogPost.frontmatter.title}
+
+        <span class="text-primary">
+          <ArrowRight />
+        </span>
+      </a>
+    )
+  }
+</nav>

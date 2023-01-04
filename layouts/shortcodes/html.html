@@ -1,4 +1,0 @@
-{{ $html := .Page.Resources.Get (.Get "path") }}
-{{ $sourceCode := $html.Content | safeHTML }}
-
-{{ partial "html-preview" (dict "SourceCode" $sourceCode "Language" "html" "HighlightOptions" (.Get "hl_options") "IframeResource" $html "Title" (.Get "title")) }}

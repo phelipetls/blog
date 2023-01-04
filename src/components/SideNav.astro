@@ -1,0 +1,151 @@
+---
+import ThemeSelect from '@components/ThemeSelect.astro'
+import { X } from 'lucide-react'
+import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
+import { getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+const mainMenuItems = getMainMenuItems(language)
+---
+
+<aside
+  data-a11y-dialog="sidenav"
+  aria-hidden="true"
+  class="fixed z-50 h-full w-full"
+  style="visibility: hidden;"
+>
+  <div
+    data-a11y-dialog-hide
+    class="fixed inset-0 -z-1 w-full bg-neutral-700 bg-opacity-75 backdrop-blur-sm"
+  >
+  </div>
+
+  <div
+    role="document"
+    class="ml-auto h-full w-3/4 rounded-none bg-background py-0 will-change-transform"
+  >
+    <div class="flex h-full flex-col justify-between">
+      <div
+        class="mb-2 flex h-nav-height items-center justify-end px-horizontal-padding"
+      >
+        <button data-a11y-dialog-hide class="btn btn-icon" aria-label="Close">
+          <X />
+        </button>
+      </div>
+
+      <nav class="flex flex-1 flex-col">
+        <ul
+          class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
+        >
+          {
+            mainMenuItems.map((item) => {
+              const isActive = isActiveMenuItem({
+                currentPathname: Astro.url.pathname,
+                menuItemPathname: item.pathname,
+                rootPathname: localizeUrl('/', language),
+              })
+
+              return (
+                <li class="w-full">
+                  <a
+                    id={item.identifier}
+                    href={new URL(item.pathname, Astro.url)}
+                    class:list={[
+                      isActive
+                        ? 'card bg-primary text-on-primary hover:bg-primary-hover'
+                        : 'hover:bg-hover',
+                      'block',
+                      'w-full',
+                      'rounded',
+                      'border-0',
+                      'p-2',
+                      'text-center',
+                      'text-xl',
+                      'transition-colors',
+                      'duration-300',
+                    ]}
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </nav>
+
+      <div
+        class="mb-4 flex h-12 flex-row items-center justify-center px-horizontal-padding"
+      >
+        <ThemeSelect />
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+  import 'a11y-dialog'
+
+  const DIALOG_BACKDROP_ANIMATION_DURATION = 300
+  const DIALOG_CONTENT_ANIMATION_DURATION = 300
+  const maxAnimationDuration = Math.max(
+    DIALOG_CONTENT_ANIMATION_DURATION,
+    DIALOG_BACKDROP_ANIMATION_DURATION
+  )
+
+  ;(() => {
+    const dialogElement =
+      document.querySelector<HTMLElement>('[data-a11y-dialog]')
+
+    if (!dialogElement) {
+      return
+    }
+
+    const backdrop = dialogElement.querySelector<HTMLElement>(
+      '[data-a11y-dialog-hide]'
+    )
+    const content = dialogElement.querySelector<HTMLElement>('[role=document]')
+
+    if (!backdrop || !content) {
+      return
+    }
+
+    const hideSidenav = () => {
+      backdrop.style.transition = `opacity ${DIALOG_BACKDROP_ANIMATION_DURATION}ms ease`
+      content.style.transition = `transform ${DIALOG_CONTENT_ANIMATION_DURATION}ms ease`
+      dialogElement.style.transition = `visibility 0ms ${maxAnimationDuration}ms ease`
+
+      content.style.transform = 'translateX(100%)'
+      backdrop.style.opacity = '0'
+      dialogElement.style.visibility = 'hidden'
+
+      document.body.style.overflowY = 'visible'
+    }
+
+    const showSidenav = () => {
+      dialogElement.style.transition = `visibility 0ms`
+      backdrop.style.transition = `opacity ${DIALOG_BACKDROP_ANIMATION_DURATION}ms ease`
+      content.style.transition = `transform ${DIALOG_CONTENT_ANIMATION_DURATION}ms ease`
+
+      dialogElement.style.visibility = 'visible'
+      backdrop.style.opacity = '1'
+      content.style.transform = 'translateX(0px)'
+
+      dialogElement
+        .querySelector<HTMLElement>('button[data-a11y-dialog-hide]')
+        ?.focus()
+
+      document.body.style.overflowY = 'hidden'
+    }
+
+    hideSidenav()
+
+    dialogElement.addEventListener('show', () => {
+      showSidenav()
+    })
+
+    dialogElement.addEventListener('hide', () => {
+      hideSidenav()
+    })
+  })()
+</script>

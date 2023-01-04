@@ -1,0 +1,247 @@
+---
+import Button from '@components/Button'
+import DevIcon, { DevIconName } from '@components/DevIcon.astro'
+import { useTranslate } from '@utils/i18n'
+import { FileText, Clipboard, Check } from 'lucide-react'
+import * as DevIcons from './devicons'
+import type { Lang } from 'shiki'
+import type { HTMLAttributes } from 'astro/types'
+import clsx from 'clsx'
+
+const t = useTranslate(Astro)
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type Props = HTMLAttributes<'pre'> & {
+  shikiBg: string
+  shikiFg: string
+  title: string
+  lang: Lang
+}
+
+const { shikiBg, shikiFg, title, lang, ...rest } = Astro.props
+
+const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
+  const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
+    jsx: 'React',
+    tsx: 'React',
+    js: 'Javascript',
+    ts: 'Typescript',
+    css: 'Css3',
+    html: 'Html5',
+    shell: 'Bash',
+  }
+
+  if (lang in shikiLangToDevIconName) {
+    return shikiLangToDevIconName[lang as keyof typeof shikiLangToDevIconName]
+  }
+}
+
+const getShikiLangName = (lang: Lang): string | undefined => {
+  const shikiLangToName: Partial<Record<Lang, string>> = {
+    jsx: 'React',
+    tsx: 'React',
+    js: 'JavaScript',
+    ts: 'TypeScript',
+    shell: 'Bash',
+  }
+
+  if (lang in shikiLangToName) {
+    return shikiLangToName[lang as keyof typeof shikiLangToName]
+  }
+}
+
+const langName = getShikiLangName(Astro.props.lang) || Astro.props.lang
+
+const isDevIconName = (str: string): str is DevIconName => {
+  return Object.keys(DevIcons)
+    .map((iconName) => iconName.toLowerCase())
+    .includes(str)
+}
+
+const capitalize = <T extends string>(str: T) =>
+  (str.charAt(0).toUpperCase() + str.slice(1)) as Capitalize<T>
+
+const devIconName = isDevIconName(lang)
+  ? (capitalize(Astro.props.lang) as DevIconName)
+  : getDevIconNameByShikiLang(lang)
+
+const hasHeader = title || devIconName
+---
+
+<style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
+></style>
+
+<div
+  data-codeblock
+  class:list={[hasHeader ? 'mt-16' : 'mt-8', 'group', 'relative', 'mb-8']}
+>
+  <div
+    class="dark absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-full overflow-hidden sm:left-0"
+  >
+    {
+      hasHeader && (
+        <div class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]">
+          <div class="shrink-0">
+            {devIconName ? (
+              <DevIcon name={devIconName} />
+            ) : (
+              <FileText stroke="current" />
+            )}
+          </div>
+
+          {title ? (
+            <div class="rtl truncate text-right font-mono">
+              <bdi>{title}</bdi>
+            </div>
+          ) : (
+            <div class="capitalize">{langName}</div>
+          )}
+        </div>
+      )
+    }
+  </div>
+
+  <pre
+    class:list={[
+      'shadow',
+      'shadow-shadow',
+      'overflow-x-auto',
+      'rounded',
+      hasHeader && 'rounded-tl-none',
+      'bg-[var(--code-bg)]',
+      'text-[var(--code-fg)]',
+      'py-4',
+      '[color-scheme:dark]',
+      '[&_code]:grid',
+      '[&_code>.line]:px-8',
+      '[&_code>.line]:border-l-[2px]',
+      '[&_code>.line]:border-[var(--code-bg)]',
+      '[&_code>.line.highlighted]:bg-[#272115]',
+      '[&_code>.line.highlighted]:border-[#624710]',
+      Astro.props.class,
+    ]}
+    {...rest}><slot /></pre>
+
+  <Button
+    icon
+    iconAction
+    data-copy-code-button
+    data-user-copied="false"
+    className={clsx([
+      'dark',
+      'bg-[var(--code-bg)]',
+      'hover:bg-[var(--code-bg)]',
+      'group',
+      'pointer-events-none',
+      'absolute',
+      'right-0',
+      'top-3',
+      'hidden',
+      '-translate-x-1/2',
+      'opacity-0',
+      'transition-opacity',
+      'duration-500',
+      'group-hover:pointer-events-auto',
+      'group-hover:opacity-100',
+      'data-[user-copied=true]:border-green-500',
+      'text-2xl',
+      '[&_svg]:w-[1em] [&_svg]:h-[1em]',
+    ])}
+    aria-label={t('CopyCodeButtonLabel')}
+  >
+    <span class="group-data-[user-copied=true]:hidden">
+      <Clipboard />
+    </span>
+
+    <span
+      class="text-green-500 group-data-[user-copied=false]:hidden [&_svg]:stroke-current"
+    >
+      <Check />
+    </span>
+  </Button>
+</div>
+
+<script>
+  import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
+
+  const copyCodeButtons = document.querySelectorAll<HTMLElement>(
+    '[data-copy-code-button]'
+  )
+
+  for (const copyCodeButton of copyCodeButtons) {
+    copyCodeButton.classList.remove('hidden')
+    addEventHandlersToCopyCodeButton(copyCodeButton)
+  }
+
+  const tooltipTemplate = document.querySelector<HTMLTemplateElement>(
+    '[data-theme-copy-code-tooltip-template]'
+  )
+
+  function addEventHandlersToCopyCodeButton(button: HTMLElement) {
+    button.addEventListener('focus', function () {
+      button.classList.add('opacity-100')
+      button.classList.remove('pointer-events-none')
+    })
+
+    button.addEventListener('blur', function () {
+      button.classList.remove('opacity-100')
+      button.classList.add('pointer-events-none')
+    })
+
+    button.addEventListener('click', async function () {
+      const codeBlock =
+        button.parentElement?.querySelector<HTMLElement>('pre code')
+      if (!codeBlock) {
+        return
+      }
+
+      await navigator.clipboard.writeText(codeBlock.innerText)
+
+      if (tooltipTemplate?.content) {
+        const tooltipContent = tooltipTemplate.content.cloneNode(true)
+        document.body.append(tooltipContent)
+      } else {
+        return
+      }
+
+      const tooltip = document.body.querySelector<HTMLElement>(
+        '[data-theme-copy-code-tooltip]'
+      )
+      const tooltipArrow = tooltip?.querySelector<HTMLElement>('[data-arrow]')
+      if (!tooltip || !tooltipArrow) {
+        return
+      }
+
+      button.setAttribute('data-user-copied', 'true')
+
+      const { x, y, middlewareData } = await computePosition(button, tooltip, {
+        placement: 'top',
+        middleware: [
+          shift({ padding: 8 }),
+          offset(8),
+          arrow({ element: tooltipArrow }),
+        ],
+      })
+
+      Object.assign(tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+        animation: 'tooltip-animation 1.5s',
+      })
+
+      setTimeout(() => {
+        button.setAttribute('data-user-copied', 'false')
+        tooltip.remove()
+      }, 1500)
+
+      const arrowX = middlewareData.arrow?.x
+      const arrowY = middlewareData.arrow?.y
+
+      Object.assign(tooltipArrow.style, {
+        left: arrowX ? `${arrowX}px` : '',
+        top: arrowY ? `${arrowY}px` : '',
+        bottom: '-4px',
+      })
+    })
+  }
+</script>

@@ -13,7 +13,7 @@
     "cy:open": "cypress run",
     "cy:run": "cypress run",
     "test": "start-server-and-test preview 3000 cy:run",
-    "pre-push": "run-s check test",
+    "pre-push": "run-s build check test",
     "generate-posts-images": "node ./scripts/generate-posts-images.js",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons"
   },

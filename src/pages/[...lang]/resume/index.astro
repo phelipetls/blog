@@ -65,7 +65,7 @@ const resumeUrl =
   import * as PDFObject from 'pdfobject'
   import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js'
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/resume/pdf.worker.js'
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
 
   const resumeLoading = document.querySelector('[data-resume-loading]')
   const resumeContainer = document.querySelector<HTMLElement>(

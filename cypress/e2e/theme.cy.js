@@ -21,9 +21,7 @@ describe('Dark, light and system theme', () => {
 
     cy.get('body').should('not.have.class', 'dark')
 
-    cy.findByRole('combobox', { name: /choose a theme/i })
-      .should('be.visible')
-      .select('dark')
+    cy.findByRole('combobox', { name: /choose a theme/i }).select('dark')
 
     cy.get('body').should('have.class', 'dark')
   })

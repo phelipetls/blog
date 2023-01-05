@@ -34,4 +34,15 @@ describe('Navbar', { retries: { runMode: 5, openMode: 0 } }, () => {
       })
     })
   })
+  ;[
+    ['/posts', '/'],
+    ['/posts/demystifying-git-rebase/', '/posts/'],
+  ].forEach(([url, parentUrl]) => {
+    it('should have correct link to parent url in mobile navbar', () => {
+      cy.viewport('iphone-6')
+
+      cy.visit(url)
+      cy.findByTestId('parent-page-link').should('have.attr', 'href', parentUrl)
+    })
+  })
 })

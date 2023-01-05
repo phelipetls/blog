@@ -2,8 +2,7 @@
 import { useTranslate } from '@utils/i18n/useTranslate'
 import { ChevronLeft, Menu } from 'lucide-react'
 
-const currentUrl = Astro.request.url
-const parentUrl = new URL(currentUrl.substring(0, currentUrl.lastIndexOf('/')))
+const parentUrl = Astro.url.pathname.replace(/[^/]+\/?$/, '')
 
 const { title, mobileNavTitle } = Astro.props
 
@@ -16,7 +15,7 @@ const t = useTranslate(Astro)
   <div class="flex flex-row items-center gap-2 overflow-hidden">
     {
       Astro.url.pathname !== '/' && (
-        <a class="border-0" href={parentUrl}>
+        <a class="border-0" href={parentUrl} data-testid="parent-page-link">
           <ChevronLeft />
         </a>
       )

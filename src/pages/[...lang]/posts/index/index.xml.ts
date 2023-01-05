@@ -12,13 +12,11 @@ export function getStaticPaths() {
   ]
 }
 
-export const get = ({ props }: APIContext) => {
-  const lang = props.lang as Language
-
-  const t = translate(lang)
+export const get = ({ props }: APIContext<{ language: Language }>) => {
+  const t = translate(props.language)
 
   let postsImportResult
-  if (lang === 'en') {
+  if (props.language === 'en') {
     postsImportResult = import.meta.glob<MDXInstance<BlogPostFrontmatter>>(
       '../../../../content/posts/**/*.mdx',
       {
@@ -48,6 +46,8 @@ export const get = ({ props }: APIContext) => {
         description: post.frontmatter.summary,
       }
     }),
-    customData: `<language>${lang === 'en' ? 'en-us' : 'pt-br'}</language>`,
+    customData: `<language>${
+      props.language === 'en' ? 'en-us' : 'pt-br'
+    }</language>`,
   })
 }

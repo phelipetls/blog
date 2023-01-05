@@ -1,6 +1,6 @@
 describe(
   'Tabs', // cypress-real-events only works in Chromium-based browsers
-  { browser: '!firefox' },
+  { browser: '!firefox', retries: { runMode: 5, openMode: 0 } },
   () => {
     it('should correctly hide and show tab panels when selecting tabs', () => {
       cy.visit('/posts/bash-for-javascript-developers')

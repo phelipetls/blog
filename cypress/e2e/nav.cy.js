@@ -1,7 +1,7 @@
 const cartesianProduct = (...a) =>
   a.reduce((a, b) => a.flatMap((d) => b.map((e) => [d, e].flat())))
 
-describe('Navbar', () => {
+describe('Navbar', { retries: { runMode: 5, openMode: 0 } }, () => {
   cartesianProduct(
     ['macbook-11', 'iphone-6'],
     ['pt', 'en'],

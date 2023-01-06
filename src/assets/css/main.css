@@ -150,10 +150,6 @@
   transition: none !important;
 }
 
-.utterances {
-  @apply mx-0 max-w-prose;
-}
-
 @keyframes tooltip-animation {
   0% {
     opacity: 0;

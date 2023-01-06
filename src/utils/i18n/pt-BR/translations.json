@@ -116,5 +116,8 @@
   },
   "404Title": {
     "one": "Página não encontrada"
+  },
+  "GoBack": {
+    "one": "Voltar à pagina anterior"
   }
 }

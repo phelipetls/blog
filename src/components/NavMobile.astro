@@ -15,7 +15,12 @@ const t = useTranslate(Astro)
   <div class="flex flex-row items-center gap-2 overflow-hidden">
     {
       Astro.url.pathname !== '/' && (
-        <a class="border-0" href={parentUrl} data-testid="parent-page-link">
+        <a
+          class="border-0"
+          href={parentUrl}
+          data-testid="parent-page-link"
+          aria-label={t('GoBack')}
+        >
           <ChevronLeft />
         </a>
       )

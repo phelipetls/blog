@@ -27,7 +27,7 @@ const { prevBlogPost, nextBlogPost } = Astro.props
   {
     prevBlogPost ? (
       <a
-        class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-500 hover:bg-hover"
+        class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-300 hover:bg-hover"
         href={createPostUrl(prevBlogPost.file)}
       >
         <span class="text-primary">
@@ -46,7 +46,7 @@ const { prevBlogPost, nextBlogPost } = Astro.props
   {
     nextBlogPost && (
       <a
-        class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-500 hover:bg-hover"
+        class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-300 hover:bg-hover"
         href={createPostUrl(nextBlogPost.file)}
       >
         {nextBlogPost.frontmatter.title}

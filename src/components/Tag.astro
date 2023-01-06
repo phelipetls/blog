@@ -4,7 +4,7 @@ const { tag, class: className = '' } = Astro.props
 
 <a
   class:list={[
-    'inline-flex w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow shadow-shadow transition-colors duration-500 hover:border-divider hover:bg-hover whitespace-nowrap',
+    'inline-flex w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover whitespace-nowrap',
     className,
   ]}
   href={tag === '...' ? '/tags' : `/tags/${tag}`}

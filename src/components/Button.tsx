@@ -29,7 +29,7 @@ function getButtonClassName(props: Pick<ButtonProps, 'color' | 'className'>) {
       'flex-row',
       'gap-2',
       'transition-colors',
-      'duration-500',
+      'duration-300',
       'hover:bg-hover',
       'disabled:bg-disabled',
       'disabled:text-on-disabled',

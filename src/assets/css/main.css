@@ -132,7 +132,7 @@
   }
 
   .tag {
-    @apply chip no-underline shadow shadow-shadow transition-colors duration-500 hover:border-divider hover:bg-hover;
+    @apply chip no-underline shadow shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover;
   }
 
   .alert {

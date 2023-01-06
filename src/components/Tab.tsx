@@ -32,7 +32,7 @@ export default function Tab(props: TabProps) {
           'rounded-t',
           'p-2',
           'transition-colors',
-          'duration-200',
+          'duration-300',
           'hover:bg-hover',
           {
             'border-b border-primary font-bold hover:bg-hover': selected,

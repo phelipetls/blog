@@ -94,17 +94,15 @@ const title = `${Astro.props.title} | Phelipe Teles`
 
   <body
     data-preload
-    class="ease h-full bg-background font-sans text-on-background"
+    class="relative flex h-full flex-col bg-background font-sans text-on-background"
   >
     <ThemeScript />
 
-    <div class="relative flex h-full flex-col">
-      <Nav title={Astro.props.title} mobileNavTitle={mobileNavTitle} />
-      <SideNav />
+    <Nav title={Astro.props.title} mobileNavTitle={mobileNavTitle} />
+    <SideNav />
 
-      <slot />
+    <slot />
 
-      <Footer />
-    </div>
+    <Footer />
   </body>
 </html>

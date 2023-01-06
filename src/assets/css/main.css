@@ -127,18 +127,6 @@
 }
 
 @layer components {
-  .chip {
-    @apply inline-flex w-fit items-center justify-center rounded-full border border-divider bg-surface px-4;
-  }
-
-  .tag {
-    @apply chip no-underline shadow shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover;
-  }
-
-  .alert {
-    @apply my-8 flex max-w-prose gap-4 rounded border-l bg-surface px-horizontal-padding py-4 shadow shadow-shadow sm:mx-0;
-  }
-
   .card {
     @apply rounded bg-surface shadow shadow-shadow;
   }

@@ -1,6 +1,7 @@
 ---
 import BlogPostReadingTime from './BlogPostReadingTime.astro'
 import BlogPostDate from './BlogPostDate.astro'
+import Tag from './Tag.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
 import type { MDXInstance } from 'astro'
 import { getDirectoryName } from '@utils/path'
@@ -30,12 +31,9 @@ const { title, tags, summary, date, readingTime } = frontmatter
         <div class="-mx-8 mt-4 mb-2 flex snap-x snap-proximity scroll-pl-8 flex-wrap gap-2 overflow-x-auto px-8 pt-1 pb-1">
           {tags.map((tag) => {
             return (
-              <a
-                href={localizeUrl(`/tags/${tag}`, language)}
-                class="tag snap-start whitespace-nowrap"
-              >
+              <Tag tag={tag} class="snap-start whitespace-nowrap">
                 {tag}
-              </a>
+              </Tag>
             )
           })}
         </div>

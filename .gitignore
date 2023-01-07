@@ -5,6 +5,6 @@ cypress/videos
 screenshots/**/*.png
 public/posts/**/image.png
 public/pt/posts/**/image.png
-public/js/pdf.worker.min.js
+public/pdf.worker.min.js
 src/components/devicons/*.ts
 src/components/devicons/*.tsx

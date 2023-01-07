@@ -132,7 +132,6 @@ function CustomSandpack(props: CustomSandpackProps) {
             <IconButton
               variant="rounded"
               onClick={createAndNavigateToCodesandbox}
-              className="shadow shadow-shadow"
               aria-label="Open on Codesandbox"
             >
               <Codesandbox />
@@ -141,7 +140,6 @@ function CustomSandpack(props: CustomSandpackProps) {
             <IconButton
               variant="rounded"
               onClick={refresh}
-              className="shadow shadow-shadow"
               aria-label="Refresh"
             >
               <RefreshCw />

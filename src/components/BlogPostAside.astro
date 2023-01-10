@@ -4,20 +4,22 @@
     'flex',
     'max-w-prose',
     'gap-4',
-    'rounded',
-    'border-l',
+    'sm:rounded',
+    'border-y',
+    'sm:border-y-0',
+    'sm:border-l',
     'bg-surface',
+    'full-width-on-mobile',
     'px-horizontal-padding',
     'py-4',
-    'shadow',
-    'shadow-shadow',
+    'sm:shadow',
+    'sm:shadow-shadow',
     'sm:mx-0',
-    'flex-col',
-    'sm:flex-row',
+    'flex-row',
     Astro.props.class,
   ]}
 >
-  <div class="hidden sm:block">
+  <div class="">
     <slot name="icon" />
   </div>
 

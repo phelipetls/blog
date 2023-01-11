@@ -132,12 +132,14 @@ const hasHeader = title || devIconName
       'hover:bg-[var(--code-bg)]',
       'group',
       'pointer-events-none',
+      'focus-visible:pointer-events-auto',
+      'opacity-0',
+      'focus-visible:opacity-100',
       'absolute',
       'right-0',
       'top-3',
       'hidden',
       '-translate-x-1/2',
-      'opacity-0',
       'transition-opacity',
       'duration-500',
       'group-hover:pointer-events-auto',
@@ -177,16 +179,6 @@ const hasHeader = title || devIconName
   )
 
   function addEventHandlersToCopyCodeButton(button: HTMLElement) {
-    button.addEventListener('focus', function () {
-      button.classList.add('opacity-100')
-      button.classList.remove('pointer-events-none')
-    })
-
-    button.addEventListener('blur', function () {
-      button.classList.remove('opacity-100')
-      button.classList.add('pointer-events-none')
-    })
-
     button.addEventListener('click', async function () {
       const codeBlock =
         button.parentElement?.querySelector<HTMLElement>('pre code')

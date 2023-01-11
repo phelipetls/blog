@@ -1,8 +1,8 @@
 ---
-import IconButton from '@components/IconButton'
+import CopyCodeBlockButton from '@components/CopyCodeBlockButton'
 import DevIcon, { DevIconName } from '@components/DevIcon.astro'
 import { useTranslate } from '@utils/i18n'
-import { FileText, Clipboard, Check } from 'lucide-react'
+import { FileText } from 'lucide-react'
 import * as DevIcons from './devicons'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
@@ -16,9 +16,10 @@ type Props = HTMLAttributes<'pre'> & {
   shikiFg: string
   title: string
   lang: Lang
+  plainCode: string
 }
 
-const { shikiBg, shikiFg, title, lang, ...rest } = Astro.props
+const { shikiBg, shikiFg, title, lang, plainCode, ...rest } = Astro.props
 
 const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
   const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
@@ -122,117 +123,17 @@ const hasHeader = title || devIconName
     ]}
     {...rest}><slot /></pre>
 
-  <IconButton
-    variant="rounded"
-    data-copy-code-button
-    data-user-copied="false"
-    className={clsx([
-      'dark',
-      'bg-[var(--code-bg)]',
-      'hover:bg-[var(--code-bg)]',
-      'group',
-      'pointer-events-none',
-      'focus-visible:pointer-events-auto',
-      'opacity-0',
-      'focus-visible:opacity-100',
-      'absolute',
-      'right-0',
-      'top-3',
-      'hidden',
-      '-translate-x-1/2',
+  <CopyCodeBlockButton
+    client:load
+    aria-label={t('CopyCodeButtonLabel')}
+    code={plainCode}
+    className={clsx(
       'transition-opacity',
       'duration-500',
-      'group-hover:pointer-events-auto',
+      'opacity-0',
+      'pointer-events-none',
       'group-hover:opacity-100',
-      'data-[user-copied=true]:border-green-500',
-      'text-2xl',
-      '[&_svg]:w-[1em] [&_svg]:h-[1em]',
-    ])}
-    aria-label={t('CopyCodeButtonLabel')}
-  >
-    <span class="group-data-[user-copied=true]:hidden text-[var(--code-fg)]">
-      <Clipboard />
-    </span>
-
-    <span
-      class="text-green-500 group-data-[user-copied=false]:hidden [&_svg]:stroke-current"
-    >
-      <Check />
-    </span>
-  </IconButton>
+      'group-hover:pointer-events-auto'
+    )}
+  />
 </div>
-
-<script>
-  import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
-
-  const copyCodeButtons = document.querySelectorAll<HTMLElement>(
-    '[data-copy-code-button]'
-  )
-
-  for (const copyCodeButton of copyCodeButtons) {
-    copyCodeButton.classList.remove('hidden')
-    addEventHandlersToCopyCodeButton(copyCodeButton)
-  }
-
-  const tooltipTemplate = document.querySelector<HTMLTemplateElement>(
-    '[data-theme-copy-code-tooltip-template]'
-  )
-
-  function addEventHandlersToCopyCodeButton(button: HTMLElement) {
-    button.addEventListener('click', async function () {
-      const codeBlock =
-        button.parentElement?.querySelector<HTMLElement>('pre code')
-      if (!codeBlock) {
-        return
-      }
-
-      await navigator.clipboard.writeText(codeBlock.innerText)
-
-      if (tooltipTemplate?.content) {
-        const tooltipContent = tooltipTemplate.content.cloneNode(true)
-        document.body.append(tooltipContent)
-      } else {
-        return
-      }
-
-      const tooltip = document.body.querySelector<HTMLElement>(
-        '[data-theme-copy-code-tooltip]'
-      )
-      const tooltipArrow = tooltip?.querySelector<HTMLElement>('[data-arrow]')
-      if (!tooltip || !tooltipArrow) {
-        return
-      }
-
-      button.setAttribute('data-user-copied', 'true')
-
-      const { x, y, middlewareData } = await computePosition(button, tooltip, {
-        placement: 'top',
-        middleware: [
-          shift({ padding: 8 }),
-          offset(8),
-          arrow({ element: tooltipArrow }),
-        ],
-      })
-
-      Object.assign(tooltip.style, {
-        left: `${x}px`,
-        top: `${y}px`,
-        animation: 'tooltip-animation 1.5s',
-      })
-
-      setTimeout(() => {
-        button.setAttribute('data-user-copied', 'false')
-        tooltip.remove()
-      }, 1500)
-
-      const arrowX = middlewareData.arrow?.x
-      const arrowY = middlewareData.arrow?.y
-
-      Object.assign(tooltipArrow.style, {
-        left: arrowX ? `${arrowX}px` : '',
-        top: arrowY ? `${arrowY}px` : '',
-        bottom: '-4px',
-      })
-    })
-  }
-</script>

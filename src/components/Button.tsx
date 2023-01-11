@@ -1,22 +1,13 @@
 import clsx from 'clsx'
+import React from 'react'
 import { twMerge } from 'tailwind-merge'
 
 type CommonButtonProps = {
   color?: 'primary' | 'secondary'
-  children: React.ReactNode
 }
 
-type ButtonLinkProps = CommonButtonProps &
-  Omit<React.ComponentPropsWithoutRef<'a'>, 'href'> & {
-    href: string
-  }
-
-type ButtonButtonProps = CommonButtonProps &
-  React.ComponentPropsWithoutRef<'button'> & {
-    href?: never
-  }
-
-export type ButtonProps = ButtonLinkProps | ButtonButtonProps
+export type ButtonProps = CommonButtonProps &
+  React.ComponentPropsWithRef<'button'>
 
 function getButtonClassName(props: Pick<ButtonProps, 'color' | 'className'>) {
   const { color, className } = props
@@ -48,14 +39,20 @@ function getButtonClassName(props: Pick<ButtonProps, 'color' | 'className'>) {
   return merged
 }
 
-export default function Button(props: ButtonProps) {
-  if (props.href !== undefined) {
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
     const { color, className, ...rest } = props
-    return <a className={getButtonClassName({ color, className })} {...rest} />
-  }
 
-  const { color, className, ...rest } = props
-  return (
-    <button className={getButtonClassName({ color, className })} {...rest} />
-  )
-}
+    return (
+      <button
+        ref={ref}
+        className={getButtonClassName({ color, className })}
+        {...rest}
+      />
+    )
+  }
+)
+
+Button.displayName = 'Button'
+
+export default Button

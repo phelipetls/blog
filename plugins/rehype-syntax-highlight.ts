@@ -75,10 +75,9 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
             return Number(str)
           }) || []
 
-      const themedTokens = highlighter.codeToThemedTokens(
-        hastToString(node),
-        lang
-      )
+      const plainCode = hastToString(node)
+
+      const themedTokens = highlighter.codeToThemedTokens(plainCode, lang)
 
       const syntaxHighlightedCode = themedTokens.flatMap((tokens, index) => {
         const isLastLine = index === themedTokens.length - 1
@@ -106,6 +105,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
       parent.properties = {
         ...parent.properties,
+        plainCode,
         lang,
       }
 

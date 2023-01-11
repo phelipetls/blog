@@ -14,6 +14,7 @@ import Tabs from './Tabs'
 import IconButton from './IconButton'
 import { Codesandbox, RefreshCw } from 'lucide-react'
 import clsx from 'clsx'
+import CopyCodeBlockButton from './CopyCodeBlockButton'
 
 type SandpackProps = SandpackProviderProps & {
   title: string
@@ -47,7 +48,7 @@ type CustomSandpackProps = {
 
 function CustomSandpack(props: CustomSandpackProps) {
   const { sandpack } = useSandpack()
-  const { activeFile, visibleFiles, setActiveFile, clients } = sandpack
+  const { files, activeFile, visibleFiles, setActiveFile, clients } = sandpack
 
   const { title } = props
 
@@ -101,8 +102,20 @@ function CustomSandpack(props: CustomSandpackProps) {
       </Tabs>
 
       <div className="full-width-on-mobile shadow shadow-shadow sm:rounded-b">
-        <div className="dark [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
+        <div className="dark group relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
           <SandpackCodeEditor showTabs={false} />
+
+          <CopyCodeBlockButton
+            code={files[activeFile].code}
+            className={clsx(
+              'transition-opacity',
+              'duration-500',
+              'opacity-0',
+              'pointer-events-none',
+              'group-hover:opacity-100',
+              'group-hover:pointer-events-auto'
+            )}
+          />
         </div>
 
         <hr />

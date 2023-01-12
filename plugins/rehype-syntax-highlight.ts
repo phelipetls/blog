@@ -26,17 +26,14 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
         return
       }
 
-      const metastring =
-        'metastring' in node.properties
-          ? (node.properties.metastring as string)
-          : ''
+      const metastring = node.properties?.metastring ?? ''
 
       let title = ''
-      if (metastring?.includes('title=')) {
-        title = metastring.match(/title="(.+)"/)?.[1]
+      if (typeof metastring === 'string' && metastring.includes('title=')) {
+        title = metastring.match(/title="(.+)"/)?.[1] ?? ''
       }
 
-      if (Array.isArray(node.properties.style)) {
+      if (node.properties && Array.isArray(node.properties?.style)) {
         node.properties.style = node.properties.style.concat([
           `color: ${shikiTheme.fg}`,
         ])
@@ -51,29 +48,32 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
       let lang = ''
 
-      if (Array.isArray(node.properties.className)) {
-        lang = node.properties.className
-          .filter(isString)
-          .find((className: string) => className.startsWith('language-'))
-          ?.replace('language-', '')
+      if (Array.isArray(node.properties?.className)) {
+        lang =
+          node.properties?.className
+            .filter(isString)
+            .find((className: string) => className.startsWith('language-'))
+            ?.replace('language-', '') ?? ''
       }
 
       // Parse highlighted lines, with the syntax '{1-2, 5}'
       const highlightedLines =
-        metastring
-          .match(/{[0-9-, ]+}/)?.[0]
-          .replace('{', '')
-          .replace('}', '')
-          .split(',')
-          .map((s: string) => s.trim())
-          .flatMap((str: string) => {
-            if (str.includes('-')) {
-              const [start, end] = str.split('-')
-              return _.range(Number(start), Number(end) + 1)
-            }
+        (typeof metastring === 'string' &&
+          metastring
+            .match(/{[0-9-, ]+}/)?.[0]
+            .replace('{', '')
+            .replace('}', '')
+            .split(',')
+            .map((s: string) => s.trim())
+            .flatMap((str: string) => {
+              if (str.includes('-')) {
+                const [start, end] = str.split('-')
+                return _.range(Number(start), Number(end) + 1)
+              }
 
-            return Number(str)
-          }) || []
+              return Number(str)
+            })) ||
+        []
 
       const plainCode = hastToString(node)
 
@@ -96,7 +96,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
             : tokens.map((token) => {
                 return h(
                   'span',
-                  token.color && { style: `color: ${token.color}` },
+                  token.color ? { style: `color: ${token.color}` } : {},
                   token.content
                 )
               })

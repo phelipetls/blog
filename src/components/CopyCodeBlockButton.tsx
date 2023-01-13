@@ -5,7 +5,14 @@ import { Clipboard, Check } from 'lucide-react'
 import { computePosition, offset, shift, arrow } from '@floating-ui/dom'
 import clsx from 'clsx'
 
-export type CopyCodeBlockButtonProps = IconButtonProps & {
+type DistributiveOmit<T, K extends string> = T extends unknown
+  ? Omit<T, K>
+  : never
+
+export type CopyCodeBlockButtonProps = DistributiveOmit<
+  IconButtonProps,
+  'children'
+> & {
   code: string
 }
 

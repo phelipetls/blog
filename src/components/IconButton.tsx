@@ -7,7 +7,7 @@ export type IconButtonProps = ButtonProps & {
   variant?: 'rounded' | 'rounded-full'
 }
 
-export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
   (props, ref) => {
     const { className, variant = 'rounded', ...rest } = props
 

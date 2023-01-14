@@ -33,22 +33,27 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
   }, [])
 
   useEffect(() => {
+    const tooltip = tooltipRef.current
+
+    if (!tooltip) {
+      return
+    }
+
     const showTooltip = async () => {
       if (!showTooltip) {
         return
       }
 
       const button = buttonRef.current
-      const tooltip = tooltipRef.current
       const tooltipArrow = tooltipArrowRef.current
 
-      if (!button || !tooltip || !tooltipArrow) {
+      if (!button || !tooltipArrow) {
         return
       }
 
       Object.assign(tooltip.style, {
         ...tooltip.style,
-        animation: 'tooltip-animation 1.5s',
+        animation: 'tooltip-animation 1.5s forwards',
       })
 
       const { x, y, middlewareData } = await computePosition(button, tooltip, {
@@ -76,6 +81,16 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     }
 
     showTooltip()
+
+    const hideTooltip = () => {
+      setShowTooltip(false)
+    }
+
+    tooltip?.addEventListener('animationend', hideTooltip)
+
+    return () => {
+      tooltip?.removeEventListener('animationend', hideTooltip)
+    }
   }, [showTooltip])
 
   return (
@@ -97,10 +112,6 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         await navigator.clipboard.writeText(code)
 
         setShowTooltip(true)
-
-        setTimeout(() => {
-          setShowTooltip(false)
-        }, 1500)
       }}
       {...rest}
     >

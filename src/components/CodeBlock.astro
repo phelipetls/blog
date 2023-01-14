@@ -126,6 +126,7 @@ const hasHeader = title || devIconName
   <CopyCodeBlockButton
     client:load
     aria-label={t('CopyCodeButtonLabel')}
+    tooltipText={t('Copied') + '!'}
     code={plainCode}
     className={clsx(
       'transition-opacity',

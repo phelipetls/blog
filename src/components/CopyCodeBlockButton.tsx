@@ -14,10 +14,11 @@ export type CopyCodeBlockButtonProps = DistributiveOmit<
   'children'
 > & {
   code: string
+  tooltipText: string
 }
 
 export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
-  const { code, className, ...rest } = props
+  const { code, className, tooltipText, ...rest } = props
 
   const buttonRef = useRef<HTMLButtonElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
@@ -123,7 +124,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
               'dark pointer-events-none absolute rounded border border-green-500 bg-background px-2 text-on-background'
             )}
           >
-            Copied!
+            {tooltipText}
             <div
               ref={tooltipArrowRef}
               className={clsx(

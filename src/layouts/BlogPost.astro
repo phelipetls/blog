@@ -1,6 +1,6 @@
 ---
 import { format } from 'date-fns'
-import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
+import { getLanguageFromUrl, localizeUrl } from '@utils/i18n'
 import Site from '@layouts/Site.astro'
 import Tag from '@components/Tag.astro'
 import Katex from '@components/Katex.astro'
@@ -12,8 +12,6 @@ import type { MarkdownHeading, MDXInstance } from 'astro'
 import { getSandpackCssText } from '@codesandbox/sandpack-react'
 import { formatISO } from 'date-fns'
 import { getDirectoryName } from '@utils/path'
-
-const t = useTranslate(Astro)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = Pick<MDXInstance<BlogPostFrontmatter>, 'file' | 'frontmatter'> & {

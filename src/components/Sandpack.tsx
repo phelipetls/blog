@@ -106,6 +106,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           <SandpackCodeEditor showTabs={false} />
 
           <CopyCodeBlockButton
+            tooltipText={'Copied'}
             code={files[activeFile].code}
             className={clsx(
               'transition-opacity',

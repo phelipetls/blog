@@ -139,7 +139,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
             <div
               ref={tooltipArrowRef}
               className={clsx(
-                'dark absolute h-[8px] w-[8px] rotate-45 border-r border-b border-green-500 bg-background'
+                'absolute h-[8px] w-[8px] rotate-45 border-r border-b border-green-500 bg-background'
               )}
             />
           </div>,

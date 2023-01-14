@@ -114,7 +114,9 @@ function CustomSandpack(props: CustomSandpackProps) {
               'opacity-0',
               'pointer-events-none',
               'group-hover:opacity-100',
-              'group-hover:pointer-events-auto'
+              'group-hover:pointer-events-auto',
+              'focus:opacity-100',
+              'focus:pointer-events-auto'
             )}
           />
         </div>

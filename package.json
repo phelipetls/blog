@@ -14,7 +14,7 @@
     "generate-posts-images": "node ./scripts/generate-posts-images.js",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "copy-pdf-worker": "node ./scripts/copy-pdf-worker.js",
-    "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons && npm run copy-pdf-worker"
+    "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install"
   },
   "repository": {
     "type": "git",

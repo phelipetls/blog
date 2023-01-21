@@ -44,8 +44,7 @@
       }
     },
     {
-      "files": ["cypress/**/*"],
-      "extends": ["plugin:cypress/recommended"],
+      "files": ["tests/**/*"],
       "parser": "@typescript-eslint/parser",
       "plugins": ["no-only-tests"],
       "rules": {

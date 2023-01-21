@@ -27,17 +27,15 @@ jobs:
 
       - run: npm run build
 
-      - name: Run Cypress tests
+      - name: Run tests
         run: npm run test
-        env:
-          CYPRESS_video: false
 
-      - name: Archive Cypress screenshots
+      - name: Archive test results on failure
         uses: actions/upload-artifact@v3
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          name: playwright-test-results
+          path: test-results
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

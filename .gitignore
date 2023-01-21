@@ -8,3 +8,6 @@ public/pt/posts/**/image.png
 public/pdf.worker.min.js
 src/components/devicons/*.ts
 src/components/devicons/*.tsx
+/test-results/
+/playwright-report/
+/playwright/.cache/

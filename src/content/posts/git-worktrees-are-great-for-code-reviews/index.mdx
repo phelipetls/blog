@@ -10,9 +10,10 @@ At first, I didn't understand how to use [git
 worktrees](https://git-scm.com/docs/git-worktree), but now I find myself using
 it more and more for code reviews.
 
-Here's what my workflow looks like when I have to review code:
+Here's what my workflow looks like when I have to review some code:
 
-- `cd` into a previously created worktree with `cd ../code-review`.
+- `cd` into a previously created worktree with `cd ../code-review` or create a
+  new one with `git worktree add ../code-review`.
 - Run `git fetch`.
 - Check out the branch to review with `git checkout <branch>`.
 - Install dependencies with `npm install`
@@ -30,20 +31,20 @@ A worktree enables you to check out more than one branch at a time per
 repository.
 
 Each worktree has its own working tree, meaning you can have completely
-different files and directories per worktree -- for instance, the untracked
-`.env` and `node_modules` may be different.
+different files and directories per worktree -- untracked files like `.env` and
+`node_modules` may be different.
 
-In practice, a worktree is just like a directory. After you create it with `git
-worktree add`, you can `cd` into it and start working.
+In practice, a worktree is just like another directory. After you create it
+with `git worktree add`, you can `cd` into it and start working.
 
 We could check out more than one branch by cloning the repository in a
-different folder, but it's slower -- creating worktrees is instant -- and
-inconvenient -- your local branches are shared across worktrees.
+different folder, but that's slower -- creating worktrees is instant -- and
+inconvenient -- in a worktree you have access to your local branches and stash,
+no need to push to a remote repository first.
 
 # Creating a worktree
 
-The command to add worktree is `git worktree add`. It expects you to pass the
-path of the new worktree:
+The command to add worktree is `git worktree add`.
 
 ```shell
 $ git worktree add ../code-review
@@ -68,8 +69,7 @@ the second argument:
 ```
 
 As I said, I don't typically create a lot of worktrees, I just have one sitting
-there, and recycle it when I have to do some code reviews, but that's how you
-create it.
+there, and reuse it whenever I have to do some code review.
 
 # Independent working trees
 
@@ -83,13 +83,13 @@ working on.
 
 </Note>
 
-But even on solo projects, like my blog, this can come in handy -- e.g. I'm on
-a migration from Cypress to Playwright, I would have to run `npm install` to
-install the correct dependencies every time I switched branches, which is
-inconvenient.
+But even on solo projects, like my blog, this can come in handy -- e.g. when
+migrating a test suite from Cypress to Playwright, a different worktree would
+save me the trouble of having to run `npm install` to install correct
+dependencies every time I switched branches.
 
 By doing the migration to Playwright in a worktree, my work on that branch
-wouldn't interfere with the main worktree with the Cypress test suite.
+wouldn't interfere with the main worktree with the Cypress-based test suite.
 
 # Removing worktrees
 
@@ -102,12 +102,3 @@ $ git worktree remove code-review
 This will only succeed if the worktree is clean -- which means ["no untracked
 files and no modification in tracked
 files"](https://git-scm.com/docs/git-worktree#Documentation/git-worktree.txt-remove).
-
-# Conclusion
-
-I don't have a lot of use cases for worktrees but using them for code reviews
-has become a staple for me so I wanted to share it. Adding and removing them is
-pretty much all I use and it's already very useful.
-
-I hope this encourage you to actually run the reviewee's code because it often
-results in better code reviews, for me at least.

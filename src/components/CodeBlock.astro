@@ -65,41 +65,32 @@ const capitalize = <T extends string>(str: T) =>
 const devIconName = isDevIconName(lang)
   ? (capitalize(Astro.props.lang) as DevIconName)
   : getDevIconNameByShikiLang(lang)
-
-const hasHeader = title || devIconName
 ---
 
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
 ></style>
 
-<div
-  data-codeblock
-  class:list={[hasHeader ? 'mt-16' : 'mt-8', 'group', 'relative', 'mb-8']}
->
+<div data-codeblock class:list={['mt-16', 'group', 'relative', 'mb-8']}>
   <div
     class="dark absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-[calc(100%-1px)] overflow-hidden sm:left-0"
   >
-    {
-      hasHeader && (
-        <div class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]">
-          <div class="shrink-0">
-            {devIconName ? (
-              <DevIcon name={devIconName} />
-            ) : (
-              <FileText stroke="current" />
-            )}
-          </div>
+    <div
+      class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]"
+    >
+      <div class="shrink-0">
+        {devIconName ? <DevIcon name={devIconName} /> : <FileText />}
+      </div>
 
-          {title ? (
-            <div class="rtl truncate text-right font-mono">
-              <bdi>{title}</bdi>
-            </div>
-          ) : (
-            <div class="capitalize">{langName}</div>
-          )}
-        </div>
-      )
-    }
+      {
+        title ? (
+          <div class="rtl truncate text-right font-mono">
+            <bdi>{title}</bdi>
+          </div>
+        ) : (
+          <div class="capitalize">{langName}</div>
+        )
+      }
+    </div>
   </div>
 
   <pre
@@ -108,7 +99,7 @@ const hasHeader = title || devIconName
       'shadow-shadow',
       'overflow-x-auto',
       'rounded',
-      hasHeader && 'rounded-tl-none',
+      'rounded-tl-none',
       'bg-[var(--code-bg)]',
       'text-[var(--code-fg)]',
       'py-4',

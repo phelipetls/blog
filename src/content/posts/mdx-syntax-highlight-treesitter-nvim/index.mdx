@@ -1,0 +1,201 @@
+---
+title: Good enough syntax highlight for MDX in Neovim using Treesitter
+date: 2023-01-24
+tags: [nvim, treesitter]
+---
+
+import Note from '@components/BlogPostNote.astro'
+import Image from '@components/BlogPostImage.astro'
+import { ReactCompareSlider, ReactCompareSliderImage } from '@components/ReactCompareSlider';
+
+import InitialHighlighting from './initial-highlighting.png'
+import MarkdownHighlighting from './markdown-highlighting.png'
+import JavascriptHighlighting from './javascript-highlighting.png'
+import NospellHighlighting from './nospell-highlighting.png'
+import TSPlaygroundToggle from './ts-playground-toggle.png'
+import SimpleQuery from './simple-query.png'
+import ConditionalQuery from './conditional-query.png'
+
+In this blog post, I'm gonna show how to get a good enough syntax highlighting
+for MDX files in Neovim.
+
+We can get pretty far by just adding some queries to our configuration, using
+the standard [Treesitter parser for markdown
+(CommonMark)](https://github.com/MDeiml/tree-sitter-markdown) -- no need to
+write a new parser, which is more challenging. Let's see how.
+
+# Supporting `.mdx` files
+
+First, let's configure `nvim` to use the `mdx` filetype for every file with the
+`.mdx` extension:
+
+```lua title="~/.config/nvim/filetype.lua"
+vim.filetype.add({
+  extension = {
+    mdx = 'mdx'
+  }
+})
+```
+
+Then, let's configure the
+[`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter/) plugin
+to use the `markdown` parser for `mdx` filetypes:
+
+```lua
+local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
+ft_to_parser.mdx = "markdown"
+```
+
+Now we have markdown highlighting in our mdx files, but of cours it still
+doesn't highlight any JS/JSX we wrote:
+
+<ReactCompareSlider client:load>
+  <ReactCompareSliderImage slot="itemOne" src={InitialHighlighting} alt="There is no syntax highlight of MDX files in Neovim out of the box" />
+  <ReactCompareSliderImage slot="itemTwo" src={MarkdownHighlighting} alt="After configuring Treesitter to use Markdown highlight for MDX files" />
+</ReactCompareSlider>
+
+# Injecting JS/JSX into markdown
+
+To highlight the JS/JSX part, we'll use Treesitter's [language
+injection](https://tree-sitter.github.io/tree-sitter/syntax-highlighting#language-injection).
+
+We do this by writing a Treesitter query to select the nodes in the tree we
+want to highlight using another parser. It's similar to CSS selectors -- but it
+has completely different syntax, a Scheme-like language.
+
+## How can we write JavaScript/JSX in MDX?
+
+We can write JavaScript inside curly braces, like this:
+
+```mdx
+The current year is {new Date().getFullYear()}
+```
+
+Lines beginning with with import/export are also interpreted as JavaScript:
+
+```mdx
+import {getCurrentYear} from './date.js'
+export const currentYear = getCurrentYear()
+
+# The current year is {currentYear}
+```
+
+We can write JSX anywhere, similar to how you can write HTML in Markdown.
+
+```mdx
+import {Box} from 'design-system'
+
+<Box>
+  Here's some text
+</Box>
+```
+
+And even inline, inside of a heading:
+
+```mdx
+export const Thing = () => <>World</>
+
+# Hello <Thing />
+```
+
+## Writing Treesitter queries
+
+Let's first write a query to select those nodes that start with `import` or
+`export`. We can get a nice representation of the abstract syntax tree built by
+Treesitter with `:TSPlaygroundToggle` command, making it easy to see where the
+text we want to select is in the tree: `section` -> `paragraph` -> `inline`:
+
+<Note>
+
+To use `:TSPlaygroundToggle`, you'll need to install the plugin
+[`nvim-treesitter/playground`](https://github.com/nvim-treesitter/playground)
+first.
+
+</Note>
+
+<Image src={TSPlaygroundToggle} alt="" />
+
+The simplest query that would match that node is:
+
+```scheme
+(section (paragraph (inline)))
+```
+
+<Image src={SimpleQuery} alt="" />
+
+<Note>
+
+To test your Treesitter queries, press `o` inside the buffer opened by
+`:TSPlaygroundToggle` command, which will open a new buffer for you write an
+your queries and see if selects what you want.
+
+You'll need to install the Treesitter parser for query editor with `:TSInstall
+query`.
+
+</Note>
+
+But that's not what we want -- we need to select only the nodes that start with
+`import` or `export`. We can use Treesitter query predicates (see `:h
+treesitter-predicates`) to conditionally select nodes -- for instance, the
+`#match` predicate will allow us to select nodes with text that matches a Vim
+regexp.
+
+```scheme
+((inline) @_inline (#match? @_inline "^\(import\|export\)"))
+```
+
+<Image src={ConditionalQuery} alt="" />
+
+## Extending Treesitter injection queries
+
+Now that we know this query correctly matches what we expect, we need to
+highlight them as JavaScript.
+
+For this, we'll have to write these queries in a file called `injections.scm`
+in a `queries` directory in our runtime path (see [Adding
+Queries](https://github.com/nvim-treesitter/nvim-treesitter/#adding-queries)).
+
+Then we need to capture the node with a name that matches the injected language
+parser's name, in our case it's `tsx`:
+
+```scheme title="~/.config/nvim/after/queries/markdown/injections.scm"
+; extends
+((inline) @_inline (#match? @_inline "^\(import\|export\)")) @tsx
+```
+
+<ReactCompareSlider client:load>
+  <ReactCompareSliderImage slot="itemOne" src={MarkdownHighlighting} alt="" />
+  <ReactCompareSliderImage slot="itemTwo" src={JavascriptHighlighting} alt="" />
+</ReactCompareSlider>
+
+# Disabling spell checking
+
+You may have noticed the red squiggly lines -- this is because I have spell
+checking turned on, but it is often not desirable to have our code spell
+checked. We can disable it for a specific node by capturing it with `@nospell`
+with a query in `highlights.scm`:
+
+```scheme title="~/.config/nvim/after/queries/markdown/highlights.scm"
+; extends
+((inline) @_inline (#match? @_inline "^\(import\|export\)")) @nospell
+```
+
+<ReactCompareSlider client:load>
+  <ReactCompareSliderImage slot="itemOne" src={JavascriptHighlighting} alt="" />
+  <ReactCompareSliderImage slot="itemTwo" src={NospellHighlighting} alt="" />
+</ReactCompareSlider>
+
+# Conclusion
+
+This is much better than what we started with, but there is still room for
+improvements:
+
+- JavaScript inside curly braces is not highlighted at all. I couldn't find a
+  way to achieve this with language injection.
+- Closing tags are not properly highlighted (because Treesitter sees a closing
+  tag without a corresponding opening tag as an error).
+
+I'm not sure if these issues could be resolved with queries alone -- maybe it'd
+require a Treesitter parser similar to the parser for [embedded template
+languages like
+EJS](https://github.com/tree-sitter/tree-sitter-embedded-template).

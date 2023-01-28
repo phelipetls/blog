@@ -1,6 +1,7 @@
 ---
 import { format } from 'date-fns'
-import { getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { getLanguageFromUrl } from '@utils/i18n'
+import { getBlogPostOgImageUrl } from '@utils/posts'
 import Site from '@layouts/Site.astro'
 import Tag from '@components/Tag.astro'
 import Katex from '@components/Katex.astro'
@@ -8,26 +9,26 @@ import PostNav from '@components/PostNav.astro'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostToc from '@components/BlogPostToc.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
-import type { MarkdownHeading, MDXInstance } from 'astro'
+import type { MarkdownHeading } from 'astro'
 import { getSandpackCssText } from '@codesandbox/sandpack-react'
 import { formatISO } from 'date-fns'
-import { getDirectoryName } from '@utils/path'
+import type { CollectionEntry } from 'astro:content'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-type Props = Pick<MDXInstance<BlogPostFrontmatter>, 'file' | 'frontmatter'> & {
+type Props = CollectionEntry<'posts'> & {
   headings: MarkdownHeading[]
-  nextBlogPost?: MDXInstance<BlogPostFrontmatter>
-  prevBlogPost?: MDXInstance<BlogPostFrontmatter>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  frontmatter: Record<string, any>
+  nextBlogPost?: CollectionEntry<'posts'>
+  prevBlogPost?: CollectionEntry<'posts'>
 }
 
-const { frontmatter, headings, nextBlogPost, prevBlogPost } = Astro.props
-const { title, date, readingTime, summary, tags } = frontmatter
+const { data, frontmatter, headings, nextBlogPost, prevBlogPost } = Astro.props
+const { readingTime, summary } = frontmatter
+const { title, date, tags } = data
 
 const language = getLanguageFromUrl(Astro.url.pathname)
-const ogImageUrl = localizeUrl(
-  `/posts/${getDirectoryName(Astro.props.file)}/image.png`,
-  language
-)
+const ogImageUrl = getBlogPostOgImageUrl(Astro.props, language)
 ---
 
 <Site
@@ -61,11 +62,11 @@ const ogImageUrl = localizeUrl(
   htmlClass="scroll-smooth scroll-pt-nav-height sm:scroll-pt-0"
 >
   <Fragment slot="head">
-    <meta name="publish-date" content={format(new Date(date), 'yyyy-MM-dd')} />
+    <meta name="publish-date" content={format(date, 'yyyy-MM-dd')} />
     {tags && <meta name="keywords" content={tags.join(', ')} />}
     <meta name="description" content={summary} />
 
-    {frontmatter.math && <Katex />}
+    {data.math && <Katex />}
 
     {/* FIXME: only include this if the page needs it */}
     <style id="sandpack" set:html={getSandpackCssText()}></style>

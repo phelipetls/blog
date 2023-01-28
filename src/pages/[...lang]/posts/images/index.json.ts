@@ -1,5 +1,10 @@
-import { getDirectoryName } from '@utils/path'
-import type { APIRoute, MDXInstance } from 'astro'
+import {
+  getBlogPostName,
+  getBlogPostOgImageUrl,
+  getBlogPosts,
+} from '@utils/posts'
+import type { APIRoute } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 
 export async function getStaticPaths() {
   return [
@@ -12,32 +17,27 @@ export async function getStaticPaths() {
   ]
 }
 
-export const get: APIRoute = ({ params, request }) => {
+export const get: APIRoute = async ({ params, request }) => {
   const language = params.lang
 
-  let blogPosts: Record<string, MDXInstance<BlogPostFrontmatter>>
-
+  let blogPosts: CollectionEntry<'posts'>[]
   if (language === 'pt') {
-    blogPosts = import.meta.glob('../../../../content/posts/*/index.pt.mdx', {
-      eager: true,
-    })
+    blogPosts = await getBlogPosts('pt')
   } else {
-    blogPosts = import.meta.glob('../../../../content/posts/*/index.mdx', {
-      eager: true,
-    })
+    blogPosts = await getBlogPosts('en')
   }
 
   return {
     body: JSON.stringify(
-      Object.entries(blogPosts).map(([_, blogPost]) => {
+      blogPosts.map((blogPost) => {
         const fullUrl = new URL(
-          `/posts/images/${getDirectoryName(blogPost.file)}`,
+          getBlogPostOgImageUrl(blogPost, language === 'pt' ? 'pt' : 'en'),
           request.url
         )
 
         return {
           url: fullUrl,
-          name: getDirectoryName(blogPost.file),
+          name: getBlogPostName(blogPost),
         }
       })
     ),

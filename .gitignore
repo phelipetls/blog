@@ -11,3 +11,5 @@ src/components/devicons/*.tsx
 /test-results/
 /playwright-report/
 /playwright/.cache/
+src/env.d.ts
+.astro

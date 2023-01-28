@@ -14,7 +14,7 @@ import rehypeKatex from 'rehype-katex'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://phelipetls.github.io',
+  site: 'https://phelipetls.github.io/',
   markdown: {
     syntaxHighlight: false,
   },

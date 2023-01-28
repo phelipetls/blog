@@ -1,24 +1,20 @@
 ---
 import Site from '@layouts/Site.astro'
-import { useTranslate } from '@utils/i18n'
-import { getBlogPostTags } from '@utils/posts'
+import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+import { getBlogPosts, getBlogPostTags } from '@utils/posts'
+import { localizeUrl } from '@utils/i18n'
 import { ChevronRight } from 'lucide-react'
-import type { MDXInstance } from 'astro'
 import BlogPostCard from '@components/BlogPostCard.astro'
+import type { CollectionEntry } from 'astro:content'
 
 export async function getStaticPaths() {
-  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.mdx'
-  )
-
-  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.pt.mdx'
-  )
+  const englishBlogPosts = await getBlogPosts('en')
+  const portugueseBlogPosts = await getBlogPosts('pt')
 
   return [
     getBlogPostTags(englishBlogPosts).map((tag) => {
       const blogPosts = englishBlogPosts.filter((blogPost) =>
-        blogPost.frontmatter.tags?.includes(tag)
+        blogPost.data.tags?.includes(tag)
       )
 
       return {
@@ -31,7 +27,7 @@ export async function getStaticPaths() {
     }),
     getBlogPostTags(portugueseBlogPosts).map((tag) => {
       const blogPosts = portugueseBlogPosts.filter((blogPost) =>
-        blogPost.frontmatter.tags?.includes(tag)
+        blogPost.data.tags?.includes(tag)
       )
 
       return {
@@ -49,11 +45,13 @@ const t = useTranslate(Astro)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = {
-  blogPosts: MDXInstance<BlogPostFrontmatter>[]
+  blogPosts: CollectionEntry<'posts'>[]
   tag: string
 }
 
 const { tag, blogPosts } = Astro.props
+
+const language = getLanguageFromUrl(Astro.url.pathname)
 ---
 
 <Site
@@ -71,7 +69,7 @@ const { tag, blogPosts } = Astro.props
         <div
           class="hidden flex-row items-center justify-center gap-2 text-2xl sm:flex"
         >
-          <a href="{{ .Parent.Permalink }}">Tags</a>
+          <a href={localizeUrl('/tags', language)}>Tags</a>
 
           <span class="text-sm">
             <ChevronRight />

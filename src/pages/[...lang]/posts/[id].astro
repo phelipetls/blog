@@ -1,25 +1,21 @@
 ---
-import type { MDXInstance } from 'astro'
 import BlogPost from '@layouts/BlogPost.astro'
 import CodeBlock from '@components/CodeBlock.astro'
-import { getDirectoryName } from '@utils/path'
+import type { CollectionEntry } from 'astro:content'
+import { getBlogPosts, getBlogPostName } from '@utils/posts'
+import _ from 'lodash'
 
 export async function getStaticPaths() {
-  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.mdx'
-  )
-
-  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.pt.mdx'
-  )
+  const englishBlogPosts = await getBlogPosts('en')
+  const portugueseBlogPosts = await getBlogPosts('pt')
 
   const sortByDateInAscendingOrder = (
-    blogPosts: MDXInstance<BlogPostFrontmatter>[]
+    blogPosts: CollectionEntry<'posts'>[]
   ) => {
     return blogPosts.sort((blogPostA, blogPostB) => {
       return (
-        new Date(blogPostA.frontmatter.date).getTime() -
-        new Date(blogPostB.frontmatter.date).getTime()
+        new Date(blogPostA.data.date).getTime() -
+        new Date(blogPostB.data.date).getTime()
       )
     })
   }
@@ -31,7 +27,7 @@ export async function getStaticPaths() {
         const prevBlogPost = blogPosts[index - 1]
 
         return {
-          params: { lang: undefined, id: getDirectoryName(blogPost.file) },
+          params: { lang: undefined, id: getBlogPostName(blogPost) },
           props: { blogPost, nextBlogPost, prevBlogPost },
         }
       }
@@ -42,7 +38,7 @@ export async function getStaticPaths() {
         const prevBlogPost = blogPosts[index - 1]
 
         return {
-          params: { lang: 'pt', id: getDirectoryName(blogPost.file) },
+          params: { lang: 'pt', id: getBlogPostName(blogPost) },
           props: { blogPost, nextBlogPost, prevBlogPost },
         }
       }
@@ -52,13 +48,13 @@ export async function getStaticPaths() {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = {
-  blogPost: MDXInstance<BlogPostFrontmatter>
-  nextBlogPost?: MDXInstance<BlogPostFrontmatter>
-  prevBlogPost?: MDXInstance<BlogPostFrontmatter>
+  blogPost: CollectionEntry<'posts'>
+  nextBlogPost?: CollectionEntry<'posts'>
+  prevBlogPost?: CollectionEntry<'posts'>
 }
 
 const { blogPost } = Astro.props
-const { Content } = blogPost
+const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
 const components = {
   pre: CodeBlock,
@@ -70,9 +66,9 @@ const components = {
 ---
 
 <BlogPost
-  file={blogPost.file}
-  frontmatter={blogPost.frontmatter}
-  headings={blogPost.getHeadings()}
+  frontmatter={remarkPluginFrontmatter}
+  headings={headings}
+  {...blogPost}
   {...Astro.props}
 >
   <Content components={{ ...components, Fragment }} />

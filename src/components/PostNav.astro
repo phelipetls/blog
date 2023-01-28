@@ -1,24 +1,16 @@
 ---
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
-import { getDirectoryName } from '@utils/path'
-import type { MDXInstance } from 'astro'
+import type { CollectionEntry } from 'astro:content'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = {
-  prevBlogPost?: MDXInstance<BlogPostFrontmatter>
-  nextBlogPost?: MDXInstance<BlogPostFrontmatter>
+  prevBlogPost?: CollectionEntry<'posts'>
+  nextBlogPost?: CollectionEntry<'posts'>
 }
 
 const t = useTranslate(Astro)
 const language = getLanguageFromUrl(Astro.url.pathname)
-
-const createPostUrl = (filename: string) => {
-  return new URL(
-    localizeUrl('/posts/' + getDirectoryName(filename), language),
-    Astro.url
-  )
-}
 
 const { prevBlogPost, nextBlogPost } = Astro.props
 ---
@@ -28,13 +20,13 @@ const { prevBlogPost, nextBlogPost } = Astro.props
     prevBlogPost ? (
       <a
         class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-300 hover:bg-hover"
-        href={createPostUrl(prevBlogPost.file)}
+        href={localizeUrl('/posts/' + prevBlogPost.slug, language)}
       >
         <span class="text-primary">
           <ArrowLeft />
         </span>
 
-        {prevBlogPost.frontmatter.title}
+        {prevBlogPost.data.title}
       </a>
     ) : (
       <div class="flex-1" />
@@ -47,9 +39,9 @@ const { prevBlogPost, nextBlogPost } = Astro.props
     nextBlogPost && (
       <a
         class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-300 hover:bg-hover"
-        href={createPostUrl(nextBlogPost.file)}
+        href={localizeUrl('/posts/' + nextBlogPost.slug, language)}
       >
-        {nextBlogPost.frontmatter.title}
+        {nextBlogPost.data.title}
 
         <span class="text-primary">
           <ArrowRight />

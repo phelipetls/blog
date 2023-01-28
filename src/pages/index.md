@@ -1,5 +1,5 @@
 ---
-title: "About"
+layout: "@layouts/Homepage.astro"
 ---
 
 Hi 👋, I'm a front-end web developer who lives in Rio, Brazil.

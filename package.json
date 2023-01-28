@@ -14,7 +14,7 @@
     "generate-posts-images": "node ./scripts/generate-posts-images.js",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "copy-pdf-worker": "node ./scripts/copy-pdf-worker.js",
-    "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install"
+    "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,10 @@
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.2.1",
     "@astrojs/mdx": "^0.11.6",
-    "@astrojs/react": "^1.2.2",
-    "@astrojs/rss": "^1.2.1",
+    "@astrojs/react": "^2.0.1",
+    "@astrojs/rss": "^2.1.0",
     "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^2.1.2",
+    "@astrojs/tailwind": "^3.0.0",
     "@codesandbox/sandpack-client": "1.18.0",
     "@codesandbox/sandpack-react": "1.17.0",
     "@codesandbox/sandpack-themes": "1.17.0",
@@ -47,7 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "a11y-dialog": "^7.5.2",
-    "astro": "^1.7.2",
+    "astro": "^2.0.6",
     "astro-robots-txt": "^0.3.10",
     "astro-seo": "^0.6.1",
     "autoprefixer": "^10.4.8",

@@ -2,16 +2,11 @@
 import Site from '@layouts/Site.astro'
 import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
 import _ from 'lodash'
-import { getBlogPostTags } from '@utils/posts'
+import { getBlogPosts, getBlogPostTags } from '@utils/posts'
 
 export async function getStaticPaths() {
-  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.mdx'
-  )
-
-  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.pt.mdx'
-  )
+  const englishBlogPosts = await getBlogPosts('en')
+  const portugueseBlogPosts = await getBlogPosts('pt')
 
   return [
     {

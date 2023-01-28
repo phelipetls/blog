@@ -3,18 +3,14 @@ import Site from '@layouts/Site.astro'
 import BlogPostCard from '@components/BlogPostCard.astro'
 import RssButton from '@components/RssButton.astro'
 import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
-import type { MDXInstance } from 'astro'
 import { format } from 'date-fns'
 import _ from 'lodash'
+import type { CollectionEntry } from 'astro:content'
+import { getBlogPosts } from '@utils/posts'
 
 export async function getStaticPaths() {
-  const englishBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.mdx'
-  )
-
-  const portugueseBlogPosts = await Astro.glob<BlogPostFrontmatter>(
-    '../../../content/posts/*/index.pt.mdx'
-  )
+  const englishBlogPosts = await getBlogPosts('en')
+  const portugueseBlogPosts = await getBlogPosts('pt')
 
   return [
     {
@@ -33,13 +29,13 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = {
-  blogPosts: MDXInstance<BlogPostFrontmatter>[]
+  blogPosts: CollectionEntry<'posts'>[]
 }
 
 const blogPosts = Astro.props.blogPosts
 
 const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
-  return format(new Date(blogPost.frontmatter.date), 'yyyy')
+  return format(blogPost.data.date, 'yyyy')
 })
 
 const rssUrl = localizeUrl('/posts/index.xml', language)
@@ -86,8 +82,8 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                   {blogPosts
                     .sort((blogPostA, blogPostB) => {
                       return (
-                        new Date(blogPostB.frontmatter.date).getTime() -
-                        new Date(blogPostA.frontmatter.date).getTime()
+                        new Date(blogPostB.data.date).getTime() -
+                        new Date(blogPostA.data.date).getTime()
                       )
                     })
                     .map((blogPost) => {

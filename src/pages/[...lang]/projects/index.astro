@@ -1,18 +1,17 @@
 ---
 import Site from '@layouts/Site.astro'
 import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
-import type { MarkdownInstance } from 'astro'
 import { Github } from 'lucide-react'
-import path from 'node:path'
+import { CollectionEntry, getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
-  const englishProjects = await Astro.glob<
-    MarkdownInstance<ProjectFrontmatter>
-  >('../../../content/projects/*/index.md')
+  const portugueseProjects = await getCollection('projects', (project) => {
+    return project.id.endsWith('.pt.md')
+  })
 
-  const portugueseProjects = await Astro.glob<
-    MarkdownInstance<ProjectFrontmatter>
-  >('../../../content/projects/*/index.pt.md')
+  const englishProjects = await getCollection('projects', (project) => {
+    return !project.id.endsWith('.pt.md')
+  })
 
   return [
     {
@@ -28,7 +27,7 @@ export async function getStaticPaths() {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = {
-  projects: MarkdownInstance<ProjectFrontmatter>[]
+  projects: CollectionEntry<'projects'>[]
 }
 
 const { projects } = Astro.props
@@ -58,16 +57,16 @@ const getSkillIconsAltText = (icons: string[]) => {
     <ul class="m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-8">
       {
         projects.map(async (project) => {
-          const { Content, frontmatter } = project
-          const { website, title, icons } = frontmatter
+          const { Content, remarkPluginFrontmatter } = await project.render()
 
-          const screenshot = (
-            await import(
-              `../../../content/projects/${path.basename(
-                path.dirname(project.file)
-              )}/screenshot.png`
-            )
-          ).default
+          const screenshot = // FIXME: this looks brittle
+            (
+              await import(
+                `../../../content/projects/${project.id
+                  .split('/')
+                  .at(0)}/_screenshot.png`
+              )
+            ).default
 
           return (
             <li>
@@ -86,19 +85,22 @@ const getSkillIconsAltText = (icons: string[]) => {
                   <div class="flex flex-col gap-4">
                     <div class="flex items-center justify-between">
                       <h2 class="m-0 inline-block">
-                        {website ? (
-                          <a class="flex items-center gap-2" href={website}>
-                            {title}
+                        {remarkPluginFrontmatter.website ? (
+                          <a
+                            class="flex items-center gap-2"
+                            href={remarkPluginFrontmatter.website}
+                          >
+                            {remarkPluginFrontmatter.title}
                           </a>
                         ) : (
-                          project.frontmatter.title
+                          remarkPluginFrontmatter.title
                         )}
                       </h2>
 
-                      {project.frontmatter.github && (
+                      {remarkPluginFrontmatter.github && (
                         <a
                           class="border-0"
-                          href={project.frontmatter.github}
+                          href={remarkPluginFrontmatter.github}
                           aria-label="GitHub"
                         >
                           <Github />
@@ -111,8 +113,8 @@ const getSkillIconsAltText = (icons: string[]) => {
 
                   <div class="mt-8">
                     <img
-                      src={getSkillIconsUrl(icons)}
-                      alt={getSkillIconsAltText(icons)}
+                      src={getSkillIconsUrl(remarkPluginFrontmatter.icons)}
+                      alt={getSkillIconsAltText(remarkPluginFrontmatter.icons)}
                     />
                   </div>
                 </div>

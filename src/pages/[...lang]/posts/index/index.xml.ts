@@ -1,6 +1,6 @@
-import rss from '@astrojs/rss'
+import rss, { pagesGlobToRssItems } from '@astrojs/rss'
 import { Language, translate } from '@utils/i18n'
-import type { APIContext, MDXInstance } from 'astro'
+import type { APIContext } from 'astro'
 
 export function getStaticPaths() {
   return [
@@ -12,40 +12,14 @@ export function getStaticPaths() {
   ]
 }
 
-export const get = ({ props }: APIContext<{ language: Language }>) => {
+export const get = async ({ props }: APIContext<{ language: Language }>) => {
   const t = translate(props.language)
-
-  let postsImportResult
-  if (props.language === 'en') {
-    postsImportResult = import.meta.glob<MDXInstance<BlogPostFrontmatter>>(
-      '../../../../content/posts/**/*.mdx',
-      {
-        eager: true,
-      }
-    )
-  } else {
-    postsImportResult = import.meta.glob<MDXInstance<BlogPostFrontmatter>>(
-      '../../../../content/posts/**/*.pt.mdx',
-      {
-        eager: true,
-      }
-    )
-  }
-
-  const posts = Object.values(postsImportResult)
 
   return rss({
     title: t('SiteTitle'),
     description: t('SiteDescription'),
     site: import.meta.env.SITE,
-    items: posts.map((post) => {
-      return {
-        link: post.url || '',
-        title: post.frontmatter.title,
-        pubDate: new Date(post.frontmatter.date),
-        description: post.frontmatter.summary,
-      }
-    }),
+    items: await pagesGlobToRssItems(import.meta.glob('./posts/*.mdx')),
     customData: `<language>${
       props.language === 'en' ? 'en-us' : 'pt-br'
     }</language>`,

@@ -1,7 +1,5 @@
 dist
 node_modules
-cypress/screenshots
-cypress/videos
 screenshots/**/*.png
 public/posts/**/image.png
 public/pt/posts/**/image.png

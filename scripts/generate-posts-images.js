@@ -62,9 +62,16 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   const context = await browser.newContext(playwright.devices['Desktop Chrome'])
   const page = await context.newPage()
 
+  page.on('requestfailed', (request) => {
+    throw new Error(
+      `Failed to generate post image due to request failure: ${
+        request.failure().errorText
+      }`
+    )
+  })
+
   for (const postImage of postsImages) {
-    await page.goto(postImage.url)
-    await page.waitForLoadState('networkidle')
+    await page.goto(postImage.url, { waitUntil: 'networkidle' })
 
     const screenshotPath = getScreenshotPath(postImage.name)
 

@@ -1,8 +1,8 @@
 {
   "name": "blog",
   "version": "1.0.0",
+  "private": true,
   "description": "A blog to share stuff I find interesting or helpful and experiment with web technologies.",
-  "main": "index.js",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -15,16 +15,6 @@
     "copy-pdf-worker": "node ./scripts/copy-pdf-worker.js",
     "postinstall": "npx simple-git-hooks && npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/phelipetls/blog.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/phelipetls/blog/issues"
-  },
-  "homepage": "https://github.com/phelipetls/blog#readme",
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.2.1",
     "@astrojs/mdx": "^0.11.6",

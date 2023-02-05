@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const fetch = require('node-fetch')
-const puppeteer = require('puppeteer')
+const playwright = require('playwright')
 
 ;(async () => {
   try {
@@ -58,28 +58,13 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   const response = await fetch.default(postsImagesUrl)
   const postsImages = await response.json()
 
-  const browser = await puppeteer.launch({
-    headless: true,
-  })
-  const page = await browser.newPage()
-
-  page.on('requestfailed', (request) => {
-    throw new Error(
-      `Failed to generate post image due to request failure: ${
-        request.failure().errorText
-      }`
-    )
-  })
-
-  page.setViewport({
-    width: 1200,
-    height: 630,
-  })
+  const browser = await playwright.chromium.launch()
+  const context = await browser.newContext(playwright.devices['Desktop Chrome'])
+  const page = await context.newPage()
 
   for (const postImage of postsImages) {
-    await page.goto(postImage.url, {
-      waitUntil: 'networkidle2',
-    })
+    await page.goto(postImage.url)
+    await page.waitForLoadState('networkidle')
 
     const screenshotPath = getScreenshotPath(postImage.name)
 
@@ -107,5 +92,6 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
     )
   }
 
+  await context.close()
   await browser.close()
 }

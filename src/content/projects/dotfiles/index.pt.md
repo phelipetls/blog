@@ -2,7 +2,6 @@
 title: "dotfiles"
 date: 2020-01-01
 github: "https://github.com/phelipetls/dotfiles"
-weight: 2
 icons: ["ansible", "linux", "lua", "bash", "vim", "vscode"]
 ---
 

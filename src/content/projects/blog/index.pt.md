@@ -3,7 +3,6 @@ title: "Blog"
 date: 2019-01-01
 website: https://phelipetls.github.io
 github: "https://github.com/phelipetls/blog"
-weight: 1
 icons: ["javascript", "html", "css", "tailwindcss", "markdown"]
 ---
 

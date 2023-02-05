@@ -1,3 +1,4 @@
+import { localizeUrl } from '@utils/i18n'
 import {
   getBlogPostName,
   getBlogPostOgImageUrl,
@@ -31,7 +32,10 @@ export const get: APIRoute = async ({ params, request }) => {
     body: JSON.stringify(
       blogPosts.map((blogPost) => {
         const fullUrl = new URL(
-          getBlogPostOgImageUrl(blogPost, language === 'pt' ? 'pt' : 'en'),
+          localizeUrl(
+            `/posts/images/${getBlogPostName(blogPost)}`,
+            language === 'pt' ? 'pt' : 'en'
+          ),
           request.url
         )
 

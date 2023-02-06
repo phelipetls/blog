@@ -1,9 +1,5 @@
 import { localizeUrl } from '@utils/i18n'
-import {
-  getBlogPostName,
-  getBlogPostOgImageUrl,
-  getBlogPosts,
-} from '@utils/posts'
+import { getBlogPostName, getBlogPosts } from '@utils/posts'
 import type { APIRoute } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 

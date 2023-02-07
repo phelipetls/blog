@@ -51,11 +51,6 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         return
       }
 
-      Object.assign(tooltip.style, {
-        ...tooltip.style,
-        animation: 'tooltip-animation 1.5s forwards',
-      })
-
       const { x, y, middlewareData } = await computePosition(button, tooltip, {
         placement: 'top',
         middleware: [
@@ -65,19 +60,16 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         ],
       })
 
-      Object.assign(tooltip.style, {
-        left: x != null ? `${x}px` : '',
-        top: y != null ? `${y}px` : '',
-      })
-
       const arrowX = middlewareData.arrow?.x
       const arrowY = middlewareData.arrow?.y
 
-      Object.assign(tooltipArrow.style, {
-        left: arrowX != null ? `${arrowX}px` : '',
-        top: arrowY != null ? `${arrowY}px` : '',
-        bottom: '-4px',
-      })
+      tooltip.style.left = x != null ? `${x}px` : ''
+      tooltip.style.top = y != null ? `${y}px` : ''
+      tooltip.style.animation = `tooltip-animation 1.5s forwards`
+
+      tooltipArrow.style.left = arrowX != null ? `${arrowX}px` : ''
+      tooltipArrow.style.top = arrowY != null ? `${arrowY}px` : ''
+      tooltipArrow.style.bottom = '-4px'
     }
 
     showTooltip()

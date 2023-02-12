@@ -24,7 +24,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
   const tooltipRef = useRef<HTMLDivElement>(null)
   const tooltipArrowRef = useRef<HTMLDivElement>(null)
 
-  const [showTooltip, setShowTooltip] = useState(false)
+  const [shouldShowTooltip, setShouldShowTooltip] = useState(false)
 
   // Circumvent 'document is not defined' error
   const [body, setBody] = useState<Element | null>(null)
@@ -40,7 +40,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     }
 
     const showTooltip = async () => {
-      if (!showTooltip) {
+      if (!shouldShowTooltip) {
         return
       }
 
@@ -75,7 +75,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     showTooltip()
 
     const hideTooltip = () => {
-      setShowTooltip(false)
+      setShouldShowTooltip(false)
     }
 
     tooltip?.addEventListener('animationend', hideTooltip)
@@ -83,7 +83,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     return () => {
       tooltip?.removeEventListener('animationend', hideTooltip)
     }
-  }, [showTooltip])
+  }, [shouldShowTooltip])
 
   return (
     <IconButton
@@ -97,17 +97,17 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         '-translate-x-1/2',
         'text-2xl',
         '[&_svg]:h-[1em] [&_svg]:w-[1em]',
-        showTooltip && 'border-green-500',
+        shouldShowTooltip && 'border-green-500',
         className,
       ])}
       onClick={async () => {
         await navigator.clipboard.writeText(code)
 
-        setShowTooltip(true)
+        setShouldShowTooltip(true)
       }}
       {...rest}
     >
-      {showTooltip ? (
+      {shouldShowTooltip ? (
         <span className="text-green-500 [&_svg]:stroke-current">
           <Check />
         </span>
@@ -118,7 +118,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
       )}
 
       {body &&
-        showTooltip &&
+        shouldShowTooltip &&
         createPortal(
           <div
             ref={tooltipRef}

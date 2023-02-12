@@ -5,12 +5,12 @@ import tailwind from '@astrojs/tailwind'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeKatex from 'rehype-katex'
 import rehypeSlug from 'rehype-slug'
+import remarkMath from 'remark-math'
 import { rehypeSyntaxHighlight } from './plugins/rehype-syntax-highlight'
 import { remarkReadingTime } from './plugins/remark-reading-time'
 import { remarkSummary } from './plugins/remark-summary'
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
 
 // https://astro.build/config
 export default defineConfig({

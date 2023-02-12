@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Copy code', () => {
-  test('should copy code block contents with the click of a button', async ({
-    page,
-  }) => {
-    page.goto('/posts/bash-for-javascript-developers')
+  test.use({ permissions: ['clipboard-write'] })
+  test.skip(({ browserName }) => browserName !== 'chromium')
+
+  test('should copy code block contents on button click', async ({ page }) => {
+    await page.goto('/posts/bash-for-javascript-developers')
 
     const tooltip = page.getByRole('tooltip', { name: 'Copied' })
 

@@ -58,7 +58,9 @@ function CustomSandpack(props: CustomSandpackProps) {
   const createAndNavigateToCodesandbox = async () => {
     const client = Object.values(clients)[0]
 
-    const codesandboxUrl = await client.getCodeSandboxURL()
+    const codesandboxUrl = await client
+      // @ts-expect-error TODO: types from the codesandbox library might be broken
+      .getCodeSandboxURL()
     if (codesandboxUrl?.editorUrl) {
       window.open(codesandboxUrl?.editorUrl, '_blank')
     }

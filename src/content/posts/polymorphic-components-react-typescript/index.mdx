@@ -44,6 +44,13 @@ supposed to be passed a `for` attribute:
 
 So let's start typing this component.
 
+<Note>
+
+I wrote this blog post using TypeScript 4.9.5. Type errors may arise if you're
+using later TypeScript versions.
+
+</Note>
+
 # Type-safe `as` prop
 
 The `as` prop should only ever receive HTML tags like `span`, `div` etc.
@@ -56,7 +63,7 @@ Arbitrary string like `foo` should break the build:
 What should be a type that accepts only valid HTML tags? Fortunately
 `@types/react` already provides us with such a type: `React.ElementType`:
 
-```tsx twoslash {1-3,5,12-14}
+```tsx twoslash {1-3,5,11-12}
 type TypographyProps = {
   as?: React.ElementType
 }
@@ -82,7 +89,7 @@ the component will be a `span` element, so it should not accept `htmlFor`.
 
 To do this, we will need to use a generic type:
 
-```tsx twoslash {1-9}
+```tsx twoslash {2,4-6,8-11}
 // TODO: implement PropsOf
 type PropsOf<T> = {}
 

@@ -7,6 +7,7 @@ import * as DevIcons from './devicons'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
 import clsx from 'clsx'
+import '@assets/css/twoslash.css'
 
 const t = useTranslate(Astro)
 
@@ -19,7 +20,8 @@ type Props = HTMLAttributes<'pre'> & {
   plainCode: string
 }
 
-const { shikiBg, shikiFg, title, lang, plainCode, ...rest } = Astro.props
+const { shikiBg, shikiFg, title, lang, plainCode, twoslash, ...rest } =
+  Astro.props
 
 const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
   const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
@@ -75,8 +77,32 @@ const devIconName = isDevIconName(lang)
 ></style>
 
 <div data-codeblock class:list={['mt-16', 'group', 'relative', 'mb-8']}>
+  <pre
+    class:list={[
+      'relative',
+      'shiki',
+      twoslash && 'twoslash',
+      'shadow',
+      'shadow-shadow',
+      'overflow-x-auto',
+      'rounded',
+      'rounded-tl-none',
+      'bg-[var(--code-bg)]',
+      'text-[var(--code-fg)]',
+      'py-4',
+      '[color-scheme:dark]',
+      '[&_code]:grid',
+      '[&_code>.line]:px-8',
+      '[&_code>.line]:border-l-[2px]',
+      '[&_code>.line]:border-[var(--code-bg)]',
+      '[&_code>.line.highlight]:bg-[#272115]',
+      '[&_code>.line.highlight]:border-[#624710]',
+      Astro.props.class,
+    ]}
+    {...rest}><slot /></pre>
+
   <div
-    class="dark absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-[calc(100%-1px)] overflow-hidden sm:left-0"
+    class="dark text-md absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-[100%] overflow-hidden sm:left-0"
   >
     <div
       class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]"
@@ -97,27 +123,6 @@ const devIconName = isDevIconName(lang)
     </div>
   </div>
 
-  <pre
-    class:list={[
-      'shadow',
-      'shadow-shadow',
-      'overflow-x-auto',
-      'rounded',
-      'rounded-tl-none',
-      'bg-[var(--code-bg)]',
-      'text-[var(--code-fg)]',
-      'py-4',
-      '[color-scheme:dark]',
-      '[&_code]:grid',
-      '[&_code>.line]:px-8',
-      '[&_code>.line]:border-l-[2px]',
-      '[&_code>.line]:border-[var(--code-bg)]',
-      '[&_code>.line.highlighted]:bg-[#272115]',
-      '[&_code>.line.highlighted]:border-[#624710]',
-      Astro.props.class,
-    ]}
-    {...rest}><slot /></pre>
-
   <CopyCodeBlockButton
     client:load
     aria-label={t('CopyCodeButtonLabel')}
@@ -135,3 +140,53 @@ const devIconName = isDevIconName(lang)
     )}
   />
 </div>
+
+<script>
+  import { computePosition, offset, shift } from '@floating-ui/dom'
+
+  for (const codeBlock of document.querySelectorAll(
+    '[data-codeblock] pre.twoslash'
+  )) {
+    const lspElements = codeBlock.querySelectorAll<HTMLElement>('data-lsp')
+
+    for (const lspElement of lspElements) {
+      lspElement.addEventListener('mouseover', async (e) => {
+        if (!e.target) {
+          return
+        }
+
+        const hoverElement = document.createElement('div')
+
+        const reference = e.target as HTMLElement
+
+        const { x, y } = await computePosition(reference, hoverElement, {
+          placement: 'bottom-start',
+          middleware: [shift({ padding: 8 }), offset(8)],
+        })
+
+        Object.assign(hoverElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        })
+
+        const lspText = reference.getAttribute('lsp')
+        hoverElement.textContent = lspText as string
+        hoverElement.classList.add(
+          'absolute',
+          'bg-gray-700',
+          'text-white',
+          'text-left',
+          'p-2',
+          'text-sm',
+          'whitespace-pre-wrap'
+        )
+
+        document.body.append(hoverElement)
+
+        reference.addEventListener('mouseout', () => {
+          hoverElement.remove()
+        })
+      })
+    }
+  }
+</script>

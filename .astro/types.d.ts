@@ -263,6 +263,13 @@ declare module 'astro:content' {
   collection: "posts",
   data: InferEntrySchema<"posts">
 },
+"polymorphic-components-react-typescript/index.mdx": {
+  id: "polymorphic-components-react-typescript/index.mdx",
+  slug: "polymorphic-components-react-typescript",
+  body: string,
+  collection: "posts",
+  data: InferEntrySchema<"posts">
+},
 "puzzle-do-cavalo-no-tabuleiro-infinito-com-numpy/index.pt.mdx": {
   id: "puzzle-do-cavalo-no-tabuleiro-infinito-com-numpy/index.pt.mdx",
   slug: "puzzle-do-cavalo-no-tabuleiro-infinito-com-numpy/indexpt",

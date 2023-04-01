@@ -66,11 +66,13 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
       const plainCode = hastToString(node)
 
       let codeToCopy = plainCode
+      let playgroundURL = null
 
       if (meta.twoslash) {
         const twoslashResults = runTwoSlash(plainCode, lang)
 
         codeToCopy = twoslashResults.code
+        playgroundURL = twoslashResults.playgroundURL
 
         const syntaxHighlightedCode = renderCodeToHTML(
           twoslashResults.code,
@@ -156,6 +158,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
       parent.properties = {
         ...parent.properties,
         plainCode: codeToCopy,
+        playgroundURL,
         lang,
         twoslash: Boolean(meta.twoslash),
       }

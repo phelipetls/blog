@@ -6,8 +6,8 @@ import { FileText } from 'lucide-react'
 import * as DevIcons from './devicons'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
 import '@assets/css/twoslash.css'
+import IconButton from './IconButton'
 
 const t = useTranslate(Astro)
 
@@ -18,10 +18,19 @@ type Props = HTMLAttributes<'pre'> & {
   title: string
   lang: Lang
   plainCode: string
+  playgroundURL: string | null
 }
 
-const { shikiBg, shikiFg, title, lang, plainCode, twoslash, ...rest } =
-  Astro.props
+const {
+  shikiBg,
+  shikiFg,
+  title,
+  lang,
+  plainCode,
+  twoslash,
+  playgroundURL,
+  ...rest
+} = Astro.props
 
 const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
   const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
@@ -123,22 +132,42 @@ const devIconName = isDevIconName(lang)
     </div>
   </div>
 
-  <CopyCodeBlockButton
-    client:load
-    aria-label={t('CopyCodeButtonLabel')}
-    tooltipText={t('Copied') + '!'}
-    code={plainCode}
-    className={clsx(
-      'transition-opacity',
-      'duration-500',
+  <div
+    class:list={[
+      'dark',
+      'flex',
+      'flex-row',
+      'gap-2',
+      'absolute',
+      'top-3',
+      'right-[var(--horizontal-padding)]',
+      'text-2xl',
+      '[&_svg]:h-[1em] [&_svg]:w-[1em]',
       'opacity-0',
       'pointer-events-none',
       'group-hover:opacity-100',
       'group-hover:pointer-events-auto',
+      'transition-opacity',
+      'duration-500',
       'focus:opacity-100',
-      'focus:pointer-events-auto'
-    )}
-  />
+      'focus:pointer-events-auto',
+    ]}
+  >
+    <CopyCodeBlockButton
+      client:load
+      aria-label={t('CopyCodeButtonLabel')}
+      tooltipText={t('Copied') + '!'}
+      code={plainCode}
+    />
+
+    {
+      playgroundURL && (
+        <IconButton href={playgroundURL} target="_blank">
+          <DevIcon name="Typescript" />
+        </IconButton>
+      )
+    }
+  </div>
 </div>
 
 <script>

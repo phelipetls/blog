@@ -39,11 +39,15 @@ const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
 
 const getShikiLangName = (lang: Lang): string | undefined => {
   const shikiLangToName: Partial<Record<Lang, string>> = {
-    jsx: 'React',
-    tsx: 'React',
+    jsx: 'JavaScript',
+    tsx: 'TypeScript',
+    javascript: 'JavaScript',
     js: 'JavaScript',
     ts: 'TypeScript',
+    typescript: 'TypeScript',
     shell: 'Bash',
+    html: 'HTML',
+    css: 'CSS',
   }
 
   if (lang in shikiLangToName) {

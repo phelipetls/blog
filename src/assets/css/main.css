@@ -3,9 +3,6 @@
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
-  --code-line-height: 1.5;
-  --code-highlight-width: 2px;
-
   --primary: hexToRgb(theme(colors.fuchsia.500));
   --primary-hover: hexToRgb(theme(colors.fuchsia.600));
   --on-primary: hexToRgb(theme(colors.stone.100));

@@ -53,12 +53,6 @@
   "PostsNavigation": {
     "one": "Navegação entre posts"
   },
-  "Projects": {
-    "one": "Projetos"
-  },
-  "ProjectsListDescription": {
-    "one": "Listagem dos meus projetos paralelos"
-  },
   "RefreshApp": {
     "one": "Recarregar app"
   },
@@ -101,9 +95,6 @@
   },
   "TagsDescription": {
     "one": "Listagem de todas as tags dos blog posts"
-  },
-  "Tech": {
-    "one": "Tecnologias"
   },
   "ThemeButton": {
     "one": "Mudar tema"

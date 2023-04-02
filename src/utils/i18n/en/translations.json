@@ -53,12 +53,6 @@
   "PostsNavigation": {
     "one": "Posts navigation"
   },
-  "Projects": {
-    "one": "Projects"
-  },
-  "ProjectsListDescription": {
-    "one": "List of my side projects"
-  },
   "RefreshApp": {
     "one": "Refresh app"
   },
@@ -101,9 +95,6 @@
   },
   "TagsDescription": {
     "one": "List of all blog posts tags"
-  },
-  "Tech": {
-    "one": "Technologies"
   },
   "ThemeButton": {
     "one": "Change theme"

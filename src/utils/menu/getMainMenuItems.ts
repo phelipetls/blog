@@ -13,11 +13,6 @@ export const getMainMenuItems = (language: Language) => {
       pathname: localizeUrl('/posts', language),
     },
     {
-      name: 'Projects',
-      identifier: 'projects',
-      pathname: localizeUrl('/projects', language),
-    },
-    {
       name: 'Résumé',
       identifier: 'resume',
       pathname: localizeUrl('/resume', language),

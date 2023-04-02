@@ -201,6 +201,7 @@ const devIconName = isDevIconName(lang)
         const lspText = reference.getAttribute('lsp')
         hoverElement.textContent = lspText as string
         hoverElement.classList.add(
+          'font-mono',
           'absolute',
           'bg-gray-700',
           'text-white',

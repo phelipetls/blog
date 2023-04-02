@@ -20,7 +20,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
     const shikiTheme = await shiki.loadTheme(`themes/${THEME}.json`)
 
     const highlighter = await createShikiHighlighter({
-      theme: 'one-dark-pro',
+      theme: THEME,
     })
 
     return visit(tree, 'element', (node, __, parent) => {
@@ -79,7 +79,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
           twoslashResults.extension,
           meta,
           {
-            themeName: 'one-dark-pro',
+            themeName: THEME,
           },
           highlighter,
           twoslashResults

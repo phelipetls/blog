@@ -174,7 +174,7 @@ const devIconName = isDevIconName(lang)
 </div>
 
 <script>
-  import { computePosition, offset, shift } from '@floating-ui/dom'
+  import { computePosition, offset, flip } from '@floating-ui/dom'
 
   for (const codeBlock of document.querySelectorAll(
     '[data-codeblock] pre.twoslash'
@@ -194,7 +194,7 @@ const devIconName = isDevIconName(lang)
 
         const { x, y } = await computePosition(reference, tooltip, {
           placement: 'bottom-start',
-          middleware: [shift({ padding: 8 }), offset(8)],
+          middleware: [offset(8), flip()],
         })
 
         Object.assign(tooltip.style, {

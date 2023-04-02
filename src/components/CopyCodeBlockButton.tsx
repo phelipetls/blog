@@ -88,7 +88,6 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
   return (
     <IconButton
       ref={buttonRef}
-      variant="rounded"
       className={clsx([shouldShowTooltip && 'border-green-500', className])}
       onClick={async () => {
         await navigator.clipboard.writeText(code)

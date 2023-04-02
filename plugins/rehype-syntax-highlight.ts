@@ -126,8 +126,6 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
           []
 
         const syntaxHighlightedCode = themedTokens.flatMap((tokens, index) => {
-          const isLastLine = index === themedTokens.length - 1
-          const isEmptyLine = tokens.length === 0
           const isLineHighlighted = highlightedLines.includes(index + 1)
 
           return h(
@@ -137,15 +135,13 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
                 .filter(Boolean)
                 .join(' '),
             },
-            isEmptyLine && !isLastLine
-              ? h('span', {}, ' ')
-              : tokens.map((token) => {
-                  return h(
-                    'span',
-                    token.color ? { style: `color: ${token.color}` } : {},
-                    token.content
-                  )
-                })
+            tokens.map((token) => {
+              return h(
+                'span',
+                token.color ? { style: `color: ${token.color}` } : {},
+                token.content
+              )
+            })
           )
         })
 

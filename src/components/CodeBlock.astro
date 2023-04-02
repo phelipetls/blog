@@ -187,23 +187,24 @@ const devIconName = isDevIconName(lang)
           return
         }
 
-        const hoverElement = document.createElement('div')
+        const tooltip = document.createElement('div')
+        tooltip.setAttribute('role', 'tooltip')
 
         const reference = e.target as HTMLElement
 
-        const { x, y } = await computePosition(reference, hoverElement, {
+        const { x, y } = await computePosition(reference, tooltip, {
           placement: 'bottom-start',
           middleware: [shift({ padding: 8 }), offset(8)],
         })
 
-        Object.assign(hoverElement.style, {
+        Object.assign(tooltip.style, {
           left: `${x}px`,
           top: `${y}px`,
         })
 
         const lspText = reference.getAttribute('lsp')
-        hoverElement.textContent = lspText as string
-        hoverElement.classList.add(
+        tooltip.textContent = lspText
+        tooltip.classList.add(
           'font-mono',
           'absolute',
           'bg-gray-700',
@@ -214,10 +215,10 @@ const devIconName = isDevIconName(lang)
           'whitespace-pre-wrap'
         )
 
-        document.body.append(hoverElement)
+        document.body.append(tooltip)
 
         reference.addEventListener('mouseout', () => {
-          hoverElement.remove()
+          tooltip.remove()
         })
       })
     }

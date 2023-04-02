@@ -185,9 +185,13 @@ const devIconName = isDevIconName(lang)
       }
 
       const tooltip = document.createElement('div')
+      const reference = e.target as HTMLElement
+
       tooltip.setAttribute('role', 'tooltip')
 
-      const reference = e.target as HTMLElement
+      const tooltipId =  'twoslash-lsp-tooltip'
+      tooltip.setAttribute('id', tooltipId)
+      reference.setAttribute('aria-describedby', tooltipId)
 
       const { x, y } = await computePosition(reference, tooltip, {
         placement: 'bottom-start',

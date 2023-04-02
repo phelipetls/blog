@@ -217,7 +217,7 @@ type PolymorphicProps<
 > = {
   as?: T
 } & TProps &
-  Omit<PropsOf<T>, keyof TProps & 'as'>
+  Omit<PropsOf<T>, keyof TProps | 'as'>
 
 type BaseTypographyProps = {
   variant: 'heading' | 'paragraph'
@@ -340,7 +340,7 @@ type PolymorphicProps<
 > = {
   as?: T
 } & TProps &
-  Omit<PropsOf<T>, keyof TProps & 'as' & 'ref'> & { ref?: PolymorphicRef<T> }
+  Omit<PropsOf<T>, keyof TProps | 'as' | 'ref'> & { ref?: PolymorphicRef<T> }
 
 type BaseTypographyProps = {
   variant: 'heading' | 'paragraph'

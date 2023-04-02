@@ -317,7 +317,7 @@ const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
 ```
 
 As you can see, the function `forwardRef` is itself a generic function, taking
-two arguments: the `ref` element's HTML instance type and its props.
+two arguments: the `ref` element's type and the component's props.
 
 But this won't help... to achieve what we want, we would need to pass as first
 argument a type that is conditional on the `as` prop value!

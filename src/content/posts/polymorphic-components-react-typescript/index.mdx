@@ -202,9 +202,11 @@ Now, let's say we want our `Typography` component to have their own props, such
 as a `variant` prop. How should we do this while maintaining polymorphism?
 
 We can do this by creating a new generic type, called `PolymorphicProps`, that
-accepts the element type and props as argument. With this, we can make our
-generic return all props that element type accepts plus all props these
-additional specific component props:
+accepts the element type and the component own props as argument.
+
+With these arguments, we will use the element type to get all props accepted by
+that element's type plus the component own props, while also handling potential
+conflicts between the two:
 
 ```tsx twoslash {3-18,31-32}
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
@@ -244,10 +246,9 @@ export default function App() {
 }
 ```
 
-Notice that we use `Omit` to eliminate any possible conflicting props between
-the result of `PropsOf` and `TProps`. In this case, we choose `TProps` to take
-precedence.
-
+The way we handle potential conflicts between the two is by using `Omit` type.
+This will omit all props in the result of `PropsOf` that are also in `TProps`,
+i.e. `TProps` will take precedence.
 
 <Note>
 

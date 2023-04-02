@@ -48,26 +48,17 @@ pre .error-behind {
 }
 /* Queries */
 pre .arrow {
-  /* Transparent background */
-  background-color: #eee;
   position: relative;
   top: -7px;
   margin-left: 0.1rem;
-  /* Edges */
-  border-left: 1px solid #eee;
-  border-top: 1px solid #eee;
   transform: translateY(25%) rotate(45deg);
   /* Size */
   height: 8px;
   width: 8px;
 }
 pre .popover {
-  margin-bottom: 10px;
-  background-color: #eee;
   display: inline-block;
   padding: 0 0.5rem 0.3rem;
-  margin-top: 10px;
-  border-radius: 3px;
 }
 /* Completion */
 pre .inline-completions ul.dropdown {

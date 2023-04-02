@@ -154,7 +154,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
       parent.properties = {
         ...parent.properties,
-        plainCode: codeToCopy,
+        codeToCopy,
         playgroundURL,
         lang,
         twoslash: Boolean(meta.twoslash),

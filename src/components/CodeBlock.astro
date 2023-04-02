@@ -17,7 +17,7 @@ type Props = HTMLAttributes<'pre'> & {
   shikiFg: string
   title: string
   lang: Lang
-  plainCode: string
+  codeToCopy: string
   playgroundURL: string | null
 }
 
@@ -26,7 +26,7 @@ const {
   shikiFg,
   title,
   lang,
-  plainCode,
+  codeToCopy,
   twoslash,
   playgroundURL,
   ...rest
@@ -160,7 +160,7 @@ const devIconName = isDevIconName(lang)
       client:load
       aria-label={t('CopyCodeButtonLabel')}
       tooltipText={t('Copied') + '!'}
-      code={plainCode}
+      code={codeToCopy}
     />
 
     {

@@ -27,8 +27,6 @@ pre .query {
 pre .error,
 pre .error-behind {
   width: 100%;
-  padding: 6px;
-  padding-left: 14px;
   white-space: pre-wrap;
 }
 pre .error {

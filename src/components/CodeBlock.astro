@@ -214,9 +214,15 @@ const devIconName = isDevIconName(lang)
 
       document.body.append(tooltip)
 
-      reference.addEventListener('mouseout', () => {
-        tooltip.remove()
-      })
+      reference.addEventListener(
+        'mouseout',
+        () => {
+          tooltip.remove()
+        },
+        {
+          once: true,
+        }
+      )
     })
   }
 </script>

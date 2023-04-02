@@ -176,51 +176,47 @@ const devIconName = isDevIconName(lang)
 <script>
   import { computePosition, offset, flip } from '@floating-ui/dom'
 
-  for (const codeBlock of document.querySelectorAll(
-    '[data-codeblock] pre.twoslash'
+  for (const lspElement of document.querySelectorAll<HTMLElement>(
+    '[data-codeblock] pre.twoslash data-lsp'
   )) {
-    const lspElements = codeBlock.querySelectorAll<HTMLElement>('data-lsp')
+    lspElement.addEventListener('mouseover', async (e) => {
+      if (!e.target) {
+        return
+      }
 
-    for (const lspElement of lspElements) {
-      lspElement.addEventListener('mouseover', async (e) => {
-        if (!e.target) {
-          return
-        }
+      const tooltip = document.createElement('div')
+      tooltip.setAttribute('role', 'tooltip')
 
-        const tooltip = document.createElement('div')
-        tooltip.setAttribute('role', 'tooltip')
+      const reference = e.target as HTMLElement
 
-        const reference = e.target as HTMLElement
-
-        const { x, y } = await computePosition(reference, tooltip, {
-          placement: 'bottom-start',
-          middleware: [offset(8), flip()],
-        })
-
-        Object.assign(tooltip.style, {
-          left: `${x}px`,
-          top: `${y}px`,
-        })
-
-        const lspText = reference.getAttribute('lsp')
-        tooltip.textContent = lspText
-        tooltip.classList.add(
-          'font-mono',
-          'absolute',
-          'bg-gray-700',
-          'text-white',
-          'text-left',
-          'p-2',
-          'text-sm',
-          'whitespace-pre-wrap'
-        )
-
-        document.body.append(tooltip)
-
-        reference.addEventListener('mouseout', () => {
-          tooltip.remove()
-        })
+      const { x, y } = await computePosition(reference, tooltip, {
+        placement: 'bottom-start',
+        middleware: [offset(8), flip()],
       })
-    }
+
+      Object.assign(tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      })
+
+      const lspText = reference.getAttribute('lsp')
+      tooltip.textContent = lspText
+      tooltip.classList.add(
+        'font-mono',
+        'absolute',
+        'bg-gray-700',
+        'text-white',
+        'text-left',
+        'p-2',
+        'text-sm',
+        'whitespace-pre-wrap'
+      )
+
+      document.body.append(tooltip)
+
+      reference.addEventListener('mouseout', () => {
+        tooltip.remove()
+      })
+    })
   }
 </script>

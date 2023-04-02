@@ -100,10 +100,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
         visit(hastTree, 'element', (_node, ___, _parent) => {
           if (_node.tagName === 'code') {
-            node.children = [
-              h('div', { className: 'language-id' }, twoslashResults.extension),
-              ..._node.children,
-            ]
+            node.children = [..._node.children]
           }
         })
       } else {

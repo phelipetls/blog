@@ -23,8 +23,8 @@ HTML tag used by a React component via props:
 This is easy to do if we're just using JavaScript and do not care about
 type-safety:
 
-```jsx
-const Typography = ({ as: Component = 'span' }: props) => {
+```jsx twoslash
+const Typography = ({ as: Component = 'span' }) => {
   return <Component />
 }
 ```

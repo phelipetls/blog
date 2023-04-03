@@ -230,6 +230,7 @@ const devIconName = isDevIconName(lang)
         'mouseout',
         () => {
           tooltip.remove()
+          reference.removeAttribute('aria-describedby')
         },
         {
           once: true,

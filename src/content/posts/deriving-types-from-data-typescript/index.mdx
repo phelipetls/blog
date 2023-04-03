@@ -1,0 +1,144 @@
+---
+title: Deriving types from data in TypeScript
+date: 2023-04-02
+tags: [typescript]
+---
+
+A TypeScript pattern I like to use is to derive types from data. Types in
+TypeScript only exist at build time (not runtime), so this pattern brings the
+benefit of types being automatically linked to the runtime values they
+represent.
+
+# `typeof` operator
+
+The heart of this pattern is the [`typeof`
+operator](https://www.typescriptlang.org/docs/handbook/2/typeof-types.html#the-typeof-type-operator),
+which gives us the type of a variable, for example:
+
+```typescript twoslash
+const hello = "hello";
+type Hello = typeof hello;
+//   ^?
+```
+
+# `const` vs `let`
+
+The resulting type differs by how we declare our variable -- where it is a
+`const` or `let`.
+
+As you could see, when we used `const`, the `Hello` type was the literal string
+`"hello"` -- this is because that variable could not be re-assigned, so it
+could only ever be `"hello`" at runtime as well.
+
+But, if we use `let`:
+
+```typescript twoslash
+let hello = "hello";
+type Hello = typeof hello;
+//   ^?
+
+hello = 'Hello'
+```
+
+The `Hello` type gets
+["widened"](https://mariusschulz.com/blog/literal-type-widening-in-typescript)
+to the `string` type -- because now that variable could be re-assigned to any
+other value of type `string` in another part of the program!
+
+# `const` assertions
+
+We could achieve the same effect of using `const` with a `const` assertion:
+
+```typescript twoslash {1}
+let hello = "hello" as const;
+type Hello = typeof hello;
+//   ^?
+
+// @errors: 2322
+hello = 'Hello'
+```
+
+We'll often use `const` assertions to prevent type widening when deriving types
+from data -- i.e., a more specific (narrower) type being changed to a more
+general (widened) type, such as a `0` being changed to a `number` and a
+`"hello"` being changed to `string`.
+
+# Deriving types from arrays
+
+Suppose we have an array of strings and we want a type that is an union of the
+array values.
+
+```typescript twoslash {2}
+const arr = ['foo', 'bar', 'baz'] as const
+type ArrayValue = (typeof arr)[number]
+//   ^?
+```
+
+The result of `typeof arr` is just an array type, the trick here is to use
+`number` to index that array -- it's like saying, what is the possible types
+when I index this array by a `number`?
+
+The `const` assertion is critical here -- if we remove it, the type gets
+widened to `string`.
+
+```typescript twoslash {1}
+const arr = ['foo', 'bar', 'baz']
+type ArrayValue = (typeof arr)[number]
+//   ^?
+```
+
+# Deriving types from objects
+
+Now let's try to derive our types from a object -- both getting every key or
+every value.
+
+```typescript twoslash
+const obj = {
+//    ^?
+  foo: 1,
+  bar: 2,
+  baz: 3,
+} as const
+
+type ObjectKey = keyof typeof obj
+//   ^?
+type ObjectValue = (typeof obj)[ObjectKey]
+//   ^?
+```
+
+To get the object keys, we needed to use the [`keyof`
+operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html).
+
+For the object values, we just needed to index that object with all of the
+object possible keys, which makes sense!
+
+The `const` assertion is also critical here, because otherwise the object value
+types would have been widened:
+
+```typescript twoslash
+const obj = {
+//    ^?
+  foo: 1,
+  bar: 2,
+  baz: 3,
+}
+
+type ObjectKey = keyof typeof obj
+//   ^?
+type ObjectValue = (typeof obj)[ObjectKey]
+//   ^?
+```
+
+# Deriving types from array of objects
+
+We can combine both approaches to derive type from an array of objects:
+
+```typescript twoslash {6}
+const obj = [
+  { kind: 'circle', radius: 100 },
+  { kind: 'square', sideLength: 50 },
+] as const
+
+type Kind = typeof obj[number]['kind']
+//   ^?
+```

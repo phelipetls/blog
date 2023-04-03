@@ -164,13 +164,6 @@ const devIconName = isDevIconName(lang)
       'group-hover:[&_:is(button,a)]:pointer-events-auto',
     ]}
   >
-    <CopyCodeBlockButton
-      client:load
-      aria-label={t('CopyCodeButtonLabel')}
-      tooltipText={t('Copied') + '!'}
-      code={codeToCopy}
-    />
-
     {
       playgroundURL && (
         <IconButton href={playgroundURL} target="_blank">
@@ -178,6 +171,13 @@ const devIconName = isDevIconName(lang)
         </IconButton>
       )
     }
+
+    <CopyCodeBlockButton
+      client:load
+      aria-label={t('CopyCodeButtonLabel')}
+      tooltipText={t('Copied') + '!'}
+      code={codeToCopy}
+    />
   </div>
 </div>
 

@@ -23,14 +23,14 @@ type Hello = typeof hello;
 
 # `const` vs `let`
 
-The resulting type differs by how we declare our variable -- where it is a
-`const` or `let`.
+The result of `typeof` will differ depending on how we declare our variable --
+whether we used `const` or `let`.
 
 As you could see, when we used `const`, the `Hello` type was the literal string
-`"hello"` -- this is because that variable could not be re-assigned, so it
-could only ever be `"hello`" at runtime as well.
+`"hello"` -- this is because a `const` variable can never be re-assigned later,
+so it can only be `"hello`" at runtime as well.
 
-But, if we use `let`:
+What happens if we use `let`?
 
 ```typescript twoslash
 let hello = "hello";
@@ -42,7 +42,7 @@ hello = 'Hello'
 
 The `Hello` type gets
 ["widened"](https://mariusschulz.com/blog/literal-type-widening-in-typescript)
-to the `string` type -- because now that variable could be re-assigned to any
+to the `string` type -- because now the variable can be re-assigned to any
 other value of type `string` in another part of the program!
 
 # `const` assertions
@@ -59,8 +59,8 @@ hello = 'Hello'
 ```
 
 We'll often use `const` assertions to prevent type widening when deriving types
-from data -- i.e., a more specific (narrower) type being changed to a more
-general (widened) type, such as a `0` being changed to a `number` and a
+from data -- i.e., avoiding a more specific (narrower) type being changed to a
+more general (widened) type, such as a `0` being changed to a `number` and a
 `"hello"` being changed to `string`.
 
 # Deriving types from arrays
@@ -75,8 +75,8 @@ type ArrayValue = (typeof arr)[number]
 ```
 
 The result of `typeof arr` is just an array type, the trick here is to use
-`number` to index that array -- it's like saying, what is the possible types
-when I index this array by a `number`?
+`number` to index that array -- it's like saying, what are all the possible
+types when I index this array by a `number`?
 
 The `const` assertion is critical here -- if we remove it, the type gets
 widened to `string`.
@@ -106,14 +106,14 @@ type ObjectValue = (typeof obj)[ObjectKey]
 //   ^?
 ```
 
-To get the object keys, we needed to use the [`keyof`
+To get the object keys, we need to use the [`keyof`
 operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html).
 
-For the object values, we just needed to index that object with all of the
-object possible keys, which makes sense!
+For the object values, we just need to index that object with all of the object
+possible keys -- which makes sense!
 
 The `const` assertion is also critical here, because otherwise the object value
-types would have been widened:
+types would have been widened to `number`:
 
 ```typescript twoslash
 const obj = {

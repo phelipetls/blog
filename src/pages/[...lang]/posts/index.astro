@@ -38,6 +38,10 @@ const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
 })
 
+const years = Object.keys(blogPostsGroupedByYear).sort(
+  (yearA, yearB) => Number(yearB) - Number(yearA)
+)
+
 const rssUrl = localizeUrl('/posts/index.xml', language)
 ---
 
@@ -57,28 +61,24 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
   }}
 >
   <main class="grid grid-cols-layout">
-    <div class="mb-4 hidden flex-row items-center justify-center gap-2 sm:flex">
+    <div class="mb-4 hidden mx-auto gap-2 sm:flex sm:items-center">
       <h1 class="m-0">Posts</h1>
 
       <RssButton />
     </div>
 
-    <div>
-      {
-        Object.entries(blogPostsGroupedByYear)
-          .sort(([yearA], [yearB]) => {
-            return Number(yearB) - Number(yearA)
-          })
-          .map(([year, blogPosts]) => {
+    <div class="flex flex-row gap-16">
+      <div>
+        {
+          years.map((year) => {
+            const blogPosts = blogPostsGroupedByYear[year]
             return (
               <>
-                <div class="mx-auto mt-16 mb-8 w-full max-w-prose first:mt-0">
-                  <h2 class="mb-0 text-2xl">
-                    <time datetime={`${year}-01-01`}>{year}</time>
-                  </h2>
-                </div>
+                <h2 id={year} class="mb-8 text-2xl sm:first:mt-8 sm:mt-16">
+                  <time datetime={`${year}-01-01`}>{year}</time>
+                </h2>
 
-                <ul class="m-0 mx-auto grid w-full max-w-2xl list-none grid-cols-1 gap-4">
+                <ul class="m-0 grid w-full max-w-2xl list-none grid-cols-1 gap-4">
                   {blogPosts
                     .sort((blogPostA, blogPostB) => {
                       return (
@@ -97,7 +97,27 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
               </>
             )
           })
-      }
+        }
+      </div>
+
+      <div class="hidden lg:block pt-8 sticky min-h-0 self-start top-0">
+        <h2>
+          {t('ByYear')}
+        </h2>
+
+        <ul class="m-0 list-inside">
+          {
+            years.map((year) => {
+              return (
+                <li class="">
+                  <a href={`#${year}`}>{year}</a>
+                  <>({blogPostsGroupedByYear[year].length})</>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
     </div>
   </main>
 

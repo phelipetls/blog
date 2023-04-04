@@ -110,5 +110,8 @@
   },
   "GoBack": {
     "one": "Go back to previous page"
+  },
+  "ByYear": {
+    "one": "By year"
   }
 }

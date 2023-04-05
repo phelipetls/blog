@@ -74,7 +74,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
             const blogPosts = blogPostsGroupedByYear[year]
             return (
               <>
-                <h2 id={year} class="mb-8 text-2xl first:mt-0 mt-8 sm:first:mt-8 sm:mt-16">
+                <h2 id={year} class="mt-16 mb-8 text-2xl first:mt-0">
                   <time datetime={`${year}-01-01`}>{year}</time>
                 </h2>
 
@@ -88,9 +88,13 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                     })
                     .map((blogPost) => {
                       return (
-                        <li class="h-full">
-                          <BlogPostCard blogPost={blogPost} />
-                        </li>
+                        <>
+                          <li>
+                            <BlogPostCard blogPost={blogPost} />
+                          </li>
+
+                          <hr class="my-4 last:hidden" />
+                        </>
                       )
                     })}
                 </ul>

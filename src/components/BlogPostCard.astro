@@ -20,7 +20,7 @@ const {
 } = await blogPost.render()
 ---
 
-<article class="card flex h-full flex-col justify-between p-8">
+<article class="flex h-full flex-col justify-between">
   <div>
     <h3 class="text-2xl">
       <a href={localizeUrl(`/posts/${blogPost.slug}`, language)}>
@@ -30,7 +30,7 @@ const {
 
     {
       tags && (
-        <div class="-mx-8 mt-4 mb-2 flex snap-x snap-proximity scroll-pl-8 flex-wrap gap-2 overflow-x-auto px-8 pt-1 pb-1">
+        <div class="mt-4 mb-4 flex flex-wrap gap-2">
           {tags.map((tag) => {
             return (
               <Tag tag={tag} class="snap-start whitespace-nowrap">

@@ -102,4 +102,27 @@ test.describe('Prefers dark color scheme', () => {
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
+
+  test('should display correct icons according to theme', async ({ page }) => {
+    await page.goto('/')
+
+    const icon = page.locator('[data-theme-select-icon]').first()
+
+    await expect(icon).toHaveAttribute('href', '#monitor')
+
+    await page
+      .getByRole('combobox', { name: /choose a theme/i })
+      .selectOption('dark')
+    await expect(icon).toHaveAttribute('href', '#moon')
+
+    await page
+      .getByRole('combobox', { name: /choose a theme/i })
+      .selectOption('light')
+    await expect(icon).toHaveAttribute('href', '#sun')
+
+    await page
+      .getByRole('combobox', { name: /choose a theme/i })
+      .selectOption('system')
+    await expect(icon).toHaveAttribute('href', '#monitor')
+  })
 })

@@ -76,7 +76,7 @@ const t = useTranslate(Astro)
 
       themeSelects.forEach((themeSelect) => {
         themeSelect
-          .querySelector<HTMLElement>('[data-theme-select-icon]')
+          .parentElement?.querySelector<HTMLElement>('[data-theme-select-icon]')
           ?.setAttribute('href', icon)
       })
     }

@@ -46,6 +46,7 @@ const t = useTranslate(Astro)
 
   themeSelects?.forEach((themeSelect) => {
     const storedThemeChoice = window.localStorage.getItem('__theme') ?? 'system'
+    changeThemeSelectIcon(storedThemeChoice as ThemeChoice)
 
     const themeChoiceOption = Array.from(themeSelect.options).find(
       (option) => option.value === storedThemeChoice
@@ -67,20 +68,20 @@ const t = useTranslate(Astro)
   document.body.addEventListener('newTheme', function (e: NewThemeEvent) {
     const themeChoice = e.detail.themeChoice
 
-    function changeThemeSelectIcon(themeChoice: ThemeChoice) {
-      const icon = {
-        dark: '#moon',
-        light: '#sun',
-        system: '#monitor',
-      }[themeChoice]
-
-      themeSelects.forEach((themeSelect) => {
-        themeSelect
-          .parentElement?.querySelector<HTMLElement>('[data-theme-select-icon]')
-          ?.setAttribute('href', icon)
-      })
-    }
-
     changeThemeSelectIcon(themeChoice)
   } as EventListener)
+
+  function changeThemeSelectIcon(themeChoice: ThemeChoice) {
+    const icon = {
+      dark: '#moon',
+      light: '#sun',
+      system: '#monitor',
+    }[themeChoice]
+
+    themeSelects.forEach((themeSelect) => {
+      themeSelect.parentElement
+        ?.querySelector<HTMLElement>('[data-theme-select-icon]')
+        ?.setAttribute('href', icon)
+    })
+  }
 </script>

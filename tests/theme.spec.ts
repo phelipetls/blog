@@ -107,7 +107,6 @@ test.describe('Prefers dark color scheme', () => {
     await page.goto('/')
 
     const icon = page.locator('[data-theme-select-icon]').first()
-
     await expect(icon).toHaveAttribute('href', '#monitor')
 
     await page
@@ -124,5 +123,17 @@ test.describe('Prefers dark color scheme', () => {
       .getByRole('combobox', { name: /choose a theme/i })
       .selectOption('system')
     await expect(icon).toHaveAttribute('href', '#monitor')
+  })
+
+  test('should display correct initial icon according to theme', async ({
+    page,
+  }) => {
+    await page.goto('/')
+
+    await page.evaluate(`window.localStorage.setItem('__theme', 'light')`)
+    await page.reload()
+
+    const icon = page.locator('[data-theme-select-icon]').first()
+    await expect(icon).toHaveAttribute('href', '#sun')
   })
 })

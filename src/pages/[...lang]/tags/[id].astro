@@ -6,6 +6,7 @@ import { localizeUrl } from '@utils/i18n'
 import { ChevronRight } from 'lucide-react'
 import BlogPostCard from '@components/BlogPostCard.astro'
 import type { CollectionEntry } from 'astro:content'
+import { format } from 'date-fns'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -63,9 +64,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 >
   <main class="grid grid-cols-layout">
     <div>
-      <div
-        class="mx-auto mb-4 flex w-full max-w-prose items-center justify-between"
-      >
+      <div class="mb-8 flex w-full items-center justify-between">
         <div
           class="hidden flex-row items-center justify-center gap-2 text-2xl sm:flex"
         >
@@ -75,23 +74,34 @@ const language = getLanguageFromUrl(Astro.url.pathname)
             <ChevronRight />
           </span>
 
-          <h1 class="m-0 capitalize">
+          <h1 class="m-0">
             {tag}
           </h1>
         </div>
       </div>
 
-      <ul
-        class="m-0 mx-auto grid w-full max-w-2xl flex-1 list-none grid-cols-1 gap-4"
-      >
+      <ul class="m-0 grid w-full max-w-2xl flex-1 list-none grid-cols-1 gap-4">
         {
-          blogPosts.map((blogPost) => {
-            return (
-              <li class="h-full">
-                <BlogPostCard blogPost={blogPost} />
-              </li>
+          blogPosts
+            .sort(
+              (blogPostA, blogPostB) =>
+                blogPostB.data.date.getTime() - blogPostA.data.date.getTime()
             )
-          })
+            .map((blogPost) => {
+              return (
+                <li class="mb-2 flex flex-row items-center gap-4 last:mb-0">
+                  <time class="text-lg tabular-nums text-divider">
+                    {format(blogPost.data.date, 'yyyy-MM-dd')}
+                  </time>
+
+                  <h2 class="m-0 font-normal">
+                    <a href={localizeUrl('/posts/' + blogPost.slug, language)}>
+                      {blogPost.data.title}
+                    </a>
+                  </h2>
+                </li>
+              )
+            })
         }
       </ul>
     </div>

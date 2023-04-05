@@ -46,7 +46,7 @@ const tagsByCount = _.countBy(tags)
         {
           Object.entries(tagsByCount)
             .sort(([_, countA], [__, countB]) => {
-              return countA - countB
+              return countB - countA
             })
             .map(([tag, count]) => {
               return (

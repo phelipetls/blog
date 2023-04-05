@@ -111,6 +111,10 @@ function CustomSandpack(props: CustomSandpackProps) {
             tooltipText={'Copied'}
             code={files[activeFile].code}
             className={clsx(
+              'absolute',
+              'right-0',
+              'top-3',
+              '-translate-x-1/2',
               'transition-opacity',
               'duration-500',
               'opacity-0',
@@ -146,7 +150,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             title={title}
           />
 
-          <div className="absolute top-3 right-horizontal-padding flex space-x-2">
+          <div className="absolute right-horizontal-padding top-3 flex space-x-2">
             <IconButton
               variant="rounded"
               onClick={createAndNavigateToCodesandbox}

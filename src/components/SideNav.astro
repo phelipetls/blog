@@ -1,6 +1,6 @@
 ---
-import ThemeSelect from '@components/ThemeSelect.astro'
 import { X } from 'lucide-react'
+import ThemeSelect from '@components/ThemeSelect'
 import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 
@@ -80,7 +80,13 @@ const t = useTranslate(Astro)
       <div
         class="mb-4 flex h-12 flex-row items-center justify-center px-horizontal-padding"
       >
-        <ThemeSelect />
+        <ThemeSelect
+          client:only
+          lightThemeLabel={t('Light')}
+          darkThemeLabel={t('Dark')}
+          systemThemeLabel={t('System')}
+          selectAriaLabel={t('ChooseATheme')}
+        />
       </div>
     </div>
   </div>

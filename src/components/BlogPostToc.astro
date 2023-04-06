@@ -17,10 +17,12 @@ const { headings } = Astro.props
 {
   headings.length > 0 && (
     <div
-      data-toc-wrapper
-      class="w-full sm:overflow-y-auto lg:sticky lg:top-[1rem] lg:max-h-[calc(100vh-1rem)] lg:pb-8 lg:pl-8"
+      style={{
+        '--offset-from-top': '1rem'
+      }}
+      class="bg-surface p-4 rounded shadow-sm shadow-shadow w-full lg:sticky lg:top-[var(--offset-from-top)] lg:h-[calc(100vh-var(--offset-from-top)_*_2)]"
     >
-      <div class="hidden lg:block">
+      <div class="hidden lg:flex lg:flex-col lg:h-full">
         <div class="flex justify-between gap-2">
           <div class="flex items-center gap-2">
             <List />
@@ -34,8 +36,11 @@ const { headings } = Astro.props
         </div>
 
         <div
+          data-toc-wrapper
           class="
           mt-4
+          min-h-0
+          sm:overflow-y-auto
           [&_a_*]:indent-0
           [&_nav_ol]:m-0
           [&_nav_ol]:list-none
@@ -109,12 +114,12 @@ const { headings } = Astro.props
     listItem.setAttribute('data-active', '')
   }
 
-  function reset(listItem: HTMLLIElement): void {
+  function deactivate(listItem: HTMLLIElement): void {
     listItem.removeAttribute('data-active')
   }
 
-  function resetToc(): void {
-    toc?.querySelectorAll('li').forEach(reset)
+  function deactivateAllTocItems(): void {
+    toc?.querySelectorAll('li').forEach(deactivate)
   }
 
   function getTocItemByHeading(
@@ -146,7 +151,7 @@ const { headings } = Astro.props
             return null
           }
 
-          resetToc()
+          deactivateAllTocItems()
           activate(tocItem)
 
           const tocContainerCoords = tocContainer.getBoundingClientRect()

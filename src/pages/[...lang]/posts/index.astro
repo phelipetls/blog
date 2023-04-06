@@ -67,7 +67,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
       <RssButton />
     </div>
 
-    <div class="flex flex-row gap-16">
+    <div class="flex flex-row">
       <div>
         {
           years.map((year) => {
@@ -104,7 +104,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
         }
       </div>
 
-      <div class="hidden lg:block mt-24 sticky min-h-0 self-start top-4">
+      <div class="bg-surface flex-1 p-4 rounded shadow shadow-shadow hidden lg:block sticky min-h-0 self-start top-4">
         <h2>
           {t('ByYear')}
         </h2>

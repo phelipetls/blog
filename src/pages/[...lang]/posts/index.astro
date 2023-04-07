@@ -143,9 +143,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
               const count = tagsCount[tag]
               return (
                 <li class="">
-                  <Tag tag={tag}>
-                    {tag} ({count})
-                  </Tag>
+                  <Tag tag={tag} count={count} />
                 </li>
               )
             })

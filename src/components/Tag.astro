@@ -1,24 +1,44 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import DevIcon, { DevIconName } from './DevIcon.astro'
+import { Tag } from 'lucide-react'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Props = HTMLAttributes<'a'> & {
   tag: string
+  count?: number
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children?: any
+  children?: never
 }
 
-const { tag, class: className = '' } = Astro.props
+const { tag, count, class: className = '' } = Astro.props
 
-const children = Astro.slots.render('default')
+const tagToIconName: Record<string, DevIconName> = {
+  typescript: 'Typescript',
+  javascript: 'Javascript',
+  react: 'React',
+  c: 'C',
+  python: 'Python',
+  lua: 'Lua',
+  'react native': 'React',
+  css: 'Css3',
+  bash: 'Bash',
+}
+
+const tagIconName = tagToIconName[tag]
 ---
 
 <a
   class:list={[
-    'inline-flex w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover whitespace-nowrap',
+    'inline-flex gap-2 w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover whitespace-nowrap [&_svg]:w-4 [&_svg]:h-4',
     className,
   ]}
   href={tag === '...' ? '/tags' : `/tags/${tag}`}
 >
-  {children ?? tag}
+  {tagIconName ?
+    <DevIcon name={tagIconName} /> : tag !== '...' && <Tag />}
+
+  {tag}
+
+  {count ? <div class="inline-flex text-sm justify-center items-center border-l border-l-divider pl-2">{count}</div> : null}
 </a>

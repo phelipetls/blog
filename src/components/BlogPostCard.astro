@@ -30,12 +30,10 @@ const {
 
     {
       tags && (
-        <div class="mt-4 mb-4 flex flex-wrap gap-2">
+        <div class="mt-4 mb-4 flex flex-wrap gap-2 max-w-prose">
           {tags.map((tag) => {
             return (
-              <Tag tag={tag} class="snap-start whitespace-nowrap">
-                {tag}
-              </Tag>
+              <Tag tag={tag} class="snap-start whitespace-nowrap" />
             )
           })}
         </div>

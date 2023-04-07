@@ -131,26 +131,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
           'max-h-[calc(100vh-2rem)]',
         ]}
       >
-        <h2>
-          {t('ByYear')}
-        </h2>
-
-        <ul class="m-0 list-inside list-none">
-          {
-            years.map((year) => {
-              return (
-                <li class="w-full">
-                  <a class="" href={`#${year}`}>
-                    {year}
-                  </a>
-                  <>({blogPostsGroupedByYear[year].length})</>
-                </li>
-              )
-            })
-          }
-        </ul>
-
-        <h2 class="mt-4">
+        <h2 class="">
           {t('ByTags')}
         </h2>
 

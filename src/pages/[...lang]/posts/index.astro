@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import _ from 'lodash'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts } from '@utils/posts'
+import Tag from '@components/Tag.astro'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -33,6 +34,12 @@ type Props = {
 }
 
 const blogPosts = Astro.props.blogPosts
+
+const tags = blogPosts.flatMap(blogPost => {
+  return blogPost.data.tags
+})
+
+const tagsCount = _.countBy(tags)
 
 const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
@@ -104,18 +111,41 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
         }
       </div>
 
-      <div class="bg-surface flex-1 p-4 rounded shadow shadow-shadow hidden lg:block sticky min-h-0 self-start top-4">
+      <div class="bg-surface flex-1 pt-4 [&>*:last-child]:pb-4 [&_h2]:px-4 [&_ul]:px-4 rounded shadow shadow-shadow hidden lg:flex flex-col sticky self-start top-4 max-h-[calc(100vh-2rem)]">
         <h2>
           {t('ByYear')}
         </h2>
 
-        <ul class="m-0 list-inside">
+        <ul class="m-0 list-inside list-none">
           {
             years.map((year) => {
               return (
-                <li class="">
-                  <a href={`#${year}`}>{year}</a>
+                <li class="w-full">
+                  <a class="" href={`#${year}`}>{year}</a>
                   <>({blogPostsGroupedByYear[year].length})</>
+                </li>
+              )
+            })
+          }
+        </ul>
+
+        <h2 class="mt-4">
+          By tags
+        </h2>
+
+        <ul class="m-0 list-inside list-none flex flex-row flex-wrap gap-2 min-h-0 overflow-y-scroll">
+          {
+            _.uniq(tags).sort((tagA, tagB) => {
+              const countA = tagsCount[tagA]
+              const countB = tagsCount[tagB]
+              return countB - countA
+            }).map((tag) => {
+              const count = tagsCount[tag]
+              return (
+                <li class="">
+                  <Tag tag={tag}>
+                    {tag} ({count})
+                  </Tag>
                 </li>
               )
             })

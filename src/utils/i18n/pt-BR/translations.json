@@ -113,5 +113,8 @@
   },
   "ByYear": {
     "one": "Por ano"
+  },
+  "ByTags": {
+    "one": "Por tags"
   }
 }

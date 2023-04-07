@@ -26,16 +26,14 @@ const resumeUrl =
 ---
 
 <Site title={t('Résumé')} description={t('RésuméDescription')}>
-  <main class="grid flex-1 grid-cols-layout">
-    <div
-      class="col-full flex flex-1 flex-shrink-0 flex-col sm:grid sm:grid-cols-layout sm:grid-rows-[auto,1fr]"
-    >
-      <h1 class="mb-4 hidden text-center sm:block">{t('Résumé')}</h1>
+  <main class="grid sm:flex-1 grid-cols-layout">
+    <div class="flex flex-col col-full sm:col-content">
+      <h1 class="hidden text-center sm:block">{t('Résumé')}</h1>
 
       <div
         data-resume-container
         data-resume-url={resumeUrl}
-        class="relative col-full h-full w-full overflow-y-auto border-y border-divider sm:col-content sm:rounded sm:border"
+        class="sm:flex-1 relative w-full overflow-y-auto sm:border-divider sm:col-content sm:rounded sm:border"
       >
         <div
           data-resume-loading
@@ -50,12 +48,15 @@ const resumeUrl =
         <noscript>
           <embed class="h-full w-full" type="application/pdf" src={resumeUrl} />
         </noscript>
-      </div>
 
-      <div data-resume-download-button class="mx-auto hidden">
-        <Button className="mt-4" color="primary" href={resumeUrl} download>
-          <Download /> Download
-        </Button>
+        <div
+          data-resume-download-button
+          class="mx-auto absolute bottom-4 right-0 left-0 flex justify-center sm:hidden"
+        >
+          <Button className="" color="primary" href={resumeUrl} download>
+            <Download /> Download
+          </Button>
+        </div>
       </div>
     </div>
   </main>
@@ -70,9 +71,6 @@ const resumeUrl =
   const resumeLoading = document.querySelector('[data-resume-loading]')
   const resumeContainer = document.querySelector<HTMLElement>(
     '[data-resume-container]'
-  )
-  const resumeDownloadButton = document.querySelector(
-    '[data-resume-download-button]'
   )
   const resumeCanvas = document.querySelector<HTMLCanvasElement>(
     '[data-resume-canvas]'
@@ -95,7 +93,6 @@ const resumeUrl =
     }
 
     resumeLoading?.classList.replace('hidden', 'flex')
-    resumeDownloadButton?.classList.remove('hidden')
 
     try {
       const document = await pdfjsLib.getDocument(resumeUrl).promise

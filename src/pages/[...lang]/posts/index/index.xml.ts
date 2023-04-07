@@ -1,6 +1,7 @@
-import rss, { pagesGlobToRssItems } from '@astrojs/rss'
+import rss from '@astrojs/rss'
 import { Language, translate } from '@utils/i18n'
 import type { APIContext } from 'astro'
+import { getCollection } from 'astro:content'
 
 export function getStaticPaths() {
   return [
@@ -15,11 +16,26 @@ export function getStaticPaths() {
 export const get = async ({ props }: APIContext<{ language: Language }>) => {
   const t = translate(props.language)
 
+  const blogPosts = await getCollection('posts')
+
+  const items = await Promise.all(
+    blogPosts.map(async (blogPost) => {
+      const { remarkPluginFrontmatter } = await blogPost.render()
+
+      return {
+        title: blogPost.data.title,
+        pubDate: blogPost.data.date,
+        description: remarkPluginFrontmatter.summary,
+        link: `${props.language === 'pt' ? '/pt' : ''}/posts/${blogPost.slug}`,
+      }
+    })
+  )
+
   return rss({
     title: t('SiteTitle'),
     description: t('SiteDescription'),
     site: import.meta.env.SITE,
-    items: await pagesGlobToRssItems(import.meta.glob('./posts/*.mdx')),
+    items,
     customData: `<language>${
       props.language === 'en' ? 'en-us' : 'pt-br'
     }</language>`,

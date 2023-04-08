@@ -62,25 +62,29 @@ const language = getLanguageFromUrl(Astro.url.pathname)
     vars: { count: blogPosts.length, tag },
   })}
 >
-  <main class="grid grid-cols-layout my-8">
-    <div>
-      <div class="mb-8 flex w-full items-center justify-between">
-        <div
-          class="hidden flex-row items-center justify-center gap-2 text-2xl sm:flex"
-        >
-          <a class="text-2xl font-serif font-bold" href={localizeUrl('/tags', language)}>Tags</a>
+  <main class="grid grid-cols-layout">
+    <div class="mb-8">
+      <div
+        class="mt-8 w-full hidden sm:flex flex-row items-center gap-2 text-2xl"
+      >
+        <span>
+          <a
+            class="text-2xl font-serif font-bold"
+            href={localizeUrl('/tags', language)}
+            >Tags
+          </a>
+        </span>
 
-          <span class="text-sm">
-            <ChevronRight />
-          </span>
+        <span class="text-sm">
+          <ChevronRight />
+        </span>
 
-          <h1 class="m-0">
-            {tag}
-          </h1>
-        </div>
+        <h1 class="m-0">
+          {tag}
+        </h1>
       </div>
 
-      <ul class="m-0 grid w-full max-w-2xl flex-1 list-none grid-cols-1 gap-4">
+      <ul class="mt-8 m-0 grid w-full flex-1 list-none grid-cols-1 gap-4">
         {
           blogPosts
             .sort(
@@ -89,8 +93,8 @@ const language = getLanguageFromUrl(Astro.url.pathname)
             )
             .map((blogPost) => {
               return (
-                <li class="mb-2 flex flex-row items-center gap-4 last:mb-0">
-                  <time class="text-lg tabular-nums text-divider">
+                <li class="mb-2 flex flex-row gap-4 last:mb-0">
+                  <time class="text-lg tabular-nums">
                     {format(blogPost.data.date, 'yyyy-MM-dd')}
                   </time>
 

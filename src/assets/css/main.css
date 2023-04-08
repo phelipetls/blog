@@ -10,7 +10,7 @@
   --on-background: hexToRgb(theme(colors.stone.700));
   --surface: hexToRgb(theme(colors.stone.100));
   --hover: hexToRgb(theme(colors.stone.200));
-  --disabled: hexToRgb(theme(colors.stone.500));
+  --disabled: hexToRgb(theme(colors.stone.100));
   --on-disabled: hexToRgb(theme(colors.stone.300));
   --divider: hexToRgb(theme(colors.stone.400));
   --shadow: hexToRgb(theme(colors.stone.500));

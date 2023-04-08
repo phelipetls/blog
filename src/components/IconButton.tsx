@@ -19,7 +19,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           clsx(
             'bg-background text-on-background',
             {
-              ['rounded-full px-4 py-2']: variant === 'rounded-full',
+              ['rounded-full p-2']: variant === 'rounded-full',
               ['rounded border border-divider p-1 shadow shadow-shadow']:
                 variant === 'rounded',
             },

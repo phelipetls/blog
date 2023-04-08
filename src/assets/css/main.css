@@ -79,7 +79,7 @@
     @apply mb-0;
   }
 
-  a {
+  :is(p, h1, h2, h3, h4, h5, h6) a {
     @apply border-b border-primary no-underline hover:border-primary-hover;
   }
 

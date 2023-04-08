@@ -8,6 +8,8 @@ import _ from 'lodash'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts } from '@utils/posts'
 import Tag from '@components/Tag.astro'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import IconButton from '@components/IconButton'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -74,16 +76,40 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
       <RssButton />
     </div>
 
-    <div class="flex flex-row">
-      <div>
+    <div class="flex flex-row gap-8">
+      <div class="flex-1">
         {
           years.map((year) => {
             const blogPosts = blogPostsGroupedByYear[year]
+
+            let prevYear: number | null = Number(year) + 1
+            let nextYear: number | null = Number(year) - 1
+
+            if (!years.includes(String(nextYear))) {
+              nextYear = null
+            }
+
+            if (!years.includes(String(prevYear))) {
+              prevYear = null
+            }
+
             return (
               <>
-                <h2 id={year} class="mb-8 mt-32 text-2xl first:mt-0">
-                  <time datetime={`${year}-01-01`}>{year}</time>
-                </h2>
+                <div class="mb-8 mt-32 flex flex-row justify-between first:mt-0">
+                  <h2 id={year} class="m-0 text-2xl">
+                    <time datetime={`${year}-01-01`}>{year}</time>
+                  </h2>
+
+                  <div class="flex flex-row gap-2">
+                    <IconButton href={`#${prevYear}`} variant='rounded-full' disabled={prevYear === null}>
+                      <ChevronUp />
+                    </IconButton>
+
+                    <IconButton href={`#${nextYear}`} variant='rounded-full' disabled={nextYear === null}>
+                      <ChevronDown />
+                    </IconButton>
+                  </div>
+                </div>
 
                 <ul class="m-0 grid w-full max-w-2xl list-none grid-cols-1 gap-4">
                   {blogPosts

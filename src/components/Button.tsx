@@ -4,20 +4,26 @@ import { twMerge } from 'tailwind-merge'
 
 type CommonButtonProps = {
   color?: 'primary' | 'secondary'
+  disabled?: boolean
   children: React.ReactNode
 }
 
-type ButtonLinkProps = CommonButtonProps &
-  Omit<React.ComponentPropsWithRef<'a'>, 'href'> & {
-    href: string
-  }
+type ButtonLinkProps = Omit<
+  React.ComponentPropsWithRef<'a'>,
+  'href' & keyof CommonButtonProps
+> & {
+  href: string
+}
 
-type ButtonButtonProps = CommonButtonProps &
-  React.ComponentPropsWithRef<'button'> & {
-    href?: never
-  }
+type ButtonButtonProps = Omit<
+  React.ComponentPropsWithRef<'button'>,
+  keyof CommonButtonProps
+> & {
+  href?: never
+}
 
-export type ButtonProps = ButtonLinkProps | ButtonButtonProps
+export type ButtonProps = CommonButtonProps &
+  (ButtonLinkProps | ButtonButtonProps)
 
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
@@ -52,6 +58,18 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
     }, [props.className, props.color])
 
     if (props.href !== undefined) {
+      if (props.disabled) {
+        return (
+          <button
+            ref={ref as React.ForwardedRef<HTMLButtonElement>}
+            disabled={props.disabled}
+            className={className}
+          >
+            {props.children}
+          </button>
+        )
+      }
+
       return (
         <a
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}

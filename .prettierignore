@@ -9,3 +9,6 @@ layouts/partials/twitter-cards.html
 # markdown
 *.md
 *.mdx
+
+# astro
+src/env.d.ts

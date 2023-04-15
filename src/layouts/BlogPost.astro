@@ -28,7 +28,10 @@ const { readingTime, summary } = frontmatter
 const { title, date, tags } = data
 
 const language = getLanguageFromUrl(Astro.url.pathname)
-const ogImageUrl = localizeUrl(`/posts/${getBlogPostName(Astro.props)}/image.png`, language)
+const ogImageUrl = localizeUrl(
+  `/posts/${getBlogPostName(Astro.props)}/image.png`,
+  language
+)
 ---
 
 <Site

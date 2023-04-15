@@ -81,7 +81,7 @@
 
   ul,
   ol {
-    @apply ml-4 mb-4 list-disc;
+    @apply mb-4 ml-4 list-disc;
   }
 
   ul li::marker,
@@ -90,7 +90,7 @@
   }
 
   ol {
-    @apply ml-4 mb-4 list-decimal;
+    @apply mb-4 ml-4 list-decimal;
   }
 
   blockquote {
@@ -98,7 +98,7 @@
   }
 
   kbd {
-    @apply inline-block whitespace-nowrap rounded bg-surface py-1 px-2 font-bold leading-none text-on-background shadow shadow-shadow;
+    @apply inline-block whitespace-nowrap rounded bg-surface px-2 py-1 font-bold leading-none text-on-background shadow shadow-shadow;
   }
 
   hr {

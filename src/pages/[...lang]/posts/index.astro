@@ -102,11 +102,19 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                   </h2>
 
                   <div class="flex flex-row gap-2">
-                    <IconButton href={`#${prevYear}`} variant='rounded-full' disabled={prevYear === null}>
+                    <IconButton
+                      href={`#${prevYear}`}
+                      variant="rounded-full"
+                      disabled={prevYear === null}
+                    >
                       <ChevronUp />
                     </IconButton>
 
-                    <IconButton href={`#${nextYear}`} variant='rounded-full' disabled={nextYear === null}>
+                    <IconButton
+                      href={`#${nextYear}`}
+                      variant="rounded-full"
+                      disabled={nextYear === null}
+                    >
                       <ChevronDown />
                     </IconButton>
                   </div>

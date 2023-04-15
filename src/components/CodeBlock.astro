@@ -87,7 +87,10 @@ const devIconName = isDevIconName(lang)
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
 ></style>
 
-<div data-codeblock class:list={['mt-16', 'group', 'relative', 'mb-8', 'last:mb-0']}>
+<div
+  data-codeblock
+  class:list={['mt-16', 'group', 'relative', 'mb-8', 'last:mb-0']}
+>
   <pre
     class:list={[
       'relative',
@@ -199,7 +202,7 @@ const devIconName = isDevIconName(lang)
 
       tooltip.setAttribute('role', 'tooltip')
 
-      const tooltipId =  'twoslash-lsp-tooltip'
+      const tooltipId = 'twoslash-lsp-tooltip'
       tooltip.setAttribute('id', tooltipId)
       reference.setAttribute('aria-describedby', tooltipId)
 

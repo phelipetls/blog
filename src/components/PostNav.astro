@@ -19,7 +19,7 @@ const { prevBlogPost, nextBlogPost } = Astro.props
   {
     prevBlogPost ? (
       <a
-        class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 py-4 px-horizontal-padding transition-colors duration-300 hover:bg-hover"
+        class="sm:card flex flex-none basis-1/2 flex-col gap-2 border-0 px-horizontal-padding py-4 transition-colors duration-300 hover:bg-hover"
         href={localizeUrl('/posts/' + prevBlogPost.slug, language)}
       >
         <span class="text-primary">
@@ -38,7 +38,7 @@ const { prevBlogPost, nextBlogPost } = Astro.props
   {
     nextBlogPost && (
       <a
-        class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 py-4 px-horizontal-padding text-right transition-colors duration-300 hover:bg-hover"
+        class="sm:card flex flex-none basis-1/2 flex-col-reverse items-end justify-end gap-2 border-0 px-horizontal-padding py-4 text-right transition-colors duration-300 hover:bg-hover"
         href={localizeUrl('/posts/' + nextBlogPost.slug, language)}
       >
         {nextBlogPost.data.title}

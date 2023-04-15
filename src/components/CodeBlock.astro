@@ -175,7 +175,8 @@ const devIconName = isDevIconName(lang)
     <CopyCodeBlockButton
       client:load
       aria-label={t('CopyCodeButtonLabel')}
-      tooltipText={t('Copied') + '!'}
+      successTooltipText={t('Copied') + '!'}
+      errorTooltipText={t('FailedToCopy')}
       code={codeToCopy}
     />
   </div>

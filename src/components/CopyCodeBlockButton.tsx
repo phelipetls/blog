@@ -14,17 +14,21 @@ export type CopyCodeBlockButtonProps = DistributiveOmit<
   'children'
 > & {
   code: string
-  tooltipText: string
+  successTooltipText: string
+  errorTooltipText: string
 }
 
 export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
-  const { code, className, tooltipText, ...rest } = props
+  const { code, className, successTooltipText, errorTooltipText, ...rest } =
+    props
 
   const buttonRef = useRef<HTMLButtonElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const tooltipArrowRef = useRef<HTMLDivElement>(null)
 
-  const [shouldShowTooltip, setShouldShowTooltip] = useState(false)
+  const [tooltipText, setTooltipText] = useState<string | null>(null)
+  const shouldShowTooltip = tooltipText !== null
+  const isError = tooltipText === errorTooltipText
 
   // Circumvent 'document is not defined' error
   const [body, setBody] = useState<Element | null>(null)
@@ -75,7 +79,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     showTooltip()
 
     const hideTooltip = () => {
-      setShouldShowTooltip(false)
+      setTooltipText(null)
     }
 
     tooltip?.addEventListener('animationend', hideTooltip)
@@ -88,16 +92,27 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
   return (
     <IconButton
       ref={buttonRef}
-      className={clsx([shouldShowTooltip && 'border-green-500', className])}
+      className={clsx([
+        isError ? 'border-warn' : 'border-green-500',
+        className,
+      ])}
       onClick={async () => {
-        await navigator.clipboard.writeText(code)
-
-        setShouldShowTooltip(true)
+        try {
+          await navigator.clipboard.writeText(code)
+          setTooltipText(successTooltipText)
+        } catch {
+          setTooltipText(errorTooltipText)
+        }
       }}
       {...rest}
     >
       {shouldShowTooltip ? (
-        <span className="text-green-500 [&_svg]:stroke-current">
+        <span
+          className={clsx(
+            '[&_svg]:stroke-current',
+            isError ? 'text-warn' : 'text-green-500'
+          )}
+        >
           <Check />
         </span>
       ) : (
@@ -113,14 +128,16 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
             ref={tooltipRef}
             role="tooltip"
             className={clsx(
-              'dark pointer-events-none absolute rounded border border-green-500 bg-background px-2 text-on-background'
+              'dark pointer-events-none absolute rounded border bg-background px-2 text-on-background',
+              isError ? 'border-warn' : 'border-green-500'
             )}
           >
             {tooltipText}
             <div
               ref={tooltipArrowRef}
               className={clsx(
-                'absolute h-[8px] w-[8px] rotate-45 border-r border-b border-green-500 bg-background'
+                'absolute h-[8px] w-[8px] rotate-45 border-b border-r bg-background',
+                isError ? 'border-warn' : 'border-green-500'
               )}
             />
           </div>,

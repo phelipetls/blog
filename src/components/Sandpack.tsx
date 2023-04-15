@@ -108,7 +108,9 @@ function CustomSandpack(props: CustomSandpackProps) {
           <SandpackCodeEditor showTabs={false} />
 
           <CopyCodeBlockButton
-            tooltipText={'Copied'}
+            // FIXME: internationalize this
+            successTooltipText={'Copied'}
+            errorTooltipText={'Error'}
             code={files[activeFile].code}
             className={clsx(
               'absolute',

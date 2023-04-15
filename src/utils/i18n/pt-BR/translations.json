@@ -20,6 +20,9 @@
   "Copied": {
     "one": "Copiado"
   },
+  "FailedToCopy": {
+    "one": "Erro ao copiar"
+  },
   "CopyCodeButtonLabel": {
     "one": "Copiar código"
   },

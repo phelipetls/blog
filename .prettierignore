@@ -2,10 +2,6 @@
 *.min.js
 *.min.css
 
-# forked templates
-layouts/partials/opengraph.html
-layouts/partials/twitter-cards.html
-
 # markdown
 *.md
 *.mdx

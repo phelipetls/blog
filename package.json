@@ -13,7 +13,8 @@
     "generate-posts-images": "node ./scripts/generate-posts-images.js",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "copy-pdf-worker": "node ./scripts/copy-pdf-worker.js",
-    "postinstall": "npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync"
+    "postinstall": "npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.2.1",
@@ -86,6 +87,7 @@
     "tailwind-merge": "^1.8.0",
     "tailwindcss": "^3.2.2",
     "typescript": "^4.9.4",
-    "unist-util-visit": "^4.1.1"
+    "unist-util-visit": "^4.1.1",
+    "husky": "^8.0.3"
   }
 }

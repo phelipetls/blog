@@ -78,6 +78,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             '--sandpack-surface1': theme.colors.surface1,
             '--sandpack-surface3': theme.colors.surface3,
             '--sandpack-accent': theme.colors.accent,
+            '--sandpack-base': theme.colors.base,
           } as React.CSSProperties
         }
       >
@@ -92,6 +93,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 '[&[aria-selected=true]]:shadow',
                 '[&[aria-selected=true]]:shadow-shadow',
                 'hover:bg-[var(--sandpack-surface3)]',
+                'hover:text-[var(--sandpack-base)]',
                 'border-b-0',
                 'font-normal'
               )}

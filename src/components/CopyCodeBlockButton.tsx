@@ -93,7 +93,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
     <IconButton
       ref={buttonRef}
       className={clsx([
-        isError ? 'border-warn' : 'border-green-500',
+        shouldShowTooltip ? (isError ? 'border-warn' : 'border-green-500') : '',
         className,
       ])}
       onClick={async () => {

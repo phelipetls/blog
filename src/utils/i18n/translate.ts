@@ -1,6 +1,6 @@
 import Mustache from 'mustache'
-import englishTranslations from './en/translations.json'
-import portugueseTranslations from './pt-BR/translations.json'
+import englishTranslations from './translations/en.json'
+import portugueseTranslations from './translations/ptBR.json'
 import type { Language } from './getLanguageFromUrl'
 
 type Translation = { one: string; other?: string }

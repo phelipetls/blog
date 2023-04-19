@@ -107,7 +107,7 @@ const ogImageUrl = localizeUrl(
         <hr class="my-8" />
 
         <div
-          class="flex flex-col-reverse lg:grid lg:grid-cols-[minmax(65ch,1fr),1fr]"
+          class="flex flex-col-reverse lg:grid lg:grid-cols-[minmax(65ch,1fr),1fr] lg:gap-8"
         >
           <div
             data-blog-post
@@ -141,7 +141,7 @@ const ogImageUrl = localizeUrl(
             <slot />
           </div>
 
-          <aside>
+          <aside class="min-w-0">
             <BlogPostToc headings={headings} />
           </aside>
         </div>

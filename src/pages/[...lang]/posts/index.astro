@@ -133,11 +133,9 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                     .map((blogPost) => {
                       return (
                         <>
-                          <li>
+                          <li class="mb-8 last:mb-0">
                             <BlogPostCard blogPost={blogPost} />
                           </li>
-
-                          <div class="my-4 last:hidden" />
                         </>
                       )
                     })}

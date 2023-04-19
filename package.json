@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "check": "prettier --check src && astro check && tsc --noEmit",
+    "check": "prettier --check src && eslint . && astro check && tsc --noEmit",
     "fmt": "prettier --write src",
     "build": "astro build",
     "preview": "astro preview",

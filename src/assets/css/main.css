@@ -5,15 +5,15 @@
 
   --primary: hexToRgb(theme(colors.orange.500));
   --primary-hover: hexToRgb(theme(colors.orange.600));
-  --on-primary: hexToRgb(theme(colors.stone.100));
-  --background: hexToRgb(theme(colors.stone.50));
-  --on-background: hexToRgb(theme(colors.stone.700));
-  --surface: hexToRgb(theme(colors.stone.100));
-  --hover: hexToRgb(theme(colors.stone.200));
+  --on-primary: hexToRgb(theme(colors.neutral.800));
+  --background: hexToRgb(theme(colors.neutral.50));
+  --on-background: hexToRgb(theme(colors.neutral.700));
+  --surface: hexToRgb(theme(colors.neutral.100));
+  --hover: hexToRgb(theme(colors.neutral.200));
   --disabled: var(--background);
-  --on-disabled: hexToRgb(theme(colors.stone.300));
-  --divider: hexToRgb(theme(colors.stone.400));
-  --shadow: hexToRgb(theme(colors.stone.500));
+  --on-disabled: hexToRgb(theme(colors.neutral.300));
+  --divider: hexToRgb(theme(colors.neutral.400));
+  --shadow: hexToRgb(theme(colors.neutral.500));
   --note: hexToRgb(theme(colors.blue.600));
   --warn: hexToRgb(theme(colors.red.600));
   color-scheme: light;
@@ -24,11 +24,11 @@
   --primary-hover: hexToRgb(theme(colors.orange.200));
   --on-primary: hexToRgb(theme(colors.neutral.800));
   --background: hexToRgb(theme(colors.neutral.800));
-  --on-background: hexToRgb(theme(colors.stone.200));
+  --on-background: hexToRgb(theme(colors.neutral.200));
   --surface: hexToRgb(theme(colors.neutral.700));
   --hover: hexToRgb(theme(colors.neutral.600));
   --disabled: var(--background);
-  --on-disabled: hexToRgb(theme(colors.stone.100));
+  --on-disabled: hexToRgb(theme(colors.neutral.100));
   --divider: hexToRgb(theme(colors.neutral.400));
   --shadow: hexToRgb(theme(colors.neutral.900));
   --note: hexToRgb(theme(colors.blue.500));

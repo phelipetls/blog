@@ -116,5 +116,11 @@
   },
   "ByTags": {
     "one": "By tags"
+  },
+  "NextYear": {
+    "one": "Next year"
+  },
+  "PreviousYear": {
+    "one": "Previous year"
   }
 }

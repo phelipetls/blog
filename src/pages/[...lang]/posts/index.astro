@@ -106,6 +106,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                       href={`#${prevYear}`}
                       variant="rounded-full"
                       disabled={prevYear === null}
+                      aria-label={t('PreviousYear')}
                     >
                       <ChevronUp />
                     </IconButton>
@@ -114,6 +115,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                       href={`#${nextYear}`}
                       variant="rounded-full"
                       disabled={nextYear === null}
+                      aria-label={t('NextYear')}
                     >
                       <ChevronDown />
                     </IconButton>

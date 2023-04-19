@@ -116,5 +116,11 @@
   },
   "ByTags": {
     "one": "Por tags"
+  },
+  "NextYear": {
+    "one": "Pŕoximo ano"
+  },
+  "PreviousYear": {
+    "one": "Ano anterior"
   }
 }

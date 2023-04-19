@@ -3,8 +3,8 @@
   --content-max-width: 64rem;
   --nav-height: 4rem;
 
-  --primary: hexToRgb(theme(colors.fuchsia.500));
-  --primary-hover: hexToRgb(theme(colors.fuchsia.600));
+  --primary: hexToRgb(theme(colors.orange.500));
+  --primary-hover: hexToRgb(theme(colors.orange.600));
   --on-primary: hexToRgb(theme(colors.stone.100));
   --background: hexToRgb(theme(colors.stone.50));
   --on-background: hexToRgb(theme(colors.stone.700));
@@ -20,8 +20,8 @@
 }
 
 .dark {
-  --primary: hexToRgb(theme(colors.fuchsia.300));
-  --primary-hover: hexToRgb(theme(colors.fuchsia.400));
+  --primary: hexToRgb(theme(colors.orange.300));
+  --primary-hover: hexToRgb(theme(colors.orange.200));
   --on-primary: hexToRgb(theme(colors.neutral.800));
   --background: hexToRgb(theme(colors.neutral.800));
   --on-background: hexToRgb(theme(colors.stone.200));

@@ -149,9 +149,11 @@ const ogImageUrl = localizeUrl(
 
       <hr class="full-width-on-mobile mt-8" />
 
-      <div class="full-width-on-mobile sm:my-8">
-        <PostNav prevBlogPost={prevBlogPost} nextBlogPost={nextBlogPost} />
-      </div>
+      <PostNav
+        class="full-width-on-mobile sm:my-8"
+        prevBlogPost={prevBlogPost}
+        nextBlogPost={nextBlogPost}
+      />
 
       <hr class="full-width-on-mobile mb-8" />
     </div>

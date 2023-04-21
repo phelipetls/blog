@@ -29,7 +29,7 @@
   --hover: hexToRgb(theme(colors.neutral.600));
   --disabled: var(--background);
   --on-disabled: hexToRgb(theme(colors.neutral.700));
-  --divider: hexToRgb(theme(colors.neutral.400));
+  --divider: hexToRgb(theme(colors.neutral.500));
   --shadow: hexToRgb(theme(colors.neutral.900));
   --note: hexToRgb(theme(colors.blue.500));
   --warn: hexToRgb(theme(colors.red.500));

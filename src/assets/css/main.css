@@ -121,7 +121,7 @@
 
 @layer components {
   .card {
-    @apply rounded bg-surface shadow shadow-shadow;
+    @apply rounded bg-surface shadow-sm shadow-shadow;
   }
 
   .grid-cols-layout > * {

@@ -6,6 +6,7 @@ import { localizeUrl } from '@utils/i18n'
 import { ChevronRight } from 'lucide-react'
 import type { CollectionEntry } from 'astro:content'
 import { format } from 'date-fns'
+import _ from 'lodash'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -50,6 +51,14 @@ type Props = {
 
 const { tag, blogPosts } = Astro.props
 
+const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
+  return format(blogPost.data.date, 'yyyy')
+})
+
+const years = Object.keys(blogPostsGroupedByYear).sort(
+  (yearA, yearB) => Number(yearB) - Number(yearA)
+)
+
 const language = getLanguageFromUrl(Astro.url.pathname)
 ---
 
@@ -61,16 +70,15 @@ const language = getLanguageFromUrl(Astro.url.pathname)
   })}
 >
   <main class="grid grid-cols-layout">
-    <div class="mb-8">
+    <div class="">
       <div
-        class="mt-8 w-full hidden sm:flex flex-row items-center gap-2 text-2xl"
+        class="mb-8 w-full hidden sm:flex flex-row items-center justify-center gap-2 text-2xl"
       >
         <span>
           <a
             class="text-2xl font-serif font-bold"
-            href={localizeUrl('/tags', language)}
-            >Tags
-          </a>
+            href={localizeUrl('/tags', language)}>Tags</a
+          >
         </span>
 
         <span class="text-sm">
@@ -82,28 +90,47 @@ const language = getLanguageFromUrl(Astro.url.pathname)
         </h1>
       </div>
 
-      <ul class="mt-8 m-0 grid w-full flex-1 list-none grid-cols-1 gap-4">
+      <ul class="list-none ml-0 mt-8">
         {
-          blogPosts
-            .sort(
-              (blogPostA, blogPostB) =>
-                blogPostB.data.date.getTime() - blogPostA.data.date.getTime()
-            )
-            .map((blogPost) => {
-              return (
-                <li class="mb-2 flex flex-row gap-4 last:mb-0">
-                  <time class="text-lg tabular-nums">
-                    {format(blogPost.data.date, 'yyyy-MM-dd')}
-                  </time>
+          years.map((year) => {
+            const blogPosts = blogPostsGroupedByYear[year]
 
-                  <h2 class="m-0 font-normal">
-                    <a href={localizeUrl('/posts/' + blogPost.slug, language)}>
-                      {blogPost.data.title}
-                    </a>
-                  </h2>
-                </li>
-              )
-            })
+            return (
+              <>
+                <h2 class="m-0 my-8 tabular-nums first:mt-0 sm:px-horizontal-padding">
+                  {year}
+                </h2>
+
+                {blogPosts
+                  .sort(
+                    (blogPostA, blogPostB) =>
+                      blogPostB.data.date.getTime() -
+                      blogPostA.data.date.getTime()
+                  )
+                  .map((blogPost) => {
+                    return (
+                      <li class="mb-2 max-w-2xl last:mb-0">
+                        <a
+                          class="hover:card hover group flex gap-4 py-2 sm:px-horizontal-padding"
+                          href={localizeUrl(
+                            '/posts/' + blogPost.slug,
+                            language
+                          )}
+                        >
+                          <time class="min-w-[6ch] flex-shrink-0 text-lg tabular-nums sm:text-right">
+                            {format(blogPost.data.date, 'MMM dd')}
+                          </time>
+
+                          <h2 class="m-0 border-l border-primary pl-4 text-lg font-normal transition-colors duration-300 sm:group-hover:text-primary">
+                            {blogPost.data.title}
+                          </h2>
+                        </a>
+                      </li>
+                    )
+                  })}
+              </>
+            )
+          })
         }
       </ul>
     </div>

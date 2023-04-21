@@ -2,6 +2,7 @@
 import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
 import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
 import ThemeSelect from './ThemeSelect.astro'
+import LanguageSelect from './LanguageSelect.astro'
 
 const t = useTranslate(Astro)
 
@@ -12,9 +13,9 @@ const mainMenuItems = getMainMenuItems(language)
 <div
   class="flex h-full w-full items-center justify-between bg-background pr-horizontal-padding"
 >
-  <div class="mx-auto flex h-full w-full max-w-content justify-between">
+  <div class="mx-auto py-3 flex h-full w-full max-w-content justify-between">
     <nav
-      class="flex h-full justify-between overflow-x-auto px-horizontal-padding"
+      class="flex h-full justify-between px-horizontal-padding"
       aria-label={t('MainNavigation')}
     >
       <ul class="m-0 flex list-none flex-row flex-nowrap items-center gap-2">
@@ -48,10 +49,10 @@ const mainMenuItems = getMainMenuItems(language)
       </ul>
     </nav>
 
-    <div class="h-full py-3">
-      <div class="flex h-full flex-row items-stretch gap-2 pl-2">
-        <ThemeSelect />
-      </div>
+    <div class="h-full flex flex-row gap-2">
+      <LanguageSelect />
+
+      <ThemeSelect />
     </div>
   </div>
 </div>

@@ -1,0 +1,51 @@
+---
+import { useTranslate, getLanguageFromUrl } from '@utils/i18n'
+import { Languages } from 'lucide-react'
+import Select from '@components/Select.astro'
+
+const language = getLanguageFromUrl(Astro.url.pathname)
+
+const t = useTranslate(Astro)
+---
+
+<Select data-language-select aria-label={t('ChooseALanguage')}>
+  <option selected={language === 'en'} value="en">English</option>
+  <option selected={language === 'pt'} value="pt">Português</option>
+
+  <Languages slot="start-icon" />
+</Select>
+
+<script>
+  const selects = document.querySelectorAll<HTMLSelectElement>(
+    '[data-language-select]'
+  )
+
+  selects?.forEach((select) => {
+    select.addEventListener('change', function () {
+      window.location.href = toggleLanguageInUrl()
+    })
+  })
+
+  function toggleLanguageInUrl() {
+    const pathname = window.location.pathname
+    let newUrl = pathname
+
+    switch (pathname) {
+      case '/pt':
+        newUrl = '/'
+        break
+      case '/':
+        newUrl = '/pt/'
+        break
+      default:
+        if (pathname.startsWith('/pt/')) {
+          newUrl = pathname.replace('/pt/', '/')
+        } else {
+          newUrl = '/pt' + pathname
+        }
+        break
+    }
+
+    return newUrl
+  }
+</script>

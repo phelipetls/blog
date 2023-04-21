@@ -17,7 +17,7 @@ const { items } = Astro.props
     items.map((item) => {
       return (
         <li>
-          <a href={'#' + item.slug}>{item.text}</a>
+          <a href={`#${item.slug}`}>{item.text}</a>
 
           {item.children && <Astro.self items={item.children} />}
         </li>

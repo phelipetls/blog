@@ -76,7 +76,7 @@
   }
 
   :is(span, p, h1, h2, h3, h4, h5, h6) a {
-    @apply border-b border-primary no-underline hover:border-primary-hover;
+    @apply border-b-2 border-dotted border-primary no-underline hover:border-primary-hover;
   }
 
   ul,

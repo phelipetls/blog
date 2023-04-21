@@ -5,9 +5,16 @@ tags: [typescript]
 ---
 
 A TypeScript pattern I like to use is to derive types from data. Types in
-TypeScript only exist at build time (not runtime), so this pattern brings the
-benefit of types being automatically linked to the runtime values they
-represent.
+TypeScript only exist at build time, so this pattern has the benefit of types
+being automatically linked to the runtime values they represent.
+
+Here's one example of what I mean by that:
+
+```typescript twoslash
+const options = ['OPTION_1', 'OPTION_2'] as const
+type Option = (typeof options)[number]
+//   ^?
+```
 
 # `typeof` operator
 

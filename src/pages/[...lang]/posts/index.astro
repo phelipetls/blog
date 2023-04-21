@@ -79,19 +79,11 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
     <div class="flex flex-row gap-8">
       <div class="flex-1">
         {
-          years.map((year) => {
+          years.map((year, index) => {
             const blogPosts = blogPostsGroupedByYear[year]
 
-            let prevYear: number | null = Number(year) + 1
-            let nextYear: number | null = Number(year) - 1
-
-            if (!years.includes(String(nextYear))) {
-              nextYear = null
-            }
-
-            if (!years.includes(String(prevYear))) {
-              prevYear = null
-            }
+            const prevYear: string | null = years[index - 1] ?? null
+            const nextYear: string | null = years[index + 1] ?? null
 
             return (
               <>

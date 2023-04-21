@@ -1,5 +1,5 @@
 ---
-import { BookOpen } from 'lucide-react'
+import { Timer } from 'lucide-react'
 
 type Props = {
   readingTime: number
@@ -9,7 +9,7 @@ const { readingTime } = Astro.props
 ---
 
 <div class="flex items-center gap-2">
-  <BookOpen />
+  <Timer />
 
   <div>{Math.floor(readingTime)} min.</div>
 </div>

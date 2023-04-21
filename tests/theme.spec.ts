@@ -11,10 +11,8 @@ test.describe('On mobile', () => {
     await expect(page.locator('body')).not.toHaveClass(/dark/)
 
     await page.getByTestId('open-sidenav').click()
-    const selectTheme = page.getByRole('combobox', {
-      name: /choose a theme/i,
-    })
-    await selectTheme.selectOption('dark')
+    const select = page.getByLabel(/choose a theme/)
+    await select.selectOption('dark')
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -28,9 +26,7 @@ test.describe('On desktop', () => {
 
     await expect(page.locator('body')).not.toHaveClass(/dark/)
 
-    await page
-      .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('dark')
+    await page.getByLabel(/choose a theme/).selectOption('dark')
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -50,12 +46,10 @@ test.describe('On desktop', () => {
   }) => {
     await page.goto('/')
 
-    const selectTheme = page.getByRole('combobox', {
-      name: /choose a theme/i,
-    })
-    await expect(
-      selectTheme.getByRole('option', { selected: true })
-    ).toHaveText('System')
+    const select = page.getByLabel(/choose a theme/)
+    await expect(select.getByRole('option', { selected: true })).toHaveText(
+      'System'
+    )
   })
 
   test('should show stored theme as selected', async ({ page }) => {
@@ -64,12 +58,10 @@ test.describe('On desktop', () => {
     await page.evaluate(`window.localStorage.setItem('__theme', 'dark')`)
     await page.reload()
 
-    const selectTheme = page.getByRole('combobox', {
-      name: /choose a theme/i,
-    })
-    await expect(
-      selectTheme.getByRole('option', { selected: true })
-    ).toHaveText('Dark')
+    const select = page.getByLabel(/choose a theme/)
+    await expect(select.getByRole('option', { selected: true })).toHaveText(
+      'Dark'
+    )
   })
 })
 
@@ -95,10 +87,8 @@ test.describe('Prefers dark color scheme', () => {
     await expect(page.locator('body')).not.toHaveClass(/dark/)
 
     // Then switch to system theme
-    const selectTheme = page.getByRole('combobox', {
-      name: /choose a theme/i,
-    })
-    await selectTheme.selectOption('system')
+    const select = page.getByLabel(/choose a theme/)
+    await select.selectOption('system')
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -109,19 +99,15 @@ test.describe('Prefers dark color scheme', () => {
     const icon = page.locator('[data-theme-select-icon]').first()
     await expect(icon).toHaveAttribute('href', '#monitor')
 
-    await page
-      .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('dark')
+    const select = page.getByLabel(/choose a theme/)
+
+    await select.selectOption('dark')
     await expect(icon).toHaveAttribute('href', '#moon')
 
-    await page
-      .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('light')
+    await select.selectOption('light')
     await expect(icon).toHaveAttribute('href', '#sun')
 
-    await page
-      .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('system')
+    await select.selectOption('system')
     await expect(icon).toHaveAttribute('href', '#monitor')
   })
 

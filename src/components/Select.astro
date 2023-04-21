@@ -1,0 +1,23 @@
+---
+---
+
+<div class="relative flex h-full flex-row items-center">
+  <span
+    class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <slot name="start-icon" />
+  </span>
+
+  <select
+    class="card h-full appearance-none bg-surface py-1 px-10 text-center"
+    {...Astro.props}
+  >
+    <slot />
+  </select>
+
+  <span
+    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <slot name="end-icon" />
+  </span>
+</div>

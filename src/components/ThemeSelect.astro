@@ -1,43 +1,36 @@
 ---
 import { useTranslate } from '@utils/i18n'
 import { ChevronDown, Moon, Sun, Monitor } from 'lucide-react'
+import Select from '@components/Select.astro'
 
 const t = useTranslate(Astro)
 ---
 
-<div class="relative flex h-full flex-row items-center">
-  <span
-    class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm"
+<Select data-theme-select aria-label={t('ChooseATheme')}>
+  <option value="light">{t('Light')}</option>
+  <option value="dark">{t('Dark')}</option>
+  <option value="system">{t('System')}</option>
+
+  <svg
+    slot="start-icon"
+    class="feather"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
   >
-    <svg class="feather" viewBox="0 0 24 24" width="24" height="24">
-      <title>{t('ThemeIcon')}</title>
+    <title>{t('ThemeIcon')}</title>
 
-      <defs>
-        <Moon id="moon" />
-        <Sun id="sun" />
-        <Monitor id="monitor" />
-      </defs>
+    <defs>
+      <Moon id="moon" />
+      <Sun id="sun" />
+      <Monitor id="monitor" />
+    </defs>
 
-      <use data-theme-select-icon href="#monitor"></use>
-    </svg>
-  </span>
+    <use data-theme-select-icon href="#monitor"></use>
+  </svg>
 
-  <select
-    class="card h-full appearance-none bg-surface py-1 px-10 text-center"
-    data-theme-select
-    aria-label={t('ChooseATheme')}
-  >
-    <option value="light">{t('Light')}</option>
-    <option value="dark">{t('Dark')}</option>
-    <option value="system">{t('System')}</option>
-  </select>
-
-  <span
-    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
-  >
-    <ChevronDown />
-  </span>
-</div>
+  <ChevronDown slot="end-icon" />
+</Select>
 
 <script>
   const themeSelects = document.querySelectorAll<HTMLSelectElement>(

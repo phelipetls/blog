@@ -122,5 +122,8 @@
   },
   "PreviousYear": {
     "one": "Previous year"
+  },
+  "BlogPostsTaggedWith": {
+    "one": "Blog posts tagged with '{{tag}}'"
   }
 }

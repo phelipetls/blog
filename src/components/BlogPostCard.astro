@@ -3,6 +3,7 @@ import BlogPostReadingTime from './BlogPostReadingTime.astro'
 import BlogPostDate from './BlogPostDate.astro'
 import Tag from './Tag.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
+import { getBlogPostName } from '@utils/posts'
 import type { CollectionEntry } from 'astro:content'
 
 const language = getLanguageFromUrl(Astro.url.pathname)
@@ -21,7 +22,10 @@ const {
 
 <article class="flex h-full flex-col gap-4">
   <h3 class="text-2xl max-w-prose m-0 border-l-2 border-primary pl-4">
-    <a class="border-0" href={localizeUrl(`/posts/${blogPost.slug}`, language)}>
+    <a
+      class="border-0"
+      href={localizeUrl(`/posts/${getBlogPostName(blogPost)}`, language)}
+    >
       {title}
     </a>
   </h3>

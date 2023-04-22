@@ -2,7 +2,8 @@
 import type { MarkdownHeading } from 'astro'
 import { useTranslate } from '@utils/i18n'
 import { List, ChevronDown } from 'lucide-react'
-import Toc from '@components/Toc.astro'
+// @ts-expect-error this library is not written in TypeScript
+import { TOC } from 'astro-toc'
 
 const t = useTranslate(Astro)
 
@@ -11,6 +12,12 @@ type Props = {
 }
 
 const { headings } = Astro.props
+
+const tocItems = headings.map((heading) => ({
+  depth: heading.depth,
+  title: heading.text,
+  url: `#${heading.slug}`,
+}))
 ---
 
 {
@@ -34,39 +41,39 @@ const { headings } = Astro.props
           </div>
         </div>
 
-        <div
+        <nav
           data-toc-wrapper
-          class="
-          mt-4
-          min-h-0
-          sm:overflow-y-auto
-          [&_a_*]:indent-0
-          [&_nav_ol]:m-0
-          [&_nav_ol]:list-none
-          [&_nav_ol]:indent-4
-          [&_nav_ol_li[data-active]>a]:text-primary
-          [&_nav_ol_li[data-active]]:before:bg-primary
-          [&_nav_ol_li]:relative
-          [&_nav_ol_li]:before:absolute
-          [&_nav_ol_li]:before:left-0
-          [&_nav_ol_li]:before:top-0
-          [&_nav_ol_li]:before:h-full
-          [&_nav_ol_li]:before:w-[1px]
-          [&_nav_ol_li]:before:bg-divider
-          [&_nav_ol_li]:before:content-['']
-          [&_nav_ol_li_a:hover]:bg-hover
-          [&_nav_ol_li_a]:block
-          [&_nav_ol_li_a]:truncate
-          [&_nav_ol_li_a]:border-b-0
-          [&_nav_ol_li_a]:transition-colors
-          [&_nav_ol_li_a]:duration-300
-          [&_nav_ol_ol]:indent-8
-          [&_nav_ol_ol_ol]:indent-12
-          [&_nav_ol_ol_ol_ol]:indent-16
-       "
+          class:list={[
+            'mt-4',
+            'min-h-0',
+            'sm:overflow-y-auto',
+            '[&_a_*]:indent-0',
+            '[&_ol]:m-0',
+            '[&_ol]:list-none',
+            '[&_ol]:indent-4',
+            '[&_ol_li[data-active]>a]:text-primary',
+            '[&_ol_li[data-active]]:before:bg-primary',
+            '[&_ol_li]:relative',
+            '[&_ol_li]:before:absolute',
+            '[&_ol_li]:before:left-0',
+            '[&_ol_li]:before:top-0',
+            '[&_ol_li]:before:h-full',
+            '[&_ol_li]:before:w-[1px]',
+            '[&_ol_li]:before:bg-divider',
+            "[&_ol_li]:before:content-['']",
+            '[&_ol_li_a:hover]:bg-hover',
+            '[&_ol_li_a]:block',
+            '[&_ol_li_a]:truncate',
+            '[&_ol_li_a]:border-b-0',
+            '[&_ol_li_a]:transition-colors',
+            '[&_ol_li_a]:duration-300',
+            '[&_ol_ol]:indent-8',
+            '[&_ol_ol_ol]:indent-12',
+            '[&_ol_ol_ol_ol]:indent-16',
+          ]}
         >
-          <Toc headings={headings} data-toc />
-        </div>
+          <TOC toc={tocItems} as="number" />
+        </nav>
       </div>
 
       <details
@@ -87,24 +94,25 @@ const { headings } = Astro.props
           </div>
         </summary>
 
-        <div
-          class="
-          mt-4
-          [&_ol]:m-0
-          [&_ol]:list-outside
-          [&_ol]:px-horizontal-padding
-          [&_ol_li:not(:first-child)]:mt-1
-        "
+        <nav
+          data-toc-wrapper
+          class:list={[
+            'mt-4',
+            '[&_ol]:m-0',
+            '[&_ol]:list-outside',
+            '[&_ol]:px-horizontal-padding',
+            '[&_ol_li:not(:first-child)]:mt-1',
+          ]}
         >
-          <Toc headings={headings} data-toc />
-        </div>
+          <TOC toc={tocItems} as="number" />
+        </nav>
       </details>
     </div>
   )
 }
 
 <script>
-  const toc = document.querySelector<HTMLElement>('nav[data-toc]')
+  const toc = document.querySelector<HTMLElement>('nav[data-toc-wrapper] ol')
   const tocContainer = toc?.closest<HTMLElement>('[data-toc-wrapper]')
   const blogPost = document.querySelector('[data-blog-post]') as HTMLElement
   const firstTocItem = toc?.querySelector('li')

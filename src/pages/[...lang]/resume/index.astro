@@ -26,32 +26,31 @@ const resumeUrl =
 ---
 
 <Site title={t('Résumé')} description={t('RésuméDescription')}>
-  <main class="grid sm:flex-1 grid-cols-layout">
+  <main class="grid flex-1 grid-cols-layout">
     <div class="flex flex-col col-full sm:col-content">
       <h1 class="hidden text-center sm:block mb-8">{t('Résumé')}</h1>
 
       <div
         data-resume-container
         data-resume-url={resumeUrl}
-        class="sm:flex-1 relative w-full overflow-y-auto sm:border-divider sm:col-content sm:rounded sm:border"
+        class="relative h-full overflow-y-auto sm:border-divider sm:col-content sm:rounded sm:border"
       >
+        <noscript>
+          <embed class="w-full h-full" type="application/pdf" src={resumeUrl} />
+        </noscript>
+
         <div
           data-resume-loading
           role="progressbar"
-          class="absolute inset-0 hidden h-full items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
+          class="h-full hidden absolute inset-0 items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
         >
           <Loader />
         </div>
 
         <canvas class="hidden" data-resume-canvas></canvas>
 
-        <noscript>
-          <embed class="h-full w-full" type="application/pdf" src={resumeUrl} />
-        </noscript>
-
         <div
-          data-resume-download-button
-          class="mx-auto absolute bottom-4 right-0 left-0 flex justify-center sm:hidden"
+          class="hidden mx-auto absolute bottom-4 right-0 left-0 justify-center sm:hidden"
         >
           <Button className="" color="primary" href={resumeUrl} download>
             <Download /> Download
@@ -68,15 +67,12 @@ const resumeUrl =
 
   pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
 
-  const resumeLoading = document.querySelector('[data-resume-loading]')
-  const resumeContainer = document.querySelector<HTMLElement>(
-    '[data-resume-container]'
-  )
-  const resumeCanvas = document.querySelector<HTMLCanvasElement>(
-    '[data-resume-canvas]'
-  )
+  showPdf()
 
-  ;(async () => {
+  async function showPdf() {
+    const resumeContainer = document.querySelector<HTMLElement>(
+      '[data-resume-container]'
+    )
     const resumeUrl = resumeContainer?.dataset.resumeUrl
 
     if (!resumeUrl) {
@@ -88,20 +84,21 @@ const resumeUrl =
       return
     }
 
-    if (!resumeCanvas) {
-      return
-    }
-
-    resumeLoading?.classList.replace('hidden', 'flex')
+    loading()
 
     try {
-      const document = await pdfjsLib.getDocument(resumeUrl).promise
+      const pdfDocument = await pdfjsLib.getDocument(resumeUrl).promise
 
-      document.getPage(1).then(function (page) {
+      pdfDocument.getPage(1).then(function (page) {
         const scale =
           resumeContainer.clientWidth / page.getViewport({ scale: 1 }).width
         const viewport = page.getViewport({ scale })
         const outputScale = window.devicePixelRatio || 1
+
+        const resumeCanvas = getResumeCanvas()
+        if (!resumeCanvas) {
+          return
+        }
 
         const context = resumeCanvas.getContext('2d')
 
@@ -124,11 +121,34 @@ const resumeUrl =
         return renderTask.promise
       })
 
-      resumeCanvas.classList.remove('hidden')
-      resumeLoading?.classList.add('hidden')
+      loaded()
+      loadedSuccessfully()
     } catch (err) {
-      resumeContainer.classList.add('hidden')
+      loaded()
       throw err
     }
-  })()
+
+    function loading() {
+      const resumeLoading = getResumeLoading()
+      resumeLoading?.classList.remove('hidden')
+      resumeLoading?.classList.add('flex')
+    }
+
+    function loaded() {
+      getResumeLoading()?.remove()
+      document.querySelector('main')?.classList.remove('flex-1')
+    }
+
+    function loadedSuccessfully() {
+      getResumeCanvas()?.classList.remove('hidden')
+    }
+
+    function getResumeCanvas() {
+      return document.querySelector<HTMLCanvasElement>('[data-resume-canvas]')
+    }
+
+    function getResumeLoading() {
+      return document.querySelector<HTMLCanvasElement>('[data-resume-loading]')
+    }
+  }
 </script>

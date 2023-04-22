@@ -16,7 +16,7 @@ const hasEndIcon = Astro.slots.has('end-icon')
 
   <select
     class:list={twMerge([
-      'card h-full appearance-none bg-surface py-1 text-center [&_option]:text-sm',
+      'card h-full appearance-none bg-surface py-1 text-center',
       hasStartIcon && 'pl-8 pr-2',
       hasEndIcon && 'pr-8',
       hasStartIcon && hasEndIcon && 'px-10',

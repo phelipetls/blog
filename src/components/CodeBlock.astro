@@ -81,6 +81,8 @@ const capitalize = <T extends string>(str: T) =>
 const devIconName = isDevIconName(lang)
   ? (capitalize(Astro.props.lang) as DevIconName)
   : getDevIconNameByShikiLang(lang)
+
+const shouldShowHeader = title !== '' || langName !== ''
 ---
 
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
@@ -88,7 +90,13 @@ const devIconName = isDevIconName(lang)
 
 <div
   data-codeblock
-  class:list={['mt-16', 'group', 'relative', 'mb-8', 'last:mb-0']}
+  class:list={[
+    shouldShowHeader ? 'mt-16' : 'mt-8',
+    'group',
+    'relative',
+    'mb-8',
+    'last:mb-0',
+  ]}
 >
   <pre
     class:list={[
@@ -98,8 +106,6 @@ const devIconName = isDevIconName(lang)
       'shadow',
       'shadow-shadow',
       'overflow-x-auto',
-      'rounded',
-      'rounded-tl-none',
       'bg-[var(--code-bg)]',
       'text-[var(--code-fg)]',
       'py-4',
@@ -120,31 +126,30 @@ const devIconName = isDevIconName(lang)
       '[&_.arrow]:bg-gray-700',
       '[&_.arrow]:border-gray-700',
       '[&_.popover]:text-white',
+      shouldShowHeader ? 'rounded' : 'rounded rounded-tl-none',
       Astro.props.class,
     ]}
     {...rest}><slot /></pre>
 
-  <div
-    class="dark text-md absolute top-0 left-horizontal-padding mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-[100%] overflow-hidden sm:left-0"
-  >
-    <div
-      class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]"
-    >
-      <div class="shrink-0">
-        {devIconName ? <DevIcon name={devIconName} /> : <FileText />}
-      </div>
-
-      {
-        title ? (
-          <div class="rtl truncate text-right font-mono">
-            <bdi>{title}</bdi>
+  {
+    shouldShowHeader && (
+      <div class="text-md dark absolute left-horizontal-padding top-0 mx-auto max-w-[calc(100%-var(--horizontal-padding)*2)] -translate-y-[100%] overflow-hidden sm:left-0">
+        <div class="flex items-center gap-2 rounded-t border-t border-primary bg-[var(--code-bg)] px-2 py-1 text-[var(--code-fg)]">
+          <div class="shrink-0">
+            {devIconName ? <DevIcon name={devIconName} /> : <FileText />}
           </div>
-        ) : (
-          <div class="capitalize">{langName}</div>
-        )
-      }
-    </div>
-  </div>
+
+          {title ? (
+            <div class="rtl truncate text-right font-mono">
+              <bdi>{title}</bdi>
+            </div>
+          ) : (
+            <div class="capitalize">{langName}</div>
+          )}
+        </div>
+      </div>
+    )
+  }
 
   <div
     class:list={[

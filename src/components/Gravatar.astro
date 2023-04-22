@@ -11,10 +11,11 @@ const generateGravatarUrl = (width: number) =>
 ---
 
 <div
-  class="relative z-0 shrink-0 overflow-hidden rounded-full border-2 border-divider"
+  class="relative z-0 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-surface to-divider p-1"
 >
   <img
     id="gravatar"
+    class="rounded-full"
     srcset={`
       ${generateGravatarUrl(200)} 1x,
       ${generateGravatarUrl(400)} 2x,

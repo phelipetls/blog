@@ -1,13 +1,15 @@
 ---
 import * as DevIcons from './devicons'
+
 export type DevIconName = keyof typeof DevIcons
 
 type Props = {
+  class?: string
   name: DevIconName
 }
 
-const { name } = Astro.props
+const { name, class: className } = Astro.props
 const DevIconComponent = DevIcons[name]
 ---
 
-<DevIconComponent />
+<DevIconComponent className={className} />

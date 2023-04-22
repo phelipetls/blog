@@ -13,7 +13,7 @@ test.describe('Multi-language', () => {
       await page.goto(initial)
 
       await page
-        .getByLabel('Choose a language')
+        .getByRole('combobox', { name: 'Choose a language' })
         .selectOption({ label: 'Português' })
 
       await expect(page).toHaveURL(expected)
@@ -32,7 +32,7 @@ test.describe('Multi-language', () => {
       await page.goto(initial)
 
       await page
-        .getByLabel('Escolha a linguagem')
+        .getByRole('combobox', { name: 'Escolha a linguagem' })
         .selectOption({ label: 'English' })
 
       await expect(page).toHaveURL(expected)

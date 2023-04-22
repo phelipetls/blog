@@ -1,11 +1,5 @@
 import { test, expect } from '@playwright/test'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const cartesianProduct = (...arrays: any[][]) => {
-  return arrays.reduce((acc, cur) => {
-    return acc.flatMap((arr) => cur.map((item) => [arr, item].flat()))
-  })
-}
+import { cartesianProduct } from '@utils/tests'
 
 test.describe('Navbar', () => {
   const matrix = cartesianProduct(

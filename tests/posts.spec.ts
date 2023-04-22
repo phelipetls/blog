@@ -1,13 +1,17 @@
 import { test, expect } from '@playwright/test'
+import { cartesianProduct } from '@utils/tests'
 
 test.describe('Posts', () => {
-  for (const lang of ['en', 'pt']) {
-    test(`blog post should have correct link (in ${lang})`, async ({
+  for (const [path, lang] of cartesianProduct(
+    ['/posts', '/tags/git'],
+    ['en', 'pt']
+  )) {
+    test(`blog post should have correct link (in ${lang} and ${path})`, async ({
       page,
     }) => {
       const urlPrefix = lang === 'pt' ? '/pt' : ''
 
-      await page.goto(`${urlPrefix}/posts`)
+      await page.goto(`${urlPrefix}${path}`)
 
       if (lang === 'pt') {
         await expect(

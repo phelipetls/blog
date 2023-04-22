@@ -106,24 +106,10 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
       } else {
         const themedTokens = highlighter.codeToThemedTokens(plainCode, lang)
 
-        // Parse highlighted lines, with the syntax '{1-2, 5}'
         const highlightedLines =
-          (typeof metastring === 'string' &&
-            metastring
-              .match(/{[0-9-, ]+}/)?.[0]
-              .replace('{', '')
-              .replace('}', '')
-              .split(',')
-              .map((s: string) => s.trim())
-              .flatMap((str: string) => {
-                if (str.includes('-')) {
-                  const [start, end] = str.split('-')
-                  return _.range(Number(start), Number(end) + 1)
-                }
-
-                return Number(str)
-              })) ||
-          []
+          'highlight' in meta && Array.isArray(meta.highlight)
+            ? meta.highlight
+            : []
 
         const syntaxHighlightedCode = themedTokens.flatMap((tokens, index) => {
           const isLineHighlighted = highlightedLines.includes(index + 1)

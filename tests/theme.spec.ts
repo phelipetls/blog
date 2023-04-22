@@ -14,7 +14,7 @@ test.describe('On mobile', () => {
     const selectTheme = page.getByRole('combobox', {
       name: /choose a theme/i,
     })
-    await selectTheme.selectOption('dark')
+    await selectTheme.selectOption({ label: 'Dark' })
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -30,7 +30,7 @@ test.describe('On desktop', () => {
 
     await page
       .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('dark')
+      .selectOption({ label: 'Dark' })
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -98,7 +98,7 @@ test.describe('Prefers dark color scheme', () => {
     const selectTheme = page.getByRole('combobox', {
       name: /choose a theme/i,
     })
-    await selectTheme.selectOption('system')
+    await selectTheme.selectOption({ label: 'System' })
 
     await expect(page.locator('body')).toHaveClass(/dark/)
   })
@@ -111,17 +111,17 @@ test.describe('Prefers dark color scheme', () => {
 
     await page
       .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('dark')
+      .selectOption({ label: 'Dark' })
     await expect(icon).toHaveAttribute('href', '#moon')
 
     await page
       .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('light')
+      .selectOption({ label: 'Light' })
     await expect(icon).toHaveAttribute('href', '#sun')
 
     await page
       .getByRole('combobox', { name: /choose a theme/i })
-      .selectOption('system')
+      .selectOption({ label: 'System' })
     await expect(icon).toHaveAttribute('href', '#monitor')
   })
 

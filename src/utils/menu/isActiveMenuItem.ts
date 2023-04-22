@@ -9,12 +9,14 @@ export const isActiveMenuItem = ({
   menuItemPathname,
   rootPathname,
 }: IsActiveMenuItemOptions) => {
-  const itemPathname = menuItemPathname
-
-  let isActive = currentPathname.startsWith(itemPathname)
+  let isActive = currentPathname.startsWith(menuItemPathname)
 
   if (menuItemPathname === rootPathname) {
     isActive = currentPathname === menuItemPathname
+  }
+
+  if (currentPathname + '/' === rootPathname) {
+    isActive = currentPathname + '/' === menuItemPathname
   }
 
   return isActive

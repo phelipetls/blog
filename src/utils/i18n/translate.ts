@@ -1,44 +1,29 @@
-import Mustache from 'mustache'
+import i18next from 'i18next'
 import englishTranslations from './translations/en.json'
-import portugueseTranslations from './translations/ptBR.json'
+import portugueseTranslations from './translations/pt.json'
 import type { Language } from './getLanguageFromUrl'
 
-type Translation = { one: string; other?: string }
-type TranslateOptions = { n?: number; vars?: Record<string, unknown> }
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
+
+const resources = {
+  pt: {
+    translation: portugueseTranslations,
+  },
+  en: {
+    translation: englishTranslations,
+  },
+} as const
+
+await i18next.init({
+  resources,
+  returnNull: false,
+})
 
 export const translate = (lang: Language) => {
-  return (key: string, options?: TranslateOptions): string => {
-    let translations: Translation | undefined
-
-    if (lang === 'en') {
-      if (key in englishTranslations) {
-        translations =
-          englishTranslations[key as keyof typeof englishTranslations]
-      }
-    }
-
-    if (lang === 'pt') {
-      if (key in englishTranslations) {
-        translations =
-          portugueseTranslations[key as keyof typeof portugueseTranslations]
-      }
-    }
-
-    if (translations) {
-      let translation =
-        options && options.n && options.n > 1 && translations.other
-          ? translations.other
-          : translations.one
-
-      if (options?.vars) {
-        translation = Mustache.render(translation, options.vars)
-      }
-
-      if (translation) {
-        return translation
-      }
-    }
-
-    return key
-  }
+  i18next.changeLanguage(lang)
+  return i18next.t
 }

@@ -1,132 +1,46 @@
 {
-  "About": {
-    "one": "About"
-  },
-  "AllTags": {
-    "one": "All tags"
-  },
-  "And": {
-    "one": "and"
-  },
-  "ChooseATheme": {
-    "one": "Choose a theme"
-  },
-  "ChooseALanguage": {
-    "one": "Choose a language"
-  },
-  "Contact": {
-    "one": "Contact"
-  },
-  "Contacts": {
-    "one": "Contacts"
-  },
-  "Copied": {
-    "one": "Copied"
-  },
-  "FailedToCopy": {
-    "one": "Failed to copy"
-  },
-  "CopyCodeButtonLabel": {
-    "one": "Copy code"
-  },
-  "Dark": {
-    "one": "Dark"
-  },
-  "GravatarAltText": {
-    "one": "A photo of me"
-  },
-  "LanguageButton": {
-    "one": "Click to read in another language"
-  },
-  "LanguageOptions": {
-    "one": "Translations"
-  },
-  "License": {
-    "one": "All content is under a\n<a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0</a>\nlicense.\n"
-  },
-  "Light": {
-    "one": "Light"
-  },
-  "MainNavigation": {
-    "one": "Main navigation"
-  },
-  "OpenSidenav": {
-    "one": "Open navigation sidebar"
-  },
-  "PostsListDescription": {
-    "one": "List of all blog posts"
-  },
-  "PostsNavigation": {
-    "one": "Posts navigation"
-  },
-  "RefreshApp": {
-    "one": "Refresh app"
-  },
-  "Resume": {
-    "one": "Résumé"
-  },
-  "Résumé": {
-    "one": "Résumé"
-  },
-  "RésuméDescription": {
-    "one": "My Résumé in PDF"
-  },
-  "ShowLess": {
-    "one": "Show less"
-  },
-  "ShowMore": {
-    "one": "Show more"
-  },
-  "SiteDescription": {
-    "one": "Front-end web developer that writes about the programming craft and its tools"
-  },
-  "SiteTitle": {
-    "one": "Posts about programming - Phelipe Teles"
-  },
-  "Subscribe": {
-    "one": "Subscribe"
-  },
-  "System": {
-    "one": "System"
-  },
-  "TableOfContents": {
-    "one": "Table of Contents"
-  },
-  "Tabs": {
-    "one": "Tabs"
-  },
-  "TagDescription": {
-    "one": "{{count}} post tagged with {{tag}}",
-    "other": "{{count}} posts tagged with {{tag}}"
-  },
-  "TagsDescription": {
-    "one": "List of all blog posts tags"
-  },
-  "ThemeButton": {
-    "one": "Change theme"
-  },
-  "ThemeIcon": {
-    "one": "Theme icon"
-  },
-  "pt": {
-    "one": "Leia em Português"
-  },
-  "404Title": {
-    "one": "Page not found"
-  },
-  "GoBack": {
-    "one": "Go back to previous page"
-  },
-  "ByTags": {
-    "one": "By tags"
-  },
-  "NextYear": {
-    "one": "Next year"
-  },
-  "PreviousYear": {
-    "one": "Previous year"
-  },
-  "BlogPostsTaggedWith": {
-    "one": "Blog posts tagged with '{{tag}}'"
-  }
+  "About": "About",
+  "AllTags": "All tags",
+  "And": "and",
+  "ChooseATheme": "Choose a theme",
+  "ChooseALanguage": "Choose a language",
+  "Contact": "Contact",
+  "Contacts": "Contacts",
+  "Copied": "Copied",
+  "FailedToCopy": "Failed to copy",
+  "CopyCodeButtonLabel": "Copy code",
+  "Dark": "Dark",
+  "GravatarAltText": "A photo of me",
+  "LanguageButton": "Click to read in another language",
+  "LanguageOptions": "Translations",
+  "License": "All content is under a\n<a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0</a>\nlicense.\n",
+  "Light": "Light",
+  "MainNavigation": "Main navigation",
+  "OpenSidenav": "Open navigation sidebar",
+  "PostsListDescription": "List of all blog posts",
+  "PostsNavigation": "Posts navigation",
+  "RefreshApp": "Refresh app",
+  "Resume": "Résumé",
+  "Résumé": "Résumé",
+  "RésuméDescription": "My Résumé in PDF",
+  "ShowLess": "Show less",
+  "ShowMore": "Show more",
+  "SiteDescription": "Front-end web developer that writes about the programming craft and its tools",
+  "SiteTitle": "Posts about programming - Phelipe Teles",
+  "Subscribe": "Subscribe",
+  "System": "System",
+  "TableOfContents": "Table of Contents",
+  "Tabs": "Tabs",
+  "TagDescription_one": "{{count}} post tagged with {{tag}}",
+  "TagDescription_other": "{{count}} posts tagged with {{tag}}",
+  "TagsDescription": "List of all blog posts tags",
+  "ThemeButton": "Change theme",
+  "ThemeIcon": "Theme icon",
+  "pt": "Leia em Português",
+  "404Title": "Page not found",
+  "GoBack": "Go back to previous page",
+  "ByTags": "By tags",
+  "NextYear": "Next year",
+  "PreviousYear": "Previous year",
+  "BlogPostsTaggedWith": "Blog posts tagged with '{{tag}}'"
 }

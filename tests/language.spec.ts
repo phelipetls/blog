@@ -4,6 +4,8 @@ test.describe('Multi-language', () => {
   const toPortugueseUrls = [
     ['/', '/pt/'],
     ['/posts', '/pt/posts'],
+    ['/posts/demystifying-git-rebase', '/pt/posts/demystifying-git-rebase'],
+    ['/tags/git', '/pt/tags/git'],
   ]
 
   toPortugueseUrls.forEach(([initial, expected]) => {
@@ -23,6 +25,8 @@ test.describe('Multi-language', () => {
   const toEnglishUrls = [
     ['/pt', '/'],
     ['/pt/posts', '/posts'],
+    ['/pt/posts/demystifying-git-rebase', '/posts/demystifying-git-rebase'],
+    ['/pt/tags/git', '/tags/git'],
   ]
 
   toEnglishUrls.forEach(([initial, expected]) => {

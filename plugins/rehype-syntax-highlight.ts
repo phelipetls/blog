@@ -105,7 +105,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
           }
         })
       } else {
-        const themedTokens = highlighter.codeToThemedTokens(plainCode, lang)
+        const lines = highlighter.codeToThemedTokens(plainCode, lang)
 
         const highlightedLines =
           'highlight' in meta
@@ -120,27 +120,25 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
               })
             : []
 
-        const syntaxHighlightedCode = themedTokens
-          .filter((tokens) => tokens.some((token) => token.content !== ''))
-          .flatMap((tokens, index) => {
-            const isLineHighlighted = highlightedLines.includes(index + 1)
+        const syntaxHighlightedCode = lines.flatMap((line, index) => {
+          const isLineHighlighted = highlightedLines.includes(index + 1)
 
-            return h(
-              'span',
-              {
-                className: ['line', isLineHighlighted && 'highlight']
-                  .filter(Boolean)
-                  .join(' '),
-              },
-              tokens.map((token) => {
-                return h(
-                  'span',
-                  token.color ? { style: `color: ${token.color}` } : {},
-                  token.content
-                )
-              })
-            )
-          })
+          return h(
+            'span',
+            {
+              className: ['line', isLineHighlighted && 'highlight']
+                .filter(Boolean)
+                .join(' '),
+            },
+            line.map((token) => {
+              return h(
+                'span',
+                token.color ? { style: `color: ${token.color}` } : {},
+                token.content
+              )
+            })
+          )
+        })
 
         node.children = syntaxHighlightedCode
       }

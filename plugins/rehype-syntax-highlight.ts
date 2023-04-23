@@ -108,8 +108,16 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
         const themedTokens = highlighter.codeToThemedTokens(plainCode, lang)
 
         const highlightedLines =
-          'highlight' in meta && Array.isArray(meta.highlight)
-            ? meta.highlight
+          'highlight' in meta
+            ? Object.keys(meta.highlight).flatMap((lineNumberOrRange) => {
+                const isRange = lineNumberOrRange.includes('-')
+                if (isRange) {
+                  const [start, end] = lineNumberOrRange.split('-')
+                  return _.range(Number(start), Number(end) + 1)
+                }
+
+                return Number(lineNumberOrRange)
+              })
             : []
 
         const syntaxHighlightedCode = themedTokens

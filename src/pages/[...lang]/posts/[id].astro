@@ -9,9 +9,12 @@ export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
   const portugueseBlogPosts = await getBlogPosts('pt')
 
-  const sortByDateInAscendingOrder = (
-    blogPosts: CollectionEntry<'posts'>[]
-  ) => {
+  const portugueseBlogPostsNames = portugueseBlogPosts.map((p) =>
+    getBlogPostName(p)
+  )
+  const englishBlogPostsNames = englishBlogPosts.map((p) => getBlogPostName(p))
+
+  function sortByDateInAscendingOrder(blogPosts: CollectionEntry<'posts'>[]) {
     return blogPosts.sort((blogPostA, blogPostB) => {
       return (
         new Date(blogPostA.data.date).getTime() -
@@ -23,23 +26,41 @@ export async function getStaticPaths() {
   return [
     ...sortByDateInAscendingOrder(englishBlogPosts).map(
       (blogPost, index, blogPosts) => {
-        const nextBlogPost = blogPosts[index + 1]
-        const prevBlogPost = blogPosts[index - 1]
+        const nextBlogPost = blogPosts[index + 1] ?? null
+        const prevBlogPost = blogPosts[index - 1] ?? null
 
         return {
           params: { lang: undefined, id: getBlogPostName(blogPost) },
-          props: { blogPost, nextBlogPost, prevBlogPost },
+          props: {
+            blogPost: {
+              ...blogPost,
+              isTranslated: portugueseBlogPostsNames.includes(
+                getBlogPostName(blogPost)
+              ),
+            },
+            nextBlogPost,
+            prevBlogPost,
+          },
         }
       }
     ),
     ...sortByDateInAscendingOrder(portugueseBlogPosts).map(
       (blogPost, index, blogPosts) => {
-        const nextBlogPost = blogPosts[index + 1]
-        const prevBlogPost = blogPosts[index - 1]
+        const nextBlogPost = blogPosts[index + 1] ?? null
+        const prevBlogPost = blogPosts[index - 1] ?? null
 
         return {
           params: { lang: 'pt', id: getBlogPostName(blogPost) },
-          props: { blogPost, nextBlogPost, prevBlogPost },
+          props: {
+            blogPost: {
+              ...blogPost,
+              isTranslated: englishBlogPostsNames.includes(
+                getBlogPostName(blogPost)
+              ),
+            },
+            nextBlogPost,
+            prevBlogPost,
+          },
         }
       }
     ),
@@ -47,9 +68,9 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  blogPost: CollectionEntry<'posts'>
-  nextBlogPost?: CollectionEntry<'posts'>
-  prevBlogPost?: CollectionEntry<'posts'>
+  blogPost: CollectionEntry<'posts'> & { isTranslated: boolean }
+  nextBlogPost: CollectionEntry<'posts'> | null
+  prevBlogPost: CollectionEntry<'posts'> | null
 }
 
 const { blogPost } = Astro.props

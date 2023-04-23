@@ -15,14 +15,22 @@ import { formatISO } from 'date-fns'
 import type { CollectionEntry } from 'astro:content'
 
 type Props = CollectionEntry<'posts'> & {
+  isTranslated: boolean
   headings: MarkdownHeading[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   frontmatter: Record<string, any>
-  nextBlogPost?: CollectionEntry<'posts'>
-  prevBlogPost?: CollectionEntry<'posts'>
+  nextBlogPost: CollectionEntry<'posts'> | null
+  prevBlogPost: CollectionEntry<'posts'> | null
 }
 
-const { data, frontmatter, headings, nextBlogPost, prevBlogPost } = Astro.props
+const {
+  data,
+  frontmatter,
+  headings,
+  nextBlogPost,
+  prevBlogPost,
+  isTranslated,
+} = Astro.props
 const { readingTime, summary } = frontmatter
 const { title, date, tags } = data
 
@@ -34,6 +42,7 @@ const ogImageUrl = localizeUrl(
 ---
 
 <Site
+  isTranslated={isTranslated}
   title={`${title} - Phelipe Teles`}
   description={summary}
   seo={{

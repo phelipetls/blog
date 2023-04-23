@@ -36,7 +36,7 @@ const { tags } = Astro.props
 const tagsByCount = _.countBy(tags)
 ---
 
-<Site title="Tags" description={t('TagsDescription')}>
+<Site isTranslated title="Tags" description={t('TagsDescription')}>
   <main class="grid grid-cols-layout my-8">
     <div>
       <h1 class="text-center mb-8 hidden sm:block">Tags</h1>

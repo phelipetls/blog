@@ -5,8 +5,8 @@ import type { CollectionEntry } from 'astro:content'
 
 type Props = {
   class?: string
-  prevBlogPost?: CollectionEntry<'posts'>
-  nextBlogPost?: CollectionEntry<'posts'>
+  prevBlogPost: CollectionEntry<'posts'> | null
+  nextBlogPost: CollectionEntry<'posts'> | null
 }
 
 const t = useTranslate(Astro)

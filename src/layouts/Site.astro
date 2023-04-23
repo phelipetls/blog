@@ -19,9 +19,10 @@ type Props = {
   description?: string
   htmlClass?: string
   seo?: Partial<SEOProps>
+  isTranslated: boolean
 }
 
-const { description = t('SiteDescription'), seo } = Astro.props
+const { description = t('SiteDescription'), seo, isTranslated } = Astro.props
 
 let mobileNavTitle
 if (Astro.slots.has('mobile-nav-title')) {
@@ -97,8 +98,12 @@ const title = `${Astro.props.title} | Phelipe Teles`
   >
     <ThemeScript />
 
-    <Nav title={Astro.props.title} mobileNavTitle={mobileNavTitle} />
-    <SideNav />
+    <Nav
+      title={Astro.props.title}
+      mobileNavTitle={mobileNavTitle}
+      isTranslated={isTranslated}
+    />
+    <SideNav isTranslated={isTranslated} />
 
     <slot />
 

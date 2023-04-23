@@ -12,8 +12,11 @@ export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
   const portugueseBlogPosts = await getBlogPosts('pt')
 
+  const englishTags = getBlogPostTags(englishBlogPosts)
+  const portugueseTags = getBlogPostTags(portugueseBlogPosts)
+
   return [
-    getBlogPostTags(englishBlogPosts).map((tag) => {
+    englishTags.map((tag) => {
       const blogPosts = englishBlogPosts.filter((blogPost) =>
         blogPost.data.tags?.includes(tag)
       )
@@ -23,10 +26,11 @@ export async function getStaticPaths() {
         props: {
           blogPosts,
           tag,
+          isTranslated: portugueseTags.includes(tag),
         },
       }
     }),
-    getBlogPostTags(portugueseBlogPosts).map((tag) => {
+    portugueseTags.map((tag) => {
       const blogPosts = portugueseBlogPosts.filter((blogPost) =>
         blogPost.data.tags?.includes(tag)
       )
@@ -36,6 +40,7 @@ export async function getStaticPaths() {
         props: {
           blogPosts,
           tag,
+          isTranslated: englishTags.includes(tag),
         },
       }
     }),
@@ -47,9 +52,10 @@ const t = useTranslate(Astro)
 type Props = {
   blogPosts: CollectionEntry<'posts'>[]
   tag: string
+  isTranslated: boolean
 }
 
-const { tag, blogPosts } = Astro.props
+const { tag, blogPosts, isTranslated } = Astro.props
 
 const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
@@ -63,6 +69,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 ---
 
 <Site
+  isTranslated={isTranslated}
   title={t(`BlogPostsTaggedWith`, { vars: { tag } })}
   description={t('TagDescription', {
     n: blogPosts.length,

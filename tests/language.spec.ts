@@ -38,4 +38,16 @@ test.describe('Multi-language', () => {
       await expect(page).toHaveURL(expected)
     })
   })
+
+  test("shouldn't have language switcher if page is not translated", async ({
+    page,
+  }) => {
+    await page.goto('/posts/deriving-types-from-data-typescript')
+
+    await expect(
+      page.getByRole('combobox', {
+        name: 'Choose a language',
+      })
+    ).toBeHidden()
+  })
 })

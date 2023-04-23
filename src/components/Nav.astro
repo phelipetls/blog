@@ -2,7 +2,13 @@
 import NavMobile from './NavMobile.astro'
 import NavDesktop from './NavDesktop.astro'
 
-const { title, mobileNavTitle } = Astro.props
+type Props = {
+  title: string
+  mobileNavTitle?: string
+  isTranslated: boolean
+}
+
+const { title, mobileNavTitle, isTranslated } = Astro.props
 ---
 
 <div class="w-full">
@@ -11,6 +17,6 @@ const { title, mobileNavTitle } = Astro.props
   </div>
 
   <div class="hidden h-full w-full sm:block">
-    <NavDesktop />
+    <NavDesktop isTranslated={isTranslated} />
   </div>
 </div>

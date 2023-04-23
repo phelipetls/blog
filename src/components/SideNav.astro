@@ -5,6 +5,12 @@ import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 import LanguageSelect from './LanguageSelect.astro'
 
+type Props = {
+  isTranslated: boolean
+}
+
+const { isTranslated } = Astro.props
+
 const language = getLanguageFromUrl(Astro.url.pathname)
 const mainMenuItems = getMainMenuItems(language)
 
@@ -79,7 +85,7 @@ const t = useTranslate(Astro)
       </nav>
 
       <div class="mb-4 flex h-12 flex-row items-center px-horizontal-padding">
-        <LanguageSelect />
+        {isTranslated && <LanguageSelect />}
         <ThemeSelect />
       </div>
     </div>

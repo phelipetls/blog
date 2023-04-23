@@ -4,6 +4,11 @@ import { ChevronLeft, Menu } from 'lucide-react'
 
 const parentUrl = Astro.url.pathname.replace(/[^/]+\/?$/, '')
 
+type Props = {
+  title: string
+  mobileNavTitle?: string
+}
+
 const { title, mobileNavTitle } = Astro.props
 
 const t = useTranslate(Astro)

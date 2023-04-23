@@ -99,7 +99,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
         // Here, we try to get only the children of the `code` tag.
         const hastTree = fromHtml(syntaxHighlightedCode, { fragment: true })
 
-        visit(hastTree, 'element', (_node, ___, _parent) => {
+        visit(hastTree, 'element', (_node, _, _parent) => {
           if (_node.tagName === 'code') {
             node.children = _node.children
           }
@@ -148,6 +148,6 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
   }
 }
 
-export const isString = (value: unknown): value is string => {
+function isString(value: unknown): value is string {
   return typeof value === 'string'
 }

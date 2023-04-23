@@ -69,7 +69,8 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
       let playgroundURL = null
 
       if (meta.twoslash) {
-        const twoslashResults = runTwoSlash(plainCode, lang)
+        const codeWithoutTrailingNewLine = plainCode.replace(/\n+$/, '')
+        const twoslashResults = runTwoSlash(codeWithoutTrailingNewLine, lang)
 
         codeToCopy = twoslashResults.code
         playgroundURL = twoslashResults.playgroundURL

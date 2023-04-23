@@ -64,13 +64,16 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
       }
 
       const plainCode = hastToString(node)
+      const plainCodeWithoutTrailingNewLine = plainCode.replace(/\n+$/, '')
 
       let codeToCopy = plainCode
       let playgroundURL = null
 
       if (meta.twoslash) {
-        const codeWithoutTrailingNewLine = plainCode.replace(/\n+$/, '')
-        const twoslashResults = runTwoSlash(codeWithoutTrailingNewLine, lang)
+        const twoslashResults = runTwoSlash(
+          plainCodeWithoutTrailingNewLine,
+          lang
+        )
 
         codeToCopy = twoslashResults.code
         playgroundURL = twoslashResults.playgroundURL
@@ -105,7 +108,10 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
           }
         })
       } else {
-        const lines = highlighter.codeToThemedTokens(plainCode, lang)
+        const lines = highlighter.codeToThemedTokens(
+          plainCodeWithoutTrailingNewLine,
+          lang
+        )
 
         const highlightedLines =
           'highlight' in meta

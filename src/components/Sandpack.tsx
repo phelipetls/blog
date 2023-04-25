@@ -110,7 +110,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           <SandpackCodeEditor showTabs={false} />
 
           <CopyCodeBlockButton
-            // FIXME: internationalize this
+            // TODO: internationalize this
             successTooltipText={'Copied'}
             errorTooltipText={'Error'}
             code={files[activeFile].code}
@@ -162,6 +162,7 @@ function CustomSandpack(props: CustomSandpackProps) {
               startIcon={<Codesandbox />}
               className="shadow-sm shadow-shadow"
             >
+              {/* TODO: Internationalize this */}
               Open on CodeSandbox
             </Button>
 
@@ -172,6 +173,7 @@ function CustomSandpack(props: CustomSandpackProps) {
               className="shadow-sm shadow-shadow"
               startIcon={<RefreshCw />}
             >
+              {/* TODO: Internationalize this */}
               Reload
             </Button>
           </div>

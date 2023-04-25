@@ -3,7 +3,12 @@ import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import Button, { ButtonProps } from './Button'
 
-export type IconButtonProps = ButtonProps & {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type DistributiveOmit<T, K extends keyof any> = T extends any
+  ? Omit<T, K>
+  : never
+
+export type IconButtonProps = DistributiveOmit<ButtonProps, 'color'> & {
   variant?: 'rounded' | 'rounded-full'
 }
 
@@ -13,6 +18,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
 
     return (
       <Button
+        color="secondary"
         ref={ref}
         type="button"
         className={twMerge(

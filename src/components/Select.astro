@@ -1,11 +1,13 @@
 ---
 import { twMerge } from 'tailwind-merge'
+import { ChevronDown } from 'lucide-react'
 
 const hasStartIcon = Astro.slots.has('start-icon')
-const hasEndIcon = Astro.slots.has('end-icon')
 ---
 
-<div class="relative flex h-full flex-row items-center">
+<div
+  class="relative py-1 bg-surface card flex justify-between flex-row items-center"
+>
   {
     hasStartIcon && (
       <span class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm">
@@ -16,21 +18,18 @@ const hasEndIcon = Astro.slots.has('end-icon')
 
   <select
     class:list={twMerge([
-      'card h-full appearance-none bg-surface py-1 text-center',
-      hasStartIcon && 'pl-8 pr-2',
-      hasEndIcon && 'pr-8',
-      hasStartIcon && hasEndIcon && 'px-10',
+      'h-full w-full bg-surface appearance-none text-center',
+      'pr-8',
+      hasStartIcon && 'px-10',
     ])}
     {...Astro.props}
   >
     <slot />
   </select>
 
-  {
-    hasEndIcon && (
-      <span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm">
-        <slot name="end-icon" />
-      </span>
-    )
-  }
+  <span
+    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
+  >
+    <ChevronDown slot="end-icon" />
+  </span>
 </div>

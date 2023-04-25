@@ -6,6 +6,7 @@ type CommonButtonProps = {
   color?: 'primary' | 'secondary'
   disabled?: boolean
   children: React.ReactNode
+  startIcon?: React.ReactNode
 }
 
 type ButtonLinkProps = Omit<
@@ -28,7 +29,7 @@ export type ButtonProps = CommonButtonProps &
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
     const className = useMemo(() => {
-      const { color, className } = props
+      const { color = 'primary', className } = props
 
       const merged = twMerge(
         clsx(
@@ -36,6 +37,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           'items-center',
           'justify-center',
           'flex-row',
+          '[&_*:first-child]:shrink-0',
           'gap-2',
           'transition-colors',
           'duration-300',
@@ -65,26 +67,37 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
             disabled={props.disabled}
             className={className}
           >
+            {props.startIcon}
             {props.children}
           </button>
         )
       }
 
+      const { startIcon, children, ...rest } = props
+
       return (
         <a
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-          {...props}
           className={className}
-        />
+          {...rest}
+        >
+          {startIcon}
+          {children}
+        </a>
       )
     }
+
+    const { startIcon, children, ...rest } = props
 
     return (
       <button
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
-        {...props}
+        {...rest}
         className={className}
-      />
+      >
+        {startIcon}
+        {children}
+      </button>
     )
   }
 )

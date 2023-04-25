@@ -23,10 +23,10 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
         type="button"
         className={twMerge(
           clsx(
-            'bg-background text-on-background',
+            'bg-background p-2 text-on-background',
             {
-              'rounded-full p-2': variant === 'rounded-full',
-              'rounded border border-divider p-1 shadow-sm shadow-shadow':
+              'rounded-full': variant === 'rounded-full',
+              'rounded border border-divider shadow-sm shadow-shadow':
                 variant === 'rounded',
             },
             className

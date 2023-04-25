@@ -1,6 +1,7 @@
 ---
 import { useTranslate } from '@utils/i18n/useTranslate'
 import { ChevronLeft, Menu } from 'lucide-react'
+import IconButton from '@components/IconButton'
 
 const parentUrl = Astro.url.pathname.replace(/[^/]+\/?$/, '')
 
@@ -43,12 +44,12 @@ const t = useTranslate(Astro)
     }
   </div>
 
-  <button
+  <IconButton
+    variant='rounded-full'
     data-a11y-dialog-show="sidenav"
-    class="btn btn-icon"
     data-testid="open-sidenav"
     aria-label={t('OpenSidenav')}
   >
     <Menu />
-  </button>
+  </IconButton>
 </div>

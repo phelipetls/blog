@@ -90,7 +90,7 @@ function CustomSandpack(props: CustomSandpackProps) {
               className={clsx(
                 '[&[aria-selected=true]]:bg-[var(--sandpack-surface1)]',
                 '[&[aria-selected=true]]:text-[var(--sandpack-accent)]',
-                '[&[aria-selected=true]]:shadow',
+                '[&[aria-selected=true]]:shadow-sm',
                 '[&[aria-selected=true]]:shadow-shadow',
                 'hover:bg-[var(--sandpack-surface3)]',
                 'hover:text-[var(--sandpack-base)]',
@@ -105,7 +105,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         })}
       </Tabs>
 
-      <div className="full-width-on-mobile shadow shadow-shadow sm:rounded-b">
+      <div className="full-width-on-mobile shadow-sm shadow-shadow sm:rounded-b">
         <div className="dark group relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
           <SandpackCodeEditor showTabs={false} />
 

@@ -31,63 +31,63 @@ const t = useTranslate(Astro)
 
   <div
     role="document"
-    class="ml-auto h-full w-3/4 rounded-none bg-background py-0 will-change-transform"
+    class="ml-auto h-full flex flex-col w-3/4 rounded-none bg-background py-0 will-change-transform"
   >
-    <div class="flex h-full flex-col justify-between">
-      <div
-        class="mb-2 flex h-nav-height items-center justify-end px-horizontal-padding"
+    <div
+      class="mb-2 flex h-nav-height items-center justify-end px-horizontal-padding"
+    >
+      <button data-a11y-dialog-hide class="btn btn-icon" aria-label="Close">
+        <X />
+      </button>
+    </div>
+
+    <nav class="flex flex-col" aria-label={t('MainNavigation')}>
+      <ul
+        class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
       >
-        <button data-a11y-dialog-hide class="btn btn-icon" aria-label="Close">
-          <X />
-        </button>
-      </div>
-
-      <nav class="flex flex-1 flex-col" aria-label={t('MainNavigation')}>
-        <ul
-          class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
-        >
-          {
-            mainMenuItems.map((item) => {
-              const isActive = isActiveMenuItem({
-                currentPathname: Astro.url.pathname,
-                menuItemPathname: item.pathname,
-                rootPathname: localizeUrl('/', language),
-              })
-
-              return (
-                <li class="w-full">
-                  <a
-                    id={item.identifier}
-                    href={item.pathname}
-                    class:list={[
-                      isActive
-                        ? 'card bg-primary text-on-primary hover:bg-primary-hover'
-                        : 'hover:bg-hover',
-                      'block',
-                      'w-full',
-                      'rounded',
-                      'border-0',
-                      'p-2',
-                      'text-center',
-                      'text-xl',
-                      'transition-colors',
-                      'duration-300',
-                    ]}
-                    {...(isActive && { 'aria-current': 'page' })}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              )
+        {
+          mainMenuItems.map((item) => {
+            const isActive = isActiveMenuItem({
+              currentPathname: Astro.url.pathname,
+              menuItemPathname: item.pathname,
+              rootPathname: localizeUrl('/', language),
             })
-          }
-        </ul>
-      </nav>
 
-      <div class="mb-4 flex h-12 flex-row items-center px-horizontal-padding">
-        {isTranslated && <LanguageSelect />}
-        <ThemeSelect />
-      </div>
+            return (
+              <li class="w-full">
+                <a
+                  id={item.identifier}
+                  href={item.pathname}
+                  class:list={[
+                    isActive
+                      ? 'card bg-primary text-on-primary hover:bg-primary-hover'
+                      : 'hover:bg-hover',
+                    'block',
+                    'w-full',
+                    'rounded',
+                    'border-0',
+                    'p-2',
+                    'text-center',
+                    'text-xl',
+                    'transition-colors',
+                    'duration-300',
+                  ]}
+                  {...(isActive && { 'aria-current': 'page' })}
+                >
+                  {item.name}
+                </a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </nav>
+
+    <div
+      class="flex h-28 flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1"
+    >
+      {isTranslated && <LanguageSelect />}
+      <ThemeSelect />
     </div>
   </div>
 </aside>

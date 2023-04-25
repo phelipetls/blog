@@ -11,10 +11,10 @@ import {
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'
 import Tabs from './Tabs'
-import IconButton from './IconButton'
 import { Codesandbox, RefreshCw } from 'lucide-react'
 import clsx from 'clsx'
 import CopyCodeBlockButton from './CopyCodeBlockButton'
+import Button from './Button'
 
 type SandpackProps = SandpackProviderProps & {
   title: string
@@ -154,22 +154,26 @@ function CustomSandpack(props: CustomSandpackProps) {
             title={title}
           />
 
-          <div className="absolute right-horizontal-padding top-3 flex space-x-2">
-            <IconButton
-              variant="rounded"
+          <div className="absolute bottom-3 right-horizontal-padding flex items-center gap-2">
+            <Button
+              color="secondary"
               onClick={createAndNavigateToCodesandbox}
               aria-label="Open on Codesandbox"
+              startIcon={<Codesandbox />}
+              className="shadow-sm shadow-shadow"
             >
-              <Codesandbox />
-            </IconButton>
+              Open on CodeSandbox
+            </Button>
 
-            <IconButton
-              variant="rounded"
+            <Button
+              color="secondary"
               onClick={refresh}
               aria-label="Refresh"
+              className="shadow-sm shadow-shadow"
+              startIcon={<RefreshCw />}
             >
-              <RefreshCw />
-            </IconButton>
+              Reload
+            </Button>
           </div>
         </div>
       </div>

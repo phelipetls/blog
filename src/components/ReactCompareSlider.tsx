@@ -17,7 +17,10 @@ export function ReactCompareSlider(props: ReactCompareSliderProps) {
           <div className="relative h-10 w-10 rounded-full border-2 border-divider">
             <div className="pointer-events-none absolute inset-0 h-full w-full rounded-full backdrop-blur-sm" />
 
-            <IconButton className="dark h-full w-full cursor-move rounded-full border-0 backdrop-blur-none">
+            <IconButton
+              variant="rounded-full"
+              className="dark h-full w-full cursor-move rounded-full border-0 backdrop-blur-none"
+            >
               {/* FIXME: use MoveVertical icon if portrait prop is false */}
               <MoveHorizontal className="dark" />
             </IconButton>

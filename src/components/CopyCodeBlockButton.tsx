@@ -11,7 +11,7 @@ type DistributiveOmit<T, K extends string> = T extends unknown
 
 export type CopyCodeBlockButtonProps = DistributiveOmit<
   IconButtonProps,
-  'children'
+  'children' | 'variant'
 > & {
   code: string
   successTooltipText: string
@@ -91,6 +91,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
 
   return (
     <IconButton
+      variant="rounded"
       ref={buttonRef}
       className={clsx([
         shouldShowTooltip ? (isError ? 'border-warn' : 'border-green-500') : '',

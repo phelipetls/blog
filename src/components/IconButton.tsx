@@ -9,12 +9,12 @@ type DistributiveOmit<T, K extends keyof any> = T extends any
   : never
 
 export type IconButtonProps = DistributiveOmit<ButtonProps, 'color'> & {
-  variant?: 'rounded' | 'rounded-full'
+  variant: 'rounded' | 'rounded-full'
 }
 
 export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
   (props, ref) => {
-    const { className, variant = 'rounded', ...rest } = props
+    const { className, variant, ...rest } = props
 
     return (
       <Button

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   SandpackProvider,
   SandpackProviderProps,
@@ -7,21 +8,40 @@ import {
   useSandpack,
   useSandpackNavigation,
   useSandpackTheme,
+  SandpackPreviewRef,
+  useSandpackConsole,
 } from '@codesandbox/sandpack-react'
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'
 import Tabs from './Tabs'
-import { Codesandbox, RefreshCw } from 'lucide-react'
+import {
+  ChevronDown,
+  ChevronRight,
+  Codesandbox,
+  RefreshCw,
+  Trash,
+} from 'lucide-react'
 import clsx from 'clsx'
 import CopyCodeBlockButton from './CopyCodeBlockButton'
 import Button from './Button'
+import type { SandpackClient } from '@codesandbox/sandpack-client'
+import IconButton from './IconButton'
 
 type SandpackProps = SandpackProviderProps & {
   title: string
+  initialURL?: string
+  shouldShowNavigator?: boolean
+  shouldShowConsole?: boolean
 }
 
 export default function Sandpack(props: SandpackProps) {
-  const { title, ...rest } = props
+  const {
+    title,
+    initialURL,
+    shouldShowNavigator = false,
+    shouldShowConsole = false,
+    ...rest
+  } = props
 
   return (
     <SandpackProvider {...rest}>
@@ -36,27 +56,60 @@ export default function Sandpack(props: SandpackProps) {
           },
         }}
       >
-        <CustomSandpack title={title} />
+        <CustomSandpack
+          title={title}
+          initialURL={initialURL}
+          shouldShowNavigator={shouldShowNavigator}
+          shouldShowConsole={shouldShowConsole}
+        />
       </SandpackThemeProvider>
     </SandpackProvider>
   )
 }
 
-type CustomSandpackProps = {
-  title: string
-}
+type CustomSandpackProps = SandpackProps
 
 function CustomSandpack(props: CustomSandpackProps) {
-  const { sandpack } = useSandpack()
-  const { files, activeFile, visibleFiles, setActiveFile, clients } = sandpack
+  const { title, initialURL, shouldShowNavigator, shouldShowConsole } = props
 
-  const { title } = props
+  const { sandpack } = useSandpack()
+  const { files, activeFile, visibleFiles, setActiveFile } = sandpack
+
+  const sandpackPreviewRef = React.useRef<SandpackPreviewRef>(null)
+  const [client, setClient] = React.useState<SandpackClient | null>(null)
+  const [clientId, setClientId] = React.useState<string | null>(null)
+
+  const [logsVisible, setLogsVisible] = React.useState(false)
+  const { logs, reset } = useSandpackConsole({
+    clientId: clientId ?? '',
+    resetOnPreviewRestart: true,
+    showSyntaxError: true,
+  })
+
+  const logsCount = logs.filter((log) =>
+    log.data?.some((line) => line !== '')
+  ).length
+  const emptyLogs = logsCount === 0
+
+  React.useEffect(() => {
+    const client = sandpackPreviewRef.current?.getClient()
+    const clientId = sandpackPreviewRef.current?.clientId
+
+    setClient(client ?? null)
+    setClientId(clientId ?? null)
+    /**
+     * NOTE: In order to make sure that the client will be available
+     * use the whole `sandpack` object as a dependency.
+     */
+  }, [sandpack])
 
   const { theme } = useSandpackTheme()
   const { refresh } = useSandpackNavigation()
 
   const createAndNavigateToCodesandbox = async () => {
-    const client = Object.values(clients)[0]
+    if (!client) {
+      return
+    }
 
     const codesandboxUrl = await client
       // @ts-expect-error TODO: types from the codesandbox library might be broken
@@ -67,20 +120,22 @@ function CustomSandpack(props: CustomSandpackProps) {
   }
 
   return (
-    <div className="my-8">
+    <div
+      className="my-8"
+      style={
+        {
+          '--sandpack-surface1': theme.colors.surface1,
+          '--sandpack-surface3': theme.colors.surface3,
+          '--sandpack-accent': theme.colors.accent,
+          '--sandpack-base': theme.colors.base,
+        } as React.CSSProperties
+      }
+    >
       <Tabs
         value={activeFile}
         onChange={(newActiveFile) => {
           setActiveFile(newActiveFile)
         }}
-        style={
-          {
-            '--sandpack-surface1': theme.colors.surface1,
-            '--sandpack-surface3': theme.colors.surface3,
-            '--sandpack-accent': theme.colors.accent,
-            '--sandpack-base': theme.colors.base,
-          } as React.CSSProperties
-        }
       >
         {visibleFiles.map((file) => {
           const filename = file.replace(/^\//, '')
@@ -105,7 +160,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         })}
       </Tabs>
 
-      <div className="full-width-on-mobile shadow-sm shadow-shadow sm:rounded-b">
+      <div className="full-width-on-mobile relative shadow-sm shadow-shadow sm:rounded-b">
         <div className="dark group relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
           <SandpackCodeEditor showTabs={false} />
 
@@ -136,7 +191,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         <div
           className={clsx(
             'relative',
-            '[&_.sp-preview-container]:sm:rounded-b',
+            !shouldShowConsole && '[&_.sp-preview-container]:sm:rounded-b',
             '[&_.sp-preview-container]:px-horizontal-padding',
             '[&_.sp-preview-container]:pt-3',
             '[&_.sp-stack]:bg-transparent'
@@ -149,6 +204,9 @@ function CustomSandpack(props: CustomSandpackProps) {
           </noscript>
 
           <SandpackPreview
+            ref={sandpackPreviewRef}
+            startRoute={initialURL}
+            showNavigator={shouldShowNavigator}
             showRefreshButton={false}
             showOpenInCodeSandbox={false}
             title={title}
@@ -165,16 +223,86 @@ function CustomSandpack(props: CustomSandpackProps) {
               <Codesandbox /> Open on CodeSandbox
             </Button>
 
-            <Button
-              color="secondary"
+            <IconButton
+              variant="rounded"
               onClick={refresh}
               aria-label="Refresh"
               className="shadow-sm shadow-shadow"
             >
               <RefreshCw />
-            </Button>
+            </IconButton>
           </div>
         </div>
+
+        {shouldShowConsole && (
+          <>
+            <hr />
+
+            <details
+              className="relative"
+              onToggle={(e) => {
+                e.preventDefault()
+                setLogsVisible(!logsVisible)
+              }}
+            >
+              <summary
+                className={clsx(
+                  `flex w-full list-none flex-row justify-start gap-2 rounded-b rounded-t-none bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] shadow-sm shadow-shadow [&::marker]:hidden [&::webkit-details-marker]:hidden`,
+                  logsVisible && 'rounded-b-none'
+                )}
+              >
+                {logsVisible ? <ChevronDown /> : <ChevronRight />} Show console
+                ({logsCount})
+              </summary>
+
+              <div
+                className={clsx(
+                  `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-base)]`
+                )}
+              >
+                {emptyLogs ? (
+                  <>No logs yet</>
+                ) : (
+                  logs
+                    .filter((log) => log.data?.some((line) => line !== ''))
+                    .map((log) => {
+                      return (
+                        <div
+                          key={log.id}
+                          className={clsx(
+                            'border-l-2 px-horizontal-padding py-2 font-mono',
+                            log.method === 'error'
+                              ? 'border-warn'
+                              : 'border-note'
+                          )}
+                        >
+                          {log.method === 'error' ? 'ERROR: ' : 'INFO: '}{' '}
+                          {log.data
+                            ?.map((d) =>
+                              typeof d === 'object'
+                                ? JSON.stringify(d, null, 2)
+                                : d
+                            )
+                            .join('')}
+                        </div>
+                      )
+                    })
+                )}
+              </div>
+
+              <div className="absolute right-horizontal-padding top-2 flex flex-row gap-2">
+                <Button
+                  color="secondary"
+                  onClick={reset}
+                  aria-label="Reset"
+                  className="shadow-sm shadow-shadow"
+                >
+                  <Trash /> Clear logs
+                </Button>
+              </div>
+            </details>
+          </>
+        )}
       </div>
     </div>
   )

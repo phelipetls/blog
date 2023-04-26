@@ -5,6 +5,7 @@ import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 import LanguageSelect from './LanguageSelect.astro'
 import IconButton from '@components/IconButton'
+import Button from './Button'
 
 type Props = {
   isTranslated: boolean
@@ -48,7 +49,7 @@ const t = useTranslate(Astro)
 
     <nav class="flex flex-col" aria-label={t('MainNavigation')}>
       <ul
-        class="m-0 flex list-none flex-col items-center justify-center gap-4 px-horizontal-padding"
+        class="m-0 flex list-none flex-col items-center justify-center gap-2 px-horizontal-padding"
       >
         {
           mainMenuItems.map((item) => {
@@ -60,27 +61,14 @@ const t = useTranslate(Astro)
 
             return (
               <li class="w-full">
-                <a
+                <Button
                   id={item.identifier}
                   href={item.pathname}
-                  class:list={[
-                    isActive
-                      ? 'card bg-primary text-on-primary hover:bg-primary-hover'
-                      : 'hover:bg-hover',
-                    'block',
-                    'w-full',
-                    'rounded',
-                    'border-0',
-                    'p-2',
-                    'text-center',
-                    'text-xl',
-                    'transition-colors',
-                    'duration-300',
-                  ]}
+                  color={isActive ? 'primary' : 'secondary'}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
                   {item.name}
-                </a>
+                </Button>
               </li>
             )
           })
@@ -89,7 +77,7 @@ const t = useTranslate(Astro)
     </nav>
 
     <div
-      class="flex h-28 flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1"
+      class="flex flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1"
     >
       {isTranslated && <LanguageSelect />}
       <ThemeSelect />

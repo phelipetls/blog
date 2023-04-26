@@ -3,6 +3,7 @@ import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
 import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
 import ThemeSelect from './ThemeSelect.astro'
 import LanguageSelect from './LanguageSelect.astro'
+import Button from './Button'
 
 type Props = {
   isTranslated: boolean
@@ -35,19 +36,14 @@ const mainMenuItems = getMainMenuItems(language)
 
             return (
               <li>
-                <a
+                <Button
                   id={item.identifier}
                   href={item.pathname}
-                  class:list={[
-                    isActive
-                      ? 'bg-primary text-on-primary card hover:bg-primary-hover'
-                      : 'hover:bg-hover',
-                    'relative flex items-center justify-center rounded border-0 py-1 px-2 transition-colors duration-300',
-                  ]}
+                  color={isActive ? 'primary' : 'secondary'}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
                   {t(item.name)}
-                </a>
+                </Button>
               </li>
             )
           })

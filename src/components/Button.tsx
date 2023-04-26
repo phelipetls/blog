@@ -46,11 +46,11 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           'disabled:text-on-disabled',
           'disabled:hover:cursor-not-allowed',
           'disabled:hover:bg-disabled',
-          'rounded-full px-4 py-2',
+          'rounded py-1 px-2',
           {
-            ['bg-primary text-on-primary hover:bg-primary-hover']:
+            ['bg-primary text-on-primary hover:bg-primary-hover shadow-sm shadow-shadow']:
               color === 'primary',
-            ['bg-surface text-on-background']: color === 'secondary',
+            ['text-on-background']: color === 'secondary',
           },
           className
         )

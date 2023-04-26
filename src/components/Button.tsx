@@ -49,7 +49,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           {
             ['bg-primary text-on-primary hover:bg-primary-hover shadow-sm shadow-shadow']:
               color === 'primary',
-            ['text-on-background']: color === 'secondary',
+            ['bg-background text-on-background']: color === 'secondary',
           },
           className
         )

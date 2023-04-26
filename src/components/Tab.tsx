@@ -29,6 +29,8 @@ export default function Tab(props: TabProps) {
       aria-selected={selected ? 'true' : 'false'}
       className={twMerge(
         clsx(
+          'bg-background',
+          'text-on-background',
           'rounded-t',
           'p-2',
           'transition-colors',

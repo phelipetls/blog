@@ -78,8 +78,8 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
       return (
         <a
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-          className={className}
           {...rest}
+          className={className}
         >
           {startIcon}
           {children}

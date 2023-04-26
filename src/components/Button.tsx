@@ -7,6 +7,7 @@ type CommonButtonProps = {
   disabled?: boolean
   children: React.ReactNode
   startIcon?: React.ReactNode
+  size?: 'normal' | 'huge'
 }
 
 type ButtonLinkProps = Omit<
@@ -29,7 +30,7 @@ export type ButtonProps = CommonButtonProps &
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
     const mergedClassName = useMemo(() => {
-      const { color = 'primary', className } = props
+      const { color = 'primary', size = 'normal', className } = props
 
       const merged = twMerge(
         clsx(
@@ -46,7 +47,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           'disabled:text-on-disabled',
           'disabled:hover:cursor-not-allowed',
           'disabled:hover:bg-disabled',
-          'rounded py-1 px-2',
+          size === 'normal' ? 'rounded py-1 px-2' : 'px-4 py-2 rounded-full',
           {
             ['bg-primary text-on-primary hover:bg-primary-hover shadow-sm shadow-shadow']:
               color === 'primary',
@@ -73,7 +74,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
         )
       }
 
-      const { startIcon, children, ...rest } = props
+      const { startIcon, children, size: _, color: __, ...rest } = props
 
       return (
         <a
@@ -87,7 +88,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
       )
     }
 
-    const { startIcon, children, ...rest } = props
+    const { startIcon, children, size: _, color: __, ...rest } = props
 
     return (
       <button

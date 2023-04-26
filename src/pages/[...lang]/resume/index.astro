@@ -50,9 +50,16 @@ const resumeUrl =
         <canvas class="hidden" data-resume-canvas></canvas>
 
         <div
+          data-resume-download-button
           class="hidden mx-auto absolute bottom-4 right-0 left-0 justify-center sm:hidden"
         >
-          <Button className="" color="primary" href={resumeUrl} download>
+          <Button
+            className=""
+            color="primary"
+            href={resumeUrl}
+            download
+            size="huge"
+          >
             <Download /> Download
           </Button>
         </div>
@@ -140,6 +147,12 @@ const resumeUrl =
     }
 
     function loadedSuccessfully() {
+      document
+        .querySelector('[data-resume-download-button]')
+        ?.classList.remove('hidden')
+      document
+        .querySelector('[data-resume-download-button]')
+        ?.classList.add('flex')
       getResumeCanvas()?.classList.remove('hidden')
     }
 

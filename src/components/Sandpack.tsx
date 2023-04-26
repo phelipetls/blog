@@ -171,8 +171,7 @@ function CustomSandpack(props: CustomSandpackProps) {
               aria-label="Refresh"
               className="shadow-sm shadow-shadow"
             >
-              {/* TODO: Internationalize this */}
-              <RefreshCw /> Reload
+              <RefreshCw />
             </Button>
           </div>
         </div>

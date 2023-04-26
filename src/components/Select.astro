@@ -6,7 +6,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
 ---
 
 <div
-  class="relative py-1 bg-surface card flex justify-between flex-row items-center"
+  class="relative bg-surface card flex justify-between flex-row items-center"
 >
   {
     hasStartIcon && (
@@ -18,9 +18,8 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
   <select
     class:list={twMerge([
-      'h-full w-full bg-surface appearance-none text-center',
-      'pr-8',
-      hasStartIcon && 'px-10',
+      'py-1 h-full w-full rounded bg-surface appearance-none text-center pr-9',
+      hasStartIcon && 'pl-9',
     ])}
     {...Astro.props}
   >

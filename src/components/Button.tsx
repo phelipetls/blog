@@ -28,7 +28,7 @@ export type ButtonProps = CommonButtonProps &
 
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
-    const className = useMemo(() => {
+    const mergedClassName = useMemo(() => {
       const { color = 'primary', className } = props
 
       const merged = twMerge(
@@ -65,7 +65,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           <button
             ref={ref as React.ForwardedRef<HTMLButtonElement>}
             disabled={props.disabled}
-            className={className}
+            className={mergedClassName}
           >
             {props.startIcon}
             {props.children}
@@ -79,7 +79,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
         <a
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
           {...rest}
-          className={className}
+          className={mergedClassName}
         >
           {startIcon}
           {children}
@@ -93,7 +93,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
       <button
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
         {...rest}
-        className={className}
+        className={mergedClassName}
       >
         {startIcon}
         {children}

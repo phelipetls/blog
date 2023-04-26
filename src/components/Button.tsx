@@ -6,8 +6,6 @@ type CommonButtonProps = {
   color?: 'primary' | 'secondary'
   disabled?: boolean
   children: React.ReactNode
-  startIcon?: React.ReactNode
-  endIcon?: React.ReactNode
   size?: 'normal' | 'huge'
 }
 
@@ -31,13 +29,7 @@ export type ButtonProps = CommonButtonProps &
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
     const mergedClassName = useMemo(() => {
-      const {
-        color = 'primary',
-        size = 'normal',
-        startIcon,
-        endIcon,
-        className,
-      } = props
+      const { color = 'primary', size = 'normal', className } = props
 
       const merged = twMerge(
         clsx(
@@ -45,7 +37,6 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           'items-center',
           'justify-center',
           'flex-row',
-          '[&_*:first-child]:shrink-0',
           'gap-2',
           'transition-colors',
           'duration-300',
@@ -55,8 +46,6 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           'disabled:hover:cursor-not-allowed',
           'disabled:hover:bg-disabled',
           size === 'normal' ? 'rounded py-1 px-2' : 'px-4 py-2 rounded-full',
-          startIcon && 'pl-0',
-          endIcon && 'pr-0',
           {
             ['bg-primary text-on-primary hover:bg-primary-hover shadow-sm shadow-shadow']:
               color === 'primary',
@@ -77,21 +66,12 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
             disabled={props.disabled}
             className={mergedClassName}
           >
-            {props.startIcon}
             {props.children}
-            {props.endIcon}
           </button>
         )
       }
 
-      const {
-        startIcon,
-        endIcon,
-        children,
-        size: _,
-        color: __,
-        ...rest
-      } = props
+      const { children, size: _, color: __, ...rest } = props
 
       return (
         <a
@@ -99,14 +79,12 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           {...rest}
           className={mergedClassName}
         >
-          {startIcon}
           {children}
-          {endIcon}
         </a>
       )
     }
 
-    const { startIcon, endIcon, children, size: _, color: __, ...rest } = props
+    const { children, size: _, color: __, ...rest } = props
 
     return (
       <button
@@ -114,9 +92,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
         {...rest}
         className={mergedClassName}
       >
-        {startIcon}
         {children}
-        {endIcon}
       </button>
     )
   }

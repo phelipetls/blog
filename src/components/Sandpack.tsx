@@ -159,11 +159,10 @@ function CustomSandpack(props: CustomSandpackProps) {
               color="secondary"
               onClick={createAndNavigateToCodesandbox}
               aria-label="Open on Codesandbox"
-              startIcon={<Codesandbox />}
               className="shadow-sm shadow-shadow"
             >
               {/* TODO: Internationalize this */}
-              Open on CodeSandbox
+              <Codesandbox /> Open on CodeSandbox
             </Button>
 
             <Button
@@ -171,10 +170,9 @@ function CustomSandpack(props: CustomSandpackProps) {
               onClick={refresh}
               aria-label="Refresh"
               className="shadow-sm shadow-shadow"
-              startIcon={<RefreshCw />}
             >
               {/* TODO: Internationalize this */}
-              Reload
+              <RefreshCw /> Reload
             </Button>
           </div>
         </div>

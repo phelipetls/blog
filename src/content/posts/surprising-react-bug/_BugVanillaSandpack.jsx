@@ -7,7 +7,7 @@ export default function () {
       template="vanilla"
       title="The same bug observed when using details element can be reproduced with vanilla JavaScript"
       files={{
-        '/src/index.js': outdent`
+        'index.js': outdent`
            document.getElementById('app').innerHTML = \`
            <span>State: closed</span>
 

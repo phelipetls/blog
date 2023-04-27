@@ -1,0 +1,43 @@
+---
+title: Parsing URL search params with Zod
+date: 2023-04-27
+tags: [typescript, javascript, zod]
+---
+
+import UrlSearchParamZodExample from './_UrlSearchParamZodExample'
+
+[`zod`](https://zod.dev/) is a library to validate if an arbitrary
+user-generated data conforms with a specific type *at runtime*. In this post, I
+want to talk about using it to validate URL search params.
+
+Say we want to put our application state in the URL. This is certainly nice but
+it requires us to deal with using the search param in a type-safe way -- since
+the user can type there pretty much anything, you need to make sure the search
+param value can be parsed as a number.
+
+This pattern revolves around using [`.catch`](https://zod.dev/?id=catch) to
+provide a "catch-all" value in case of a parsing error, which is exactly what
+we want: to provide a default a safe-to-use value in case we can't work with
+the user's input.
+
+Let's build an example in which we need to parse the `pageNumber` search param.
+We expect it to be a number, but in case it isn't, we'll fall back to `0`. We
+can do this with the schema `z.number().catch(0)`.
+
+Here's a live example -- try to break the app by passing values that cannot be
+parsed as numbers:
+
+<UrlSearchParamZodExample client:visible />
+
+We don't need to use a number as the fallback value -- it's fine to use `null`,
+`undefined`, or any other really, we'd just need to update the schema
+accordingly:
+
+```typescript
+z.number().nullable().catch(null)
+z.number().optional().catch(undefined)
+```
+
+The nice thing about Zod is that it prevents us from using type-casting and
+other TypeScript patterns I'd prefer to avoid -- I don't feel like struggling
+with the type system and the code is more elegant.

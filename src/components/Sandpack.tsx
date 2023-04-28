@@ -79,6 +79,18 @@ function CustomSandpack(props: CustomSandpackProps) {
   const [client, setClient] = React.useState<SandpackClient | null>(null)
   const [clientId, setClientId] = React.useState<string | null>(null)
 
+  React.useEffect(() => {
+    const client = sandpackPreviewRef.current?.getClient()
+    const clientId = sandpackPreviewRef.current?.clientId
+
+    setClient(client ?? null)
+    setClientId(clientId ?? null)
+    /**
+     * NOTE: In order to make sure that the client will be available
+     * use the whole `sandpack` object as a dependency.
+     */
+  }, [sandpack])
+
   const [logsVisible, setLogsVisible] = React.useState(false)
   const { logs, reset } = useSandpackConsole({
     clientId: clientId ?? '',
@@ -91,17 +103,7 @@ function CustomSandpack(props: CustomSandpackProps) {
   ).length
   const emptyLogs = logsCount === 0
 
-  React.useEffect(() => {
-    const client = sandpackPreviewRef.current?.getClient()
-    const clientId = sandpackPreviewRef.current?.clientId
-
-    setClient(client ?? null)
-    setClientId(clientId ?? null)
-    /**
-     * NOTE: In order to make sure that the client will be available
-     * use the whole `sandpack` object as a dependency.
-     */
-  }, [sandpack])
+  const logsContainerRef = React.useRef<HTMLDivElement>(null)
 
   const { theme } = useSandpackTheme()
   const { refresh } = useSandpackNavigation()
@@ -256,37 +258,42 @@ function CustomSandpack(props: CustomSandpackProps) {
               </summary>
 
               <div
+                ref={logsContainerRef}
                 className={clsx(
-                  `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-base)]`
+                  `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] py-2 text-[var(--sandpack-base)]`
                 )}
               >
                 {emptyLogs ? (
-                  <>No logs yet</>
+                  <div className="px-horizontal-padding">No logs yet</div>
                 ) : (
-                  logs
-                    .filter((log) => log.data?.some((line) => line !== ''))
-                    .map((log) => {
-                      return (
-                        <div
-                          key={log.id}
-                          className={clsx(
-                            'border-l-2 px-horizontal-padding py-2 font-mono',
-                            log.method === 'error'
-                              ? 'border-warn'
-                              : 'border-note'
-                          )}
-                        >
-                          {log.method === 'error' ? 'ERROR: ' : 'INFO: '}{' '}
-                          {log.data
-                            ?.map((d) =>
-                              typeof d === 'object'
-                                ? JSON.stringify(d, null, 2)
-                                : d
-                            )
-                            .join('')}
-                        </div>
-                      )
-                    })
+                  <>
+                    {logs
+                      .filter((log) => log.data?.some((line) => line !== ''))
+                      .map((log) => {
+                        return (
+                          <div
+                            key={log.id}
+                            className={clsx(
+                              'border-l-2 px-horizontal-padding py-2 font-mono [overflow-anchor:none]',
+                              log.method === 'error'
+                                ? 'border-warn'
+                                : 'border-note'
+                            )}
+                          >
+                            {log.method === 'error' ? 'ERROR: ' : 'INFO: '}{' '}
+                            {log.data
+                              ?.map((d) =>
+                                typeof d === 'object'
+                                  ? JSON.stringify(d, null, 2)
+                                  : d
+                              )
+                              .join('')}
+                          </div>
+                        )
+                      })}
+
+                    <div className="h-[1px] [overflow-anchor:auto]" />
+                  </>
                 )}
               </div>
 

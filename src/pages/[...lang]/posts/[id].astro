@@ -1,6 +1,7 @@
 ---
 import BlogPost from '@layouts/BlogPost.astro'
 import CodeBlock from '@components/CodeBlock.astro'
+import Link from '@components/Link.astro'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts, getBlogPostName } from '@utils/posts'
 import _ from 'lodash'
@@ -78,6 +79,7 @@ const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
 const components = {
   pre: CodeBlock,
+  a: Link,
   h1: 'h2',
   h3: 'h4',
   h4: 'h5',

@@ -22,7 +22,6 @@ const t = useTranslate(Astro)
     {
       Astro.url.pathname !== '/' && (
         <a
-          class="border-0"
           href={parentUrl}
           data-testid="parent-page-link"
           aria-label={t('GoBack')}

@@ -1,0 +1,29 @@
+---
+type Props = {
+  level: 1 | 2 | 3 | 4 | 5 | 6
+}
+
+const { level, ...rest } = Astro.props
+const Heading = {
+  1: 'h1',
+  2: 'h2',
+  3: 'h3',
+  4: 'h4',
+  5: 'h5',
+  6: 'h6',
+}[level]
+---
+
+<Heading
+  class:list={[
+    'mb-8',
+    'mt-4',
+    'pt-4',
+    '[&_a]:text-primary',
+    '[&_a]:border-0',
+    "[&_a]:before:content-['_#']",
+  ]}
+  {...rest}
+>
+  <slot />
+</Heading>

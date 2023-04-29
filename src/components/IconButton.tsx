@@ -14,7 +14,7 @@ export type IconButtonProps = DistributiveOmit<ButtonProps, 'color'> & {
 
 export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
   (props, ref) => {
-    const { className, variant, ...rest } = props
+    const { className, variant = 'rounded', ...rest } = props
 
     return (
       <Button

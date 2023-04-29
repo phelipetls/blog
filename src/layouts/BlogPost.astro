@@ -114,15 +114,21 @@ const hasToc = headings.length > 0
         <hr class="my-8" />
 
         <div
+          data-has-toc={hasToc ? 'true' : 'false'}
           class:list={[
-            hasToc &&
-              'flex flex-col-reverse lg:grid lg:gap-8 lg:grid-cols-[minmax(65ch,1fr),1fr]',
+            'group',
+            'data-[has-toc=true]:flex',
+            'data-[has-toc=true]:flex-col-reverse',
+            'data-[has-toc=true]:lg:grid',
+            'data-[has-toc=true]:lg:gap-8',
+            'data-[has-toc=true]:lg:grid-cols-[minmax(65ch,1fr),1fr]',
           ]}
         >
           <div
             data-blog-post
             class:list={[
-              !hasToc && 'max-w-prose mx-auto',
+              'sm:group-data-[has-toc=false]:max-w-prose',
+              'sm:group-data-[has-toc=false]:mx-auto',
               '[&>pre]:full-width-on-mobile',
               '[&>figure]:full-width-on-mobile',
               '[&_img]:mx-auto',
@@ -149,13 +155,9 @@ const hasToc = headings.length > 0
             <slot />
           </div>
 
-          {
-            hasToc && (
-              <aside class="min-w-0">
-                <BlogPostToc headings={headings} />
-              </aside>
-            )
-          }
+          <aside class="min-w-0 invisible group-data-[has-toc]:visible">
+            <BlogPostToc headings={headings} />
+          </aside>
         </div>
       </article>
 

@@ -39,6 +39,8 @@ const ogImageUrl = localizeUrl(
   `/posts/${getBlogPostName(Astro.props)}/image.png`,
   language
 )
+
+const hasToc = headings.length > 0
 ---
 
 <Site
@@ -112,11 +114,15 @@ const ogImageUrl = localizeUrl(
         <hr class="my-8" />
 
         <div
-          class="flex flex-col-reverse lg:grid lg:grid-cols-[minmax(65ch,1fr),1fr] lg:gap-8"
+          class:list={[
+            hasToc &&
+              'flex flex-col-reverse lg:grid lg:gap-8 lg:grid-cols-[minmax(65ch,1fr),1fr]',
+          ]}
         >
           <div
             data-blog-post
             class:list={[
+              !hasToc && 'max-w-prose mx-auto',
               '[&>pre]:full-width-on-mobile',
               '[&>figure]:full-width-on-mobile',
               '[&>[data-codeblock]]:full-width-on-mobile',
@@ -146,9 +152,13 @@ const ogImageUrl = localizeUrl(
             <slot />
           </div>
 
-          <aside class="min-w-0">
-            <BlogPostToc headings={headings} />
-          </aside>
+          {
+            hasToc && (
+              <aside class="min-w-0">
+                <BlogPostToc headings={headings} />
+              </aside>
+            )
+          }
         </div>
       </article>
 

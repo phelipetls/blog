@@ -92,6 +92,8 @@ const shouldShowHeader = title !== '' || langName !== ''
   data-codeblock
   class:list={[
     shouldShowHeader ? 'mt-16' : 'mt-8',
+    'full-width-on-mobile',
+    '[&_pre]:max-sm:rounded-none',
     'group',
     'relative',
     'mb-8',

@@ -1,38 +1,84 @@
-import React from 'react'
+import * as React from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import Button, { ButtonProps } from './Button'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type DistributiveOmit<T, K extends keyof any> = T extends any
-  ? Omit<T, K>
-  : never
-
-export type IconButtonProps = DistributiveOmit<ButtonProps, 'color'> & {
+type IconButtonCommonProps = {
   variant: 'rounded' | 'rounded-full'
+  disabled?: boolean
 }
+
+type IconButtonLinkProps = Omit<
+  React.ComponentPropsWithRef<'a'>,
+  'href' & keyof IconButtonCommonProps
+> & {
+  href: string
+}
+
+type IconButtonButtonProps = Omit<
+  React.ComponentPropsWithRef<'button'>,
+  keyof IconButtonCommonProps
+> & {
+  href?: never
+}
+
+export type IconButtonProps = IconButtonCommonProps &
+  (IconButtonLinkProps | IconButtonButtonProps)
 
 export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
   (props, ref) => {
-    const { className, variant = 'rounded', ...rest } = props
+    const className = React.useMemo(() => {
+      return twMerge(
+        clsx(
+          'bg-background',
+          'hover:bg-hover',
+          'text-on-background',
+          'disabled:bg-disabled',
+          'disabled:text-on-disabled',
+          'disabled:hover:cursor-not-allowed',
+          'disabled:hover:bg-disabled',
+          {
+            'rounded-full p-2': props.variant === 'rounded-full',
+            'rounded border border-divider p-1 shadow-sm shadow-shadow':
+              props.variant === 'rounded',
+          },
+          props.className
+        )
+      )
+    }, [])
+
+    if (props.href !== undefined) {
+      if (props.disabled) {
+        return (
+          <button
+            ref={ref as React.ForwardedRef<HTMLButtonElement>}
+            type="button"
+            className={className}
+            disabled={props.disabled}
+          >
+            {props.children}
+          </button>
+        )
+      }
+
+      const { variant: _, ...rest } = props
+
+      return (
+        <a
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+          {...rest}
+          className={className}
+        />
+      )
+    }
+
+    const { variant: _, ...rest } = props
 
     return (
-      <Button
-        color="secondary"
-        ref={ref}
+      <button
+        ref={ref as React.ForwardedRef<HTMLButtonElement>}
         type="button"
-        className={twMerge(
-          clsx(
-            'bg-background text-on-background',
-            {
-              'rounded-full p-2': variant === 'rounded-full',
-              'rounded border border-divider p-1 shadow-sm shadow-shadow':
-                variant === 'rounded',
-            },
-            className
-          )
-        )}
         {...rest}
+        className={className}
       />
     )
   }

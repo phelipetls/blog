@@ -214,7 +214,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             title={title}
           />
 
-          <div className="absolute bottom-3 right-horizontal-padding flex items-center gap-2">
+          <div className="absolute bottom-3 right-horizontal-padding flex items-stretch gap-2">
             <Button
               color="secondary"
               onClick={createAndNavigateToCodesandbox}
@@ -226,7 +226,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             </Button>
 
             <IconButton
-              variant="rounded"
+              variant="rounded-full"
               onClick={refresh}
               aria-label="Refresh"
               className="shadow-sm shadow-shadow"

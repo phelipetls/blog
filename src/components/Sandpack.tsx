@@ -163,8 +163,8 @@ function CustomSandpack(props: CustomSandpackProps) {
       </Tabs>
 
       <div className="full-width-on-mobile relative shadow-sm shadow-shadow sm:rounded-b">
-        <div className="dark group relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
-          <SandpackCodeEditor showTabs={false} />
+        <div className="dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
+          <SandpackCodeEditor className="peer" showTabs={false} />
 
           <CopyCodeBlockButton
             // TODO: internationalize this
@@ -180,8 +180,8 @@ function CustomSandpack(props: CustomSandpackProps) {
               'duration-500',
               'opacity-0',
               'pointer-events-none',
-              'group-hover:opacity-100',
-              'group-hover:pointer-events-auto',
+              'peer-hover:opacity-100',
+              'peer-hover:pointer-events-auto',
               'focus:opacity-100',
               'focus:pointer-events-auto'
             )}

@@ -1,12 +1,13 @@
 ---
 import '@assets/css/main.css'
 import { Language, useTranslate } from '@utils/i18n'
-import Fonts from '@components/Fonts.astro'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import md5 from 'md5'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts, getBlogPostName } from '@utils/posts'
+import '@fontsource/fira-sans'
+import '@fontsource/merriweather'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -47,7 +48,6 @@ const t = useTranslate(Astro)
 <html lang={language === 'pt' ? 'pt-BR' : 'en-US'} class="h-full text-2xl">
   <head>
     <meta charset="UTF-8" />
-    <Fonts />
   </head>
 
   <body

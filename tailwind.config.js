@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 function withOpacityValue(variable) {
   return `rgb(var(${variable}) / <alpha-value>)`
 }
@@ -50,9 +52,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['Fira Sans', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-      mono: ['Consolas', 'Menlo', 'Monaco', 'Fira Code', 'monospace'],
+      sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+      serif: ['Merriweather', ...defaultTheme.fontFamily.serif],
+      mono: defaultTheme.fontFamily.mono,
     },
   },
   plugins: [],

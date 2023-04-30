@@ -82,10 +82,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
       <div
         class="mb-8 w-full hidden sm:flex flex-row items-center justify-center gap-2 text-2xl"
       >
-        <Link
-          class="text-2xl font-serif font-bold"
-          href={localizeUrl('/tags', language)}
-        >
+        <Link class="text-2xl font-bold" href={localizeUrl('/tags', language)}>
           Tags
         </Link>
 

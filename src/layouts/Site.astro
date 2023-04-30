@@ -2,13 +2,14 @@
 import '@assets/css/main.css'
 import Nav from '@components/Nav.astro'
 import SideNav from '@components/SideNav.astro'
-import Fonts from '@components/Fonts.astro'
 import { format } from 'date-fns'
 import Footer from '@components/Footer.astro'
 import ThemeScript from '@components/ThemeScript.astro'
 import { SEO } from 'astro-seo'
 import type { Props as SEOProps } from 'astro-seo'
 import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+import '@fontsource/fira-sans'
+import '@fontsource/merriweather'
 
 const language = getLanguageFromUrl(Astro.url.pathname)
 
@@ -86,8 +87,6 @@ const title = `${Astro.props.title} | Phelipe Teles`
       }}
       {...seo}
     />
-
-    <Fonts />
 
     <slot name="head" />
   </head>

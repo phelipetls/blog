@@ -8,9 +8,8 @@ test.describe('Tabs', () => {
 
     const firstTablist = page.getByRole('tablist').first()
     const selectedTab = firstTablist.getByRole('tab', { selected: true })
-    // for some reason, I need to click here first to be able to click on the
-    // other tab later
-    await selectedTab.click()
+    await selectedTab.scrollIntoViewIfNeeded()
+    await selectedTab.focus()
 
     const selectedTabPanelId = await selectedTab.getAttribute('aria-controls')
     await expect(page.locator(`#${selectedTabPanelId}`)).toBeVisible()

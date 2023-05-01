@@ -182,6 +182,8 @@ function CustomSandpack(props: CustomSandpackProps) {
               'pointer-events-none',
               'peer-hover:opacity-100',
               'peer-hover:pointer-events-auto',
+              'hover:opacity-100',
+              'hover:pointer-events-auto',
               'focus:opacity-100',
               'focus:pointer-events-auto'
             )}

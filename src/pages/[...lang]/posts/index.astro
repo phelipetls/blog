@@ -7,7 +7,6 @@ import { format } from 'date-fns'
 import _ from 'lodash'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts } from '@utils/posts'
-import Tag from '@components/Tag.astro'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import IconButton from '@components/IconButton'
 
@@ -35,12 +34,6 @@ type Props = {
 }
 
 const blogPosts = Astro.props.blogPosts
-
-const tags = blogPosts.flatMap((blogPost) => {
-  return blogPost.data.tags
-})
-
-const tagsCount = _.countBy(tags)
 
 const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
@@ -77,25 +70,28 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
       <RssButton />
     </div>
 
-    <div class="flex flex-row gap-8">
-      <div class="flex-1">
-        {
-          years.map((year, index) => {
-            const blogPosts = blogPostsGroupedByYear[year]
+    <div class="col-full grid grid-cols-layout">
+      {
+        years.map((year, index) => {
+          const blogPosts = blogPostsGroupedByYear[year]
 
-            const prevYear: string | null = years[index - 1] ?? null
-            const nextYear: string | null = years[index + 1] ?? null
+          const prevYear: string | null = years[index - 1] ?? null
+          const nextYear: string | null = years[index + 1] ?? null
 
-            return (
-              <>
-                <div class="mb-8 mt-24 flex flex-row justify-between first:mt-0">
-                  <h2 id={year} class="m-0 text-2xl">
+          return (
+            <div class="col-full mt-24 grid grid-cols-layout first:mt-0">
+              <div id={year} />
+
+              <div class="sticky top-[calc(var(--nav-height)_+_0.5rem)] col-full mb-8 w-full bg-background bg-opacity-75 px-horizontal-padding py-2 backdrop-blur-sm sm:top-0">
+                <div class="mx-auto flex max-w-2xl flex-row justify-between">
+                  <h2 class="m-0 text-2xl">
                     <time datetime={`${year}-01-01`}>{year}</time>
                   </h2>
 
                   <div class="flex flex-row gap-2">
                     <IconButton
                       href={`#${prevYear}`}
+                      className="bg-transparent"
                       variant="rounded-full"
                       disabled={prevYear === null}
                       aria-label={t('PreviousYear')}
@@ -105,6 +101,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
 
                     <IconButton
                       href={`#${nextYear}`}
+                      className="bg-transparent"
                       variant="rounded-full"
                       disabled={nextYear === null}
                       aria-label={t('NextYear')}
@@ -113,79 +110,37 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                     </IconButton>
                   </div>
                 </div>
+              </div>
 
-                <ul class="m-0 grid w-full max-w-2xl list-none grid-cols-1 gap-4">
-                  {blogPosts
-                    .sort((blogPostA, blogPostB) => {
-                      return (
-                        new Date(blogPostB.data.date).getTime() -
-                        new Date(blogPostA.data.date).getTime()
-                      )
-                    })
-                    .map((blogPost) => {
-                      return (
-                        <>
-                          <li class="mb-8 last:mb-0">
-                            <BlogPostCard blogPost={blogPost} />
-                          </li>
-                        </>
-                      )
-                    })}
-                </ul>
-              </>
-            )
-          })
-        }
-      </div>
-
-      <div
-        class:list={[
-          'max-w-xs',
-          'bg-surface',
-          'pt-4',
-          '[&>*:last-child]:pb-4',
-          '[&_h2]:px-4',
-          '[&_ul]:px-4',
-          'rounded',
-          'shadow-sm',
-          'shadow-shadow',
-          'hidden',
-          'lg:flex',
-          'flex-col',
-          'sticky',
-          'top-4',
-          'max-h-[calc(100vh-2rem)]',
-        ]}
-      >
-        <h2 class="">
-          {t('ByTags')}
-        </h2>
-
-        <ul
-          class="m-0 list-inside list-none flex flex-row flex-wrap gap-2 min-h-0 overflow-y-auto"
-        >
-          {
-            _.uniq(tags)
-              .sort((tagA, tagB) => {
-                const countA = tagsCount[tagA]
-                const countB = tagsCount[tagB]
-                return countB - countA
-              })
-              .map((tag) => {
-                const count = tagsCount[tag]
-                return (
-                  <li class="">
-                    <Tag tag={tag} count={count} />
-                  </li>
-                )
-              })
-          }
-        </ul>
-      </div>
+              <ul class="m-0 mx-auto grid w-full max-w-2xl list-none grid-cols-1 gap-4">
+                {blogPosts
+                  .sort((blogPostA, blogPostB) => {
+                    return (
+                      new Date(blogPostB.data.date).getTime() -
+                      new Date(blogPostA.data.date).getTime()
+                    )
+                  })
+                  .map((blogPost) => {
+                    return (
+                      <>
+                        <li class="mb-8 last:mb-0">
+                          <BlogPostCard blogPost={blogPost} />
+                        </li>
+                      </>
+                    )
+                  })}
+              </ul>
+            </div>
+          )
+        })
+      }
     </div>
   </main>
 
-  <div slot="mobile-nav-title" class="flex flex-row items-center gap-2 [&_a]:bg-transparent">
+  <div
+    slot="mobile-nav-title"
+    class="flex flex-row items-center gap-2 [&_a]:bg-transparent"
+  >
     Posts
 
     <RssButton />

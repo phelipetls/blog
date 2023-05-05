@@ -1,12 +1,24 @@
 ---
 import { twMerge } from 'tailwind-merge'
 import { ChevronDown } from 'lucide-react'
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = HTMLAttributes<'select'> & {
+  variant?: 'default' | 'ghost'
+}
+
+const { variant = 'default', ...rest } = Astro.props
 
 const hasStartIcon = Astro.slots.has('start-icon')
 ---
 
 <div
-  class="relative bg-surface shadow-sm shadow-shadow rounded flex justify-between flex-row items-center"
+  class:list={[
+    'relative rounded flex justify-between flex-row items-center',
+    variant === 'default'
+      ? 'bg-surface shadow-sm shadow-shadow'
+      : 'bg-background',
+  ]}
 >
   {
     hasStartIcon && (
@@ -18,10 +30,10 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
   <select
     class:list={twMerge([
-      'py-1 h-full w-full rounded bg-surface appearance-none text-center pr-9',
+      'py-1 h-full w-full rounded bg-inherit appearance-none text-center pr-9',
       hasStartIcon && 'pl-9',
     ])}
-    {...Astro.props}
+    {...rest}
   >
     <slot />
   </select>

@@ -1,7 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import DevIcon, { DevIconName } from './DevIcon.astro'
-import { Tag } from 'lucide-react'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
 
 type Props = HTMLAttributes<'a'> & {
@@ -42,7 +41,7 @@ const tagIconName = tagToIconName[tag]
     ? localizeUrl('/tags', language)
     : localizeUrl(`/tags/${tag}`, language)}
 >
-  {tagIconName ? <DevIcon name={tagIconName} /> : tag !== '...' && <Tag />}
+  {tagIconName && <DevIcon name={tagIconName} />}
 
   {tag}
 

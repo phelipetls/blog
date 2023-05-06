@@ -14,33 +14,30 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
 <div
   class:list={[
-    'relative rounded flex justify-between flex-row items-center',
+    'rounded justify-between flex-row items-center grid grid-cols-[repeat(3,minmax(fit-content,1fr)]',
     variant === 'default'
       ? 'bg-surface shadow-sm shadow-shadow'
       : 'bg-background',
   ]}
 >
-  {
-    hasStartIcon && (
-      <span class="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm">
-        <slot name="start-icon" />
-      </span>
-    )
-  }
-
   <select
     class:list={twMerge([
-      'py-1 rounded bg-inherit appearance-none text-center pr-9',
-      hasStartIcon && 'pl-9',
+      'py-1 px-8 rounded bg-inherit appearance-none text-center row-start-1 col-start-1 col-end-4',
     ])}
     {...rest}
   >
     <slot />
   </select>
 
-  <span
-    class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-sm"
-  >
+  {
+    hasStartIcon && (
+      <span class="pointer-events-none col-start-1 row-start-1 px-1 text-sm">
+        <slot name="start-icon" />
+      </span>
+    )
+  }
+
+  <span class="pointer-events-none text-sm row-start-1 col-start-3 px-1">
     <ChevronDown slot="end-icon" />
   </span>
 </div>

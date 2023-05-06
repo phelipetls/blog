@@ -30,7 +30,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
   <select
     class:list={twMerge([
-      'py-1 h-full w-full rounded bg-inherit appearance-none text-center pr-9',
+      'py-1 rounded bg-inherit appearance-none text-center pr-9',
       hasStartIcon && 'pl-9',
     ])}
     {...rest}

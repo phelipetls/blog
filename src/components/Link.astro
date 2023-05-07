@@ -8,7 +8,7 @@ const { class: className, ...rest } = Astro.props
 
 <a
   class:list={twMerge([
-    'border-b border-primary no-underline hover:border-primary-hover',
+    'underline underline-offset-4 decoration-primary hover:decoration-primary-hover',
     className,
   ])}
   {...rest}

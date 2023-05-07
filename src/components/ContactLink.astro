@@ -1,9 +1,7 @@
 ---
+import IconButton from './IconButton'
 ---
 
-<a
-  class="rounded-full transition-colors duration-300 hover:bg-hover p-2 [&_svg]:transition-colors [&_svg]:duration-300 hover:text-primary border-0"
-  {...Astro.props}
->
+<IconButton variant="rounded-full" {...Astro.props}>
   <slot />
-</a>
+</IconButton>

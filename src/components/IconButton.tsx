@@ -36,6 +36,9 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           'disabled:text-on-disabled',
           'disabled:hover:cursor-not-allowed',
           'disabled:hover:bg-disabled',
+          'hover:text-primary',
+          'transition-colors',
+          'duration-300',
           {
             'rounded-full p-2': props.variant === 'rounded-full',
             'rounded border border-divider p-1 shadow-sm shadow-shadow':

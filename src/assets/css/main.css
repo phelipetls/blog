@@ -133,6 +133,10 @@
   .full-width-on-mobile {
     @apply -mx-horizontal-padding sm:mx-0;
   }
+
+  .link {
+    @apply underline decoration-primary underline-offset-4 hover:decoration-primary-hover;
+  }
 }
 
 [data-preload] {

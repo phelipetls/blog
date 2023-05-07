@@ -1,5 +1,4 @@
 ---
-import { twMerge } from 'tailwind-merge'
 import { ChevronDown } from 'lucide-react'
 import type { HTMLAttributes } from 'astro/types'
 
@@ -13,17 +12,28 @@ const hasStartIcon = Astro.slots.has('start-icon')
 ---
 
 <div
+  style={{
+    '--cols': hasStartIcon ? 3 : 2,
+  }}
   class:list={[
-    'rounded justify-between flex-row items-center grid grid-cols-[repeat(3,minmax(fit-content,1fr)]',
+    'rounded items-center grid grid-cols-[repeat(var(--cols),minmax(fit-content,1fr))]',
     variant === 'default'
       ? 'bg-surface shadow-sm shadow-shadow'
       : 'bg-background',
   ]}
 >
   <select
-    class:list={twMerge([
-      'py-1 px-8 rounded bg-inherit appearance-none text-center row-start-1 col-start-1 col-end-4',
-    ])}
+    class:list={[
+      'py-1',
+      'rounded',
+      'bg-inherit',
+      'appearance-none',
+      'text-center',
+      'row-start-1',
+      // FIXME: not using col-span-full is terrible, but I did not make it work otherwise
+      'col-[1_/_calc(var(--cols)+1)]',
+      hasStartIcon ? 'px-8' : 'pr-8',
+    ]}
     {...rest}
   >
     <slot />
@@ -37,7 +47,9 @@ const hasStartIcon = Astro.slots.has('start-icon')
     )
   }
 
-  <span class="pointer-events-none text-sm row-start-1 col-start-3 px-1">
+  <span
+    class="pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]"
+  >
     <ChevronDown slot="end-icon" />
   </span>
 </div>

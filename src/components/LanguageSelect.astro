@@ -1,6 +1,5 @@
 ---
 import { useTranslate, getLanguageFromUrl } from '@utils/i18n'
-import { Languages } from 'lucide-react'
 import Select from '@components/Select.astro'
 
 const language = getLanguageFromUrl(Astro.url.pathname)
@@ -11,8 +10,6 @@ const t = useTranslate(Astro)
 <Select data-language-select aria-label={t('ChooseALanguage')} variant="ghost">
   <option selected={language === 'en'} value="en">English</option>
   <option selected={language === 'pt'} value="pt">Português</option>
-
-  <Languages slot="start-icon" />
 </Select>
 
 <script>

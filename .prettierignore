@@ -8,3 +8,6 @@
 
 # astro
 src/env.d.ts
+
+# ignore files that, when formatted, would insert unwanted whitespace in HTML
+src/components/ReactLink.astro

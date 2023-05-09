@@ -2,4 +2,6 @@
 import BlogPostHeading from '@components/BlogPostHeading.astro'
 ---
 
-<BlogPostHeading level={3} {...Astro.props} />
+<BlogPostHeading level={3} {...Astro.props}>
+  <slot />
+</BlogPostHeading>

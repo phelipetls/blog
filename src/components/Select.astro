@@ -16,7 +16,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
     '--cols': hasStartIcon ? 3 : 2,
   }}
   class:list={[
-    'rounded items-center grid grid-cols-[repeat(var(--cols),minmax(fit-content,1fr))]',
+    'rounded items-center grid grid-cols-[repeat(var(--cols),1fr)]',
     variant === 'default'
       ? 'bg-surface shadow-sm shadow-shadow'
       : 'bg-background',
@@ -48,7 +48,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
   }
 
   <span
-    class="pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]"
+    class="flex flex-row justify-end pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]"
   >
     <ChevronDown slot="end-icon" />
   </span>

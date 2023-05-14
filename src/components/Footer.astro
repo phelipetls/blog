@@ -1,8 +1,9 @@
 ---
-import { useTranslate } from '@utils/i18n/useTranslate'
 import Contact from './Contact.astro'
+import { getLanguageFromUrl } from '@utils/i18n'
+import Link from './Link.astro'
 
-const t = useTranslate(Astro)
+const language = getLanguageFromUrl(Astro.url.pathname)
 ---
 
 <footer class="border-t border-divider bg-background sm:border-0">
@@ -11,6 +12,27 @@ const t = useTranslate(Astro)
   >
     <Contact />
 
-    <span class="text-center" set:html={t('License')} />
+    <span class="text-center">
+      {
+        language === 'pt' ? (
+          <>
+            All content is under a{' '}
+            <Link
+              rel="license"
+              href="http://creativecommons.org/licenses/by/4.0/"
+            >Creative Commons Attribution 4.0</Link>
+            license.
+          </>
+        ) : (
+          <>
+            Todo conteúdo está sob a licença{' '}
+            <Link
+              rel="license"
+              href="http://creativecommons.org/licenses/by/4.0/"
+            >Creative Commons Attribution 4.0</Link>.
+          </>
+        )
+      }
+    </span>
   </div>
 </footer>

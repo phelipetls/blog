@@ -71,10 +71,10 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 
 <Site
   isTranslated={isTranslated}
-  title={t(`BlogPostsTaggedWith`, { vars: { tag } })}
+  title={t(`BlogPostsTaggedWith`, { tag })}
   description={t('TagDescription', {
-    n: blogPosts.length,
-    vars: { count: blogPosts.length, tag },
+    count: blogPosts.length,
+    tag,
   })}
 >
   <main class="grid grid-cols-layout my-8">

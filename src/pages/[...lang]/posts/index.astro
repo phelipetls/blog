@@ -79,10 +79,10 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
           const nextYear: string | null = years[index + 1] ?? null
 
           return (
-            <div class="col-full mt-24 grid grid-cols-layout first:mt-0">
+            <div class="group col-full grid grid-cols-layout">
               <div id={year} />
 
-              <div class="sticky top-[calc(var(--nav-height)_+_0.5rem)] col-full mb-8 w-full bg-background bg-opacity-75 px-horizontal-padding py-2 backdrop-blur-sm sm:top-0">
+              <div class="sticky top-[calc(var(--nav-height)_+_0.5rem)] col-full w-full bg-background bg-opacity-75 px-horizontal-padding py-2 backdrop-blur-sm sm:top-0">
                 <div class="mx-auto flex max-w-2xl flex-row justify-between">
                   <h2 class="m-0 text-2xl">
                     <time datetime={`${year}-01-01`}>{year}</time>
@@ -112,7 +112,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                 </div>
               </div>
 
-              <ul class="m-0 mx-auto grid w-full max-w-2xl list-none grid-cols-1 gap-4">
+              <ul class="m-0 mx-auto mt-8 grid w-full max-w-2xl list-none grid-cols-1 gap-4 pb-24 group-last:pb-0">
                 {blogPosts
                   .sort((blogPostA, blogPostB) => {
                     return (

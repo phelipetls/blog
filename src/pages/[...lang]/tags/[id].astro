@@ -77,67 +77,68 @@ const language = getLanguageFromUrl(Astro.url.pathname)
     vars: { count: blogPosts.length, tag },
   })}
 >
-  <main class="grid grid-cols-layout">
-    <div class="">
-      <div
-        class="mb-8 w-full hidden sm:flex flex-row items-center justify-center gap-2 text-2xl"
+  <main class="grid grid-cols-layout my-8">
+    <div
+      class="w-full hidden sm:flex flex-row items-center justify-center gap-2 text-2xl"
+    >
+      <Link
+        class="text-2xl underline-offset-8"
+        href={localizeUrl('/tags', language)}
       >
-        <Link class="text-2xl font-bold" href={localizeUrl('/tags', language)}>
-          Tags
-        </Link>
+        Tags
+      </Link>
 
-        <span class="text-sm">
-          <ChevronRight />
-        </span>
+      <span class="text-sm">
+        <ChevronRight />
+      </span>
 
-        <h1 class="m-0">
-          {tag}
-        </h1>
-      </div>
-
-      <ul class="list-none ml-0 mt-8">
-        {
-          years.map((year) => {
-            const blogPosts = blogPostsGroupedByYear[year]
-
-            return (
-              <>
-                <h2 class="m-0 my-8 tabular-nums first:mt-0 sm:px-horizontal-padding">
-                  {year}
-                </h2>
-
-                {blogPosts
-                  .sort(
-                    (blogPostA, blogPostB) =>
-                      blogPostB.data.date.getTime() -
-                      blogPostA.data.date.getTime()
-                  )
-                  .map((blogPost) => {
-                    return (
-                      <li class="mb-2 max-w-2xl last:mb-0">
-                        <a
-                          class="group flex gap-4 py-2 sm:px-horizontal-padding"
-                          href={localizeUrl(
-                            '/posts/' + getBlogPostName(blogPost),
-                            language
-                          )}
-                        >
-                          <time class="min-w-[6ch] flex-shrink-0 text-lg tabular-nums sm:text-right">
-                            {format(blogPost.data.date, 'MMM dd')}
-                          </time>
-
-                          <h2 class="m-0 border-l border-primary pl-4 text-lg font-normal transition-colors duration-300 sm:group-hover:text-primary">
-                            {blogPost.data.title}
-                          </h2>
-                        </a>
-                      </li>
-                    )
-                  })}
-              </>
-            )
-          })
-        }
-      </ul>
+      <h1 class="m-0">
+        {tag}
+      </h1>
     </div>
+
+    <ul class="list-none ml-0 mt-8">
+      {
+        years.map((year) => {
+          const blogPosts = blogPostsGroupedByYear[year]
+
+          return (
+            <>
+              <h2 class="m-0 my-8 tabular-nums first:mt-0 sm:px-horizontal-padding">
+                {year}
+              </h2>
+
+              {blogPosts
+                .sort(
+                  (blogPostA, blogPostB) =>
+                    blogPostB.data.date.getTime() -
+                    blogPostA.data.date.getTime()
+                )
+                .map((blogPost) => {
+                  return (
+                    <li class="mb-2 max-w-2xl last:mb-0">
+                      <a
+                        class="group flex gap-4 py-2 sm:px-horizontal-padding"
+                        href={localizeUrl(
+                          '/posts/' + getBlogPostName(blogPost),
+                          language
+                        )}
+                      >
+                        <time class="min-w-[6ch] flex-shrink-0 font-mono text-lg tabular-nums sm:text-right">
+                          {format(blogPost.data.date, 'MMM dd')}
+                        </time>
+
+                        <h2 class="m-0 border-l border-primary pl-4 text-lg font-normal transition-colors duration-300 sm:group-hover:text-primary">
+                          {blogPost.data.title}
+                        </h2>
+                      </a>
+                    </li>
+                  )
+                })}
+            </>
+          )
+        })
+      }
+    </ul>
   </main>
 </Site>

@@ -53,7 +53,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+      sans: ['Source Sans Pro', ...defaultTheme.fontFamily.sans],
       serif: ['Merriweather', ...defaultTheme.fontFamily.serif],
       mono: defaultTheme.fontFamily.mono,
     },

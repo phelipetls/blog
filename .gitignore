@@ -11,3 +11,4 @@ src/components/devicons/*.tsx
 /playwright/.cache/
 src/env.d.ts
 .astro
+src/i18n/i18n-*.ts

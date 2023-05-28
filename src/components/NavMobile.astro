@@ -24,7 +24,7 @@ const t = useTranslate(Astro)
         <a
           href={parentUrl}
           data-testid="parent-page-link"
-          aria-label={t('GoBack')}
+          aria-label={t.GoBack()}
         >
           <ChevronLeft />
         </a>
@@ -48,7 +48,7 @@ const t = useTranslate(Astro)
     className="bg-transparent"
     data-a11y-dialog-show="sidenav"
     data-testid="open-sidenav"
-    aria-label={t('OpenSidenav')}
+    aria-label={t.OpenSidenav()}
   >
     <Menu />
   </IconButton>

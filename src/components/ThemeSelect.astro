@@ -6,10 +6,10 @@ import Select from '@components/Select.astro'
 const t = useTranslate(Astro)
 ---
 
-<Select data-theme-select aria-label={t('ChooseATheme')}>
-  <option value="light">{t('Light')}</option>
-  <option value="dark">{t('Dark')}</option>
-  <option value="system">{t('System')}</option>
+<Select data-theme-select aria-label={t.ChooseATheme()}>
+  <option value="light">{t.Light()}</option>
+  <option value="dark">{t.Dark()}</option>
+  <option value="system">{t.System()}</option>
 
   <svg
     slot="start-icon"
@@ -18,7 +18,7 @@ const t = useTranslate(Astro)
     width="24"
     height="24"
   >
-    <title>{t('ThemeIcon')}</title>
+    <title>{t.ThemeIcon()}</title>
 
     <defs>
       <Moon id="moon" />

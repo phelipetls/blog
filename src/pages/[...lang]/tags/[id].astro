@@ -71,8 +71,8 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 
 <Site
   isTranslated={isTranslated}
-  title={t(`BlogPostsTaggedWith`, { tag })}
-  description={t('TagDescription', {
+  title={t.BlogPostsTaggedWith({ tag })}
+  description={t.TagDescription({
     count: blogPosts.length,
     tag,
   })}

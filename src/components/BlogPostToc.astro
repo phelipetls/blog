@@ -33,7 +33,7 @@ const tocItems = headings.map((heading) => ({
           <div class="flex items-center gap-2">
             <List />
 
-            <h2 class="m-0">{t('TableOfContents')}</h2>
+            <h2 class="m-0">{t.TableOfContents()}</h2>
           </div>
 
           <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">
@@ -78,14 +78,14 @@ const tocItems = headings.map((heading) => ({
 
       <details
         class="card group mb-8 px-horizontal-padding py-4 lg:hidden"
-        aria-label={t('TableOfContents')}
+        aria-label={t.TableOfContents()}
       >
         <summary class="list-none">
           <div class="flex justify-between gap-2">
             <div class="flex items-center gap-2">
               <List />
 
-              <h2 class="m-0">{t('TableOfContents')}</h2>
+              <h2 class="m-0">{t.TableOfContents()}</h2>
             </div>
 
             <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">

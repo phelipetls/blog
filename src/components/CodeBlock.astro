@@ -184,9 +184,9 @@ const shouldShowHeader = title !== '' || langName !== ''
 
     <CopyCodeBlockButton
       client:load
-      aria-label={t('CopyCodeButtonLabel')}
-      successTooltipText={t('Copied') + '!'}
-      errorTooltipText={t('FailedToCopy')}
+      aria-label={t.CopyCodeButtonLabel()}
+      successTooltipText={t.Copied() + '!'}
+      errorTooltipText={t.FailedToCopy()}
       code={codeToCopy}
     />
   </div>

@@ -7,7 +7,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 const t = useTranslate(Astro)
 ---
 
-<Select data-language-select aria-label={t('ChooseALanguage')} variant="ghost">
+<Select data-language-select aria-label={t.ChooseALanguage()} variant="ghost">
   <option selected={language === 'en'} value="en">English</option>
   <option selected={language === 'pt'} value="pt">Português</option>
 </Select>

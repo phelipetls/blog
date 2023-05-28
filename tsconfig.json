@@ -8,6 +8,7 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
+      "@i18n/*": ["src/i18n/*"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],

@@ -17,7 +17,7 @@ const { prevBlogPost, nextBlogPost, class: className } = Astro.props
 
 <nav
   class:list={['flex items-stretch sm:gap-4', className]}
-  aria-label={t('PostsNavigation')}
+  aria-label={t.PostsNavigation()}
 >
   {
     prevBlogPost ? (

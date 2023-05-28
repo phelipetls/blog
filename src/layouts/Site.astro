@@ -23,7 +23,7 @@ type Props = {
   isTranslated: boolean
 }
 
-const { description = t('SiteDescription'), seo, isTranslated } = Astro.props
+const { description = t.SiteDescription(), seo, isTranslated } = Astro.props
 
 let mobileNavTitle
 if (Astro.slots.has('mobile-nav-title')) {

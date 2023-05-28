@@ -32,8 +32,8 @@ export const get = async ({ props }: APIContext<{ language: Language }>) => {
   )
 
   return rss({
-    title: t('SiteTitle'),
-    description: t('SiteDescription'),
+    title: t.SiteTitle(),
+    description: t.SiteDescription(),
     site: import.meta.env.SITE,
     items,
     customData: `<language>${

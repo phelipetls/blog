@@ -1,7 +1,7 @@
 ---
 import ThemeSelect from '@components/ThemeSelect.astro'
 import { X } from 'lucide-react'
-import { isActiveMenuItem, getMainMenuItems } from '@utils/menu'
+import { isActiveMenuItem, MAIN_MENU_ITEMS } from '@utils/menu'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 import LanguageSelect from './LanguageSelect.astro'
 import IconButton from '@components/IconButton'
@@ -14,8 +14,6 @@ type Props = {
 const { isTranslated } = Astro.props
 
 const language = getLanguageFromUrl(Astro.url.pathname)
-const mainMenuItems = getMainMenuItems(language)
-
 const t = useTranslate(Astro)
 ---
 
@@ -47,15 +45,15 @@ const t = useTranslate(Astro)
       </IconButton>
     </div>
 
-    <nav class="flex flex-col" aria-label={t('MainNavigation')}>
+    <nav class="flex flex-col" aria-label={t.MainNavigation()}>
       <ul
         class="m-0 flex list-none flex-col items-center justify-center gap-2 px-horizontal-padding"
       >
         {
-          mainMenuItems.map((item) => {
+          MAIN_MENU_ITEMS.map((item) => {
             const isActive = isActiveMenuItem({
               currentPathname: Astro.url.pathname,
-              menuItemPathname: item.pathname,
+              menuItemPathname: localizeUrl(item.pathname, language),
               rootPathname: localizeUrl('/', language),
             })
 
@@ -63,7 +61,7 @@ const t = useTranslate(Astro)
               <li class="w-full">
                 <Button
                   id={item.identifier}
-                  href={item.pathname}
+                  href={localizeUrl(item.pathname, language)}
                   color={isActive ? 'primary' : 'secondary'}
                   {...(isActive && { 'aria-current': 'page' })}
                 >

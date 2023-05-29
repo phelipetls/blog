@@ -12,3 +12,6 @@ src/env.d.ts
 # ignore files that, when formatted, would insert unwanted whitespace in HTML
 src/components/ReactLink.astro
 src/components/Footer.astro
+
+# typesafe-i18n generated files
+src/i18n/i18n-*.ts

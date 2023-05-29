@@ -29,7 +29,6 @@
     "@codesandbox/sandpack-react": "^2.6.3",
     "@codesandbox/sandpack-themes": "^2.0.21",
     "@floating-ui/dom": "^1.2.7",
-    "@fontsource/fira-sans": "^4.5.10",
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/source-sans-pro": "^5.0.1",
     "@playwright/test": "^1.33.0",

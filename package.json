@@ -14,7 +14,7 @@
     "generate-posts-images": "node ./scripts/generate-posts-images.js",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "copy-pdf-worker": "node ./scripts/copy-pdf-worker.js",
-    "postinstall": "npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync",
+    "postinstall": "npx patch-package && npm run generate-devicons && npm run copy-pdf-worker && npx playwright install && npx astro sync && npx typesafe-i18n --no-watch",
     "prepare": "husky install",
     "typesafe-i18n": "typesafe-i18n"
   },

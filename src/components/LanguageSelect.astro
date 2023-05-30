@@ -5,11 +5,20 @@ import Select from '@components/Select.astro'
 const language = getLanguageFromUrl(Astro.url.pathname)
 
 const t = useTranslate(Astro)
+
+type Props = {
+  isInSideNav?: boolean
+}
+
+const { isInSideNav = false } = Astro.props
 ---
 
 <Select data-language-select aria-label={t.ChooseALanguage()} variant="ghost">
   <option selected={language === 'en'} value="en">English</option>
   <option selected={language === 'pt'} value="pt">Português</option>
+
+  {/* Hacky workaround to fix misaligned Select text in SideNav */}
+  {isInSideNav && <div slot={isInSideNav && 'start-icon'} />}
 </Select>
 
 <script>

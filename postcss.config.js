@@ -17,5 +17,20 @@ module.exports = {
         hexToRgb,
       },
     }),
+    // Workaround to https://github.com/fontsource/fontsource/issues/121
+    // See https://github.com/fontsource/fontsource/issues/121
+    {
+      postcssPlugin: 'postcss-force-font-display-swap',
+      Declaration: {
+        'font-display': (node) => {
+          if (
+            node.parent.name === 'font-face' &&
+            node.parent.type === 'atrule'
+          ) {
+            node.value = 'swap'
+          }
+        },
+      },
+    },
   ],
 }

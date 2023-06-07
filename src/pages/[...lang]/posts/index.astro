@@ -82,7 +82,20 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
             <div class="group col-full grid grid-cols-layout">
               <div id={year} />
 
-              <div class="sticky top-[calc(var(--nav-height)_+_0.5rem)] col-full w-full bg-background bg-opacity-75 px-horizontal-padding py-2 backdrop-blur-sm sm:top-0">
+              <div
+                class:list={[
+                  'sticky',
+                  'top-[calc(var(--nav-height)_+_0.5rem)]',
+                  'col-full',
+                  'w-full',
+                  'bg-background',
+                  'bg-opacity-75',
+                  'px-horizontal-padding',
+                  'py-2',
+                  'backdrop-blur-sm',
+                  'sm:top-0',
+                ]}
+              >
                 <div class="mx-auto flex max-w-2xl flex-row justify-between">
                   <h2 class="m-0 text-2xl">
                     <time datetime={`${year}-01-01`}>{year}</time>

@@ -10,7 +10,7 @@ type Props = {
 
 const date = Astro.props.date
 
-let formattedDate = format(date, 'MMMM dd, yyyy')
+let formattedDate = format(date, 'MMMM dd')
 
 if (getLanguageFromUrl(Astro.url.pathname) === 'pt') {
   formattedDate = format(date, "d ' de ' MMMM", {

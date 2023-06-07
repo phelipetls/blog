@@ -17,14 +17,12 @@ if (getLanguageFromUrl(Astro.url.pathname) === 'pt') {
     locale: ptBR,
   })
 }
-
-const datetime = format(date, 'yyyy-MM-dd')
 ---
 
 <div class="flex items-center gap-2">
   <Calendar />
 
-  <time datetime={datetime}>
+  <time datetime={format(date, 'yyyy-MM-dd')}>
     {formattedDate}
   </time>
 </div>

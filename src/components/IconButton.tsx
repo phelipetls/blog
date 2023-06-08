@@ -29,7 +29,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
     const className = React.useMemo(() => {
       return twMerge(
         clsx(
-          'bg-background',
+          'bg-surface',
           'hover:bg-hover',
           'text-on-background',
           'disabled:bg-disabled',

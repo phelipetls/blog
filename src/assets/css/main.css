@@ -120,6 +120,10 @@
     @apply rounded bg-surface shadow-sm shadow-shadow;
   }
 
+  .card-none {
+    @apply rounded-none bg-background shadow-none;
+  }
+
   .grid-cols-layout > * {
     @apply col-content;
   }

@@ -45,6 +45,7 @@ const pt = {
   NextYear: 'Pŕoximo ano',
   PreviousYear: 'Ano anterior',
   BlogPostsTaggedWith: "Blog posts com a tag '{tag}'",
+  OpenToc: 'Abrir tabela de conteúdo',
 } satisfies BaseTranslation
 
 export default pt

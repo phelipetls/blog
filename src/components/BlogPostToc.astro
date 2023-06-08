@@ -20,96 +20,87 @@ const tocItems = headings.map((heading) => ({
 }))
 ---
 
-{
-  headings.length > 0 && (
+<div class="hidden lg:flex lg:h-full lg:flex-col">
+  <div class:list={['flex', 'items-center', 'gap-2', 'h-10', 'flex-none']}>
+    <List />
+
+    <h2 class="m-0">{t.TableOfContents()}</h2>
+
     <div
-      style={{
-        '--offset-from-top': '1rem',
-      }}
-      class="w-full rounded lg:sticky lg:top-[var(--offset-from-top)] lg:h-[calc(100vh-var(--offset-from-top)_*_2)] lg:bg-surface lg:p-4 lg:shadow-sm lg:shadow-shadow"
+      class="ml-auto flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden"
     >
-      <div class="hidden lg:flex lg:h-full lg:flex-col">
-        <div class="flex justify-between gap-2">
-          <div class="flex items-center gap-2">
-            <List />
+      <ChevronDown />
+    </div>
+  </div>
 
-            <h2 class="m-0">{t.TableOfContents()}</h2>
-          </div>
+  <nav
+    data-toc-wrapper
+    class:list={[
+      'mt-4',
+      'min-h-0',
+      'sm:overflow-y-auto',
+      '[&_a_*]:indent-0',
+      '[&_ol]:m-0',
+      '[&_ol]:list-none',
+      '[&_ol]:indent-4',
+      '[&_ol_li[data-active]>a]:text-primary',
+      '[&_ol_li[data-active]]:before:bg-primary',
+      '[&_ol_li]:relative',
+      '[&_ol_li]:before:absolute',
+      '[&_ol_li]:before:left-0',
+      '[&_ol_li]:before:top-0',
+      '[&_ol_li]:before:h-full',
+      '[&_ol_li]:before:w-[1px]',
+      '[&_ol_li]:before:bg-divider',
+      "[&_ol_li]:before:content-['']",
+      '[&_ol_li_a:hover]:bg-hover',
+      '[&_ol_li_a]:block',
+      '[&_ol_li_a]:truncate',
+      '[&_ol_li_a]:border-b-0',
+      '[&_ol_li_a]:transition-colors',
+      '[&_ol_li_a]:duration-300',
+      '[&_ol_ol]:indent-8',
+      '[&_ol_ol_ol]:indent-12',
+      '[&_ol_ol_ol_ol]:indent-16',
+    ]}
+  >
+    <TOC toc={tocItems} as="number" />
+  </nav>
+</div>
 
-          <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">
-            <ChevronDown />
-          </div>
-        </div>
+<details
+  class="group px-horizontal-padding py-4 lg:hidden"
+  aria-label={t.TableOfContents()}
+>
+  <summary class="list-none">
+    <div class="flex justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <List />
 
-        <nav
-          data-toc-wrapper
-          class:list={[
-            'mt-4',
-            'min-h-0',
-            'sm:overflow-y-auto',
-            '[&_a_*]:indent-0',
-            '[&_ol]:m-0',
-            '[&_ol]:list-none',
-            '[&_ol]:indent-4',
-            '[&_ol_li[data-active]>a]:text-primary',
-            '[&_ol_li[data-active]]:before:bg-primary',
-            '[&_ol_li]:relative',
-            '[&_ol_li]:before:absolute',
-            '[&_ol_li]:before:left-0',
-            '[&_ol_li]:before:top-0',
-            '[&_ol_li]:before:h-full',
-            '[&_ol_li]:before:w-[1px]',
-            '[&_ol_li]:before:bg-divider',
-            "[&_ol_li]:before:content-['']",
-            '[&_ol_li_a:hover]:bg-hover',
-            '[&_ol_li_a]:block',
-            '[&_ol_li_a]:truncate',
-            '[&_ol_li_a]:border-b-0',
-            '[&_ol_li_a]:transition-colors',
-            '[&_ol_li_a]:duration-300',
-            '[&_ol_ol]:indent-8',
-            '[&_ol_ol_ol]:indent-12',
-            '[&_ol_ol_ol_ol]:indent-16',
-          ]}
-        >
-          <TOC toc={tocItems} as="number" />
-        </nav>
+        <h2 class="m-0">{t.TableOfContents()}</h2>
       </div>
 
-      <details
-        class="card group mb-8 px-horizontal-padding py-4 lg:hidden"
-        aria-label={t.TableOfContents()}
+      <div
+        class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden"
       >
-        <summary class="list-none">
-          <div class="flex justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <List />
-
-              <h2 class="m-0">{t.TableOfContents()}</h2>
-            </div>
-
-            <div class="flex items-center transition-transform duration-100 ease-in group-open:rotate-180 lg:hidden">
-              <ChevronDown />
-            </div>
-          </div>
-        </summary>
-
-        <nav
-          data-toc-wrapper
-          class:list={[
-            'mt-4',
-            '[&_ol]:m-0',
-            '[&_ol]:list-outside',
-            '[&_ol]:px-horizontal-padding',
-            '[&_ol_li:not(:first-child)]:mt-1',
-          ]}
-        >
-          <TOC toc={tocItems} as="number" />
-        </nav>
-      </details>
+        <ChevronDown />
+      </div>
     </div>
-  )
-}
+  </summary>
+
+  <nav
+    data-toc-wrapper
+    class:list={[
+      'mt-4',
+      '[&_ol]:m-0',
+      '[&_ol]:list-outside',
+      '[&_ol]:px-horizontal-padding',
+      '[&_ol_li:not(:first-child)]:mt-1',
+    ]}
+  >
+    <TOC toc={tocItems} as="number" />
+  </nav>
+</details>
 
 <script>
   const toc = document.querySelector<HTMLElement>('nav[data-toc-wrapper] ol')

@@ -104,7 +104,6 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                   <div class="flex flex-row gap-2">
                     <IconButton
                       href={`#${prevYear}`}
-                      className="bg-transparent disabled:bg-transparent"
                       variant="rounded-full"
                       disabled={prevYear === null}
                       aria-label={t.PreviousYear()}
@@ -114,7 +113,6 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
 
                     <IconButton
                       href={`#${nextYear}`}
-                      className="bg-transparent disabled:bg-transparent"
                       variant="rounded-full"
                       disabled={nextYear === null}
                       aria-label={t.NextYear()}

@@ -156,3 +156,8 @@
     transform: translateY(-100%);
   }
 }
+
+button,
+[role='button'] {
+  cursor: default;
+}

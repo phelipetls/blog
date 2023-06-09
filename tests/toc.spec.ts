@@ -1,6 +1,42 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Table of contents interactive sidebar', () => {
+  test.describe('On mobile', () => {
+    test.use({ viewport: { width: 375, height: 667 } })
+
+    test('should be visible by default on mobile', async ({ page }) => {
+      await page.goto('/posts/deriving-types-from-data-typescript')
+
+      await expect(
+        page.getByRole('heading', { name: 'Table of contents' })
+      ).toBeVisible()
+    })
+  })
+
+  test('should be visible by default', async ({ page }) => {
+    await page.goto('/posts/deriving-types-from-data-typescript')
+
+    await expect(
+      page.getByRole('heading', { name: 'Table of contents' })
+    ).toBeVisible()
+  })
+
+  test('should be able to toggle toc visibility', async ({ page }) => {
+    await page.goto('/posts/deriving-types-from-data-typescript')
+
+    const tocHeading = page.getByRole('heading', { name: 'Table of contents' })
+
+    await expect(tocHeading).toBeVisible()
+    await page.getByRole('button', { name: 'Close table of contents' }).click()
+    await expect(tocHeading).toBeHidden()
+
+    await page.getByRole('button', { name: 'Open table of contents' }).click()
+    await expect(tocHeading).toBeVisible()
+
+    await page.getByRole('button', { name: 'Close table of contents' }).click()
+    await expect(tocHeading).toBeHidden()
+  })
+
   test('should highlight toc item when its corresponding heading comes into view', async ({
     page,
   }) => {

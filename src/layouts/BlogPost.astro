@@ -168,10 +168,11 @@ const emptyHeadings = headings.length === 0
                   'mb-8',
                   'lg:mb-0',
                   'relative',
+                  'card',
                   'lg:group-data-toc-open:basis-1/3',
                   'lg:group-data-toc-open:ml-auto',
                   'lg:group-data-toc-open:p-4',
-                  'lg:group-data-toc-open:card',
+                  'lg:group-data-toc-closed:card-none',
                   'lg:sticky',
                   'lg:top-[var(--offset-from-top)]',
                   'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
@@ -198,7 +199,7 @@ const emptyHeadings = headings.length === 0
                   <List className="scale-0 transition-transform duration-150 group-data-toc-closed:scale-100 group-data-toc-closed:delay-100" />
                 </IconButton>
 
-                <div class="hidden lg:h-full lg:group-data-toc-open:block">
+                <div class="lg:hidden lg:h-full lg:group-data-toc-open:block">
                   <BlogPostToc headings={headings} />
                 </div>
               </aside>

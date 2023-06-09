@@ -46,6 +46,7 @@ const en = {
   PreviousYear: 'Previous year',
   BlogPostsTaggedWith: "Blog posts tagged with '{tag}'",
   OpenToc: 'Open table of contents',
+  CloseToc: 'Close table of contents',
 } satisfies BaseTranslation
 
 export default en

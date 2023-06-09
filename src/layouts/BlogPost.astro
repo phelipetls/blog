@@ -179,8 +179,11 @@ const emptyHeadings = headings.length === 0
                 ]}
               >
                 <IconButton
-                  data-close-toc
+                  data-toggle-toc
                   variant="rounded-full"
+                  data-open-toc-label={t.OpenToc()}
+                  data-close-toc-label={t.CloseToc()}
+                  aria-label={t.CloseToc()}
                   className={clsx(
                     'absolute',
                     'top-4',
@@ -192,7 +195,6 @@ const emptyHeadings = headings.length === 0
                     '[&_*]:row-start-1',
                     '[&_*]:row-end-1'
                   )}
-                  aria-label={t.OpenToc()}
                 >
                   <X className="scale-0 transition-transform duration-150 group-data-toc-open:scale-100 group-data-toc-open:delay-100" />
 
@@ -222,18 +224,34 @@ const emptyHeadings = headings.length === 0
 </Site>
 
 <script>
-  document.querySelector('[data-close-toc]')?.addEventListener('click', () => {
-    const blogPostContainer = document.querySelector<HTMLElement>(
-      '[data-blog-post-container]'
-    )
+  document
+    .querySelector('[data-toggle-toc]')
+    ?.addEventListener('click', (e) => {
+      const blogPostContainer = document.querySelector<HTMLElement>(
+        '[data-blog-post-container]'
+      )
 
-    if (!blogPostContainer) {
-      return
-    }
+      if (!blogPostContainer) {
+        return
+      }
 
-    const tocIsOpen = blogPostContainer.dataset.toc === 'open'
-    const toggledHasToc = tocIsOpen ? 'closed' : 'open'
+      const toggleTocButton = e.currentTarget as HTMLElement
 
-    blogPostContainer.dataset.toc = toggledHasToc
-  })
+      const toggledTocState =
+        blogPostContainer.dataset.toc === 'open' ? 'closed' : 'open'
+
+      if (toggledTocState === 'open') {
+        toggleTocButton.setAttribute(
+          'aria-label',
+          toggleTocButton.dataset.closeTocLabel ?? ''
+        )
+      } else {
+        toggleTocButton.setAttribute(
+          'aria-label',
+          toggleTocButton.dataset.openTocLabel ?? ''
+        )
+      }
+
+      blogPostContainer.dataset.toc = toggledTocState
+    })
 </script>

@@ -10,6 +10,10 @@ module.exports = {
   content: ['./src/{components,layouts,pages}/**/*.{astro,tsx}'],
   darkMode: 'class',
   theme: {
+    data: {
+      'toc-open': 'toc="open"',
+      'toc-closed': 'toc="closed"',
+    },
     extend: {
       maxWidth: {
         '1/2': '50%',

@@ -156,53 +156,53 @@ const hasToc = headings.length > 0
             <slot />
           </div>
 
-          <aside
-            style={{
-              '--offset-from-top': '1rem',
-            }}
-            class:list={[
-              'card',
-              'min-w-0',
-              'mb-8',
-              'lg:mb-0',
-              'relative',
-              'lg:group-data-[has-toc=true]:flex-1',
-              'lg:group-data-[has-toc=false]:card-none',
-              'lg:p-4',
-              'lg:sticky',
-              'lg:top-[var(--offset-from-top)]',
-              'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
-            ]}
-          >
-            <IconButton
-              data-close-toc
-              variant="rounded-full"
-              className={clsx(
-                'absolute',
-                'top-4',
-                'right-4',
-                'hidden',
-                'lg:grid',
-                '[&_*]:col-start-1',
-                '[&_*]:col-end-1',
-                '[&_*]:row-start-1',
-                '[&_*]:row-end-1'
-              )}
-              aria-label={t.OpenToc()}
-            >
-              <X
-                className="scale-0 transition-transform duration-150 group-data-[has-toc=true]:delay-100 group-data-[has-toc=true]:scale-100"
-              />
+          {
+            headings.length > 0 && (
+              <aside
+                style={{
+                  '--offset-from-top': '1rem',
+                }}
+                class:list={[
+                  'card',
+                  'min-w-0',
+                  'mb-8',
+                  'lg:mb-0',
+                  'relative',
+                  'lg:group-data-[has-toc=true]:flex-1',
+                  'lg:group-data-[has-toc=false]:card-none',
+                  'lg:p-4',
+                  'lg:sticky',
+                  'lg:top-[var(--offset-from-top)]',
+                  'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
+                ]}
+              >
+                <IconButton
+                  data-close-toc
+                  variant="rounded-full"
+                  className={clsx(
+                    'absolute',
+                    'top-4',
+                    'right-4',
+                    'hidden',
+                    'lg:grid',
+                    '[&_*]:col-start-1',
+                    '[&_*]:col-end-1',
+                    '[&_*]:row-start-1',
+                    '[&_*]:row-end-1'
+                  )}
+                  aria-label={t.OpenToc()}
+                >
+                  <X className="scale-0 transition-transform duration-150 group-data-[has-toc=true]:scale-100 group-data-[has-toc=true]:delay-100" />
 
-              <List
-                className="scale-0 transition-transform duration-150 group-data-[has-toc=false]:delay-100 group-data-[has-toc=false]:scale-100"
-              />
-            </IconButton>
+                  <List className="scale-0 transition-transform duration-150 group-data-[has-toc=false]:scale-100 group-data-[has-toc=false]:delay-100" />
+                </IconButton>
 
-            <div class="lg:group-data-[has-toc=false]:hidden lg:h-full">
-              <BlogPostToc headings={headings} />
-            </div>
-          </aside>
+                <div class="lg:h-full lg:group-data-[has-toc=false]:hidden">
+                  <BlogPostToc headings={headings} />
+                </div>
+              </aside>
+            )
+          }
         </div>
       </article>
 

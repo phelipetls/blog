@@ -135,7 +135,7 @@ const hasToc = headings.length > 0
             class:list={[
               'w-full',
               'max-w-prose',
-              'mx-auto',
+              'lg:group-data-[has-toc=false]:mx-auto',
               '[&>pre]:my-8',
               '[&>pre]:full-width-on-mobile',
               '[&>img]:my-8',
@@ -168,7 +168,8 @@ const hasToc = headings.length > 0
                   'mb-8',
                   'lg:mb-0',
                   'relative',
-                  'lg:group-data-[has-toc=true]:flex-1',
+                  'lg:group-data-[has-toc=true]:basis-1/3',
+                  'lg:group-data-[has-toc=true]:ml-auto',
                   'lg:group-data-[has-toc=false]:card-none',
                   'lg:p-4',
                   'lg:sticky',

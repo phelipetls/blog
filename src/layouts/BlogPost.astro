@@ -167,15 +167,33 @@ const emptyHeadings = headings.length === 0
                   'lg:mb-0',
                   'relative',
                   'card',
-                  'lg:group-data-toc-open:basis-1/3',
-                  'lg:group-data-toc-open:ml-auto',
-                  'lg:group-data-toc-open:p-4',
+                  'lg:basis-1/3',
+                  'lg:ml-auto',
+                  'lg:p-4',
                   'lg:group-data-toc-closed:card-none',
+                  'transition-[background-color,box-shadow]',
+                  'duration-300',
                   'lg:sticky',
                   'lg:top-[var(--offset-from-top)]',
                   'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
                 ]}
               >
+                <div
+                  class:list={[
+                    'lg:h-full',
+                    'lg:group-data-toc-open:opacity-1',
+                    'lg:group-data-toc-open:visible',
+                    'lg:group-data-toc-closed:opacity-0',
+                    'lg:group-data-toc-closed:invisible',
+                    'lg:group-data-toc-closed:pointer-events-none',
+                    'transition-opacity',
+                    'duration-300',
+                    'ease-in-out',
+                  ]}
+                >
+                  <BlogPostToc headings={headings} />
+                </div>
+
                 <IconButton
                   data-toggle-toc
                   variant="rounded-full"
@@ -195,7 +213,7 @@ const emptyHeadings = headings.length === 0
                   )}
                   style={{
                     // @ts-expect-error I'm allowed to do this
-                    '--duration': '300ms',
+                    '--duration': '150ms',
                   }}
                 >
                   <X
@@ -220,10 +238,6 @@ const emptyHeadings = headings.length === 0
                     )}
                   />
                 </IconButton>
-
-                <div class="lg:hidden lg:h-full lg:group-data-toc-open:block">
-                  <BlogPostToc headings={headings} />
-                </div>
               </aside>
             )
           }

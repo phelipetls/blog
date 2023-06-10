@@ -182,7 +182,7 @@ const emptyHeadings = headings.length === 0
                   data-toggle-toc
                   variant="rounded-full"
                   data-open-toc-label={t.OpenToc()}
-                  data-close-toc-label={t.CloseToc()}
+                  data-closed-toc-label={t.CloseToc()}
                   aria-label={t.CloseToc()}
                   className={clsx(
                     'absolute',
@@ -246,34 +246,37 @@ const emptyHeadings = headings.length === 0
 </Site>
 
 <script>
-  document
-    .querySelector('[data-toggle-toc]')
-    ?.addEventListener('click', (e) => {
-      const blogPostContainer = document.querySelector<HTMLElement>(
-        '[data-blog-post-container]'
-      )
+  const blogPostContainer = document.querySelector(
+    '[data-blog-post-container]'
+  ) as HTMLElement
 
-      if (!blogPostContainer) {
-        return
-      }
+  const toggleTocButton = document.querySelector(
+    '[data-toggle-toc]'
+  ) as HTMLElement
 
-      const toggleTocButton = e.currentTarget as HTMLElement
+  function openToc() {
+    blogPostContainer?.setAttribute('data-toc', 'open')
+    toggleTocButton.setAttribute(
+      'aria-label',
+      toggleTocButton.dataset.closedTocLabel ?? ''
+    )
+  }
 
-      const toggledTocState =
-        blogPostContainer.dataset.toc === 'open' ? 'closed' : 'open'
+  function closeToc() {
+    blogPostContainer?.setAttribute('data-toc', 'closed')
+    toggleTocButton.setAttribute(
+      'aria-label',
+      toggleTocButton.dataset.openTocLabel ?? ''
+    )
+  }
 
-      if (toggledTocState === 'open') {
-        toggleTocButton.setAttribute(
-          'aria-label',
-          toggleTocButton.dataset.closeTocLabel ?? ''
-        )
-      } else {
-        toggleTocButton.setAttribute(
-          'aria-label',
-          toggleTocButton.dataset.openTocLabel ?? ''
-        )
-      }
+  toggleTocButton?.addEventListener('click', () => {
+    const tocIsOpen = blogPostContainer.dataset.toc === 'open'
 
-      blogPostContainer.dataset.toc = toggledTocState
-    })
+    if (tocIsOpen) {
+      closeToc()
+    } else {
+      openToc()
+    }
+  })
 </script>

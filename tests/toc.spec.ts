@@ -41,6 +41,22 @@ test.describe('Table of contents interactive sidebar', () => {
     await expect(tocHeading).toBeHidden()
   })
 
+  test('should remember user preference about toc being open/closed', async ({
+    page,
+  }) => {
+    await page.goto('/posts/deriving-types-from-data-typescript')
+
+    const tocHeading = page.getByRole('heading', { name: 'Table of contents' })
+
+    await page.getByRole('button', { name: 'Close table of contents' }).click()
+    await page.reload()
+    await expect(tocHeading).toBeHidden()
+
+    await page.getByRole('button', { name: 'Open table of contents' }).click()
+    await page.reload()
+    await expect(tocHeading).toBeVisible()
+  })
+
   test('should highlight toc item when its corresponding heading comes into view', async ({
     page,
   }) => {

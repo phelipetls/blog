@@ -254,8 +254,18 @@ const emptyHeadings = headings.length === 0
     '[data-toggle-toc]'
   ) as HTMLElement
 
+  const storedTocState = localStorage.getItem('__preferred_toc_state')
+  if (storedTocState !== null) {
+    if (storedTocState === 'open') {
+      openToc()
+    } else {
+      closeToc()
+    }
+  }
+
   function openToc() {
     blogPostContainer?.setAttribute('data-toc', 'open')
+    localStorage.setItem('__preferred_toc_state', 'open')
     toggleTocButton.setAttribute(
       'aria-label',
       toggleTocButton.dataset.closedTocLabel ?? ''
@@ -264,6 +274,7 @@ const emptyHeadings = headings.length === 0
 
   function closeToc() {
     blogPostContainer?.setAttribute('data-toc', 'closed')
+    localStorage.setItem('__preferred_toc_state', 'closed')
     toggleTocButton.setAttribute(
       'aria-label',
       toggleTocButton.dataset.openTocLabel ?? ''

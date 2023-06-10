@@ -200,9 +200,27 @@ const emptyHeadings = headings.length === 0
                     '--duration': '300ms',
                   }}
                 >
-                  <X className="scale-0 transition-transform duration-[var(--duration)] ease-out group-data-toc-open:scale-100 group-data-toc-open:delay-[var(--duration)]" />
+                  <X
+                    className={clsx(
+                      'scale-0',
+                      'transition-transform',
+                      'duration-[var(--duration)]',
+                      'ease-out',
+                      'group-data-toc-open:scale-100',
+                      'group-data-toc-open:delay-[var(--duration)]'
+                    )}
+                  />
 
-                  <List className="scale-0 transition-transform duration-[var(--duration)] ease-in group-data-toc-closed:scale-100 group-data-toc-closed:delay-[var(--duration)" />
+                  <List
+                    className={clsx(
+                      'scale-0',
+                      'transition-transform',
+                      'duration-[var(--duration)]',
+                      'ease-in',
+                      'group-data-toc-closed:scale-100',
+                      'group-data-toc-closed:delay-[var(--duration)'
+                    )}
+                  />
                 </IconButton>
 
                 <div class="lg:hidden lg:h-full lg:group-data-toc-open:block">

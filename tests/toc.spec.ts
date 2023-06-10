@@ -10,6 +10,10 @@ test.describe('Table of contents interactive sidebar', () => {
       await expect(
         page.getByRole('heading', { name: 'Table of contents' })
       ).toBeVisible()
+
+      await expect(
+        page.getByRole('button', { name: 'Close table of contents' })
+      ).toBeHidden()
     })
   })
 

@@ -166,27 +166,24 @@ const emptyHeadings = headings.length === 0
                   'mb-8',
                   'lg:mb-0',
                   'relative',
-                  'card',
                   'lg:basis-1/3',
-                  'lg:ml-auto',
-                  'lg:p-4',
-                  'lg:group-data-toc-closed:card-none',
-                  'transition-[background-color,box-shadow]',
-                  'duration-300',
                   'lg:sticky',
                   'lg:top-[var(--offset-from-top)]',
                   'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
                 ]}
               >
                 <div
+                  data-blog-post-toc-container
                   class:list={[
+                    'card',
                     'lg:h-full',
-                    'lg:group-data-toc-open:opacity-1',
-                    'lg:group-data-toc-open:visible',
-                    'lg:group-data-toc-closed:opacity-0',
-                    'lg:group-data-toc-closed:invisible',
+                    'lg:p-4',
+                    'lg:ml-auto',
+                    'lg:group-data-toc-open:scale-1',
+                    'lg:group-data-toc-closed:scale-0',
                     'lg:group-data-toc-closed:pointer-events-none',
-                    'transition-opacity',
+                    'lg:origin-top-right',
+                    'transition-transform',
                     'duration-300',
                     'ease-in-out',
                   ]}
@@ -266,6 +263,8 @@ const emptyHeadings = headings.length === 0
     '[data-toggle-toc]'
   ) as HTMLElement
 
+  const tocContainer = document.querySelector('[data-blog-post-toc-container]')
+
   const storedTocState = localStorage.getItem('__preferred_toc_state')
   if (storedTocState !== null) {
     if (storedTocState === 'open') {
@@ -276,6 +275,7 @@ const emptyHeadings = headings.length === 0
   }
 
   function openToc() {
+    tocContainer?.classList.remove('invisible')
     blogPostContainer?.setAttribute('data-toc', 'open')
     localStorage.setItem('__preferred_toc_state', 'open')
     toggleTocButton.setAttribute(
@@ -290,6 +290,16 @@ const emptyHeadings = headings.length === 0
     toggleTocButton.setAttribute(
       'aria-label',
       toggleTocButton.dataset.openTocLabel ?? ''
+    )
+
+    tocContainer?.addEventListener(
+      'transitionend',
+      () => {
+        tocContainer.classList.add('invisible')
+      },
+      {
+        once: true,
+      }
     )
   }
 

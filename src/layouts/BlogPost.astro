@@ -124,37 +124,12 @@ const emptyHeadings = headings.length === 0
           class:list={[
             'group',
             'flex',
-            'flex-col-reverse',
+            'flex-col',
             'w-full',
             'lg:gap-8',
-            'lg:flex-row',
+            'lg:flex-row-reverse',
           ]}
         >
-          <div
-            data-blog-post
-            class:list={[
-              'w-full',
-              'max-w-prose',
-              '[&>pre]:my-8',
-              '[&>pre]:full-width-on-mobile',
-              '[&>img]:my-8',
-              '[&_img]:mx-auto',
-              '[&>hr]:border-0',
-              '[&>hr]:text-center',
-              "[&>hr]:after:content-['⁂']",
-              '[&>figure]:my-8',
-              '[&>figure]:full-width-on-mobile',
-              '[&>astro-island>div]:my-8',
-              '[&>lite-youtube]:my-8',
-              '[&>blockquote]:my-8',
-              '[&>figure_video]:min-h-[15em]',
-              '[&_.katex-display]:overflow-x-auto',
-              '[&_.katex-display]:overflow-y-hidden',
-            ]}
-          >
-            <slot />
-          </div>
-
           {
             !emptyHeadings && (
               <aside
@@ -265,6 +240,31 @@ const emptyHeadings = headings.length === 0
               </aside>
             )
           }
+
+          <div
+            data-blog-post
+            class:list={[
+              'w-full',
+              'max-w-prose',
+              '[&>pre]:my-8',
+              '[&>pre]:full-width-on-mobile',
+              '[&>img]:my-8',
+              '[&_img]:mx-auto',
+              '[&>hr]:border-0',
+              '[&>hr]:text-center',
+              "[&>hr]:after:content-['⁂']",
+              '[&>figure]:my-8',
+              '[&>figure]:full-width-on-mobile',
+              '[&>astro-island>div]:my-8',
+              '[&>lite-youtube]:my-8',
+              '[&>blockquote]:my-8',
+              '[&>figure_video]:min-h-[15em]',
+              '[&_.katex-display]:overflow-x-auto',
+              '[&_.katex-display]:overflow-y-hidden',
+            ]}
+          >
+            <slot />
+          </div>
         </div>
       </article>
 

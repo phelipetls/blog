@@ -197,24 +197,33 @@ const emptyHeadings = headings.length === 0
                   data-open-toc-label={t.OpenToc()}
                   data-closed-toc-label={t.CloseToc()}
                   aria-label={t.CloseToc()}
+                  style={{
+                    // @ts-expect-error I'm allowed to do this
+                    '--duration': '150ms',
+                  }}
                   className={clsx(
                     'absolute',
                     'top-4',
                     'right-4',
                     'hidden',
                     'lg:grid',
-                    '[&_*]:col-start-1',
-                    '[&_*]:col-end-1',
-                    '[&_*]:row-start-1',
-                    '[&_*]:row-end-1'
+                    'lg:min-w-0',
+                    'lg:group-data-toc-open:grid-cols-[0fr_max-content]',
+                    'lg:group-data-toc-closed:grid-cols-[1fr_max-content]',
+                    'transition-all',
+                    'duration-[var(--duration)]',
+                    'ease-in-out',
+                    'overflow-hidden',
+                    'lg:justify-center',
+                    'lg:items-center'
                   )}
-                  style={{
-                    // @ts-expect-error I'm allowed to do this
-                    '--duration': '150ms',
-                  }}
                 >
                   <X
                     className={clsx(
+                      'col-start-2',
+                      'col-end-2',
+                      'row-start-1',
+                      'row-end-1',
                       'scale-0',
                       'transition-transform',
                       'duration-[var(--duration)]',
@@ -226,6 +235,10 @@ const emptyHeadings = headings.length === 0
 
                   <List
                     className={clsx(
+                      'col-start-2',
+                      'col-end-2',
+                      'row-start-1',
+                      'row-end-1',
                       'scale-0',
                       'transition-transform',
                       'duration-[var(--duration)]',
@@ -234,6 +247,17 @@ const emptyHeadings = headings.length === 0
                       'group-data-toc-closed:delay-[var(--duration)'
                     )}
                   />
+
+                  <div
+                    class:list={[
+                      'col-start-1',
+                      'col-end-1',
+                      'group-data-toc-closed:mx-2',
+                      'truncate',
+                    ]}
+                  >
+                    {t.OpenToc()}
+                  </div>
                 </IconButton>
               </aside>
             )

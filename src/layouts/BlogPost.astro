@@ -146,29 +146,6 @@ const emptyHeadings = headings.length === 0
                   'lg:h-[calc(100vh-var(--offset-from-top)_*_2)]',
                 ]}
               >
-                <div
-                  data-blog-post-toc-container
-                  data-preload
-                  class:list={[
-                    'card',
-                    'lg:h-full',
-                    'lg:p-4',
-                    'lg:ml-auto',
-                    'lg:group-data-toc-open:translate-x-0',
-                    'lg:group-data-toc-open:scale-x-1',
-                    'lg:group-data-toc-open:opacity-1',
-                    'lg:group-data-toc-closed:translate-x-full',
-                    'lg:group-data-toc-closed:opacity-0',
-                    'lg:group-data-toc-closed:scale-x-0',
-                    'lg:group-data-toc-closed:pointer-events-none',
-                    'transition-[transform,opacity]',
-                    'duration-300',
-                    'ease-in-out',
-                  ]}
-                >
-                  <BlogPostToc headings={headings} />
-                </div>
-
                 <IconButton
                   data-toggle-toc
                   variant="rounded-full"
@@ -181,6 +158,7 @@ const emptyHeadings = headings.length === 0
                   }}
                   data-preload
                   className={clsx(
+                    'z-1',
                     'absolute',
                     'top-4',
                     'right-4',
@@ -237,6 +215,29 @@ const emptyHeadings = headings.length === 0
                     {t.OpenToc()}
                   </div>
                 </IconButton>
+
+                <div
+                  data-blog-post-toc-container
+                  data-preload
+                  class:list={[
+                    'card',
+                    'lg:h-full',
+                    'lg:p-4',
+                    'lg:ml-auto',
+                    'lg:group-data-toc-open:translate-x-0',
+                    'lg:group-data-toc-open:scale-x-1',
+                    'lg:group-data-toc-open:opacity-1',
+                    'lg:group-data-toc-closed:translate-x-full',
+                    'lg:group-data-toc-closed:opacity-0',
+                    'lg:group-data-toc-closed:scale-x-0',
+                    'lg:group-data-toc-closed:pointer-events-none',
+                    'transition-[transform,opacity]',
+                    'duration-300',
+                    'ease-in-out',
+                  ]}
+                >
+                  <BlogPostToc headings={headings} />
+                </div>
               </aside>
             )
           }

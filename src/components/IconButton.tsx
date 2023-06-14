@@ -40,7 +40,8 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           'transition-colors',
           'duration-300',
           {
-            'rounded-full p-2': props.variant === 'rounded-full',
+            'h-10 flex items-center rounded-full px-2':
+              props.variant === 'rounded-full',
             'rounded border border-divider p-1 shadow-sm shadow-shadow':
               props.variant === 'rounded',
           },

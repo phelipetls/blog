@@ -24,6 +24,7 @@ module.exports = {
       },
       zIndex: {
         '-1': '-1',
+        1: '1',
       },
       spacing: {
         'horizontal-padding': 'var(--horizontal-padding)',

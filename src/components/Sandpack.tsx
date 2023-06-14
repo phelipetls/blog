@@ -177,7 +177,7 @@ function CustomSandpack(props: CustomSandpackProps) {
               'top-3',
               '-translate-x-1/2',
               'transition-opacity',
-              'duration-500',
+              'duration-300',
               'opacity-0',
               'pointer-events-none',
               'peer-hover:opacity-100',

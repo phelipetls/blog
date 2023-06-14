@@ -126,7 +126,7 @@ const emptyHeadings = headings.length === 0
             'flex',
             'flex-col',
             'lg:gap-8',
-            'lg:flex-row-reverse',
+            !emptyHeadings && 'lg:flex-row-reverse',
           ]}
         >
           {

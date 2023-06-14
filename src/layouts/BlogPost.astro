@@ -302,7 +302,6 @@ const emptyHeadings = headings.length === 0
   }
 
   function openToc() {
-    tocContainer?.classList.remove('invisible')
     blogPostContainer?.setAttribute('data-toc', 'open')
     localStorage.setItem('__preferred_toc_state', 'open')
     toggleTocButton.setAttribute(
@@ -318,16 +317,6 @@ const emptyHeadings = headings.length === 0
       'aria-label',
       toggleTocButton.dataset.openTocLabel ?? ''
     )
-
-    tocContainer?.addEventListener(
-      'transitionend',
-      () => {
-        tocContainer.classList.add('invisible')
-      },
-      {
-        once: true,
-      }
-    )
   }
 
   toggleTocButton?.addEventListener('click', () => {
@@ -335,8 +324,18 @@ const emptyHeadings = headings.length === 0
 
     if (tocIsOpen) {
       closeToc()
+      tocContainer?.addEventListener(
+        'transitionend',
+        () => {
+          tocContainer.classList.add('invisible')
+        },
+        {
+          once: true,
+        }
+      )
     } else {
       openToc()
+      tocContainer?.classList.remove('invisible')
     }
   })
 </script>

@@ -149,6 +149,7 @@ const emptyHeadings = headings.length === 0
               >
                 <div
                   data-blog-post-toc-container
+                  data-preload
                   class:list={[
                     'card',
                     'lg:h-full',
@@ -179,6 +180,7 @@ const emptyHeadings = headings.length === 0
                     // @ts-expect-error I'm allowed to do this
                     '--duration': '150ms',
                   }}
+                  data-preload
                   className={clsx(
                     'absolute',
                     'top-4',

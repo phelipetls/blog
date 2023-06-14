@@ -41,6 +41,8 @@
   })
 
   window.addEventListener('load', function () {
-    document.body.removeAttribute('data-preload')
+    document.querySelectorAll('[data-preload]').forEach((elem) => {
+      elem.removeAttribute('data-preload')
+    })
   })
 </script>

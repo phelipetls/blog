@@ -8,6 +8,7 @@ import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
 import '@assets/css/twoslash.css'
 import IconButton from './IconButton'
+import clsx from 'clsx'
 
 const t = useTranslate(Astro)
 
@@ -83,6 +84,17 @@ const devIconName = isDevIconName(lang)
   : getDevIconNameByShikiLang(lang)
 
 const shouldShowHeader = title !== '' || langName !== ''
+
+const codeBlockButtonClassNames = [
+  'opacity-0',
+  'pointer-events-none',
+  'transition-opacity',
+  'duration-300',
+  'hover:opacity-100',
+  'hover:pointer-events-auto',
+  'focus-visible:opacity-100',
+  'focus-visible:pointer-events-auto',
+]
 ---
 
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
@@ -164,19 +176,18 @@ const shouldShowHeader = title !== '' || langName !== ''
       'right-[var(--horizontal-padding)]',
       'text-2xl',
       '[&_svg]:h-[1em] [&_svg]:w-[1em]',
-      '[&_:is(button,a)]:opacity-0',
-      '[&_:is(button,a)]:pointer-events-none',
-      '[&_:is(button,a)]:transition-opacity',
-      '[&_:is(button,a)]:duration-300',
-      '[&_:is(button,a)]:hover:opacity-100',
-      '[&_:is(button,a)]:hover:pointer-events-auto',
       'peer-hover:[&_:is(button,a)]:opacity-100',
       'peer-hover:[&_:is(button,a)]:pointer-events-auto',
     ]}
   >
     {
       playgroundURL && (
-        <IconButton variant="rounded" href={playgroundURL} target="_blank">
+        <IconButton
+          variant="rounded"
+          href={playgroundURL}
+          target="_blank"
+          className={clsx(...codeBlockButtonClassNames)}
+        >
           <DevIcon name="Typescript" />
         </IconButton>
       )
@@ -188,6 +199,7 @@ const shouldShowHeader = title !== '' || langName !== ''
       successTooltipText={t.Copied() + '!'}
       errorTooltipText={t.FailedToCopy()}
       code={codeToCopy}
+      className={clsx(...codeBlockButtonClassNames)}
     />
   </div>
 </div>

@@ -1,6 +1,20 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Copy code', () => {
+  test('Button to copy code should be visible when focused', async ({
+    page,
+  }) => {
+    await page.goto('/posts/bash-for-javascript-developers')
+
+    const copyCodeButton = page
+      .getByRole('button', { name: /copy code/i })
+      .first()
+    await copyCodeButton.focus()
+
+    await expect(copyCodeButton).toBeVisible()
+    await expect(copyCodeButton).not.toHaveCSS('opacity', '0')
+  })
+
   test.describe('Clipboard', () => {
     test.skip(({ browserName }) => browserName !== 'chromium')
 

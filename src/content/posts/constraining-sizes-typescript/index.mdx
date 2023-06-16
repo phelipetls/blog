@@ -1,0 +1,228 @@
+---
+title: Constraining data size with TypeScript
+tags: [typescript]
+date: 2023-06-16
+---
+
+import Warn from '@components/BlogPostWarn.astro'
+
+Ever wondered how to require an array to be non-empty or of a specific length
+at the type-level? Or to require an object to have at least one property? In
+this post, I want to explore how to this with TypeScript.
+
+These types aren't often needed in practice, but I think learning about it can
+improve our understanding of TypeScript.
+
+# Arrays
+
+## Empty arrays
+
+The empty array seems to be the easiest:
+
+```tsx twoslash
+type EmptyArray = []
+
+// @errors: 2322
+const nonEmptyArray: EmptyArray = [1, 2, 3]
+const emptyArray: EmptyArray = []
+```
+
+It even prevents us from mutating the array:
+
+```tsx twoslash
+// @errors: 2345
+type EmptyArray = []
+
+const emptyArray: EmptyArray = []
+emptyArray.push(1)
+```
+
+I honestly thought this would be more complicated, but apparently it isn't.
+
+## Non-empty arrays
+
+Let's try to create a type for non-empty arrays now.
+
+The trick is to use [rest
+elements](https://devblogs.microsoft.com/typescript/announcing-typescript-4-2-beta/#leading-middle-rest-elements-in-tuple-types)
+in tuple types -- which are meant to model arrays of specific lengths or types.
+
+Since we don't care about the specific type, we'll just use a tuple of
+`unknown`. The array should have at least one `unknown` type and the "rest" can
+be any number of `unknown`s:
+
+```tsx twoslash
+type NonEmptyArray = [unknown, ...unknown[]]
+
+// @errors: 2322
+const nonEmptyArray: NonEmptyArray = [1, 2, 3]
+const emptyArray: NonEmptyArray = []
+```
+
+# Strings
+
+## Empty strings
+
+Empty string are as easy to represent as empty arrays:
+
+```tsx twoslash
+// @errors: 2322 2588
+type EmptyString = ''
+
+const nonEmptyString: EmptyString = 'foo'
+const emptyString: EmptyString = ''
+
+emptyString += 'bar'
+```
+
+## Non-empty strings
+
+Non-empty strings are way trickier. Unfortunately, I don't think it's possible
+to do it with current TypeScript features.
+
+I initially thought the solution would involve template literal types, which is
+correct... Except it's totally impractical and inelegant:
+
+```tsx twoslash
+// @errors: 2322
+type Character = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+
+type NonEmptyString = `${Character}${string}`
+
+const nonEmptyString: NonEmptyString = 'foo'
+const emptyString: NonEmptyString = ''
+```
+
+The other, more practical, solution is to use a generic conditional type which
+will return `never` when the string is empty:
+
+```tsx twoslash
+// @errors: 2322
+type NonEmptyString<T extends string = string> = T extends '' ? never : T
+
+const nonEmptyString: NonEmptyString<'foo'> = 'foo'
+const emptyString: NonEmptyString<''> = ''
+```
+
+This type is inconvenient to use (due to repetition), it's less bad if we're
+using it in a function, but the error message isn't very helpful:
+
+```tsx twoslash
+// @errors: 2345
+type NonEmptyString<T extends string = string> = T extends '' ? never : T
+
+function dontPassAnEmptyString<T extends string = string>(
+  str: NonEmptyString<T>
+) {
+  return str
+}
+
+const nonEmptyString = dontPassAnEmptyString('foo')
+const emptyString = dontPassAnEmptyString('')
+```
+
+# Objects
+
+## Empty objects
+
+It would be reasonable to attempt to model an empty object with just a `{}`, as
+we did with strings. But that doesn't appear to do what we want, because we can
+assign a non-empty object to it anyway:
+
+### `{}`
+
+```tsx twoslash
+type EmptyObject = {}
+
+const emptyObj: EmptyObject = {}
+const nonEmptyObj: EmptyObject = { foo: 'bar' }
+```
+
+In fact, the type `{}` actually means "any non-nullish value". [You may already
+know this if you're a `typescript-eslint`
+user](https://github.com/typescript-eslint/typescript-eslint/issues/2063#issuecomment-675156492):
+
+```tsx twoslash
+// @errors: 2322
+type EmptyObject = {}
+
+const emptyObj: EmptyObject = {}
+const nonEmptyObj: EmptyObject = { foo: 'bar' }
+const one: EmptyObject = 1
+const str: EmptyObject = 'foo'
+const nullish: EmptyObject = null
+const notDefined: EmptyObject = undefined
+```
+
+<Warn>
+
+`{}` does not work as a model to empty objects. It means any non-nullish value.
+
+</Warn>
+
+### `Record<string, never>`
+
+The closest we can get to model an empty object is to use `Record<string,
+never>`.
+
+```tsx twoslash
+// @errors: 2322 2339
+type EmptyObject = Record<string, never>
+
+const emptyObj: EmptyObject = {}
+const nonEmptyObj: EmptyObject = { foo: 'bar' }
+
+nonEmptyObj.foo = 'bar'
+```
+
+This works because it means ["an error will be thrown at runtime if you try to
+access a property in this
+object"](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856),
+which isn't correct for an empty object, but it works in that it breaks the
+build if a developer tries to access a property.
+
+### `object`
+
+[TypeScript's lead developer doesn't seem to like
+the previous solution](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856),
+but his suggestion to use `object` doesn't work either -- I can still assign a
+non-empty object to it -- just not directly mutate it.
+
+```tsx twoslash
+// @errors: 2339
+type EmptyObject = object
+
+const emptyObj: EmptyObject = {}
+const nonEmptyObj: EmptyObject = { foo: 'bar' }
+
+nonEmptyObj.foo = 'bar'
+```
+
+This makes sense, `{ foo: 'bar' }` is an object after all. But TypeScript won't
+allow me to directly access the property `.foo` because it doesn't know that
+it's safe -- it could potentially generate a runtime error.
+
+### `Record<never, never>`
+
+I also thought about using `Record<never, never>`, but it doesn't work because
+it turns out to effectively be `{}`:
+
+```tsx twoslash
+// @errors: 2339
+type EmptyObject = Record<never, never>
+//   ^?
+
+const emptyObj: EmptyObject = {}
+const nonEmptyObj: EmptyObject = { foo: 'bar' }
+
+nonEmptyObj.foo = 'bar'
+```
+
+## Non-empty objects
+
+```tsx twoslash
+type NonEmptyObject = Record<string, unknown>
+
+const emptyObj: NonEmptyObject = {}
+const nonEmptyObj: NonEmptyObject = { foo: 'bar' }
+```

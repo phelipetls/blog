@@ -2,13 +2,11 @@
 title: Constraining data size with TypeScript
 tags: [typescript]
 date: 2023-06-16
+draft: true
 ---
 
-import Warn from '@components/BlogPostWarn.astro'
-
 Ever wondered how to require an array to be non-empty or of a specific length
-at the type-level? Or to require an object to have at least one property? In
-this post, I want to explore how to this with TypeScript.
+at the type-level? In this post, I want to explore how to this with TypeScript.
 
 These types aren't often needed in practice, but I think learning about it can
 improve our understanding of TypeScript.
@@ -119,110 +117,4 @@ function dontPassAnEmptyString<T extends string = string>(
 
 const nonEmptyString = dontPassAnEmptyString('foo')
 const emptyString = dontPassAnEmptyString('')
-```
-
-# Objects
-
-## Empty objects
-
-It would be reasonable to attempt to model an empty object with just a `{}`, as
-we did with strings. But that doesn't appear to do what we want, because we can
-assign a non-empty object to it anyway:
-
-### `{}`
-
-```tsx twoslash
-type EmptyObject = {}
-
-const emptyObj: EmptyObject = {}
-const nonEmptyObj: EmptyObject = { foo: 'bar' }
-```
-
-In fact, the type `{}` actually means "any non-nullish value". [You may already
-know this if you're a `typescript-eslint`
-user](https://github.com/typescript-eslint/typescript-eslint/issues/2063#issuecomment-675156492):
-
-```tsx twoslash
-// @errors: 2322
-type EmptyObject = {}
-
-const emptyObj: EmptyObject = {}
-const nonEmptyObj: EmptyObject = { foo: 'bar' }
-const one: EmptyObject = 1
-const str: EmptyObject = 'foo'
-const nullish: EmptyObject = null
-const notDefined: EmptyObject = undefined
-```
-
-<Warn>
-
-`{}` does not work as a model to empty objects. It means any non-nullish value.
-
-</Warn>
-
-### `Record<string, never>`
-
-The closest we can get to model an empty object is to use `Record<string,
-never>`.
-
-```tsx twoslash
-// @errors: 2322 2339
-type EmptyObject = Record<string, never>
-
-const emptyObj: EmptyObject = {}
-const nonEmptyObj: EmptyObject = { foo: 'bar' }
-
-nonEmptyObj.foo = 'bar'
-```
-
-This works because it means ["an error will be thrown at runtime if you try to
-access a property in this
-object"](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856),
-which isn't correct for an empty object, but it works in that it breaks the
-build if a developer tries to access a property.
-
-### `object`
-
-[TypeScript's lead developer doesn't seem to like
-the previous solution](https://github.com/microsoft/TypeScript/issues/47486#issuecomment-1015671856),
-but his suggestion to use `object` doesn't work either -- I can still assign a
-non-empty object to it -- just not directly mutate it.
-
-```tsx twoslash
-// @errors: 2339
-type EmptyObject = object
-
-const emptyObj: EmptyObject = {}
-const nonEmptyObj: EmptyObject = { foo: 'bar' }
-
-nonEmptyObj.foo = 'bar'
-```
-
-This makes sense, `{ foo: 'bar' }` is an object after all. But TypeScript won't
-allow me to directly access the property `.foo` because it doesn't know that
-it's safe -- it could potentially generate a runtime error.
-
-### `Record<never, never>`
-
-I also thought about using `Record<never, never>`, but it doesn't work because
-it turns out to effectively be `{}`:
-
-```tsx twoslash
-// @errors: 2339
-type EmptyObject = Record<never, never>
-//   ^?
-
-const emptyObj: EmptyObject = {}
-const nonEmptyObj: EmptyObject = { foo: 'bar' }
-
-nonEmptyObj.foo = 'bar'
-```
-
-## Non-empty objects
-
-```tsx twoslash
-type NonEmptyObject = Record<string, unknown>
-
-const emptyObj: NonEmptyObject = {}
-const nonEmptyObj: NonEmptyObject = { foo: 'bar' }
 ```

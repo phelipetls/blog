@@ -1,0 +1,47 @@
+---
+title: Negative type guards in TypeScript
+date: 2023-07-01
+draft: true
+tags: [typescript]
+---
+
+Type guards are functions in TypeScript that perform a runtime check, e.g.
+checking if a value is a boolean, with some type guarantees. It usually takes
+the form of `isBoolean`, but what about negative type guards, like
+`isNotBoolean`?
+
+# User-defined type guards in TypeScript
+
+In the code snippet below, the `isBoolean` function acts a type guard:
+
+```ts twoslash {7-8}
+function isBoolean(value: unknown): value is boolean {
+  return typeof value === 'boolean'
+}
+
+const value: unknown = 0
+
+if (isBoolean(value)) {
+  console.log(value)
+  //          ^?
+} else {
+  console.log(value)
+  //          ^?
+}
+```
+
+```ts twoslash {7-8}
+function isNotBoolean<T>(value: T | boolean): value is T {
+  return typeof value !== 'boolean'
+}
+
+const value: unknown = 0
+
+if (isNotBoolean(value)) {
+  console.log(value)
+  //          ^?
+} else {
+  console.log(value)
+  //          ^?
+}
+```

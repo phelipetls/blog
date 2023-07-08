@@ -30,7 +30,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
       'appearance-none',
       'text-center',
       'row-start-1',
-      // FIXME: not using col-span-full is terrible, but I did not make it work otherwise
+      // TODO: not using col-span-full is terrible, but I did not make it work otherwise
       'col-[1_/_calc(var(--cols)+1)]',
       hasStartIcon ? 'px-8' : 'pr-8',
     ]}

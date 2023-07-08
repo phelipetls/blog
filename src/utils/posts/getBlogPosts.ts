@@ -4,11 +4,11 @@ import { getCollection } from 'astro:content'
 export function getBlogPosts(language: Language) {
   if (language === 'pt') {
     return getCollection('posts', (blogPost) => {
-      return blogPost.id.endsWith('.pt.mdx')
+      return blogPost.id.endsWith('.pt.mdx') && !blogPost.data.draft
     })
   }
 
   return getCollection('posts', (blogPost) => {
-    return !blogPost.id.endsWith('.pt.mdx')
+    return !blogPost.id.endsWith('.pt.mdx') && !blogPost.data.draft
   })
 }

@@ -9,9 +9,4 @@ export const MAIN_MENU_ITEMS = [
     identifier: 'posts',
     pathname: '/posts',
   },
-  {
-    name: 'Résumé',
-    identifier: 'resume',
-    pathname: '/resume',
-  },
 ] as const

@@ -168,8 +168,8 @@ function CustomSandpack(props: CustomSandpackProps) {
 
           <CopyCodeBlockButton
             // TODO: internationalize this
-            successTooltipText={'Copied'}
-            errorTooltipText={'Error'}
+            successText={'Copied!'}
+            errorText={'Failed to copy'}
             code={files[activeFile].code}
             className={clsx(
               'absolute',

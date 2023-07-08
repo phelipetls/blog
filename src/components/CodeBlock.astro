@@ -167,11 +167,7 @@ const shouldShowHeader = title !== '' || langName !== ''
   >
     {
       playgroundURL && (
-        <IconButton
-          variant="rounded"
-          href={playgroundURL}
-          target="_blank"
-        >
+        <IconButton variant="rounded" href={playgroundURL} target="_blank">
           <DevIcon name="Typescript" />
         </IconButton>
       )
@@ -179,9 +175,8 @@ const shouldShowHeader = title !== '' || langName !== ''
 
     <CopyCodeBlockButton
       client:load
-      aria-label={t.CopyCodeButtonLabel()}
-      successTooltipText={t.Copied() + '!'}
-      errorTooltipText={t.FailedToCopy()}
+      successText={t.Copied() + '!'}
+      errorText={t.FailedToCopy()}
       code={codeToCopy}
     />
   </div>

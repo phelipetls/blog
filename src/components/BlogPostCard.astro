@@ -13,7 +13,7 @@ type Props = {
 }
 
 const { blogPost } = Astro.props
-const { title, tags, date } = blogPost.data
+const { title, tags, date, description } = blogPost.data
 
 const {
   remarkPluginFrontmatter: { summary, readingTime },
@@ -33,7 +33,7 @@ const {
   </div>
 
   <div class="my-4">
-    {summary}
+    {description ?? summary}
   </div>
 
   {

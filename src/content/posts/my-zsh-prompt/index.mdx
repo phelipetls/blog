@@ -1,0 +1,186 @@
+---
+title: 'My zsh prompt'
+date: 2023-07-16
+tags: [zsh]
+description: Tips and tricks to build your own custom Zsh prompt
+---
+
+import Image from '@components/BlogPostImage.astro'
+import Warn from '@components/BlogPostWarn.astro'
+
+import ColoredPrompt from './_colored-prompt.png'
+import GitPrompt from './_git-prompt.png'
+import ErrorPrompt from './_error-prompt.png'
+import BackgroundJobPrompt from './_background-job-prompt.png'
+
+I've been happy with my Zsh prompt for some time now, it probably isn't worth
+of a blog post but I did need to read the manual to come up with it so maybe it
+is.
+
+# Default
+
+By default, it looks like this:
+
+```
+phelipe @ ~/dotfiles %
+```
+
+If we don't care about colors, the code for this would be
+
+```sh title="~/.zshrc"
+export PROMPT='%n @ %~ %#'
+```
+
+# With colors
+
+<Image
+  title=""
+  alt="A zsh shell session with the prompt showing 'phelipe @ ~/Projetos/blog %' but now with colors"
+  src={ColoredPrompt}
+/>
+
+But we do care about colors, so let's do that.
+
+To give text a foreground color we surround it with `%F{red}textf`. And,
+similarly, to bold text we surround it with `%Btext%b`:
+
+```sh title="~/.zshrc"
+export PROMPT='\
+%B%F{green}%n %b%f\
+%B%F{yellow}@ %b%f\
+%B%F{blue}%~ %b%f\
+%B%F{black}%# %b%f\
+'
+```
+
+[You can learn more about how to decorate your Zsh prompt in their
+manual.](https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Visual-effects)
+
+# Git integration
+
+<Image
+  title=""
+  alt="A zsh shell session with a prompt with git integration, showing the text '(master|REABASE 1/2)'"
+  src={GitPrompt}
+/>
+
+When on a git repository, an indicator with the branch name is shown:
+
+```
+phelipe @ ~/dotfiles (master) %
+```
+
+If the branch name is too long, it'll be truncated:
+
+```
+phelipe @ ~/dotfiles (the-quick-brown-fox-jumps-over-the-l…) %
+```
+
+This is achieved using a shell function called `__git_ps1`, which is part of
+the Git project itself
+
+<Warn>
+
+To use `__git_ps1`, you'll need to source
+[`git-prompt.sh`](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
+shell script, that comes with every git installation, in your `.zshrc`. The
+exact path to the script may vary per OS or Linux distribution, for instance I
+have this in my `.zshrc`, which supports Ubuntu, Fedora and macOS (not sure if
+there's a way to simplify it).
+
+```sh title="~/.zshrc"
+if [ -f /usr/lib/git-core/git-sh-prompt ]; then
+  source /usr/lib/git-core/git-sh-prompt
+elif [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+  source /usr/share/git-core/contrib/completion/git-prompt.sh
+elif [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
+  source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
+fi
+```
+
+</Warn>
+
+It also indicates if you're reverting, cherry-picking, rebasing, merging,
+bisecting etc.
+
+```
+phelipe @ ~/dotfiles (master|REBASE 1/2) %
+```
+
+To display its output around parenthesis, we can pass a `printf`-like argument
+to it: `__git_ps1 "(%s) "`.
+
+And to truncate it at 40 characters, we use a Zsh built-in feature. We mark the
+start of the truncation with `%40>…) >`, in which `40` is the maximum permitted
+length and `…) ` is the truncation indicator. We mark the end of the truncated
+text with `%<<`.
+
+```sh title="~/.zshrc" {5}
+export PROMPT='\
+%B%F{green}%n %b%f\
+%B%F{yellow}@ %b%f\
+%B%F{blue}%~ %b%f\
+%B%F{yellow}%40>…) >$(__git_ps1 "(%s) ")%<<%b%f\
+%B%F{black}%# %b%f\
+'
+```
+
+# Background jobs
+
+<Image
+  title=""
+  alt="A zsh shell session with a prompt showing '*' as an indicator that there are jobs in the background"
+  src={BackgroundJobPrompt}
+/>
+
+If there is a program running in the background, an asterisk is shown
+
+```
+phelipe @ ~/dotfiles (master) * %
+```
+
+This is useful because I often let Vim in the background with `<C-z>` to do
+something in the terminal, and this serves as a reminder.
+
+It works by using a Zsh built-in feature, a ternary-like expression with the
+condition being if is there at least one background jobs:
+`%(1j.<true>.<false>)`:
+
+```sh title="~/.zshrc" {6}
+export PROMPT='\
+%B%F{green}%n %b%f\
+%B%F{yellow}@ %b%f\
+%B%F{blue}%~ %b%f\
+%B%F{yellow}%40>…) >$(__git_ps1 "(%s) ")%<<%b%f\
+%B%F{green}%(1j.* .)%b%f\
+%B%F{black}%# %b%f\
+'
+```
+
+[You can learn more about this conditional logic in Zsh prompt
+in the their manual.](https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html#Conditional-Substrings-in-Prompts)
+
+# Error indicator
+
+<Image
+  title=""
+  alt="A zsh shell session with a prompt with the '%' text in red because the last command execute was 'false'"
+  src={ErrorPrompt}
+/>
+
+Finally, the `%` symbol turns red if the last program executed exited with an
+error (a non-zero exit code).
+
+To do this, we use the same ternary expression but using `?` as the condition,
+which by default will be `true` if the exit status of the last command was `0`:
+
+```sh title="~/.zshrc" {7}
+export PROMPT='\
+%B%F{green}%n %b%f\
+%B%F{yellow}@ %b%f\
+%B%F{blue}%~ %b%f\
+%B%F{yellow}%40>…) >$(__git_ps1 "(%s) ")%<<%b%f\
+%B%F{green}%(1j.* .)%b%f\
+%B%F{%(?.black.red)}%# %b%f\
+'
+```

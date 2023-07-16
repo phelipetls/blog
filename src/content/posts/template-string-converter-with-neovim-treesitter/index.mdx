@@ -33,7 +33,7 @@ case you're just interested in that.
 
 Let's begin by creating a Lua module with some boilerplate code:
 
-```lua filename="~/.config/nvim/lua/template-string-converter.lua"
+```lua title="~/.config/nvim/lua/template-string-converter.lua"
 local M = {}
 
 M.convert = function()
@@ -142,7 +142,7 @@ The least invasive way to use this function is to call it after leaving insert
 mode (with `:h InsertLeave`) and after changes in normal mode (`:h
 TextChanged`):
 
-```vim filename="~/.config/nvim/after/ftplugin/javascript.vim"
+```vim title="~/.config/nvim/after/ftplugin/javascript.vim"
 if has('nvim')
   augroup TemplateStringConverter
     autocmd!

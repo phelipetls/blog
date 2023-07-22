@@ -40,7 +40,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           'transition-colors',
           'duration-300',
           {
-            'h-10 flex items-center rounded-full px-2':
+            'h-10 aspect-square flex justify-center items-center rounded-full px-2':
               props.variant === 'rounded-full',
             'rounded border border-divider p-1 shadow-sm shadow-shadow':
               props.variant === 'rounded',
@@ -55,7 +55,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
         return (
           <button
             ref={ref as React.ForwardedRef<HTMLButtonElement>}
-            type="button"
+            type='button'
             className={className}
             disabled={props.disabled}
           >
@@ -80,7 +80,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
     return (
       <button
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
-        type="button"
+        type='button'
         {...rest}
         className={className}
       />

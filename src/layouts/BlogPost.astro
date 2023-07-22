@@ -248,14 +248,14 @@ const emptyHeadings = headings.length === 0
               'w-full',
               'max-w-prose',
               '[&>pre]:my-8',
-              '[&>pre]:full-width-on-mobile',
+              '[&>pre]:max-sm:full-bleed',
               '[&>img]:my-8',
               '[&_img]:mx-auto',
               '[&>hr]:border-0',
               '[&>hr]:text-center',
               "[&>hr]:after:content-['⁂']",
               '[&>figure]:my-8',
-              '[&>figure]:full-width-on-mobile',
+              '[&>figure]:max-sm:full-bleed',
               '[&>astro-island>div]:my-8',
               '[&>lite-youtube]:my-8',
               '[&>blockquote]:my-8',
@@ -269,15 +269,15 @@ const emptyHeadings = headings.length === 0
         </div>
       </article>
 
-      <hr class="full-width-on-mobile mt-8" />
+      <hr class="max-sm:full-bleed mt-8" />
 
       <PostNav
-        class="full-width-on-mobile sm:my-8"
+        class="max-sm:full-bleed sm:my-8"
         prevBlogPost={prevBlogPost}
         nextBlogPost={nextBlogPost}
       />
 
-      <hr class="full-width-on-mobile mb-8" />
+      <hr class="max-sm:full-bleed mb-8" />
     </div>
   </main>
 </Site>

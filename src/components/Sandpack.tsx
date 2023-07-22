@@ -162,7 +162,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         })}
       </Tabs>
 
-      <div className="full-width-on-mobile relative shadow-sm shadow-shadow sm:rounded-b">
+      <div className="max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b">
         <div className="dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
           <SandpackCodeEditor className="peer" showTabs={false} />
 

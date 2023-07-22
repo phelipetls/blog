@@ -72,7 +72,7 @@ export default function BlogPostTabs(props: Props) {
           <div
             key={tabId}
             className={clsx(selected ? 'block' : 'hidden')}
-            role="tabpanel"
+            role='tabpanel'
             id={`tabpanel-${tabUniqueId}`}
             aria-labelledby={`tab-${tabUniqueId}`}
           >

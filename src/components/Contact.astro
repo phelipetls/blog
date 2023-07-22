@@ -6,27 +6,27 @@ import ContactLink from './ContactLink.astro'
 const t = useTranslate(Astro)
 ---
 
-<nav aria-label={t.Contacts()} class="flex gap-2 mb-2">
+<nav aria-label={t.Contacts()} class='flex gap-2 mb-2'>
   <ContactLink
-    id="contact-email"
-    href="mailto:phelipe_teles@hotmail.com"
-    aria-label="E-mail"
+    id='contact-email'
+    href='mailto:phelipe_teles@hotmail.com'
+    aria-label='E-mail'
   >
     <Mail />
   </ContactLink>
 
   <ContactLink
-    id="contact-linkedin"
-    href="https://linkedin.com/in/phelipeteles"
-    aria-label="LinkedIn"
+    id='contact-linkedin'
+    href='https://linkedin.com/in/phelipeteles'
+    aria-label='LinkedIn'
   >
     <Linkedin />
   </ContactLink>
 
   <ContactLink
-    id="contact-github"
-    href="https://github.com/phelipetls"
-    aria-label="GitHub"
+    id='contact-github'
+    href='https://github.com/phelipetls'
+    aria-label='GitHub'
   >
     <Github />
   </ContactLink>

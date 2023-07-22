@@ -41,15 +41,15 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
   {
     hasStartIcon && (
-      <span class="pointer-events-none col-start-1 row-start-1 px-1 text-sm">
-        <slot name="start-icon" />
+      <span class='pointer-events-none col-start-1 row-start-1 px-1 text-sm'>
+        <slot name='start-icon' />
       </span>
     )
   }
 
   <span
-    class="flex flex-row justify-end pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]"
+    class='flex flex-row justify-end pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]'
   >
-    <ChevronDown slot="end-icon" />
+    <ChevronDown slot='end-icon' />
   </span>
 </div>

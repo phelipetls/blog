@@ -4,8 +4,8 @@ import outdent from 'outdent'
 export default function () {
   return (
     <Sandpack
-      template="vanilla"
-      title="The same bug observed when using details element can be reproduced with vanilla JavaScript"
+      template='vanilla'
+      title='The same bug observed when using details element can be reproduced with vanilla JavaScript'
       files={{
         'index.js': outdent`
            document.getElementById('app').innerHTML = \`

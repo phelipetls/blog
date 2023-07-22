@@ -11,12 +11,12 @@ type Props = {
 const { title, mobileNavTitle, isTranslated } = Astro.props
 ---
 
-<div class="w-full">
-  <div class="pt-nav-height sm:hidden">
+<div class='w-full'>
+  <div class='pt-nav-height sm:hidden'>
     <NavMobile title={title} mobileNavTitle={mobileNavTitle} />
   </div>
 
-  <div class="hidden h-full w-full sm:block">
+  <div class='hidden h-full w-full sm:block'>
     <NavDesktop isTranslated={isTranslated} />
   </div>
 </div>

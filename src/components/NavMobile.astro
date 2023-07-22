@@ -16,14 +16,14 @@ const t = useTranslate(Astro)
 ---
 
 <div
-  class="fixed top-0 left-0 z-30 flex w-screen justify-between rounded-none border-b border-divider bg-background/90 py-4 px-horizontal-padding backdrop-blur"
+  class='fixed top-0 left-0 z-30 flex w-screen justify-between rounded-none border-b border-divider bg-background/90 py-4 px-horizontal-padding backdrop-blur'
 >
-  <div class="flex flex-row items-center gap-2 overflow-hidden">
+  <div class='flex flex-row items-center gap-2 overflow-hidden'>
     {
       Astro.url.pathname !== '/' && (
         <a
           href={parentUrl}
-          data-testid="parent-page-link"
+          data-testid='parent-page-link'
           aria-label={t.GoBack()}
         >
           <ChevronLeft />
@@ -34,20 +34,20 @@ const t = useTranslate(Astro)
     {
       mobileNavTitle ? (
         <h2
-          class="m-0 truncate font-sans font-normal"
+          class='m-0 truncate font-sans font-normal'
           set:html={mobileNavTitle}
         />
       ) : (
-        <h2 class="m-0 truncate font-sans font-normal">{title}</h2>
+        <h2 class='m-0 truncate font-sans font-normal'>{title}</h2>
       )
     }
   </div>
 
   <IconButton
-    variant="rounded-full"
-    className="bg-transparent"
-    data-a11y-dialog-show="sidenav"
-    data-testid="open-sidenav"
+    variant='rounded-full'
+    className='bg-transparent'
+    data-a11y-dialog-show='sidenav'
+    data-testid='open-sidenav'
     aria-label={t.OpenSidenav()}
   >
     <Menu />

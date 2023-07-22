@@ -123,7 +123,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
   return (
     <div
-      className="my-8"
+      className='my-8'
       style={
         {
           '--sandpack-surface1': theme.colors.surface1,
@@ -162,9 +162,9 @@ function CustomSandpack(props: CustomSandpackProps) {
         })}
       </Tabs>
 
-      <div className="max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b">
-        <div className="dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none">
-          <SandpackCodeEditor className="peer" showTabs={false} />
+      <div className='max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b'>
+        <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
+          <SandpackCodeEditor className='peer' showTabs={false} />
 
           <CopyCodeBlockButton
             // TODO: internationalize this
@@ -202,7 +202,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           )}
         >
           <noscript>
-            <div className="px-horizontal-padding pt-3 text-on-background">
+            <div className='px-horizontal-padding pt-3 text-on-background'>
               You need to enable JavaScript to preview the code.
             </div>
           </noscript>
@@ -216,22 +216,22 @@ function CustomSandpack(props: CustomSandpackProps) {
             title={title}
           />
 
-          <div className="absolute bottom-3 right-horizontal-padding flex items-stretch gap-2">
+          <div className='absolute bottom-3 right-horizontal-padding flex items-stretch gap-2'>
             <Button
-              color="secondary"
+              color='secondary'
               onClick={createAndNavigateToCodesandbox}
-              aria-label="Open on Codesandbox"
-              className="shadow-sm shadow-shadow"
+              aria-label='Open on Codesandbox'
+              className='shadow-sm shadow-shadow'
             >
               {/* TODO: Internationalize this */}
               <Codesandbox /> Open on CodeSandbox
             </Button>
 
             <IconButton
-              variant="rounded-full"
+              variant='rounded-full'
               onClick={refresh}
-              aria-label="Refresh"
-              className="shadow-sm shadow-shadow"
+              aria-label='Refresh'
+              className='shadow-sm shadow-shadow'
             >
               <RefreshCw />
             </IconButton>
@@ -243,7 +243,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             <hr />
 
             <details
-              className="relative"
+              className='relative'
               onToggle={(e) => {
                 e.preventDefault()
                 setLogsVisible(!logsVisible)
@@ -266,7 +266,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 )}
               >
                 {emptyLogs ? (
-                  <div className="px-horizontal-padding">No logs yet</div>
+                  <div className='px-horizontal-padding'>No logs yet</div>
                 ) : (
                   <>
                     {logs
@@ -294,17 +294,17 @@ function CustomSandpack(props: CustomSandpackProps) {
                         )
                       })}
 
-                    <div className="h-[1px] [overflow-anchor:auto]" />
+                    <div className='h-[1px] [overflow-anchor:auto]' />
                   </>
                 )}
               </div>
 
-              <div className="absolute right-horizontal-padding top-2 flex flex-row gap-2">
+              <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
                 <Button
-                  color="secondary"
+                  color='secondary'
                   onClick={reset}
-                  aria-label="Reset"
-                  className="shadow-sm shadow-shadow"
+                  aria-label='Reset'
+                  className='shadow-sm shadow-shadow'
                 >
                   <Trash /> Clear logs
                 </Button>

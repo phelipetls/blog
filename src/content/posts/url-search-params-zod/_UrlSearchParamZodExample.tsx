@@ -3,9 +3,9 @@ import Sandpack from '@components/Sandpack'
 export default function ZodExample() {
   return (
     <Sandpack
-      template="react"
-      title="An example of parsing a URL search param with Zod"
-      initialURL="/?pageNumber=3"
+      template='react'
+      title='An example of parsing a URL search param with Zod'
+      initialURL='/?pageNumber=3'
       shouldShowNavigator
       customSetup={{
         dependencies: {

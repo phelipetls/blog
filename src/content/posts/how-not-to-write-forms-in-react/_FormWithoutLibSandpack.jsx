@@ -4,7 +4,7 @@ import outdent from 'outdent'
 export default function () {
   return (
     <Sandpack
-      template="react"
+      template='react'
       files={{
         '/App.js': outdent`
            export default function App() {

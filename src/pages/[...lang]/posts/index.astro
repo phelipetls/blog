@@ -47,7 +47,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
 ---
 
 <Site
-  title="Posts"
+  title='Posts'
   isTranslated
   description={t.PostsListDescription()}
   seo={{
@@ -61,16 +61,16 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
       ],
     },
   }}
-  htmlClass="scroll-smooth scroll-pt-[calc(var(--nav-height)_+_1rem)] sm:scroll-pt-0"
+  htmlClass='scroll-smooth scroll-pt-[calc(var(--nav-height)_+_1rem)] sm:scroll-pt-0'
 >
-  <main class="grid grid-cols-layout my-8">
-    <div class="mb-8 hidden mx-auto gap-2 sm:flex sm:items-center">
-      <h1 class="m-0">Posts</h1>
+  <main class='grid grid-cols-layout my-8'>
+    <div class='mb-8 hidden mx-auto gap-2 sm:flex sm:items-center'>
+      <h1 class='m-0'>Posts</h1>
 
       <RssButton />
     </div>
 
-    <div class="col-full grid grid-cols-layout">
+    <div class='col-full grid grid-cols-layout'>
       {
         years.map((year, index) => {
           const blogPosts = blogPostsGroupedByYear[year]
@@ -79,7 +79,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
           const nextYear: string | null = years[index + 1] ?? null
 
           return (
-            <div class="group col-full grid grid-cols-layout">
+            <div class='group col-full grid grid-cols-layout'>
               <div id={year} />
 
               <div
@@ -96,15 +96,15 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                   'sm:top-0',
                 ]}
               >
-                <div class="mx-auto flex max-w-2xl flex-row justify-between">
-                  <h2 class="m-0 text-2xl">
+                <div class='mx-auto flex max-w-2xl flex-row justify-between'>
+                  <h2 class='m-0 text-2xl'>
                     <time datetime={`${year}-01-01`}>{year}</time>
                   </h2>
 
-                  <div class="flex flex-row gap-2">
+                  <div class='flex flex-row gap-2'>
                     <IconButton
                       href={`#${prevYear}`}
-                      variant="rounded-full"
+                      variant='rounded-full'
                       disabled={prevYear === null}
                       aria-label={t.PreviousYear()}
                     >
@@ -113,7 +113,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
 
                     <IconButton
                       href={`#${nextYear}`}
-                      variant="rounded-full"
+                      variant='rounded-full'
                       disabled={nextYear === null}
                       aria-label={t.NextYear()}
                     >
@@ -123,7 +123,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                 </div>
               </div>
 
-              <ul class="m-0 mx-auto mt-8 grid w-full max-w-2xl list-none grid-cols-1 gap-4 pb-24 group-last:pb-0">
+              <ul class='m-0 mx-auto mt-8 grid w-full max-w-2xl list-none grid-cols-1 gap-4 pb-24 group-last:pb-0'>
                 {blogPosts
                   .sort((blogPostA, blogPostB) => {
                     return (
@@ -134,7 +134,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                   .map((blogPost) => {
                     return (
                       <>
-                        <li class="mb-8 last:mb-0">
+                        <li class='mb-8 last:mb-0'>
                           <BlogPostCard blogPost={blogPost} />
                         </li>
                       </>
@@ -149,8 +149,8 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
   </main>
 
   <div
-    slot="mobile-nav-title"
-    class="flex flex-row items-center gap-2 [&_a]:bg-transparent"
+    slot='mobile-nav-title'
+    class='flex flex-row items-center gap-2 [&_a]:bg-transparent'
   >
     Posts
 

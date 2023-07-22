@@ -36,12 +36,12 @@ const { tags } = Astro.props
 const tagsByCount = _.countBy(tags)
 ---
 
-<Site isTranslated title="Tags" description={t.TagsDescription()}>
-  <main class="grid grid-cols-layout my-8">
+<Site isTranslated title='Tags' description={t.TagsDescription()}>
+  <main class='grid grid-cols-layout my-8'>
     <div>
-      <h1 class="text-center mb-8 hidden sm:block">Tags</h1>
+      <h1 class='text-center mb-8 hidden sm:block'>Tags</h1>
 
-      <ul class="list-none m-0 flex flex-wrap gap-2">
+      <ul class='list-none m-0 flex flex-wrap gap-2'>
         {
           _.uniq(tags)
             .sort((tagA, tagB) => {

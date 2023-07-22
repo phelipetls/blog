@@ -18,36 +18,36 @@ const t = useTranslate(Astro)
 ---
 
 <aside
-  data-a11y-dialog="sidenav"
-  aria-hidden="true"
-  class="fixed z-50 h-full w-full"
-  style="visibility: hidden;"
+  data-a11y-dialog='sidenav'
+  aria-hidden='true'
+  class='fixed z-50 h-full w-full'
+  style='visibility: hidden;'
 >
   <div
     data-a11y-dialog-hide
-    class="fixed inset-0 -z-1 w-full bg-neutral-700 bg-opacity-75 backdrop-blur-sm"
+    class='fixed inset-0 -z-1 w-full bg-neutral-700 bg-opacity-75 backdrop-blur-sm'
   >
   </div>
 
   <div
-    role="document"
-    class="ml-auto h-full flex flex-col w-3/4 rounded-none bg-background py-0 will-change-transform"
+    role='document'
+    class='ml-auto h-full flex flex-col w-3/4 rounded-none bg-background py-0 will-change-transform'
   >
     <div
-      class="mb-2 flex h-nav-height items-center justify-end px-horizontal-padding"
+      class='mb-2 flex h-nav-height items-center justify-end px-horizontal-padding'
     >
       <IconButton
-        variant="rounded-full"
+        variant='rounded-full'
         data-a11y-dialog-hide
-        aria-label="Close"
+        aria-label='Close'
       >
         <X />
       </IconButton>
     </div>
 
-    <nav class="flex flex-col" aria-label={t.MainNavigation()}>
+    <nav class='flex flex-col' aria-label={t.MainNavigation()}>
       <ul
-        class="m-0 flex list-none flex-col items-center justify-center gap-2 px-horizontal-padding"
+        class='m-0 flex list-none flex-col items-center justify-center gap-2 px-horizontal-padding'
       >
         {
           MAIN_MENU_ITEMS.map((item) => {
@@ -58,7 +58,7 @@ const t = useTranslate(Astro)
             })
 
             return (
-              <li class="w-full">
+              <li class='w-full'>
                 <Button
                   id={item.identifier}
                   href={localizeUrl(item.pathname, language)}
@@ -75,7 +75,7 @@ const t = useTranslate(Astro)
     </nav>
 
     <div
-      class="flex flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1"
+      class='flex flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1'
     >
       {isTranslated && <LanguageSelect isInSideNav />}
       <ThemeSelect />

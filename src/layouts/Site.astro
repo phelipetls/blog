@@ -42,11 +42,11 @@ const title = `${Astro.props.title} | Phelipe Teles`
   lang={language}
 >
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="deploy-date" content={format(new Date(), 'yyyy-MM-dd')} />
-    <meta name="author" content="Phelipe Teles" />
-    <meta name="color-scheme" content="dark light" />
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='deploy-date' content={format(new Date(), 'yyyy-MM-dd')} />
+    <meta name='author' content='Phelipe Teles' />
+    <meta name='color-scheme' content='dark light' />
 
     <SEO
       title={title}
@@ -88,12 +88,12 @@ const title = `${Astro.props.title} | Phelipe Teles`
       {...seo}
     />
 
-    <slot name="head" />
+    <slot name='head' />
   </head>
 
   <body
     data-preload
-    class="relative flex h-full flex-col bg-background font-sans text-on-background"
+    class='relative flex h-full flex-col bg-background font-sans text-on-background'
   >
     <ThemeScript />
 

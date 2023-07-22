@@ -7,26 +7,26 @@ const t = useTranslate(Astro)
 ---
 
 <Select data-theme-select aria-label={t.ChooseATheme()}>
-  <option value="light">{t.Light()}</option>
-  <option value="dark">{t.Dark()}</option>
-  <option value="system">{t.System()}</option>
+  <option value='light'>{t.Light()}</option>
+  <option value='dark'>{t.Dark()}</option>
+  <option value='system'>{t.System()}</option>
 
   <svg
-    slot="start-icon"
-    class="feather"
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
+    slot='start-icon'
+    class='feather'
+    viewBox='0 0 24 24'
+    width='24'
+    height='24'
   >
     <title>{t.ThemeIcon()}</title>
 
     <defs>
-      <Moon id="moon" />
-      <Sun id="sun" />
-      <Monitor id="monitor" />
+      <Moon id='moon' />
+      <Sun id='sun' />
+      <Monitor id='monitor' />
     </defs>
 
-    <use data-theme-select-icon href="#monitor"></use>
+    <use data-theme-select-icon href='#monitor'></use>
   </svg>
 </Select>
 

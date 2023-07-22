@@ -157,16 +157,16 @@ const shouldShowHeader = title !== '' || langName !== ''
             'text-[var(--code-fg)]',
           ]}
         >
-          <div class="shrink-0">
+          <div class='shrink-0'>
             {devIconName ? <DevIcon name={devIconName} /> : <FileText />}
           </div>
 
           {title ? (
-            <div class="rtl truncate text-right font-mono">
+            <div class='rtl truncate text-right font-mono'>
               <bdi>{title}</bdi>
             </div>
           ) : (
-            <div class="capitalize">{langName}</div>
+            <div class='capitalize'>{langName}</div>
           )}
         </div>
       </div>
@@ -188,8 +188,8 @@ const shouldShowHeader = title !== '' || langName !== ''
   >
     {
       playgroundURL && (
-        <IconButton variant="rounded" href={playgroundURL} target="_blank">
-          <DevIcon name="Typescript" />
+        <IconButton variant='rounded' href={playgroundURL} target='_blank'>
+          <DevIcon name='Typescript' />
         </IconButton>
       )
     }

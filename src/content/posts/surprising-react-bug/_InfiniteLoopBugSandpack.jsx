@@ -4,8 +4,8 @@ import outdent from 'outdent'
 export default function () {
   return (
     <Sandpack
-      template="react"
-      title="Infinite loop when using details toggle event"
+      template='react'
+      title='Infinite loop when using details toggle event'
       files={{
         'App.js': outdent`
           import { useState } from 'react'

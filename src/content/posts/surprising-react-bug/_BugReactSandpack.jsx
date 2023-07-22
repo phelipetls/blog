@@ -4,8 +4,8 @@ import outdent from 'outdent'
 export default function () {
   return (
     <Sandpack
-      template="react"
-      title="Bug when using details element with React"
+      template='react'
+      title='Bug when using details element with React'
       files={{
         'App.js': outdent`
           import { useState } from 'react'

@@ -20,27 +20,27 @@ const {
 } = await blogPost.render()
 ---
 
-<article class="flex h-full flex-col">
-  <h3 class="text-2xl max-w-prose m-0 border-l-2 border-primary pl-4">
+<article class='flex h-full flex-col'>
+  <h3 class='text-2xl max-w-prose m-0 border-l-2 border-primary pl-4'>
     <a href={localizeUrl(`/posts/${getBlogPostName(blogPost)}`, language)}>
       {title}
     </a>
   </h3>
 
-  <div class="mt-2 [&_svg]:w-[1.25em] [&_svg]:h-[1.25em] flex flex-wrap gap-2">
+  <div class='mt-2 [&_svg]:w-[1.25em] [&_svg]:h-[1.25em] flex flex-wrap gap-2'>
     <BlogPostReadingTime readingTime={readingTime} />
     <BlogPostDate date={date} />
   </div>
 
-  <div class="my-4">
+  <div class='my-4'>
     {description ?? summary}
   </div>
 
   {
     tags && (
-      <div class="flex max-w-prose flex-wrap gap-2">
+      <div class='flex max-w-prose flex-wrap gap-2'>
         {tags.map((tag) => {
-          return <Tag tag={tag} class="snap-start whitespace-nowrap" />
+          return <Tag tag={tag} class='snap-start whitespace-nowrap' />
         })}
       </div>
     )

@@ -24,8 +24,8 @@ export default function Tab(props: TabProps) {
 
   return (
     <button
-      type="button"
-      role="tab"
+      type='button'
+      role='tab'
       aria-selected={selected ? 'true' : 'false'}
       className={twMerge(
         clsx(

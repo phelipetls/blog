@@ -20,14 +20,14 @@ const tocItems = headings.map((heading) => ({
 }))
 ---
 
-<div class="hidden lg:flex lg:h-full lg:flex-col">
+<div class='hidden lg:flex lg:h-full lg:flex-col'>
   <div class:list={['flex', 'items-center', 'gap-2', 'h-10', 'flex-none']}>
     <List />
 
-    <h2 class="m-0">{t.TableOfContents()}</h2>
+    <h2 class='m-0'>{t.TableOfContents()}</h2>
 
     <div
-      class="ml-auto flex items-center transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden"
+      class='ml-auto flex items-center transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden'
     >
       <ChevronDown />
     </div>
@@ -65,22 +65,22 @@ const tocItems = headings.map((heading) => ({
       '[&_ol_ol_ol_ol]:indent-16',
     ]}
   >
-    <TOC toc={tocItems} as="number" />
+    <TOC toc={tocItems} as='number' />
   </nav>
 </div>
 
 <details
-  class="group px-horizontal-padding py-4 lg:hidden"
+  class='group px-horizontal-padding py-4 lg:hidden'
   aria-label={t.TableOfContents()}
 >
-  <summary class="list-none">
-    <div class="flex items-center gap-2">
+  <summary class='list-none'>
+    <div class='flex items-center gap-2'>
       <List />
 
-      <h2 class="m-0">{t.TableOfContents()}</h2>
+      <h2 class='m-0'>{t.TableOfContents()}</h2>
 
       <div
-        class="flex items-center ml-auto transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden"
+        class='flex items-center ml-auto transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden'
       >
         <ChevronDown />
       </div>
@@ -97,7 +97,7 @@ const tocItems = headings.map((heading) => ({
       '[&_ol_li:not(:first-child)]:mt-1',
     ]}
   >
-    <TOC toc={tocItems} as="number" />
+    <TOC toc={tocItems} as='number' />
   </nav>
 </details>
 

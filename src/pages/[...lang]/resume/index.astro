@@ -26,39 +26,39 @@ const resumeUrl =
 ---
 
 <Site isTranslated title={t.Résumé()} description={t.RésuméDescription()}>
-  <main class="grid flex-1 grid-cols-layout">
-    <div class="flex flex-col col-full sm:col-content">
-      <h1 class="hidden text-center sm:block my-8">{t.Résumé()}</h1>
+  <main class='grid flex-1 grid-cols-layout'>
+    <div class='flex flex-col col-full sm:col-content'>
+      <h1 class='hidden text-center sm:block my-8'>{t.Résumé()}</h1>
 
       <div
         data-resume-container
         data-resume-url={resumeUrl}
-        class="relative h-full overflow-y-auto sm:border-divider sm:col-content sm:rounded sm:border"
+        class='relative h-full overflow-y-auto sm:border-divider sm:col-content sm:rounded sm:border'
       >
         <noscript>
-          <embed class="w-full h-full" type="application/pdf" src={resumeUrl} />
+          <embed class='w-full h-full' type='application/pdf' src={resumeUrl} />
         </noscript>
 
         <div
           data-resume-loading
-          role="progressbar"
-          class="h-full hidden absolute inset-0 items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]"
+          role='progressbar'
+          class='h-full hidden absolute inset-0 items-center justify-center [&_svg]:animate-spin [&_svg]:duration-[1500ms]'
         >
           <Loader />
         </div>
 
-        <canvas class="hidden" data-resume-canvas></canvas>
+        <canvas class='hidden' data-resume-canvas></canvas>
 
         <div
           data-resume-download-button
-          class="hidden mx-auto absolute bottom-4 right-0 left-0 justify-center sm:hidden"
+          class='hidden mx-auto absolute bottom-4 right-0 left-0 justify-center sm:hidden'
         >
           <Button
-            className=""
-            color="primary"
+            className=''
+            color='primary'
             href={resumeUrl}
             download
-            size="huge"
+            size='huge'
           >
             <Download /> Download
           </Button>

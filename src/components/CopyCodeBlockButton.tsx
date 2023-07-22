@@ -27,7 +27,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
 
   return (
     <IconButton
-      variant="rounded"
+      variant='rounded'
       aria-label={justCopied ? (error ? errorText : successText) : 'Copy code'}
       className={clsx([
         justCopied ? (error ? 'border-warn' : 'border-green-500') : '',
@@ -57,7 +57,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
           {error ? <X /> : <Check />}
         </span>
       ) : (
-        <span className="text-[var(--code-fg)]">
+        <span className='text-[var(--code-fg)]'>
           <Clipboard />
         </span>
       )}

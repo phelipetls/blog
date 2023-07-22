@@ -11,18 +11,18 @@ const generateGravatarUrl = (width: number) =>
 ---
 
 <div
-  class="relative z-0 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-surface to-divider p-1"
+  class='relative z-0 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-surface to-divider p-1'
 >
   <img
-    id="gravatar"
-    class="rounded-full"
+    id='gravatar'
+    class='rounded-full'
     srcset={`
       ${generateGravatarUrl(200)} 1x,
       ${generateGravatarUrl(400)} 2x,
       ${generateGravatarUrl(600)} 3x
     `}
     alt={t.GravatarAltText()}
-    width="200"
-    height="200"
+    width='200'
+    height='200'
   />
 </div>

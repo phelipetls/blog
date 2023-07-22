@@ -7,6 +7,6 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 const rssUrl = localizeUrl('/posts/index.xml', language)
 ---
 
-<IconButton variant="rounded-full" href={rssUrl} aria-label="RSS Feed">
+<IconButton variant='rounded-full' href={rssUrl} aria-label='RSS Feed'>
   <Rss />
 </IconButton>

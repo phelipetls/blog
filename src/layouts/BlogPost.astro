@@ -77,46 +77,46 @@ const emptyHeadings = headings.length === 0
       ],
     },
   }}
-  htmlClass="scroll-smooth scroll-pt-nav-height sm:scroll-pt-0"
+  htmlClass='scroll-smooth scroll-pt-nav-height sm:scroll-pt-0'
 >
-  <Fragment slot="head">
-    <meta name="publish-date" content={format(date, 'yyyy-MM-dd')} />
-    {tags && <meta name="keywords" content={tags.join(', ')} />}
-    <meta name="description" content={summary} />
+  <Fragment slot='head'>
+    <meta name='publish-date' content={format(date, 'yyyy-MM-dd')} />
+    {tags && <meta name='keywords' content={tags.join(', ')} />}
+    <meta name='description' content={summary} />
 
     {data.math && <Katex />}
 
     {/* FIXME: only include this if the page needs it */}
-    <style id="sandpack" set:html={getSandpackCssText()}></style>
+    <style id='sandpack' set:html={getSandpackCssText()}></style>
   </Fragment>
 
-  <main class="grid grid-cols-layout">
-    <div class="pt-8 sm:col-content px-0">
+  <main class='grid grid-cols-layout'>
+    <div class='pt-8 sm:col-content px-0'>
       <article>
-        <header class="flex flex-col">
-          <h1 class="mb-4 text-4xl max-w-prose">
+        <header class='flex flex-col'>
+          <h1 class='mb-4 text-4xl max-w-prose'>
             {title}
           </h1>
 
-          <div class="mb-4 flex gap-2 flex-row">
+          <div class='mb-4 flex gap-2 flex-row'>
             <BlogPostDate date={date} />
             <BlogPostReadingTime readingTime={readingTime} />
           </div>
 
           {
             tags && (
-              <div class="mb-4 flex max-w-lg flex-wrap gap-2">
+              <div class='mb-4 flex max-w-lg flex-wrap gap-2'>
                 {tags.map((tag) => {
                   return <Tag tag={tag} />
                 })}
 
-                <Tag tag="..." />
+                <Tag tag='...' />
               </div>
             )
           }
         </header>
 
-        <hr class="my-8" />
+        <hr class='my-8' />
 
         <div
           data-blog-post-container
@@ -148,7 +148,7 @@ const emptyHeadings = headings.length === 0
               >
                 <IconButton
                   data-toggle-toc
-                  variant="rounded-full"
+                  variant='rounded-full'
                   data-open-toc-label={t.OpenToc()}
                   data-closed-toc-label={t.CloseToc()}
                   aria-label={t.CloseToc()}
@@ -270,15 +270,15 @@ const emptyHeadings = headings.length === 0
         </div>
       </article>
 
-      <hr class="max-sm:full-bleed mt-8" />
+      <hr class='max-sm:full-bleed mt-8' />
 
       <PostNav
-        class="max-sm:full-bleed sm:my-8"
+        class='max-sm:full-bleed sm:my-8'
         prevBlogPost={prevBlogPost}
         nextBlogPost={nextBlogPost}
       />
 
-      <hr class="max-sm:full-bleed mb-8" />
+      <hr class='max-sm:full-bleed mb-8' />
     </div>
   </main>
 </Site>

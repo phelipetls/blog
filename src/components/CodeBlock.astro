@@ -105,8 +105,6 @@ const shouldShowHeader = title !== '' || langName !== ''
       'shadow-sm',
       'shadow-shadow',
       'rounded',
-      'max-sm:rounded-none',
-      shouldShowHeader && 'rounded-tl-none',
       'overflow-x-auto',
       'bg-[var(--code-bg)]',
       'text-[var(--code-fg)]',
@@ -135,7 +133,6 @@ const shouldShowHeader = title !== '' || langName !== ''
     shouldShowHeader && (
       <div
         class:list={[
-          'text-md',
           'dark',
           'absolute',
           'left-horizontal-padding',
@@ -144,7 +141,6 @@ const shouldShowHeader = title !== '' || langName !== ''
           'max-w-[calc(100%-var(--horizontal-padding)*2)]',
           '-translate-y-[100%]',
           'overflow-hidden',
-          'sm:left-0',
         ]}
       >
         <div

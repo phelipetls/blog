@@ -93,7 +93,6 @@ const shouldShowHeader = title !== '' || langName !== ''
   class:list={[
     shouldShowHeader ? 'mt-16' : 'mt-8',
     'full-width-on-mobile',
-    '[&_pre]:max-sm:rounded-none',
     'relative',
     'mb-8',
     'last:mb-0',
@@ -107,6 +106,7 @@ const shouldShowHeader = title !== '' || langName !== ''
       'shadow-sm',
       'shadow-shadow',
       'rounded',
+      'max-sm:rounded-none',
       shouldShowHeader && 'rounded-tl-none',
       'overflow-x-auto',
       'bg-[var(--code-bg)]',

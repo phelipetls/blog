@@ -78,7 +78,7 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
     console.log(
       'Saved screenshot for %s in %s',
       new URL(postImage.url).pathname,
-      screenshotPath.replace(path.join(dirname, '..'), '')
+      stripDirname(screenshotPath)
     )
   }
 
@@ -91,4 +91,11 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
  */
 function createPath(...args) {
   return path.join(dirname, '..', ...args)
+}
+
+/**
+ * @type {(filePath: string) => string}
+ */
+function stripDirname(filePath) {
+  return filePath.replace(path.join(dirname, '..'), '')
 }

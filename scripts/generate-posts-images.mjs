@@ -6,7 +6,7 @@ import playwright from 'playwright'
 import * as url from 'url'
 import z from 'zod'
 
-const dirname = url.fileURLToPath(new URL('.', import.meta.url))
+const rootDir = url.fileURLToPath(new URL('..', import.meta.url))
 
 const DEV = process.env.NODE_ENV === 'development'
 
@@ -15,18 +15,18 @@ await Promise.all([
     postsImagesUrl: 'http://localhost:3000/posts/images.json',
     getScreenshotPath: (image) => {
       if (DEV) {
-        return createPath('screenshots', `${image}.png`)
+        return path.join(rootDir, 'screenshots', `${image}.png`)
       }
-      return createPath('public', 'posts', image, 'image.png')
+      return path.join(rootDir, 'public', 'posts', image, 'image.png')
     },
   }),
   generatePostsImages({
     postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
     getScreenshotPath: (image) => {
       if (DEV) {
-        return createPath('screenshots', `${image}.pt.png`)
+        return path.join(rootDir, 'screenshots', `${image}.pt.png`)
       }
-      return createPath('public', 'pt', 'posts', image, 'image.png')
+      return path.join(rootDir, 'public', 'pt', 'posts', image, 'image.png')
     },
   }),
 ])
@@ -97,7 +97,7 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
       console.log(
         'Saved screenshot for %s in %s',
         new URL(url).pathname,
-        stripDirname(screenshotPath)
+        stripRootDir(screenshotPath)
       )
     })
   }
@@ -114,15 +114,8 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
 }
 
 /**
- * @type {(...args: string[]) => string}
- */
-function createPath(...args) {
-  return path.join(dirname, '..', ...args)
-}
-
-/**
  * @type {(filePath: string) => string}
  */
-function stripDirname(filePath) {
-  return filePath.replace(path.join(dirname, '..'), '')
+function stripRootDir(filePath) {
+  return filePath.replace(rootDir, '')
 }

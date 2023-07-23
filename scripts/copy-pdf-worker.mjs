@@ -8,10 +8,13 @@
  * Astro does not seem to provide an obvious way to publish JavaScript files from
  * node_modules, in the same way that's possible in Hugo (say with .Publish)
  */
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
+import * as url from 'url'
+
+const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 fs.copyFileSync(
-  path.join(__dirname, '../node_modules/pdfjs-dist/build/pdf.worker.min.js'),
-  path.join(__dirname, '../public/pdf.worker.min.js')
+  path.join(dirname, '../node_modules/pdfjs-dist/build/pdf.worker.min.js'),
+  path.join(dirname, '../public/pdf.worker.min.js')
 )

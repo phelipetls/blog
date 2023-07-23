@@ -8,27 +8,28 @@ import * as url from 'url'
 const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 try {
-  await generatePostsImages({
-    postsImagesUrl: 'http://localhost:3000/posts/images.json',
-    getScreenshotPath: (image) => {
-      if (process.env.NODE_ENV === 'development') {
-        return createPath('screenshots', `${image}.png`)
-      }
+  await Promise.all([
+    generatePostsImages({
+      postsImagesUrl: 'http://localhost:3000/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (process.env.NODE_ENV === 'development') {
+          return createPath('screenshots', `${image}.png`)
+        }
 
-      return createPath('public', 'posts', image, 'image.png')
-    },
-  })
+        return createPath('public', 'posts', image, 'image.png')
+      },
+    }),
+    generatePostsImages({
+      postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (process.env.NODE_ENV === 'development') {
+          return createPath('screenshots', `${image}.pt.png`)
+        }
 
-  await generatePostsImages({
-    postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
-    getScreenshotPath: (image) => {
-      if (process.env.NODE_ENV === 'development') {
-        return createPath('screenshots', `${image}.pt.png`)
-      }
-
-      return createPath('public', 'pt', 'posts', image, 'image.png')
-    },
-  })
+        return createPath('public', 'pt', 'posts', image, 'image.png')
+      },
+    }),
+  ])
 
   process.exit(0)
 } catch (err) {

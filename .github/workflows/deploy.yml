@@ -22,10 +22,13 @@ jobs:
       - name: Check for code quality issues
         run: npm run check
 
-      - name: Generate posts images to use as Open Graph images
-        run: npx start-server-and-test dev 3000 generate-posts-images
-
       - run: npm run build
+
+      - name: Generate posts images to use as Open Graph images
+        run: npx start-server-and-test preview 3000 generate-posts-images
+
+      - name: Re-build the site after generating posts images
+        run: npm run build
 
       - name: Run tests
         run: npm run test

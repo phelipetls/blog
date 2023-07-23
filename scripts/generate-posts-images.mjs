@@ -8,13 +8,6 @@ import * as url from 'url'
 const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 try {
-  /**
-   * @type {(...args: string[]) => string}
-   */
-  const createPath = (...args) => {
-    return path.join(dirname, '..', ...args)
-  }
-
   await generatePostsImages({
     postsImagesUrl: 'http://localhost:3000/posts/images.json',
     getScreenshotPath: (image) => {
@@ -71,7 +64,7 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   })
 
   for (const postImage of postsImages) {
-    await page.goto(postImage.url)
+    await page.goto(postImage.url, { waitUntil: 'networkidle' })
 
     const screenshotPath = getScreenshotPath(postImage.name)
 
@@ -101,4 +94,11 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
 
   await context.close()
   await browser.close()
+}
+
+/**
+ * @type {(...args: string[]) => string}
+ */
+function createPath(...args) {
+  return path.join(dirname, '..', ...args)
 }

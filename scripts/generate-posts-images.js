@@ -65,7 +65,7 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   page.on('requestfailed', (request) => {
     throw new Error(
       `Failed to generate post image due to request failure: ${
-        request.failure().errorText
+        request.failure()?.errorText
       }`
     )
   })

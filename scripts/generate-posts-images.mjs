@@ -4,6 +4,7 @@ import path from 'path'
 import fetch from 'node-fetch'
 import playwright from 'playwright'
 import * as url from 'url'
+import z from 'zod'
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -55,37 +56,61 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
     )
   })
 
-  for (const postImage of postsImages) {
-    await page.goto(postImage.url, { waitUntil: 'networkidle' })
+  const postImageSchema = z.object({
+    url: z.string(),
+    name: z.string(),
+  })
 
-    const screenshotPath = getScreenshotPath(postImage.name)
+  /** @type {(() => void)[]} */
+  const writeFileOperations = []
 
-    if (fs.existsSync(screenshotPath)) {
+  for (const /** @type {unknown} */ postImage of postsImages) {
+    const result = postImageSchema.safeParse(postImage)
+
+    if (!result.success) {
+      console.error('Malformed JSON payload: %s', result.error)
+      process.exit(1)
+    }
+
+    const { name, url } = result.data
+
+    await page.goto(url, { waitUntil: 'networkidle' })
+    const screenshot = await page.screenshot()
+
+    const screenshotPath = getScreenshotPath(name)
+
+    writeFileOperations.push(() => {
+      if (fs.existsSync(screenshotPath)) {
+        console.log(
+          'Skipping %s because screenshot already exists...',
+          screenshotPath
+        )
+        return
+      }
+
+      if (!fs.existsSync(path.dirname(screenshotPath))) {
+        fs.mkdirSync(path.dirname(screenshotPath), { recursive: true })
+      }
+
+      fs.writeFileSync(screenshotPath, screenshot)
+
       console.log(
-        'Skipping %s because screenshot already exists...',
-        screenshotPath
+        'Saved screenshot for %s in %s',
+        new URL(url).pathname,
+        stripDirname(screenshotPath)
       )
-      continue
-    }
-
-    if (!fs.existsSync(path.dirname(screenshotPath))) {
-      fs.mkdirSync(path.dirname(screenshotPath), { recursive: true })
-    }
-
-    await page.screenshot({
-      path: screenshotPath,
-      fullPage: true,
     })
-
-    console.log(
-      'Saved screenshot for %s in %s',
-      new URL(postImage.url).pathname,
-      stripDirname(screenshotPath)
-    )
   }
 
   await context.close()
   await browser.close()
+
+  // Delay saving the screeenshot into the file system so that the Astro dev
+  // server does not slow down and fail to send the file when we request it to
+  // screenshot it.
+  for (const writeFileOperation of writeFileOperations) {
+    writeFileOperation()
+  }
 }
 
 /**

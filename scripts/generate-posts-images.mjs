@@ -10,26 +10,30 @@ const rootDir = url.fileURLToPath(new URL('..', import.meta.url))
 
 const DEV = process.env.NODE_ENV === 'development'
 
-await Promise.all([
-  generatePostsImages({
-    postsImagesUrl: 'http://localhost:3000/posts/images.json',
-    getScreenshotPath: (image) => {
-      if (DEV) {
-        return path.join(rootDir, 'screenshots', `${image}.png`)
-      }
-      return path.join(rootDir, 'public', 'posts', image, 'image.png')
-    },
-  }),
-  generatePostsImages({
-    postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
-    getScreenshotPath: (image) => {
-      if (DEV) {
-        return path.join(rootDir, 'screenshots', `${image}.pt.png`)
-      }
-      return path.join(rootDir, 'public', 'pt', 'posts', image, 'image.png')
-    },
-  }),
-])
+;(
+  await Promise.all([
+    generatePostsImages({
+      postsImagesUrl: 'http://localhost:3000/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (DEV) {
+          return path.join(rootDir, 'screenshots', `${image}.png`)
+        }
+        return path.join(rootDir, 'public', 'posts', image, 'image.png')
+      },
+    }),
+    generatePostsImages({
+      postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
+      getScreenshotPath: (image) => {
+        if (DEV) {
+          return path.join(rootDir, 'screenshots', `${image}.pt.png`)
+        }
+        return path.join(rootDir, 'public', 'pt', 'posts', image, 'image.png')
+      },
+    }),
+  ])
+)
+  .flat()
+  .forEach((writeFileOperation) => writeFileOperation())
 
 /**
  * @typedef Options
@@ -38,7 +42,11 @@ await Promise.all([
  */
 
 /**
- * @type {(options: Options) => Promise<void>}
+ * @typedef {() => void} FileOperation
+ */
+
+/**
+ * @type {(options: Options) => Promise<FileOperation[]>}
  */
 async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   const response = await fetch(postsImagesUrl)
@@ -105,12 +113,7 @@ async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
   await context.close()
   await browser.close()
 
-  // Delay saving the screeenshot into the file system so that the Astro dev
-  // server does not slow down and fail to send the file when we request it to
-  // screenshot it.
-  for (const writeFileOperation of writeFileOperations) {
-    writeFileOperation()
-  }
+  return writeFileOperations
 }
 
 /**

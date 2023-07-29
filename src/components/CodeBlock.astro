@@ -2,7 +2,6 @@
 import CopyCodeBlockButton from '@components/CopyCodeBlockButton'
 import DevIcon, { DevIconName } from '@components/DevIcon.astro'
 import { useTranslate } from '@utils/i18n'
-import { FileText } from 'lucide-react'
 import * as DevIcons from './devicons'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
@@ -88,23 +87,64 @@ const shouldShowHeader = title !== '' || langName !== ''
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
 ></style>
 
-<div
-  data-codeblock
-  class:list={[
-    shouldShowHeader ? 'mt-16' : 'mt-8',
-    'relative',
-    'mb-8',
-    'last:mb-0',
-  ]}
->
+<div data-codeblock class:list={['last:mb-0']}>
+  {
+    shouldShowHeader && (
+      <div
+        data-codeblock-header
+        class:list={[
+          'dark',
+          'flex',
+          'items-center',
+          'gap-2',
+          'rounded-t',
+          'border-t',
+          'border-primary',
+          'px-2',
+          'py-1',
+          'bg-[var(--code-bg)]',
+          'text-[var(--code-fg)]',
+        ]}
+      >
+        {devIconName && (
+          <div class='shrink-0'>
+            <DevIcon name={devIconName} />
+          </div>
+        )}
+
+        {title ? (
+          <div class='rtl truncate text-right font-mono'>
+            <bdi>{title}</bdi>
+          </div>
+        ) : (
+          <div class='capitalize'>{langName}</div>
+        )}
+
+        <div class='ml-auto flex flex-row gap-2 [&_svg]:h-6 [&_svg]:w-6'>
+          {playgroundURL && (
+            <IconButton variant='rounded' href={playgroundURL} target='_blank'>
+              <DevIcon name='Typescript' />
+            </IconButton>
+          )}
+
+          <CopyCodeBlockButton
+            client:load
+            successText={t.Copied() + '!'}
+            errorText={t.FailedToCopy()}
+            code={codeToCopy}
+          />
+        </div>
+      </div>
+    )
+  }
+
   <pre
     class:list={[
-      'relative',
       'shiki',
       twoslash && 'twoslash',
       'shadow-sm',
       'shadow-shadow',
-      'rounded',
+      shouldShowHeader ? 'rounded-b' : 'rounded',
       'overflow-x-auto',
       'bg-[var(--code-bg)]',
       'text-[var(--code-fg)]',
@@ -128,79 +168,6 @@ const shouldShowHeader = title !== '' || langName !== ''
       Astro.props.class,
     ]}
     {...rest}><slot /></pre>
-
-  {
-    shouldShowHeader && (
-      <div
-        class:list={[
-          'dark',
-          'absolute',
-          'left-horizontal-padding',
-          'top-0',
-          'mx-auto',
-          'max-w-[calc(100%-var(--horizontal-padding)*2)]',
-          '-translate-y-[100%]',
-          'overflow-hidden',
-        ]}
-      >
-        <div
-          class:list={[
-            'flex',
-            'items-center',
-            'gap-2',
-            'rounded-t',
-            'border-t',
-            'border-primary',
-            'bg-[var(--code-bg)]',
-            'px-2',
-            'py-1',
-            'text-[var(--code-fg)]',
-          ]}
-        >
-          <div class='shrink-0'>
-            {devIconName ? <DevIcon name={devIconName} /> : <FileText />}
-          </div>
-
-          {title ? (
-            <div class='rtl truncate text-right font-mono'>
-              <bdi>{title}</bdi>
-            </div>
-          ) : (
-            <div class='capitalize'>{langName}</div>
-          )}
-        </div>
-      </div>
-    )
-  }
-
-  <div
-    class:list={[
-      'dark',
-      'flex',
-      'flex-row',
-      'gap-2',
-      'absolute',
-      'top-3',
-      'right-[var(--horizontal-padding)]',
-      'text-2xl',
-      '[&_svg]:h-[1em] [&_svg]:w-[1em]',
-    ]}
-  >
-    {
-      playgroundURL && (
-        <IconButton variant='rounded' href={playgroundURL} target='_blank'>
-          <DevIcon name='Typescript' />
-        </IconButton>
-      )
-    }
-
-    <CopyCodeBlockButton
-      client:load
-      successText={t.Copied() + '!'}
-      errorText={t.FailedToCopy()}
-      code={codeToCopy}
-    />
-  </div>
 </div>
 
 <script>

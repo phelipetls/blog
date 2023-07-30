@@ -4,116 +4,120 @@ import path from 'path'
 import fetch from 'node-fetch'
 import playwright from 'playwright'
 import * as url from 'url'
-import z from 'zod'
 
 const rootDir = url.fileURLToPath(new URL('..', import.meta.url))
 
 const DEV = process.env.NODE_ENV === 'development'
 
-;(
-  await Promise.all([
-    generatePostsImages({
-      postsImagesUrl: 'http://localhost:3000/posts/images.json',
-      getScreenshotPath: (image) => {
-        if (DEV) {
-          return path.join(rootDir, 'screenshots', `${image}.png`)
-        }
-        return path.join(rootDir, 'public', 'posts', image, 'image.png')
-      },
-    }),
-    generatePostsImages({
-      postsImagesUrl: 'http://localhost:3000/pt/posts/images.json',
-      getScreenshotPath: (image) => {
-        if (DEV) {
-          return path.join(rootDir, 'screenshots', `${image}.pt.png`)
-        }
-        return path.join(rootDir, 'public', 'pt', 'posts', image, 'image.png')
-      },
-    }),
-  ])
-)
-  .flat()
-  .forEach((writeFileOperation) => writeFileOperation())
+const browser = await playwright.chromium.launch()
+const context = await browser.newContext(playwright.devices['Desktop Chrome'])
+const page = await context.newPage()
 
-/**
- * @typedef Options
- * @property {string} postsImagesUrl
- * @property {(name: string) => string} getScreenshotPath
- */
+page.on('requestfailed', (request) => {
+  throw new Error(
+    `Failed to generate post image due to request failure: ${
+      request.failure()?.errorText
+    }`
+  )
+})
 
-/**
- * @typedef {() => void} FileOperation
- */
+/** @typedef {() => void} NoOp */
+/** @type {NoOp[]} */
+const saveScreenshotOperations = []
 
-/**
- * @type {(options: Options) => Promise<FileOperation[]>}
- */
-async function generatePostsImages({ postsImagesUrl, getScreenshotPath }) {
-  const response = await fetch(postsImagesUrl)
-  const postsImages = await response.json()
+for (const {
+  name,
+  url,
+  getScreenshotPath,
+} of await getPostImagesToScreenshot()) {
+  await page.goto(url, { waitUntil: 'networkidle' })
 
-  const browser = await playwright.chromium.launch()
-  const context = await browser.newContext(playwright.devices['Desktop Chrome'])
-  const page = await context.newPage()
+  const screenshot = await page.screenshot()
+  const screenshotPath = getScreenshotPath(name)
 
-  page.on('requestfailed', (request) => {
-    throw new Error(
-      `Failed to generate post image due to request failure: ${
-        request.failure()?.errorText
-      }`
+  saveScreenshotOperations.push(() => {
+    saveScreenshot(screenshot, screenshotPath)
+
+    console.log(
+      'Saved screenshot for %s in %s',
+      new URL(url).pathname,
+      stripRootDir(screenshotPath)
     )
   })
+}
 
-  const postImageSchema = z.object({
-    url: z.string(),
-    name: z.string(),
-  })
+for (const saveScreenshotOperation of saveScreenshotOperations) {
+  saveScreenshotOperation()
+}
 
-  /** @type {(() => void)[]} */
-  const writeFileOperations = []
+await context.close()
+await browser.close()
 
-  for (const /** @type {unknown} */ postImage of postsImages) {
-    const result = postImageSchema.safeParse(postImage)
+/**
+ * @typedef {object} PostImage
+ * @property {string} url
+ * @property {string} name
+ */
 
-    if (!result.success) {
-      console.error('Malformed JSON payload: %s', result.error)
-      process.exit(1)
-    }
+async function fetchPostImages(/** @type {string} */ url) {
+  const response = await fetch(url)
+  const json = response.json()
+  return /** @type {PostImage[]} */ json
+}
 
-    const { name, url } = result.data
+/**
+ * @typedef {PostImage} PostImageToScrenshot
+ * @property {(name: string) => name} getScrenshotPath
+ */
 
-    await page.goto(url, { waitUntil: 'networkidle' })
-    const screenshot = await page.screenshot()
+export async function getPostImagesToScreenshot() {
+  const [englishPostImages, portuguesePostImages] = await Promise.all([
+    fetchPostImages('http://localhost:3000/posts/images.json'),
+    fetchPostImages('http://localhost:3000/pt/posts/images.json'),
+  ])
 
-    const screenshotPath = getScreenshotPath(name)
-
-    writeFileOperations.push(() => {
-      if (fs.existsSync(screenshotPath)) {
-        console.log(
-          'Skipping %s because screenshot already exists...',
-          screenshotPath
+  return [
+    ...englishPostImages.map((/** @type {PostImage} */ postImage) => ({
+      ...postImage,
+      getScreenshotPath: () => {
+        if (DEV) {
+          return path.join(rootDir, 'screenshots', `${postImage.name}.png`)
+        }
+        return path.join(
+          rootDir,
+          'public',
+          'posts',
+          postImage.name,
+          'image.png'
         )
-        return
-      }
+      },
+    })),
+    ...portuguesePostImages.map((/** @type {PostImage} */ postImage) => ({
+      ...postImage,
+      getScreenshotPath: () => {
+        if (DEV) {
+          return path.join(rootDir, 'screenshots', `${postImage.name}.pt.png`)
+        }
+        return path.join(
+          rootDir,
+          'public',
+          'pt',
+          'posts',
+          postImage.name,
+          'image.png'
+        )
+      },
+    })),
+  ]
+}
 
-      if (!fs.existsSync(path.dirname(screenshotPath))) {
-        fs.mkdirSync(path.dirname(screenshotPath), { recursive: true })
-      }
-
-      fs.writeFileSync(screenshotPath, screenshot)
-
-      console.log(
-        'Saved screenshot for %s in %s',
-        new URL(url).pathname,
-        stripRootDir(screenshotPath)
-      )
-    })
+/** @type {(screenshot: Buffer, filePath: string) => void} */
+function saveScreenshot(screenshot, filePath) {
+  if (!fs.existsSync(path.dirname(filePath))) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true })
   }
 
-  await context.close()
-  await browser.close()
-
-  return writeFileOperations
+  fs.writeFileSync(filePath, screenshot)
 }
 
 /**

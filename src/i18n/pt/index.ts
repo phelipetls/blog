@@ -47,6 +47,7 @@ const pt = {
   BlogPostsTaggedWith: "Blog posts com a tag '{tag}'",
   OpenToc: 'Abrir tabela de conteúdo',
   CloseToc: 'Fechar tabela de conteúdo',
+  NoName: '[Sem nome]',
 } satisfies BaseTranslation
 
 export default pt

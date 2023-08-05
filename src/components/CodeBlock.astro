@@ -80,63 +80,56 @@ const capitalize = <T extends string>(str: T) =>
 const devIconName = isDevIconName(lang)
   ? (capitalize(Astro.props.lang) as DevIconName)
   : getDevIconNameByShikiLang(lang)
-
-const shouldShowHeader = title !== '' || langName !== ''
 ---
 
 <style is:global define:vars={{ 'code-bg': shikiBg, 'code-fg': shikiFg }}
 ></style>
 
 <div data-codeblock class:list={['last:mb-0']}>
-  {
-    shouldShowHeader && (
-      <div
-        data-codeblock-header
-        class:list={[
-          'dark',
-          'flex',
-          'items-center',
-          'gap-2',
-          'rounded-t',
-          'border-t',
-          'border-primary',
-          'px-2',
-          'py-1',
-          'bg-[var(--code-bg)]',
-          'text-[var(--code-fg)]',
-        ]}
-      >
-        {devIconName && (
-          <div class='shrink-0'>
-            <DevIcon name={devIconName} />
-          </div>
-        )}
-
-        {title ? (
-          <div class='rtl truncate text-right font-mono'>
-            <bdi>{title}</bdi>
-          </div>
-        ) : (
-          <div class='capitalize'>{langName}</div>
-        )}
-
-        <div class='ml-auto flex flex-row gap-2 [&_svg]:h-6 [&_svg]:w-6'>
-          {playgroundURL && (
-            <IconButton variant='rounded' href={playgroundURL} target='_blank'>
-              <DevIcon name='Typescript' />
-            </IconButton>
-          )}
-
-          <CopyCodeBlockButton
-            client:load
-            successText={t.Copied() + '!'}
-            errorText={t.FailedToCopy()}
-            code={codeToCopy}
-          />
+  <div
+    data-codeblock-header
+    class:list={[
+      'dark',
+      'flex',
+      'items-center',
+      'gap-2',
+      'rounded-t',
+      'py-1',
+      'bg-[var(--code-bg)]',
+      'text-[var(--code-fg)]',
+      'border-b',
+      'border-divider',
+    ]}
+  >
+    {
+      devIconName && (
+        <div class='shrink-0'>
+          <DevIcon name={devIconName} />
         </div>
-      </div>
-    )
-  }
+      )
+    }
+
+    <div class:list={['rtl', 'truncate', 'pl-8', 'text-right', 'font-mono']}>
+      {title ? <bdi>{title}</bdi> : langName || t.NoName()}
+    </div>
+
+    <div class='ml-auto flex flex-row gap-2 [&_svg]:h-6 [&_svg]:w-6 pr-2'>
+      {
+        playgroundURL && (
+          <IconButton variant='rounded' href={playgroundURL} target='_blank'>
+            <DevIcon name='Typescript' />
+          </IconButton>
+        )
+      }
+
+      <CopyCodeBlockButton
+        client:load
+        successText={t.Copied() + '!'}
+        errorText={t.FailedToCopy()}
+        code={codeToCopy}
+      />
+    </div>
+  </div>
 
   <pre
     class:list={[
@@ -144,7 +137,7 @@ const shouldShowHeader = title !== '' || langName !== ''
       twoslash && 'twoslash',
       'shadow-sm',
       'shadow-shadow',
-      shouldShowHeader ? 'rounded-b' : 'rounded',
+      'rounded-b',
       'overflow-x-auto',
       'bg-[var(--code-bg)]',
       'text-[var(--code-fg)]',

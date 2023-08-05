@@ -39,6 +39,9 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           'hover:text-primary',
           'transition-colors',
           'duration-300',
+          'shadow-sm',
+          'shadow-shadow',
+          'disabled:shadow-none',
           {
             'min-w-[40px] h-[40px] flex justify-center items-center rounded-full px-2':
               props.variant === 'rounded-full',

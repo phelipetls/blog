@@ -7,12 +7,6 @@ import LanguageSelect from './LanguageSelect.astro'
 import IconButton from '@components/IconButton'
 import Button from './Button'
 
-type Props = {
-  isTranslated: boolean
-}
-
-const { isTranslated } = Astro.props
-
 const language = getLanguageFromUrl(Astro.url.pathname)
 const t = useTranslate(Astro)
 ---
@@ -77,7 +71,7 @@ const t = useTranslate(Astro)
     <div
       class='flex flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1'
     >
-      {isTranslated && <LanguageSelect isInSideNav />}
+      <LanguageSelect />
       <ThemeSelect />
     </div>
   </div>

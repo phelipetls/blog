@@ -5,15 +5,15 @@
 
   --primary: hexToRgb(theme(colors.orange.500));
   --primary-hover: hexToRgb(theme(colors.orange.600));
-  --on-primary: hexToRgb(theme(colors.neutral.800));
-  --background: hexToRgb(theme(colors.neutral.50));
-  --on-background: hexToRgb(theme(colors.neutral.700));
-  --surface: hexToRgb(theme(colors.neutral.100));
-  --hover: hexToRgb(theme(colors.neutral.200));
+  --on-primary: hexToRgb(theme(colors.stone.800));
+  --background: hexToRgb(theme(colors.stone.100));
+  --on-background: hexToRgb(theme(colors.stone.800));
+  --surface: hexToRgb(theme(colors.stone.200));
+  --hover: hexToRgb(theme(colors.stone.300));
   --disabled: var(--background);
-  --on-disabled: hexToRgb(theme(colors.neutral.300));
-  --divider: hexToRgb(theme(colors.neutral.400));
-  --shadow: hexToRgb(theme(colors.neutral.500));
+  --on-disabled: hexToRgb(theme(colors.stone.400));
+  --divider: hexToRgb(theme(colors.stone.500));
+  --shadow: hexToRgb(theme(colors.stone.600));
   --note: hexToRgb(theme(colors.blue.600));
   --warn: hexToRgb(theme(colors.red.600));
   color-scheme: light;

@@ -15,15 +15,13 @@ const t = useTranslate(Astro)
 const language = getLanguageFromUrl(Astro.url.pathname)
 ---
 
-<div
-  class='flex h-full w-full items-center justify-between bg-background pr-horizontal-padding'
->
-  <div class='mx-auto py-3 flex h-full w-full max-w-content justify-between'>
+<div class='flex w-full items-center justify-between pr-horizontal-padding'>
+  <div class='mx-auto flex w-full max-w-content justify-between'>
     <nav
-      class='flex h-full justify-between px-horizontal-padding'
+      class='flex justify-between pl-horizontal-padding'
       aria-label={t.MainNavigation()}
     >
-      <ul class='m-0 flex list-none flex-row flex-nowrap items-center gap-2'>
+      <ul class='m-0 flex flex-row list-none gap-2'>
         {
           MAIN_MENU_ITEMS.map((item) => {
             const isActive = isActiveMenuItem({
@@ -37,7 +35,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
                 <a
                   id={item.identifier}
                   href={localizeUrl(item.pathname, language)}
-                  class:list={['p-2', 'group']}
+                  class:list={['p-2', 'inline-block h-full w-full', 'group']}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
                   <span
@@ -58,7 +56,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
       </ul>
     </nav>
 
-    <div class='h-full flex flex-row gap-2'>
+    <div class='flex flex-row items-center gap-2'>
       {isTranslated && <LanguageSelect />}
 
       <ThemeSelect />

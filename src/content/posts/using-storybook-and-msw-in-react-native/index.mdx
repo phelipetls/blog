@@ -4,6 +4,8 @@ date: 2022-03-02
 tags: ['react native', 'javascript', 'mobile', 'storybook', 'msw']
 ---
 
+import Note from '@components/BlogPostNote.astro'
+
 The integration between [Storybook](storybook.js.org/) and
 [Mock Service Worker](https://mswjs.io/) enables you to develop components
 isolated from your app and your back-end server.
@@ -21,11 +23,14 @@ make it work in React Native, even though it's pretty new.
 
 In this post, I'm gonna explain in detail how I did it.
 
-:::note **tl;dr:** You can read the
-[example repository](https://github.com/phelipetls/react-native-storybook-msw)
-or this
+<Note>
+
+**tl;dr:** You can read the [example
+repository](https://github.com/phelipetls/react-native-storybook-msw) or this
 [pull request](https://github.com/phelipetls/react-native-storybook-msw/pull/1)
-instead. :::
+instead.
+
+</Note>
 
 # How `msw-storybook-addon` works?
 

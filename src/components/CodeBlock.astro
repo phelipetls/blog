@@ -101,16 +101,12 @@ const devIconName = isDevIconName(lang)
       'border-divider',
     ]}
   >
-    {
-      devIconName && (
-        <div class='shrink-0'>
-          <DevIcon name={devIconName} />
-        </div>
-      )
-    }
+    <div class:list={['flex', 'pl-2', 'items-center', 'gap-2']}>
+      {devIconName && <DevIcon name={devIconName} />}
 
-    <div class:list={['rtl', 'truncate', 'pl-8', 'text-right', 'font-mono']}>
-      {title ? <bdi>{title}</bdi> : langName || t.NoName()}
+      <div class:list={['rtl', 'truncate', 'font-mono']}>
+        {title ? <bdi>{title}</bdi> : langName || t.NoName()}
+      </div>
     </div>
 
     <div class='ml-auto flex flex-row gap-2 [&_svg]:h-6 [&_svg]:w-6 pr-2'>

@@ -220,11 +220,11 @@ function CustomSandpack(props: CustomSandpackProps) {
             <Button
               color='secondary'
               onClick={createAndNavigateToCodesandbox}
-              aria-label='Open on Codesandbox'
+              aria-label='Open Sandbox'
               className='shadow-sm shadow-shadow'
             >
               {/* TODO: Internationalize this */}
-              <Codesandbox /> Open on CodeSandbox
+              <Codesandbox /> Open Sandbox
             </Button>
 
             <IconButton

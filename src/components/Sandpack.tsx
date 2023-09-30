@@ -18,6 +18,7 @@ import {
   ChevronDown,
   ChevronRight,
   Codesandbox,
+  Play,
   RefreshCw,
   Trash,
 } from 'lucide-react'
@@ -40,11 +41,12 @@ export default function Sandpack(props: SandpackProps) {
     initialURL,
     shouldShowNavigator = false,
     shouldShowConsole = false,
+    options,
     ...rest
   } = props
 
   return (
-    <SandpackProvider {...rest}>
+    <SandpackProvider options={options} {...rest}>
       <SandpackThemeProvider
         theme={{
           ...atomDark,
@@ -61,19 +63,35 @@ export default function Sandpack(props: SandpackProps) {
           initialURL={initialURL}
           shouldShowNavigator={shouldShowNavigator}
           shouldShowConsole={shouldShowConsole}
+          shouldAutorun={options?.autorun ?? true}
         />
       </SandpackThemeProvider>
     </SandpackProvider>
   )
 }
 
-type CustomSandpackProps = SandpackProps
+type CustomSandpackProps = SandpackProps & {
+  shouldAutorun: boolean
+}
 
 function CustomSandpack(props: CustomSandpackProps) {
-  const { title, initialURL, shouldShowNavigator, shouldShowConsole } = props
+  const {
+    title,
+    initialURL,
+    shouldShowNavigator,
+    shouldShowConsole,
+    shouldAutorun,
+  } = props
 
   const { sandpack } = useSandpack()
-  const { files, activeFile, visibleFiles, setActiveFile } = sandpack
+  const {
+    files,
+    activeFile,
+    visibleFiles,
+    setActiveFile,
+    runSandpack,
+    status,
+  } = sandpack
 
   const sandpackPreviewRef = React.useRef<SandpackPreviewRef>(null)
   const [client, setClient] = React.useState<SandpackClient | null>(null)
@@ -164,30 +182,44 @@ function CustomSandpack(props: CustomSandpackProps) {
 
       <div className='max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b'>
         <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
-          <SandpackCodeEditor className='peer' showTabs={false} />
+          <SandpackCodeEditor
+            className='peer'
+            showTabs={false}
+            showRunButton={false}
+          />
 
-          <CopyCodeBlockButton
-            // TODO: internationalize this
-            successText={'Copied!'}
-            errorText={'Failed to copy'}
-            code={files[activeFile].code}
+          <div
             className={clsx(
               'absolute',
-              'right-0',
+              'right-3',
               'top-3',
-              '-translate-x-1/2',
-              'transition-opacity',
-              'duration-300',
-              'opacity-0',
-              'pointer-events-none',
-              'peer-hover:opacity-100',
-              'peer-hover:pointer-events-auto',
-              'hover:opacity-100',
-              'hover:pointer-events-auto',
-              'focus-visible:opacity-100',
-              'focus-visible:pointer-events-auto'
+              'space-x-2',
+              '[&_[data-show-on-hover]]:transition-opacity',
+              '[&_[data-show-on-hover]]:duration-300',
+              '[&_[data-show-on-hover]]:opacity-0',
+              '[&_[data-show-on-hover]]:pointer-events-none',
+              '[&_[data-show-on-hover]]:peer-hover:opacity-100',
+              '[&_[data-show-on-hover]]:peer-hover:pointer-events-auto',
+              '[&_[data-show-on-hover]]:hover:opacity-100',
+              '[&_[data-show-on-hover]]:hover:pointer-events-auto',
+              '[&_[data-show-on-hover]]:focus-visible:opacity-100',
+              '[&_[data-show-on-hover]]:focus-visible:pointer-events-auto'
             )}
-          />
+          >
+            <CopyCodeBlockButton
+              // TODO: internationalize this
+              successText={'Copied!'}
+              errorText={'Failed to copy'}
+              code={files[activeFile].code}
+              data-show-on-hover
+            />
+
+            {!shouldAutorun && (
+              <IconButton variant='rounded' onClick={runSandpack}>
+                <Play />
+              </IconButton>
+            )}
+          </div>
         </div>
 
         <hr />
@@ -216,26 +248,36 @@ function CustomSandpack(props: CustomSandpackProps) {
             title={title}
           />
 
-          <div className='absolute bottom-3 right-horizontal-padding flex items-stretch gap-2'>
-            <Button
-              color='secondary'
-              onClick={createAndNavigateToCodesandbox}
-              aria-label='Open Sandbox'
-              className='shadow-sm shadow-shadow'
-            >
-              {/* TODO: Internationalize this */}
-              <Codesandbox /> Open Sandbox
-            </Button>
+          {!shouldAutorun && status !== 'running' && (
+            <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+              <Button color='primary' size='huge' onClick={runSandpack}>
+                Run Sandbox <Play />
+              </Button>
+            </div>
+          )}
 
-            <IconButton
-              variant='rounded-full'
-              onClick={refresh}
-              aria-label='Refresh'
-              className='shadow-sm shadow-shadow'
-            >
-              <RefreshCw />
-            </IconButton>
-          </div>
+          {status === 'running' && (
+            <div className='absolute bottom-3 right-horizontal-padding flex items-stretch gap-2'>
+              <Button
+                color='secondary'
+                onClick={createAndNavigateToCodesandbox}
+                aria-label='Open Sandbox'
+                className='shadow-sm shadow-shadow'
+              >
+                {/* TODO: Internationalize this */}
+                <Codesandbox /> Open Sandbox
+              </Button>
+
+              <IconButton
+                variant='rounded-full'
+                onClick={refresh}
+                aria-label='Refresh'
+                className='shadow-sm shadow-shadow'
+              >
+                <RefreshCw />
+              </IconButton>
+            </div>
+          )}
         </div>
 
         {shouldShowConsole && (

@@ -31,6 +31,7 @@ import IconButton from './IconButton'
 type SandpackProps = SandpackProviderProps & {
   title: string
   initialURL?: string
+  shouldShowCodeEditor?: boolean
   shouldShowNavigator?: boolean
   shouldShowConsole?: boolean
 }
@@ -39,6 +40,7 @@ export default function Sandpack(props: SandpackProps) {
   const {
     title,
     initialURL,
+    shouldShowCodeEditor = true,
     shouldShowNavigator = false,
     shouldShowConsole = false,
     options,
@@ -61,6 +63,7 @@ export default function Sandpack(props: SandpackProps) {
         <CustomSandpack
           title={title}
           initialURL={initialURL}
+          shouldShowCodeEditor={shouldShowCodeEditor}
           shouldShowNavigator={shouldShowNavigator}
           shouldShowConsole={shouldShowConsole}
           shouldAutorun={options?.autorun ?? true}
@@ -78,6 +81,7 @@ function CustomSandpack(props: CustomSandpackProps) {
   const {
     title,
     initialURL,
+    shouldShowCodeEditor,
     shouldShowNavigator,
     shouldShowConsole,
     shouldAutorun,
@@ -151,83 +155,92 @@ function CustomSandpack(props: CustomSandpackProps) {
         } as React.CSSProperties
       }
     >
-      <Tabs
-        value={activeFile}
-        onChange={(newActiveFile) => {
-          setActiveFile(newActiveFile)
-        }}
+      {shouldShowCodeEditor && (
+        <Tabs
+          value={activeFile}
+          onChange={(newActiveFile) => {
+            setActiveFile(newActiveFile)
+          }}
+        >
+          {visibleFiles.map((file) => {
+            const filename = file.replace(/^\//, '')
+
+            return (
+              <Tab
+                className={clsx(
+                  '[&[aria-selected=true]]:bg-[var(--sandpack-surface1)]',
+                  '[&[aria-selected=true]]:text-[var(--sandpack-accent)]',
+                  '[&[aria-selected=true]]:shadow-sm',
+                  '[&[aria-selected=true]]:shadow-shadow',
+                  'hover:bg-[var(--sandpack-surface3)]',
+                  'hover:text-[var(--sandpack-base)]',
+                  'border-b-0',
+                  'font-normal'
+                )}
+                key={file}
+                value={file}
+                label={filename}
+              />
+            )
+          })}
+        </Tabs>
+      )}
+
+      <div
+        className={clsx(
+          'max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b'
+        )}
       >
-        {visibleFiles.map((file) => {
-          const filename = file.replace(/^\//, '')
+        {shouldShowCodeEditor && (
+          <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
+            <SandpackCodeEditor
+              className='peer'
+              showTabs={false}
+              showRunButton={false}
+            />
 
-          return (
-            <Tab
+            <div
               className={clsx(
-                '[&[aria-selected=true]]:bg-[var(--sandpack-surface1)]',
-                '[&[aria-selected=true]]:text-[var(--sandpack-accent)]',
-                '[&[aria-selected=true]]:shadow-sm',
-                '[&[aria-selected=true]]:shadow-shadow',
-                'hover:bg-[var(--sandpack-surface3)]',
-                'hover:text-[var(--sandpack-base)]',
-                'border-b-0',
-                'font-normal'
+                'absolute',
+                'right-3',
+                'top-3',
+                'space-x-2',
+                '[&_[data-show-on-hover]]:transition-opacity',
+                '[&_[data-show-on-hover]]:duration-300',
+                '[&_[data-show-on-hover]]:opacity-0',
+                '[&_[data-show-on-hover]]:pointer-events-none',
+                '[&_[data-show-on-hover]]:peer-hover:opacity-100',
+                '[&_[data-show-on-hover]]:peer-hover:pointer-events-auto',
+                '[&_[data-show-on-hover]]:hover:opacity-100',
+                '[&_[data-show-on-hover]]:hover:pointer-events-auto',
+                '[&_[data-show-on-hover]]:focus-visible:opacity-100',
+                '[&_[data-show-on-hover]]:focus-visible:pointer-events-auto'
               )}
-              key={file}
-              value={file}
-              label={filename}
-            />
-          )
-        })}
-      </Tabs>
+            >
+              <CopyCodeBlockButton
+                // TODO: internationalize this
+                successText={'Copied!'}
+                errorText={'Failed to copy'}
+                code={files[activeFile].code}
+                data-show-on-hover
+              />
 
-      <div className='max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b'>
-        <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
-          <SandpackCodeEditor
-            className='peer'
-            showTabs={false}
-            showRunButton={false}
-          />
-
-          <div
-            className={clsx(
-              'absolute',
-              'right-3',
-              'top-3',
-              'space-x-2',
-              '[&_[data-show-on-hover]]:transition-opacity',
-              '[&_[data-show-on-hover]]:duration-300',
-              '[&_[data-show-on-hover]]:opacity-0',
-              '[&_[data-show-on-hover]]:pointer-events-none',
-              '[&_[data-show-on-hover]]:peer-hover:opacity-100',
-              '[&_[data-show-on-hover]]:peer-hover:pointer-events-auto',
-              '[&_[data-show-on-hover]]:hover:opacity-100',
-              '[&_[data-show-on-hover]]:hover:pointer-events-auto',
-              '[&_[data-show-on-hover]]:focus-visible:opacity-100',
-              '[&_[data-show-on-hover]]:focus-visible:pointer-events-auto'
-            )}
-          >
-            <CopyCodeBlockButton
-              // TODO: internationalize this
-              successText={'Copied!'}
-              errorText={'Failed to copy'}
-              code={files[activeFile].code}
-              data-show-on-hover
-            />
-
-            {!shouldAutorun && (
-              <IconButton variant='rounded' onClick={runSandpack}>
-                <Play />
-              </IconButton>
-            )}
+              {!shouldAutorun && (
+                <IconButton variant='rounded' onClick={runSandpack}>
+                  <Play />
+                </IconButton>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
-        <hr />
+        {shouldShowCodeEditor && <hr />}
 
         <div
           className={clsx(
             'relative',
             !shouldShowConsole && '[&_.sp-preview-container]:sm:rounded-b',
+            !shouldShowCodeEditor && '[&_.sp-preview-container]:sm:rounded',
             '[&_.sp-preview-container]:px-horizontal-padding',
             '[&_.sp-preview-container]:pt-3',
             '[&_.sp-stack]:bg-transparent'

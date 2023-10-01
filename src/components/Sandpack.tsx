@@ -14,14 +14,7 @@ import {
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'
 import Tabs from './Tabs'
-import {
-  ChevronDown,
-  ChevronRight,
-  Codesandbox,
-  Play,
-  RefreshCw,
-  Trash,
-} from 'lucide-react'
+import { ChevronRight, Codesandbox, Play, RefreshCw, Trash } from 'lucide-react'
 import clsx from 'clsx'
 import CopyCodeBlockButton from './CopyCodeBlockButton'
 import Button from './Button'
@@ -310,8 +303,13 @@ function CustomSandpack(props: CustomSandpackProps) {
                   logsVisible && 'rounded-b-none'
                 )}
               >
-                {logsVisible ? <ChevronDown /> : <ChevronRight />} Show console
-                ({logsCount})
+                <ChevronRight
+                  className={clsx(
+                    'ease transition-transform duration-300',
+                    logsVisible && 'rotate-[90deg]'
+                  )}
+                />{' '}
+                Show console ({logsCount})
               </summary>
 
               <div

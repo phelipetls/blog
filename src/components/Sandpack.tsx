@@ -329,7 +329,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                           <div
                             key={log.id}
                             className={clsx(
-                              'border-l-2 px-horizontal-padding py-2 font-mono [overflow-anchor:none]',
+                              'whitespace-nowrap border-l-2 px-horizontal-padding py-2 font-mono [overflow-anchor:none]',
                               log.method === 'error'
                                 ? 'border-warn'
                                 : 'border-note'

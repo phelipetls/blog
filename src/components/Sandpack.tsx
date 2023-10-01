@@ -107,7 +107,7 @@ function CustomSandpack(props: CustomSandpackProps) {
   }, [sandpack])
 
   const [logsVisible, setLogsVisible] = React.useState(false)
-  const { logs, reset } = useSandpackConsole({
+  const { logs, reset: resetLogs } = useSandpackConsole({
     clientId: clientId ?? '',
     resetOnPreviewRestart: true,
     showSyntaxError: true,
@@ -276,7 +276,10 @@ function CustomSandpack(props: CustomSandpackProps) {
 
               <IconButton
                 variant='rounded-full'
-                onClick={refresh}
+                onClick={() => {
+                  refresh()
+                  resetLogs()
+                }}
                 aria-label='Refresh'
                 className='shadow-sm shadow-shadow'
               >
@@ -356,7 +359,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
                   <Button
                     color='secondary'
-                    onClick={reset}
+                    onClick={resetLogs}
                     aria-label='Reset'
                     className='shadow-sm shadow-shadow'
                   >

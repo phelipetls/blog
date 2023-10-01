@@ -194,7 +194,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         {shouldShowCodeEditor && (
           <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
             <SandpackCodeEditor
-              className='peer'
+              className='peer max-h-[450px]'
               showTabs={false}
               showRunButton={false}
             />

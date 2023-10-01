@@ -28,7 +28,7 @@ import Button from './Button'
 import type { SandpackClient } from '@codesandbox/sandpack-client'
 import IconButton from './IconButton'
 
-type SandpackProps = SandpackProviderProps & {
+export type SandpackProps = SandpackProviderProps & {
   title: string
   initialURL?: string
   shouldShowCodeEditor?: boolean

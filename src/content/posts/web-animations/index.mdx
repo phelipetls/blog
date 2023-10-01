@@ -1,0 +1,130 @@
+---
+title: Animating on the web
+date: 2023-09-30
+tags: [javascript, css, html]
+draft: true
+---
+
+import Note from '@components/BlogPostNote.astro'
+
+import AnimatedBox from './_AnimatedBox.tsx'
+import AnimatedBoxWithCssTransition from './_AnimatedBoxWithCssTransition.tsx'
+import AnimatedBoxWithStartingStyle from './_AnimatedBoxWithStartingStyle.tsx'
+import AnimatedBoxWithRequestAnimationFrame from './_AnimatedBoxWithRequestAnimationFrame.tsx'
+import AnimatedBoxWithWebAnimations from './_AnimatedBoxWithWebAnimations.tsx'
+
+In this post we'll explore all the different ways animate on the web, with only
+CSS and vanilla JavaScript.
+
+For simplicity sake, we'll animate a box moving forward.
+
+# CSS `animation` property
+
+Let's start by using the CSS `animation` property.
+
+This way of animating works by first describing your animation using
+[`@keyframes`](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes),
+which is a way to declare the animation frames. For example, the starting styles
+can be declared under `0%` or `from` and the ending styles with `to` or `100%`.
+
+After defining our `keyframe`, we use it in the `animation` property, where we
+also define the animation
+[duration](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration)
+(`1s`) and the [timing
+function](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)
+(`linear`, in this case).
+
+<AnimatedBox client:visible />
+
+<Note>
+
+  You may have noticed the usage of the `forwards` keyword in the `animation`
+  property, [which is a value of the `animation-fill-mode` CSS
+  property](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode).
+
+  To understand this property, let's see how the animation plays by not using
+  it -- the box will reset to its initial style after the animation finishes:
+
+  <AnimatedBox withForwards={false} client:visible shouldShowCodeEditor={false} options={{ autorun: false }} />
+
+  By default, the animation styles are applied only while it's executing. After
+  the animation finishes, the box goes back to its starting position. With
+  `forwards`, the box keeps the style as of the last animation frame.
+
+</Note>
+
+# CSS `transition` property
+
+Now let's try doing the same thing with CSS `transition` property.
+
+With CSS transitions, we no longer have `@keyframes`, instead we need to pass
+which property we want to animate to the `transition` property, while also
+specifying the transition duration and timing function. Whenever we change the
+box style, changes to that property value will be animated.
+
+<AnimatedBoxWithCssTransition client:visible />
+
+In this example, we need a JavaScript trick to make the animation work when the
+document loads -- it doesn't work with pure HTML and CSS. We need to force a
+[reflow](https://developer.mozilla.org/en-US/docs/Glossary/Reflow) with
+`getBoundingClientRect` before adding the `animated-box` class for the
+animation to play. If we used the `animated-box` directly in the HTML, without
+this trick, the box will not appear moving forward, it will appear already in
+its destination.
+
+<Note>
+
+In the future, we'll not need to use JavaScript to animate with CSS transitions
+because of the upcoming
+[`@starting-style`](https://chromestatus.com/feature/4515377717968896) CSS
+rule.
+
+<AnimatedBoxWithStartingStyle client:visible />
+
+</Note>
+
+# `requestAnimationFrame`
+
+Now let's try using the `requestAnimationFrame` to do the same thing.
+
+`requestAnimationFrame` is usually not the most convenient way to animate on
+the web, specially in this case.
+
+This is because `requestAnimationFrame` is an imperative way to do animations,
+in contrast with the declarative way of CSS.
+
+For example, there is no parameter to define the animation duration or timing
+function -- `requestAnimationFrame` just receives a callback function to be
+executed before the browser updates the screen visually (which is called a
+[repaint](https://developer.mozilla.org/en-US/docs/Glossary/Repaint)), so it's
+our job to animate the box from scratch, including for how long and in what
+way.
+
+We will need to have some kind of infinite loop to repeatedly call the function
+responsible for the visual changes, but we should these function calls with
+`requestAnimationFrame` so our visual updates will only run when the browser is
+ready to update the screen visually.
+
+This usually means that our function will be called at most 60 times per
+second. In this way, we can achieve a smooth animation and not waste CPU
+resources/overload the browser.
+
+In this example, you can see how many times the animation function is run in
+the console:
+
+<AnimatedBoxWithRequestAnimationFrame client:visible shouldShowConsole />
+
+# Web Animations API
+
+Fortunately, there is a much more convenient JavaScript API to animate, that is
+similar to how CSS animations work but much more powerful because it's
+JavaScript: the [Web Animations
+API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API).
+
+In the example below, we replicate our animation by calling the `animate`
+method of the DOM element and pass an array of objects that represent each step
+of the animation (this is equivalent to `@keyframes` in CSS) and in the next
+object we specify the animation characteristics such as its duration, fill mode
+(as we've seen) etc.
+
+<AnimatedBoxWithWebAnimations client:visible />

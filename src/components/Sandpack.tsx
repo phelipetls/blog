@@ -352,16 +352,18 @@ function CustomSandpack(props: CustomSandpackProps) {
                 )}
               </div>
 
-              <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
-                <Button
-                  color='secondary'
-                  onClick={reset}
-                  aria-label='Reset'
-                  className='shadow-sm shadow-shadow'
-                >
-                  <Trash /> Clear logs
-                </Button>
-              </div>
+              {!emptyLogs && (
+                <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
+                  <Button
+                    color='secondary'
+                    onClick={reset}
+                    aria-label='Reset'
+                    className='shadow-sm shadow-shadow'
+                  >
+                    <Trash /> Clear logs
+                  </Button>
+                </div>
+              )}
             </details>
           </>
         )}

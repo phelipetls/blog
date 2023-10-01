@@ -113,9 +113,7 @@ function CustomSandpack(props: CustomSandpackProps) {
     showSyntaxError: true,
   })
 
-  const logsCount = logs.filter((log) =>
-    log.data?.some((line) => line !== '')
-  ).length
+  const logsCount = logs.length
   const emptyLogs = logsCount === 0
 
   const logsContainerRef = React.useRef<HTMLDivElement>(null)

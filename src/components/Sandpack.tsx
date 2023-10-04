@@ -325,12 +325,35 @@ function CustomSandpack(props: CustomSandpackProps) {
                   <>
                     {logs
                       .filter((log) => log.data?.some((line) => line !== ''))
+                      .reduce((logs, log) => {
+                        const lastLog = logs.at(-1)
+
+                        if (!lastLog) {
+                          logs.push({ ...log, count: 1 })
+                          return logs
+                        }
+
+                        if (
+                          log.method === lastLog.method &&
+                          log.data?.length === lastLog.data?.length &&
+                          log.data?.every(
+                            (entry, index) => entry === lastLog.data?.[index]
+                          )
+                        ) {
+                          logs[logs.length - 1] = {
+                            ...log,
+                            count: lastLog.count + 1,
+                          }
+                        }
+
+                        return logs
+                      }, [] as ((typeof logs)[0] & { count: number })[])
                       .map((log) => {
                         return (
                           <div
                             key={log.id}
                             className={clsx(
-                              'whitespace-nowrap border-l-2 px-horizontal-padding py-2 font-mono [overflow-anchor:none]',
+                              'whitespace-nowrap border-l-2 px-horizontal-padding py-2 [overflow-anchor:none]',
                               log.method === 'error'
                                 ? 'border-warn'
                                 : 'border-note'
@@ -344,6 +367,13 @@ function CustomSandpack(props: CustomSandpackProps) {
                                   : d
                               )
                               .join('')}
+                            {log.count > 0 ? (
+                              <span className='ml-2 aspect-square w-2 rounded-full bg-surface p-1 text-on-background'>
+                                {log.count}
+                              </span>
+                            ) : (
+                              ''
+                            )}
                           </div>
                         )
                       })}

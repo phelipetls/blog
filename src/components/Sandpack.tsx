@@ -10,6 +10,7 @@ import {
   useSandpackTheme,
   SandpackPreviewRef,
   useSandpackConsole,
+  UnstyledOpenInCodeSandboxButton,
 } from '@codesandbox/sandpack-react'
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'
@@ -18,7 +19,6 @@ import { ChevronRight, Codesandbox, Play, RefreshCw, Trash } from 'lucide-react'
 import clsx from 'clsx'
 import CopyCodeBlockButton from './CopyCodeBlockButton'
 import Button from './Button'
-import type { SandpackClient } from '@codesandbox/sandpack-client'
 import IconButton from './IconButton'
 
 export type SandpackProps = SandpackProviderProps & {
@@ -91,14 +91,11 @@ function CustomSandpack(props: CustomSandpackProps) {
   } = sandpack
 
   const sandpackPreviewRef = React.useRef<SandpackPreviewRef>(null)
-  const [client, setClient] = React.useState<SandpackClient | null>(null)
   const [clientId, setClientId] = React.useState<string | null>(null)
 
   React.useEffect(() => {
-    const client = sandpackPreviewRef.current?.getClient()
     const clientId = sandpackPreviewRef.current?.clientId
 
-    setClient(client ?? null)
     setClientId(clientId ?? null)
     /**
      * NOTE: In order to make sure that the client will be available
@@ -120,19 +117,6 @@ function CustomSandpack(props: CustomSandpackProps) {
 
   const { theme } = useSandpackTheme()
   const { refresh } = useSandpackNavigation()
-
-  const createAndNavigateToCodesandbox = async () => {
-    if (!client) {
-      return
-    }
-
-    const codesandboxUrl = await client
-      // @ts-expect-error TODO: types from the codesandbox library might be broken
-      .getCodeSandboxURL()
-    if (codesandboxUrl?.editorUrl) {
-      window.open(codesandboxUrl?.editorUrl, '_blank')
-    }
-  }
 
   return (
     <div
@@ -263,8 +247,8 @@ function CustomSandpack(props: CustomSandpackProps) {
           {status === 'running' && (
             <div className='absolute bottom-3 right-horizontal-padding flex items-stretch gap-2'>
               <Button
+                as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'
-                onClick={createAndNavigateToCodesandbox}
                 aria-label='Open Sandbox'
                 className='shadow-sm shadow-shadow'
               >

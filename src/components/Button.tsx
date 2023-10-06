@@ -13,6 +13,7 @@ type ButtonLinkProps = Omit<
   React.ComponentPropsWithRef<'a'>,
   'href' & keyof CommonButtonProps
 > & {
+  as?: never
   href: string
 }
 
@@ -20,11 +21,15 @@ type ButtonButtonProps = Omit<
   React.ComponentPropsWithRef<'button'>,
   keyof CommonButtonProps
 > & {
+  as?: never
   href?: never
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type CustomButtonProps = any
+
 export type ButtonProps = CommonButtonProps &
-  (ButtonLinkProps | ButtonButtonProps)
+  (ButtonLinkProps | ButtonButtonProps | CustomButtonProps)
 
 export const Button = React.forwardRef<HTMLElement, ButtonProps>(
   (props, ref) => {
@@ -84,16 +89,21 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
       )
     }
 
-    const { children, size: _, color: __, ...rest } = props
+    if (props.as) {
+      const { size: _, color: __, ...rest } = props
+      const Component = props.as
+
+      return <Component ref={ref} {...rest} className={mergedClassName} />
+    }
+
+    const { size: _, color: __, ...rest } = props
 
     return (
       <button
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
         {...rest}
         className={mergedClassName}
-      >
-        {children}
-      </button>
+      />
     )
   }
 )

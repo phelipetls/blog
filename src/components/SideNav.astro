@@ -54,6 +54,7 @@ const t = useTranslate(Astro)
             return (
               <li class='w-full'>
                 <Button
+                  as='a'
                   id={item.identifier}
                   href={localizeUrl(item.pathname, language)}
                   color={isActive ? 'primary' : 'secondary'}

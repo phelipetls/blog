@@ -113,8 +113,6 @@ function CustomSandpack(props: CustomSandpackProps) {
   const logsCount = logs.length
   const emptyLogs = logsCount === 0
 
-  const logsContainerRef = React.useRef<HTMLDivElement>(null)
-
   const { theme } = useSandpackTheme()
   const { refresh } = useSandpackNavigation()
 
@@ -298,7 +296,6 @@ function CustomSandpack(props: CustomSandpackProps) {
               </summary>
 
               <div
-                ref={logsContainerRef}
                 className={clsx(
                   `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] py-2 text-[var(--sandpack-base)]`
                 )}

@@ -27,6 +27,9 @@ jobs:
 
       - run: npm run build
 
+      - name: Install playwright browsers
+        run: npx playwright install
+
       - name: Run tests
         run: npm run test
 

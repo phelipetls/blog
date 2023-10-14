@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import IconButton, { IconButtonProps } from './IconButton'
+import IconButton from './IconButton'
+import type { IconButtonProps } from './IconButton'
 import { Clipboard, Check, X } from 'lucide-react'
 import clsx from 'clsx'
 

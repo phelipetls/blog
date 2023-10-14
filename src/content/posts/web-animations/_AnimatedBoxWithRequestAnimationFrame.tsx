@@ -1,4 +1,5 @@
-import Sandpack, { SandpackProps } from '@components/Sandpack'
+import Sandpack from '@components/Sandpack'
+import type { SandpackProps } from '@components/Sandpack'
 
 export default function AnimatedBoxWithRequestAnimationFrame(
   props: SandpackProps

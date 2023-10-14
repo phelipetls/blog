@@ -1,16 +1,18 @@
 import * as React from 'react'
 import {
   SandpackProvider,
-  SandpackProviderProps,
   SandpackCodeEditor,
   SandpackPreview,
   SandpackThemeProvider,
   useSandpack,
   useSandpackNavigation,
   useSandpackTheme,
-  SandpackPreviewRef,
   useSandpackConsole,
   UnstyledOpenInCodeSandboxButton,
+} from '@codesandbox/sandpack-react'
+import type {
+  SandpackProviderProps,
+  SandpackPreviewRef,
 } from '@codesandbox/sandpack-react'
 import { atomDark } from '@codesandbox/sandpack-themes'
 import Tab from './Tab'

@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'npm'
 
       - run: npm ci
@@ -23,7 +23,7 @@ jobs:
         run: npm run check
 
       - name: Generate posts images to use as Open Graph images
-        run: npx start-server-and-test start 3000 generate-posts-images
+        run: npx start-server-and-test start 4321 generate-posts-images
 
       - run: npm run build
 

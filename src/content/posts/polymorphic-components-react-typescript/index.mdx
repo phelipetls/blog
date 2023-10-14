@@ -233,6 +233,7 @@ const Typography = <T extends React.ElementType = 'span'>({
   ...rest
 }: TypographyProps<T>) => {
   const Component = as ?? 'span'
+  // @ts-expect-error: FIXME this used to work in TypeScript 4.x but not anymore
   return <Component {...rest} />
 }
 

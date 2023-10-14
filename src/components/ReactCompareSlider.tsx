@@ -1,9 +1,9 @@
 import IconButton from '@components/IconButton'
 import {
   ReactCompareSlider as OriginalReactCompareSlider,
-  ReactCompareSliderProps,
   ReactCompareSliderImage,
 } from 'react-compare-slider'
+import type { ReactCompareSliderProps } from 'react-compare-slider'
 import { MoveHorizontal } from 'lucide-react'
 
 export function ReactCompareSlider(props: ReactCompareSliderProps) {

@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import DevIcon, { DevIconName } from './DevIcon.astro'
+import DevIcon from './DevIcon.astro'
+import type { DevIconName } from './DevIcon.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
 
 type Props = HTMLAttributes<'a'> & {

@@ -72,8 +72,8 @@ async function fetchPostImages(/** @type {string} */ url) {
 
 export async function getPostImagesToScreenshot() {
   const [englishPostImages, portuguesePostImages] = await Promise.all([
-    fetchPostImages('http://localhost:3000/posts/images.json'),
-    fetchPostImages('http://localhost:3000/pt/posts/images.json'),
+    fetchPostImages('http://localhost:4321/posts/images.json'),
+    fetchPostImages('http://localhost:4321/pt/posts/images.json'),
   ])
 
   return [

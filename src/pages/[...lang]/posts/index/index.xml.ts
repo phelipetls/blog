@@ -1,5 +1,6 @@
 import rss from '@astrojs/rss'
-import { Language, translate } from '@utils/i18n'
+import { translate } from '@utils/i18n'
+import type { Language } from '@utils/i18n'
 import type { APIContext } from 'astro'
 import { getCollection } from 'astro:content'
 

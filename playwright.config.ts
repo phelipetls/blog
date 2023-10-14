@@ -101,7 +101,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npm run preview',
     reuseExistingServer: process.env.CI ? false : true,
-    port: 3000,
+    port: 4321,
   },
 }
 

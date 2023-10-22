@@ -63,8 +63,8 @@ export const Button: ButtonComponent = React.forwardRef(function InnerButton<
     return merged
   }, [props.className, props.color])
 
-  const { size: _, color: __, ...rest } = props
-  const Component = props.as ?? 'button'
+  const { as, size: _, color: __, ...rest } = props
+  const Component = as ?? 'button'
 
   return <Component ref={ref} {...rest} className={mergedClassName} />
 })

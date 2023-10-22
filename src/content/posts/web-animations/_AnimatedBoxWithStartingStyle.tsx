@@ -29,12 +29,6 @@ export default function _AnimatedBoxWithCssTransition() {
   <body>
     <div class="box"></div>
   </body>
-
-  <script>
-    if (!CSS.supports('@starting-style')) {
-      document.body.innerHTML = 'Your browser does not suppport @starting-style yet.'
-    }
-  </script>
 <html>`,
         },
       }}

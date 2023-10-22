@@ -11,6 +11,7 @@ import AnimatedBoxWithCssTransition from './_AnimatedBoxWithCssTransition.tsx'
 import AnimatedBoxWithStartingStyle from './_AnimatedBoxWithStartingStyle.tsx'
 import AnimatedBoxWithRequestAnimationFrame from './_AnimatedBoxWithRequestAnimationFrame.tsx'
 import AnimatedBoxWithWebAnimations from './_AnimatedBoxWithWebAnimations.tsx'
+import AnimatedBoxWithViewTransitions from './_AnimatedBoxWithViewTransitions.tsx'
 
 In this post we'll explore all the different ways animate on the web, with only
 CSS and vanilla JavaScript.
@@ -127,3 +128,19 @@ object we specify the animation characteristics such as its duration, fill mode
 (as we've seen) etc.
 
 <AnimatedBoxWithWebAnimations client:visible />
+
+# View Transitions
+
+We can achieve a similar effect with [View Transitions
+API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
+
+This new browser API is intended to power much more powerful animations, such
+as page transitions or shared elements. [I suggest this blog post if you want
+to learn more about
+it.](https://developer.chrome.com/docs/web-platform/view-transitions)
+
+We can still use it for this blog post's purpose of animating a box moving --
+we just need to modify the DOM element to make the box move inside a callback
+passed to `document.startViewTransition`:
+
+<AnimatedBoxWithViewTransitions client:visible />

@@ -316,21 +316,33 @@ function CustomSandpack(props: CustomSandpackProps) {
                           return logs
                         }
 
-                        if (
-                          log.method === lastLog.method &&
-                          log.data?.length === lastLog.data?.length &&
-                          log.data?.every(
-                            (data, index) =>
-                              JSON.stringify(data) ===
-                              JSON.stringify(lastLog.data?.[index])
-                          )
+                        function areLogEntriesEqual(
+                          logEntryA: typeof log,
+                          logEntryB: typeof log
                         ) {
+                          return (
+                            logEntryA.method === logEntryB.method &&
+                            logEntryA.data?.length === logEntryB.data?.length &&
+                            logEntryA.data?.every(
+                              (data, index) =>
+                                JSON.stringify(data) ===
+                                JSON.stringify(logEntryB.data?.[index])
+                            )
+                          )
+                        }
+
+                        if (areLogEntriesEqual(log, lastLog)) {
                           logs[logs.length - 1] = {
                             ...log,
                             count: lastLog.count + 1,
                           }
+                          return logs
                         }
 
+                        logs.push({
+                          ...log,
+                          count: 1,
+                        })
                         return logs
                       }, [] as ((typeof logs)[0] & { count: number })[])
                       .map((log) => {

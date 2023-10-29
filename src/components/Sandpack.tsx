@@ -320,7 +320,9 @@ function CustomSandpack(props: CustomSandpackProps) {
                           log.method === lastLog.method &&
                           log.data?.length === lastLog.data?.length &&
                           log.data?.every(
-                            (entry, index) => entry === lastLog.data?.[index]
+                            (data, index) =>
+                              JSON.stringify(data) ===
+                              JSON.stringify(lastLog.data?.[index])
                           )
                         ) {
                           logs[logs.length - 1] = {

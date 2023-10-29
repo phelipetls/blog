@@ -344,11 +344,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                           >
                             {log.method === 'error' ? 'ERROR: ' : 'INFO: '}{' '}
                             {log.data
-                              ?.map((d) =>
-                                typeof d === 'object'
-                                  ? JSON.stringify(d, null, 2)
-                                  : d
-                              )
+                              ?.map((d) => JSON.stringify(d, null, 2))
                               .join('')}
                             {log.count > 0 ? (
                               <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>

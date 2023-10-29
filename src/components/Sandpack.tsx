@@ -348,12 +348,10 @@ function CustomSandpack(props: CustomSandpackProps) {
                             {log.data
                               ?.map((d) => JSON.stringify(d, null, 2))
                               .join('')}
-                            {log.count > 0 ? (
+                            {log.count > 0 && (
                               <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>
                                 {log.count}
                               </span>
-                            ) : (
-                              ''
                             )}
                           </div>
                         )

@@ -344,7 +344,6 @@ function CustomSandpack(props: CustomSandpackProps) {
                                 : 'border-note'
                             )}
                           >
-                            {log.method === 'error' ? 'ERROR: ' : 'INFO: '}{' '}
                             {log.data
                               ?.map((d) => JSON.stringify(d, null, 2))
                               .join('')}

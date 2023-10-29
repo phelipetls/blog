@@ -351,7 +351,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                               )
                               .join('')}
                             {log.count > 0 ? (
-                              <span className='ml-2 aspect-square w-2 rounded-full bg-surface p-1 text-on-background'>
+                              <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>
                                 {log.count}
                               </span>
                             ) : (

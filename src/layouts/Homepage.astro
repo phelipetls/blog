@@ -8,16 +8,14 @@ const t = useTranslate(Astro)
 
 <Site isTranslated title={t.About()}>
   <main class='grid grid-cols-layout my-8'>
-    <div class='flex flex-col items-center justify-center gap-8 sm:flex-row'>
-      <Gravatar />
+    <article class='max-w-prose'>
+      <header class='flex flex-row items-end gap-2 mb-4'>
+        <Gravatar baseWidth={48} />
 
-      <article class='max-w-prose'>
-        <header>
-          <h1 class='mb-4 hidden sm:block'>{t.About()}</h1>
-        </header>
+        <h1 class='mb-0'>{t.About()}</h1>
+      </header>
 
-        <slot />
-      </article>
-    </div>
+      <slot />
+    </article>
   </main>
 </Site>

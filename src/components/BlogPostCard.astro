@@ -22,7 +22,10 @@ const {
 
 <article class='flex h-full flex-col'>
   <h3 class='text-2xl max-w-prose m-0 border-l-2 border-primary pl-4'>
-    <a href={localizeUrl(`/posts/${getBlogPostName(blogPost)}`, language)}>
+    <a
+      class='max-w-prose'
+      href={localizeUrl(`/posts/${getBlogPostName(blogPost)}`, language)}
+    >
       {title}
     </a>
   </h3>
@@ -32,13 +35,13 @@ const {
     <BlogPostDate date={date} />
   </div>
 
-  <div class='my-4'>
+  <div class='my-4 max-w-prose'>
     {description ?? summary}
   </div>
 
   {
     tags && (
-      <div class='flex max-w-prose flex-wrap gap-2'>
+      <div class='flex flex-wrap gap-2'>
         {tags.map((tag) => {
           return <Tag tag={tag} class='snap-start whitespace-nowrap' />
         })}

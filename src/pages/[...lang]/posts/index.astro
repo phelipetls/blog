@@ -64,9 +64,8 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
   htmlClass='scroll-smooth scroll-pt-[calc(var(--nav-height)_+_1rem)] sm:scroll-pt-0'
 >
   <main class='grid grid-cols-layout my-8'>
-    <div class='mb-8 hidden mx-auto gap-2 sm:flex sm:items-center'>
+    <div class='mx-auto mb-8 hidden gap-2 sm:flex sm:items-end'>
       <h1 class='m-0'>Posts</h1>
-
       <RssButton />
     </div>
 
@@ -80,23 +79,21 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
 
           return (
             <div class='group col-full grid grid-cols-layout'>
-              <div id={year} />
+              <div class='sr-only' id={year} />
 
               <div
                 class:list={[
                   'sticky',
                   'top-[calc(var(--nav-height)_+_0.5rem)]',
-                  'col-full',
                   'w-full',
                   'bg-background',
                   'bg-opacity-75',
-                  'px-horizontal-padding',
                   'py-2',
                   'backdrop-blur-sm',
                   'sm:top-0',
                 ]}
               >
-                <div class='mx-auto flex max-w-2xl flex-row justify-between'>
+                <div class='flex flex-row justify-between'>
                   <h2 class='m-0 text-2xl'>
                     <time datetime={`${year}-01-01`}>{year}</time>
                   </h2>
@@ -123,7 +120,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                 </div>
               </div>
 
-              <ul class='m-0 mx-auto mt-8 grid w-full max-w-2xl list-none grid-cols-1 gap-4 pb-24 group-last:pb-0'>
+              <ul class='m-0 mt-8 grid w-full list-none grid-cols-1 gap-4 pb-24 group-last:pb-0'>
                 {blogPosts
                   .sort((blogPostA, blogPostB) => {
                     return (

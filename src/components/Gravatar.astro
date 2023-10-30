@@ -2,6 +2,12 @@
 import md5 from 'md5'
 import { useTranslate } from '@utils/i18n'
 
+type Props = {
+  baseWidth?: number
+}
+
+const { baseWidth = 200 } = Astro.props
+
 const t = useTranslate(Astro)
 
 const email = 'phelipe_teles@hotmail.com'
@@ -10,19 +16,15 @@ const generateGravatarUrl = (width: number) =>
   `https://www.gravatar.com/avatar/${md5(email)}?s=${width}`
 ---
 
-<div
-  class='relative z-0 shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-surface to-divider p-1'
->
-  <img
-    id='gravatar'
-    class='rounded-full'
-    srcset={`
-      ${generateGravatarUrl(200)} 1x,
-      ${generateGravatarUrl(400)} 2x,
-      ${generateGravatarUrl(600)} 3x
-    `}
-    alt={t.GravatarAltText()}
-    width='200'
-    height='200'
-  />
-</div>
+<img
+  id='gravatar'
+  class='rounded-full'
+  srcset={`
+    ${generateGravatarUrl(baseWidth)} 1x,
+    ${generateGravatarUrl(baseWidth * 2)} 2x,
+    ${generateGravatarUrl(baseWidth * 3)} 3x
+  `}
+  alt={t.GravatarAltText()}
+  width={baseWidth}
+  height={baseWidth}
+/>

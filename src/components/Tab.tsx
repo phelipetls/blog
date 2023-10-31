@@ -37,7 +37,7 @@ export default function Tab(props: TabProps) {
           'duration-300',
           'hover:bg-hover',
           {
-            'border-b border-primary font-bold hover:bg-hover': selected,
+            'border-b border-primary font-bold': selected,
           },
           className
         )

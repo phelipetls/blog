@@ -3,11 +3,12 @@ import type { HTMLAttributes } from 'astro/types'
 import DevIcon from './DevIcon.astro'
 import type { DevIconName } from './DevIcon.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
+import { upperFirst } from 'lodash'
+import { isDevIcon } from '@utils/devicons'
 
 type Props = HTMLAttributes<'a'> & {
   tag: string
   count?: number
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children?: never
 }
 
@@ -15,36 +16,32 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 
 const { tag, count, class: className = '' } = Astro.props
 
-const tagToIconName: Record<string, DevIconName> = {
-  typescript: 'Typescript',
-  javascript: 'Javascript',
-  react: 'React',
-  c: 'C',
-  python: 'Python',
-  lua: 'Lua',
-  'react native': 'React',
-  css: 'Css3',
-  html: 'Html5',
-  bash: 'Bash',
-  node: 'Nodejs',
-  vim: 'Vim',
-  nvim: 'Vim',
-}
+let tagDevIconName: DevIconName | null = null
 
-const tagIconName = tagToIconName[tag]
+const tagComponentName = upperFirst(tag)
+if (isDevIcon(tagComponentName)) {
+  tagDevIconName = tagComponentName
+} else {
+  const tagToIconName: Record<string, DevIconName> = {
+    'react native': 'React',
+    nvim: 'Vim',
+  }
+
+  tagDevIconName = tagToIconName[tag] ?? null
+}
 ---
 
 <a
   class:list={[
     'inline-flex gap-2 w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow-sm shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover whitespace-nowrap [&_svg]:w-[1em] [&_svg]:h-[1em]',
-    tagIconName ? 'order-1' : 'order-2',
+    tagDevIconName ? 'order-1' : 'order-2',
     className,
   ]}
   href={tag === '...'
     ? localizeUrl('/tags', language)
     : localizeUrl(`/tags/${tag}`, language)}
 >
-  {tagIconName && <DevIcon name={tagIconName} />}
+  {tagDevIconName !== null && <DevIcon name={tagDevIconName} />}
 
   {tag}
 

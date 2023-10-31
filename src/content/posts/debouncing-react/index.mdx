@@ -1,0 +1,107 @@
+---
+title: Debouncing callbacks in React components
+date: 2023-10-31
+tags: [javascript, typescript, react]
+---
+
+import debounceCode from './_debounce.js'
+import DebounceButtonExample from './_DebounceButtonExample.tsx'
+import DebounceReactNaiveButtonExample from './_DebounceReactNaiveButtonExample.tsx'
+import DebounceReactNaiveInputExample from './_DebounceReactNaiveInputExample.tsx'
+import DebounceReactUseCallbackExample from './_DebounceReactUseCallbackExample.tsx'
+import DebounceReactUseMemoExample from './_DebounceReactUseMemoExample.tsx'
+
+Debouncing a callback in a React component may not be as straightforward as you
+might think. In this post I want to explore the source of this difficulty and
+how to solve it.
+
+# What is debouncing?
+
+Debouncing a callback means delaying it to run after some time has passed from
+the last user's request.
+
+For example, it's useful to fetch search results after the user stopped typing
+in the search input.
+
+Here's an example of a button that runs a debounced callback on click:
+
+<DebounceButtonExample client:visible shouldShowConsole debounceCode={debounceCode} />
+
+The click handler callback calls `console.log` and you'll notice it takes 300ms
+before it actually runs after the click. If you're fast enough in spamming
+button clicks the `console.log` will only run 300ms after you stop.
+
+# Naive implementation
+
+Let's implement this example in React:
+
+<DebounceReactNaiveButtonExample client:visible shouldShowConsole debounceCode={debounceCode} />
+
+We can see that everything works just as fine as in the vanilla JavaScript
+example.
+
+But what could go wrong, exactly...? `debounce` is a higher-order function --
+it accepts a function as argument and returns a new one. This returned function
+is a closure, meaning it is a function that "closes over" its scope with a
+variable that holds the last `setTimeout` return value, which we use later to
+cancel the scheduled timeout with `clearTimeout`, in case the callback gets
+called within the 300ms interval -- this is how we achieve the debounce effect
+is produced.
+
+In other words, the returned function depends on a *state* to do its job
+properly:
+
+```js {4,12}
+export function debounce(func, duration) {
+  console.log('Running debounce')
+
+  let timeout
+
+  return function (...args) {
+    const effect = () => {
+      timeout = null
+      return func.apply(this, args)
+    }
+
+    clearTimeout(timeout)
+    timeout = setTimeout(effect, duration)
+  }
+}
+```
+
+So this function needs to be stable across renders! We know that in React
+functional components, this is not a given -- every function declaration will
+result in a new function instance at every render, unless we use `useCallback`
+or `useMemo`.
+
+In this particular case, it's crucial to use these hooks to achieve the desired
+user experience. Doing otherwise is what I'm calling the naive implementation.
+
+Now, why does the button example work? Because the button example only renders
+once since it has no state or parent components -- the debounced callback is
+stable, it's the same exact function every time we click on the button.
+
+We can start to expect buggy behavior once the debounced callback depends on a
+value or state, such as in this example of filtering a list of films based on
+user input:
+
+<DebounceReactNaiveInputExample client:visible shouldShowConsole debounceCode={debounceCode} />
+
+In this example, everything is broken, the filtering is not debounced -- this
+is because our debounced function is not stable across renders.
+
+# Implementation with `useCallback`
+
+The fix is to wrap the `debounce` function call with `useCallback`:
+
+<DebounceReactUseCallbackExample client:visible shouldShowConsole debounceCode={debounceCode} />
+
+The only "problem" with this approach is that `debounce` will run on every
+render, but we can deal with this by using `useMemo`.
+
+# Implementation with `useMemo`
+
+Using useMemo, the `debounce` function will be invoked only during the initial
+render:
+
+<DebounceReactUseMemoExample client:visible shouldShowConsole debounceCode={debounceCode} />

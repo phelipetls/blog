@@ -3,11 +3,12 @@ import CopyCodeBlockButton from '@components/CopyCodeBlockButton'
 import DevIcon from '@components/DevIcon.astro'
 import type { DevIconName } from '@components/DevIcon.astro'
 import { useTranslate } from '@utils/i18n'
-import * as DevIcons from './devicons'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
 import '@assets/css/twoslash.css'
 import IconButton from './IconButton'
+import { isDevIcon } from '@utils/devicons'
+import { upperFirst } from 'lodash'
 
 const t = useTranslate(Astro)
 
@@ -38,8 +39,6 @@ const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
     tsx: 'Typescript',
     js: 'Javascript',
     ts: 'Typescript',
-    css: 'Css3',
-    html: 'Html5',
     shell: 'Bash',
   }
 
@@ -69,17 +68,10 @@ const getShikiLangName = (lang: Lang): string | undefined => {
 
 const langName = getShikiLangName(Astro.props.lang) || Astro.props.lang
 
-const isDevIconName = (str: string): str is DevIconName => {
-  return Object.keys(DevIcons)
-    .map((iconName) => iconName.toLowerCase())
-    .includes(str)
-}
+const langComponentName = upperFirst(Astro.props.lang)
 
-const capitalize = <T extends string>(str: T) =>
-  (str.charAt(0).toUpperCase() + str.slice(1)) as Capitalize<T>
-
-const devIconName = isDevIconName(lang)
-  ? (capitalize(Astro.props.lang) as DevIconName)
+const devIconName = isDevIcon(langComponentName)
+  ? langComponentName
   : getDevIconNameByShikiLang(lang)
 ---
 

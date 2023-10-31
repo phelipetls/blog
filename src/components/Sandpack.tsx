@@ -143,6 +143,8 @@ function CustomSandpack(props: CustomSandpackProps) {
             return (
               <Tab
                 className={clsx(
+                  'bg-surface',
+                  'text-on-background',
                   '[&[aria-selected=true]]:bg-[var(--sandpack-surface1)]',
                   '[&[aria-selected=true]]:text-[var(--sandpack-accent)]',
                   '[&[aria-selected=true]]:shadow-sm',

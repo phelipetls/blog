@@ -8,7 +8,7 @@ const TabList = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { children, ...rest } = props
 
   return (
-    <div ref={ref} role='tablist' className='space-x-2' {...rest}>
+    <div ref={ref} role='tablist' className='space-x-1' {...rest}>
       {children}
     </div>
   )

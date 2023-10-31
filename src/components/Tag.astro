@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types'
 import DevIcon from './DevIcon.astro'
 import type { DevIconName } from './DevIcon.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
-import { upperFirst } from 'lodash'
+import _ from 'lodash'
 import { isDevIcon } from '@utils/devicons'
 
 type Props = HTMLAttributes<'a'> & {
@@ -18,7 +18,7 @@ const { tag, count, class: className = '' } = Astro.props
 
 let tagDevIconName: DevIconName | null = null
 
-const tagComponentName = upperFirst(tag)
+const tagComponentName = _.upperFirst(tag)
 if (isDevIcon(tagComponentName)) {
   tagDevIconName = tagComponentName
 } else {

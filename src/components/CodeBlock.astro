@@ -8,7 +8,7 @@ import type { HTMLAttributes } from 'astro/types'
 import '@assets/css/twoslash.css'
 import IconButton from './IconButton'
 import { isDevIcon } from '@utils/devicons'
-import { upperFirst } from 'lodash'
+import _ from 'lodash'
 
 const t = useTranslate(Astro)
 
@@ -68,7 +68,7 @@ const getShikiLangName = (lang: Lang): string | undefined => {
 
 const langName = getShikiLangName(Astro.props.lang) || Astro.props.lang
 
-const langComponentName = upperFirst(Astro.props.lang)
+const langComponentName = _.upperFirst(Astro.props.lang)
 
 const devIconName = isDevIcon(langComponentName)
   ? langComponentName

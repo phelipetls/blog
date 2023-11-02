@@ -3,7 +3,7 @@ import Site from '@layouts/Site.astro'
 import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
 import { getBlogPostName, getBlogPosts, getBlogPostTags } from '@utils/posts'
 import { localizeUrl } from '@utils/i18n'
-import { ChevronRight } from 'lucide-react'
+import { Calendar, ChevronRight } from 'lucide-react'
 import type { CollectionEntry } from 'astro:content'
 import { format } from 'date-fns'
 import _ from 'lodash'
@@ -77,22 +77,20 @@ const language = getLanguageFromUrl(Astro.url.pathname)
     tag,
   })}
 >
-  <main class='grid grid-cols-layout my-8'>
+  <main class='grid grid-cols-layout my-6'>
     <div
-      class='w-full hidden sm:flex flex-row items-center gap-2 text-2xl'
+      class='w-full [&_svg]:w-[1em] [&_svg]:h-[1em] flex flex-row items-center gap-2'
     >
       <Link
-        class='text-2xl underline-offset-8'
+        class='underline-offset-8 text-base'
         href={localizeUrl('/tags', language)}
       >
         Tags
       </Link>
 
-      <span class='text-sm'>
-        <ChevronRight />
-      </span>
+      <ChevronRight />
 
-      <h1 class='m-0'>
+      <h1 class='text-base m-0'>
         {tag}
       </h1>
     </div>
@@ -104,9 +102,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
 
           return (
             <>
-              <h2 class='m-0 my-8 tabular-nums first:mt-0'>
-                {year}
-              </h2>
+              <h2 class='m-0 mb-2 mt-8 tabular-nums first:mt-0'>{year}</h2>
 
               {blogPosts
                 .sort(
@@ -116,17 +112,21 @@ const language = getLanguageFromUrl(Astro.url.pathname)
                 )
                 .map((blogPost) => {
                   return (
-                    <li class='mb-2 max-w-2xl last:mb-0'>
+                    <li class='mb-2 last:mb-0'>
                       <a
-                        class='group flex gap-4 py-2'
+                        class='group flex flex-nowrap items-start gap-4'
                         href={localizeUrl(
                           '/posts/' + getBlogPostName(blogPost),
                           language
                         )}
                       >
-                        <time class='min-w-[6ch] flex-shrink-0 font-mono text-lg tabular-nums sm:text-right'>
-                          {format(blogPost.data.date, 'MMM dd')}
-                        </time>
+                        <div class='flex flex-row items-center gap-2'>
+                          <Calendar />
+
+                          <time class='whitespace-nowrap'>
+                            {format(blogPost.data.date, 'MMM dd')}
+                          </time>
+                        </div>
 
                         <h2 class='m-0 border-l border-primary pl-4 text-lg font-normal transition-colors duration-300 sm:group-hover:text-primary'>
                           {blogPost.data.title}

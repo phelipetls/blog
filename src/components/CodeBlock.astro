@@ -190,7 +190,9 @@ const devIconName = isDevIcon(langComponentName)
       'border-divider',
     ]}
   >
-    <div class:list={['flex', 'pl-2', 'items-center', 'gap-2']}>
+    <div
+      class:list={['flex', 'pl-horizontal-padding', 'items-center', 'gap-2']}
+    >
       {devIconName && <DevIcon name={devIconName} />}
 
       <div class:list={['rtl', 'truncate', 'font-mono']}>
@@ -233,7 +235,7 @@ const devIconName = isDevIcon(langComponentName)
       '[color-scheme:dark]',
       '[&_code]:py-4',
       '[&_code]:grid',
-      '[&_code>.line]:px-8',
+      '[&_code>.line]:px-horizontal-padding',
       '[&_code>.line]:border-l-[2px]',
       '[&_code>.line]:border-[var(--code-bg)]',
       '[&_code>.line.highlight]:bg-[#272115]',

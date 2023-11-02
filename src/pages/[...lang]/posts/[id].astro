@@ -79,7 +79,7 @@ type Props = {
   prevBlogPost: CollectionEntry<'posts'> | null
 }
 
-const { blogPost } = Astro.props
+const { blogPost, nextBlogPost, prevBlogPost } = Astro.props
 const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
 const components = {
@@ -96,8 +96,9 @@ const components = {
 <BlogPost
   frontmatter={remarkPluginFrontmatter}
   headings={headings}
+  nextBlogPost={nextBlogPost}
+  prevBlogPost={prevBlogPost}
   {...blogPost}
-  {...Astro.props}
 >
   <Content components={{ ...components, Fragment }} />
 </BlogPost>

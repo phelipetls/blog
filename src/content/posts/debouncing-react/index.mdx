@@ -10,6 +10,7 @@ import DebounceReactNaiveButtonExample from './_DebounceReactNaiveButtonExample.
 import DebounceReactNaiveInputExample from './_DebounceReactNaiveInputExample.tsx'
 import DebounceReactUseCallbackExample from './_DebounceReactUseCallbackExample.tsx'
 import DebounceReactUseMemoExample from './_DebounceReactUseMemoExample.tsx'
+import CodeBlock from '@components/CodeBlock.astro'
 
 Debouncing a callback in a React component may not be as straightforward as you
 might think. In this post I want to explore the source of this difficulty and
@@ -51,23 +52,11 @@ is produced.
 In other words, the returned function depends on a *state* to do its job
 properly:
 
-```js {4,12}
-export function debounce(func, duration) {
-  console.log('Running debounce')
-
-  let timeout
-
-  return function (...args) {
-    const effect = () => {
-      timeout = null
-      return func.apply(this, args)
-    }
-
-    clearTimeout(timeout)
-    timeout = setTimeout(effect, duration)
-  }
-}
-```
+<CodeBlock
+  lang='javascript'
+  highlight='4,12'
+  code={debounceCode}
+/>
 
 So this function needs to be stable across renders! We know that in React
 functional components, this is not a given -- every function declaration will

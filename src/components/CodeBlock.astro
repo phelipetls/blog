@@ -195,7 +195,7 @@ const devIconName = isDevIcon(langComponentName)
     >
       {devIconName && <DevIcon name={devIconName} />}
 
-      <div class:list={['rtl', 'truncate', 'font-mono']}>
+      <div class:list={['rtl', 'truncate']}>
         {title ? <bdi>{title}</bdi> : langName || t.NoName()}
       </div>
     </div>

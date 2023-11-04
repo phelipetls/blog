@@ -1,6 +1,6 @@
 :root {
   --horizontal-padding: 1rem;
-  --content-max-width: 64rem;
+  --content-max-width: 80rem;
   --nav-height: 4rem;
 
   --primary: hexToRgb(theme(colors.orange.500));

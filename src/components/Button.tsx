@@ -7,6 +7,8 @@ type CommonButtonProps = {
   disabled?: boolean
   children: React.ReactNode
   size?: 'normal' | 'huge'
+  endIcon?: React.ReactNode
+  startIcon?: React.ReactNode
 }
 
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithRef<T>
@@ -42,7 +44,6 @@ export const Button: ButtonComponent = React.forwardRef(function InnerButton<
         'items-center',
         'justify-center',
         'flex-row',
-        'gap-2',
         'transition-colors',
         'duration-300',
         'hover:bg-hover',
@@ -63,10 +64,26 @@ export const Button: ButtonComponent = React.forwardRef(function InnerButton<
     return merged
   }, [props.className, props.color])
 
-  const { as, size: _, color: __, ...rest } = props
+  const {
+    as,
+    size: _,
+    color: __,
+    children,
+    startIcon,
+    endIcon,
+    ...rest
+  } = props
   const Component = as ?? 'button'
 
-  return <Component ref={ref} {...rest} className={mergedClassName} />
+  return (
+    <Component ref={ref} {...rest} className={mergedClassName}>
+      <div className='pr-2'>{startIcon}</div>
+
+      {children}
+
+      <div className='pl-2'>{endIcon}</div>
+    </Component>
+  )
 })
 
 export default Button

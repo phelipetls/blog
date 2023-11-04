@@ -240,8 +240,13 @@ function CustomSandpack(props: CustomSandpackProps) {
 
           {!shouldAutorun && status !== 'running' && (
             <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
-              <Button color='primary' size='huge' onClick={runSandpack}>
-                Run Sandbox <Play />
+              <Button
+                color='primary'
+                size='huge'
+                onClick={runSandpack}
+                endIcon={<Play />}
+              >
+                Run Sandbox
               </Button>
             </div>
           )}
@@ -253,9 +258,10 @@ function CustomSandpack(props: CustomSandpackProps) {
                 color='secondary'
                 aria-label='Open Sandbox'
                 className='shadow-sm shadow-shadow'
+                startIcon={<Codesandbox />}
               >
                 {/* TODO: Internationalize this */}
-                <Codesandbox /> Open Sandbox
+                Open Sandbox
               </Button>
 
               <IconButton
@@ -390,8 +396,9 @@ function CustomSandpack(props: CustomSandpackProps) {
                     onClick={resetLogs}
                     aria-label='Reset'
                     className='shadow-sm shadow-shadow'
+                    startIcon={<Trash />}
                   >
-                    <Trash /> Clear logs
+                    Clear logs
                   </Button>
                 </div>
               )}

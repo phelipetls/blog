@@ -164,12 +164,35 @@ function CustomSandpack(props: CustomSandpackProps) {
       )}
 
       <div
+        style={{
+          // @ts-expect-error This is ok
+          '--column-template-areas': shouldShowCodeEditor
+            ? `
+            "editor preview"
+            "editor preview"
+            "console console"
+          `
+            : `
+            "preview preview"
+            "preview preview"
+            "console console"
+          `,
+        }}
         className={clsx(
-          'max-sm:full-bleed relative shadow-sm shadow-shadow sm:rounded-b'
+          'max-sm:full-bleed shadow-sm shadow-shadow',
+          'lg:grid lg:grid-cols-2 lg:[grid-template-areas:_var(--column-template-areas)]',
+          'lg:rounded lg:rounded-tl-none',
+          !shouldShowConsole &&
+            'lg:[&_.sp-code-editor]:rounded-bl lg:[&_.sp-editor]:rounded-bl lg:[&_.sp-preview-container]:rounded-r lg:[&_[data-editor]]:rounded-bl',
+          !shouldShowCodeEditor && 'lg:[&_.sp-preview-container]:rounded-l',
+          shouldShowConsole && 'rounded-b'
         )}
       >
         {shouldShowCodeEditor && (
-          <div className='dark relative [&_.sp-code-editor_*]:sm:rounded [&_.sp-code-editor_*]:sm:rounded-tl-none'>
+          <div
+            data-editor
+            className='dark relative border-b border-divider lg:[grid-area:_editor]'
+          >
             <SandpackCodeEditor
               className='peer max-h-[450px]'
               showTabs={false}
@@ -211,16 +234,15 @@ function CustomSandpack(props: CustomSandpackProps) {
           </div>
         )}
 
-        {shouldShowCodeEditor && <hr />}
-
         <div
           className={clsx(
             'relative',
-            !shouldShowConsole && '[&_.sp-preview-container]:sm:rounded-b',
-            !shouldShowCodeEditor && '[&_.sp-preview-container]:sm:rounded',
+            'lg:[grid-area:_preview]',
             '[&_.sp-preview-container]:px-horizontal-padding',
             '[&_.sp-preview-container]:pt-3',
-            '[&_.sp-stack]:bg-transparent'
+            '[&_.sp-stack]:bg-transparent',
+            'border-b',
+            'border-divider'
           )}
         >
           <noscript>
@@ -236,6 +258,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             showRefreshButton={false}
             showOpenInCodeSandbox={false}
             title={title}
+            className='h-full'
           />
 
           {!shouldAutorun && status !== 'running' && (
@@ -280,130 +303,126 @@ function CustomSandpack(props: CustomSandpackProps) {
         </div>
 
         {shouldShowConsole && (
-          <>
-            <hr />
-
-            <details
-              className='relative'
-              onToggle={(e) => {
-                e.preventDefault()
-                setLogsVisible(!logsVisible)
-              }}
-            >
-              <summary
-                className={clsx(
-                  `flex w-full list-none flex-row justify-start gap-2 rounded-b rounded-t-none bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] shadow-sm shadow-shadow [&::marker]:hidden [&::webkit-details-marker]:hidden`,
-                  logsVisible && 'rounded-b-none'
-                )}
-              >
-                <ChevronRight
-                  className={clsx(
-                    'ease transition-transform duration-300',
-                    logsVisible && 'rotate-[90deg]'
-                  )}
-                />{' '}
-                Show console ({logsCount})
-              </summary>
-
-              <div
-                className={clsx(
-                  `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] py-2 text-[var(--sandpack-base)]`
-                )}
-              >
-                {emptyLogs ? (
-                  <div className='px-horizontal-padding'>No logs yet</div>
-                ) : (
-                  <>
-                    {logs
-                      .filter((log) => log.data?.some((line) => line !== ''))
-                      .reduce((logs, log) => {
-                        const lastLog = logs.at(-1)
-
-                        if (!lastLog) {
-                          logs.push({ ...log, count: 1 })
-                          return logs
-                        }
-
-                        function areLogEntriesEqual(
-                          logEntryA: typeof log,
-                          logEntryB: typeof log
-                        ) {
-                          return (
-                            logEntryA.method === logEntryB.method &&
-                            logEntryA.data?.length === logEntryB.data?.length &&
-                            logEntryA.data?.every(
-                              (data, index) =>
-                                JSON.stringify(data) ===
-                                JSON.stringify(logEntryB.data?.[index])
-                            )
-                          )
-                        }
-
-                        if (areLogEntriesEqual(log, lastLog)) {
-                          logs[logs.length - 1] = {
-                            ...log,
-                            count: lastLog.count + 1,
-                          }
-                          return logs
-                        }
-
-                        logs.push({
-                          ...log,
-                          count: 1,
-                        })
-                        return logs
-                      }, [] as ((typeof logs)[0] & { count: number })[])
-                      .map((log) => {
-                        return (
-                          <div
-                            key={log.id}
-                            className={clsx(
-                              'whitespace-nowrap border-l-2 px-horizontal-padding py-2 [overflow-anchor:none]',
-                              log.method === 'error'
-                                ? 'border-warn'
-                                : 'border-note'
-                            )}
-                          >
-                            {log.data
-                              ?.map((d) => {
-                                if (typeof d === 'object' && '@t' in d) {
-                                  return d['@t']
-                                    .replace(/^\[\[/, '')
-                                    .replace(/\]\]$/, '')
-                                }
-
-                                return JSON.stringify(d, null, 2)
-                              })
-                              .join(' ')}
-                            {log.count > 1 && (
-                              <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>
-                                {log.count}
-                              </span>
-                            )}
-                          </div>
-                        )
-                      })}
-
-                    <div className='h-[1px] [overflow-anchor:auto]' />
-                  </>
-                )}
-              </div>
-
-              {!emptyLogs && (
-                <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
-                  <Button
-                    color='secondary'
-                    onClick={resetLogs}
-                    aria-label='Reset'
-                    className='shadow-sm shadow-shadow'
-                    startIcon={<Trash />}
-                  >
-                    Clear logs
-                  </Button>
-                </div>
+          <details
+            className='relative lg:[grid-area:_console]'
+            onToggle={(e) => {
+              e.preventDefault()
+              setLogsVisible(!logsVisible)
+            }}
+          >
+            <summary
+              className={clsx(
+                `flex w-full list-none flex-row justify-start gap-2 rounded-b rounded-t-none bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] [&::marker]:hidden [&::webkit-details-marker]:hidden`,
+                logsVisible && 'rounded-b-none'
               )}
-            </details>
-          </>
+            >
+              <ChevronRight
+                className={clsx(
+                  'ease transition-transform duration-300',
+                  logsVisible && 'rotate-[90deg]'
+                )}
+              />{' '}
+              Show console ({logsCount})
+            </summary>
+
+            <div
+              className={clsx(
+                `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] py-2 text-[var(--sandpack-base)]`
+              )}
+            >
+              {emptyLogs ? (
+                <div className='px-horizontal-padding'>No logs yet</div>
+              ) : (
+                <>
+                  {logs
+                    .filter((log) => log.data?.some((line) => line !== ''))
+                    .reduce((logs, log) => {
+                      const lastLog = logs.at(-1)
+
+                      if (!lastLog) {
+                        logs.push({ ...log, count: 1 })
+                        return logs
+                      }
+
+                      function areLogEntriesEqual(
+                        logEntryA: typeof log,
+                        logEntryB: typeof log
+                      ) {
+                        return (
+                          logEntryA.method === logEntryB.method &&
+                          logEntryA.data?.length === logEntryB.data?.length &&
+                          logEntryA.data?.every(
+                            (data, index) =>
+                              JSON.stringify(data) ===
+                              JSON.stringify(logEntryB.data?.[index])
+                          )
+                        )
+                      }
+
+                      if (areLogEntriesEqual(log, lastLog)) {
+                        logs[logs.length - 1] = {
+                          ...log,
+                          count: lastLog.count + 1,
+                        }
+                        return logs
+                      }
+
+                      logs.push({
+                        ...log,
+                        count: 1,
+                      })
+                      return logs
+                    }, [] as ((typeof logs)[0] & { count: number })[])
+                    .map((log) => {
+                      return (
+                        <div
+                          key={log.id}
+                          className={clsx(
+                            'whitespace-nowrap border-l-2 px-horizontal-padding py-2 [overflow-anchor:none]',
+                            log.method === 'error'
+                              ? 'border-warn'
+                              : 'border-note'
+                          )}
+                        >
+                          {log.data
+                            ?.map((d) => {
+                              if (typeof d === 'object' && '@t' in d) {
+                                return d['@t']
+                                  .replace(/^\[\[/, '')
+                                  .replace(/\]\]$/, '')
+                              }
+
+                              return JSON.stringify(d, null, 2)
+                            })
+                            .join(' ')}
+                          {log.count > 1 && (
+                            <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>
+                              {log.count}
+                            </span>
+                          )}
+                        </div>
+                      )
+                    })}
+
+                  <div className='h-[1px] [overflow-anchor:auto]' />
+                </>
+              )}
+            </div>
+
+            {!emptyLogs && (
+              <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
+                <Button
+                  color='secondary'
+                  onClick={resetLogs}
+                  aria-label='Reset'
+                  className='shadow-sm shadow-shadow'
+                  startIcon={<Trash />}
+                >
+                  Clear logs
+                </Button>
+              </div>
+            )}
+          </details>
         )}
       </div>
     </div>

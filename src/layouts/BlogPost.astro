@@ -45,7 +45,7 @@ const ogImageUrl = localizeUrl(
 
 const t = useTranslate(Astro)
 
-const emptyHeadings = headings.length === 0
+const tocWouldBeEmpty = headings.length === 0
 ---
 
 <Site
@@ -120,17 +120,17 @@ const emptyHeadings = headings.length === 0
 
         <div
           data-blog-post-container
-          data-toc={emptyHeadings ? 'closed' : 'open'}
+          data-toc={tocWouldBeEmpty ? 'closed' : 'open'}
           class:list={[
             'group',
             'flex',
             'flex-col',
             'lg:gap-8',
-            !emptyHeadings && 'lg:flex-row-reverse',
+            !tocWouldBeEmpty && 'lg:flex-row-reverse',
           ]}
         >
           {
-            !emptyHeadings && (
+            !tocWouldBeEmpty && (
               <aside
                 style={{
                   '--offset-from-top': '1rem',

@@ -191,7 +191,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         {shouldShowCodeEditor && (
           <div
             data-editor
-            className='dark relative border-b border-divider lg:[grid-area:_editor]'
+            className='dark relative lg:border-b lg:border-divider lg:[grid-area:_editor]'
           >
             <SandpackCodeEditor
               className='peer max-h-[450px]'
@@ -239,10 +239,11 @@ function CustomSandpack(props: CustomSandpackProps) {
             'relative',
             'lg:[grid-area:_preview]',
             '[&_.sp-preview-container]:px-horizontal-padding',
-            '[&_.sp-preview-container]:pt-3',
-            '[&_.sp-stack]:bg-transparent',
-            'border-b',
-            'border-divider'
+            '[&_.sp-preview-container]:py-3',
+            '[&_.sp-preview-container]:bg-[var(--sandpack-surface1)]',
+            'lg:border-b',
+            'lg:border-l',
+            'lg:border-divider'
           )}
         >
           <noscript>
@@ -275,7 +276,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           )}
 
           {status === 'running' && (
-            <div className='absolute bottom-3 right-horizontal-padding flex items-stretch gap-2'>
+            <div className='absolute bottom-6 right-[calc(var(--horizontal-padding)_+_6px)] flex items-stretch gap-2'>
               <Button
                 as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'

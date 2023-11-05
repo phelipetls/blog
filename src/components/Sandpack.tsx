@@ -270,6 +270,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 size='huge'
                 onClick={runSandpack}
                 endIcon={<Play />}
+                className='rounded-full'
               >
                 Run Sandbox
               </Button>
@@ -282,7 +283,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'
                 aria-label='Open Sandbox'
-                className='shadow-sm shadow-shadow'
+                className='rounded-full shadow-sm shadow-shadow'
                 startIcon={<Codesandbox />}
               >
                 {/* TODO: Internationalize this */}

@@ -196,7 +196,15 @@ const devIconName = isDevIcon(langComponentName)
       {devIconName && <DevIcon name={devIconName} />}
 
       <div class:list={['rtl', 'truncate', 'text-lg']}>
-        {title ? <bdi>{title}</bdi> : langName || t.NoName()}
+        {
+          title ? (
+            <bdi>{title}</bdi>
+          ) : langName === 'plaintext' || langName === '' ? (
+            t.NoName()
+          ) : (
+            langName
+          )
+        }
       </div>
     </div>
 

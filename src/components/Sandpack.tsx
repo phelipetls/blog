@@ -312,8 +312,8 @@ function CustomSandpack(props: CustomSandpackProps) {
           >
             <summary
               className={clsx(
-                `flex w-full list-none flex-row justify-start gap-2 rounded-b rounded-t-none bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] [&::marker]:hidden [&::webkit-details-marker]:hidden`,
-                logsVisible && 'rounded-b-none'
+                `flex w-full list-none flex-row justify-start gap-2 bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] lg:rounded-b [&::marker]:hidden [&::webkit-details-marker]:hidden`,
+                logsVisible && 'lg:rounded-b-none'
               )}
             >
               <ChevronRight

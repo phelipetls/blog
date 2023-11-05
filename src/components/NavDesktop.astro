@@ -21,7 +21,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
       class='flex justify-between pl-horizontal-padding'
       aria-label={t.MainNavigation()}
     >
-      <ul class='m-0 flex flex-row list-none gap-2'>
+      <ul class='m-0 flex flex-row list-none gap-4'>
         {
           MAIN_MENU_ITEMS.map((item) => {
             const isActive = isActiveMenuItem({
@@ -31,11 +31,11 @@ const language = getLanguageFromUrl(Astro.url.pathname)
             })
 
             return (
-              <li>
+              <li class=''>
                 <a
                   id={item.identifier}
                   href={localizeUrl(item.pathname, language)}
-                  class:list={['p-2', 'inline-block h-full w-full', 'group']}
+                  class:list={['py-2', 'inline-block h-full w-full', 'group']}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
                   <span

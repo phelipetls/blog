@@ -137,6 +137,7 @@ const tocWouldBeEmpty = headings.length === 0
                 }}
                 class:list={[
                   'relative',
+                  'shrink-0',
                   'mb-8',
                   'lg:group-data-toc-open:card',
                   'lg:ml-auto',
@@ -246,7 +247,7 @@ const tocWouldBeEmpty = headings.length === 0
           <div
             data-blog-post
             class:list={[
-              'w-full',
+              'min-w-0',
               '[&>pre]:my-8',
               '[&>pre]:max-sm:full-bleed',
               '[&>[data-codeblock]]:my-8',

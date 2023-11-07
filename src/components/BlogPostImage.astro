@@ -12,8 +12,12 @@ type Props = {
 const { src, caption, alt, width, height } = Astro.props
 ---
 
-<figure class='my-8'>
-  <Image src={src} alt={alt} width={width} height={height} />
+<figure class='my-8 max-w-2xl bg-surface rounded-md py-1'>
+  <Image class='mx-auto' src={src} alt={alt} width={width} height={height} />
 
-  {caption && <figcaption class='mt-1 font-bold'>{caption}</figcaption>}
+  {
+    caption && (
+      <figcaption class='mt-1 text-center font-bold'>{caption}</figcaption>
+    )
+  }
 </figure>

@@ -12,7 +12,7 @@ type Props = {
 const { src, caption, alt, width, height } = Astro.props
 ---
 
-<figure>
+<figure class='my-8'>
   <Image src={src} alt={alt} width={width} height={height} />
 
   {caption && <figcaption class='mt-2 px-horizontal-padding text-center' />}

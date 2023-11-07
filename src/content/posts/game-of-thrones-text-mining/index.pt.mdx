@@ -319,7 +319,7 @@ word_pairs %>%
   theme_void()
 ```
 
-<Image title="Grafo das palavras mais comuns em Game of Thrones" alt="Grafo das palavras mais comuns em Game of Thrones" src={GrafoDePalavras} />
+<Image caption="Grafo das palavras mais comuns em Game of Thrones" alt="Grafo das palavras mais comuns em Game of Thrones" src={GrafoDePalavras} />
 
 # Palavras mais frequentes
 
@@ -347,7 +347,7 @@ got_words %>%
   ))
 ```
 
-<Image title="Nuvem de palavras das palavras mais comuns em Game of Thrones" alt="Nuvem de palavras das palavras mais comuns em Game of Thrones" src={NuvemDePalavras} />
+<Image caption="Nuvem de palavras das palavras mais comuns em Game of Thrones" alt="Nuvem de palavras das palavras mais comuns em Game of Thrones" src={NuvemDePalavras} />
 
 Agora, vamos ver como isso varia para cada temporada, com o pacote
 `ggwordcloud`.
@@ -375,7 +375,7 @@ got_words %>%
   facet_wrap(. ~ season, nrow = 3, ncol = 3)
 ```
 
-<Image title="Nuvem de palavras por temporada" alt="Nuvem de palavras por temporada" src={NuvemDePalavrasPorTemporada} />
+<Image caption="Nuvem de palavras por temporada" alt="Nuvem de palavras por temporada" src={NuvemDePalavrasPorTemporada} />
 
 # Análise de sentimentos
 
@@ -494,7 +494,7 @@ got_bing %>%
   )
 ```
 
-<Image title="Palavras negativas e positivas" alt="Palavras negativas e positivas" src={PalavrasNegativasEPositivas} />
+<Image caption="Palavras negativas e positivas" alt="Palavras negativas e positivas" src={PalavrasNegativasEPositivas} />
 
 Agora, vamos fazer isso em por temporada e medir o sentimento médio a cada seção
 de n palavras.
@@ -536,7 +536,7 @@ got_afinn %>%
   facet_wrap(season ~ ., scale = "free_x")
 ```
 
-<Image title="Sentimento médio, método afinn" alt="Sentimento médio, método afinn" src={SentimentoMedioAfinn} />
+<Image caption="Sentimento médio, método afinn" alt="Sentimento médio, método afinn" src={SentimentoMedioAfinn} />
 
 Em geral, podemos ver que as temporadas foram ficando mais pesadas. Os picos
 azuis claros foram ficando cada vez mais raros e os vales vermelhos mais agudos,
@@ -573,7 +573,7 @@ got_bing %>%
   )
 ```
 
-<Image title="Sentimento médio, método bing" alt="Sentimento médio, método bing" src={SentimentoMedioBing} />
+<Image caption="Sentimento médio, método bing" alt="Sentimento médio, método bing" src={SentimentoMedioBing} />
 
 Ok, isso em geral vai de encontro com o que já havíamos visto.
 
@@ -616,7 +616,7 @@ got_nrc %>%
   )
 ```
 
-<Image title="Sentimento médio, método NRC" alt="Sentimento médio, método NRC" src={SentimentoMedioNrc} />
+<Image caption="Sentimento médio, método NRC" alt="Sentimento médio, método NRC" src={SentimentoMedioNrc} />
 
 Pera! Já esse nos dá quase que o resultado oposto! De fato, por esse método a
 série não parece ser tão negativa quanto os outros haviam sugerido. Isso porque

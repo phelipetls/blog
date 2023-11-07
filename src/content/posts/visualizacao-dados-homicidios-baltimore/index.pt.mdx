@@ -89,7 +89,7 @@ df %>%
   )
 ```
 
-<Image alt="Gráfico mostrando um declínio no número de homicídios na cidade de Baltimore do ano de 2007 a 2012" title="Declínio nos homicídios nos anos de 2007-2012 em Baltimore" src={UnnamedChunk_2_1} />
+<Image alt="Gráfico mostrando um declínio no número de homicídios na cidade de Baltimore do ano de 2007 a 2012" caption="Declínio nos homicídios nos anos de 2007-2012 em Baltimore" src={UnnamedChunk_2_1} />
 
 Ok, uma boa notícia, parece que o número de homicídios vem reduzindo com os
 anos…
@@ -118,7 +118,7 @@ df %>%
   scale_x_continuous(breaks = 2007:2012)
 ```
 
-<Image title="A maioria das vítimas de homicídio é negra" alt="Gráfico mostrando que a maioria das vítimas de homicídio é negra" src={UnnamedChunk_3_1} />
+<Image caption="A maioria das vítimas de homicídio é negra" alt="Gráfico mostrando que a maioria das vítimas de homicídio é negra" src={UnnamedChunk_3_1} />
 
 Essa é a primeira visualização do que já era esperado: na cidade de Baltimore, a
 violência afeta muito mais os negros do que a qualquer outra raça. Impressiona a
@@ -158,7 +158,7 @@ acumulado <- df %>%
 acumulado
 ```
 
-<Image title="Os homicídios tendem a aumentar ao longo dos meses" alt="Gráfico mostrando como cresceu o número de homicídios em Baltimore por mês, a cada ano, de 2007 a 2012" src={UnnamedChunk_4_1} />
+<Image caption="Os homicídios tendem a aumentar ao longo dos meses" alt="Gráfico mostrando como cresceu o número de homicídios em Baltimore por mês, a cada ano, de 2007 a 2012" src={UnnamedChunk_4_1} />
 
 E aqui fica claro o porquê da queda em 2012: não temos os dados de todos os
 meses. Também salta aos olhos que a violência diminuiu em relação a 2007, mas se
@@ -186,7 +186,7 @@ df %>%
   scale_x_continuous(breaks = seq(0, 100, 10))
 ```
 
-<Image title="Conclui-se, de cara, que a maioria das vítimas é negra e do sexo masculino" alt="Gráfico mostrando as vítimas de homicídio por recortes sociais, do que se conclui que a maioria das vítimas é negra e do sexo masculino" src={UnnamedChunk_5_1} />
+<Image caption="Conclui-se, de cara, que a maioria das vítimas é negra e do sexo masculino" alt="Gráfico mostrando as vítimas de homicídio por recortes sociais, do que se conclui que a maioria das vítimas é negra e do sexo masculino" src={UnnamedChunk_5_1} />
 
 E assim podemos ver que o mais afetado pela violência é o homem negro da faixa
 dos 20-30 anos. Se olharmos bem, pode-se também observar que a mulher negra está
@@ -216,7 +216,7 @@ df %>%
   scale_fill_brewer(palette = "Set1")
 ```
 
-<Image alt="Gráfico mostrando os homicídios por causa de morte, sendo por arma de fogo a mais comum, seguida de esfaqueamento" title="Os homicídios por armas de fogo são os mais comuns" src={UnnamedChunk_6_1} />
+<Image alt="Gráfico mostrando os homicídios por causa de morte, sendo por arma de fogo a mais comum, seguida de esfaqueamento" caption="Os homicídios por armas de fogo são os mais comuns" src={UnnamedChunk_6_1} />
 
 Os homicídios por armas de fogo são de longe os mais comuns, seguido por
 esfaqueamento e contusão.
@@ -277,7 +277,7 @@ anim <- baltimore_map +
 animate(anim, fps = 5)
 ```
 
-<Image alt="Animação mostrando a evolução dos homicídios por localização" title="Nota-se que a violência é concentrada em certos bairros, mas em toda a região" src={UnnamedChunk_7_1} />
+<Image alt="Animação mostrando a evolução dos homicídios por localização" caption="Nota-se que a violência é concentrada em certos bairros, mas em toda a região" src={UnnamedChunk_7_1} />
 
 Fica evidente daí como a violência é concentrada em certos bairros.
 
@@ -307,7 +307,7 @@ df %>%
   transition_states(ano)
 ```
 
-<Image alt="Animação mostrando a evolução no tempo dos homicídios, por causa de morte" title="Não é uma visualização interessante, porque o homicídio por arma de fogo é o mais comum em todos os anos" src={UnnamedChunk_8_1} />
+<Image alt="Animação mostrando a evolução no tempo dos homicídios, por causa de morte" caption="Não é uma visualização interessante, porque o homicídio por arma de fogo é o mais comum em todos os anos" src={UnnamedChunk_8_1} />
 
 E que tal animarmos aquele gráfico do número acumulado? Vamos usar o
 `gganimate::transition_reveal()` para revelar ao longo do eixo do tempo como os
@@ -325,7 +325,7 @@ acumulado +
   transition_reveal(mes)
 ```
 
-<Image alt="Animação mostrando a evolução no tempo dos homicídios, por mês" title="O comportamento do crescimento é consistente durante os anos" src={UnnamedChunk_9_1} />
+<Image alt="Animação mostrando a evolução no tempo dos homicídios, por mês" caption="O comportamento do crescimento é consistente durante os anos" src={UnnamedChunk_9_1} />
 
 # Conclusões
 

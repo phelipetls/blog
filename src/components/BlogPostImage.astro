@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+
 type Props = {
   src: string
   caption: string
@@ -11,7 +13,7 @@ const { src, caption, alt, width, height } = Astro.props
 ---
 
 <figure>
-  <img src={src} alt={alt} width={width} height={height} />
+  <Image src={src} alt={alt} width={width} height={height} />
 
   {caption && <figcaption class='mt-2 px-horizontal-padding text-center' />}
 </figure>

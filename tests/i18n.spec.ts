@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test.describe('Multi-language', () => {
+test.describe('Internationalization', () => {
   const toPortugueseUrls = [
     ['/', '/pt/'],
     ['/posts', '/pt/posts'],

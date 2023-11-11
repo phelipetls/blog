@@ -9,13 +9,19 @@ const t = useTranslate(Astro)
 <Site isTranslated title={t.About()}>
   <main class='grid grid-cols-layout my-8'>
     <article class='max-w-prose'>
-      <header class='flex flex-row items-end gap-2 mb-4'>
+      <header class='hidden sm:flex flex-row items-end gap-2 mb-4'>
         <Gravatar baseWidth={48} />
 
-        <h1 class='mb-0'>{t.About()}</h1>
+        <h1 class='text-xl mb-0'>Phelipe Teles</h1>
       </header>
 
       <slot />
     </article>
   </main>
+
+  <div slot='mobile-nav-title' class='flex flex-row items-center gap-2'>
+    <Gravatar baseWidth={40} />
+
+    <h1 class='text-xl mb-0'>Phelipe Teles</h1>
+  </div>
 </Site>

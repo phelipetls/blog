@@ -22,9 +22,6 @@ const pt = {
   PostsListDescription: 'Listagem de todos os blog posts',
   PostsNavigation: 'Navegação entre posts',
   RefreshApp: 'Recarregar app',
-  Resume: 'Currículo',
-  Résumé: 'Currículo',
-  RésuméDescription: 'Meu currículo em PDF',
   ShowLess: 'Mostrar menos',
   ShowMore: 'Mostrar mais',
   SiteDescription:

@@ -22,9 +22,6 @@ const en = {
   PostsListDescription: 'List of all blog posts',
   PostsNavigation: 'Posts navigation',
   RefreshApp: 'Refresh app',
-  Resume: 'Résumé',
-  Résumé: 'Résumé',
-  RésuméDescription: 'My Résumé in PDF',
   ShowLess: 'Show less',
   ShowMore: 'Show more',
   SiteDescription:

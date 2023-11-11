@@ -7,9 +7,9 @@ export function getBlogPosts(language: Language) {
   if (language === 'pt') {
     return getCollection('posts', (blogPost) => {
       const isPortuguese = blogPost.id.endsWith('.pt.mdx')
-      const isDraft = blogPost.data.draft
 
       if (isProd) {
+        const isDraft = blogPost.data.draft
         return isPortuguese && !isDraft
       } else {
         return isPortuguese
@@ -19,9 +19,9 @@ export function getBlogPosts(language: Language) {
 
   return getCollection('posts', (blogPost) => {
     const isEnglish = !blogPost.id.endsWith('.pt.mdx')
-    const isDraft = blogPost.data.draft
 
     if (isProd) {
+      const isDraft = blogPost.data.draft
       return isEnglish && !isDraft
     } else {
       return isEnglish

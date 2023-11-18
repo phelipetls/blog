@@ -9,7 +9,7 @@ const { readingTime } = Astro.props
 ---
 
 <div class='flex items-center gap-2'>
-  <Timer />
+  <Timer className='flex-shrink-0' />
 
   <div>{Math.floor(readingTime)} min.</div>
 </div>

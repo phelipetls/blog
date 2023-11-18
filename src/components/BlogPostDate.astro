@@ -1,28 +1,37 @@
 ---
 import { Calendar } from 'lucide-react'
 import { format } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR/index.js'
 import { getLanguageFromUrl } from '@utils/i18n'
+import enUS from 'date-fns/locale/en-US/index.js'
+import ptBR from 'date-fns/locale/pt-BR/index.js'
 
 type Props = {
   date: Date
+  showYear: boolean
 }
 
-const date = Astro.props.date
-
-let formattedDate = format(date, 'MMMM dd')
-
-if (getLanguageFromUrl(Astro.url.pathname) === 'pt') {
-  formattedDate = format(date, "d ' de ' MMMM", {
-    locale: ptBR,
-  })
+let dateFormat = 'MMMM dd'
+if (Astro.props.showYear) {
+  dateFormat = 'MMMM dd, yyyy'
 }
+
+const isPortuguese = getLanguageFromUrl(Astro.url.pathname) === 'pt'
+if (isPortuguese) {
+  dateFormat = "d ' de ' MMMM"
+  if (Astro.props.showYear) {
+    dateFormat = "d ' de ' MMMM, yyyy"
+  }
+}
+
+const formattedDisplayDate = format(Astro.props.date, dateFormat, {
+  locale: isPortuguese ? ptBR : enUS,
+})
 ---
 
 <div class='flex items-center gap-2'>
   <Calendar />
 
-  <time datetime={format(date, 'yyyy-MM-dd')}>
-    {formattedDate}
+  <time datetime={format(Astro.props.date, 'yyyy-MM-dd')}>
+    {formattedDisplayDate}
   </time>
 </div>

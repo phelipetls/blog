@@ -9,37 +9,33 @@ import PostNav from '@components/PostNav.astro'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostToc from '@components/BlogPostToc.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
-import type { MarkdownHeading } from 'astro'
 import { getSandpackCssText } from '@codesandbox/sandpack-react'
 import { formatISO } from 'date-fns'
 import type { CollectionEntry } from 'astro:content'
 import IconButton from '@components/IconButton'
 import clsx from 'clsx'
 import { List, X } from 'lucide-react'
+import CodeBlock from '@components/CodeBlock.astro'
+import Link from '@components/Link.astro'
+import H2 from '@components/H2.astro'
+import H3 from '@components/H3.astro'
+import H4 from '@components/H4.astro'
+import H5 from '@components/H5.astro'
+import H6 from '@components/H6.astro'
+import Paragraph from '@components/Paragraph.astro'
 
-type Props = CollectionEntry<'posts'> & {
-  isTranslated: boolean
-  headings: MarkdownHeading[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  frontmatter: Record<string, any>
+type Props = {
+  blogPost: CollectionEntry<'posts'> & { isTranslated: boolean }
   nextBlogPost: CollectionEntry<'posts'> | null
   prevBlogPost: CollectionEntry<'posts'> | null
 }
 
-const {
-  data,
-  frontmatter,
-  headings,
-  nextBlogPost,
-  prevBlogPost,
-  isTranslated,
-} = Astro.props
-const { readingTime, summary } = frontmatter
-const { title, date, tags } = data
+const { blogPost, nextBlogPost, prevBlogPost } = Astro.props
+const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
 const language = getLanguageFromUrl(Astro.url.pathname)
 const ogImageUrl = localizeUrl(
-  `/posts/${getBlogPostFolderName(Astro.props)}/image.png`,
+  `/posts/${getBlogPostFolderName(Astro.props.blogPost)}/image.png`,
   language
 )
 
@@ -49,19 +45,19 @@ const tocWouldBeEmpty = headings.length === 0
 ---
 
 <Site
-  isTranslated={isTranslated}
-  title={`${title} - Phelipe Teles`}
-  description={summary}
+  isTranslated={blogPost.isTranslated}
+  title={`${blogPost.data.title} - Phelipe Teles`}
+  description={remarkPluginFrontmatter.summary}
   seo={{
     openGraph: {
       basic: {
-        title: `${title}`,
+        title: `${blogPost.data.title}`,
         image: ogImageUrl,
         type: 'article',
       },
       article: {
-        tags,
-        publishedTime: formatISO(new Date(date)),
+        tags: blogPost.data.tags,
+        publishedTime: formatISO(new Date(blogPost.data.date)),
         authors: ['Phelipe Teles'],
       },
     },
@@ -80,11 +76,18 @@ const tocWouldBeEmpty = headings.length === 0
   htmlClass='scroll-smooth scroll-pt-nav-height sm:scroll-pt-0'
 >
   <Fragment slot='head'>
-    <meta name='publish-date' content={format(date, 'yyyy-MM-dd')} />
-    {tags && <meta name='keywords' content={tags.join(', ')} />}
-    <meta name='description' content={summary} />
+    <meta
+      name='publish-date'
+      content={format(blogPost.data.date, 'yyyy-MM-dd')}
+    />
+    {
+      blogPost.data.tags && (
+        <meta name='keywords' content={blogPost.data.tags.join(', ')} />
+      )
+    }
+    <meta name='description' content={remarkPluginFrontmatter.summary} />
 
-    {data.math && <Katex />}
+    {blogPost.data.math && <Katex />}
 
     {/* FIXME: only include this if the page needs it */}
     <style id='sandpack' set:html={getSandpackCssText()}></style>
@@ -95,18 +98,20 @@ const tocWouldBeEmpty = headings.length === 0
       <article>
         <header class='flex flex-col'>
           <h1 class='mb-4 text-4xl max-w-prose'>
-            {title}
+            {blogPost.data.title}
           </h1>
 
           <div class='mb-4 flex gap-2 flex-row'>
-            <BlogPostDate date={date} showYear />
-            <BlogPostReadingTime readingTime={readingTime} />
+            <BlogPostDate date={blogPost.data.date} showYear />
+            <BlogPostReadingTime
+              readingTime={remarkPluginFrontmatter.readingTime}
+            />
           </div>
 
           {
-            tags && (
+            blogPost.data.tags && (
               <div class='mb-4 flex max-w-lg flex-wrap gap-2'>
-                {tags.map((tag) => {
+                {blogPost.data.tags.map((tag) => {
                   return <Tag tag={tag} />
                 })}
 
@@ -268,7 +273,19 @@ const tocWouldBeEmpty = headings.length === 0
               '[&_.katex-display]:overflow-y-hidden',
             ]}
           >
-            <slot />
+            <Content
+              components={{
+                pre: CodeBlock,
+                a: Link,
+                p: Paragraph,
+                h1: H2,
+                h2: H3,
+                h3: H4,
+                h4: H5,
+                h5: H6,
+                Fragment,
+              }}
+            />
           </div>
         </div>
       </article>

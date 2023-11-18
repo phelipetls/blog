@@ -1,13 +1,5 @@
 ---
 import BlogPost from '@layouts/BlogPost.astro'
-import CodeBlock from '@components/CodeBlock.astro'
-import Link from '@components/Link.astro'
-import H2 from '@components/H2.astro'
-import H3 from '@components/H3.astro'
-import H4 from '@components/H4.astro'
-import H5 from '@components/H5.astro'
-import H6 from '@components/H6.astro'
-import Paragraph from '@components/Paragraph.astro'
 import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts, getBlogPostFolderName } from '@utils/posts'
 import _ from 'lodash'
@@ -81,28 +73,10 @@ type Props = {
   nextBlogPost: CollectionEntry<'posts'> | null
   prevBlogPost: CollectionEntry<'posts'> | null
 }
-
-const { blogPost, nextBlogPost, prevBlogPost } = Astro.props
-const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
-
-const components = {
-  pre: CodeBlock,
-  a: Link,
-  p: Paragraph,
-  h1: H2,
-  h2: H3,
-  h3: H4,
-  h4: H5,
-  h5: H6,
-}
 ---
 
 <BlogPost
-  frontmatter={remarkPluginFrontmatter}
-  headings={headings}
-  nextBlogPost={nextBlogPost}
-  prevBlogPost={prevBlogPost}
-  {...blogPost}
->
-  <Content components={{ ...components, Fragment }} />
-</BlogPost>
+  blogPost={Astro.props.blogPost}
+  nextBlogPost={Astro.props.nextBlogPost}
+  prevBlogPost={Astro.props.prevBlogPost}
+/>

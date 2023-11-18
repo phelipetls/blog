@@ -7,11 +7,9 @@ import {
   getBlogPostTags,
 } from '@utils/posts'
 import { localizeUrl } from '@utils/i18n'
-import { Calendar, ChevronRight } from 'lucide-react'
 import type { CollectionEntry } from 'astro:content'
 import { format } from 'date-fns'
 import _ from 'lodash'
-import Link from '@components/Link.astro'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -82,22 +80,9 @@ const language = getLanguageFromUrl(Astro.url.pathname)
   })}
 >
   <main class='grid grid-cols-layout my-6'>
-    <div
-      class='w-full [&_svg]:w-[1em] [&_svg]:h-[1em] flex flex-row items-center gap-2'
-    >
-      <Link
-        class='underline-offset-8 text-base'
-        href={localizeUrl('/tags', language)}
-      >
-        Tags
-      </Link>
-
-      <ChevronRight />
-
-      <h1 class='text-base m-0'>
-        {tag} ({blogPosts.length})
-      </h1>
-    </div>
+    <h1 class='text-base m-0'>
+      {t.BlogPostsTaggedWith({ tag })} ({blogPosts.length})
+    </h1>
 
     <ul class='list-none ml-0 mt-8'>
       {
@@ -116,23 +101,21 @@ const language = getLanguageFromUrl(Astro.url.pathname)
                 )
                 .map((blogPost) => {
                   return (
-                    <li class='mb-2 last:mb-0'>
+                    <li class='group'>
                       <a
-                        class='group flex flex-nowrap items-start gap-4'
+                        class='flex flex-nowrap items-start gap-4'
                         href={localizeUrl(
                           '/posts/' + getBlogPostFolderName(blogPost),
                           language
                         )}
                       >
-                        <div class='flex min-w-[9ch] basis-2 flex-row items-center gap-2 [&_*]:shrink-0'>
-                          <Calendar />
-
-                          <time class='whitespace-nowrap'>
+                        <div class='flex min-w-[6ch] basis-2'>
+                          <time class='whitespace-nowrap tabular-nums'>
                             {format(blogPost.data.date, 'MMM dd')}
                           </time>
                         </div>
 
-                        <h2 class='m-0 border-l border-primary pl-4 text-lg font-normal transition-colors duration-300 sm:group-hover:text-primary'>
+                        <h2 class='m-0 border-l border-primary pb-2 pl-4 text-base font-normal transition-colors duration-300 group-last:pb-0 sm:hover:text-primary'>
                           {blogPost.data.title}
                         </h2>
                       </a>

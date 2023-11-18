@@ -46,7 +46,7 @@ test.describe('Posts', () => {
       page.getByText('Por que aprender git rebase?').first()
     ).toBeVisible()
 
-    await page.getByRole('link', { name: /edit on github/i }).click()
+    await page.getByRole('link', { name: /editar no github/i }).click()
     await expect(page).toHaveURL(
       `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.pt.mdx`
     )

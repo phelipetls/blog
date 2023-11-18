@@ -6,7 +6,7 @@ import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import md5 from 'md5'
 import type { CollectionEntry } from 'astro:content'
-import { getBlogPosts, getBlogPostName } from '@utils/posts'
+import { getBlogPosts, getBlogPostFolderName } from '@utils/posts'
 import '@fontsource/source-sans-pro'
 import '@fontsource/merriweather'
 
@@ -17,13 +17,13 @@ export async function getStaticPaths() {
   return [
     ...englishBlogPosts.map((blogPost) => {
       return {
-        params: { lang: undefined, id: getBlogPostName(blogPost) },
+        params: { lang: undefined, id: getBlogPostFolderName(blogPost) },
         props: { language: 'en', blogPost },
       }
     }),
     ...portugueseBlogPosts.map((blogPost) => {
       return {
-        params: { lang: 'pt', id: getBlogPostName(blogPost) },
+        params: { lang: 'pt', id: getBlogPostFolderName(blogPost) },
         props: { language: 'pt', blogPost },
       }
     }),

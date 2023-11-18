@@ -1,7 +1,7 @@
 ---
 import { format } from 'date-fns'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
-import { getBlogPostName } from '@utils/posts'
+import { getBlogPostFolderName } from '@utils/posts'
 import Site from '@layouts/Site.astro'
 import Tag from '@components/Tag.astro'
 import Katex from '@components/Katex.astro'
@@ -39,7 +39,7 @@ const { title, date, tags } = data
 
 const language = getLanguageFromUrl(Astro.url.pathname)
 const ogImageUrl = localizeUrl(
-  `/posts/${getBlogPostName(Astro.props)}/image.png`,
+  `/posts/${getBlogPostFolderName(Astro.props)}/image.png`,
   language
 )
 

@@ -9,7 +9,7 @@ import H5 from '@components/H5.astro'
 import H6 from '@components/H6.astro'
 import Paragraph from '@components/Paragraph.astro'
 import type { CollectionEntry } from 'astro:content'
-import { getBlogPosts, getBlogPostName } from '@utils/posts'
+import { getBlogPosts, getBlogPostFolderName } from '@utils/posts'
 import _ from 'lodash'
 
 export async function getStaticPaths() {
@@ -17,9 +17,11 @@ export async function getStaticPaths() {
   const portugueseBlogPosts = await getBlogPosts('pt')
 
   const portugueseBlogPostsNames = portugueseBlogPosts.map((p) =>
-    getBlogPostName(p)
+    getBlogPostFolderName(p)
   )
-  const englishBlogPostsNames = englishBlogPosts.map((p) => getBlogPostName(p))
+  const englishBlogPostsNames = englishBlogPosts.map((p) =>
+    getBlogPostFolderName(p)
+  )
 
   function sortByDateInAscendingOrder(blogPosts: CollectionEntry<'posts'>[]) {
     return blogPosts.sort((blogPostA, blogPostB) => {
@@ -37,12 +39,12 @@ export async function getStaticPaths() {
         const prevBlogPost = blogPosts[index - 1] ?? null
 
         return {
-          params: { lang: undefined, id: getBlogPostName(blogPost) },
+          params: { lang: undefined, id: getBlogPostFolderName(blogPost) },
           props: {
             blogPost: {
               ...blogPost,
               isTranslated: portugueseBlogPostsNames.includes(
-                getBlogPostName(blogPost)
+                getBlogPostFolderName(blogPost)
               ),
             },
             nextBlogPost,
@@ -57,12 +59,12 @@ export async function getStaticPaths() {
         const prevBlogPost = blogPosts[index - 1] ?? null
 
         return {
-          params: { lang: 'pt', id: getBlogPostName(blogPost) },
+          params: { lang: 'pt', id: getBlogPostFolderName(blogPost) },
           props: {
             blogPost: {
               ...blogPost,
               isTranslated: englishBlogPostsNames.includes(
-                getBlogPostName(blogPost)
+                getBlogPostFolderName(blogPost)
               ),
             },
             nextBlogPost,

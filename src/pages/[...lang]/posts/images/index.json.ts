@@ -1,5 +1,5 @@
 import { localizeUrl } from '@utils/i18n'
-import { getBlogPostName, getBlogPosts } from '@utils/posts'
+import { getBlogPostFolderName, getBlogPosts } from '@utils/posts'
 import type { APIRoute } from 'astro'
 import type { CollectionEntry } from 'astro:content'
 
@@ -29,7 +29,7 @@ export const get: APIRoute = async ({ params, request }) => {
       blogPosts.map((blogPost) => {
         const fullUrl = new URL(
           localizeUrl(
-            `/posts/images/${getBlogPostName(blogPost)}`,
+            `/posts/images/${getBlogPostFolderName(blogPost)}`,
             language === 'pt' ? 'pt' : 'en'
           ),
           request.url
@@ -37,7 +37,7 @@ export const get: APIRoute = async ({ params, request }) => {
 
         return {
           url: fullUrl,
-          name: getBlogPostName(blogPost),
+          name: getBlogPostFolderName(blogPost),
         }
       })
     ),

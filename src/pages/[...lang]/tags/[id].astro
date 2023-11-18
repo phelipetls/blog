@@ -1,7 +1,11 @@
 ---
 import Site from '@layouts/Site.astro'
 import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
-import { getBlogPostName, getBlogPosts, getBlogPostTags } from '@utils/posts'
+import {
+  getBlogPostFolderName,
+  getBlogPosts,
+  getBlogPostTags,
+} from '@utils/posts'
 import { localizeUrl } from '@utils/i18n'
 import { Calendar, ChevronRight } from 'lucide-react'
 import type { CollectionEntry } from 'astro:content'
@@ -116,7 +120,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
                       <a
                         class='group flex flex-nowrap items-start gap-4'
                         href={localizeUrl(
-                          '/posts/' + getBlogPostName(blogPost),
+                          '/posts/' + getBlogPostFolderName(blogPost),
                           language
                         )}
                       >

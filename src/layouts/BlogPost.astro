@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
 import { getBlogPostFolderName } from '@utils/posts'
 import Site from '@layouts/Site.astro'
-import Tag from '@components/Tag.astro'
+import BlogPostTag from '@components/BlogPostTag.astro'
 import Katex from '@components/Katex.astro'
 import PostNav from '@components/PostNav.astro'
 import BlogPostDate from '@components/BlogPostDate.astro'
@@ -112,10 +112,10 @@ const tocWouldBeEmpty = headings.length === 0
             blogPost.data.tags && (
               <div class='mb-4 flex max-w-lg flex-wrap gap-2'>
                 {blogPost.data.tags.map((tag) => {
-                  return <Tag tag={tag} />
+                  return <BlogPostTag tag={tag} />
                 })}
 
-                <Tag tag='...' />
+                <BlogPostTag tag='...' />
               </div>
             )
           }

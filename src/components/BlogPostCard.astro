@@ -1,7 +1,7 @@
 ---
 import BlogPostReadingTime from './BlogPostReadingTime.astro'
 import BlogPostDate from './BlogPostDate.astro'
-import Tag from './Tag.astro'
+import BlogPostTag from './BlogPostTag.astro'
 import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
 import { getBlogPostFolderName } from '@utils/posts'
 import type { CollectionEntry } from 'astro:content'
@@ -43,7 +43,7 @@ const {
     tags && (
       <div class='flex flex-wrap gap-2'>
         {tags.map((tag) => {
-          return <Tag tag={tag} class='snap-start whitespace-nowrap' />
+          return <BlogPostTag tag={tag} class='snap-start whitespace-nowrap' />
         })}
       </div>
     )

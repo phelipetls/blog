@@ -3,7 +3,7 @@ import Site from '@layouts/Site.astro'
 import { useTranslate } from '@utils/i18n'
 import _ from 'lodash'
 import { getBlogPosts, getBlogPostTags } from '@utils/posts'
-import Tag from '@components/Tag.astro'
+import BlogPostTag from '@components/BlogPostTag.astro'
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -54,7 +54,7 @@ const tagsByCount = _.countBy(tags)
 
               return (
                 <li>
-                  <Tag tag={tag} count={count} />
+                  <BlogPostTag tag={tag} count={count} />
                 </li>
               )
             })

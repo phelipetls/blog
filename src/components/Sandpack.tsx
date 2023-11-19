@@ -83,6 +83,8 @@ function CustomSandpack(props: CustomSandpackProps) {
     shouldAutorun,
   } = props
 
+  const previewOnly = !shouldShowCodeEditor
+
   const { sandpack } = useSandpack()
   const {
     files,
@@ -183,10 +185,11 @@ function CustomSandpack(props: CustomSandpackProps) {
           'max-sm:full-bleed shadow-sm shadow-shadow',
           'lg:grid lg:grid-cols-2 lg:[grid-template-areas:_var(--column-template-areas)]',
           'lg:rounded lg:rounded-tl-none',
-          !shouldShowConsole &&
-            'lg:[&_.sp-code-editor]:rounded-bl lg:[&_.sp-editor]:rounded-bl lg:[&_.sp-preview-container]:rounded-r lg:[&_[data-editor]]:rounded-bl',
-          !shouldShowCodeEditor && 'lg:[&_.sp-preview-container]:rounded-l',
-          shouldShowConsole && 'rounded-b'
+          'lg:[&_.sp-preview-container]:rounded-[inherit] lg:[&_.sp-preview]:rounded-[inherit] lg:[&_[data-preview]]:rounded-r',
+          'lg:[&_.sp-code-editor]:rounded-bl-[inherit] lg:[&_.sp-editor]:rounded-bl-[inherit] lg:[&_[data-editor]]:rounded-bl',
+          shouldShowConsole &&
+            'lg:[&_[data-editor]]:rounded-bl-none lg:[&_[data-preview]]:rounded-br-none',
+          previewOnly && 'lg:rounded-tl lg:[&_[data-preview]]:rounded'
         )}
       >
         {shouldShowCodeEditor && (
@@ -236,6 +239,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         )}
 
         <div
+          data-preview
           className={clsx(
             'relative',
             'lg:[grid-area:_preview]',

@@ -184,12 +184,12 @@ function CustomSandpack(props: CustomSandpackProps) {
         className={clsx(
           'max-sm:full-bleed shadow-sm shadow-shadow',
           'lg:grid lg:grid-cols-2 lg:[grid-template-areas:_var(--column-template-areas)]',
-          'lg:rounded lg:rounded-tl-none',
-          'lg:[&_.sp-preview-container]:rounded-[inherit] lg:[&_.sp-preview]:rounded-[inherit] lg:[&_[data-preview]]:rounded-r',
-          'lg:[&_.sp-code-editor]:rounded-bl-[inherit] lg:[&_.sp-editor]:rounded-bl-[inherit] lg:[&_[data-editor]]:rounded-bl',
+          'sm:rounded sm:rounded-tl-none',
+          'sm:[&_.sp-preview-container]:rounded-[inherit] sm:[&_.sp-preview]:rounded-[inherit] sm:[&_[data-preview]]:rounded-r',
+          'sm:[&_.sp-code-editor]:rounded-bl-[inherit] sm:[&_.sp-editor]:rounded-bl-[inherit] sm:[&_[data-editor]]:rounded-bl',
           shouldShowConsole &&
-            'lg:[&_[data-editor]]:rounded-bl-none lg:[&_[data-preview]]:rounded-br-none',
-          previewOnly && 'lg:rounded-tl lg:[&_[data-preview]]:rounded'
+            'sm:[&_[data-editor]]:rounded-bl-none sm:[&_[data-preview]]:rounded-br-none',
+          previewOnly && 'sm:rounded-tl sm:[&_[data-preview]]:rounded'
         )}
       >
         {shouldShowCodeEditor && (

@@ -193,10 +193,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         )}
       >
         {shouldShowCodeEditor && (
-          <div
-            data-editor
-            className='dark relative lg:border-b lg:border-divider lg:[grid-area:_editor]'
-          >
+          <div data-editor className='dark relative lg:[grid-area:_editor]'>
             <SandpackCodeEditor
               className='peer max-h-[450px]'
               showTabs={false}
@@ -240,16 +237,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
         <div
           data-preview
-          className={clsx(
-            'relative',
-            'lg:[grid-area:_preview]',
-            '[&_.sp-preview-container]:px-horizontal-padding',
-            '[&_.sp-preview-container]:py-3',
-            '[&_.sp-preview-container]:bg-[var(--sandpack-surface1)]',
-            'lg:border-b',
-            'lg:border-l',
-            'lg:border-divider'
-          )}
+          className={clsx('relative', 'lg:[grid-area:_preview]')}
         >
           <noscript>
             <div className='px-horizontal-padding pt-3 text-on-background'>
@@ -311,7 +299,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
         {shouldShowConsole && (
           <details
-            className='relative lg:[grid-area:_console]'
+            className='relative border-t border-divider lg:[grid-area:_console]'
             onToggle={(e) => {
               e.preventDefault()
               setLogsVisible(!logsVisible)

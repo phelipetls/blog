@@ -67,12 +67,12 @@
     @apply max-w-full;
   }
 
-  article p {
-    @apply mb-4 leading-relaxed;
+  p {
+    @apply leading-relaxed;
   }
 
-  article p:only-child {
-    @apply mb-0;
+  p + p {
+    @apply mt-4;
   }
 
   ul,

@@ -17,9 +17,11 @@ import {
 } from 'shiki-twoslash'
 import { fromHtml } from 'hast-util-from-html'
 import { toHtml } from 'hast-util-to-html'
-import { visit, EXIT, CONTINUE } from 'unist-util-visit'
+import { select } from 'hast-util-select'
 import { h } from 'hastscript'
 import { parseHighlightString } from '@utils/code-block'
+import type { Nodes } from 'node_modules/hast-util-select/lib'
+import type { RootContent } from 'node_modules/hast-util-to-html/lib'
 
 const t = useTranslate(Astro)
 
@@ -85,14 +87,11 @@ if (twoslash) {
   // </pre>
   //
   // Here, we try to get only the children of the `code` tag.
-  visit(twoslashHast, 'element', (element) => {
-    if (element.tagName === 'code') {
-      // @ts-expect-error Ignore this type error because it still works at runtime
-      codeBlockHtml = toHtml(element)
-      return EXIT
-    }
-    return CONTINUE
-  })
+  const codeElement = select('code', twoslashHast as Nodes)
+
+  if (codeElement) {
+    codeBlockHtml = toHtml(codeElement)
+  }
 } else {
   const lines = highlighter.codeToThemedTokens(code, lang)
 
@@ -121,8 +120,7 @@ if (twoslash) {
     )
   })
 
-  // @ts-expect-error Ignore this type error because it still works at runtime
-  codeBlockHtml = toHtml(h('code', {}, syntaxHighlightedCode))
+  codeBlockHtml = toHtml(syntaxHighlightedCode as RootContent[])
 }
 
 function getDevIconNameByShikiLang(lang: Lang) {

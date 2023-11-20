@@ -1,8 +1,8 @@
-import type { SandpackConsoleData } from '@codesandbox/sandpack-react/components/Console/utils/getType'
+import { useSandpackConsole } from '@codesandbox/sandpack-react'
 import clsx from 'clsx'
 
 type SandpackConsoleProps = {
-  logs: SandpackConsoleData
+  logs: ReturnType<typeof useSandpackConsole>['logs']
 }
 
 export function SandpackConsole(props: SandpackConsoleProps) {

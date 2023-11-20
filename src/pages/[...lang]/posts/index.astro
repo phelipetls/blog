@@ -31,9 +31,7 @@ export async function getStaticPaths() {
 const t = useTranslate(Astro)
 const language = getLanguageFromUrl(Astro.url.pathname)
 
-const blogPosts = Astro.props.blogPosts
-
-const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
+const blogPostsGroupedByYear = _.groupBy(Astro.props.blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
 })
 
@@ -70,10 +68,13 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
     <div class='col-full grid grid-cols-layout'>
       {
         years.map((year, index) => {
-          const blogPosts = blogPostsGroupedByYear[year]
-
           const prevYear: string | null = years[index - 1] ?? null
           const nextYear: string | null = years[index + 1] ?? null
+
+          const blogPostsFromThatYear = blogPostsGroupedByYear[year]
+          if (!blogPostsFromThatYear) {
+            return
+          }
 
           return (
             <div class='group col-full grid grid-cols-layout'>
@@ -121,7 +122,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
               </div>
 
               <ul class='m-0 mt-8 grid w-full list-none grid-cols-1 gap-4 pb-24 group-last:pb-0'>
-                {blogPosts
+                {blogPostsFromThatYear
                   .sort((blogPostA, blogPostB) => {
                     return (
                       new Date(blogPostB.data.date).getTime() -

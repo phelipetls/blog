@@ -32,7 +32,7 @@ const t = useTranslate(Astro)
 
 const { tags } = Astro.props
 
-const tagsByCount = _.countBy(tags)
+const tagCounter = _.countBy(tags)
 ---
 
 <Site isTranslated title='Tags' description={t.TagsDescription()}>
@@ -44,12 +44,12 @@ const tagsByCount = _.countBy(tags)
         {
           _.uniq(tags)
             .sort((tagA, tagB) => {
-              const countA = tagsByCount[tagA]
-              const countB = tagsByCount[tagB]
+              const countA = tagCounter[tagA] ?? 0
+              const countB = tagCounter[tagB] ?? 0
               return countB - countA
             })
             .map((tag) => {
-              const count = tagsByCount[tag]
+              const count = tagCounter[tag] ?? 0
 
               return (
                 <li>

@@ -134,9 +134,9 @@ const tocItems = headings.map((heading) => ({
 
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
+      entries.forEach((entry): void => {
         if (!tocContainer) {
-          return null
+          return
         }
 
         const heading = entry.target
@@ -145,7 +145,7 @@ const tocItems = headings.map((heading) => ({
           const tocItem = getTocItemByHeading(heading as HTMLHeadingElement)
 
           if (!tocItem) {
-            return null
+            return
           }
 
           deactivateAllTocItems()

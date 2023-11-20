@@ -7,7 +7,7 @@ const parentUrl = Astro.url.pathname.replace(/[^/]+\/?$/, '')
 
 type Props = {
   title: string
-  mobileNavTitle?: string
+  mobileNavTitle: string | null
 }
 
 const { title, mobileNavTitle } = Astro.props

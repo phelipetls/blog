@@ -17,7 +17,7 @@ import {
 } from 'shiki-twoslash'
 import { fromHtml } from 'hast-util-from-html'
 import { toHtml } from 'hast-util-to-html'
-import { visit, EXIT } from 'unist-util-visit'
+import { visit, EXIT, CONTINUE } from 'unist-util-visit'
 import { h } from 'hastscript'
 import { parseHighlightString } from '@utils/code-block'
 
@@ -91,6 +91,7 @@ if (twoslash) {
       codeBlockHtml = toHtml(element)
       return EXIT
     }
+    return CONTINUE
   })
 } else {
   const lines = highlighter.codeToThemedTokens(code, lang)
@@ -124,7 +125,7 @@ if (twoslash) {
   codeBlockHtml = toHtml(h('code', {}, syntaxHighlightedCode))
 }
 
-const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
+function getDevIconNameByShikiLang(lang: Lang) {
   const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
     jsx: 'Javascript',
     tsx: 'Typescript',
@@ -134,11 +135,16 @@ const getDevIconNameByShikiLang = (lang: Lang): DevIconName | undefined => {
   }
 
   if (lang in shikiLangToDevIconName) {
-    return shikiLangToDevIconName[lang as keyof typeof shikiLangToDevIconName]
+    return (
+      shikiLangToDevIconName[lang as keyof typeof shikiLangToDevIconName] ??
+      null
+    )
   }
+
+  return null
 }
 
-const getShikiLangName = (lang: Lang): string | undefined => {
+function getShikiLangName(lang: Lang) {
   const shikiLangToName: Partial<Record<Lang, string>> = {
     jsx: 'JavaScript',
     tsx: 'TypeScript',
@@ -154,8 +160,10 @@ const getShikiLangName = (lang: Lang): string | undefined => {
   }
 
   if (lang in shikiLangToName) {
-    return shikiLangToName[lang as keyof typeof shikiLangToName]
+    return shikiLangToName[lang as keyof typeof shikiLangToName] ?? null
   }
+
+  return null
 }
 
 const langName = getShikiLangName(Astro.props.lang) || Astro.props.lang

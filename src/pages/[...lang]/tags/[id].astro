@@ -83,13 +83,16 @@ const language = getLanguageFromUrl(Astro.url.pathname)
     <ul class='list-none ml-0 mt-8'>
       {
         years.map((year) => {
-          const blogPosts = blogPostsGroupedByYear[year]
+          const blogPostsFromThatYear = blogPostsGroupedByYear[year]
+          if (!blogPostsFromThatYear) {
+            return
+          }
 
           return (
             <>
               <h2 class='m-0 mb-2 mt-8 tabular-nums first:mt-0'>{year}</h2>
 
-              {blogPosts
+              {blogPostsFromThatYear
                 .sort(
                   (blogPostA, blogPostB) =>
                     blogPostB.data.date.getTime() -

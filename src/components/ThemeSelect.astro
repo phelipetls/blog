@@ -52,7 +52,9 @@ const t = useTranslate(Astro)
       }
 
       const selectedOption = (e.target as HTMLSelectElement).selectedOptions[0]
-      window.__setTheme(selectedOption.value as ThemeChoice)
+      if (selectedOption) {
+        window.__setTheme(selectedOption.value as ThemeChoice)
+      }
     })
   })
 

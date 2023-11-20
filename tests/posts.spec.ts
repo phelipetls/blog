@@ -25,31 +25,37 @@ test.describe('Posts', () => {
     })
   }
 
-  test('english blog post should have a link to edit on GitHub', async ({
-    page,
-  }) => {
-    await page.goto('/posts/demystifying-git-rebase')
-    await expect(page.getByText('Why learn git rebase?').first()).toBeVisible()
+  test.describe('Edit on GitHub link', () => {
+    test('english blog post should have a link to edit on GitHub', async ({
+      page,
+    }) => {
+      await page.goto('/posts/demystifying-git-rebase')
+      await expect(
+        page.getByText('Why learn git rebase?').first()
+      ).toBeVisible()
 
-    await page.getByRole('link', { name: /edit on github/i }).click()
-    await expect(page).toHaveURL(
-      `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.mdx`
-    )
-    await expect(page.getByText('Why learn `git rebase`?')).toBeVisible()
-  })
+      await page.getByRole('link', { name: /edit on github/i }).click()
+      await expect(page).toHaveURL(
+        `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.mdx`
+      )
+      await expect(page.getByText('Why learn `git rebase`?')).toBeVisible()
+    })
 
-  test('portuguese blog post should have a link to edit on GitHub', async ({
-    page,
-  }) => {
-    await page.goto('/pt/posts/demystifying-git-rebase')
-    await expect(
-      page.getByText('Por que aprender git rebase?').first()
-    ).toBeVisible()
+    test('portuguese blog post should have a link to edit on GitHub', async ({
+      page,
+    }) => {
+      await page.goto('/pt/posts/demystifying-git-rebase')
+      await expect(
+        page.getByText('Por que aprender git rebase?').first()
+      ).toBeVisible()
 
-    await page.getByRole('link', { name: /editar no github/i }).click()
-    await expect(page).toHaveURL(
-      `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.pt.mdx`
-    )
-    await expect(page.getByText('Por que aprender `git rebase`?')).toBeVisible()
+      await page.getByRole('link', { name: /editar no github/i }).click()
+      await expect(page).toHaveURL(
+        `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.pt.mdx`
+      )
+      await expect(
+        page.getByText('Por que aprender `git rebase`?')
+      ).toBeVisible()
+    })
   })
 })

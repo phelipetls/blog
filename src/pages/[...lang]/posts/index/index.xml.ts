@@ -14,7 +14,7 @@ export function getStaticPaths() {
   ]
 }
 
-export const get = async ({ props }: APIContext<{ language: Language }>) => {
+export async function get({ props }: APIContext<{ language: Language }>) {
   const t = translate(props.language)
 
   const blogPosts = await getCollection('posts')

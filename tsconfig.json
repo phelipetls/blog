@@ -1,12 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "skipLibCheck": true,
     "paths": {
       "@i18n/*": ["src/i18n/*"],
       "@utils/*": ["src/utils/*"],

@@ -4,6 +4,9 @@ import { useTranslate } from '@utils/i18n'
 import _ from 'lodash'
 import { getBlogPosts, getBlogPostTags } from '@utils/posts'
 import BlogPostTag from '@components/BlogPostTag.astro'
+import type { InferGetStaticPropsType } from 'astro'
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -26,10 +29,6 @@ export async function getStaticPaths() {
 }
 
 const t = useTranslate(Astro)
-
-type Props = {
-  tags: string[]
-}
 
 const { tags } = Astro.props
 

@@ -1,14 +1,15 @@
 ---
 import '@assets/css/main.css'
 import { useTranslate } from '@utils/i18n'
-import type { Language } from '@utils/i18n'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import md5 from 'md5'
-import type { CollectionEntry } from 'astro:content'
 import { getBlogPosts, getBlogPostFolderName } from '@utils/posts'
 import '@fontsource/source-sans-pro'
 import '@fontsource/merriweather'
+import type { InferGetStaticPropsType } from 'astro'
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 export async function getStaticPaths() {
   const englishBlogPosts = await getBlogPosts('en')
@@ -28,11 +29,6 @@ export async function getStaticPaths() {
       }
     }),
   ]
-}
-
-type Props = {
-  blogPost: CollectionEntry<'posts'>
-  language: Language
 }
 
 const { language, blogPost } = Astro.props

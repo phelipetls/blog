@@ -21,7 +21,6 @@ import { select } from 'hast-util-select'
 import { h } from 'hastscript'
 import { parseHighlightString } from '@utils/code-block'
 import type { Nodes } from 'node_modules/hast-util-select/lib'
-import type { RootContent } from 'node_modules/hast-util-to-html/lib'
 
 const t = useTranslate(Astro)
 
@@ -120,7 +119,7 @@ if (twoslash) {
     )
   })
 
-  codeBlockHtml = toHtml(syntaxHighlightedCode as RootContent[])
+  codeBlockHtml = toHtml(h('code', {}, syntaxHighlightedCode) as Nodes)
 }
 
 function getDevIconNameByShikiLang(lang: Lang) {

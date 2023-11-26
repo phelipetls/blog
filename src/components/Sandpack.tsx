@@ -270,7 +270,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           )}
 
           {status === 'running' && (
-            <div className='absolute bottom-6 right-6 flex items-stretch gap-2'>
+            <div className='absolute bottom-3 right-3 flex items-stretch gap-2'>
               <Button
                 as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'

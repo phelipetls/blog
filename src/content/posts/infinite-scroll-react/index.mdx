@@ -1,0 +1,86 @@
+---
+title: Implementing infinite scroll in React
+date: 2023-11-26
+tags: [javascript, react]
+---
+
+import ReactIntersectionObserverExample from './_ReactIntersectionObserverExample.tsx'
+import ReactIntersectionObserverLibExample from './_ReactIntersectionObserverLibExample.tsx'
+import InfiniteScrollExample from './_InfiniteScrollExample.tsx'
+import InfiniteScrollWithCallbackRefsExample from './_InfiniteScrollWithCallbackRefsExample.tsx'
+
+Infinite scroll is a common UX that web developers need to be comfortable
+implementing. In this post, we'll see how to implement this experience using
+standard web APIs such as
+[`IntersectionObserver`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+and React hooks.
+
+# Introduction to IntersectionObserver
+
+This is a standard web API that, as the name suggests, let us observe when an
+element in our web page intersects with another.
+
+In practice, we are interested in observing, for example, when the last row of
+a table becomes visible to the user -- when it "intersects" with the
+"viewport".
+
+In the example below, we make the element's background turn green when it
+becomes visible:
+
+<ReactIntersectionObserverExample client:visible />
+
+We can extrapolate this example to build an infinite scroll experience -- the
+major difference here would be what to do once the element comes into view:
+instead of changing the element's color, we would trigger a network request
+etc.
+
+# Introducing `react-inteserction-observer` library
+
+The code in the previous example is not as expressive as I'd like. I'm also
+never quite 100% sure if I'm doing things correctly in `useEffect` -- is my
+that all the code I need to write in clean up function? Is there any potential
+memory leaks? I don't think there is but I'm not quite sure either.
+
+Because of this, I prefer to use a library for this. It turns out there is an
+library,
+[`react-inteserction-observer`](https://www.npmjs.com/package/react-intersection-observer),
+that lets you use the `IntersectionObserver` API in a idiomatic way in React.
+
+Let's re-write the previous example using its `useInView` hook:
+
+<ReactIntersectionObserverLibExample client:visible />
+
+This code is more readable, idiomatic and I'm more confident with it -- I don't
+have to worry about `useEffect` clean up functions and memory leaks.
+
+## Comparison with other libraries
+
+I also like that `react-inteserction-observer` is just a thin wrapper around
+`IntersectionObserver`. It has a small API surface and it does not do much more
+than the web standard API -- it just translate it into the React way of doing
+things.
+
+For comparison, some people may prefer to use a library like
+[`react-infinite-scroll-component`](https://www.npmjs.com/package/react-infinite-scroll-component)
+or
+[`react-infinite-scroller`](https://www.npmjs.com/package/react-infinite-scroller),
+which I dislike because they fall into the God-like components -- a much
+opinionated abstraction with customization done entirely by props.
+
+# Implementing infinite scroll
+
+## With loading indicator
+
+If our UI has a loading indicator, like a spinner, we can just pass the `ref`
+returned by `useInView` hook to it. The `onChange` callback will be executed
+when the spinner gets into view to handle getting more items:
+
+<InfiniteScrollExample client:visible />
+
+## Without loading indicator
+
+If our UI doesn't have a loading indicator, we can use the `ref` as a [callback
+refs](https://react.dev/reference/react-dom/components/common#ref-callback) and
+call it with the last item in the list:
+
+<InfiniteScrollWithCallbackRefsExample client:visible />

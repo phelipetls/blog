@@ -45,7 +45,7 @@ const pt = {
   OpenToc: 'Abrir tabela de conteúdo',
   CloseToc: 'Fechar tabela de conteúdo',
   NoName: '[Sem nome]',
-  EditOnGitHub: 'Editar no GitHub',
+  LinkToSourceLabel: 'Ver código fonte',
 } satisfies BaseTranslation
 
 export default pt

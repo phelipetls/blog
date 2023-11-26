@@ -45,7 +45,7 @@ const en = {
   OpenToc: 'Open table of contents',
   CloseToc: 'Close table of contents',
   NoName: '[No name]',
-  EditOnGitHub: 'Edit on GitHub',
+  LinkToSourceLabel: 'View source code',
 } satisfies BaseTranslation
 
 export default en

@@ -14,7 +14,7 @@ import { formatISO } from 'date-fns'
 import type { CollectionEntry } from 'astro:content'
 import IconButton from '@components/IconButton'
 import clsx from 'clsx'
-import { Edit, List, X } from 'lucide-react'
+import { FileCode2, List, X } from 'lucide-react'
 import CodeBlock from '@components/CodeBlock.astro'
 import Link from '@components/Link.astro'
 import H2 from '@components/H2.astro'
@@ -116,11 +116,11 @@ const tocWouldBeEmpty = headings.length === 0
               readingTime={remarkPluginFrontmatter.readingTime}
             />
             <Link
-              class='flex flex-row gap-2 items-center lg:ml-auto flex-shrink-0'
+              class='flex flex-row gap-2 items-center flex-shrink-0'
               href={buildGitHubLinkToPostSourceCode(Astro.props.blogPost)}
             >
-              <Edit />
-              {t.EditOnGitHub()}
+              <FileCode2 />
+              {t.LinkToSourceLabel()}
             </Link>
           </div>
 

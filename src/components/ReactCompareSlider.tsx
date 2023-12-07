@@ -9,7 +9,7 @@ import { MoveHorizontal } from 'lucide-react'
 export function ReactCompareSlider(props: ReactCompareSliderProps) {
   return (
     <OriginalReactCompareSlider
-      className='max-sm:full-bleed'
+      className='max-sm:full-bleed max-w-2xl'
       handle={
         <div className='flex h-full flex-col items-center justify-center'>
           <div className='flex-1 border-l-2 border-divider' />

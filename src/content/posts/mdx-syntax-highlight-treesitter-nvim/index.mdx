@@ -102,16 +102,8 @@ export const Thing = () => <>World</>
 
 Let's first write a query to select those nodes that start with `import` or
 `export`. We can get a nice representation of the abstract syntax tree built by
-Treesitter with `:TSPlaygroundToggle` command, making it easy to see where the
+Treesitter with `:InspectTree` command, making it easy to see where the
 text we want to select is in the tree: `section` -> `paragraph` -> `inline`:
-
-<Note>
-
-To use `:TSPlaygroundToggle`, you'll need to install the plugin
-[`nvim-treesitter/playground`](https://github.com/nvim-treesitter/playground)
-first.
-
-</Note>
 
 <Image src={tsPlaygroundToggle} alt="" />
 
@@ -125,9 +117,7 @@ The simplest query that would match that node is:
 
 <Note>
 
-To test your Treesitter queries, press `o` inside the buffer opened by
-`:TSPlaygroundToggle` command, which will open a new buffer for you write an
-your queries and see if selects what you want.
+To test your Treesitter queries, use the command `:EditQuery` in neovim 0.10+.
 
 You'll need to install the Treesitter parser for query editor with `:TSInstall
 query`.

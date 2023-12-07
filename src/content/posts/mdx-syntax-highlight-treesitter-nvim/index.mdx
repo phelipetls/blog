@@ -160,7 +160,9 @@ parser's name, in our case it's `tsx`:
 
 ```scheme title="~/.config/nvim/after/queries/markdown/injections.scm"
 ; extends
-((inline) @_inline (#match? @_inline "^\(import\|export\)")) @tsx
+(((inline) @_inline) @injection.content
+  (#match? @_inline "^\(import\|export\)")
+  (#set! injection.language "tsx"))
 ```
 
 <ReactCompareSlider client:load>

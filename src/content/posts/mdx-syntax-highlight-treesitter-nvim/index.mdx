@@ -8,13 +8,13 @@ import Note from '@components/BlogPostNote.astro'
 import Image from '@components/BlogPostImage.astro'
 import { ReactCompareSlider, ReactCompareSliderImage } from '@components/ReactCompareSlider';
 
-import InitialHighlighting from './_initial-highlighting.png'
-import MarkdownHighlighting from './_markdown-highlighting.png'
-import JavascriptHighlighting from './_javascript-highlighting.png'
-import NospellHighlighting from './_nospell-highlighting.png'
-import TSPlaygroundToggle from './_ts-playground-toggle.png'
-import SimpleQuery from './_simple-query.png'
-import ConditionalQuery from './_conditional-query.png'
+import initialHighlighting from './_initial-highlighting.png'
+import markdownHighlighting from './_markdown-highlighting.png'
+import javascriptHighlighting from './_javascript-highlighting.png'
+import noSpellHighlighting from './_nospell-highlighting.png'
+import tsPlaygroundToggle from './_ts-playground-toggle.png'
+import simpleQuery from './_simple-query.png'
+import conditionalQuery from './_conditional-query.png'
 
 In this blog post, I'm gonna show how to get a good enough syntax highlighting
 for MDX files in Neovim.
@@ -50,8 +50,8 @@ Now we have markdown highlighting in our mdx files, but of cours it still
 doesn't highlight any JS/JSX we wrote:
 
 <ReactCompareSlider client:load>
-  <ReactCompareSliderImage slot="itemOne" src={InitialHighlighting} alt="There is no syntax highlight of MDX files in Neovim out of the box" />
-  <ReactCompareSliderImage slot="itemTwo" src={MarkdownHighlighting} alt="After configuring Treesitter to use Markdown highlight for MDX files" />
+  <ReactCompareSliderImage slot="itemOne" src={initialHighlighting.src} alt="There is no syntax highlight of MDX files in Neovim out of the box" />
+  <ReactCompareSliderImage slot="itemTwo" src={markdownHighlighting.src} alt="After configuring Treesitter to use Markdown highlight for MDX files" />
 </ReactCompareSlider>
 
 # Injecting JS/JSX into markdown
@@ -113,7 +113,7 @@ first.
 
 </Note>
 
-<Image src={TSPlaygroundToggle} alt="" />
+<Image src={tsPlaygroundToggle} alt="" />
 
 The simplest query that would match that node is:
 
@@ -121,7 +121,7 @@ The simplest query that would match that node is:
 (section (paragraph (inline)))
 ```
 
-<Image src={SimpleQuery} alt="" />
+<Image src={simpleQuery} alt="" />
 
 <Note>
 
@@ -141,10 +141,17 @@ treesitter-predicates`) to conditionally select nodes -- for instance, the
 regexp.
 
 ```scheme
-((inline) @_inline (#match? @_inline "^\(import\|export\)"))
+((inline) @_inline (#match? @_inline "^\s*\(import\|export\)"))
 ```
 
-<Image src={ConditionalQuery} alt="" />
+Using Vim regexp is expensive though, so it'd be preferred to use Lua patterns in this case:
+
+```scheme
+((inline) @_inline (#lua-match? @_inline "^%s*import"))
+((inline) @_inline (#lua-match? @_inline "^%s*export"))
+```
+
+<Image src={conditionalQuery} alt="" />
 
 ## Extending Treesitter injection queries
 
@@ -161,16 +168,16 @@ parser's name, in our case it's `tsx`:
 ```scheme title="~/.config/nvim/after/queries/markdown/injections.scm"
 ; extends
 ((inline) @injection.content
-  (#lua-match? @injection.content "^%s*import%s")
-  (#set! injection.language "tsx"))
+  (#lua-match? @injection.content "^%s*import")
+  (#set! injection.language "typescript"))
 ((inline) @injection.content
-  (#lua-match? @injection.content "^%s*export%s")
-  (#set! injection.language "tsx"))
+  (#lua-match? @injection.content "^%s*export")
+  (#set! injection.language "typescript"))
 ```
 
 <ReactCompareSlider client:load>
-  <ReactCompareSliderImage slot="itemOne" src={MarkdownHighlighting} alt="" />
-  <ReactCompareSliderImage slot="itemTwo" src={JavascriptHighlighting} alt="" />
+  <ReactCompareSliderImage slot="itemOne" src={markdownHighlighting.src} alt="" />
+  <ReactCompareSliderImage slot="itemTwo" src={javascriptHighlighting.src} alt="" />
 </ReactCompareSlider>
 
 # Disabling spell checking
@@ -182,12 +189,13 @@ with a query in `highlights.scm`:
 
 ```scheme title="~/.config/nvim/after/queries/markdown/highlights.scm"
 ; extends
-((inline) @_inline (#match? @_inline "^\(import\|export\)")) @nospell
+((inline) @_inline (#lua-match? @_inline "^%s*import")) @nospell
+((inline) @_inline (#lua-match? @_inline "^%s*export")) @nospell
 ```
 
 <ReactCompareSlider client:load>
-  <ReactCompareSliderImage slot="itemOne" src={JavascriptHighlighting} alt="" />
-  <ReactCompareSliderImage slot="itemTwo" src={NospellHighlighting} alt="" />
+  <ReactCompareSliderImage slot="itemOne" src={javascriptHighlighting.src} alt="" />
+  <ReactCompareSliderImage slot="itemTwo" src={noSpellHighlighting.src} alt="" />
 </ReactCompareSlider>
 
 # Conclusion

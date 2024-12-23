@@ -24,8 +24,8 @@ export const get: APIRoute = async ({ params, request }) => {
     blogPosts = await getBlogPosts('en')
   }
 
-  return {
-    body: JSON.stringify(
+  return new Response(
+    JSON.stringify(
       blogPosts.map((blogPost) => {
         const fullUrl = new URL(
           localizeUrl(
@@ -40,6 +40,6 @@ export const get: APIRoute = async ({ params, request }) => {
           name: getBlogPostFolderName(blogPost),
         }
       })
-    ),
-  }
+    )
+  )
 }

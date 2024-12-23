@@ -15,13 +15,11 @@ import { remarkSummary } from './plugins/remark-summary'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://phelipetls.github.io/',
-  markdown: {
-    syntaxHighlight: false,
-  },
   integrations: [
     robotsTxt(),
     react(),
     mdx({
+      syntaxHighlight: false,
       remarkPlugins: [remarkReadingTime, remarkSummary, remarkMath],
       rehypePlugins: [
         rehypeSlug,

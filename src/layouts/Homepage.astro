@@ -2,15 +2,25 @@
 import { useTranslate } from '@utils/i18n/useTranslate'
 import Gravatar from '@components/Gravatar.astro'
 import Site from '@layouts/Site.astro'
+import type { Locale } from '@utils/i18n/locales'
+import type { MarkdownLayoutProps } from 'astro'
 
-const t = useTranslate(Astro)
+type Props = MarkdownLayoutProps<{
+  locale: Locale
+}>
+
+const {
+  frontmatter: { locale },
+} = Astro.props
+
+const t = useTranslate(locale)
 ---
 
-<Site isTranslated title={t.About()}>
+<Site locale={locale} isTranslated title={t['About']}>
   <main class='grid grid-cols-layout'>
     <article class='max-w-prose'>
       <header class='hidden sm:flex flex-row items-end gap-2 mb-4'>
-        <Gravatar baseWidth={48} />
+        <Gravatar locale={locale} baseWidth={48} />
 
         <h1 class='text-xl mb-0'>Phelipe Teles</h1>
       </header>
@@ -20,7 +30,7 @@ const t = useTranslate(Astro)
   </main>
 
   <div slot='mobile-nav-title' class='flex flex-row items-center gap-2'>
-    <Gravatar baseWidth={40} />
+    <Gravatar locale={locale} baseWidth={40} />
 
     <h1 class='text-xl mb-0'>Phelipe Teles</h1>
   </div>

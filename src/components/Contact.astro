@@ -2,11 +2,16 @@
 import { useTranslate } from '@utils/i18n/useTranslate'
 import { Mail, Linkedin, Github } from 'lucide-react'
 import ContactLink from './ContactLink.astro'
+import type { Locale } from '@utils/i18n/locales'
 
-const t = useTranslate(Astro)
+type Props = {
+  locale: Locale
+}
+
+const t = useTranslate(Astro.props.locale)
 ---
 
-<nav aria-label={t.Contacts()} class='flex gap-2 mb-2'>
+<nav aria-label={t.Contacts} class='flex gap-2 mb-2'>
   <ContactLink
     id='contact-email'
     href='mailto:phelipe_teles@hotmail.com'

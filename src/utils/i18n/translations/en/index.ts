@@ -1,6 +1,4 @@
-import type { BaseTranslation } from '../i18n-types.js'
-
-const en = {
+export const en = {
   About: 'About',
   Posts: 'Posts',
   AllTags: 'All tags',
@@ -31,21 +29,21 @@ const en = {
   System: 'System',
   TableOfContents: 'Table of Contents',
   Tabs: 'Tabs',
-  TagDescription: '{count} {{post|posts}} tagged with {tag}',
+  TagDescription: (opts: { count: number; tag: string }) =>
+    `${opts.count} ${opts.count === 1 ? 'post' : 'posts'} tagged with ${
+      opts.tag
+    }`,
   TagsDescription: 'List of all blog posts tags',
   ThemeButton: 'Change theme',
   ThemeIcon: 'Theme icon',
-  pt: 'Leia em Português',
   '404Title': 'Page not found',
   GoBack: 'Go back to previous page',
   ByTags: 'By tags',
   NextYear: 'Next year',
   PreviousYear: 'Previous year',
-  BlogPostsTaggedWith: "Blog posts tagged with '{tag}'",
+  BlogPostsTaggedWith: (tag: string) => `Blog posts tagged with '${tag}'`,
   OpenToc: 'Open table of contents',
   CloseToc: 'Close table of contents',
   NoName: '[No name]',
   LinkToSourceLabel: 'View source code',
-} satisfies BaseTranslation
-
-export default en
+}

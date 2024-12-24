@@ -2,13 +2,20 @@
 import ThemeSelect from '@components/ThemeSelect.astro'
 import { X } from 'lucide-react'
 import { isActiveMenuItem, MAIN_MENU_ITEMS } from '@utils/menu'
-import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import LanguageSelect from './LanguageSelect.astro'
 import IconButton from '@components/IconButton'
 import Button from './Button'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
-const language = getLanguageFromUrl(Astro.url.pathname)
-const t = useTranslate(Astro)
+type Props = {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+
+const t = useTranslate(locale)
 ---
 
 <aside
@@ -39,7 +46,7 @@ const t = useTranslate(Astro)
       </IconButton>
     </div>
 
-    <nav class='flex flex-col' aria-label={t.MainNavigation()}>
+    <nav class='flex flex-col' aria-label={t['MainNavigation']}>
       <ul
         class='m-0 flex list-none flex-col items-center justify-center gap-2 px-horizontal-padding'
       >
@@ -47,8 +54,8 @@ const t = useTranslate(Astro)
           MAIN_MENU_ITEMS.map((item) => {
             const isActive = isActiveMenuItem({
               currentPathname: Astro.url.pathname,
-              menuItemPathname: localizeUrl(item.pathname, language),
-              rootPathname: localizeUrl('/', language),
+              menuItemPathname: getRelativeLocaleUrl(locale, item.pathname),
+              rootPathname: getRelativeLocaleUrl(locale, '/'),
             })
 
             return (
@@ -56,7 +63,7 @@ const t = useTranslate(Astro)
                 <Button
                   as='a'
                   id={item.identifier}
-                  href={localizeUrl(item.pathname, language)}
+                  href={getRelativeLocaleUrl(locale, item.pathname)}
                   color={isActive ? 'primary' : 'secondary'}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
@@ -72,8 +79,8 @@ const t = useTranslate(Astro)
     <div
       class='flex flex-col gap-2 pb-4 mt-auto px-horizontal-padding [&_div]:flex-1'
     >
-      <LanguageSelect />
-      <ThemeSelect />
+      <LanguageSelect locale={Astro.props.locale} />
+      <ThemeSelect locale={locale} />
     </div>
   </div>
 </aside>

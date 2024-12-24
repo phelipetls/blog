@@ -1,0 +1,20 @@
+---
+import Site from '@layouts/Site.astro'
+import { YouTube } from '@astro-community/astro-embed-youtube'
+import type { Locale } from '@utils/i18n/locales'
+import { useTranslate } from '@utils/i18n/useTranslate'
+
+type Props = {
+  locale: Locale
+}
+
+const t = useTranslate(Astro.props.locale)
+---
+
+<Site locale='en' isTranslated={false} title={t['404Title']}>
+  <main class='grid grid-cols-layout'>
+    <div class='col-full grid place-items-center sm:col-content'>
+      <YouTube id='-RFunvF0mDw' class='w-full' />
+    </div>
+  </main>
+</Site>

@@ -1,48 +1,31 @@
 ---
 import '@assets/css/main.css'
-import { useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import md5 from 'md5'
-import { getBlogPosts, getBlogPostFolderName } from '@utils/posts'
 import '@fontsource/source-sans-pro'
 import '@fontsource/merriweather'
-import type { InferGetStaticPropsType } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import type { Locale } from '@utils/i18n/locales'
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>
-
-export async function getStaticPaths() {
-  const englishBlogPosts = await getBlogPosts('en')
-  const portugueseBlogPosts = await getBlogPosts('pt')
-
-  return [
-    ...englishBlogPosts.map((blogPost) => {
-      return {
-        params: { lang: undefined, id: getBlogPostFolderName(blogPost) },
-        props: { language: 'en', blogPost },
-      }
-    }),
-    ...portugueseBlogPosts.map((blogPost) => {
-      return {
-        params: { lang: 'pt', id: getBlogPostFolderName(blogPost) },
-        props: { language: 'pt', blogPost },
-      }
-    }),
-  ]
+type Props = {
+  locale: Locale
+  blogPost: CollectionEntry<'posts'>
 }
 
-const { language, blogPost } = Astro.props
+const { locale, blogPost } = Astro.props
 const { title, date } = blogPost.data
 const { remarkPluginFrontmatter } = await blogPost.render()
 
 const email = 'phelipe_teles@hotmail.com'
 const gravatarUrl = `https://www.gravatar.com/avatar/${md5(email)}?s=200`
 
-const t = useTranslate(Astro)
+const t = useTranslate(locale)
 ---
 
 <!DOCTYPE html>
-<html lang={language === 'pt' ? 'pt-BR' : 'en-US'} class='h-full text-2xl'>
+<html lang={locale === 'pt' ? 'pt-BR' : 'en-US'} class='h-full text-2xl'>
   <head>
     <meta charset='UTF-8' />
   </head>
@@ -60,7 +43,7 @@ const t = useTranslate(Astro)
       </div>
 
       <div class='mx-auto flex gap-2 text-xl'>
-        <BlogPostDate date={date} showYear />
+        <BlogPostDate locale={locale} date={date} showYear />
 
         <BlogPostReadingTime
           readingTime={remarkPluginFrontmatter.readingTime}
@@ -82,7 +65,7 @@ const t = useTranslate(Astro)
           <h2 class='m-0'>Phelipe Teles</h2>
 
           <span class='max-w-sm'>
-            {t.SiteDescription()}
+            {t['SiteDescription']}
           </span>
         </div>
       </div>

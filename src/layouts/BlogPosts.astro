@@ -1,37 +1,24 @@
 ---
-import Site from '@layouts/Site.astro'
 import BlogPostCard from '@components/BlogPostCard.astro'
+import IconButton from '@components/IconButton'
 import RssButton from '@components/RssButton.astro'
-import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import Site from '@layouts/Site.astro'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import { format } from 'date-fns'
 import _ from 'lodash'
-import { getBlogPosts } from '@utils/posts'
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import IconButton from '@components/IconButton'
-import type { InferGetStaticPropsType } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro/virtual-modules/i18n.js'
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>
-
-export async function getStaticPaths() {
-  const englishBlogPosts = await getBlogPosts('en')
-  const portugueseBlogPosts = await getBlogPosts('pt')
-
-  return [
-    {
-      params: { lang: undefined },
-      props: { blogPosts: englishBlogPosts },
-    },
-    {
-      params: { lang: 'pt' },
-      props: { blogPosts: portugueseBlogPosts },
-    },
-  ]
+type Props = {
+  locale: Locale
+  blogPosts: CollectionEntry<'posts'>[]
 }
 
-const t = useTranslate(Astro)
-const language = getLanguageFromUrl(Astro.url.pathname)
+const { locale, blogPosts } = Astro.props
 
-const blogPostsGroupedByYear = _.groupBy(Astro.props.blogPosts, (blogPost) => {
+const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
   return format(blogPost.data.date, 'yyyy')
 })
 
@@ -39,13 +26,16 @@ const years = Object.keys(blogPostsGroupedByYear).sort(
   (yearA, yearB) => Number(yearB) - Number(yearA)
 )
 
-const rssUrl = localizeUrl('/posts/index.xml', language)
+const t = useTranslate(locale)
+
+const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
 ---
 
 <Site
+  locale={locale}
   title='Posts'
   isTranslated
-  description={t.PostsListDescription()}
+  description={t['PostsListDescription']}
   seo={{
     extend: {
       link: [
@@ -62,7 +52,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
   <main class='grid grid-cols-layout'>
     <div class='sm:mb-8 hidden sm:gap-2 sm:flex sm:items-end'>
       <h1 class='m-0'>Posts</h1>
-      <RssButton />
+      <RssButton locale={locale} />
     </div>
 
     <div class='col-full grid grid-cols-layout'>
@@ -104,7 +94,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                       href={`#${prevYear}`}
                       variant='rounded-full'
                       disabled={prevYear === null}
-                      aria-label={t.PreviousYear()}
+                      aria-label={t['PreviousYear']}
                     >
                       <ChevronUp />
                     </IconButton>
@@ -113,7 +103,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                       href={`#${nextYear}`}
                       variant='rounded-full'
                       disabled={nextYear === null}
-                      aria-label={t.NextYear()}
+                      aria-label={t['NextYear']}
                     >
                       <ChevronDown />
                     </IconButton>
@@ -133,7 +123,7 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
                     return (
                       <>
                         <li class='mb-8 last:mb-0'>
-                          <BlogPostCard blogPost={blogPost} />
+                          <BlogPostCard locale={locale} blogPost={blogPost} />
                         </li>
                       </>
                     )
@@ -152,6 +142,6 @@ const rssUrl = localizeUrl('/posts/index.xml', language)
   >
     Posts
 
-    <RssButton />
+    <RssButton locale={locale} />
   </div>
 </Site>

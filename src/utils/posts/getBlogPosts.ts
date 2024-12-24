@@ -1,12 +1,14 @@
-import type { Language } from '@utils/i18n'
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import type { Locale } from '@utils/i18n/locales'
 
 const isProd = !import.meta.env.DEV
 
-export function getBlogPosts(language: Language) {
-  if (language === 'pt') {
+export function getBlogPosts(
+  locale: Locale
+): Promise<CollectionEntry<'posts'>[]> {
+  if (locale === 'pt') {
     return getCollection('posts', (blogPost) => {
-      const isPortuguese = blogPost.id.endsWith('.pt.mdx')
+      const isPortuguese = blogPost.filePath?.endsWith('.pt.mdx')
 
       if (isProd) {
         const isDraft = blogPost.data.draft
@@ -18,7 +20,8 @@ export function getBlogPosts(language: Language) {
   }
 
   return getCollection('posts', (blogPost) => {
-    const isEnglish = !blogPost.id.endsWith('.pt.mdx')
+    const isEnglish =
+      blogPost.filePath && !blogPost.filePath.endsWith('.pt.mdx')
 
     if (isProd) {
       const isDraft = blogPost.data.draft

@@ -2,19 +2,19 @@
 import type { HTMLAttributes } from 'astro/types'
 import DevIcon from './DevIcon.astro'
 import type { DevIconName } from './DevIcon.astro'
-import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
 import _ from 'lodash'
 import { isDevIcon } from '@utils/devicons'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 type Props = HTMLAttributes<'a'> & {
+  locale: Locale
   tag: string
   count?: number
   children?: never
 }
 
-const language = getLanguageFromUrl(Astro.url.pathname)
-
-const { tag, count, class: className = '' } = Astro.props
+const { locale, tag, count, class: className = '' } = Astro.props
 
 let tagDevIconName: DevIconName | null = null
 
@@ -39,8 +39,8 @@ if (isDevIcon(tagComponentName)) {
     className,
   ]}
   href={tag === '...'
-    ? localizeUrl('/tags', language)
-    : localizeUrl(`/tags/${tag}`, language)}
+    ? getRelativeLocaleUrl(locale, '/tags')
+    : getRelativeLocaleUrl(locale, `/tags/${tag}`)}
 >
   {tagDevIconName !== null && <DevIcon name={tagDevIconName} />}
 

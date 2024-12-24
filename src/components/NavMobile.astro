@@ -2,17 +2,19 @@
 import { useTranslate } from '@utils/i18n/useTranslate'
 import { ChevronLeft, Menu } from 'lucide-react'
 import IconButton from '@components/IconButton'
+import type { Locale } from '@utils/i18n/locales'
 
 const parentUrl = Astro.url.pathname.replace(/[^/]+\/?$/, '')
 
 type Props = {
   title: string
   mobileNavTitle: string | null
+  locale: Locale
 }
 
 const { title, mobileNavTitle } = Astro.props
 
-const t = useTranslate(Astro)
+const t = useTranslate(Astro.props.locale)
 ---
 
 <div
@@ -24,7 +26,7 @@ const t = useTranslate(Astro)
         <a
           href={parentUrl}
           data-testid='parent-page-link'
-          aria-label={t.GoBack()}
+          aria-label={t['GoBack']}
         >
           <ChevronLeft />
         </a>
@@ -48,7 +50,7 @@ const t = useTranslate(Astro)
     className='bg-transparent'
     data-a11y-dialog-show='sidenav'
     data-testid='open-sidenav'
-    aria-label={t.OpenSidenav()}
+    aria-label={t['OpenSidenav']}
   >
     <Menu />
   </IconButton>

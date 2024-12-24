@@ -7,23 +7,28 @@ import Footer from '@components/Footer.astro'
 import ThemeScript from '@components/ThemeScript.astro'
 import { SEO } from 'astro-seo'
 import type { Props as SEOProps } from 'astro-seo'
-import { getLanguageFromUrl, useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import '@fontsource/source-sans-pro'
 import '@fontsource/merriweather'
-
-const language = getLanguageFromUrl(Astro.url.pathname)
-
-const t = useTranslate(Astro)
+import type { Locale } from '@utils/i18n/locales'
 
 type Props = {
   title: string
+  locale: Locale
   description?: string
   htmlClass?: string
   seo?: Partial<SEOProps>
   isTranslated: boolean
 }
 
-const { description = t.SiteDescription(), seo, isTranslated } = Astro.props
+const t = useTranslate(Astro.props.locale)
+
+const {
+  locale,
+  description = t['SiteDescription'],
+  seo,
+  isTranslated,
+} = Astro.props
 
 let mobileNavTitle = null
 if (Astro.slots.has('mobile-nav-title')) {
@@ -39,7 +44,7 @@ const title = `${Astro.props.title} | Phelipe Teles`
     'h-full min-h-0 text-base sm:text-lg selection:bg-primary selection:text-on-primary',
     Astro.props.htmlClass,
   ]}
-  lang={language}
+  lang={Astro.props.locale === 'en' ? 'en-US' : 'pt-BR'}
 >
   <head>
     <meta charset='utf-8' />
@@ -60,8 +65,8 @@ const title = `${Astro.props.title} | Phelipe Teles`
           ...seo?.openGraph?.basic,
         },
         optional: {
-          locale: language === 'pt' ? 'pt_BR' : 'en_US',
-          localeAlternate: language === 'pt' ? ['en_US'] : ['pt_BR'],
+          locale: Astro.props.locale === 'pt' ? 'pt_BR' : 'en_US',
+          localeAlternate: Astro.props.locale === 'pt' ? ['en_US'] : ['pt_BR'],
           ...seo?.openGraph?.optional,
         },
       }}
@@ -98,14 +103,15 @@ const title = `${Astro.props.title} | Phelipe Teles`
     <ThemeScript />
 
     <Nav
+      locale={locale}
       title={Astro.props.title}
       mobileNavTitle={mobileNavTitle}
       isTranslated={isTranslated}
     />
-    <SideNav />
+    <SideNav locale={locale} />
 
     <slot />
 
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>

@@ -1,7 +1,7 @@
 ---
 import { format } from 'date-fns'
-import { getLanguageFromUrl, localizeUrl, useTranslate } from '@utils/i18n'
-import { getBlogPostFolderName } from '@utils/posts'
+import { useTranslate } from '@utils/i18n/useTranslate'
+import { getBlogPostFolderName } from '@utils/posts/getBlogPostFolderName'
 import Site from '@layouts/Site.astro'
 import BlogPostTag from '@components/BlogPostTag.astro'
 import Katex from '@components/Katex.astro'
@@ -23,37 +23,40 @@ import H4 from '@components/H4.astro'
 import H5 from '@components/H5.astro'
 import H6 from '@components/H6.astro'
 import Paragraph from '@components/Paragraph.astro'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 type Props = {
+  locale: Locale
   blogPost: CollectionEntry<'posts'> & { isTranslated: boolean }
   nextBlogPost: CollectionEntry<'posts'> | null
   prevBlogPost: CollectionEntry<'posts'> | null
 }
 
-const { blogPost, nextBlogPost, prevBlogPost } = Astro.props
+const { locale, blogPost, nextBlogPost, prevBlogPost } = Astro.props
 const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
-const language = getLanguageFromUrl(Astro.url.pathname)
-const ogImageUrl = localizeUrl(
-  `/posts/${getBlogPostFolderName(Astro.props.blogPost)}/image.png`,
-  language
+const ogImageUrl = getRelativeLocaleUrl(
+  locale,
+  `/posts/${getBlogPostFolderName(Astro.props.blogPost)}/image.png`
 )
 
 function buildGitHubLinkToPostSourceCode(blogPost: CollectionEntry<'posts'>) {
   const folderName = getBlogPostFolderName(blogPost)
   let fileName = 'index.mdx'
-  if (language === 'pt') {
+  if (locale === 'pt') {
     fileName = 'index.pt.mdx'
   }
   return `https://github.com/phelipetls/blog/tree/master/src/content/posts/${folderName}/${fileName}`
 }
 
-const t = useTranslate(Astro)
+const t = useTranslate(locale)
 
 const tocWouldBeEmpty = headings.length === 0
 ---
 
 <Site
+  locale={locale}
   isTranslated={blogPost.isTranslated}
   title={`${blogPost.data.title} - Phelipe Teles`}
   description={remarkPluginFrontmatter.summary}
@@ -111,7 +114,7 @@ const tocWouldBeEmpty = headings.length === 0
           </h1>
 
           <div class='mb-4 flex gap-2 flex-row flex-wrap'>
-            <BlogPostDate date={blogPost.data.date} showYear />
+            <BlogPostDate locale={locale} date={blogPost.data.date} showYear />
             <BlogPostReadingTime
               readingTime={remarkPluginFrontmatter.readingTime}
             />
@@ -120,7 +123,7 @@ const tocWouldBeEmpty = headings.length === 0
               href={buildGitHubLinkToPostSourceCode(Astro.props.blogPost)}
             >
               <FileCode2 />
-              {t.LinkToSourceLabel()}
+              {t['LinkToSourceLabel']}
             </Link>
           </div>
 
@@ -128,10 +131,10 @@ const tocWouldBeEmpty = headings.length === 0
             blogPost.data.tags && (
               <div class='mb-4 flex max-w-lg flex-wrap gap-2'>
                 {blogPost.data.tags.map((tag) => {
-                  return <BlogPostTag tag={tag} />
+                  return <BlogPostTag locale={locale} tag={tag} />
                 })}
 
-                <BlogPostTag tag='...' />
+                <BlogPostTag locale={locale} tag='...' />
               </div>
             )
           }
@@ -172,9 +175,9 @@ const tocWouldBeEmpty = headings.length === 0
                 <IconButton
                   data-toggle-toc
                   variant='rounded-full'
-                  data-open-toc-label={t.OpenToc()}
-                  data-closed-toc-label={t.CloseToc()}
-                  aria-label={t.CloseToc()}
+                  data-open-toc-label={t['OpenToc']}
+                  data-closed-toc-label={t['CloseToc']}
+                  aria-label={t['CloseToc']}
                   style={{
                     // @ts-expect-error I'm allowed to do this
                     '--duration': '150ms',
@@ -235,7 +238,7 @@ const tocWouldBeEmpty = headings.length === 0
                       'truncate',
                     ]}
                   >
-                    {t.OpenToc()}
+                    {t['OpenToc']}
                   </div>
                 </IconButton>
 
@@ -259,7 +262,7 @@ const tocWouldBeEmpty = headings.length === 0
                     'ease-in-out',
                   ]}
                 >
-                  <BlogPostToc headings={headings} />
+                  <BlogPostToc locale={locale} headings={headings} />
                 </div>
               </aside>
             )
@@ -309,6 +312,7 @@ const tocWouldBeEmpty = headings.length === 0
       <hr class='max-sm:full-bleed mt-8' />
 
       <PostNav
+        locale={locale}
         class='max-sm:full-bleed sm:my-8'
         prevBlogPost={prevBlogPost}
         nextBlogPost={nextBlogPost}

@@ -1,0 +1,19 @@
+---
+import BlogPost from '@layouts/BlogPost.astro'
+import { getBlogPostsAsStaticPaths } from '@utils/posts/getBlogPostsAsStaticPaths'
+import type { InferGetStaticPropsType } from 'astro'
+import _ from 'lodash'
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+export function getStaticPaths() {
+  return getBlogPostsAsStaticPaths('en')
+}
+---
+
+<BlogPost
+  locale='en'
+  blogPost={Astro.props.blogPost}
+  nextBlogPost={Astro.props.nextBlogPost}
+  prevBlogPost={Astro.props.prevBlogPost}
+/>

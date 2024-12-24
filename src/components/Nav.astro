@@ -1,22 +1,24 @@
 ---
 import NavMobile from './NavMobile.astro'
 import NavDesktop from './NavDesktop.astro'
+import type { Locale } from '@utils/i18n/locales'
 
 type Props = {
+  locale: Locale
   title: string
   mobileNavTitle: string | null
   isTranslated: boolean
 }
 
-const { title, mobileNavTitle, isTranslated } = Astro.props
+const { title, mobileNavTitle, isTranslated, locale } = Astro.props
 ---
 
 <div class='w-full'>
   <div class='pt-nav-height sm:hidden'>
-    <NavMobile title={title} mobileNavTitle={mobileNavTitle} />
+    <NavMobile locale={locale} title={title} mobileNavTitle={mobileNavTitle} />
   </div>
 
   <div class='hidden h-full w-full sm:block'>
-    <NavDesktop isTranslated={isTranslated} />
+    <NavDesktop locale={locale} isTranslated={isTranslated} />
   </div>
 </div>

@@ -1,29 +1,31 @@
 ---
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import type { CollectionEntry } from 'astro:content'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 type Props = {
   class?: string
+  locale: Locale
   prevBlogPost: CollectionEntry<'posts'> | null
   nextBlogPost: CollectionEntry<'posts'> | null
 }
 
-const t = useTranslate(Astro)
-const language = getLanguageFromUrl(Astro.url.pathname)
+const t = useTranslate(Astro.props.locale)
 
-const { prevBlogPost, nextBlogPost, class: className } = Astro.props
+const { locale, prevBlogPost, nextBlogPost, class: className } = Astro.props
 ---
 
 <nav
   class:list={['flex items-stretch sm:gap-4', className]}
-  aria-label={t.PostsNavigation()}
+  aria-label={t['PostsNavigation']}
 >
   {
     prevBlogPost ? (
       <a
         class='sm:card flex flex-1 flex-col gap-2 border-0 px-horizontal-padding py-4 transition-colors duration-300 hover:bg-hover'
-        href={localizeUrl('/posts/' + prevBlogPost.slug, language)}
+        href={getRelativeLocaleUrl(locale, '/posts/' + prevBlogPost.slug)}
       >
         <span class='text-primary'>
           <ArrowLeft />
@@ -42,7 +44,7 @@ const { prevBlogPost, nextBlogPost, class: className } = Astro.props
     nextBlogPost && (
       <a
         class='sm:card flex flex-1 flex-col-reverse items-end justify-end gap-2 border-0 px-horizontal-padding py-4 text-right transition-colors duration-300 hover:bg-hover'
-        href={localizeUrl('/posts/' + nextBlogPost.slug, language)}
+        href={getRelativeLocaleUrl(locale, '/posts/' + nextBlogPost.slug)}
       >
         {nextBlogPost.data.title}
 

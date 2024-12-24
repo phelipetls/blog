@@ -1,0 +1,53 @@
+---
+import { useTranslate } from '@utils/i18n/useTranslate'
+import Site from './Site.astro'
+import _ from 'lodash'
+import BlogPostTag from '@components/BlogPostTag.astro'
+import type { Locale } from '@utils/i18n/locales'
+
+type Props = {
+  locale: Locale
+  tags: string[]
+}
+
+const t = useTranslate(Astro.props.locale)
+
+const tagCounter = _.countBy(Astro.props.tags)
+---
+
+<Site
+  locale={Astro.props.locale}
+  isTranslated
+  title='Tags'
+  description={t.TagsDescription}
+>
+  <main class='grid grid-cols-layout'>
+    <div>
+      <h1 class='mb-8 hidden sm:block'>Tags</h1>
+
+      <ul class='list-none m-0 flex flex-wrap gap-2'>
+        {
+          _.uniq(Astro.props.tags)
+            .sort((tagA, tagB) => {
+              const countA = tagCounter[tagA] ?? 0
+              const countB = tagCounter[tagB] ?? 0
+              return countB - countA
+            })
+            .map((tag) => {
+              const count = tagCounter[tag] ?? 0
+
+              return (
+                <li>
+                  <BlogPostTag
+                    locale={Astro.props.locale}
+                    tag={tag}
+                    count={count}
+                  />
+                </li>
+              )
+            })
+        }
+      </ul>
+    </div>
+  </main>
+</Site>

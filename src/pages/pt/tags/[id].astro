@@ -1,0 +1,22 @@
+---
+import { getBlogPostsTagsAsStaticPaths } from '@utils/posts/getBlogPostsTagsAsStaticPaths'
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro'
+import Tag from '@layouts/Tag.astro'
+import _ from 'lodash'
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+export function getStaticPaths() {
+  return getBlogPostsTagsAsStaticPaths('pt')
+}
+
+const params = Astro.params as Params
+---
+
+<Tag
+  tag={params.id}
+  locale='pt'
+  blogPosts={Astro.props.blogPosts}
+  isTranslated={Astro.props.isTranslated}
+/>

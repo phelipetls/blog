@@ -2,17 +2,17 @@
 import BlogPostReadingTime from './BlogPostReadingTime.astro'
 import BlogPostDate from './BlogPostDate.astro'
 import BlogPostTag from './BlogPostTag.astro'
-import { localizeUrl, getLanguageFromUrl } from '@utils/i18n'
-import { getBlogPostFolderName } from '@utils/posts'
+import type { Locale } from '@utils/i18n/locales'
+import { getBlogPostFolderName } from '@utils/posts/getBlogPostFolderName'
 import type { CollectionEntry } from 'astro:content'
-
-const language = getLanguageFromUrl(Astro.url.pathname)
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 type Props = {
+  locale: Locale
   blogPost: CollectionEntry<'posts'>
 }
 
-const { blogPost } = Astro.props
+const { locale, blogPost } = Astro.props
 const { title, tags, date, description } = blogPost.data
 
 const {
@@ -24,14 +24,17 @@ const {
   <h3 class='text-2xl max-w-prose m-0 border-l-2 border-primary pl-4'>
     <a
       class='max-w-prose'
-      href={localizeUrl(`/posts/${getBlogPostFolderName(blogPost)}`, language)}
+      href={getRelativeLocaleUrl(
+        locale,
+        `/posts/${getBlogPostFolderName(blogPost)}`
+      )}
     >
       {title}
     </a>
   </h3>
 
   <div class='mt-2 [&_svg]:w-[1.25em] [&_svg]:h-[1.25em] flex flex-wrap gap-2'>
-    <BlogPostDate date={date} showYear={false} />
+    <BlogPostDate locale={locale} date={date} showYear={false} />
     <BlogPostReadingTime readingTime={readingTime} />
   </div>
 
@@ -43,7 +46,13 @@ const {
     tags && (
       <div class='flex flex-wrap gap-2'>
         {tags.map((tag) => {
-          return <BlogPostTag tag={tag} class='snap-start whitespace-nowrap' />
+          return (
+            <BlogPostTag
+              locale={locale}
+              tag={tag}
+              class='snap-start whitespace-nowrap'
+            />
+          )
         })}
       </div>
     )

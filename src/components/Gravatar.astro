@@ -1,14 +1,16 @@
 ---
 import md5 from 'md5'
-import { useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
+import type { Locale } from '@utils/i18n/locales'
 
 type Props = {
+  locale: Locale
   baseWidth?: number
 }
 
 const { baseWidth = 200 } = Astro.props
 
-const t = useTranslate(Astro)
+const t = useTranslate(Astro.props.locale)
 
 const email = 'phelipe_teles@hotmail.com'
 
@@ -24,7 +26,7 @@ const generateGravatarUrl = (width: number) =>
     ${generateGravatarUrl(baseWidth * 2)} 2x,
     ${generateGravatarUrl(baseWidth * 3)} 3x
   `}
-  alt={t.GravatarAltText()}
+  alt={t['GravatarAltText']}
   width={baseWidth}
   height={baseWidth}
 />

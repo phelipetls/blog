@@ -1,9 +1,13 @@
-import type { AstroGlobal } from 'astro'
-import { getLanguageFromUrl } from './getLanguageFromUrl'
-import { translate } from './translate'
+import type { Locale } from './locales'
+import { en } from './translations/en'
+import { pt } from './translations/pt'
 
-export const useTranslate = (Astro: Readonly<AstroGlobal>) => {
-  const lang = getLanguageFromUrl(Astro.url.pathname)
+export const useTranslate = (locale: Locale) => {
+  let dictionary = en
 
-  return translate(lang)
+  if (locale === 'pt') {
+    dictionary = pt
+  }
+
+  return dictionary
 }

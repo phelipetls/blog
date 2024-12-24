@@ -1,0 +1,10 @@
+---
+import { getBlogPosts } from '@utils/posts/getBlogPosts'
+import { getBlogPostTags } from '@utils/posts/getBlogPostTags'
+import Tags from '@layouts/Tags.astro'
+
+const blogPosts = await getBlogPosts('pt')
+const tags = getBlogPostTags(blogPosts)
+---
+
+<Tags locale='pt' tags={tags} />

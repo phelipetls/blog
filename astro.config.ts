@@ -11,10 +11,15 @@ import remarkMath from 'remark-math'
 import { rehypeSyntaxHighlight } from './plugins/rehype-syntax-highlight'
 import { remarkReadingTime } from './plugins/remark-reading-time'
 import { remarkSummary } from './plugins/remark-summary'
+import { LOCALES } from './src/utils/i18n/locales'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://phelipetls.github.io/',
+  i18n: {
+    locales: LOCALES,
+    defaultLocale: 'en',
+  },
   integrations: [
     robotsTxt(),
     react(),

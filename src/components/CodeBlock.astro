@@ -2,7 +2,7 @@
 import CopyCodeBlockButton from '@components/CopyCodeBlockButton'
 import DevIcon from '@components/DevIcon.astro'
 import type { DevIconName } from '@components/DevIcon.astro'
-import { useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
 import '@assets/css/twoslash.css'
@@ -21,8 +21,7 @@ import { select } from 'hast-util-select'
 import { h } from 'hastscript'
 import { parseHighlightString } from '@utils/code-block'
 import type { Nodes } from 'node_modules/hast-util-select/lib'
-
-const t = useTranslate(Astro)
+import type { Locale } from '@utils/i18n/locales'
 
 export type CodeBlockProps = {
   title: string
@@ -30,6 +29,7 @@ export type CodeBlockProps = {
   twoslash: boolean
   code: string
   highlight: string
+  locale: Locale
 }
 
 type Props = HTMLAttributes<'pre'> & CodeBlockProps
@@ -40,8 +40,11 @@ const {
   highlight = '',
   code = '',
   twoslash = false,
+  locale,
   ...rest
 } = Astro.props
+
+const t = useTranslate(locale)
 
 const THEME = 'one-dark-pro'
 
@@ -203,7 +206,7 @@ const devIconName = isDevIcon(langComponentName)
           title ? (
             <bdi>{title}</bdi>
           ) : langName === 'plaintext' || langName === '' ? (
-            t.NoName()
+            t['NoName']
           ) : (
             langName
           )
@@ -227,8 +230,8 @@ const devIconName = isDevIcon(langComponentName)
 
       <CopyCodeBlockButton
         client:load
-        successText={t.Copied() + '!'}
-        errorText={t.FailedToCopy()}
+        successText={t['Copied'] + '!'}
+        errorText={t['FailedToCopy']}
         code={codeToCopy}
       />
     </div>

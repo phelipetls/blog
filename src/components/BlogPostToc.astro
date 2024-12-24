@@ -1,17 +1,19 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import { useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import { List, ChevronDown } from 'lucide-react'
 // @ts-expect-error this library is not written in TypeScript
 import { TOC } from 'astro-toc'
-
-const t = useTranslate(Astro)
+import type { Locale } from '@utils/i18n/locales'
 
 type Props = {
+  locale: Locale
   headings: MarkdownHeading[]
 }
 
-const { headings } = Astro.props
+const { headings, locale } = Astro.props
+
+const t = useTranslate(locale)
 
 const tocItems = headings.map((heading) => ({
   depth: heading.depth,
@@ -24,7 +26,7 @@ const tocItems = headings.map((heading) => ({
   <div class:list={['flex', 'items-center', 'gap-2', 'h-10', 'flex-none']}>
     <List />
 
-    <h2 class='m-0'>{t.TableOfContents()}</h2>
+    <h2 class='m-0'>{t['TableOfContents']}</h2>
 
     <div
       class='ml-auto flex items-center transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden'
@@ -71,13 +73,13 @@ const tocItems = headings.map((heading) => ({
 
 <details
   class='group px-horizontal-padding py-4 lg:hidden'
-  aria-label={t.TableOfContents()}
+  aria-label={t['TableOfContents']}
 >
   <summary class='list-none'>
     <div class='flex items-center gap-2'>
       <List />
 
-      <h2 class='m-0'>{t.TableOfContents()}</h2>
+      <h2 class='m-0'>{t['TableOfContents']}</h2>
 
       <div
         class='flex items-center ml-auto transition-transform duration-150 ease-in group-open:rotate-180 lg:hidden'

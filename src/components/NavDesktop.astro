@@ -1,40 +1,41 @@
 ---
-import { useTranslate, getLanguageFromUrl, localizeUrl } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import { isActiveMenuItem, MAIN_MENU_ITEMS } from '@utils/menu'
 import ThemeSelect from './ThemeSelect.astro'
 import LanguageSelect from './LanguageSelect.astro'
+import type { Locale } from '@utils/i18n/locales'
+import { getRelativeLocaleUrl } from 'astro:i18n'
 
 type Props = {
   isTranslated: boolean
+  locale: Locale
 }
 
-const { isTranslated } = Astro.props
+const { isTranslated, locale } = Astro.props
 
-const t = useTranslate(Astro)
-
-const language = getLanguageFromUrl(Astro.url.pathname)
+const t = useTranslate(Astro.props.locale)
 ---
 
 <div class='flex w-full items-center justify-between pr-horizontal-padding'>
   <div class='mx-auto flex w-full max-w-content justify-between'>
     <nav
       class='flex justify-between pl-horizontal-padding'
-      aria-label={t.MainNavigation()}
+      aria-label={t['MainNavigation']}
     >
       <ul class='m-0 flex flex-row list-none gap-4'>
         {
           MAIN_MENU_ITEMS.map((item) => {
             const isActive = isActiveMenuItem({
               currentPathname: Astro.url.pathname,
-              menuItemPathname: localizeUrl(item.pathname, language),
-              rootPathname: localizeUrl('/', language),
+              menuItemPathname: getRelativeLocaleUrl(locale, item.pathname),
+              rootPathname: getRelativeLocaleUrl(locale, '/'),
             })
 
             return (
               <li class=''>
                 <a
                   id={item.identifier}
-                  href={localizeUrl(item.pathname, language)}
+                  href={getRelativeLocaleUrl(locale, item.pathname)}
                   class:list={['py-2', 'inline-block h-full w-full', 'group']}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
@@ -46,7 +47,7 @@ const language = getLanguageFromUrl(Astro.url.pathname)
                         : 'decoration-transparent group-hover:decoration-hover',
                     ]}
                   >
-                    {t[item.name]()}
+                    {t[item.name]}
                   </span>
                 </a>
               </li>
@@ -57,9 +58,9 @@ const language = getLanguageFromUrl(Astro.url.pathname)
     </nav>
 
     <div class='flex flex-row items-center gap-2'>
-      {isTranslated && <LanguageSelect />}
+      {isTranslated && <LanguageSelect locale={Astro.props.locale} />}
 
-      <ThemeSelect />
+      <ThemeSelect locale={locale} />
     </div>
   </div>
 </div>

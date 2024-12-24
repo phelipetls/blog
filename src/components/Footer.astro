@@ -1,20 +1,22 @@
 ---
 import Contact from './Contact.astro'
-import { getLanguageFromUrl } from '@utils/i18n'
 import Link from './Link.astro'
+import type { Locale } from '@utils/i18n/locales'
 
-const language = getLanguageFromUrl(Astro.url.pathname)
+type Props = {
+  locale: Locale
+}
 ---
 
 <footer class="bg-background">
   <div
     class="mx-auto flex w-full max-w-content flex-col px-horizontal-padding pt-4 pb-8 sm:justify-between"
   >
-    <Contact />
+    <Contact locale={Astro.props.locale} />
 
     <span class="">
       {
-        language === 'en' ? (
+        Astro.props.locale === 'en' ? (
           <>
             All content is under a{' '}
             <Link

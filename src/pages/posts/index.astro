@@ -1,0 +1,6 @@
+---
+import BlogPosts from '@layouts/BlogPosts.astro'
+import { getBlogPosts } from '@utils/posts/getBlogPosts'
+---
+
+<BlogPosts locale='en' blogPosts={await getBlogPosts('en')} />

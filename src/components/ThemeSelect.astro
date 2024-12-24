@@ -1,15 +1,20 @@
 ---
-import { useTranslate } from '@utils/i18n'
+import { useTranslate } from '@utils/i18n/useTranslate'
 import { Moon, Sun, Monitor } from 'lucide-react'
 import Select from '@components/Select.astro'
+import type { Locale } from '@utils/i18n/locales'
 
-const t = useTranslate(Astro)
+type Props = {
+  locale: Locale
+}
+
+const t = useTranslate(Astro.props.locale)
 ---
 
-<Select data-theme-select aria-label={t.ChooseATheme()}>
-  <option value='light'>{t.Light()}</option>
-  <option value='dark'>{t.Dark()}</option>
-  <option value='system'>{t.System()}</option>
+<Select data-theme-select aria-label={t['ChooseATheme']}>
+  <option value='light'>{t['Light']}</option>
+  <option value='dark'>{t['Dark']}</option>
+  <option value='system'>{t['System']}</option>
 
   <svg
     slot='start-icon'
@@ -18,7 +23,7 @@ const t = useTranslate(Astro)
     width='24'
     height='24'
   >
-    <title>{t.ThemeIcon()}</title>
+    <title>{t['ThemeIcon']}</title>
 
     <defs>
       <Moon id='moon' />

@@ -1,0 +1,23 @@
+---
+import '@assets/css/main.css'
+import { getBlogPosts } from '@utils/posts/getBlogPosts'
+import type { InferGetStaticPropsType } from 'astro'
+import BlogPostImage from '@layouts/BlogPostImage.astro'
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+export async function getStaticPaths() {
+  const blogPosts = await getBlogPosts('pt')
+
+  return blogPosts.map((blogPost) => {
+    return {
+      params: { id: blogPost.id },
+      props: { blogPost },
+    }
+  })
+}
+
+const { blogPost } = Astro.props
+---
+
+<BlogPostImage locale='pt' blogPost={blogPost} />

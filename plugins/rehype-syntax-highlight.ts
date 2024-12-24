@@ -34,7 +34,9 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
       // Transform '{ '1-3': true, '5': true }' into 1-3,5
       const highlight =
-        typeof meta.highlight === 'object'
+        meta.highlight &&
+        typeof meta.highlight === 'object' &&
+        !Array.isArray(meta.highglight)
           ? Object.keys(meta.highlight).join(',')
           : ''
 

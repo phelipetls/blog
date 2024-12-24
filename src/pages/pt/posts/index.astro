@@ -1,0 +1,8 @@
+---
+import BlogPosts from '@layouts/BlogPosts.astro'
+import { getBlogPosts } from '@utils/posts/getBlogPosts'
+
+const posts = await getBlogPosts('pt')
+---
+
+<BlogPosts locale='pt' blogPosts={posts} />

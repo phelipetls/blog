@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "test": "playwright test",
     "generate-posts-images": "node ./scripts/generate-posts-images.mjs",
-    "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
+    "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.mjs --svgo-config ./src/assets/svgs/devicons/svgo.config.mjs --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "postinstall": "npx patch-package && npm run generate-devicons && npx playwright install && npx astro sync",
     "prepare": "husky install"
   },
@@ -36,6 +36,8 @@
     "@types/md5": "^2.3.2",
     "@types/mustache": "^4.2.2",
     "@types/node-fetch": "^2.6.3",
+    "@types/postcss-functions": "^4.0.4",
+    "@types/postcss-import": "^14.0.3",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "a11y-dialog": "^7.5.2",

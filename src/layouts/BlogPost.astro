@@ -24,7 +24,7 @@ import H5 from '@components/H5.astro'
 import H6 from '@components/H6.astro'
 import Paragraph from '@components/Paragraph.astro'
 import type { Locale } from '@utils/i18n/locales'
-import { getRelativeLocaleUrl } from 'astro:i18n'
+import { getAbsoluteLocaleUrl } from 'astro:i18n'
 
 type Props = {
   locale: Locale
@@ -36,10 +36,11 @@ type Props = {
 const { locale, blogPost, nextBlogPost, prevBlogPost } = Astro.props
 const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
 
-const ogImageUrl = getRelativeLocaleUrl(
-  locale,
-  `/posts/${getBlogPostFolderName(Astro.props.blogPost)}/image.png`
-)
+const ogImageUrl =
+  getAbsoluteLocaleUrl(
+    locale,
+    `/posts/${getBlogPostFolderName(Astro.props.blogPost)}`
+  ) + 'image.png'
 
 function buildGitHubLinkToPostSourceCode(blogPost: CollectionEntry<'posts'>) {
   const folderName = getBlogPostFolderName(blogPost)

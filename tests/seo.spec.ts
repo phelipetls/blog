@@ -10,22 +10,36 @@ test.describe('SEO', () => {
 
       await page.goto(`${urlPrefix}/posts/demystifying-git-rebase`)
 
-      const ogImageUrl = await page
-        .locator('head meta[property="og:image"]')
-        .getAttribute('content')
-      expect(ogImageUrl).toBeTruthy()
+      const ogImageUrl =
+        (await page
+          .locator('head meta[property="og:image"]')
+          .getAttribute('content')) ?? ''
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const ogImageResponse = await request.get(ogImageUrl!)
+      expect(ogImageUrl).toBe(
+        lang === 'pt'
+          ? 'https://phelipetls.github.io/pt/posts/demystifying-git-rebase/image.png'
+          : 'https://phelipetls.github.io/posts/demystifying-git-rebase/image.png'
+      )
+
+      const ogImageResponse = await request.get(
+        toLocalhostURL(new URL(ogImageUrl))
+      )
       expect(ogImageResponse.status()).toBe(200)
 
-      const twitterImageUrl = await page
-        .locator('head meta[name="twitter:image"]')
-        .getAttribute('content')
-      expect(twitterImageUrl).toBeTruthy()
+      const twitterImageUrl =
+        (await page
+          .locator('head meta[name="twitter:image"]')
+          .getAttribute('content')) ?? ''
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const twitterImageResponse = await request.get(twitterImageUrl!)
+      expect(twitterImageUrl).toBe(
+        lang === 'pt'
+          ? 'https://phelipetls.github.io/pt/posts/demystifying-git-rebase/image.png'
+          : 'https://phelipetls.github.io/posts/demystifying-git-rebase/image.png'
+      )
+
+      const twitterImageResponse = await request.get(
+        toLocalhostURL(new URL(twitterImageUrl))
+      )
       expect(twitterImageResponse.status()).toBe(200)
 
       await expect(
@@ -34,3 +48,8 @@ test.describe('SEO', () => {
     })
   }
 })
+
+function toLocalhostURL(url: URL): string {
+  const localhostUrl = new URL(url.pathname, 'http://localhost:4321')
+  return localhostUrl.toString()
+}

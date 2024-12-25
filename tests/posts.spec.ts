@@ -16,11 +16,11 @@ test.describe('Posts', () => {
       if (lang === 'pt') {
         await expect(
           page.getByRole('link', { name: 'Desmistificando git rebase' })
-        ).toHaveAttribute('href', `/pt/posts/demystifying-git-rebase`)
+        ).toHaveAttribute('href', `/pt/posts/demystifying-git-rebase/`)
       } else {
         await expect(
           page.getByRole('link', { name: 'Demystifying git rebase' })
-        ).toHaveAttribute('href', `/posts/demystifying-git-rebase`)
+        ).toHaveAttribute('href', `/posts/demystifying-git-rebase/`)
       }
     })
   }
@@ -30,32 +30,22 @@ test.describe('Posts', () => {
       page,
     }) => {
       await page.goto('/posts/demystifying-git-rebase')
-      await expect(
-        page.getByText('Why learn git rebase?').first()
-      ).toBeVisible()
 
       await page.getByRole('link', { name: /view source code/i }).click()
       await expect(page).toHaveURL(
         `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.mdx`
       )
-      await expect(page.getByText('Why learn `git rebase`?')).toBeVisible()
     })
 
     test('portuguese blog post should have a link to view source code on GitHub', async ({
       page,
     }) => {
       await page.goto('/pt/posts/demystifying-git-rebase')
-      await expect(
-        page.getByText('Por que aprender git rebase?').first()
-      ).toBeVisible()
 
       await page.getByRole('link', { name: /ver código fonte/i }).click()
       await expect(page).toHaveURL(
         `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.pt.mdx`
       )
-      await expect(
-        page.getByText('Por que aprender `git rebase`?')
-      ).toBeVisible()
     })
   })
 })

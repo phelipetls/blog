@@ -1,7 +1,6 @@
 // @ts-check
 import fs from 'fs'
 import path from 'path'
-import fetch from 'node-fetch'
 import playwright from 'playwright'
 import * as url from 'url'
 

@@ -43,12 +43,7 @@ const ogImageUrl =
   ) + 'image.png'
 
 function buildGitHubLinkToPostSourceCode(blogPost: CollectionEntry<'posts'>) {
-  const folderName = getBlogPostFolderName(blogPost)
-  let fileName = 'index.mdx'
-  if (locale === 'pt') {
-    fileName = 'index.pt.mdx'
-  }
-  return `https://github.com/phelipetls/blog/tree/master/src/content/posts/${folderName}/${fileName}`
+  return `https://github.com/phelipetls/blog/tree/master/${blogPost.filePath}`
 }
 
 const t = useTranslate(locale)

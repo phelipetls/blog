@@ -3,36 +3,36 @@
   --content-max-width: 80rem;
   --nav-height: 4rem;
 
-  --primary: hexToRgb(theme(colors.orange.500));
-  --primary-hover: hexToRgb(theme(colors.orange.600));
-  --on-primary: hexToRgb(theme(colors.stone.800));
-  --background: hexToRgb(theme(colors.stone.100));
-  --on-background: hexToRgb(theme(colors.stone.800));
-  --surface: hexToRgb(theme(colors.stone.200));
-  --hover: hexToRgb(theme(colors.stone.300));
+  --primary: hexToRgb(theme(colors.cyan.700));
+  --primary-hover: hexToRgb(theme(colors.cyan.800));
+  --on-primary: hexToRgb(theme(colors.slate.100));
+  --background: hexToRgb(theme(colors.slate.50));
+  --on-background: hexToRgb(theme(colors.slate.800));
+  --surface: hexToRgb(theme(colors.slate.100));
+  --hover: hexToRgb(theme(colors.slate.200));
   --disabled: var(--background);
-  --on-disabled: hexToRgb(theme(colors.stone.400));
-  --divider: hexToRgb(theme(colors.stone.500));
-  --shadow: hexToRgb(theme(colors.stone.600));
-  --note: hexToRgb(theme(colors.blue.600));
-  --warn: hexToRgb(theme(colors.red.600));
+  --on-disabled: hexToRgb(theme(colors.slate.500));
+  --divider: hexToRgb(theme(colors.slate.400));
+  --shadow: hexToRgb(theme(colors.slate.500));
+  --note: hexToRgb(theme(colors.cyan.600));
+  --warn: hexToRgb(theme(colors.rose.600));
   color-scheme: light;
 }
 
 .dark {
-  --primary: hexToRgb(theme(colors.orange.300));
-  --primary-hover: hexToRgb(theme(colors.orange.200));
-  --on-primary: hexToRgb(theme(colors.neutral.800));
-  --background: hexToRgb(theme(colors.neutral.800));
-  --on-background: hexToRgb(theme(colors.neutral.200));
-  --surface: hexToRgb(theme(colors.neutral.700));
-  --hover: hexToRgb(theme(colors.neutral.600));
+  --primary: hexToRgb(theme(colors.cyan.300));
+  --primary-hover: hexToRgb(theme(colors.cyan.200));
+  --on-primary: hexToRgb(theme(colors.slate.100));
+  --background: hexToRgb(theme(colors.slate.900));
+  --on-background: hexToRgb(theme(colors.slate.200));
+  --surface: hexToRgb(theme(colors.slate.800));
+  --hover: hexToRgb(theme(colors.slate.700));
   --disabled: var(--background);
-  --on-disabled: hexToRgb(theme(colors.neutral.700));
-  --divider: hexToRgb(theme(colors.neutral.500));
-  --shadow: hexToRgb(theme(colors.neutral.900));
-  --note: hexToRgb(theme(colors.blue.500));
-  --warn: hexToRgb(theme(colors.red.500));
+  --on-disabled: hexToRgb(theme(colors.slate.700));
+  --divider: hexToRgb(theme(colors.slate.600));
+  --shadow: hexToRgb(theme(colors.slate.900));
+  --note: hexToRgb(theme(colors.cyan.500));
+  --warn: hexToRgb(theme(colors.rose.500));
   color-scheme: dark;
 }
 

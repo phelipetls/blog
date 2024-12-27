@@ -2,13 +2,15 @@
 import md5 from 'md5'
 import { useTranslate } from '@utils/i18n/useTranslate'
 import type { Locale } from '@utils/i18n/locales'
+import { twMerge } from 'tailwind-merge'
 
 type Props = {
   locale: Locale
   baseWidth?: number
+  className?: string
 }
 
-const { baseWidth = 200 } = Astro.props
+const { baseWidth = 200, className = '' } = Astro.props
 
 const t = useTranslate(Astro.props.locale)
 
@@ -20,7 +22,7 @@ const generateGravatarUrl = (width: number) =>
 
 <img
   id='gravatar'
-  class='rounded-full'
+  class={twMerge(className, `rounded-full`)}
   srcset={`
     ${generateGravatarUrl(baseWidth)} 1x,
     ${generateGravatarUrl(baseWidth * 2)} 2x,

@@ -20,7 +20,11 @@ const t = useTranslate(locale)
   <main class='grid grid-cols-layout'>
     <article class='max-w-prose'>
       <header class='hidden sm:flex flex-row items-end gap-2 mb-4'>
-        <Gravatar locale={locale} baseWidth={48} />
+        <Gravatar
+          locale={locale}
+          className='border border-divider'
+          baseWidth={48}
+        />
 
         <h1 class='text-xl mb-0'>Phelipe Teles</h1>
       </header>

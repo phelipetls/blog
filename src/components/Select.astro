@@ -1,6 +1,7 @@
 ---
 import { ChevronDown } from 'lucide-react'
 import type { HTMLAttributes } from 'astro/types'
+import SelectIcon from '@components/SelectIcon.astro'
 
 type Props = HTMLAttributes<'select'> & {
   variant?: 'default' | 'ghost'
@@ -16,7 +17,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
     '--cols': hasStartIcon ? 3 : 2,
   }}
   class:list={[
-    'rounded items-center grid grid-cols-[repeat(var(--cols),1fr)]',
+    'px-1 rounded items-center grid auto-cols-max',
     variant === 'default'
       ? 'bg-surface shadow-sm shadow-shadow'
       : 'bg-background',
@@ -31,9 +32,9 @@ const hasStartIcon = Astro.slots.has('start-icon')
       'appearance-none',
       'text-center',
       'row-start-1',
-      // TODO: not using col-span-full is terrible, but I did not make it work otherwise
-      'col-[1_/_calc(var(--cols)+1)]',
-      hasStartIcon ? 'px-8' : 'pr-8',
+      'col-start-1',
+      'col-end-4',
+      hasStartIcon ? 'px-[24px]' : 'pr-[24px]',
     ]}
     {...rest}
   >
@@ -42,15 +43,13 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
   {
     hasStartIcon && (
-      <span class='pointer-events-none col-start-1 row-start-1 px-1 text-sm'>
+      <SelectIcon class='col-span-1 col-start-1 row-start-1'>
         <slot name='start-icon' />
-      </span>
+      </SelectIcon>
     )
   }
 
-  <span
-    class='flex flex-row justify-end pointer-events-none text-sm row-start-1 px-1 col-[var(--cols)_/_var(--cols)]'
-  >
-    <ChevronDown slot='end-icon' />
-  </span>
+  <SelectIcon class='justify-self-end row-start-1 col-start-3 col-span-1'>
+    <ChevronDown />
+  </SelectIcon>
 </div>

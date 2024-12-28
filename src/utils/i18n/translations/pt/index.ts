@@ -45,5 +45,5 @@ export const pt = {
   OpenToc: 'Abrir tabela de conteúdo',
   CloseToc: 'Fechar tabela de conteúdo',
   NoName: '[Sem nome]',
-  LinkToSourceLabel: 'Ver código fonte',
+  LinkToSourceLabel: 'Código fonte',
 }

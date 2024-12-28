@@ -45,5 +45,5 @@ export const en = {
   OpenToc: 'Open table of contents',
   CloseToc: 'Close table of contents',
   NoName: '[No name]',
-  LinkToSourceLabel: 'View source code',
+  LinkToSourceLabel: 'Source code',
 }

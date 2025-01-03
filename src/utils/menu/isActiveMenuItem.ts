@@ -1,4 +1,4 @@
-type IsActiveMenuItemOptions = {
+interface IsActiveMenuItemOptions {
   currentPathname: string
   menuItemPathname: string
   rootPathname: string

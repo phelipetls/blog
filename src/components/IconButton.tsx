@@ -2,7 +2,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-type IconButtonCommonProps = {
+interface IconButtonCommonProps {
   variant: 'rounded' | 'rounded-full'
   disabled?: boolean
 }

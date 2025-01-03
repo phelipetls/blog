@@ -52,7 +52,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         <span
           className={clsx(
             '[&_svg]:stroke-current',
-            justCopied ? (error ? 'text-warn' : 'text-green-500') : ''
+            error ? 'text-warn' : 'text-green-500'
           )}
         >
           {error ? <X /> : <Check />}

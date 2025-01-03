@@ -48,22 +48,22 @@ export default function Tabs(props: Props) {
 
     switch (event.key) {
       case 'ArrowLeft':
-        prevTab?.focus()
+        prevTab.focus()
         flag = true
         break
 
       case 'ArrowRight':
-        nextTab?.focus()
+        nextTab.focus()
         flag = true
         break
 
       case 'Home':
-        firstTab?.focus()
+        firstTab.focus()
         flag = true
         break
 
       case 'End':
-        lastTab?.focus()
+        lastTab.focus()
         flag = true
         break
 

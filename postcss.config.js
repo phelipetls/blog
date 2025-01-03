@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 function hexToRgb(hex) {
   const [, rr, gg, bb] = hex.match(
     /^#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})$/i

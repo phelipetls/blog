@@ -1,6 +1,6 @@
 import Sandpack from '@components/Sandpack'
 
-type AnimatedBoxProps = {
+interface AnimatedBoxProps {
   withForwards?: boolean
 }
 

@@ -3,7 +3,7 @@ import { getBlogPosts } from './getBlogPosts'
 import { getBlogPostTags } from './getBlogPostTags'
 import type { CollectionEntry } from 'astro:content'
 
-type StaticPath = {
+interface StaticPath {
   params: { id: string }
   props: {
     blogPosts: CollectionEntry<'posts'>[]
@@ -25,7 +25,7 @@ export async function getBlogPostsTagsAsStaticPaths(
       params: { id: tag },
       props: {
         blogPosts: blogPosts.filter((blogPost) => {
-          return blogPost.data.tags?.includes(tag)
+          return blogPost.data.tags.includes(tag)
         }),
         isTranslated: getBlogPostTags(translatedBlogPosts).includes(tag),
       },

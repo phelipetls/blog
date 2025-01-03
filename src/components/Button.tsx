@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React, { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type CommonButtonProps = {
+interface CommonButtonProps {
   color?: 'primary' | 'secondary'
   disabled?: boolean
   children: React.ReactNode
@@ -18,7 +18,7 @@ type PolymorphicRef<T extends React.ElementType> =
 
 type PolymorphicProps<
   T extends React.ElementType = React.ElementType,
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   TProps = {}
 > = {
   as?: T

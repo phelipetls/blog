@@ -12,6 +12,6 @@
     "types": ["astro/client"],
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*", "plugins", "scripts", "tests"],
+  "include": ["src/**/*", "*.ts", "plugins", "scripts", "tests"],
   "exclude": ["src/components/devicons"]
 }

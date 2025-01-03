@@ -1,8 +1,14 @@
 import { useSandpackConsole } from '@codesandbox/sandpack-react'
 import clsx from 'clsx'
 
-type SandpackConsoleProps = {
-  logs: ReturnType<typeof useSandpackConsole>['logs']
+type Log = ReturnType<typeof useSandpackConsole>['logs'][number]
+
+interface SandpackConsoleProps {
+  logs: Log[]
+}
+
+type LogWithCounter = Log & {
+  count: number
 }
 
 export function SandpackConsole(props: SandpackConsoleProps) {
@@ -10,7 +16,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
     <>
       {props.logs
         .filter((log) => log.data?.some((line) => line !== ''))
-        .reduce((logs, log) => {
+        .reduce<LogWithCounter[]>((logs, log) => {
           const lastLog = logs.at(-1)
 
           if (!lastLog) {
@@ -46,7 +52,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
             count: 1,
           })
           return logs
-        }, [] as ((typeof props.logs)[0] & { count: number })[])
+        }, [])
         .map((log) => {
           return (
             <div

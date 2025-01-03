@@ -3,7 +3,7 @@ import { getBlogPostFolderName } from './getBlogPostFolderName'
 import { getBlogPosts } from './getBlogPosts'
 import type { CollectionEntry } from 'astro:content'
 
-type StaticPath = {
+interface StaticPath {
   params: {
     id: string
   }

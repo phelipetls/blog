@@ -1,6 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const cartesianProduct = (...arrays: any[][]) => {
-  return arrays.reduce((acc, cur) => {
-    return acc.flatMap((arr) => cur.map((item) => [arr, item].flat()))
-  })
+export const cartesianProduct = <T extends unknown[][]>(
+  ...arrays: T
+): T[number][number][][] => {
+  return arrays.reduce<T[number][number][][]>(
+    (acc, cur) => {
+      return acc.flatMap((arr) => cur.map((item) => [...arr, item]))
+    },
+    [[]]
+  )
 }

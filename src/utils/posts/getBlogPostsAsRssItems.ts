@@ -9,6 +9,14 @@ export async function getBlogPostsAsRssItems(locale: Locale) {
     blogPosts.map(async (blogPost) => {
       const { remarkPluginFrontmatter } = await blogPost.render()
 
+      if (typeof remarkPluginFrontmatter.summary !== 'string') {
+        throw new Error(
+          `Expected blog post summary to be string, but instead got value '${String(
+            remarkPluginFrontmatter.summary
+          )}' of type '${typeof remarkPluginFrontmatter.summary}'`
+        )
+      }
+
       return {
         title: blogPost.data.title,
         pubDate: blogPost.data.date,

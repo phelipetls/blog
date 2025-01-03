@@ -3,7 +3,7 @@ import Tabs from './Tabs'
 import Tab from './Tab'
 import clsx from 'clsx'
 
-type Props = {
+interface Props {
   id: string
   tabs: string
   children?: React.ReactElement
@@ -46,10 +46,12 @@ export default function BlogPostTabs(props: Props) {
     <>
       <Tabs
         value={selectedTabId}
-        onChange={(newTabId) => setSelectedTabId(newTabId)}
+        onChange={(newTabId) => {
+          setSelectedTabId(newTabId)
+        }}
         aria-label={'Tabs'}
       >
-        {Object.entries(tabs)?.map(([tabId, tabLabel]) => {
+        {Object.entries(tabs).map(([tabId, tabLabel]) => {
           const tabUniqueId = `${tabsId}-${tabId}`
 
           return (

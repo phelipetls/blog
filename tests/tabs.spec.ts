@@ -11,13 +11,13 @@ test.describe('Tabs', () => {
     await selectedTab.scrollIntoViewIfNeeded()
     await selectedTab.focus()
 
-    const selectedTabPanelId = await selectedTab.getAttribute('aria-controls')
+    const selectedTabPanelId =
+      (await selectedTab.getAttribute('aria-controls')) ?? ''
     await expect(page.locator(`#${selectedTabPanelId}`)).toBeVisible()
 
     const unselectedTab = firstTablist.getByRole('tab', { selected: false })
-    const unselectedTabPanelId = await unselectedTab.getAttribute(
-      'aria-controls'
-    )
+    const unselectedTabPanelId =
+      (await unselectedTab.getAttribute('aria-controls')) ?? ''
     await expect(page.locator(`#${unselectedTabPanelId}`)).not.toBeVisible()
 
     await unselectedTab.click()

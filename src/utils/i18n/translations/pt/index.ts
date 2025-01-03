@@ -30,7 +30,7 @@ export const pt = {
   TableOfContents: 'Tabela de conteúdo',
   Tabs: 'Abas',
   TagDescription: (opts: { tag: string; count: number }) =>
-    `${opts.count} ${opts.count === 1 ? 'post' : 'posts'} com a tag ${
+    `${String(opts.count)} ${opts.count === 1 ? 'post' : 'posts'} com a tag ${
       opts.tag
     }`,
   TagsDescription: 'Listagem de todas as tags dos blog posts',

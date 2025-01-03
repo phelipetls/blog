@@ -5,7 +5,7 @@
   "description": "A blog to share stuff I find interesting or helpful and experiment with web technologies.",
   "scripts": {
     "dev": "astro dev",
-    "check": "prettier --check src && eslint . && astro check && tsc --noEmit",
+    "check": "prettier --check src && eslint . && astro check && tsc --noEmit && eslint .",
     "fmt": "prettier --write src",
     "build": "astro build",
     "preview": "astro preview",

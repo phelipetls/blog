@@ -17,8 +17,8 @@ import { LOCALES } from './src/utils/i18n/locales'
 export default defineConfig({
   site: 'https://phelipetls.github.io/',
   i18n: {
-    locales: LOCALES,
-    defaultLocale: 'en',
+    locales: [...LOCALES],
+    defaultLocale: 'en' as const,
   },
   integrations: [
     robotsTxt(),

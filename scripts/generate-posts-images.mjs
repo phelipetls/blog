@@ -8,6 +8,8 @@ const rootDir = url.fileURLToPath(new URL('..', import.meta.url))
 
 const DEV = process.env.NODE_ENV === 'development'
 
+console.log('Preparing Playwright to generate posts images...')
+
 const browser = await playwright.chromium.launch()
 const context = await browser.newContext(playwright.devices['Desktop Chrome'])
 const page = await context.newPage()
@@ -22,7 +24,7 @@ page.on('requestfailed', (request) => {
 
 /** @typedef {() => void} NoOp */
 /** @type {NoOp[]} */
-const saveScreenshotOperations = []
+const operations = []
 
 for (const {
   name,
@@ -34,19 +36,23 @@ for (const {
   const screenshot = await page.screenshot()
   const screenshotPath = getScreenshotPath(name)
 
-  saveScreenshotOperations.push(() => {
+  const blogPostPath = new URL(url).pathname
+
+  operations.push(() => {
     saveScreenshot(screenshot, screenshotPath)
 
     console.log(
-      'Saved screenshot for %s in %s',
-      new URL(url).pathname,
+      'Saved post image for %s in path %s',
+      blogPostPath,
       stripRootDir(screenshotPath)
     )
   })
+
+  console.log(`Prepared image of post ${blogPostPath}`)
 }
 
-for (const saveScreenshotOperation of saveScreenshotOperations) {
-  saveScreenshotOperation()
+for (const operation of operations) {
+  operation()
 }
 
 await context.close()

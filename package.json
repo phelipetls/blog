@@ -12,7 +12,7 @@
     "test": "playwright test",
     "generate-posts-images": "node ./scripts/generate-posts-images.mjs",
     "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
-    "postinstall": "npx patch-package && npm run generate-devicons && npx playwright install && npx astro sync",
+    "postinstall": "npx patch-package && npx astro sync",
     "prepare": "husky install"
   },
   "dependencies": {

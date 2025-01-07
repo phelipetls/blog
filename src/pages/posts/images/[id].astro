@@ -7,7 +7,7 @@ import BlogPostImage from '@layouts/BlogPostImage.astro'
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 export async function getStaticPaths() {
-  const blogPosts = await getBlogPosts('pt')
+  const blogPosts = await getBlogPosts('en')
 
   return blogPosts.map((blogPost) => {
     return {
@@ -20,4 +20,4 @@ export async function getStaticPaths() {
 const { blogPost } = Astro.props
 ---
 
-<BlogPostImage locale='pt' blogPost={blogPost} />
+<BlogPostImage locale='en' blogPost={blogPost} />

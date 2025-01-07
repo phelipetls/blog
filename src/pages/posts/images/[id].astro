@@ -3,6 +3,7 @@ import '@assets/css/main.css'
 import { getBlogPosts } from '@utils/posts/getBlogPosts'
 import type { InferGetStaticPropsType } from 'astro'
 import BlogPostImage from '@layouts/BlogPostImage.astro'
+import { getBlogPostFolderName } from '@utils/posts/getBlogPostFolderName'
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
 
   return blogPosts.map((blogPost) => {
     return {
-      params: { id: blogPost.id },
+      params: { id: getBlogPostFolderName(blogPost) },
       props: { blogPost },
     }
   })

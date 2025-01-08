@@ -137,6 +137,10 @@
   .full-bleed {
     @apply -mx-horizontal-padding;
   }
+
+  .animate-react-icon-spin {
+    animation: react-spin 5s linear infinite;
+  }
 }
 
 [data-preload] {
@@ -158,6 +162,15 @@
   100% {
     opacity: 0;
     transform: translateY(-100%);
+  }
+}
+
+@keyframes react-spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

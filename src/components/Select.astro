@@ -17,7 +17,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
     '--cols': hasStartIcon ? 3 : 2,
   }}
   class:list={[
-    'px-1 rounded items-center grid auto-cols-max',
+    'px-1 rounded items-center grid auto-cols-max justify-between',
     variant === 'default'
       ? 'bg-surface shadow-sm shadow-shadow'
       : 'bg-background',

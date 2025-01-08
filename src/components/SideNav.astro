@@ -55,7 +55,7 @@ const t = useTranslate(locale)
             const isActive = isActiveMenuItem({
               currentPathname: Astro.url.pathname,
               menuItemPathname: getRelativeLocaleUrl(locale, item.pathname),
-              rootPathname: getRelativeLocaleUrl(locale, '/'),
+              rootPathname: getRelativeLocaleUrl(locale),
             })
 
             return (

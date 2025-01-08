@@ -1,0 +1,108 @@
+---
+title: Debugging GitHub actions locally in an interactive shell
+date: 2025-01-06
+tags: [docker, "github actions", "ci%2Fcd", "bash", "linux"]
+---
+
+It's not news that [`nektos/act`](https://github.com/nektos/act) works well to
+debug GitHub actions locally, but I wanted the fast feedback loop of an
+interactive shell instead of re-running `act push` each time I changed `echo`
+commands in the workflow file.
+
+Today was the first time that I resorted to `nektos/act` because usually it
+isn't so difficult to reproduce CI-only errors locally in JavaScript projects,
+but today it happened and I'm glad it exists.
+
+Fortunately I had already installed Docker in my Fedora machine so I was spared
+of this headache, but [I still needed to fix not being able to run it as a
+non-root
+user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user):
+
+```sh
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+docker run hello-world
+```
+
+Once that was done, I started running the problematic action locally to start
+debugging it:
+
+```sh
+act push
+```
+
+At first, I was adding `echo` commands to debug what I think would help me
+understand the errors:
+
+```yaml
+name: Debug
+run: echo "grep -C10 'export type CollectionEntry' ./.astro/content.d.ts"
+```
+
+But this workflow got tired fast since it's not so much faster than running it
+on github.com itself, so I had the idea of getting into this Docker image after
+a certain step, similar to a debugging breakpoint.
+
+Nothing as such exists, naturally, but I asked Claude and it gave me an amazing
+idea... to use `sleep`:
+
+```yaml
+name: Sleep
+run: sleep 9999999999
+```
+
+Once the Docker container is sleeping, we can run `/bin/bash` to get access to
+it! First, we need the Docker container, let's run `docker ps` to find it:
+
+```sh
+% docker ps
+CONTAINER ID   IMAGE                            COMMAND               CREATED          STATUS          PORTS     NAMES
+43539276413c   catthehacker/ubuntu:act-latest   "tail -f /dev/null"   51 minutes ago   Up 51 minutes             act-Deploy-website-to-GitHub-Pages-on-push-deploy-222f0898354481efb0d5304069c913b76bf812924903a1f31f1e1000da84071f
+```
+
+Then we can hop into a Bash shell with the following command:
+
+```sh
+% docker exec -it 43539276413c /bin/bash
+```
+
+Now, I can run any commands or read any files without waiting for the whole
+workflow to run! It's perfect.
+
+Unfortunately, it does not have `vim` nor `emacs` neither `nano`, so it's
+difficult to edit files but we still have "here documents":
+
+```sh
+% cat << EOF > myfile.json
+{"foo":"bar"}
+EOF
+```
+
+It is even possible to copy container files to the host machine to help
+reproducing the errors -- that was how I ended up finding the fix:
+
+```sh
+% rm -rf .astro
+% docker cp 43539276413c:/home/phelipe/Projetos/blog/.astro .
+```
+
+...In case you're wondering, it was a bunch of TypeScript errors of the type
+`TS7006: Parameter 'xxx' implicitly has an 'any' type` that occurred only for
+Astro-generated types, which explains my attempt to reproduce the errors by
+copying the container `.astro` folder. Eventually, I discovered that the
+problem was with my `tsconfig.json`, which was outdated according to Astro docs
+recommendations:
+
+```json
+{
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}
+```
+
+I also learned that `tsconfig.json` files do not merge array values with the
+extended `tsconfig.json` array values, which was the mistaken assumption that
+kept me from fixing it faster.

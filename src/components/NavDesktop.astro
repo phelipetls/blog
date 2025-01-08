@@ -16,51 +16,50 @@ const { isTranslated, locale } = Astro.props
 const t = useTranslate(Astro.props.locale)
 ---
 
-<div class='flex w-full items-center justify-between pr-horizontal-padding'>
-  <div class='mx-auto flex w-full max-w-content justify-between'>
-    <nav
-      class='flex justify-between pl-horizontal-padding'
-      aria-label={t['MainNavigation']}
-    >
-      <ul class='m-0 flex flex-row list-none gap-4'>
-        {
-          MAIN_MENU_ITEMS.map((item) => {
-            const isActive = isActiveMenuItem({
-              currentPathname: Astro.url.pathname,
-              menuItemPathname: getRelativeLocaleUrl(locale, item.pathname),
-              rootPathname: getRelativeLocaleUrl(locale, '/'),
-            })
+<div class='grid grid-cols-layout'>
+  <div class='flex w-full items-center justify-between'>
+    <div class='mx-auto flex w-full max-w-content justify-between'>
+      <nav class='flex justify-between' aria-label={t['MainNavigation']}>
+        <ul class='m-0 flex flex-row list-none gap-4'>
+          {
+            MAIN_MENU_ITEMS.map((item) => {
+              const isActive = isActiveMenuItem({
+                currentPathname: Astro.url.pathname,
+                menuItemPathname: getRelativeLocaleUrl(locale, item.pathname),
+                rootPathname: getRelativeLocaleUrl(locale, '/'),
+              })
 
-            return (
-              <li class=''>
-                <a
-                  id={item.identifier}
-                  href={getRelativeLocaleUrl(locale, item.pathname)}
-                  class:list={['py-2', 'inline-block h-full w-full', 'group']}
-                  {...(isActive && { 'aria-current': 'page' })}
-                >
-                  <span
-                    class:list={[
-                      'underline underline-offset-8 decoration-2',
-                      isActive
-                        ? 'decoration-primary group-hover:decoration-primary-hover'
-                        : 'decoration-transparent group-hover:decoration-hover',
-                    ]}
+              return (
+                <li class=''>
+                  <a
+                    id={item.identifier}
+                    href={getRelativeLocaleUrl(locale, item.pathname)}
+                    class:list={['py-2', 'inline-block h-full w-full', 'group']}
+                    {...(isActive && { 'aria-current': 'page' })}
                   >
-                    {t[item.name]}
-                  </span>
-                </a>
-              </li>
-            )
-          })
-        }
-      </ul>
-    </nav>
+                    <span
+                      class:list={[
+                        'underline underline-offset-8 decoration-2',
+                        isActive
+                          ? 'decoration-primary group-hover:decoration-primary-hover'
+                          : 'decoration-transparent group-hover:decoration-hover',
+                      ]}
+                    >
+                      {t[item.name]}
+                    </span>
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </nav>
 
-    <div class='flex flex-row items-center gap-2'>
-      {isTranslated && <LanguageSelect locale={Astro.props.locale} />}
+      <div class='flex flex-row items-center gap-2'>
+        {isTranslated && <LanguageSelect locale={Astro.props.locale} />}
 
-      <ThemeSelect locale={locale} />
+        <ThemeSelect locale={locale} />
+      </div>
     </div>
   </div>
 </div>

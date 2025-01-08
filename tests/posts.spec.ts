@@ -31,7 +31,7 @@ test.describe('Posts', () => {
     }) => {
       await page.goto('/posts/demystifying-git-rebase')
 
-      await page.getByRole('link', { name: /view source code/i }).click()
+      await page.getByRole('link', { name: /source code/i }).click()
       await expect(page).toHaveURL(
         `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.mdx`
       )
@@ -42,7 +42,7 @@ test.describe('Posts', () => {
     }) => {
       await page.goto('/pt/posts/demystifying-git-rebase')
 
-      await page.getByRole('link', { name: /ver código fonte/i }).click()
+      await page.getByRole('link', { name: /código fonte/i }).click()
       await expect(page).toHaveURL(
         `https://github.com/phelipetls/blog/blob/master/src/content/posts/demystifying-git-rebase/index.pt.mdx`
       )

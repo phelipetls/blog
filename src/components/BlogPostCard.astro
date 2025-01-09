@@ -4,6 +4,7 @@ import BlogPostDate from './BlogPostDate.astro'
 import BlogPostTag from './BlogPostTag.astro'
 import type { Locale } from '@utils/i18n/locales'
 import { getBlogPostFolderName } from '@utils/posts/getBlogPostFolderName'
+import { render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -17,7 +18,7 @@ const { title, tags, date, description } = blogPost.data
 
 const {
   remarkPluginFrontmatter: { summary, readingTime },
-} = await blogPost.render()
+} = await render(blogPost)
 ---
 
 <article class='flex h-full flex-col'>

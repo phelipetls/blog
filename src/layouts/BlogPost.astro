@@ -11,6 +11,7 @@ import BlogPostToc from '@components/BlogPostToc.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import { getSandpackCssText } from '@codesandbox/sandpack-react'
 import { formatISO } from 'date-fns'
+import { render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import IconButton from '@components/IconButton'
 import clsx from 'clsx'
@@ -34,7 +35,7 @@ type Props = {
 }
 
 const { locale, blogPost, nextBlogPost, prevBlogPost } = Astro.props
-const { Content, headings, remarkPluginFrontmatter } = await blogPost.render()
+const { Content, headings, remarkPluginFrontmatter } = await render(blogPost)
 
 const ogImageUrl =
   getAbsoluteLocaleUrl(

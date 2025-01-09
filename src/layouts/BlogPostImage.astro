@@ -6,6 +6,7 @@ import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
 import md5 from 'md5'
 import '@fontsource/source-sans-pro'
 import '@fontsource/merriweather'
+import { render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import type { Locale } from '@utils/i18n/locales'
 
@@ -16,7 +17,7 @@ type Props = {
 
 const { locale, blogPost } = Astro.props
 const { title, date } = blogPost.data
-const { remarkPluginFrontmatter } = await blogPost.render()
+const { remarkPluginFrontmatter } = await render(blogPost)
 
 const email = 'phelipe_teles@hotmail.com'
 const gravatarUrl = `https://www.gravatar.com/avatar/${md5(email)}?s=200`

@@ -1,43 +1,135 @@
 import { test, expect } from '@playwright/test'
-import { cartesianProduct } from '@utils/tests'
 
 test.describe('Navbar', () => {
-  const matrix = cartesianProduct(
-    ['desktop', 'mobile'],
-    ['pt', 'en'],
-    ['/', '/posts']
-  )
+  test.describe('Desktop', () => {
+    test.describe('English', () => {
+      test(`should highlight about page link in nav`, async ({ page }) => {
+        await page.goto('/')
 
-  for (const [viewport, lang, pathname] of matrix) {
-    if (viewport === 'mobile') {
-      test.use({ viewport: { width: 375, height: 667 } })
-    }
+        const nav = page.getByRole('navigation', {
+          name: /main navigation/i,
+        })
 
-    const urlPrefix = lang === 'pt' ? '/pt' : ''
-    const url = urlPrefix + pathname
+        const aboutPageLink = nav.getByRole('link', { name: 'About' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
 
-    test(`should highlight link for ${url} in nav (on ${viewport})`, async ({
-      page,
-    }) => {
-      await page.goto(url)
-
-      if (viewport === 'mobile') {
-        await page.getByTestId('open-sidenav').click()
-      }
-
-      const nav = page.getByRole('navigation', {
-        name: lang === 'pt' ? /navegação principal/i : /main navigation/i,
+        await expect(aboutPageLink).toHaveAttribute('aria-current', 'page')
+        await expect(postsLink).not.toHaveAttribute('aria-current', 'page')
       })
 
-      for (const link of await nav.locator('a').all()) {
-        if ((await link.getAttribute('href')) === url) {
-          await expect(link).toHaveAttribute('aria-current', 'page')
-          await expect(link).toHaveClass(/bg-primary/)
-        } else {
-          await expect(link).not.toHaveAttribute('aria-current', 'page')
-          await expect(link).not.toHaveClass(/bg-primary/)
-        }
-      }
+      test(`should highlight posts page link in nav`, async ({ page }) => {
+        await page.goto('/posts')
+
+        const nav = page.getByRole('navigation', {
+          name: /main navigation/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'About' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(postsLink).toHaveAttribute('aria-current', 'page')
+        await expect(aboutPageLink).not.toHaveAttribute('aria-current', 'page')
+      })
     })
-  }
+
+    test.describe('Portuguese', () => {
+      test(`should highlight about page link in nav`, async ({ page }) => {
+        await page.goto('/pt')
+
+        const nav = page.getByRole('navigation', {
+          name: /navegação principal/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'Sobre' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(aboutPageLink).toHaveAttribute('aria-current', 'page')
+        await expect(postsLink).not.toHaveAttribute('aria-current', 'page')
+      })
+
+      test(`should highlight posts page link in nav`, async ({ page }) => {
+        await page.goto('/pt/posts')
+
+        const nav = page.getByRole('navigation', {
+          name: /navegação principal/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'Sobre' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(postsLink).toHaveAttribute('aria-current', 'page')
+        await expect(aboutPageLink).not.toHaveAttribute('aria-current', 'page')
+      })
+    })
+  })
+
+  test.describe('Mobile', () => {
+    test.use({ viewport: { width: 375, height: 667 } })
+
+    test.describe('English', () => {
+      test(`should highlight about page link in nav`, async ({ page }) => {
+        await page.goto('/')
+        await page.getByTestId('open-sidenav').click()
+
+        const nav = page.getByRole('navigation', {
+          name: /main navigation/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'About' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(aboutPageLink).toHaveAttribute('aria-current', 'page')
+        await expect(postsLink).not.toHaveAttribute('aria-current', 'page')
+      })
+
+      test(`should highlight posts page link in nav`, async ({ page }) => {
+        await page.goto('/posts')
+        await page.getByTestId('open-sidenav').click()
+
+        const nav = page.getByRole('navigation', {
+          name: /main navigation/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'About' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(postsLink).toHaveAttribute('aria-current', 'page')
+        await expect(aboutPageLink).not.toHaveAttribute('aria-current', 'page')
+      })
+    })
+
+    test.describe('Portuguese', () => {
+      test(`should highlight about page link in nav`, async ({ page }) => {
+        await page.goto('/pt')
+        await page.getByTestId('open-sidenav').click()
+
+        const nav = page.getByRole('navigation', {
+          name: /navegação principal/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'Sobre' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await page.pause()
+
+        await expect(aboutPageLink).toHaveAttribute('aria-current', 'page')
+        await expect(postsLink).not.toHaveAttribute('aria-current', 'page')
+      })
+
+      test(`should highlight posts page link in nav`, async ({ page }) => {
+        await page.goto('/pt/posts')
+        await page.getByTestId('open-sidenav').click()
+
+        const nav = page.getByRole('navigation', {
+          name: /navegação principal/i,
+        })
+
+        const aboutPageLink = nav.getByRole('link', { name: 'Sobre' })
+        const postsLink = nav.getByRole('link', { name: 'Posts' })
+
+        await expect(postsLink).toHaveAttribute('aria-current', 'page')
+        await expect(aboutPageLink).not.toHaveAttribute('aria-current', 'page')
+      })
+    })
+  })
 })

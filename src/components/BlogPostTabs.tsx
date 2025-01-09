@@ -3,7 +3,7 @@ import Tabs from './Tabs'
 import Tab from './Tab'
 import clsx from 'clsx'
 
-type Slots = Record<string, string | React.ReactElement>
+type Slots = Record<string, React.ReactElement>
 
 export default function BlogPostTabs(slots: Slots) {
   const tabsId = useId()
@@ -54,7 +54,7 @@ export default function BlogPostTabs(slots: Slots) {
             <Tab
               key={tabId}
               value={tabId}
-              label={typeof tabLabel === 'string' ? tabLabel : '[None]'}
+              label={tabLabel}
               id={`tab-${tabUniqueId}`}
               aria-controls={`tabpanel-${tabUniqueId}`}
             />

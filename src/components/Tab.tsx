@@ -6,7 +6,7 @@ export type TabProps = Omit<
   'onChange'
 > & {
   value: string
-  label: string
+  label: React.ReactNode
   selected?: boolean
   onChange?: (value: string) => void
 }

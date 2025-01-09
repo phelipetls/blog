@@ -22,7 +22,9 @@ test.describe('SEO', () => {
       )
 
       const ogImageResponse = await request.get(
-        toLocalhostURL(new URL(ogImageUrl))
+        lang === 'pt'
+          ? 'http://localhost:4321/pt/posts/demystifying-git-rebase/image.png'
+          : 'http://localhost:4321/posts/demystifying-git-rebase/image.png'
       )
       expect(ogImageResponse.status()).toBe(200)
 
@@ -38,7 +40,9 @@ test.describe('SEO', () => {
       )
 
       const twitterImageResponse = await request.get(
-        toLocalhostURL(new URL(twitterImageUrl))
+        lang === 'pt'
+          ? 'http://localhost:4321/pt/posts/demystifying-git-rebase/image.png'
+          : 'http://localhost:4321/posts/demystifying-git-rebase/image.png'
       )
       expect(twitterImageResponse.status()).toBe(200)
 
@@ -48,8 +52,3 @@ test.describe('SEO', () => {
     })
   }
 })
-
-function toLocalhostURL(url: URL): string {
-  const localhostUrl = new URL(url.pathname, 'http://localhost:4321')
-  return localhostUrl.toString()
-}

@@ -53,4 +53,4 @@ jobs:
           publish_dir: ./dist
           external_repository: phelipetls/phelipetls.github.io
           publish_branch: master
-          personal_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}

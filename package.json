@@ -30,7 +30,7 @@
     "@floating-ui/dom": "^1.2.7",
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/source-sans-pro": "^5.0.1",
-    "@playwright/test": "^1.38.1",
+    "@playwright/test": "^1.49.1",
     "@svgr/cli": "^8.1.0",
     "@types/eslint": "^9.6.1",
     "@types/hast": "^3.0.4",

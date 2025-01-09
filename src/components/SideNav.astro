@@ -67,7 +67,7 @@ const t = useTranslate(locale)
                   color={isActive ? 'primary' : 'secondary'}
                   {...(isActive && { 'aria-current': 'page' })}
                 >
-                  {item.name}
+                  {t[item.name]}
                 </Button>
               </li>
             )

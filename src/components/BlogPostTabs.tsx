@@ -1,24 +1,20 @@
-import React from 'react'
+import React, { useId } from 'react'
 import Tabs from './Tabs'
 import Tab from './Tab'
 import clsx from 'clsx'
 
-interface Props {
-  id: string
-  tabs: string
-  children?: React.ReactElement
-}
+type Slots = Record<string, string | React.ReactElement>
 
-export default function BlogPostTabs(props: Props) {
-  const { id: tabsId, ...slots } = props
+export default function BlogPostTabs(slots: Slots) {
+  const tabsId = useId()
 
   const tabs = Object.fromEntries(
     Object.entries(slots)
       .filter(([slotName]) => {
         return slotName.startsWith('tab:')
       })
-      .map(([tabId, content]) => {
-        return [tabId.replace(/^tab:/, ''), content]
+      .map(([slotName, reactElement]) => {
+        return [slotName.replace(/^tab:/, ''), reactElement]
       })
   )
 
@@ -27,8 +23,8 @@ export default function BlogPostTabs(props: Props) {
       .filter(([slotName]) => {
         return slotName.startsWith('panel:')
       })
-      .map(([tabId, panel]) => {
-        return [tabId.replace(/^panel:/, ''), panel]
+      .map(([slotName, reactElement]) => {
+        return [slotName.replace(/^panel:/, ''), reactElement]
       })
   )
 
@@ -58,7 +54,7 @@ export default function BlogPostTabs(props: Props) {
             <Tab
               key={tabId}
               value={tabId}
-              label={tabLabel as string}
+              label={typeof tabLabel === 'string' ? tabLabel : '[None]'}
               id={`tab-${tabUniqueId}`}
               aria-controls={`tabpanel-${tabUniqueId}`}
             />

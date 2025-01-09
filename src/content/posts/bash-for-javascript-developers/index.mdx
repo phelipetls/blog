@@ -47,7 +47,7 @@ familiar programming language to most developers, JavaScript.
 
 Let's start with the "Hello World" program in both languages:
 
-<Tabs client:visible id="hello-world">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -199,7 +199,7 @@ up eventually.
 
 Here's how to create a variable in Bash.
 
-<Tabs client:visible id="variables">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -247,7 +247,7 @@ bar
 
 Here's how to do string interpolation:
 
-<Tabs client:visible id="string-interpolation">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -309,7 +309,7 @@ value.
 For example, the syntax `${parameter:-word}` allows you to use `word` as a
 default value in case `$parameter` is unset or null:
 
-<Tabs client:visible id="default-values">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -449,7 +449,7 @@ $ false && echo "I won't be executed"
 We could also execute a fallback command in case the previous command failed
 with the control operator `||`:
 
-<Tabs client:visible id="logical-or">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -503,7 +503,7 @@ string `foo` is inside `$bar`.
 
 Here are some common ways to compare two numbers:
 
-<Tabs client:visible id="conditionals-numbers">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -590,7 +590,7 @@ by Greg's Wiki article [Conditional Blocks (if, test and
 
 And here are some common ways to compare strings, including regex:
 
-<Tabs client:visible id="conditionals-string">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -666,7 +666,7 @@ more about globs here](https://mywiki.wooledge.org/BashGuide/Patterns).
 
 Bash also has something more similar to `if` statements in JavaScript:
 
-<Tabs client:visible id="if-statement">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -709,7 +709,7 @@ my creativity is lacking right now, let's use the example in [MDN's
 documentation page about
 switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch).
 
-<Tabs client:visible id="switch-statement">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -755,7 +755,7 @@ Bash's `case` command looks more convenient than JavaScript switch statement
 though, for example, we don't need to reach for the ugly `switch (true)`
 pattern:
 
-<Tabs client:visible id="switch-true-pattern">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -807,7 +807,7 @@ but we'll just cover `for` here.
 
 Let's start by counting from number `0` to `n`:
 
-<Tabs client:visible id="for-loop">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -868,7 +868,7 @@ done
 
 Bash has arrays too:
 
-<Tabs client:visible id="arrays">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -914,7 +914,7 @@ them like a key-value pair collection.
 I still have to find usage for them as a JavaScript developer that occasionally
 has to deal with Bash, but let's look how to use them anyway:
 
-<Tabs client:visible id="associative-arrays">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -957,7 +957,7 @@ able to distinguish it from simply being an array of strings.
 Let's combine what we've learned so far and implement Fizz buzz in both Bash
 and JavaScript.
 
-<Tabs client:visible id="fizzbuzz">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -1009,7 +1009,7 @@ parameters, only positional parameters, accessible via special parameters `$1`,
 
 Let's refactor our Fizz buzz implementation to illustrate how to use functions:
 
-<Tabs client:visible id="fizzbuzz-with-functions">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -1173,7 +1173,7 @@ more dynamic place, depending on your OS or node version manager.
 A Bash script may take arguments to accomplish a task. Here's how we can handle
 them in Bash and Node.js:
 
-<Tabs client:visible id="script-args">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -1205,7 +1205,7 @@ console.log(`All arguments: ${process.argv.join(' ')}`)
 
 Let's modify our Fizz buzz implementation to get `n` from `stdin`:
 
-<Tabs client:visible id="fizzbuzz-from-stdin">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -1287,7 +1287,7 @@ If we wish to handle this signal differently, we can use the `trap` builtin
 command. For example, here's a script that forever echoes "Loading...", but
 upon interruption it says goodbye and exit.
 
-<Tabs client:visible id="signals">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 
@@ -1353,7 +1353,7 @@ pipeline.
 For example, we can combine the `echo` and `cut` command to get the second
 field from a comma-delimited string:
 
-<Tabs client:visible id="echo-and-cut">
+<Tabs client:visible>
   <Fragment slot="tab:bash">Bash</Fragment>
   <Fragment slot="tab:js">JavaScript</Fragment>
 

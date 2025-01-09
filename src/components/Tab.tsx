@@ -8,19 +8,10 @@ export type TabProps = Omit<
   value: string
   label: React.ReactNode
   selected?: boolean
-  onChange?: (value: string) => void
 }
 
 export default function Tab(props: TabProps) {
-  const {
-    label,
-    selected = false,
-    value,
-    onChange,
-    onClick,
-    className,
-    ...rest
-  } = props
+  const { label, selected = false, className, ...rest } = props
 
   return (
     <button
@@ -42,15 +33,6 @@ export default function Tab(props: TabProps) {
           className
         )
       )}
-      onClick={(event) => {
-        if (!selected && onChange) {
-          onChange(value)
-        }
-
-        if (onClick) {
-          onClick(event)
-        }
-      }}
       {...rest}
     >
       {label}

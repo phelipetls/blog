@@ -6,23 +6,22 @@ test.describe('Tabs', () => {
   }) => {
     await page.goto('/posts/bash-for-javascript-developers')
 
-    const firstTablist = page.getByRole('tablist').first()
-    const selectedTab = firstTablist.getByRole('tab', { selected: true })
-    await selectedTab.scrollIntoViewIfNeeded()
-    await selectedTab.focus()
+    await page.getByRole('tablist').first().scrollIntoViewIfNeeded()
 
-    const selectedTabPanelId =
-      (await selectedTab.getAttribute('aria-controls')) ?? ''
-    await expect(page.locator(`#${selectedTabPanelId}`)).toBeVisible()
+    await expect(page.getByRole('tab', { selected: true }).first()).toHaveText(
+      'Bash'
+    )
+    await expect(page.getByRole('tabpanel').first()).toContainText(
+      'echo Hello World'
+    )
 
-    const unselectedTab = firstTablist.getByRole('tab', { selected: false })
-    const unselectedTabPanelId =
-      (await unselectedTab.getAttribute('aria-controls')) ?? ''
-    await expect(page.locator(`#${unselectedTabPanelId}`)).not.toBeVisible()
-
-    await unselectedTab.click()
-    await expect(page.locator(`#${unselectedTabPanelId}`)).toBeVisible()
-    await expect(page.locator(`#${selectedTabPanelId}`)).not.toBeVisible()
+    await page.getByRole('tab', { name: 'JavaScript' }).first().click()
+    await expect(page.getByRole('tab', { selected: true }).first()).toHaveText(
+      'JavaScript'
+    )
+    await expect(page.getByRole('tabpanel').first()).toContainText(
+      'console.log("Hello World")'
+    )
   })
 
   test('should support keyboard navigation', async ({ page }) => {

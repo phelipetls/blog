@@ -86,7 +86,10 @@ export default function Tabs(props: Props) {
 
     return React.cloneElement(child, {
       selected,
-      onChange: props.onChange,
+      onClick: () => {
+        console.log('clicked')
+        props.onChange(child.props.value)
+      },
       onKeyDown: handleKeyDown,
     })
   })

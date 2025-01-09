@@ -25,6 +25,9 @@ jobs:
       - name: Check for code quality issues
         run: npm run check
 
+      - name: Install playwright system deps
+        run: npx playwright install-deps
+
       - name: Install playwright browsers
         run: npx playwright install
 

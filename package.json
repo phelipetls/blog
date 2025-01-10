@@ -43,7 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "a11y-dialog": "^7.5.2",
-    "astro": "^5.1.1",
+    "astro": "^5.1.4",
     "astro-robots-txt": "^0.3.12",
     "astro-seo": "^0.6.1",
     "astro-toc": "^0.1.3",

@@ -55,7 +55,7 @@ const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
       <RssButton locale={locale} />
     </div>
 
-    <div class='col-full grid grid-cols-layout'>
+    <div>
       {
         years.map((year, index) => {
           const prevYear: string | null = years[index - 1] ?? null
@@ -67,14 +67,11 @@ const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
           }
 
           return (
-            <div class='group col-full grid grid-cols-layout'>
+            <div class='group'>
               <div class='sr-only' id={year} />
 
               <div
                 class:list={[
-                  'col-full',
-                  'grid',
-                  'grid-cols-layout',
                   'sticky',
                   'top-[calc(var(--nav-height)_+_0.5rem)]',
                   'w-full',

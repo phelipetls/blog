@@ -1,13 +1,11 @@
 ---
 import CopyCodeBlockButton from '@components/CopyCodeBlockButton'
-import DevIcon from '@components/DevIcon.astro'
-import type { DevIconName } from '@components/DevIcon.astro'
+import DevIcon, { DevIcons } from '@components/DevIcon.astro'
 import { useTranslate } from '@utils/i18n/useTranslate'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
 import '@assets/css/twoslash.css'
 import IconButton from './IconButton'
-import { isDevIcon } from '@utils/devicons'
 import _ from 'lodash'
 import shiki from 'shiki'
 import {
@@ -125,20 +123,21 @@ if (twoslash) {
   codeBlockHtml = toHtml(h('code', {}, syntaxHighlightedCode) as Nodes)
 }
 
-function getDevIconNameByShikiLang(lang: Lang) {
-  const shikiLangToDevIconName: Partial<Record<Lang, DevIconName>> = {
-    jsx: 'Javascript',
-    tsx: 'Typescript',
-    js: 'Javascript',
-    ts: 'Typescript',
-    shell: 'Bash',
+function getDevIconName(lang: Lang): keyof typeof DevIcons | null {
+  if (lang in DevIcons) {
+    return lang as keyof typeof DevIcons
+  }
+
+  const shikiLangToDevIconName: Partial<Record<Lang, keyof typeof DevIcons>> = {
+    jsx: 'javascript',
+    tsx: 'typescript',
+    js: 'javascript',
+    ts: 'typescript',
+    shell: 'bash',
   }
 
   if (lang in shikiLangToDevIconName) {
-    return (
-      shikiLangToDevIconName[lang as keyof typeof shikiLangToDevIconName] ??
-      null
-    )
+    return shikiLangToDevIconName[lang] ?? null
   }
 
   return null
@@ -168,11 +167,7 @@ function getShikiLangName(lang: Lang) {
 
 const langName = getShikiLangName(Astro.props.lang) || Astro.props.lang
 
-const langComponentName = _.upperFirst(Astro.props.lang)
-
-const devIconName = isDevIcon(langComponentName)
-  ? langComponentName
-  : lang !== 'plaintext' && getDevIconNameByShikiLang(lang)
+const devIconName = getDevIconName(Astro.props.lang)
 ---
 
 <style
@@ -199,7 +194,7 @@ const devIconName = isDevIcon(langComponentName)
     <div
       class:list={['flex', 'pl-horizontal-padding', 'items-center', 'gap-2']}
     >
-      {devIconName && <DevIcon name={devIconName} />}
+      {devIconName !== null && <DevIcon name={devIconName} />}
 
       <div class:list={['rtl', 'truncate', 'text-lg']}>
         {
@@ -223,7 +218,7 @@ const devIconName = isDevIcon(langComponentName)
             target='_blank'
             className='[&_svg_*]:fill-[var(--code-fg)]'
           >
-            <DevIcon name='Typescript' />
+            <DevIcon name='typescript' />
           </IconButton>
         )
       }

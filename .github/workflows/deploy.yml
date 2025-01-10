@@ -19,9 +19,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Generate dev icons
-        run: npm run generate-devicons
-
       - name: Check for code quality issues
         run: npm run check
 

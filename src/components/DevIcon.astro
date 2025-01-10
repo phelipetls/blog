@@ -1,15 +1,59 @@
 ---
-import * as DevIcons from './devicons'
+import CIcon from '@assets/devicons/c.svg'
+import AnsibleIcon from '@assets/devicons/ansible.svg'
+import AppleIcon from '@assets/devicons/apple.svg'
+import BashIcon from '@assets/devicons/bash.svg'
+import CssIcon from '@assets/devicons/css.svg'
+import FedoraIcon from '@assets/devicons/fedora.svg'
+import GitIcon from '@assets/devicons/git.svg'
+import HtmlIcon from '@assets/devicons/html.svg'
+import JavaIcon from '@assets/devicons/java.svg'
+import JavascriptIcon from '@assets/devicons/javascript.svg'
+import LinuxIcon from '@assets/devicons/linux.svg'
+import LuaIcon from '@assets/devicons/lua.svg'
+import NodeIcon from '@assets/devicons/node.svg'
+import PythonIcon from '@assets/devicons/python.svg'
+import RIcon from '@assets/devicons/r.svg'
+import ReactIcon from '@assets/devicons/react.svg'
+import StorybookIcon from '@assets/devicons/storybook.svg'
+import TypescriptIcon from '@assets/devicons/typescript.svg'
+import UbuntuIcon from '@assets/devicons/ubuntu.svg'
+import VimIcon from '@assets/devicons/vim.svg'
 
-export type DevIconName = keyof typeof DevIcons
+export const DevIcons = {
+  c: CIcon,
+  ansible: AnsibleIcon,
+  apple: AppleIcon,
+  macos: AppleIcon,
+  bash: BashIcon,
+  css: CssIcon,
+  fedora: FedoraIcon,
+  git: GitIcon,
+  html: HtmlIcon,
+  java: JavaIcon,
+  javascript: JavascriptIcon,
+  linux: LinuxIcon,
+  lua: LuaIcon,
+  node: NodeIcon,
+  python: PythonIcon,
+  r: RIcon,
+  react: ReactIcon,
+  'react native': ReactIcon,
+  storybook: StorybookIcon,
+  typescript: TypescriptIcon,
+  ubuntu: UbuntuIcon,
+  vim: VimIcon,
+  nvim: VimIcon,
+} as const;
 
 type Props = {
+  name: keyof typeof DevIcons
+  size?: number | string
   class?: string
-  name: DevIconName
 }
+const { name, ...rest } = Astro.props
 
-const { name, class: className } = Astro.props
 const DevIconComponent = DevIcons[name]
 ---
 
-<DevIconComponent className={className} />
+<DevIconComponent {...rest} />

@@ -11,7 +11,6 @@
     "preview": "astro preview",
     "test": "playwright test",
     "generate-posts-images": "node ./scripts/generate-posts-images.mjs",
-    "generate-devicons": "svgr --icon 1em --typescript --jsx-runtime automatic --index-template ./src/assets/svgs/devicons/index-template.js --svgo-config ./src/assets/svgs/devicons/svgo.config.js --out-dir ./src/components/devicons src/assets/svgs/devicons",
     "postinstall": "npx patch-package && npx astro sync",
     "prepare": "husky install"
   },
@@ -31,7 +30,6 @@
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/source-sans-pro": "^5.0.1",
     "@playwright/test": "^1.49.1",
-    "@svgr/cli": "^8.1.0",
     "@types/eslint": "^9.6.1",
     "@types/hast": "^3.0.4",
     "@types/lodash": "^4.14.194",

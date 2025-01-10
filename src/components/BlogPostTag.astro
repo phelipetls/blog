@@ -1,9 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import DevIcon from './DevIcon.astro'
-import type { DevIconName } from './DevIcon.astro'
-import _ from 'lodash'
-import { isDevIcon } from '@utils/devicons'
+import DevIcon, { DevIcons } from './DevIcon.astro'
 import type { Locale } from '@utils/i18n/locales'
 import { getRelativeLocaleUrl } from 'astro:i18n'
 
@@ -15,34 +12,19 @@ type Props = HTMLAttributes<'a'> & {
 }
 
 const { locale, tag, count, class: className = '' } = Astro.props
-
-let tagDevIconName: DevIconName | null = null
-
-const tagComponentName = _.upperFirst(tag)
-if (isDevIcon(tagComponentName)) {
-  tagDevIconName = tagComponentName
-} else {
-  const tagToIconName: Record<string, DevIconName> = {
-    'react native': 'React',
-    nvim: 'Vim',
-    macos: 'Apple',
-  }
-
-  tagDevIconName = tagToIconName[tag] ?? null
-}
 ---
 
 <a
   class:list={[
     'inline-flex gap-2 w-fit items-center justify-center rounded-full border border-divider bg-surface px-4 no-underline shadow-sm shadow-shadow transition-colors duration-300 hover:border-divider hover:bg-hover whitespace-nowrap [&_svg]:w-[1em] [&_svg]:h-[1em]',
-    tagDevIconName ? 'order-1' : 'order-2',
+    tag in DevIcons ? 'order-1' : 'order-2',
     className,
   ]}
   href={tag === '...'
     ? getRelativeLocaleUrl(locale, '/tags')
     : getRelativeLocaleUrl(locale, `/tags/${tag}`)}
 >
-  {tagDevIconName !== null && <DevIcon name={tagDevIconName} />}
+  {tag in DevIcons && <DevIcon name={tag as keyof typeof DevIcons} />}
 
   {tag}
 

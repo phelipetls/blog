@@ -15,6 +15,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
 <div
   style={{
     '--cols': hasStartIcon ? 3 : 2,
+    '--select-padding': '24px',
   }}
   class:list={[
     'px-1 rounded items-center grid auto-cols-max justify-between',
@@ -34,7 +35,9 @@ const hasStartIcon = Astro.slots.has('start-icon')
       'row-start-1',
       'col-start-1',
       'col-end-4',
-      hasStartIcon ? 'px-[24px]' : 'pr-[24px]',
+      hasStartIcon
+        ? 'px-[var(--select-padding)]'
+        : 'pr-[var(--select-padding)]',
     ]}
     {...rest}
   >

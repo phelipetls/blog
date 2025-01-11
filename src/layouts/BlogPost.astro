@@ -318,13 +318,9 @@ const tocWouldBeEmpty = headings.length === 0
 </Site>
 
 <script>
-  const blogPostContainer = document.querySelector(
-    '[data-blog-post-container]'
-  ) as HTMLElement
+  const blogPostContainer = document.querySelector('[data-blog-post-container]')
 
-  const toggleTocButton = document.querySelector(
-    '[data-toggle-toc]'
-  ) as HTMLElement
+  const toggleTocButton = document.querySelector('[data-toggle-toc]')
 
   const tocContainer = document.querySelector('[data-blog-post-toc-container]')
 
@@ -338,24 +334,38 @@ const tocWouldBeEmpty = headings.length === 0
   }
 
   function openToc() {
-    blogPostContainer?.setAttribute('data-toc', 'open')
-    localStorage.setItem('__preferred_toc_state', 'open')
-    toggleTocButton.setAttribute(
-      'aria-label',
-      toggleTocButton.dataset.closedTocLabel ?? ''
-    )
+    if (
+      blogPostContainer instanceof HTMLElement &&
+      toggleTocButton instanceof HTMLButtonElement
+    ) {
+      blogPostContainer.setAttribute('data-toc', 'open')
+      localStorage.setItem('__preferred_toc_state', 'open')
+      toggleTocButton.setAttribute(
+        'aria-label',
+        toggleTocButton.dataset.closedTocLabel ?? ''
+      )
+    }
   }
 
   function closeToc() {
-    blogPostContainer?.setAttribute('data-toc', 'closed')
-    localStorage.setItem('__preferred_toc_state', 'closed')
-    toggleTocButton.setAttribute(
-      'aria-label',
-      toggleTocButton.dataset.openTocLabel ?? ''
-    )
+    if (
+      blogPostContainer instanceof HTMLElement &&
+      toggleTocButton instanceof HTMLButtonElement
+    ) {
+      blogPostContainer.setAttribute('data-toc', 'closed')
+      localStorage.setItem('__preferred_toc_state', 'closed')
+      toggleTocButton.setAttribute(
+        'aria-label',
+        toggleTocButton.dataset.openTocLabel ?? ''
+      )
+    }
   }
 
   toggleTocButton?.addEventListener('click', () => {
+    if (!(blogPostContainer instanceof HTMLDivElement)) {
+      return
+    }
+
     const tocIsOpen = blogPostContainer.dataset.toc === 'open'
 
     if (tocIsOpen) {

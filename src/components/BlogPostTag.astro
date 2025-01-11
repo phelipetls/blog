@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'astro/types'
 import DevIcon, { DevIcons } from './DevIcon.astro'
 import type { Locale } from '@utils/i18n/locales'
 import { getRelativeLocaleUrl } from 'astro:i18n'
+import { Tag } from 'lucide-react'
 
 type Props = HTMLAttributes<'a'> & {
   locale: Locale
@@ -24,7 +25,7 @@ const { locale, tag, count, class: className = '' } = Astro.props
     ? getRelativeLocaleUrl(locale, '/tags')
     : getRelativeLocaleUrl(locale, `/tags/${tag}`)}
 >
-  {tag in DevIcons && <DevIcon name={tag as keyof typeof DevIcons} />}
+  {tag in DevIcons ? <DevIcon name={tag as keyof typeof DevIcons} /> : <Tag />}
 
   {tag}
 

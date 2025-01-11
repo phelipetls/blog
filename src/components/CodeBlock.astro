@@ -194,7 +194,7 @@ const devIconName = getDevIconName(Astro.props.lang)
     <div
       class:list={['flex', 'pl-horizontal-padding', 'items-center', 'gap-2']}
     >
-      {devIconName !== null && <DevIcon name={devIconName} />}
+      {devIconName !== null && <DevIcon size='1em' name={devIconName} />}
 
       <div class:list={['rtl', 'truncate', 'text-lg']}>
         {
@@ -209,7 +209,7 @@ const devIconName = getDevIconName(Astro.props.lang)
       </div>
     </div>
 
-    <div class='ml-auto flex flex-row gap-2 [&_svg]:h-6 [&_svg]:w-6 pr-2'>
+    <div class='ml-auto flex flex-row gap-2 pr-2'>
       {
         typescriptPlaygroundURL && (
           <IconButton
@@ -218,7 +218,7 @@ const devIconName = getDevIconName(Astro.props.lang)
             target='_blank'
             className='[&_svg_*]:fill-[var(--code-fg)]'
           >
-            <DevIcon name='typescript' />
+            <DevIcon size='24px' name='typescript' />
           </IconButton>
         )
       }

@@ -28,9 +28,9 @@ const { locale, tag, count, class: className = '' } = Astro.props
   {
     tag in DevIcons ? (
       <DevIcon size='1em' name={tag as keyof typeof DevIcons} />
-    ) : (
+    ) : tag !== '...' ? (
       <Tag size='1em' />
-    )
+    ) : null
   }
 
   {tag}

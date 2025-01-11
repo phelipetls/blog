@@ -19,6 +19,11 @@ import StorybookIcon from '@assets/devicons/storybook.svg'
 import TypescriptIcon from '@assets/devicons/typescript.svg'
 import UbuntuIcon from '@assets/devicons/ubuntu.svg'
 import VimIcon from '@assets/devicons/vim.svg'
+import DockerIcon from '@assets/devicons/docker.svg'
+import GitHub from '@assets/devicons/github.svg'
+import Android from '@assets/devicons/android.svg'
+import Flask from '@assets/devicons/flask.svg'
+import Eslint from '@assets/devicons/eslint.svg'
 
 export const DevIcons = {
   c: CIcon,
@@ -44,7 +49,12 @@ export const DevIcons = {
   ubuntu: UbuntuIcon,
   vim: VimIcon,
   nvim: VimIcon,
-} as const;
+  docker: DockerIcon,
+  'github actions': GitHub,
+  android: Android,
+  flask: Flask,
+  eslint: Eslint,
+}
 
 type Props = {
   name: keyof typeof DevIcons

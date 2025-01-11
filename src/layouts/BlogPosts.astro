@@ -47,7 +47,7 @@ const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
       ],
     },
   }}
-  htmlClass='scroll-smooth scroll-pt-[var(--nav-height)] sm:scroll-pt-0'
+  htmlClass='scroll-smooth scroll-pt-nav-height sm:scroll-pt-0'
 >
   <main class='grid grid-cols-layout'>
     <div class='sm:mb-8 hidden sm:gap-2 sm:flex sm:items-end'>
@@ -73,7 +73,7 @@ const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
               <div
                 class:list={[
                   'sticky',
-                  'top-[calc(var(--nav-height)_+_0.5rem)]',
+                  'top-nav-height',
                   'w-full',
                   'bg-background/90',
                   'backdrop-blur-sm',

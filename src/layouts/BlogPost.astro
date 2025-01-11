@@ -123,7 +123,7 @@ const tocWouldBeEmpty = headings.length === 0
 
           {
             blogPost.data.tags && (
-              <div class='mb-4 flex max-w-lg flex-wrap gap-2'>
+              <div class='mb-4 flex max-w-xl flex-wrap gap-2'>
                 {blogPost.data.tags.map((tag) => {
                   return <BlogPostTag locale={locale} tag={tag} />
                 })}

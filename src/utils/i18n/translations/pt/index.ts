@@ -46,4 +46,5 @@ export const pt = {
   CloseToc: 'Fechar tabela de conteúdo',
   NoName: '[Sem nome]',
   LinkToSourceLabel: 'Código fonte',
+  LinkToTypeScriptPlaygroundIconAriaLabel: 'Abrir Playground de TypeScript',
 }

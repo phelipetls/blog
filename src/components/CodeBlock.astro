@@ -217,6 +217,7 @@ const devIconName = getDevIconName(Astro.props.lang)
             href={typescriptPlaygroundURL}
             target='_blank'
             className='[&_svg_*]:fill-[var(--code-fg)]'
+            aria-label={t['LinkToTypeScriptPlaygroundIconAriaLabel']}
           >
             <DevIcon size='24px' name='typescript' />
           </IconButton>

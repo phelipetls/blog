@@ -46,4 +46,5 @@ export const en = {
   CloseToc: 'Close table of contents',
   NoName: '[No name]',
   LinkToSourceLabel: 'Source code',
+  LinkToTypeScriptPlaygroundIconAriaLabel: 'Open TypeScript Playground',
 }

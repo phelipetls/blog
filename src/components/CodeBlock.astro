@@ -65,7 +65,7 @@ if (twoslash) {
   const twoslashHtml = renderCodeToHTML(
     twoslashResults.code,
     twoslashResults.extension,
-    { title, highlight, twoslash: true },
+    { title, highlight: JSON.parse(highlight), twoslash: true },
     {
       themeName: THEME,
     },

@@ -1,0 +1,153 @@
+---
+title: Mutually exclusive React component props with TypeScript
+date: 2025-01-21
+tags: [react, typescript]
+draft: true
+---
+
+Let's say we need to build a component that may accept one prop or the other,
+but not both simultaneously. How could we ensure this at the type-level?
+
+A practical example is a component that can have either controlled or
+uncontrolled state, but not both.
+
+A controlled `Checkbox`, for example, needs to have both a `checked` and an
+`onChange` prop.
+
+An uncontrolled `Checkbox` would be the default behavior, optionally accepting a
+`defaultChecked` for the initial state value or `onChange`.
+
+But `defaultChecked` and `checked` should not be accepted if passed
+simultaneously, since a component state can't be controlled and uncontrolled at
+the same time.
+
+Our solution will involve implementing an
+[XOR-like](https://en.wikipedia.org/wiki/Exclusive_or) logical operator at the
+type-level:
+
+```ts
+type CheckboxProps = XOR<
+  | {
+      checked: boolean
+      onChange: (checked: boolean) => void
+    }
+  | {
+      defaultChecked?: boolean
+      onChange?: (checked: boolean) => void
+    }
+>
+
+function Checkbox(props: CheckboxProps) {
+  // ...
+}
+
+function App() {
+  return (
+    <>
+      <Checkbox checked defaultChecked /> // ❌ Error: Cannot mix controlled and uncontrolled
+    </>
+  )
+}
+```
+
+# The Naive Approach: Optional Props
+
+The simplest solution might be to make all props optional:
+
+```ts {3-7}
+import { useState } from 'react'
+
+type Props = {
+  checked?: boolean
+  onChange?: () => void
+  defaultChecked?: boolean
+}
+
+function Checkbox(props: Props) {
+  return <input type='checkbox' {...props} />
+}
+
+function App() {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <>
+      <Checkbox checked={checked} onChange={() => setChecked(!checked)} />
+      <Checkbox defaultChecked />
+    </>
+  )
+}
+```
+
+However, this approach has significant drawbacks. Even though it will compile
+and run without errors, it fails to catch several invalid prop combinations at
+compile time:
+
+```tsx twoslash {8-9}
+import { useState } from 'react'
+
+type Props = {
+  checked?: boolean
+  onChange?: React.ComponentPropsWithoutRef<'input'>['onChange']
+  defaultChecked?: boolean
+}
+
+function Checkbox(props: Props) {
+  return <input type='checkbox' {...props} />
+}
+
+// ---cut---
+
+function App() {
+  const [checked, setChecked] = useState(false)
+
+  return (
+    <>
+      {/* These pass type checking but are logically invalid: */}
+      <Checkbox checked={checked} defaultChecked={true} />  // ❌ Cannot be both controlled and uncontrolled
+      <Checkbox checked={checked} />  // ❌ Missing onChange handler
+    </>
+  )
+}
+```
+
+# Unions
+
+```tsx twoslash {3-13}
+// @errors: 2322
+import { useState } from 'react'
+
+type Props =
+  | {
+      checked: boolean
+      onChange: React.ComponentPropsWithoutRef<'input'>['onChange']
+      defaultChecked?: undefined
+    }
+  | {
+      checked?: undefined
+      onChange?: React.ComponentPropsWithoutRef<'input'>['onChange']
+      defaultChecked?: boolean
+    }
+
+function Checkbox(props: Props) {
+  return <input type='checkbox' {...props} />
+}
+
+function App() {
+  const [checked, setChecked] = useState(false)
+
+  const handleChange = () => setChecked(!checked)
+
+  return (
+    <>
+      <Checkbox /> // ✅ Valid uncontrolled
+      <Checkbox defaultChecked={true} /> // ✅ Valid uncontrolled with default
+      <Checkbox checked={checked} onChange={e => setChecked(e.target.checked)} /> // ✅ Valid controlled
+
+      {/* TypeScript errors: */}
+      <Checkbox checked={checked} defaultChecked onChange={e => setChecked(e.target.checked)} /> // ❌ Error: Cannot mix controlled and uncontrolled
+      <Checkbox checked={checked} /> // ❌ Error: Missing onChange handler
+    </>
+  )
+}
+```

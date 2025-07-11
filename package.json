@@ -88,8 +88,7 @@
     "rehype-slug": "^6.0.0",
     "remark-directive": "^2.0.1",
     "remark-math": "^6.0.0",
-    "shiki": "^0.14.5",
-    "shiki-twoslash": "^3.1.2",
+    "shiki": "^3.7.0",
     "tailwind-merge": "^1.12.0",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.7.2",
@@ -97,5 +96,8 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@shikijs/twoslash": "^3.7.0"
   }
 }

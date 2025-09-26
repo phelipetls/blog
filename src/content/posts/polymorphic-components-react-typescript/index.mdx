@@ -23,7 +23,9 @@ HTML tag used by a React component via props:
 This is easy to do if we're just using JavaScript and do not care about
 type-safety:
 
-```jsx twoslash
+```tsx twoslash
+import React from 'react'
+// ---cut---
 const Typography = ({ as: Component = 'span' }) => {
   return <Component />
 }
@@ -64,6 +66,8 @@ What should be a type that accepts only valid HTML tags? Fortunately
 `@types/react` already provides us with such a type: `React.ElementType`:
 
 ```tsx twoslash {1-3,5,11-12}
+import React from 'react'
+// ---cut---
 type TypographyProps = {
   as?: React.ElementType
 }
@@ -90,6 +94,8 @@ the component will be a `span` element, so it should not accept `htmlFor`.
 To do this, we will need to use a generic type:
 
 ```tsx twoslash {2,4-6,8-11}
+import React from 'react'
+// ---cut---
 // TODO: implement PropsOf
 type PropsOf<T> = {}
 
@@ -126,6 +132,8 @@ Fortunately, there is a type already for this:
 `React.ComponentPropsWithoutRef`.
 
 ```tsx twoslash {1,18-25}
+import React from 'react'
+// ---cut---
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
 
 type TypographyProps<T extends React.ElementType = React.ElementType> = {
@@ -164,6 +172,8 @@ For instance, imagine we want to create a link using `Link` from
 `react-router-dom` or `next/link`.
 
 ```tsx twoslash
+import React from 'react'
+
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
 
 type TypographyProps<T extends React.ElementType = React.ElementType> = {
@@ -179,7 +189,6 @@ export const Typography = <T extends React.ElementType = 'span'>({
 }
 
 // ---cut---
-
 // A mock Link component
 function Link(props: { to: string }) {
   return <a href={props.to} />
@@ -209,6 +218,8 @@ that element's type plus the component own props, while also handling potential
 conflicts between the two:
 
 ```tsx twoslash {3-18,31-32}
+import React from 'react'
+// ---cut---
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
 
 type PolymorphicProps<
@@ -304,6 +315,8 @@ To illustrate this, let's see how we're supposed to type a non-polymorphic
 component using the `forwardRef` with TypeScript:
 
 ```tsx twoslash {7}
+import React from 'react'
+// ---cut---
 import { forwardRef, useRef } from 'react'
 
 type TypographyProps = {
@@ -330,6 +343,8 @@ So we essentially need to bypass the `React.forwardRef` types and define the
 component types from scratch.
 
 ```tsx twoslash {1-12,23-25,27-37}
+import React, { useRef } from 'react'
+
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithRef<T>
 
 type PolymorphicRef<T extends React.ElementType> =
@@ -367,8 +382,6 @@ const Typography: TypographyComponent = React.forwardRef(
     return <Component ref={ref} {...rest} />
   }
 )
-
-import { useRef } from 'react'
 
 // @errors: 2322
 export default function App() {

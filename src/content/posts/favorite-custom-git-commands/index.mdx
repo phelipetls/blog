@@ -17,7 +17,7 @@ shell scripts.
 alias](https://github.com/phelipetls/dotfiles/blob/7b1d9f14debdeef1f1fd0b6603f1d116504ff1f3/.gitconfig#L29)
 to list the most recent branches:
 
-```plaintext
+```
 [alias]
   recent = branch -v --sort=-committerdate
 ```
@@ -28,7 +28,7 @@ It works by listing branches sorted by commit date, in descending order.
 
 `git undo` is an alias to undo the last commit:
 
-```plaintext
+```
 [alias]
   undo = reset --soft HEAD^
 ```
@@ -63,7 +63,7 @@ lot simpler.
 `git recommit` is an alias I use to make a commit while reusing the undone
 commit's message.
 
-```plaintext
+```
 [alias]
   recommit = commit --reedit-message ORIG_HEAD
 ```
@@ -98,7 +98,7 @@ spinoff`](https://github.com/nvie/git-toolbelt/blob/main/git-spinoff)!
 Its API is similar to `git checkout -b`, i.e. you need to pass the name of the
 new branch (and an optional base -- usually it'll be `main`).
 
-```plaintext
+```
 usage: git spinoff [-h] <new-name> [<base>]
 ```
 

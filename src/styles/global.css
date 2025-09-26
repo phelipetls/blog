@@ -199,16 +199,16 @@
     @apply border-divider border-t;
   }
 
-  :not(pre) > code {
-    @apply text-primary font-bold break-words;
-  }
-
   p > code {
     @apply text-sm;
   }
 
-  :not(pre) > code::before,
-  :not(pre) > code::after {
+  :is(p, h1, h2, h3, h4, h5, h6) > code {
+    @apply text-primary font-bold break-words;
+  }
+
+  :is(p, h1, h2, h3, h4, h5, h6) > code::before,
+  :is(p, h1, h2, h3, h4, h5, h6) > code::after {
     content: '\`';
   }
 
@@ -255,4 +255,15 @@
 button,
 [role='button'] {
   cursor: default;
+}
+
+.twoslash:hover .twoslash-hover {
+  border-color: currentColor;
+}
+
+.twoslash .twoslash-hover {
+  border-bottom: 1px dotted transparent;
+  transition-timing-function: ease;
+  transition: border-color 0.3s;
+  position: relative;
 }

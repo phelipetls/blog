@@ -203,7 +203,7 @@ function CustomSandpack(props: CustomSandpackProps) {
             <div
               className={clsx(
                 'absolute',
-                'right-3',
+                'right-5',
                 'top-3',
                 'space-x-2',
                 '*:transition-opacity',

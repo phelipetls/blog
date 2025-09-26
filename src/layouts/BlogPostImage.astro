@@ -1,5 +1,5 @@
 ---
-import '@assets/css/main.css'
+import '../styles/global.css'
 import { useTranslate } from '@utils/i18n/useTranslate'
 import BlogPostDate from '@components/BlogPostDate.astro'
 import BlogPostReadingTime from '@components/BlogPostReadingTime.astro'
@@ -32,7 +32,7 @@ const t = useTranslate(locale)
   </head>
 
   <body
-    class='h-full border-b-[8px] border-primary bg-background px-4 font-sans text-on-background'
+    class='h-full border-b-8 border-primary bg-background px-4 font-sans text-on-background'
   >
     <div class='flex h-full flex-col justify-center'>
       <div class='flex-1'></div>
@@ -54,7 +54,7 @@ const t = useTranslate(locale)
       <div class='flex-1'></div>
 
       <div class='flex flex-row items-center justify-center gap-6'>
-        <div class='flex-shrink-0'>
+        <div class='shrink-0'>
           <img
             class='rounded-full border border-divider'
             src={gravatarUrl}

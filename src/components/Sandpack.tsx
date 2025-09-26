@@ -148,12 +148,12 @@ function CustomSandpack(props: CustomSandpackProps) {
                 className={clsx(
                   'bg-surface',
                   'text-on-background',
-                  '[&[aria-selected=true]]:bg-[var(--sandpack-surface1)]',
-                  '[&[aria-selected=true]]:text-[var(--sandpack-accent)]',
-                  '[&[aria-selected=true]]:shadow-sm',
-                  '[&[aria-selected=true]]:shadow-shadow',
-                  'hover:bg-[var(--sandpack-surface3)]',
-                  'hover:text-[var(--sandpack-base)]',
+                  'aria-selected:bg-(--sandpack-surface1)',
+                  'aria-selected:text-(--sandpack-accent)',
+                  'aria-selected:shadow-xs',
+                  'aria-selected:shadow-shadow',
+                  'hover:bg-(--sandpack-surface3)',
+                  'hover:text-(--sandpack-base)',
                   'border-b-0',
                   'font-normal'
                 )}
@@ -182,18 +182,18 @@ function CustomSandpack(props: CustomSandpackProps) {
           `,
         }}
         className={clsx(
-          'max-sm:full-bleed shadow-sm shadow-shadow',
-          'lg:grid lg:grid-cols-2 lg:[grid-template-areas:_var(--column-template-areas)]',
-          'sm:rounded sm:rounded-tl-none',
-          'sm:[&_.sp-preview-container]:rounded-[inherit] sm:[&_.sp-preview]:rounded-[inherit] sm:[&_[data-preview]]:rounded-r',
-          'sm:[&_.sp-code-editor]:rounded-bl-[inherit] sm:[&_.sp-editor]:rounded-bl-[inherit] sm:[&_[data-editor]]:rounded-bl',
+          'max-sm:full-bleed shadow-xs shadow-shadow',
+          'lg:grid lg:grid-cols-2 lg:[grid-template-areas:var(--column-template-areas)]',
+          'sm:rounded-sm sm:rounded-tl-none',
+          'sm:[&_.sp-preview-container]:rounded-[inherit] sm:[&_.sp-preview]:rounded-[inherit] sm:**:data-preview:rounded-r',
+          'sm:[&_.sp-code-editor]:rounded-bl-[inherit] sm:[&_.sp-editor]:rounded-bl-[inherit] sm:**:data-editor:rounded-bl',
           shouldShowConsole &&
-            'sm:[&_[data-editor]]:rounded-bl-none sm:[&_[data-preview]]:rounded-br-none',
-          previewOnly && 'sm:rounded-tl sm:[&_[data-preview]]:rounded'
+            'sm:**:data-editor:rounded-bl-none sm:**:data-preview:rounded-br-none',
+          previewOnly && 'sm:rounded-tl sm:**:data-preview:rounded-sm'
         )}
       >
         {shouldShowCodeEditor && (
-          <div data-editor className='dark relative lg:[grid-area:_editor]'>
+          <div data-editor className='dark relative lg:[grid-area:editor]'>
             <SandpackCodeEditor
               className='peer max-h-[450px]'
               showTabs={false}
@@ -206,16 +206,16 @@ function CustomSandpack(props: CustomSandpackProps) {
                 'right-3',
                 'top-3',
                 'space-x-2',
-                '[&_[data-show-on-hover]]:transition-opacity',
-                '[&_[data-show-on-hover]]:duration-300',
-                '[&_[data-show-on-hover]]:opacity-0',
-                '[&_[data-show-on-hover]]:pointer-events-none',
-                '[&_[data-show-on-hover]]:peer-hover:opacity-100',
-                '[&_[data-show-on-hover]]:peer-hover:pointer-events-auto',
-                '[&_[data-show-on-hover]]:hover:opacity-100',
-                '[&_[data-show-on-hover]]:hover:pointer-events-auto',
-                '[&_[data-show-on-hover]]:focus-visible:opacity-100',
-                '[&_[data-show-on-hover]]:focus-visible:pointer-events-auto'
+                '**:data-show-on-hover:transition-opacity',
+                '**:data-show-on-hover:duration-300',
+                '**:data-show-on-hover:opacity-0',
+                '**:data-show-on-hover:pointer-events-none',
+                'peer-hover:**:data-show-on-hover:opacity-100',
+                'peer-hover:**:data-show-on-hover:pointer-events-auto',
+                'hover:**:data-show-on-hover:opacity-100',
+                'hover:**:data-show-on-hover:pointer-events-auto',
+                'focus-visible:**:data-show-on-hover:opacity-100',
+                'focus-visible:**:data-show-on-hover:pointer-events-auto'
               )}
             >
               <CopyCodeBlockButton
@@ -237,7 +237,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
         <div
           data-preview
-          className={clsx('relative', 'lg:[grid-area:_preview]')}
+          className={clsx('relative', 'lg:[grid-area:preview]')}
         >
           <noscript>
             <div className='px-horizontal-padding pt-3 text-on-background'>
@@ -275,7 +275,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'
                 aria-label='Open Sandbox'
-                className='rounded-full shadow-sm shadow-shadow'
+                className='rounded-full shadow-xs shadow-shadow'
                 startIcon={<Codesandbox />}
               >
                 {/* TODO: Internationalize this */}
@@ -289,7 +289,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                   resetLogs()
                 }}
                 aria-label='Refresh'
-                className='shadow-sm shadow-shadow'
+                className='shadow-xs shadow-shadow'
               >
                 <RefreshCw />
               </IconButton>
@@ -299,7 +299,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
         {shouldShowConsole && (
           <details
-            className='relative border-t border-divider lg:[grid-area:_console]'
+            className='relative border-t border-divider lg:[grid-area:console]'
             onToggle={(e) => {
               e.preventDefault()
               setLogsVisible(!logsVisible)
@@ -307,14 +307,14 @@ function CustomSandpack(props: CustomSandpackProps) {
           >
             <summary
               className={clsx(
-                `flex w-full list-none flex-row justify-start gap-2 bg-[var(--sandpack-surface1)] px-horizontal-padding py-2 text-[var(--sandpack-accent)] lg:rounded-b [&::marker]:hidden [&::webkit-details-marker]:hidden`,
+                `flex w-full list-none flex-row justify-start gap-2 bg-(--sandpack-surface1) px-horizontal-padding py-2 text-(--sandpack-accent) lg:rounded-b [&::marker]:hidden [&::webkit-details-marker]:hidden`,
                 logsVisible && 'lg:rounded-b-none'
               )}
             >
               <ChevronRight
                 className={clsx(
                   'ease transition-transform duration-300',
-                  logsVisible && 'rotate-[90deg]'
+                  logsVisible && 'rotate-90'
                 )}
               />{' '}
               Show console ({logsCount})
@@ -322,7 +322,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
             <div
               className={clsx(
-                `max-h-40 overflow-y-auto rounded-b bg-[var(--sandpack-surface1)] py-2 text-[var(--sandpack-base)]`
+                `max-h-40 overflow-y-auto rounded-b bg-(--sandpack-surface1) py-2 text-(--sandpack-base)`
               )}
             >
               {emptyLogs ? (
@@ -338,7 +338,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                   color='secondary'
                   onClick={resetLogs}
                   aria-label='Reset'
-                  className='shadow-sm shadow-shadow'
+                  className='shadow-xs shadow-shadow'
                   startIcon={<Trash />}
                 >
                   Clear logs

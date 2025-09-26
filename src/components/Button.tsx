@@ -51,11 +51,11 @@ export const Button: ButtonComponent = React.forwardRef(function InnerButton<
         'disabled:text-on-disabled',
         'disabled:hover:cursor-not-allowed',
         'disabled:hover:bg-disabled',
-        'rounded',
+        'rounded-sm',
         'whitespace-nowrap',
         size === 'normal' ? 'py-1 px-2' : 'py-2 px-4',
         {
-          ['bg-primary text-on-primary hover:bg-primary-hover shadow-sm shadow-shadow']:
+          ['bg-primary text-on-primary hover:bg-primary-hover shadow-xs shadow-shadow']:
             color === 'primary',
           ['bg-surface text-on-background']: color === 'secondary',
         },

@@ -30,7 +30,7 @@ const formattedDisplayDate = format(Astro.props.date, dateFormat, {
 ---
 
 <div class='flex items-center gap-2'>
-  <Calendar size='1.25em' className='flex-shrink-0' />
+  <Calendar size='1.25em' className='shrink-0' />
 
   <time datetime={format(Astro.props.date, 'yyyy-MM-dd')}>
     {formattedDisplayDate}

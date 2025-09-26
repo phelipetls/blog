@@ -1,0 +1,254 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@custom-variant data-toc-open (&[data-toc="open"]);
+@custom-variant data-toc-closed (&[data-toc="closed"]);
+
+@theme {
+  --font-*: initial;
+  --font-sans:
+    Source Sans Pro, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif:
+    Merriweather, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+
+  --container-1\/2: 50%;
+  --container-content: var(--content-max-width);
+
+  --shadow-t: 0 -1px 3px 0 rgb(0 0 0 / 0.1), 0 -1px 2px -1px rgb(0 0 0 / 0.1);
+
+  --z-index-1: 1;
+
+  --z-index--1: -1;
+
+  --spacing-horizontal-padding: var(--horizontal-padding);
+  --spacing-nav-height: var(--nav-height);
+
+  --grid-template-columns-layout: [full-start] 1fr [content-start]
+    calc(min(var(--content-max-width), 100%) - var(--horizontal-padding) * 2)
+    [content-end] 1fr [full-end];
+
+  --grid-column-content: content;
+  --grid-column-full: full;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-divider: var(--divider);
+  --color-shadow: var(--shadow);
+  --color-on-background: var(--on-background);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-hover: var(--hover);
+  --color-disabled: var(--disabled);
+  --color-on-disabled: var(--on-disabled);
+  --color-note: var(--note);
+  --color-warn: var(--warn);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility card {
+  @apply rounded-sm bg-surface shadow-xs shadow-shadow;
+}
+
+@utility card-none {
+  @apply rounded-none bg-background shadow-none;
+}
+
+@utility grid-cols-layout {
+  & > * {
+    @apply col-content;
+  }
+}
+
+@utility rtl {
+  direction: rtl;
+}
+
+@utility full-bleed {
+  @apply -mx-horizontal-padding;
+}
+
+@utility animate-react-icon-spin {
+  animation: react-spin 5s linear infinite;
+}
+
+@layer base {
+  :root {
+    --horizontal-padding: 1rem;
+    --content-max-width: 80rem;
+    --nav-height: 4rem;
+
+    --primary: var(--color-orange-500);
+    --primary-hover: var(--color-orange-600);
+    --on-primary: var(--color-stone-800);
+    --background: var(--color-stone-100);
+    --on-background: var(--color-stone-800);
+    --surface: var(--color-stone-200);
+    --hover: var(--color-stone-300);
+    --disabled: var(--background);
+    --on-disabled: var(--color-stone-400);
+    --divider: var(--color-stone-500);
+    --shadow: var(--color-stone-600);
+    --note: var(--color-blue-600);
+    --warn: var(--color-red-600);
+    color-scheme: light;
+  }
+
+  .dark {
+    --primary: var(--color-orange-300);
+    --primary-hover: var(--color-orange-200);
+    --on-primary: var(--color-neutral-800);
+    --background: var(--color-neutral-800);
+    --on-background: var(--color-neutral-200);
+    --surface: var(--color-neutral-700);
+    --hover: var(--color-neutral-600);
+    --disabled: var(--background);
+    --on-disabled: var(--color-neutral-700);
+    --divider: var(--color-neutral-500);
+    --shadow: var(--color-neutral-900);
+    --note: var(--color-blue-500);
+    --warn: var(--color-red-500);
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply mb-2 font-serif font-bold;
+  }
+
+  code {
+    @apply font-mono;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  p + p {
+    @apply mt-4;
+  }
+
+  ul,
+  ol {
+    @apply mb-4 ml-4 list-disc;
+  }
+
+  ul li::marker,
+  ol li::marker {
+    @apply text-primary;
+  }
+
+  ol {
+    @apply mb-4 ml-4 list-decimal;
+  }
+
+  blockquote {
+    @apply border-l border-divider pl-8;
+  }
+
+  kbd {
+    @apply inline-block whitespace-nowrap rounded-sm bg-surface px-2 py-1 font-bold leading-none text-on-background shadow-xs shadow-shadow;
+  }
+
+  hr {
+    @apply border-t border-divider;
+  }
+
+  :not(pre)>code {
+    @apply break-words text-sm font-bold text-primary;
+  }
+
+  :not(pre) > code::before,
+  :not(pre) > code::after {
+    content: '\`';
+  }
+
+  .footnotes hr {
+    @apply mb-4;
+  }
+}
+
+[data-preload] {
+  transition: none !important;
+}
+
+@keyframes tooltip-animation {
+  0% {
+    opacity: 0;
+    transform: rotate(-180deg);
+  }
+
+  10% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes react-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button,
+[role='button'] {
+  cursor: default;
+}

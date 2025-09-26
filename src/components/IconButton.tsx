@@ -42,7 +42,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
           {
             'min-w-[40px] h-[40px] flex justify-center items-center rounded-full px-2':
               props.variant === 'rounded-full',
-            'rounded border border-divider p-1 shadow-sm shadow-shadow':
+            'rounded-sm border border-divider p-1 shadow-xs shadow-shadow':
               props.variant === 'rounded',
           },
           props.className

@@ -58,7 +58,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
           {error ? <X /> : <Check />}
         </span>
       ) : (
-        <span className='text-[var(--code-fg)]'>
+        <span className='text-(--code-fg)'>
           <Clipboard />
         </span>
       )}

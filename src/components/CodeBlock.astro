@@ -4,7 +4,7 @@ import DevIcon, { DevIcons } from '@components/DevIcon.astro'
 import { useTranslate } from '@utils/i18n/useTranslate'
 import type { Lang } from 'shiki'
 import type { HTMLAttributes } from 'astro/types'
-import '@assets/css/twoslash.css'
+import '../styles/twoslash.css'
 import IconButton from './IconButton'
 import _ from 'lodash'
 import shiki from 'shiki'
@@ -190,8 +190,8 @@ const devIconName = getDevIconName(Astro.props.lang)
       'gap-2',
       'rounded-t',
       'py-1',
-      'bg-[var(--code-bg)]',
-      'text-[var(--code-fg)]',
+      'bg-(--code-bg)',
+      'text-(--code-fg)',
       'border-b',
       'border-divider',
     ]}
@@ -221,7 +221,7 @@ const devIconName = getDevIconName(Astro.props.lang)
             variant='rounded'
             href={typescriptPlaygroundURL}
             target='_blank'
-            className='[&_svg_*]:fill-[var(--code-fg)]'
+            className='[&_svg_*]:fill-(--code-fg)'
             aria-label={t['LinkToTypeScriptPlaygroundIconAriaLabel']}
           >
             <DevIcon size='24px' name='typescript' />
@@ -242,25 +242,25 @@ const devIconName = getDevIconName(Astro.props.lang)
     class:list={[
       'shiki',
       twoslash && 'twoslash',
-      'shadow-sm',
+      'shadow-xs',
       'shadow-shadow',
       'rounded-b',
       'overflow-x-auto',
-      'bg-[var(--code-bg)]',
-      'text-[var(--code-fg)]',
-      '[color-scheme:dark]',
+      'bg-(--code-bg)',
+      'text-(--code-fg)',
+      'scheme-dark',
       '[&_code]:py-4',
       '[&_code]:grid',
       '[&_code>.line]:px-horizontal-padding',
-      '[&_code>.line]:border-l-[2px]',
-      '[&_code>.line]:border-[var(--code-bg)]',
+      '[&_code>.line]:border-l-2',
+      '[&_code>.line]:border-(--code-bg)',
       '[&_code>.line.highlight]:bg-[#272115]',
       '[&_code>.line.highlight]:border-[#624710]',
       '[&_.error]:text-sm',
       '[&_.error]:px-8',
       '[&_.error]:py-1',
       '[&_.popover]:my-2',
-      '[&_.popover]:rounded-sm',
+      '[&_.popover]:rounded-xs',
       '[&_.popover]:bg-gray-700',
       '[&_.popover]:text-white',
       '[&_.arrow]:bg-gray-700',

@@ -80,7 +80,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
           )
         })}
 
-      <div className='h-[1px] [overflow-anchor:auto]' />
+      <div className='h-px [overflow-anchor:auto]' />
     </>
   )
 }

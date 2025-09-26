@@ -1,7 +1,6 @@
 import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -12,6 +11,7 @@ import { rehypeSyntaxHighlight } from './plugins/rehype-syntax-highlight'
 import { remarkReadingTime } from './plugins/remark-reading-time'
 import { remarkSummary } from './plugins/remark-summary'
 import { LOCALES } from './src/utils/i18n/locales'
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -47,8 +47,8 @@ export default defineConfig({
         },
       },
     }),
-    tailwind({
-      applyBaseStyles: false,
-    }),
   ],
+  vite: {
+    plugins: [tailwindcss()]
+  }
 })

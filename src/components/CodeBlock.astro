@@ -64,7 +64,7 @@ if (twoslash) {
 
   // Transform '1-3,5' into { '1-3': true, '5': true }
   const highlightedLinesObj = Object.fromEntries(
-    highlight.split(',').map((lineOrRange) => [lineOrRange, true])
+    highlight.split(',').map((lineOrRange) => [lineOrRange, true]),
   )
 
   const twoslashHtml = renderCodeToHTML(
@@ -75,7 +75,7 @@ if (twoslash) {
       themeName: THEME,
     },
     highlighter,
-    twoslashResults
+    twoslashResults,
   )
 
   const twoslashHast = fromHtml(twoslashHtml, { fragment: true })
@@ -119,9 +119,9 @@ if (twoslash) {
             return h(
               'span',
               token.color ? { style: `color: ${token.color}` } : {},
-              token.content
+              token.content,
             )
-          })
+          }),
     )
   })
 
@@ -274,7 +274,7 @@ const devIconName = getDevIconName(Astro.props.lang)
   import { computePosition, offset, flip } from '@floating-ui/dom'
 
   for (const lspElement of document.querySelectorAll<HTMLElement>(
-    '[data-codeblock] pre.twoslash data-lsp'
+    '[data-codeblock] pre.twoslash data-lsp',
   )) {
     lspElement.addEventListener('mouseover', async (e) => {
       if (!e.target) {
@@ -310,7 +310,7 @@ const devIconName = getDevIconName(Astro.props.lang)
         'text-left',
         'p-2',
         'text-sm',
-        'whitespace-pre-wrap'
+        'whitespace-pre-wrap',
       )
 
       document.body.append(tooltip)
@@ -323,7 +323,7 @@ const devIconName = getDevIconName(Astro.props.lang)
         },
         {
           once: true,
-        }
+        },
       )
     })
   }

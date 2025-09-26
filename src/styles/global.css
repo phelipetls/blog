@@ -73,11 +73,11 @@
 }
 
 @utility card {
-  @apply rounded-sm bg-surface shadow-xs shadow-shadow;
+  @apply bg-surface shadow-shadow rounded-sm shadow-xs;
 }
 
 @utility card-none {
-  @apply rounded-none bg-background shadow-none;
+  @apply bg-background rounded-none shadow-none;
 }
 
 @utility grid-cols-layout {
@@ -188,19 +188,19 @@
   }
 
   blockquote {
-    @apply border-l border-divider pl-8;
+    @apply border-divider border-l pl-8;
   }
 
   kbd {
-    @apply inline-block whitespace-nowrap rounded-sm bg-surface px-2 py-1 font-bold leading-none text-on-background shadow-xs shadow-shadow;
+    @apply bg-surface text-on-background shadow-shadow inline-block rounded-sm px-2 py-1 leading-none font-bold whitespace-nowrap shadow-xs;
   }
 
   hr {
-    @apply border-t border-divider;
+    @apply border-divider border-t;
   }
 
-  :not(pre)>code {
-    @apply break-words text-sm font-bold text-primary;
+  :not(pre) > code {
+    @apply text-primary text-sm font-bold break-words;
   }
 
   :not(pre) > code::before,

@@ -155,7 +155,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                   'hover:bg-(--sandpack-surface3)',
                   'hover:text-(--sandpack-base)',
                   'border-b-0',
-                  'font-normal'
+                  'font-normal',
                 )}
                 key={file}
                 value={file}
@@ -182,14 +182,14 @@ function CustomSandpack(props: CustomSandpackProps) {
           `,
         }}
         className={clsx(
-          'max-sm:full-bleed shadow-xs shadow-shadow',
+          'max-sm:full-bleed shadow-shadow shadow-xs',
           'lg:grid lg:grid-cols-2 lg:[grid-template-areas:var(--column-template-areas)]',
           'sm:rounded-sm sm:rounded-tl-none',
-          'sm:[&_.sp-preview-container]:rounded-[inherit] sm:[&_.sp-preview]:rounded-[inherit] sm:**:data-preview:rounded-r',
-          'sm:[&_.sp-code-editor]:rounded-bl-[inherit] sm:[&_.sp-editor]:rounded-bl-[inherit] sm:**:data-editor:rounded-bl',
+          'sm:**:data-preview:rounded-r sm:[&_.sp-preview]:rounded-[inherit] sm:[&_.sp-preview-container]:rounded-[inherit]',
+          'sm:**:data-editor:rounded-bl sm:[&_.sp-code-editor]:rounded-bl-[inherit] sm:[&_.sp-editor]:rounded-bl-[inherit]',
           shouldShowConsole &&
             'sm:**:data-editor:rounded-bl-none sm:**:data-preview:rounded-br-none',
-          previewOnly && 'sm:rounded-tl sm:**:data-preview:rounded-sm'
+          previewOnly && 'sm:rounded-tl sm:**:data-preview:rounded-sm',
         )}
       >
         {shouldShowCodeEditor && (
@@ -215,7 +215,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                 'hover:**:data-show-on-hover:opacity-100',
                 'hover:**:data-show-on-hover:pointer-events-auto',
                 'focus-visible:**:data-show-on-hover:opacity-100',
-                'focus-visible:**:data-show-on-hover:pointer-events-auto'
+                'focus-visible:**:data-show-on-hover:pointer-events-auto',
               )}
             >
               <CopyCodeBlockButton
@@ -240,7 +240,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           className={clsx('relative', 'lg:[grid-area:preview]')}
         >
           <noscript>
-            <div className='px-horizontal-padding pt-3 text-on-background'>
+            <div className='px-horizontal-padding text-on-background pt-3'>
               You need to enable JavaScript to preview the code.
             </div>
           </noscript>
@@ -256,7 +256,7 @@ function CustomSandpack(props: CustomSandpackProps) {
           />
 
           {!shouldAutorun && status !== 'running' && (
-            <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'>
+            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
               <Button
                 color='primary'
                 size='huge'
@@ -270,12 +270,12 @@ function CustomSandpack(props: CustomSandpackProps) {
           )}
 
           {status === 'running' && (
-            <div className='absolute bottom-3 right-3 flex items-stretch gap-2'>
+            <div className='absolute right-3 bottom-3 flex items-stretch gap-2'>
               <Button
                 as={UnstyledOpenInCodeSandboxButton}
                 color='secondary'
                 aria-label='Open Sandbox'
-                className='rounded-full shadow-xs shadow-shadow'
+                className='shadow-shadow rounded-full shadow-xs'
                 startIcon={<Codesandbox />}
               >
                 {/* TODO: Internationalize this */}
@@ -289,7 +289,7 @@ function CustomSandpack(props: CustomSandpackProps) {
                   resetLogs()
                 }}
                 aria-label='Refresh'
-                className='shadow-xs shadow-shadow'
+                className='shadow-shadow shadow-xs'
               >
                 <RefreshCw />
               </IconButton>
@@ -299,7 +299,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
         {shouldShowConsole && (
           <details
-            className='relative border-t border-divider lg:[grid-area:console]'
+            className='border-divider relative border-t lg:[grid-area:console]'
             onToggle={(e) => {
               e.preventDefault()
               setLogsVisible(!logsVisible)
@@ -307,14 +307,14 @@ function CustomSandpack(props: CustomSandpackProps) {
           >
             <summary
               className={clsx(
-                `flex w-full list-none flex-row justify-start gap-2 bg-(--sandpack-surface1) px-horizontal-padding py-2 text-(--sandpack-accent) lg:rounded-b [&::marker]:hidden [&::webkit-details-marker]:hidden`,
-                logsVisible && 'lg:rounded-b-none'
+                `px-horizontal-padding flex w-full list-none flex-row justify-start gap-2 bg-(--sandpack-surface1) py-2 text-(--sandpack-accent) lg:rounded-b [&::marker]:hidden [&::webkit-details-marker]:hidden`,
+                logsVisible && 'lg:rounded-b-none',
               )}
             >
               <ChevronRight
                 className={clsx(
                   'ease transition-transform duration-300',
-                  logsVisible && 'rotate-90'
+                  logsVisible && 'rotate-90',
                 )}
               />{' '}
               Show console ({logsCount})
@@ -322,7 +322,7 @@ function CustomSandpack(props: CustomSandpackProps) {
 
             <div
               className={clsx(
-                `max-h-40 overflow-y-auto rounded-b bg-(--sandpack-surface1) py-2 text-(--sandpack-base)`
+                `max-h-40 overflow-y-auto rounded-b bg-(--sandpack-surface1) py-2 text-(--sandpack-base)`,
               )}
             >
               {emptyLogs ? (
@@ -333,12 +333,12 @@ function CustomSandpack(props: CustomSandpackProps) {
             </div>
 
             {!emptyLogs && (
-              <div className='absolute right-horizontal-padding top-2 flex flex-row gap-2'>
+              <div className='right-horizontal-padding absolute top-2 flex flex-row gap-2'>
                 <Button
                   color='secondary'
                   onClick={resetLogs}
                   aria-label='Reset'
-                  className='shadow-xs shadow-shadow'
+                  className='shadow-shadow shadow-xs'
                   startIcon={<Trash />}
                 >
                   Clear logs

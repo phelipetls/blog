@@ -12,7 +12,7 @@ interface StaticPath {
 }
 
 export async function getBlogPostsTagsAsStaticPaths(
-  locale: Locale
+  locale: Locale,
 ): Promise<StaticPath[]> {
   const blogPosts = await getBlogPosts(locale)
   const tags = getBlogPostTags(blogPosts)

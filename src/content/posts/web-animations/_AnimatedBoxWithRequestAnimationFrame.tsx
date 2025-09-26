@@ -2,7 +2,7 @@ import Sandpack from '@components/Sandpack'
 import type { SandpackProps } from '@components/Sandpack'
 
 export default function AnimatedBoxWithRequestAnimationFrame(
-  props: SandpackProps
+  props: SandpackProps,
 ) {
   return (
     <Sandpack

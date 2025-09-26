@@ -22,7 +22,7 @@ const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
 })
 
 const years = Object.keys(blogPostsGroupedByYear).sort(
-  (yearA, yearB) => Number(yearB) - Number(yearA)
+  (yearA, yearB) => Number(yearB) - Number(yearA),
 )
 
 const t = useTranslate(locale)
@@ -58,7 +58,7 @@ const t = useTranslate(locale)
                 .sort(
                   (blogPostA, blogPostB) =>
                     blogPostB.data.date.getTime() -
-                    blogPostA.data.date.getTime()
+                    blogPostA.data.date.getTime(),
                 )
                 .map((blogPost) => {
                   return (
@@ -67,7 +67,7 @@ const t = useTranslate(locale)
                         class='flex flex-nowrap items-start gap-4'
                         href={getRelativeLocaleUrl(
                           locale,
-                          `/posts/${getBlogPostFolderName(blogPost)}`
+                          `/posts/${getBlogPostFolderName(blogPost)}`,
                         )}
                       >
                         <div class='flex min-w-[6ch] basis-2'>

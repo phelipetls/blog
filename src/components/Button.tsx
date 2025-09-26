@@ -19,7 +19,7 @@ type PolymorphicRef<T extends React.ElementType> =
 type PolymorphicProps<
   T extends React.ElementType = React.ElementType,
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  TProps = {}
+  TProps = {},
 > = {
   as?: T
 } & TProps &
@@ -29,11 +29,11 @@ export type ButtonProps<T extends React.ElementType = 'button'> =
   PolymorphicProps<T, CommonButtonProps>
 
 type ButtonComponent = <T extends React.ElementType = 'button'>(
-  props: PolymorphicProps<T, ButtonProps<T>>
+  props: PolymorphicProps<T, ButtonProps<T>>,
 ) => React.ReactElement | null
 
 export const Button: ButtonComponent = React.forwardRef(function InnerButton<
-  T extends React.ElementType = 'button'
+  T extends React.ElementType = 'button',
 >(props: ButtonProps<T>, ref: PolymorphicRef<T>) {
   const mergedClassName = useMemo(() => {
     const { color = 'primary', size = 'normal', className } = props
@@ -59,8 +59,8 @@ export const Button: ButtonComponent = React.forwardRef(function InnerButton<
             color === 'primary',
           ['bg-surface text-on-background']: color === 'secondary',
         },
-        className
-      )
+        className,
+      ),
     )
 
     return merged

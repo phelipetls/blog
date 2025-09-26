@@ -45,8 +45,8 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
             'rounded-sm border border-divider p-1 shadow-xs shadow-shadow':
               props.variant === 'rounded',
           },
-          props.className
-        )
+          props.className,
+        ),
       )
     }, [])
 
@@ -85,7 +85,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(
         className={className}
       />
     )
-  }
+  },
 )
 
 IconButton.displayName = 'IconButton'

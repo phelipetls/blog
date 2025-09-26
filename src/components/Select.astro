@@ -35,9 +35,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
       'row-start-1',
       'col-start-1',
       'col-end-4',
-      hasStartIcon
-        ? 'px-(--select-padding)'
-        : 'pr-(--select-padding)',
+      hasStartIcon ? 'px-(--select-padding)' : 'pr-(--select-padding)',
     ]}
     {...rest}
   >

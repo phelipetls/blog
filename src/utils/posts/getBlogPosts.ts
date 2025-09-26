@@ -4,7 +4,7 @@ import type { Locale } from '@utils/i18n/locales'
 const isProd = !import.meta.env.DEV
 
 export function getBlogPosts(
-  locale: Locale
+  locale: Locale,
 ): Promise<CollectionEntry<'posts'>[]> {
   if (locale === 'pt') {
     return getCollection('posts', (blogPost) => {

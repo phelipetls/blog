@@ -122,7 +122,7 @@ const tocItems = headings.map((heading) => ({
   }
 
   function getTocItemByHeading(
-    heading: HTMLHeadingElement
+    heading: HTMLHeadingElement,
   ): HTMLLIElement | null {
     const headingId = heading.getAttribute('id')
     const tocAnchorElem = toc?.querySelector(`li a[href="#${headingId}"]`)
@@ -177,7 +177,7 @@ const tocItems = headings.map((heading) => ({
     },
     {
       threshold: 1,
-    }
+    },
   )
 
   const headingsInBlogPost = blogPost.querySelectorAll('h2, h3, h4, h4, h6')

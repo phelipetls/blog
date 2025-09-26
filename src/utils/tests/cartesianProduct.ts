@@ -5,6 +5,6 @@ export const cartesianProduct = <T extends unknown[][]>(
     (acc, cur) => {
       return acc.flatMap((arr) => cur.map((item) => [...arr, item]))
     },
-    [[]]
+    [[]],
   )
 }

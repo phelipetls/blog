@@ -22,7 +22,7 @@ export default function Tabs(props: Props) {
     }
 
     const tabElements = Array.from(
-      tabListRef.current.children
+      tabListRef.current.children,
     ) as HTMLButtonElement[]
 
     const firstTab = tabElements[0]

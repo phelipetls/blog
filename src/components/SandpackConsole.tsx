@@ -26,7 +26,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
 
           function areLogEntriesEqual(
             logEntryA: typeof log,
-            logEntryB: typeof log
+            logEntryB: typeof log,
           ) {
             return (
               logEntryA.method === logEntryB.method &&
@@ -34,7 +34,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
               logEntryA.data?.every(
                 (data, index) =>
                   JSON.stringify(data) ===
-                  JSON.stringify(logEntryB.data?.[index])
+                  JSON.stringify(logEntryB.data?.[index]),
               )
             )
           }
@@ -58,8 +58,8 @@ export function SandpackConsole(props: SandpackConsoleProps) {
             <div
               key={log.id}
               className={clsx(
-                'whitespace-nowrap border-l-2 px-horizontal-padding py-2 [overflow-anchor:none]',
-                log.method === 'error' ? 'border-warn' : 'border-note'
+                'px-horizontal-padding border-l-2 py-2 whitespace-nowrap [overflow-anchor:none]',
+                log.method === 'error' ? 'border-warn' : 'border-note',
               )}
             >
               {log.data
@@ -72,7 +72,7 @@ export function SandpackConsole(props: SandpackConsoleProps) {
                 })
                 .join(' ')}
               {log.count > 1 && (
-                <span className='ml-2 aspect-square w-2 rounded-full bg-surface px-2 py-1 text-on-background'>
+                <span className='bg-surface text-on-background ml-2 aspect-square w-2 rounded-full px-2 py-1'>
                   {log.count}
                 </span>
               )}

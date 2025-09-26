@@ -15,7 +15,7 @@ export default function BlogPostTabs(slots: Slots) {
       })
       .map(([slotName, reactElement]) => {
         return [slotName.replace(/^tab:/, ''), reactElement]
-      })
+      }),
   )
 
   const panels = Object.fromEntries(
@@ -25,7 +25,7 @@ export default function BlogPostTabs(slots: Slots) {
       })
       .map(([slotName, reactElement]) => {
         return [slotName.replace(/^panel:/, ''), reactElement]
-      })
+      }),
   )
 
   const tabsIds = Object.entries(tabs).map(([tabId]) => {

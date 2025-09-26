@@ -12,9 +12,9 @@ export function ReactCompareSlider(props: ReactCompareSliderProps) {
       className='max-sm:full-bleed max-w-2xl'
       handle={
         <div className='flex h-full flex-col items-center justify-center'>
-          <div className='flex-1 border-l-2 border-divider' />
+          <div className='border-divider flex-1 border-l-2' />
 
-          <div className='relative h-10 w-10 rounded-full border-2 border-divider'>
+          <div className='border-divider relative h-10 w-10 rounded-full border-2'>
             <div className='pointer-events-none absolute inset-0 h-full w-full rounded-full backdrop-blur-xs' />
 
             <IconButton
@@ -26,7 +26,7 @@ export function ReactCompareSlider(props: ReactCompareSliderProps) {
             </IconButton>
           </div>
 
-          <div className='flex-1 border-l-2 border-divider' />
+          <div className='border-divider flex-1 border-l-2' />
         </div>
       }
       {...props}

@@ -21,7 +21,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
   const { code, className, successText, errorText, ...rest } = props
 
   const [copyStatus, setCopyStatus] = useState<'success' | 'error' | 'idle'>(
-    'idle'
+    'idle',
   )
   const justCopied = copyStatus !== 'idle'
   const error = copyStatus === 'error'
@@ -52,7 +52,7 @@ export default function CopyCodeBlockButton(props: CopyCodeBlockButtonProps) {
         <span
           className={clsx(
             '[&_svg]:stroke-current',
-            error ? 'text-warn' : 'text-green-500'
+            error ? 'text-warn' : 'text-green-500',
           )}
         >
           {error ? <X /> : <Check />}

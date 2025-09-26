@@ -11,14 +11,14 @@ export const GET: APIRoute = async () => {
       blogPosts.map((blogPost) => {
         const fullUrl = getAbsoluteLocaleUrl(
           'pt',
-          `/posts/images/${getBlogPostFolderName(blogPost)}`
+          `/posts/images/${getBlogPostFolderName(blogPost)}`,
         )
 
         return {
           url: fullUrl,
           name: getBlogPostFolderName(blogPost),
         }
-      })
-    )
+      }),
+    ),
   )
 }

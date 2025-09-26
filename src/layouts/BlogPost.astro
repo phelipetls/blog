@@ -40,7 +40,7 @@ const { Content, headings, remarkPluginFrontmatter } = await render(blogPost)
 const ogImageUrl =
   getAbsoluteLocaleUrl(
     locale,
-    `/posts/${getBlogPostFolderName(Astro.props.blogPost)}`
+    `/posts/${getBlogPostFolderName(Astro.props.blogPost)}`,
   ) + 'image.png'
 
 const t = useTranslate(locale)
@@ -191,7 +191,7 @@ const tocWouldBeEmpty = headings.length === 0
                     'duration-(--duration)',
                     'ease-in-out',
                     'overflow-hidden',
-                    'lg:justify-center'
+                    'lg:justify-center',
                   )}
                 >
                   <X
@@ -205,7 +205,7 @@ const tocWouldBeEmpty = headings.length === 0
                       'duration-(--duration)',
                       'ease-out',
                       'group-data-toc-open:scale-100',
-                      'group-data-toc-open:delay-(--duration)'
+                      'group-data-toc-open:delay-(--duration)',
                     )}
                   />
 
@@ -220,7 +220,7 @@ const tocWouldBeEmpty = headings.length === 0
                       'duration-(--duration)',
                       'ease-in',
                       'group-data-toc-closed:scale-100',
-                      'group-data-toc-closed:delay-[var(--duration)'
+                      'group-data-toc-closed:delay-[var(--duration)',
                     )}
                   />
 
@@ -342,7 +342,7 @@ const tocWouldBeEmpty = headings.length === 0
       localStorage.setItem('__preferred_toc_state', 'open')
       toggleTocButton.setAttribute(
         'aria-label',
-        toggleTocButton.dataset.closedTocLabel ?? ''
+        toggleTocButton.dataset.closedTocLabel ?? '',
       )
     }
   }
@@ -356,7 +356,7 @@ const tocWouldBeEmpty = headings.length === 0
       localStorage.setItem('__preferred_toc_state', 'closed')
       toggleTocButton.setAttribute(
         'aria-label',
-        toggleTocButton.dataset.openTocLabel ?? ''
+        toggleTocButton.dataset.openTocLabel ?? '',
       )
     }
   }
@@ -377,7 +377,7 @@ const tocWouldBeEmpty = headings.length === 0
         },
         {
           once: true,
-        }
+        },
       )
     } else {
       openToc()

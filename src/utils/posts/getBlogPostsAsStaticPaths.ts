@@ -17,7 +17,7 @@ interface StaticPath {
 }
 
 export async function getBlogPostsAsStaticPaths(
-  language: Locale
+  language: Locale,
 ): Promise<StaticPath[]> {
   const blogPosts = await getBlogPosts(language)
 
@@ -30,7 +30,7 @@ export async function getBlogPostsAsStaticPaths(
 
   const otherLocale = language === 'en' ? 'pt' : 'en'
   const translatedBlogPostsNames = (await getBlogPosts(otherLocale)).map(
-    (post) => getBlogPostFolderName(post)
+    (post) => getBlogPostFolderName(post),
   )
 
   return sortedBlogPosts.map((blogPost, index, blogPosts) => {

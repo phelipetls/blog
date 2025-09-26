@@ -14,8 +14,8 @@ export async function getBlogPostsAsRssItems(locale: Locale) {
       if (typeof remarkPluginFrontmatter.summary !== 'string') {
         throw new Error(
           `Expected blog post summary to be string, but instead got value '${String(
-            remarkPluginFrontmatter.summary
-          )}' of type '${typeof remarkPluginFrontmatter.summary}'`
+            remarkPluginFrontmatter.summary,
+          )}' of type '${typeof remarkPluginFrontmatter.summary}'`,
         )
       }
 
@@ -25,9 +25,9 @@ export async function getBlogPostsAsRssItems(locale: Locale) {
         description: remarkPluginFrontmatter.summary,
         link: getRelativeLocaleUrl(
           'pt',
-          `/posts/${getBlogPostFolderName(blogPost)}`
+          `/posts/${getBlogPostFolderName(blogPost)}`,
         ),
       }
-    })
+    }),
   )
 }

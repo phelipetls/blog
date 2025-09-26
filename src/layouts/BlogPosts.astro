@@ -23,7 +23,7 @@ const blogPostsGroupedByYear = _.groupBy(blogPosts, (blogPost) => {
 })
 
 const years = Object.keys(blogPostsGroupedByYear).sort(
-  (yearA, yearB) => Number(yearB) - Number(yearA)
+  (yearA, yearB) => Number(yearB) - Number(yearA),
 )
 
 const t = useTranslate(locale)

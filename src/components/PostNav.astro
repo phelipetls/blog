@@ -28,7 +28,7 @@ const { locale, prevBlogPost, nextBlogPost, class: className } = Astro.props
         class='sm:card flex flex-1 flex-col gap-2 border-0 px-horizontal-padding py-4 transition-colors duration-300 hover:bg-hover'
         href={getRelativeLocaleUrl(
           locale,
-          '/posts/' + getBlogPostFolderName(prevBlogPost)
+          '/posts/' + getBlogPostFolderName(prevBlogPost),
         )}
       >
         <span class='text-primary'>
@@ -50,7 +50,7 @@ const { locale, prevBlogPost, nextBlogPost, class: className } = Astro.props
         class='sm:card flex flex-1 flex-col-reverse items-end justify-end gap-2 border-0 px-horizontal-padding py-4 text-right transition-colors duration-300 hover:bg-hover'
         href={getRelativeLocaleUrl(
           locale,
-          '/posts/' + getBlogPostFolderName(nextBlogPost)
+          '/posts/' + getBlogPostFolderName(nextBlogPost),
         )}
       >
         {nextBlogPost.data.title}

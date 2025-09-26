@@ -28,10 +28,10 @@ export default function Tab(props: TabProps) {
           'duration-300',
           'hover:bg-hover',
           {
-            'border-b border-primary font-bold': selected,
+            'border-primary border-b font-bold': selected,
           },
-          className
-        )
+          className,
+        ),
       )}
       {...rest}
     >

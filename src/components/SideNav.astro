@@ -92,7 +92,7 @@ const t = useTranslate(locale)
   const DIALOG_CONTENT_ANIMATION_DURATION = 300
   const maxAnimationDuration = Math.max(
     DIALOG_CONTENT_ANIMATION_DURATION,
-    DIALOG_BACKDROP_ANIMATION_DURATION
+    DIALOG_BACKDROP_ANIMATION_DURATION,
   )
 
   ;(() => {
@@ -104,7 +104,7 @@ const t = useTranslate(locale)
     }
 
     const backdrop = dialogElement.querySelector<HTMLElement>(
-      '[data-a11y-dialog-hide]'
+      '[data-a11y-dialog-hide]',
     )
     const content = dialogElement.querySelector<HTMLElement>('[role=document]')
 

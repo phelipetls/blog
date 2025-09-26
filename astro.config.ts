@@ -34,8 +34,8 @@ export default defineConfig({
             behavior: 'append',
           },
         ],
-        rehypeSyntaxHighlight,
         rehypeKatex,
+        rehypeSyntaxHighlight,
       ],
     }),
     sitemap({

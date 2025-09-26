@@ -52,10 +52,6 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
         return
       }
 
-      if (Array.isArray(node.properties.className) && node.properties.className.includes('language-math')) {
-        return
-      }
-
       let lang = ''
       if (Array.isArray(node.properties.className)) {
         lang =

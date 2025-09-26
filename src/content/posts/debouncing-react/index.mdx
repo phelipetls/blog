@@ -52,11 +52,23 @@ is produced.
 In other words, the returned function depends on a *state* to do its job
 properly:
 
-<CodeBlock
-  lang='javascript'
-  highlight='4,12'
-  code={debounceCode}
-/>
+```javascript 4,12
+export function debounce(func, duration) {
+  console.log('Running debounce')
+
+  let timeout
+
+  return function (...args) {
+    const effect = () => {
+      timeout = null
+      return func.apply(this, args)
+    }
+
+    clearTimeout(timeout)
+    timeout = setTimeout(effect, duration)
+  }
+}
+```
 
 So this function needs to be stable across renders! We know that in React
 functional components, this is not a given -- every function declaration will

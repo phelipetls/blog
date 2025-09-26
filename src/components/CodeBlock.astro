@@ -62,10 +62,15 @@ if (twoslash) {
   codeToCopy = twoslashResults.code
   typescriptPlaygroundURL = twoslashResults.playgroundURL
 
+  // Transform '1-3,5' into { '1-3': true, '5': true }
+  const highlightedLinesObj = Object.fromEntries(
+    highlight.split(',').map((lineOrRange) => [lineOrRange, true])
+  )
+
   const twoslashHtml = renderCodeToHTML(
     twoslashResults.code,
     twoslashResults.extension,
-    { title, highlight, twoslash: true },
+    { title, highlight: highlightedLinesObj, twoslash: true },
     {
       themeName: THEME,
     },

@@ -206,16 +206,16 @@ function CustomSandpack(props: CustomSandpackProps) {
                 'right-3',
                 'top-3',
                 'space-x-2',
-                '**:data-show-on-hover:transition-opacity',
-                '**:data-show-on-hover:duration-300',
-                '**:data-show-on-hover:opacity-0',
-                '**:data-show-on-hover:pointer-events-none',
-                'peer-hover:**:data-show-on-hover:opacity-100',
-                'peer-hover:**:data-show-on-hover:pointer-events-auto',
-                'hover:**:data-show-on-hover:opacity-100',
-                'hover:**:data-show-on-hover:pointer-events-auto',
-                'focus-visible:**:data-show-on-hover:opacity-100',
-                'focus-visible:**:data-show-on-hover:pointer-events-auto',
+                '*:transition-opacity',
+                '*:duration-300',
+                '*:opacity-0',
+                '*:pointer-events-none',
+                'peer-hover:*:opacity-100',
+                'peer-hover:*:pointer-events-auto',
+                'hover:*:opacity-100',
+                'hover:*:pointer-events-auto',
+                'focus-visible:*:opacity-100',
+                'focus-visible:*:pointer-events-auto',
               )}
             >
               <CopyCodeBlockButton
@@ -223,7 +223,6 @@ function CustomSandpack(props: CustomSandpackProps) {
                 successText={'Copied!'}
                 errorText={'Failed to copy'}
                 code={files[activeFile].code}
-                data-show-on-hover
               />
 
               {!shouldAutorun && (

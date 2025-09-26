@@ -20,9 +20,6 @@ export default defineConfig({
     locales: [...LOCALES],
     defaultLocale: 'en' as const,
   },
-  experimental: {
-    svg: true,
-  },
   integrations: [
     robotsTxt(),
     react(),

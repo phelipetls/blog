@@ -32,12 +32,20 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
 
       const title = typeof meta.title === 'string' ? meta.title : ''
 
+      // Transform '{ '1-3': true, '5': true }' into 1-3,5
+      const highlight =
+        meta.highlight &&
+        typeof meta.highlight === 'object' &&
+        !Array.isArray(meta.highglight)
+          ? Object.keys(meta.highlight).join(',')
+          : ''
+
       const code = hastToString(node).replace(/\n+$/, '')
 
       parent.properties = {
         ...parent.properties,
         title,
-        highlight: JSON.stringify(meta.highlight ?? {}),
+        highlight,
         code,
         lang,
         twoslash: Boolean(meta.twoslash),

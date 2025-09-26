@@ -58,12 +58,13 @@ export const DevIcons = {
 
 type Props = {
   name: keyof typeof DevIcons
-  size?: number | string
+  size?: string | number
   class?: string
 }
-const { name, ...rest } = Astro.props
+
+const { name, size = 18, ...rest } = Astro.props
 
 const DevIconComponent = DevIcons[name]
 ---
 
-<DevIconComponent {...rest} />
+<DevIconComponent height={size} width={size} {...rest} />

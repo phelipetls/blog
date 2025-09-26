@@ -200,7 +200,11 @@
   }
 
   :not(pre) > code {
-    @apply text-primary text-sm font-bold break-words;
+    @apply text-primary font-bold break-words;
+  }
+
+  p > code {
+    @apply text-sm;
   }
 
   :not(pre) > code::before,

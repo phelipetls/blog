@@ -195,7 +195,7 @@ function CustomSandpack(props: CustomSandpackProps) {
         {shouldShowCodeEditor && (
           <div data-editor className='dark relative lg:[grid-area:editor]'>
             <SandpackCodeEditor
-              className='peer max-h-[450px]'
+              className='peer max-h-[450px] text-sm'
               showTabs={false}
               showRunButton={false}
             />

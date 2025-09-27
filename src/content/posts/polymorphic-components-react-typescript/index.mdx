@@ -93,7 +93,7 @@ the component will be a `span` element, so it should not accept `htmlFor`.
 
 To do this, we will need to use a generic type:
 
-```tsx twoslash {2,4-6,8-11}
+```tsx twoslash
 import React from 'react'
 // ---cut---
 // TODO: implement PropsOf
@@ -217,7 +217,7 @@ With these arguments, we will use the element type to get all props accepted by
 that element's type plus the component own props, while also omitting any
 potential conflicting props between the two with `DistributiveOmit`:
 
-```tsx twoslash {3-18,31-32}
+```tsx twoslash
 import React from 'react'
 // ---cut---
 type DistributiveOmit<T, U> = T extends any
@@ -349,7 +349,7 @@ demonstrates.](https://www.benmvp.com/blog/forwarding-refs-polymorphic-react-com
 So we essentially need to bypass the `React.forwardRef` types and define the
 component types from scratch.
 
-```tsx twoslash {1-12,23-25,27-37}
+```tsx twoslash {29-43}
 import React, { useRef } from 'react'
 
 type DistributiveOmit<T, U> = T extends any

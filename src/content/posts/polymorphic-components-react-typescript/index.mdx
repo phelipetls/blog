@@ -211,15 +211,19 @@ Now, let's say we want our `Typography` component to have their own props, such
 as a `variant` prop. How should we do this while maintaining polymorphism?
 
 We can do this by creating a new generic type, called `PolymorphicProps`, that
-accepts the element type and the component own props as argument.
+accepts the element type and the component own props as arguments.
 
 With these arguments, we will use the element type to get all props accepted by
-that element's type plus the component own props, while also handling potential
-conflicts between the two:
+that element's type plus the component own props, while also omitting any
+potential conflicting props between the two with `DistributiveOmit`:
 
 ```tsx twoslash {3-18,31-32}
 import React from 'react'
 // ---cut---
+type DistributiveOmit<T, U> = T extends any
+  ? Pick<T, Exclude<keyof T, U>>
+  : never
+
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithoutRef<T>
 
 type PolymorphicProps<
@@ -228,7 +232,7 @@ type PolymorphicProps<
 > = {
   as?: T
 } & TProps &
-  Omit<PropsOf<T>, keyof TProps | 'as'>
+  DistributiveOmit<PropsOf<T>, keyof TProps | 'as'>
 
 type BaseTypographyProps = {
   variant: 'heading' | 'paragraph'
@@ -270,6 +274,9 @@ is a built-in [utility
 type](https://www.typescriptlang.org/docs/handbook/utility-types.html). [You
 can learn more about `Omit` in the TypeScript
 docs.](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)
+
+We use `DistributiveOmit` here to handle union types, applying the `Omit` to
+all members of the union, further preventing bugs due to conflicting props.
 
 </Note>
 
@@ -345,6 +352,10 @@ component types from scratch.
 ```tsx twoslash {1-12,23-25,27-37}
 import React, { useRef } from 'react'
 
+type DistributiveOmit<T, U> = T extends any
+  ? Pick<T, Exclude<keyof T, U>>
+  : never
+
 type PropsOf<T extends React.ElementType> = React.ComponentPropsWithRef<T>
 
 type PolymorphicRef<T extends React.ElementType> =
@@ -356,7 +367,7 @@ type PolymorphicProps<
 > = {
   as?: T
 } & TProps &
-  Omit<PropsOf<T>, keyof TProps | 'as' | 'ref'> & { ref?: PolymorphicRef<T> }
+  DistributiveOmit<PropsOf<T>, keyof TProps | 'as' | 'ref'> & { ref?: PolymorphicRef<T> }
 
 type BaseTypographyProps = {
   variant: 'heading' | 'paragraph'

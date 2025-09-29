@@ -252,7 +252,7 @@ First, we check if the input filename matches the alias (e.g., `~/file` should
 match `~/*` but also `*` since it means any value), replace the alias with its
 path (`~/file` -> `src/file`) and try to find it:
 
-```lua {5, 7-8}
+```lua {5,7-8}
 local function expand_tsconfig_path(input)
   -- ...
 
@@ -285,7 +285,7 @@ is now just ignores these other configurations completely.
 To handle this, we'll need to recursively call `get_tsconfig_paths` for every
 `tsconfig.json` that has an `extends` option, until it doesn't:
 
-```lua {10, 16, 22-24}
+```lua {10,16,22-24}
 local function find_tsconfig_extends(extends, tsconfig_fname)
   if not extends or vim.startswith(extends, "@") then
     return

@@ -250,7 +250,7 @@ you probably don't want to use Homebrew in Linux, even though you could.
 [We can run a task conditionally with the `when`
 keyword](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#basic-conditionals-with-when):
 
-```yaml {9, 19}
+```yaml {9,19}
   tasks:
   - name: Install packages with apt
     become: yes
@@ -325,7 +325,7 @@ just a string.
 is one of such modules. Here's an example of how to install some npm modules
 globally:
 
-```yaml {2-5, 7}
+```yaml {2-5,7}
 - name: Install npm global packages
   loop:
     - yalc
@@ -357,7 +357,7 @@ e.g. `product` to build a [cartesian
 product](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_filters.html#product-filters)
 from lists:
 
-```yaml {3-4, 7}
+```yaml {3-4,7}
 - name: Give users access to multiple databases
   community.mysql.mysql_user:
     name: "{{ item[0] }}"

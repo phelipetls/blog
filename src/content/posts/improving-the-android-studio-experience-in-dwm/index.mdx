@@ -42,7 +42,7 @@ whose value we can get with an Xlib function named
 Here's an example on how to use this function, taken from the [`dwm` source
 code](https://git.suckless.org/dwm/file/dwm.c.html#l1038):
 
-``` c {4-5, 9-11}
+``` c {4-5,9-11}
 void
 manage(Window w, XWindowAttributes *wa)
 {
@@ -80,7 +80,7 @@ The taskbar is drawn by the `drawbar` function.
 
 I just need to check if a window is transient and, if so, skip:
 
-```c {10-11, 21-22}
+```c {10-11,21-22}
 void
 drawbar(Monitor *m)
 {
@@ -155,7 +155,7 @@ well](https://github.com/phelipetls/dotfiles/commit/7333e85b50abc63da0193705d204
 This is simple, we just need to *not* increment a counter when the window is
 transient, in the `monocle` function:
 
-```c {5-6, 9-10}
+```c {5-6,9-10}
 void
 monocle(Monitor *m)
 {

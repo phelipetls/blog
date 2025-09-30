@@ -92,25 +92,28 @@ const devIconName = getDevIconName(lang)
   data-codeblock
   class='last:mb-0 text-sm'
   class:list={[
-    '[&_pre]:shadow-xs',
-    '[&_pre]:shadow-shadow',
-    '[&_pre]:rounded-b',
-    '[&_pre]:overflow-x-auto',
-    '[&_pre]:scheme-dark',
-    '[&_pre_>_code]:py-4',
-    '[&_pre_>_code]:grid',
-    '[&_pre_>_code_>_.line]:px-horizontal-padding',
-    '[&_pre_>_code_>_.line]:border-l-2',
-    '[&_pre_>_code_>_.line]:border-(--code-bg)',
-    '[&_pre_>_code_>_.line.highlighted]:bg-[#272115]',
-    '[&_pre_>_code_>_.line.highlighted]:border-[#624710]',
-    '[&_pre_>_code_>_.twoslash-meta-line]:border-l-2',
-    '[&_pre_>_code_>_.twoslash-meta-line]:border-(--code-bg)',
-    '[&_pre_>_code_>_.twoslash-meta-line]:py-1',
-    '[&_pre_>_code_>_.twoslash-meta-line]:px-4',
-    '[&_pre_>_code_>_.twoslash-error-line]:bg-[#d4565620]',
-    '[&_pre_>_code_>_.twoslash-error-line]:text-[#d45656]',
-    '[&_pre_>_code_>_.twoslash-error-line]:border-[#d45656]',
+    '[&_>_pre]:shadow-xs',
+    '[&_>_pre]:shadow-shadow',
+    '[&_>_pre]:rounded-b',
+    '[&_>_pre]:overflow-x-auto',
+    '[&_>_pre]:scheme-dark',
+    '[&_>_pre_>_code]:py-4',
+    '[&_>_pre_>_code]:grid',
+    '[&_.line]:px-horizontal-padding',
+    '[&_.line]:border-l-2',
+    '[&_.line]:border-(--code-bg)',
+    '[&_.line.highlighted]:bg-[#272115]',
+    '[&_.line.highlighted]:border-[#624710]',
+    '[&_.twoslash-query-line]:px-horizontal-padding',
+    '[&_.twoslash-error-line]:border-l-2',
+    '[&_.twoslash-error-line]:border-(--code-bg)',
+    '[&_.twoslash-error-line]:py-1',
+    '[&_.twoslash-error-line]:px-4',
+    '[&_.twoslash-error-line]:bg-[#d4565620]',
+    '[&_.twoslash-error-line]:text-[#d45656]',
+    '[&_.twoslash-error-line]:border-[#d45656]',
+    '[&_.twoslash-popup-arrow]:bg-(--code-bg)',
+    '[&_.twoslash-popup-container]:bg-(--code-bg)',
   ]}
 >
   <div
@@ -176,11 +179,16 @@ const devIconName = getDevIconName(lang)
 <script>
   import { computePosition, offset, flip, shift, arrow } from '@floating-ui/dom'
 
+  const htmlComputedStyles = window.getComputedStyle(document.documentElement)
+  const tooltipArrowSize = htmlComputedStyles.getPropertyValue(
+    '--tooltip-arrow-size',
+  )
+
   const triggers = document.querySelectorAll('.twoslash-hover')
 
-  const computedStyles = window.getComputedStyle(triggers[0])
-  const codeBackground = computedStyles.getPropertyValue('--code-bg')
-  const codeForeground = computedStyles.getPropertyValue('--code-fg')
+  const triggerComputedStyles = window.getComputedStyle(triggers[0])
+  const codeBackground = triggerComputedStyles.getPropertyValue('--code-bg')
+  const codeForeground = triggerComputedStyles.getPropertyValue('--code-fg')
 
   triggers.forEach((trigger) => {
     const showTooltip = async () => {
@@ -204,24 +212,16 @@ const devIconName = getDevIconName(lang)
           `Unexpected Twoslash Popup Container Element: ${popupContainer}`,
         )
       }
-      popupContainer.classList.add(
-        'px-4',
-        'py-2',
-        'rounded-lg',
-        'border-divider',
-        'border-1',
-      )
       Object.assign(popupContainer.style, {
         backgroundColor: codeBackground,
         color: codeForeground,
       })
 
       const arrowEl = document.createElement('div')
-      arrowEl.classList.add('absolute', 'pointer-events-none', 'border-divider')
-      const arrowSize = '10px'
+      arrowEl.classList.add('absolute', 'twoslash-popup-arrow')
       Object.assign(arrowEl.style, {
-        width: arrowSize,
-        height: arrowSize,
+        width: tooltipArrowSize,
+        height: tooltipArrowSize,
       })
       tooltip.insertBefore(arrowEl, tooltip.firstElementChild)
 
@@ -258,6 +258,8 @@ const devIconName = getDevIconName(lang)
           throw new Error(`Unexpected placement side: ${side}`)
         }
 
+        arrowEl.setAttribute('data-side', side)
+
         const staticSide = {
           top: 'bottom',
           right: 'left',
@@ -267,21 +269,11 @@ const devIconName = getDevIconName(lang)
 
         const arrowPosition = middlewareData.arrow
 
-        const arrowBorders = {
-          top: ['border-b', 'border-r'],
-          bottom: ['border-t', 'border-l'],
-          left: ['border-t', 'border-r'],
-          right: ['border-b', 'border-l'],
-        }
-
-        arrowEl.classList.add(...arrowBorders[side])
-
         Object.assign(arrowEl.style, {
           left: arrowPosition?.x != null ? `${arrowPosition.x}px` : '',
           top: arrowPosition?.y != null ? `${arrowPosition.y}px` : '',
-          [staticSide as keyof typeof staticSide]: `calc(-${arrowSize} / 2)`,
+          [staticSide as keyof typeof staticSide]: `calc(-${tooltipArrowSize} / 2)`,
           backgroundColor: codeBackground,
-          transform: 'rotate(45deg)',
         })
       }
     }

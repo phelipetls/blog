@@ -103,6 +103,7 @@
     --horizontal-padding: 1rem;
     --content-max-width: 80rem;
     --nav-height: 4rem;
+    --tooltip-arrow-size: 10px;
 
     --primary: var(--color-orange-500);
     --primary-hover: var(--color-orange-600);
@@ -136,9 +137,7 @@
     --warn: var(--color-red-500);
     color-scheme: dark;
   }
-}
 
-@layer base {
   h1,
   h2,
   h3 {
@@ -215,6 +214,50 @@
   .footnotes hr {
     @apply mb-4;
   }
+
+  .twoslash-hover {
+    @apply border-b-1 border-dotted border-transparent;
+  }
+
+  .twoslash:hover .twoslash-hover {
+    @apply border-current;
+  }
+
+  .twoslash-popup-container {
+    @apply border-divider rounded-lg border-1 px-4 py-2;
+  }
+
+  .twoslash-query-line {
+    @apply py-2;
+  }
+
+  .twoslash-query-line .twoslash-popup-container {
+    @apply relative inline-block;
+  }
+
+  .twoslash-popup-arrow {
+    @apply border-divider pointer-events-none h-(--tooltip-arrow-size) w-(--tooltip-arrow-size) rotate-45;
+  }
+
+  .twoslash-query-line .twoslash-popup-arrow {
+    @apply absolute top-[calc(-1_*_var(--tooltip-arrow-size)_/_2)] left-4 border-t border-l;
+  }
+
+  .twoslash-popup-arrow[data-side='top'] {
+    @apply border-r border-b;
+  }
+
+  .twoslash-popup-arrow[data-side='bottom'] {
+    @apply border-t border-l;
+  }
+
+  .twoslash-popup-arrow[data-side='left'] {
+    @apply border-t border-r;
+  }
+
+  .twoslash-popup-arrow[data-side='right'] {
+    @apply border-b border-l;
+  }
 }
 
 [data-preload] {
@@ -250,15 +293,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.twoslash:hover .twoslash-hover {
-  border-color: currentColor;
-}
-
-.twoslash .twoslash-hover {
-  border-bottom: 1px dotted transparent;
-  transition-timing-function: ease;
-  transition: border-color 0.3s;
-  position: relative;
 }

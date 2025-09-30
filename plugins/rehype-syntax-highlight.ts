@@ -79,6 +79,7 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
           transformerTwoslash({
             explicitTrigger: true,
             renderer: rendererRich({
+              queryRendering: 'line',
               hast: {
                 hoverPopup: {
                   tagName: 'div',
@@ -98,6 +99,21 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
                     },
                   ]
                 },
+                queryCompose({ popup, token }) {
+                  return [
+                    token,
+                    {
+                      type: 'element',
+                      tagName: 'template',
+                      properties: { class: 'twoslash-popup-template' },
+                      content: {
+                        type: 'root',
+                        children: [popup],
+                      },
+                      children: [],
+                    },
+                  ]
+                }
               },
             }),
           }),

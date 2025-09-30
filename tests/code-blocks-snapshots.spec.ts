@@ -36,4 +36,16 @@ test.describe('Code Block Snapshots', () => {
 
     await expect(twoslashCodeBlock).toHaveScreenshot('twoslash-code-block.png')
   })
+
+  test('twoslash code block with inline query', async ({ page, browserName }) => {
+    test.skip(browserName !== 'chromium')
+
+    await page.goto('/posts/deriving-types-from-data-typescript/')
+
+    const twoslashInlineQuery = page
+      .locator('[data-codeblock]')
+      .first()
+
+    await expect(twoslashInlineQuery).toHaveScreenshot('twoslash-inline-query.png')
+  })
 })

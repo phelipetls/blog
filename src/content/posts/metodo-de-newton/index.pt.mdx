@@ -78,19 +78,23 @@ potência, $ \frac{d(x^2)}{dx} = 2x $. Já a equação da tangente é obtida
 simplesmente da equação de uma reta:
 
 $$
-\Delta y = f'(x)\Delta x \\
-(y - y_0) = f'(x_0)(x - x_0) \\
-y = y_0 + m(x - x_0)
+\begin{align}
+\Delta y &= f'(x)\Delta x \\
+(y - y_0) &= f'(x_0)(x - x_0) \\
+y &= y_0 + m(x - x_0)
+\end{align}
 $$
 
 No nosso caso, queremos achar a reta tangente quando $ x_0 = 1 $, sendo $ f(x_0) = x^2 - 5 = 1 - 5 = -4 $.
 Logo, a reta que tangencia o ponto $ (1, -4) $ é:
 
 $$
-y = y_0 + 2x(x - x_0) \\
-y = -4 + 2\cdot 1(x - 1) \\
-y = -4 + 2x -2 \\
-y = 2x - 6
+\begin{align}
+y &= y_0 + 2x(x - x_0) \\
+y &= -4 + 2\cdot 1(x - 1) \\
+y &= -4 + 2x -2 \\
+y &= 2x - 6
+\end{align}
 $$
 
 Mas, é crucial perceber que essa é a _equação da reta tangente ao ponto $ (x_0,
@@ -133,10 +137,27 @@ Assim, nosso objetivo fica melhor delineado dessa forma: queremos sempre o
 valor de $ x $ da reta tangente a um ponto $ (x_0, y_0) $ que faz com que $ y = 0 $:
 
 $$
-y - y_0 = m(x - x_0) \text{ dividindo tudo por m e sumindo com o y: } \newline
-\frac{y_0}{m} = x - x_0 \Rightarrow x = x_0 - \frac{y_0}{m} \newline
-\text{ o que também pode ser escrito como: } \newline
-x = x_0 - \frac{f(x_0)}{f'(x_0)} \Rightarrow x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \newline
+\begin{align}
+y - y_0 = m(x - x_0)
+\end{align}
+$$
+
+dividindo tudo por m e sumindo com o y:
+
+$$
+\begin{align}
+\frac{y_0}{m} &= x - x_0 \\
+x &= x_0 - \frac{y_0}{m}
+\end{align}
+$$
+
+o que também pode ser escrito como:
+
+$$
+\begin{align}
+x &= x_0 - \frac{f(x_0)}{f'(x_0)} \\
+x_{n+1} &= x_n - \frac{f(x_n)}{f'(x_n)}
+\end{align}
 $$
 
 Plugando os valores de nossa estimativa inicial, obtemos:

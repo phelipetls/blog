@@ -117,25 +117,6 @@ export const rehypeSyntaxHighlight: Plugin<[], Root> = () => {
               },
             }),
           }),
-          {
-            line(node) {
-              if (node.children.length === 0) {
-                node.children = [
-                  {
-                    type: 'element',
-                    properties: {},
-                    tagName: 'span',
-                    children: [
-                      {
-                        type: 'text',
-                        value: ' ',
-                      },
-                    ],
-                  },
-                ]
-              }
-            },
-          },
         ],
         meta: {
           __raw: metastring,

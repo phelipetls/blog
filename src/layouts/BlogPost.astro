@@ -160,7 +160,6 @@ const tocWouldBeEmpty = headings.length === 0
                   'relative',
                   'shrink-0',
                   'mb-8',
-                  'lg:group-data-toc-open:card',
                   'lg:ml-auto',
                   'lg:mb-0',
                   'lg:basis-1/3',
@@ -244,15 +243,15 @@ const tocWouldBeEmpty = headings.length === 0
                   data-blog-post-toc-container
                   data-preload
                   class:list={[
-                    'max-lg:card',
+                    'card',
                     'lg:h-full',
                     'lg:p-4',
                     'lg:ml-auto',
-                    'lg:group-data-toc-open:translate-x-0',
-                    'lg:group-data-toc-open:scale-x-100',
-                    'lg:group-data-toc-open:opacity-100',
-                    'lg:group-data-toc-closed:translate-x-full',
+                    'lg:opacity-100',
+                    'lg:translate-x-0',
+                    'lg:scale-x-100',
                     'lg:group-data-toc-closed:opacity-0',
+                    'lg:group-data-toc-closed:translate-x-full',
                     'lg:group-data-toc-closed:scale-x-0',
                     'lg:group-data-toc-closed:pointer-events-none',
                     'transition-[translate,scale,opacity]',

@@ -113,7 +113,6 @@ export default tseslint.config(
       'public',
       '.astro',
       'dist',
-      'src/components/devicons',
       'src/env.d.ts',
       'playwright-report',
       'src/content/posts/tres-algoritmos-para-a-sequencia-de-fibonacci/index.pt.mdx',

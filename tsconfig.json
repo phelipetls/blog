@@ -11,6 +11,5 @@
     },
     "jsx": "react-jsx"
   },
-  "include": [".astro/types.d.ts", "src/**/*", "*.ts", "plugins", "scripts", "tests"],
-  "exclude": ["dist", "src/components/devicons"]
+  "include": [".astro/types.d.ts", "src/**/*", "*.ts", "plugins", "scripts", "tests"]
 }

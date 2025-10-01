@@ -188,9 +188,13 @@ const devIconName = getDevIconName(lang)
 
   const triggers = document.querySelectorAll('.twoslash-hover')
 
-  const triggerComputedStyles = window.getComputedStyle(triggers[0])
-  const codeBackground = triggerComputedStyles.getPropertyValue('--code-bg')
-  const codeForeground = triggerComputedStyles.getPropertyValue('--code-fg')
+  let codeBackground = ''
+  let codeForeground = ''
+  if (triggers[0]) {
+    const triggerComputedStyles = window.getComputedStyle(triggers[0])
+    codeBackground = triggerComputedStyles.getPropertyValue('--code-bg')
+    codeForeground = triggerComputedStyles.getPropertyValue('--code-fg')
+  }
 
   triggers.forEach((trigger) => {
     const showTooltip = async () => {

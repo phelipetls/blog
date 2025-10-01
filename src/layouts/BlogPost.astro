@@ -60,6 +60,9 @@ const tocWouldBeEmpty = headings.length === 0
         image: ogImageUrl,
         type: 'article',
       },
+      image: {
+        alt: `Blog Post ${blogPost.data.title} Preview Image`,
+      },
       article: {
         tags: blogPost.data.tags,
         publishedTime: formatISO(new Date(blogPost.data.date)),

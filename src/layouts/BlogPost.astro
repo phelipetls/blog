@@ -367,8 +367,18 @@ const tocWouldBeEmpty = headings.length === 0
 
     if (tocIsOpen) {
       closeToc()
+      tocContainer?.addEventListener(
+        'transitionend',
+        () => {
+          tocContainer.classList.add('invisible')
+        },
+        {
+          once: true,
+        },
+      )
     } else {
       openToc()
+      tocContainer?.classList.remove('invisible')
     }
   })
 </script>

@@ -316,10 +316,10 @@ const tocWouldBeEmpty = headings.length === 0
 
 <script>
   const blogPostContainer = document.querySelector('[data-blog-post-container]')
-
   const toggleTocButton = document.querySelector('[data-toggle-toc]')
-
   const tocContainer = document.querySelector('[data-blog-post-toc-container]')
+
+  let hideTocController = new AbortController()
 
   const storedTocState = localStorage.getItem('__preferred_toc_state')
   if (storedTocState !== null) {
@@ -331,6 +331,9 @@ const tocWouldBeEmpty = headings.length === 0
   }
 
   function openToc() {
+    hideTocController.abort()
+    tocContainer?.classList.remove('invisible')
+
     if (
       blogPostContainer instanceof HTMLElement &&
       toggleTocButton instanceof HTMLButtonElement
@@ -345,6 +348,17 @@ const tocWouldBeEmpty = headings.length === 0
   }
 
   function closeToc() {
+    hideTocController = new AbortController()
+    tocContainer?.addEventListener(
+      'transitionend',
+      () => {
+        tocContainer?.classList.add('invisible')
+      },
+      {
+        signal: hideTocController.signal,
+      },
+    )
+
     if (
       blogPostContainer instanceof HTMLElement &&
       toggleTocButton instanceof HTMLButtonElement
@@ -367,18 +381,8 @@ const tocWouldBeEmpty = headings.length === 0
 
     if (tocIsOpen) {
       closeToc()
-      tocContainer?.addEventListener(
-        'transitionend',
-        () => {
-          tocContainer.classList.add('invisible')
-        },
-        {
-          once: true,
-        },
-      )
     } else {
       openToc()
-      tocContainer?.classList.remove('invisible')
     }
   })
 </script>

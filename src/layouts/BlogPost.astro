@@ -327,6 +327,7 @@ const tocWouldBeEmpty = headings.length === 0
       openToc()
     } else {
       closeToc()
+      tocContainer?.classList.add('invisible')
     }
   }
 

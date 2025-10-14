@@ -18,7 +18,9 @@
         : 'light'
     }
 
-    document.body.classList.toggle('dark', theme === 'dark')
+    document.startViewTransition(() => {
+      document.body.classList.toggle('dark', theme === 'dark')
+    })
 
     window.localStorage.setItem('__theme', themeChoice)
 

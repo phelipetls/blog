@@ -7,9 +7,9 @@
   window.__setTheme(/** @type {ThemeChoice} */ (storedThemeChoice))
 
   /**
-   * @type {(themeChoice: ThemeChoice) => void}
+   * @type {(themeChoice: ThemeChoice) => Promise<void>}
    */
-  function setTheme(themeChoice) {
+  async function setTheme(themeChoice) {
     let theme = themeChoice
 
     if (themeChoice === 'system') {
@@ -18,9 +18,33 @@
         : 'light'
     }
 
-    document.startViewTransition(() => {
+    const changeTheme = () => {
       document.body.classList.toggle('dark', theme === 'dark')
-    })
+    }
+
+    let viewTransition = null
+
+    if (
+      document.startViewTransition &&
+      !document.documentElement.hasAttribute('data-notransition')
+    ) {
+      document.documentElement.setAttribute('data-notransition', '')
+
+      const width = document.documentElement.clientWidth
+      const height = document.documentElement.clientHeight
+      const diagonal = Math.sqrt(width ** 2 + height ** 2)
+      const circleRadius = height > width ? height : diagonal
+      document.documentElement.style.setProperty(
+        '--circle-radius',
+        `${circleRadius}px`,
+      )
+
+      viewTransition = document.startViewTransition(() => {
+        changeTheme()
+      })
+    } else {
+      changeTheme()
+    }
 
     window.localStorage.setItem('__theme', themeChoice)
 
@@ -32,6 +56,11 @@
         },
       }),
     )
+
+    if (viewTransition) {
+      await viewTransition.finished
+      document.documentElement.removeAttribute('data-notransition')
+    }
   }
 
   window.addEventListener('storage', function (e) {
@@ -43,8 +72,6 @@
   })
 
   window.addEventListener('load', function () {
-    document.querySelectorAll('[data-preload]').forEach((elem) => {
-      elem.removeAttribute('data-preload')
-    })
+    document.documentElement.removeAttribute('data-notransition')
   })
 </script>

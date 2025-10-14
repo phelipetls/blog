@@ -260,7 +260,7 @@
   }
 }
 
-[data-preload] {
+[data-notransition] * {
   transition: none !important;
 }
 
@@ -293,4 +293,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes expand {
+  from {
+    clip-path: circle(0% at right top);
+  }
+
+  to {
+    clip-path: circle(var(--circle-radius) at right top);
+  }
+}
+
+:root {
+  view-transition-name: root;
+}
+
+::view-transition-new(root) {
+  animation: 350ms ease-out expand;
+}
+
+::view-transition-old(root) {
+  animation: none;
 }

@@ -45,6 +45,7 @@ const title = `${Astro.props.title} | Phelipe Teles`
     Astro.props.htmlClass,
   ]}
   lang={Astro.props.locale === 'en' ? 'en-US' : 'pt-BR'}
+  data-notransition
 >
   <head>
     <meta charset='utf-8' />
@@ -97,7 +98,6 @@ const title = `${Astro.props.title} | Phelipe Teles`
   </head>
 
   <body
-    data-preload
     class='relative flex h-full flex-col bg-background font-sans text-on-background [&_main]:my-6'
   >
     <ThemeScript />

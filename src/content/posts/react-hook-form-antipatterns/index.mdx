@@ -1,0 +1,102 @@
+---
+title: Common Anti-Patterns in React Hook Form
+date: 2025-10-15
+tags: [react]
+---
+
+import AntiPatternWatchSetValue from './_AntiPatternWatchSetValue.jsx'
+import GoodPatternController from './_GoodPatternController.jsx'
+import AntiPatternAdvanced from './_AntiPatternAdvanced.jsx'
+import GoodPatternAdvanced from './_GoodPatternAdvanced.jsx'
+import AntiPatternSubmit from './_AntiPatternSubmit.jsx'
+import GoodPatternSubmit from './_GoodPatternSubmit.jsx'
+import ExcessiveTrigger from './_ExcessiveTrigger.jsx'
+import ReValidateMode from './_ReValidateMode.jsx'
+
+Throughout my career, a staple React library in every team was React Hook Form,
+for good reasons -- it's pretty easy to use. Unfortunately, it's also easy to
+misuse. When working with it, I often saw code that got the job done but was
+inefficient or non-idiomatic. Let's talk about them.
+
+# Using `watch` and `setValue` instead of `Controller`
+
+This anti-pattern involves using `watch` and `setValue` to manually control an
+input, which seems natural but causes performance issues. Here's how it looks:
+
+<AntiPatternWatchSetValue client:visible />
+
+This code works, but it's not optimal since the whole component will
+re-render whenever the input changes (try it above!).
+
+This is unlikely to become a performance issue (unless heavily abused in a huge
+form) but it's easier to just use a `Controller` or an uncontrolled component
+like this:
+
+<GoodPatternController client:visible />
+
+In the example above we can see the component never re-renders even though the
+input state changes. This is because now `Controller` owns the input state.
+
+Additionally, there are also deeper integration issues with the library that
+often go unnoticed at first glance.
+
+The example below demonstrates two features that don't work properly with this
+anti-pattern: a button to focus the input using `setFocus`, and a button to log
+`formState.dirtyFields` (which always appears empty).
+
+<AntiPatternAdvanced client:visible />
+
+Both of these buttons work as expected when we use `Controller`:
+
+<GoodPatternAdvanced client:visible />
+
+This is because React Hook Form `Controller` and `register` APIs pass more than
+just a `value` and `onChange` prop to each form field: `ref` and `onBlur` are
+important props to imperatively focus and track dirty fields state.
+
+# Using `getValues` on submit event handlers
+
+Another common anti-pattern is manually reading form values in the submit
+handler instead of using React Hook Form's `handleSubmit`.
+
+This pattern gets the job done since there is nothing wrong with using `getValues`
+to get the form values. But when submitting a form, there's no reason not to
+use `handleSubmit`.
+
+In the example below we can see the following issues:
+
+- The submit handler runs even when form values are invalid.
+- Error messages are not displayed on form submission.
+- `formState.submitCount` is always `0`.
+
+<AntiPatternSubmit client:visible />
+
+The correct way is to use `handleSubmit`, which accepts two callbacks to handle
+successful and invalid form submissions, in this order.
+
+<GoodPatternSubmit client:visible />
+
+Now the API call only happens if form values are valid and the error messages
+are correctly displayed if they're invalid.
+
+# Using `trigger` instead of `mode` or `reValidateMode`
+
+Another anti-pattern is manually calling `trigger` on every input change to
+validate fields whenever the value changes.
+
+<ExcessiveTrigger client:visible />
+
+This anti-pattern often appears alongside the others mentioned, as developers
+who manually control inputs may naturally reach for manual validation
+triggering as well. React Hook Form needs to manage the `onChange`, `onBlur`
+and `onSubmit` event handlers to validate fields, which do not happen if we
+don't use `Controller`, `register` and `handleSubmit`.
+
+A simpler approach that achieves the same result without modifying every event
+handler is by changing the `mode` and `reValidateMode` options in `useForm`:
+
+<ReValidateMode client:visible />
+
+A use case for the `trigger` API is to trigger validation in a different field when
+one field value changes -- think re-validating a phone number when the selected
+country changes.

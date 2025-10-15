@@ -6,11 +6,11 @@ import { twMerge } from 'tailwind-merge'
 
 type Props = {
   locale: Locale
-  baseWidth?: number
+  baseWidth: number
   className?: string
 }
 
-const { baseWidth = 200, className = '' } = Astro.props
+const { baseWidth, className = '' } = Astro.props
 
 const t = useTranslate(Astro.props.locale)
 

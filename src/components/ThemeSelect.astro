@@ -8,10 +8,11 @@ type Props = {
   locale: Locale
 }
 
-const t = useTranslate(Astro.props.locale)
+const { locale, ...rest } = Astro.props
+const t = useTranslate(locale)
 ---
 
-<Select data-theme-select aria-label={t['ChooseATheme']}>
+<Select data-theme-select aria-label={t['ChooseATheme']} {...rest}>
   <option value='light'>{t['Light']}</option>
   <option value='dark'>{t['Dark']}</option>
   <option value='system'>{t['System']}</option>

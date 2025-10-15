@@ -8,10 +8,16 @@ type Props = {
   locale: Locale
 }
 
-const t = useTranslate(Astro.props.locale)
+const { locale, ...rest } = Astro.props
+const t = useTranslate(locale)
 ---
 
-<Select data-language-select aria-label={t['ChooseALanguage']} variant='ghost'>
+<Select
+  data-language-select
+  aria-label={t['ChooseALanguage']}
+  variant='ghost'
+  {...rest}
+>
   <option selected={Astro.props.locale === 'en'} value='en'>English</option>
   <option selected={Astro.props.locale === 'pt'} value='pt'>Português</option>
 

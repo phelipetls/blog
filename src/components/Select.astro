@@ -14,11 +14,11 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
 <div
   style={{
-    '--cols': hasStartIcon ? 3 : 2,
-    '--select-padding': '24px',
+    '--icon-size': '24px',
+    '--select-padding': `var(--icon-size)`,
   }}
   class:list={[
-    'px-1 rounded-sm items-center grid auto-cols-max justify-between',
+    'rounded-sm items-center grid justify-between',
     variant === 'default'
       ? 'bg-surface shadow-xs shadow-shadow'
       : 'bg-background',
@@ -26,7 +26,6 @@ const hasStartIcon = Astro.slots.has('start-icon')
 >
   <select
     class:list={[
-      'py-1',
       'sm:py-0',
       'rounded-sm',
       'bg-inherit',

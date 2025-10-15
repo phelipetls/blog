@@ -5,6 +5,11 @@ import { twMerge } from 'tailwind-merge'
 type Props = HTMLAttributes<'span'>
 ---
 
-<span class={twMerge(Astro.props.class, 'text-sm pointer-events-none')}>
+<span
+  class={twMerge(
+    Astro.props.class,
+    'flex items-center justify-center w-(--icon-size) h-(--icon-size) [&_svg]:w-[16px] [&_svg]:h-[16px] pointer-events-none',
+  )}
+>
   <slot />
 </span>

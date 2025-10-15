@@ -6,9 +6,12 @@ type Props = HTMLAttributes<'span'>
 ---
 
 <span
+  style={{
+    '--svg-size': 'calc(var(--icon-size) - 8px)',
+  }}
   class={twMerge(
     Astro.props.class,
-    'flex items-center justify-center w-(--icon-size) h-(--icon-size) [&_svg]:w-[16px] [&_svg]:h-[16px] pointer-events-none',
+    'flex items-center justify-center w-(--icon-size) h-(--icon-size) [&_svg]:w-(--svg-size) [&_svg]:h-(--svg-size) pointer-events-none',
   )}
 >
   <slot />

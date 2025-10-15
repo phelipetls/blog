@@ -1,14 +1,16 @@
 ---
+import type { HTMLAttributes } from 'astro/types'
 import Contact from './Contact.astro'
 import Link from './Link.astro'
 import type { Locale } from '@utils/i18n/locales'
+import { twMerge } from 'tailwind-merge'
 
-type Props = {
+type Props = HTMLAttributes<'footer'> & {
   locale: Locale
 }
 ---
 
-<footer class="bg-background grid grid-cols-layout">
+<footer class={twMerge("bg-background grid grid-cols-layout", Astro.props.class)}>
   <div
     class="mx-auto flex w-full max-w-content flex-col pt-4 pb-8 sm:justify-between"
   >

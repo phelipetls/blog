@@ -18,24 +18,23 @@ const t = useTranslate(locale)
 
 <Site locale={locale} isTranslated title={t['About']}>
   <main class='grid grid-cols-layout'>
-    <article class='max-w-prose'>
-      <header class='hidden sm:flex flex-row items-end gap-2 mb-4'>
-        <Gravatar
-          locale={locale}
-          className='border border-divider'
-          baseWidth={48}
-        />
+    <article
+      class='flex flex-col sm:flex-row items-center sm:items-start gap-2'
+    >
+      <Gravatar
+        locale={locale}
+        className='border border-divider shrink-0'
+        baseWidth={120}
+      />
 
-        <h1 class='text-xl mb-0'>Phelipe Teles</h1>
-      </header>
-
-      <slot />
+      <div class='max-w-prose'>
+        <h1 class='hidden sm:block text-xl mb-2'>Phelipe Teles</h1>
+        <slot />
+      </div>
     </article>
   </main>
 
   <div slot='mobile-nav-title' class='flex flex-row items-center gap-2'>
-    <Gravatar locale={locale} baseWidth={40} />
-
     <h1 class='text-xl mb-0'>Phelipe Teles</h1>
   </div>
 </Site>

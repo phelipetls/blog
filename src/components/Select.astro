@@ -14,8 +14,9 @@ const hasStartIcon = Astro.slots.has('start-icon')
 
 <div
   style={{
+    '--gap': '2px',
     '--icon-size': '24px',
-    '--select-padding': `var(--icon-size)`,
+    '--select-padding': `calc(var(--icon-size) + var(--gap) * 2)`,
   }}
   class:list={[
     'rounded-sm items-center grid justify-between',

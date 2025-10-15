@@ -5,6 +5,6 @@ import { twMerge } from 'tailwind-merge'
 type Props = HTMLAttributes<'span'>
 ---
 
-<span class={twMerge(Astro.props.class, 'text-sm')}>
+<span class={twMerge(Astro.props.class, 'text-sm pointer-events-none')}>
   <slot />
 </span>

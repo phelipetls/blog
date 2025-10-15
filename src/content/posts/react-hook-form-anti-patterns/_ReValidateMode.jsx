@@ -9,22 +9,32 @@ export default function ReValidateMode() {
       customSetup={{
         dependencies: {
           'react-hook-form': '7.51.0',
+          zod: '3.22.4',
+          '@hookform/resolvers': '3.3.4',
         },
       }}
       files={{
         '/App.js': {
           code: outdent`
             import { useForm } from 'react-hook-form';
+            import { zodResolver } from '@hookform/resolvers/zod';
+            import * as z from 'zod';
+
+            const schema = z.object({
+              email: z.string().min(1, 'Email is required').email('Invalid email'),
+              password: z.string().min(6, 'Password must be at least 6 characters'),
+            });
 
             function App() {
               const { register, formState: { errors } } = useForm({
                 defaultValues: { email: '', password: '' },
+                resolver: zodResolver(schema),
                 mode: 'onChange',
                 reValidateMode: 'onChange'
               });
 
               return (
-                <form>
+                <form onSubmit={e => e.preventDefault()}>
                   <div>
                     <label>Email:</label>
                     <input

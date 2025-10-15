@@ -34,7 +34,7 @@ export default function ExcessiveTrigger() {
               const password = watch('password');
 
               return (
-                <form>
+                <form onSubmit={e => e.preventDefault()}>
                   <div>
                     <label>Email:</label>
                     <input

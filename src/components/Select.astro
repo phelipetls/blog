@@ -19,7 +19,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
     '--select-padding': `calc(var(--icon-size) + var(--gap) * 2)`,
   }}
   class:list={[
-    'rounded-sm items-center grid justify-between',
+    'h-[32px] rounded-sm items-center grid justify-between',
     variant === 'default'
       ? 'bg-surface shadow-xs shadow-shadow'
       : 'bg-background',
@@ -27,6 +27,7 @@ const hasStartIcon = Astro.slots.has('start-icon')
 >
   <select
     class:list={[
+      'h-full',
       'sm:py-0',
       'rounded-sm',
       'bg-inherit',

@@ -12,9 +12,11 @@ type Props = {
   locale: Locale
 }
 
-const { title, mobileNavTitle } = Astro.props
+const { title, mobileNavTitle, locale } = Astro.props
 
 const t = useTranslate(Astro.props.locale)
+
+const root = locale === 'pt' ? '/pt/' : '/'
 ---
 
 <div
@@ -22,7 +24,7 @@ const t = useTranslate(Astro.props.locale)
 >
   <div class='flex flex-row items-center gap-2 min-w-0'>
     {
-      Astro.url.pathname !== '/' && (
+      Astro.url.pathname !== root && (
         <a
           href={parentUrl}
           data-testid='parent-page-link'

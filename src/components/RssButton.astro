@@ -1,16 +1,8 @@
 ---
 import { Rss } from 'lucide-react'
 import IconButton from './IconButton'
-import type { Locale } from '@utils/i18n/locales'
-import { getRelativeLocaleUrl } from 'astro:i18n'
-
-type Props = {
-  locale: Locale
-}
-
-const rssUrl = getRelativeLocaleUrl(Astro.props.locale, '/posts/index.xml')
 ---
 
-<IconButton variant='rounded-full' href={rssUrl} aria-label='RSS Feed'>
+<IconButton variant='rounded-full' href='index.xml' aria-label='RSS Feed'>
   <Rss />
 </IconButton>

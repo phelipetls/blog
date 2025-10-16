@@ -9,7 +9,6 @@ import { format } from 'date-fns'
 import _ from 'lodash'
 import type { CollectionEntry } from 'astro:content'
 import type { Locale } from '@utils/i18n/locales'
-import { getRelativeLocaleUrl } from 'astro/virtual-modules/i18n.js'
 
 type Props = {
   locale: Locale
@@ -27,8 +26,6 @@ const years = Object.keys(blogPostsGroupedByYear).sort(
 )
 
 const t = useTranslate(locale)
-
-const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
 ---
 
 <Site
@@ -42,7 +39,7 @@ const rssUrl = getRelativeLocaleUrl(locale, '/posts/index.xml')
         {
           rel: 'alternate',
           type: 'application/rss+xml',
-          href: rssUrl,
+          href: 'index.xml',
         },
       ],
     },

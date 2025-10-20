@@ -27,7 +27,7 @@
     "@floating-ui/dom": "^1.7.4",
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/source-sans-pro": "^5.0.1",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.56.1",
     "@shikijs/transformers": "^3.13.0",
     "@shikijs/twoslash": "^3.13.0",
     "@tailwindcss/vite": "^4.1.13",

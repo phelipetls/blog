@@ -59,7 +59,7 @@
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.1",
     "husky": "^8.0.3",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "lucide-react": "^0.293.0",
     "md5": "^2.3.0",
     "mdast": "^3.0.0",

@@ -19,7 +19,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/react": "^4.4.0",
-    "@astrojs/rss": "^4.0.10",
+    "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.2.1",
     "@codesandbox/sandpack-react": "^2.8.0",
     "@codesandbox/sandpack-themes": "^2.0.21",
